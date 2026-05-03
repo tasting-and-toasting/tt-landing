@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasting & Toasting — Operations Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0F0B0A;
+  --bg-2: #1A1413;
+  --bg-3: #241B19;
+  --bg-4: #2E2320;
+  --ink: #F4EDE4;
+  --ink-2: #C7B8A8;
+  --ink-3: #8A7A6B;
+  --wine: #6B1E2C;
+  --wine-2: #8B2838;
+  --wine-bright: #B83246;
+  --gold: #C9A961;
+  --gold-bright: #E8C77A;
+  --green: #4A6B3D;
+  --green-bright: #6B9E58;
+  --red: #B83246;
+  --line: rgba(244,237,228,0.08);
+  --line-2: rgba(244,237,228,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+body { overflow-x: hidden; }
+.serif { font-family: 'Fraunces', serif; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* ============= NAVIGATION ============= */
+.proto-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(15,11,10,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  z-index: 1000;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.proto-brand {
+  display: flex; align-items: baseline; gap: 12px;
+  font-family: 'Fraunces', serif;
+}
+.proto-brand .amp { color: var(--wine-bright); font-style: italic; font-weight: 400; }
+.proto-brand .name { font-size: 16px; letter-spacing: 0.02em; }
+.proto-brand .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.15em; }
+.proto-tabs {
+  display: flex; gap: 4px; background: var(--bg-2); padding: 4px; border-radius: 999px; border: 1px solid var(--line);
+}
+.proto-tab {
+  padding: 7px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: none;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.proto-tab:hover { color: var(--ink); }
+.proto-tab.active { background: var(--wine); color: var(--ink); }
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  padding-top: 60px;
+  animation: fadeIn 0.45s ease;
+}
+.screen.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============= SHARED ============= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--line-2);
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.btn:hover { border-color: var(--ink); }
+.btn-primary { background: var(--wine); border-color: var(--wine); }
+.btn-primary:hover { background: var(--wine-2); border-color: var(--wine-2); }
+.btn-gold { background: var(--gold); border-color: var(--gold); color: var(--bg); }
+.btn-gold:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+.btn-arrow { font-size: 16px; }
+.btn-sm { padding: 10px 18px; font-size: 11px; }
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 56px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--line);
+}
+.page-kicker {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 16px;
+}
+.page-title {
+  font-family: 'Fraunces', serif; font-size: 64px; line-height: 0.95;
+  font-weight: 400; letter-spacing: -0.02em;
+}
+.page-title em { font-style: italic; color: var(--wine-bright); }
+.page-meta {
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-3);
+  line-height: 2;
+}
+.page-meta .gold { color: var(--gold); }
+
+/* ============= 1. ONBOARDING / SIGN UP ============= */
+.onboard-page { min-height: calc(100vh - 60px); display: grid; grid-template-columns: 1fr 1fr; }
+.onboard-left {
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(184,50,70,0.2), transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(201,169,97,0.12), transparent 60%),
+    var(--bg-2);
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--line);
+}
+.onboard-left-top {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink-3);
+  display: flex; gap: 24px;
+}
+.onboard-left-top .step {
+  display: flex; align-items: center; gap: 8px;
+}
+.onboard-left-top .step.active { color: var(--gold); }
+.onboard-left-top .step .num {
+  width: 22px; height: 22px;
+  border: 1px solid var(--ink-3); border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.onboard-left-top .step.active .num { border-color: var(--gold); background: var(--gold); color: var(--bg); }
+.onboard-headline {
+  font-family: 'Fraunces', serif; font-size: 72px; line-height: 0.95;
+  font-weight: 400; letter-spacing: -0.025em; margin: 64px 0 32px;
+}
+.onboard-headline em { font-style: italic; color: var(--wine-bright); }
+.onboard-sub {
+  font-family: 'Fraunces', serif; font-size: 20px; line-height: 1.5;
+  color: var(--ink-2); max-width: 480px; font-weight: 300;
+}
+.onboard-quote {
+  margin-top: 64px; padding: 24px 32px;
+  border-left: 3px solid var(--gold);
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 18px; line-height: 1.5; color: var(--ink-2);
+}
+.onboard-quote-author {
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-style: normal;
+}
+
+.onboard-right {
+  padding: 64px 56px;
+  display: flex; flex-direction: column; justify-content: center;
+  max-width: 600px;
+}
+.onboard-form-h {
+  font-family: 'Fraunces', serif; font-size: 36px; font-weight: 500;
+  margin-bottom: 8px;
+}
+.onboard-form-sub {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 16px;
+  color: var(--ink-3); margin-bottom: 40px;
+}
+
+.form-group { margin-bottom: 28px; }
+.form-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink-3);
+  display: block; margin-bottom: 10px;
+}
+.form-input {
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  padding: 16px;
+  color: var(--ink);
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  transition: border 0.2s ease;
+}
+.form-input:focus { outline: none; border-color: var(--gold); }
+.form-input::placeholder { color: var(--ink-3); font-style: italic; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.preference-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.preference-chip {
+  padding: 14px 12px;
+  border: 1px solid var(--line-2);
+  background: var(--bg-2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+.preference-chip:hover { border-color: var(--gold); }
+.preference-chip.selected { border-color: var(--wine-bright); background: var(--bg-3); }
+.preference-chip .pref-name { font-family: 'Fraunces', serif; font-size: 15px; }
+.preference-chip .pref-meta {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; color: var(--ink-3); text-transform: uppercase; margin-top: 4px;
+}
+
+.form-helper {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 13px;
+  color: var(--ink-3); margin-top: 6px; line-height: 1.4;
+}
+
+.onboard-cta-row {
+  margin-top: 32px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 24px; border-top: 1px solid var(--line);
+}
+.onboard-policy {
+  font-size: 12px; color: var(--ink-3); line-height: 1.5;
+  max-width: 280px;
+}
+.onboard-policy a { color: var(--gold); text-decoration: none; }
+
+/* ============= 2. EVENT MARKETPLACE ============= */
+.market-page { padding: 64px 64px 96px; max-width: 1400px; margin: 0 auto; }
+.market-filters {
+  display: flex; align-items: center; gap: 16px;
+  padding: 24px 32px; background: var(--bg-2);
+  border: 1px solid var(--line);
+  margin-bottom: 32px;
+}
+.filter-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink-3);
+}
+.filter-pills { display: flex; gap: 8px; flex-wrap: wrap; flex: 1; }
+.filter-pill {
+  padding: 8px 14px;
+  background: var(--bg);
+  border: 1px solid var(--line-2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.filter-pill:hover { color: var(--ink); border-color: var(--ink-3); }
+.filter-pill.active { color: var(--bg); background: var(--gold); border-color: var(--gold); }
+
+.market-search {
+  background: var(--bg);
+  border: 1px solid var(--line-2);
+  padding: 8px 14px;
+  color: var(--ink);
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 14px;
+  width: 220px;
+}
+.market-search:focus { outline: none; border-color: var(--gold); }
+
+.market-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.event-tile {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.event-tile:hover { transform: translateY(-2px); border-color: var(--gold); }
+.event-tile-image {
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+}
+.event-tile-image.gradient-1 {
+  background:
+    radial-gradient(ellipse at 30% 30%, var(--wine-2) 0%, var(--bg-3) 70%),
+    var(--bg-3);
+}
+.event-tile-image.gradient-2 {
+  background:
+    radial-gradient(ellipse at 70% 30%, #5A4824 0%, var(--bg-3) 70%),
+    var(--bg-3);
+}
+.event-tile-image.gradient-3 {
+  background:
+    radial-gradient(ellipse at 50% 50%, #3A4A28 0%, var(--bg-3) 70%),
+    var(--bg-3);
+}
+.event-tile-image.gradient-4 {
+  background:
+    radial-gradient(ellipse at 30% 70%, #4A2858 0%, var(--bg-3) 70%),
+    var(--bg-3);
+}
+.event-tile-image.gradient-5 {
+  background:
+    radial-gradient(ellipse at 70% 50%, #5A2832 0%, var(--bg-3) 70%),
+    var(--bg-3);
+}
+.event-tile-image.gradient-6 {
+  background:
+    radial-gradient(ellipse at 50% 30%, #2A4A4A 0%, var(--bg-3) 70%),
+    var(--bg-3);
+}
+.event-tile-decor {
+  position: absolute; bottom: 16px; right: 16px;
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 64px; line-height: 1;
+  color: rgba(244,237,228,0.12);
+}
+.event-tile-badge {
+  position: absolute; top: 16px; left: 16px;
+  background: var(--bg);
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 6px 10px; color: var(--gold);
+}
+.event-tile-status {
+  position: absolute; top: 16px; right: 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 6px 10px;
+}
+.event-tile-status.few { background: rgba(184,50,70,0.85); color: var(--ink); }
+.event-tile-status.open { background: rgba(74,107,61,0.85); color: var(--ink); }
+.event-tile-content { padding: 24px 24px 28px; flex: 1; display: flex; flex-direction: column; }
+.event-tile-meta {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-3); margin-bottom: 12px;
+  display: flex; gap: 14px;
+}
+.event-tile-meta .gold { color: var(--gold); }
+.event-tile-name {
+  font-family: 'Fraunces', serif; font-size: 22px;
+  line-height: 1.2; font-weight: 500; margin-bottom: 10px;
+}
+.event-tile-host {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 14px; color: var(--ink-2); margin-bottom: 20px; flex: 1;
+}
+.event-tile-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 16px; border-top: 1px solid var(--line);
+}
+.event-tile-cost {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.1em; color: var(--gold);
+}
+.event-tile-cta {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3);
+}
+.event-tile:hover .event-tile-cta { color: var(--gold); }
+
+/* ============= 3. SOMMELIER ============= */
+.somm-page { padding: 64px 64px 96px; max-width: 1400px; margin: 0 auto; }
+.somm-hero {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+.somm-portrait {
+  height: 380px;
+  background:
+    radial-gradient(ellipse at 50% 30%, var(--wine-2) 0%, var(--bg-3) 60%),
+    var(--bg-3);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line);
+}
+.somm-portrait-initials {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--wine), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif; font-size: 56px; color: var(--ink);
+  font-weight: 400;
+}
+.somm-info-block .kicker {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 16px;
+}
+.somm-name {
+  font-family: 'Fraunces', serif; font-size: 56px; font-weight: 400;
+  line-height: 1; letter-spacing: -0.02em;
+}
+.somm-credentials {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 18px; color: var(--ink-2); margin: 12px 0 24px;
+}
+.somm-bio {
+  font-family: 'Fraunces', serif; font-size: 17px; line-height: 1.55;
+  color: var(--ink-2); max-width: 720px; font-weight: 300; margin-bottom: 28px;
+}
+.somm-tags {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.somm-tag {
+  padding: 7px 12px;
+  background: var(--bg-3);
+  border: 1px solid var(--line-2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.somm-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  margin-bottom: 56px;
+}
+.somm-stat {
+  background: var(--bg);
+  padding: 28px 24px;
+}
+.somm-stat .lbl {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-3);
+}
+.somm-stat .val {
+  font-family: 'Fraunces', serif; font-size: 40px; line-height: 1;
+  font-weight: 400; margin-top: 12px;
+}
+.somm-stat .val em { font-style: italic; color: var(--gold); font-size: 22px; }
+
+.somm-row { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; }
+
+.somm-upcoming-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 32px;
+}
+.somm-card-h {
+  font-family: 'Fraunces', serif; font-size: 28px; font-weight: 500; margin-bottom: 24px;
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.somm-card-h .all {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em;
+}
+.somm-event-row {
+  display: grid; grid-template-columns: 80px 1fr auto;
+  gap: 20px; align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  cursor: pointer;
+  transition: padding 0.2s ease;
+}
+.somm-event-row:hover { padding-left: 8px; padding-right: 8px; background: var(--bg-3); margin: 0 -8px; }
+.somm-event-row:first-child { border-top: none; }
+.somm-event-date {
+  text-align: center;
+}
+.somm-event-date .day {
+  font-family: 'Fraunces', serif; font-size: 32px; font-weight: 500; line-height: 1;
+}
+.somm-event-date .month {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-top: 4px;
+}
+.somm-event-info .name {
+  font-family: 'Fraunces', serif; font-size: 20px; line-height: 1.2;
+}
+.somm-event-info .desc {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 14px; color: var(--ink-3); margin-top: 4px;
+}
+.somm-event-time {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.1em; color: var(--gold);
+}
+
+.somm-payout-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 32px;
+}
+.payout-amount {
+  font-family: 'Fraunces', serif; font-size: 56px;
+  font-weight: 400; line-height: 1; color: var(--gold-bright);
+  margin: 12px 0;
+}
+.payout-amount .currency {
+  font-family: 'JetBrains Mono', monospace; font-size: 18px;
+  color: var(--ink-3); letter-spacing: 0.05em; vertical-align: top; margin-right: 4px;
+}
+.payout-meta {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 14px;
+  color: var(--ink-3); margin-bottom: 24px;
+}
+.payout-row {
+  display: flex; justify-content: space-between;
+  padding: 12px 0; border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+.payout-row:first-of-type { border-top: 1px solid var(--line); margin-top: 16px; padding-top: 16px; }
+.payout-row .lbl { color: var(--ink-2); }
+.payout-row .val { font-family: 'Fraunces', serif; font-size: 15px; }
+.payout-row .val.green { color: var(--green-bright); }
+
+/* ============= 4. CHECKOUT ============= */
+.check-page { padding: 64px 64px 96px; max-width: 1100px; margin: 0 auto; }
+.check-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; }
+
+.check-block {
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--line);
+}
+.check-block:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+.check-block-h {
+  font-family: 'Fraunces', serif; font-size: 28px; font-weight: 500; margin-bottom: 8px;
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.check-block-h .step-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.18em; color: var(--gold);
+}
+.check-block-help {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 15px; color: var(--ink-3); margin-bottom: 24px;
+}
+
+.shipping-confirmation {
+  padding: 20px 24px;
+  background: var(--bg-2);
+  border-left: 3px solid var(--green-bright);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.shipping-confirmation-info .label {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-bright);
+}
+.shipping-confirmation-info .addr {
+  font-family: 'Fraunces', serif; font-size: 17px; margin-top: 6px;
+}
+.shipping-confirmation-info .addr-meta {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 13px; color: var(--ink-3); margin-top: 4px;
+}
+.change-link {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase;
+}
+
+.payment-options { display: flex; flex-direction: column; gap: 10px; }
+.payment-option {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 24px;
+  border: 1px solid var(--line-2);
+  background: var(--bg-2);
+  cursor: pointer; transition: all 0.2s ease;
+}
+.payment-option:hover { border-color: var(--gold); }
+.payment-option.selected { border-color: var(--wine-bright); background: var(--bg-3); }
+.payment-radio {
+  width: 18px; height: 18px;
+  border: 1px solid var(--ink-3); border-radius: 50%;
+  position: relative; flex-shrink: 0;
+}
+.payment-option.selected .payment-radio {
+  border-color: var(--wine-bright);
+}
+.payment-option.selected .payment-radio::after {
+  content: '';
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--wine-bright);
+}
+.payment-info { flex: 1; }
+.payment-info .name {
+  font-family: 'Fraunces', serif; font-size: 16px;
+}
+.payment-info .meta {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; color: var(--ink-3); margin-top: 4px;
+}
+.payment-icons {
+  display: flex; gap: 6px;
+}
+.pay-icon {
+  padding: 4px 8px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: 0.1em; color: var(--ink-2); text-transform: uppercase;
+}
+
+.delivery-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.delivery-option {
+  padding: 20px;
+  border: 1px solid var(--line-2);
+  background: var(--bg-2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.delivery-option:hover { border-color: var(--gold); }
+.delivery-option.selected { border-color: var(--wine-bright); background: var(--bg-3); }
+.delivery-name {
+  font-family: 'Fraunces', serif; font-size: 17px; margin-bottom: 6px;
+}
+.delivery-meta {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase;
+}
+.delivery-extra {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 13px; color: var(--ink-3); margin-top: 8px;
+}
+
+.summary-card {
+  position: sticky;
+  top: 84px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 32px;
+}
+.summary-h {
+  font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; margin-bottom: 24px;
+}
+.summary-tier {
+  padding: 20px;
+  background: var(--bg-3);
+  margin-bottom: 24px;
+}
+.summary-tier-name {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+}
+.summary-tier-tag {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 17px; line-height: 1.3; margin-top: 6px; color: var(--ink-2);
+}
+.summary-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 12px 0;
+  font-size: 14px;
+}
+.summary-row.divider { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 8px; }
+.summary-row .lbl { color: var(--ink-2); }
+.summary-row .val { font-family: 'Fraunces', serif; font-size: 16px; }
+.summary-row.discount .val { color: var(--green-bright); }
+.summary-row.total { padding-top: 24px; margin-top: 8px; border-top: 1px solid var(--gold); }
+.summary-row.total .lbl {
+  font-family: 'Fraunces', serif; font-size: 18px; color: var(--ink);
+}
+.summary-row.total .val {
+  font-family: 'Fraunces', serif; font-size: 32px; color: var(--gold-bright);
+}
+.summary-row.total .val em { font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--ink-3); margin-left: 4px; font-style: normal; letter-spacing: 0.05em; }
+
+.summary-cta {
+  width: 100%; padding: 18px;
+  background: var(--wine);
+  border: none; color: var(--ink);
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  cursor: pointer; margin-top: 24px; transition: background 0.2s ease;
+}
+.summary-cta:hover { background: var(--wine-2); }
+.summary-trust {
+  margin-top: 16px;
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 12px; color: var(--ink-3); text-align: center; line-height: 1.6;
+}
+
+/* ============= 5. TASTING CENTER ============= */
+.center-page { padding: 64px 64px 96px; max-width: 1400px; margin: 0 auto; }
+.center-hero {
+  height: 380px;
+  background:
+    linear-gradient(135deg, rgba(15,11,10,0.7), rgba(15,11,10,0.3)),
+    radial-gradient(ellipse at 30% 40%, rgba(184,50,70,0.4), transparent 65%),
+    radial-gradient(ellipse at 75% 60%, rgba(201,169,97,0.3), transparent 65%),
+    var(--bg-3);
+  position: relative;
+  border: 1px solid var(--line);
+  margin-bottom: 56px;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.center-hero-meta {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+  display: flex; gap: 32px;
+}
+.center-hero-meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-bright); display: inline-block; margin-right: 8px; }
+.center-hero-name {
+  font-family: 'Fraunces', serif; font-size: 80px;
+  font-weight: 400; line-height: 1; letter-spacing: -0.02em;
+}
+.center-hero-name em { font-style: italic; color: var(--gold-bright); }
+.center-hero-bottom {
+  display: flex; justify-content: space-between; align-items: end;
+}
+.center-hero-bottom-left {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 18px; color: var(--ink-2); max-width: 480px; line-height: 1.4;
+}
+
+.center-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--line); margin-bottom: 56px;
+}
+.center-stat {
+  background: var(--bg);
+  padding: 28px 24px;
+}
+.center-stat .lbl {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-3);
+}
+.center-stat .val {
+  font-family: 'Fraunces', serif; font-size: 36px; line-height: 1;
+  margin-top: 12px; font-weight: 400;
+}
+.center-stat .val em { font-style: italic; color: var(--gold); font-size: 22px; }
+
+.center-section-title {
+  font-family: 'Fraunces', serif; font-size: 36px;
+  font-weight: 400; margin-bottom: 32px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--line);
+}
+.center-section-title em { font-style: italic; color: var(--wine-bright); }
+
+.spaces-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 64px; }
+.space-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.space-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+.space-image {
+  height: 180px;
+  position: relative;
+}
+.space-image-1 { background: radial-gradient(ellipse at center, #4A2832, var(--bg-3)); }
+.space-image-2 { background: radial-gradient(ellipse at center, #2A3A48, var(--bg-3)); }
+.space-image-3 { background: radial-gradient(ellipse at center, #4A3818, var(--bg-3)); }
+.space-image-decor {
+  position: absolute; bottom: 16px; right: 20px;
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 56px; color: rgba(244,237,228,0.12);
+}
+.space-content { padding: 24px; }
+.space-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+}
+.space-name {
+  font-family: 'Fraunces', serif; font-size: 24px; font-weight: 500; margin-bottom: 10px;
+}
+.space-features {
+  font-size: 13px; color: var(--ink-2); line-height: 1.5; margin-bottom: 20px;
+}
+.space-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 14px; border-top: 1px solid var(--line);
+}
+.space-rate {
+  font-family: 'Fraunces', serif; font-size: 18px;
+}
+.space-rate-meta {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; color: var(--ink-3); display: block; margin-top: 2px;
+}
+
+/* ============= 6. CALENDAR ============= */
+.cal-page { padding: 64px 64px 96px; max-width: 1500px; margin: 0 auto; }
+.cal-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 32px;
+}
+.cal-month {
+  font-family: 'Fraunces', serif; font-size: 36px; font-weight: 400;
+}
+.cal-month em { font-style: italic; color: var(--gold-bright); }
+.cal-nav { display: flex; gap: 8px; }
+.cal-nav-btn {
+  width: 40px; height: 40px;
+  border: 1px solid var(--line-2);
+  background: var(--bg-2);
+  color: var(--ink);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.cal-nav-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+.cal-legend {
+  display: flex; gap: 18px; align-items: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-3);
+}
+.cal-legend-item { display: flex; align-items: center; gap: 8px; }
+.cal-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.cal-legend-dot.tasting { background: var(--wine-bright); }
+.cal-legend-dot.private { background: var(--gold); }
+.cal-legend-dot.b2b { background: var(--green-bright); }
+.cal-legend-dot.maint { background: var(--ink-3); }
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.cal-day-header {
+  background: var(--bg-3);
+  padding: 14px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3);
+}
+.cal-cell {
+  background: var(--bg);
+  min-height: 130px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.cal-cell:hover { background: var(--bg-2); }
+.cal-cell.muted { background: var(--bg-2); }
+.cal-cell.muted .cal-date { color: var(--ink-3); opacity: 0.4; }
+.cal-cell.today { background: var(--bg-3); border: 1px solid var(--gold); }
+.cal-date {
+  font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 8px; font-weight: 500;
+}
+.cal-cell.today .cal-date { color: var(--gold); }
+.cal-event {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  padding: 4px 6px;
+  margin-bottom: 3px;
+  letter-spacing: 0.05em;
+  border-left: 2px solid;
+  background: var(--bg-2);
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cal-event.tasting { border-color: var(--wine-bright); }
+.cal-event.private { border-color: var(--gold); }
+.cal-event.b2b { border-color: var(--green-bright); }
+.cal-event.maint { border-color: var(--ink-3); color: var(--ink-3); }
+.cal-event-more {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  color: var(--gold); margin-top: 2px;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 1024px) {
+  .onboard-page { grid-template-columns: 1fr; }
+  .onboard-left { padding: 48px 32px; }
+  .market-grid { grid-template-columns: 1fr; }
+  .somm-hero { grid-template-columns: 1fr; }
+  .somm-portrait { height: 240px; }
+  .somm-stats { grid-template-columns: 1fr 1fr; }
+  .somm-row { grid-template-columns: 1fr; }
+  .check-grid { grid-template-columns: 1fr; }
+  .summary-card { position: static; }
+  .center-stats { grid-template-columns: 1fr 1fr; }
+  .spaces-grid { grid-template-columns: 1fr; }
+  .cal-cell { min-height: 80px; padding: 6px; }
+  .cal-event { font-size: 8px; }
+}
+
+/* ===== Tasting & Toasting site wiring (added) ===== */
+.tt-hub-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3, #8A7A6B);
+  text-decoration: none;
+  border: 1px solid var(--line, rgba(244,237,228,0.08));
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.tt-hub-link:hover {
+  color: var(--ink, #F4EDE4);
+  border-color: var(--line-2, rgba(244,237,228,0.15));
+  background: var(--bg-2, #1A1413);
+}
+.tt-hub-link .arrow { font-size: 14px; line-height: 1; }
+
+.tt-footer {
+  background: var(--bg-2, #1A1413);
+  border-top: 1px solid var(--line, rgba(244,237,228,0.08));
+  padding: 56px 32px 40px;
+  margin-top: 80px;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink-3, #8A7A6B);
+}
+.tt-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.tt-footer-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  color: var(--ink, #F4EDE4);
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+}
+.tt-footer-brand .amp {
+  color: var(--wine-bright, #B83246);
+  font-style: italic;
+  font-weight: 400;
+}
+.tt-footer-tagline {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-3, #8A7A6B);
+  max-width: 320px;
+}
+.tt-footer-col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3, #8A7A6B);
+  margin-bottom: 16px;
+}
+.tt-footer-col ul { list-style: none; padding: 0; margin: 0; }
+.tt-footer-col li { margin-bottom: 10px; }
+.tt-footer-col a {
+  color: var(--ink-2, #C7B8A8);
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.tt-footer-col a:hover { color: var(--gold, #C9A961); }
+.tt-footer-bottom {
+  max-width: 1200px;
+  margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line, rgba(244,237,228,0.08));
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-3, #8A7A6B);
+}
+.tt-footer-bottom .legal-jurisdictions { display: flex; gap: 16px; flex-wrap: wrap; }
+.tt-prelaunch-banner {
+  background: rgba(201, 169, 97, 0.08);
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-radius: 6px;
+  padding: 12px 18px;
+  margin: 24px auto 0;
+  max-width: 1200px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold, #C9A961);
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .tt-footer-inner { grid-template-columns: 1fr 1fr; }
+  .tt-footer-bottom { flex-direction: column; }
+}
+@media (max-width: 600px) {
+  .tt-footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .tt-footer { padding: 40px 20px 32px; }
+  .tt-hub-link .label-full { display: none; }
+}
+/* ===== end wiring ===== */
+
+</style>
+</head>
+<body>
+
+<nav class="proto-nav">
+  <a href="index.html" class="tt-hub-link" title="Back to overview"><span class="arrow">←</span><span class="label-full">Hub</span></a>
+  <div class="proto-brand">
+    <span class="name">TASTING<span class="amp">&</span>TOASTING</span>
+    <span class="tag">operations · v0.1</span>
+  </div>
+  <div class="proto-tabs">
+    <button class="proto-tab active" data-screen="onboard">Sign up</button>
+    <button class="proto-tab" data-screen="market">Events</button>
+    <button class="proto-tab" data-screen="somm">Sommelier</button>
+    <button class="proto-tab" data-screen="check">Checkout</button>
+    <button class="proto-tab" data-screen="center">Tasting Center</button>
+    <button class="proto-tab" data-screen="cal">Calendar</button>
+  </div>
+</nav>
+
+<!-- ============= 1. ONBOARDING ============= -->
+<section class="screen active" id="onboard">
+  <div class="onboard-page">
+    <div class="onboard-left">
+      <div class="onboard-left-top">
+        <div class="step active"><span class="num">1</span> About you</div>
+        <div class="step"><span class="num">2</span> Preferences</div>
+        <div class="step"><span class="num">3</span> Choose tier</div>
+        <div class="step"><span class="num">4</span> Confirm</div>
+      </div>
+      <div>
+        <h1 class="onboard-headline">First, the<br><em>palate</em>.</h1>
+        <p class="onboard-sub">Three minutes. Six questions. We use this to make every box and every event you receive feel hand-picked, because it will be.</p>
+      </div>
+      <div class="onboard-quote">
+        "Tell us less than you think we need. The wine will tell us the rest."
+        <div class="onboard-quote-author">— Carlos Mendoza, head sommelier</div>
+      </div>
+    </div>
+
+    <div class="onboard-right">
+      <h2 class="onboard-form-h">Your details.</h2>
+      <p class="onboard-form-sub">We send the box. You decide what's in it later.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First name</label>
+          <input type="text" class="form-input" value="Maksim">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last name</label>
+          <input type="text" class="form-input" placeholder="Geller">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email · for delivery confirmations</label>
+        <input type="email" class="form-input" placeholder="you@example.com">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Where do we ship</label>
+        <input type="text" class="form-input" value="Madrid, Spain · Salamanca district">
+        <div class="form-helper">Spain only on launch — we expand to FR/IT/PT in Q3.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">What you usually drink — pick up to three</label>
+        <div class="preference-grid">
+          <div class="preference-chip selected">
+            <div class="pref-name">Old-world reds</div>
+            <div class="pref-meta">Bordeaux · Rioja</div>
+          </div>
+          <div class="preference-chip selected">
+            <div class="pref-name">Bold structure</div>
+            <div class="pref-meta">High tannin</div>
+          </div>
+          <div class="preference-chip">
+            <div class="pref-name">Cool whites</div>
+            <div class="pref-meta">Riesling · Chablis</div>
+          </div>
+          <div class="preference-chip">
+            <div class="pref-name">Natural / orange</div>
+            <div class="pref-meta">Skin contact</div>
+          </div>
+          <div class="preference-chip selected">
+            <div class="pref-name">High altitude</div>
+            <div class="pref-meta">Cooler climate</div>
+          </div>
+          <div class="preference-chip">
+            <div class="pref-name">Champagne family</div>
+            <div class="pref-meta">Sparkling</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="onboard-cta-row">
+        <p class="onboard-policy">
+          By continuing you agree to our <a href="#">terms</a> and confirm you are over 21. We never sell your data.
+        </p>
+        <button class="btn btn-primary" onclick="goTo('check')">
+          Continue <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 2. EVENT MARKETPLACE ============= -->
+<section class="screen" id="market">
+  <div class="market-page">
+    <div class="page-header">
+      <div>
+        <div class="page-kicker">May 2026 · Madrid · 27 events</div>
+        <h1 class="page-title">Tonight,<br>or <em>next month</em>.</h1>
+      </div>
+      <div class="page-meta">
+        Available · <span class="gold">160 cr</span><br>
+        Tier · <span class="gold">Connoisseur</span>
+      </div>
+    </div>
+
+    <div class="market-filters">
+      <span class="filter-label">Filter</span>
+      <div class="filter-pills">
+        <span class="filter-pill active">All</span>
+        <span class="filter-pill">Group tasting</span>
+        <span class="filter-pill">Masterclass</span>
+        <span class="filter-pill">Curated dinner</span>
+        <span class="filter-pill">Vineyard travel</span>
+        <span class="filter-pill">This week</span>
+        <span class="filter-pill">Available with credits</span>
+      </div>
+      <input type="text" class="market-search" placeholder="Search by region, grape...">
+    </div>
+
+    <div class="market-grid">
+      <div class="event-tile" onclick="goTo('somm')">
+        <div class="event-tile-image gradient-1">
+          <div class="event-tile-badge">Masterclass</div>
+          <div class="event-tile-status few">4 left</div>
+          <div class="event-tile-decor">Vertical.</div>
+        </div>
+        <div class="event-tile-content">
+          <div class="event-tile-meta">
+            <span class="gold">Tue · May 12</span>
+            <span>20:00 · 2h</span>
+          </div>
+          <div class="event-tile-name">Tempranillo, north to south</div>
+          <div class="event-tile-host">Carlos Mendoza, MS · 6 wines blind</div>
+          <div class="event-tile-bottom">
+            <span class="event-tile-cost">120 cr · €120</span>
+            <span class="event-tile-cta">Reserve →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-tile">
+        <div class="event-tile-image gradient-2">
+          <div class="event-tile-badge">Group tasting</div>
+          <div class="event-tile-status open">12 spots</div>
+          <div class="event-tile-decor">Italia.</div>
+        </div>
+        <div class="event-tile-content">
+          <div class="event-tile-meta">
+            <span class="gold">Sat · May 16</span>
+            <span>19:30 · 2h</span>
+          </div>
+          <div class="event-tile-name">Sangiovese vs Nebbiolo</div>
+          <div class="event-tile-host">Marta Sanguineti · 4 wines, the Italian question</div>
+          <div class="event-tile-bottom">
+            <span class="event-tile-cost">40 cr · €40</span>
+            <span class="event-tile-cta">Reserve →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-tile">
+        <div class="event-tile-image gradient-3">
+          <div class="event-tile-badge">Curated dinner</div>
+          <div class="event-tile-status few">2 left</div>
+          <div class="event-tile-decor">Pairing.</div>
+        </div>
+        <div class="event-tile-content">
+          <div class="event-tile-meta">
+            <span class="gold">Thu · May 21</span>
+            <span>20:30 · 3h</span>
+          </div>
+          <div class="event-tile-name">Five courses, five wines</div>
+          <div class="event-tile-host">Chef Iván Cerdeño · partner restaurant Lavinia</div>
+          <div class="event-tile-bottom">
+            <span class="event-tile-cost">200 cr · €200</span>
+            <span class="event-tile-cta">Reserve →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-tile">
+        <div class="event-tile-image gradient-4">
+          <div class="event-tile-badge">Masterclass</div>
+          <div class="event-tile-status open">8 spots</div>
+          <div class="event-tile-decor">Burgundy.</div>
+        </div>
+        <div class="event-tile-content">
+          <div class="event-tile-meta">
+            <span class="gold">Mon · May 26</span>
+            <span>19:00 · 2.5h</span>
+          </div>
+          <div class="event-tile-name">Reading a Burgundy label</div>
+          <div class="event-tile-host">Pierre Lefèvre · everything you don't yet know</div>
+          <div class="event-tile-bottom">
+            <span class="event-tile-cost">120 cr · €120</span>
+            <span class="event-tile-cta">Reserve →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-tile">
+        <div class="event-tile-image gradient-5">
+          <div class="event-tile-badge">Vineyard travel</div>
+          <div class="event-tile-status few">1 left</div>
+          <div class="event-tile-decor">Ribera.</div>
+        </div>
+        <div class="event-tile-content">
+          <div class="event-tile-meta">
+            <span class="gold">Fri-Sat · May 30</span>
+            <span>2 days</span>
+          </div>
+          <div class="event-tile-name">A weekend in Ribera del Duero</div>
+          <div class="event-tile-host">Three wineries · stayover at Vega Sicilia</div>
+          <div class="event-tile-bottom">
+            <span class="event-tile-cost">650 cr · €650</span>
+            <span class="event-tile-cta">Reserve →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-tile">
+        <div class="event-tile-image gradient-6">
+          <div class="event-tile-badge">Group tasting</div>
+          <div class="event-tile-status open">7 spots</div>
+          <div class="event-tile-decor">Riesling.</div>
+        </div>
+        <div class="event-tile-content">
+          <div class="event-tile-meta">
+            <span class="gold">Wed · Jun 04</span>
+            <span>20:00 · 2h</span>
+          </div>
+          <div class="event-tile-name">The Riesling argument</div>
+          <div class="event-tile-host">Klara Hofmann · dry vs off-dry, Mosel vs Rheingau</div>
+          <div class="event-tile-bottom">
+            <span class="event-tile-cost">40 cr · €40</span>
+            <span class="event-tile-cta">Reserve →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 3. SOMMELIER PROFILE ============= -->
+<section class="screen" id="somm">
+  <div class="somm-page">
+    <div class="page-header" style="margin-bottom: 32px;">
+      <div>
+        <div class="page-kicker">— Our network of sommeliers</div>
+        <h1 class="page-title">The <em>person</em> behind the pour.</h1>
+      </div>
+      <div class="page-meta">
+        Network · <span class="gold">42 sommeliers</span><br>
+        Across · <span class="gold">7 EU countries</span>
+      </div>
+    </div>
+
+    <div class="somm-hero">
+      <div class="somm-portrait">
+        <div class="somm-portrait-initials">CM</div>
+      </div>
+      <div class="somm-info-block">
+        <div class="kicker">Master Sommelier · Madrid · since 2022</div>
+        <h2 class="somm-name">Carlos Mendoza</h2>
+        <p class="somm-credentials">14 years across Rioja and Ribera del Duero. Fluent in Spanish, English, Italian.</p>
+        <p class="somm-bio">Carlos started in his uncle's bodega in San Vicente de la Sonsierra at sixteen, washing barrels. Twenty-two years later he writes the wine list at La Buena Mesa Madrid, teaches at the Spanish Sommelier Academy, and runs vertical comparisons for our Salamanca center. Specializes in the difficult question — why this terroir, this year, this exact bottle.</p>
+        <div class="somm-tags">
+          <span class="somm-tag">Spanish reds</span>
+          <span class="somm-tag">Old-world structure</span>
+          <span class="somm-tag">Vertical comparisons</span>
+          <span class="somm-tag">Blind tastings</span>
+          <span class="somm-tag">Group instruction</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="somm-stats">
+      <div class="somm-stat">
+        <div class="lbl">Events hosted</div>
+        <div class="val">147</div>
+      </div>
+      <div class="somm-stat">
+        <div class="lbl">This year</div>
+        <div class="val">38</div>
+      </div>
+      <div class="somm-stat">
+        <div class="lbl">Member rating</div>
+        <div class="val">4.9 <em>/ 5</em></div>
+      </div>
+      <div class="somm-stat">
+        <div class="lbl">Repeat bookings</div>
+        <div class="val">68 <em>%</em></div>
+      </div>
+    </div>
+
+    <div class="somm-row">
+      <div class="somm-upcoming-card">
+        <div class="somm-card-h">
+          <span>Carlos's upcoming nights</span>
+          <span class="all">All events →</span>
+        </div>
+        <div class="somm-event-row" onclick="goTo('market')">
+          <div class="somm-event-date">
+            <div class="day">12</div>
+            <div class="month">May</div>
+          </div>
+          <div class="somm-event-info">
+            <div class="name">Tempranillo, north to south</div>
+            <div class="desc">Masterclass · 6 wines · 12 seats · 4 left</div>
+          </div>
+          <div class="somm-event-time">20:00</div>
+        </div>
+        <div class="somm-event-row">
+          <div class="somm-event-date">
+            <div class="day">19</div>
+            <div class="month">May</div>
+          </div>
+          <div class="somm-event-info">
+            <div class="name">Private tasting · Galicia Forum</div>
+            <div class="desc">Corporate booking · 24 attendees · closed</div>
+          </div>
+          <div class="somm-event-time">19:30</div>
+        </div>
+        <div class="somm-event-row">
+          <div class="somm-event-date">
+            <div class="day">25</div>
+            <div class="month">May</div>
+          </div>
+          <div class="somm-event-info">
+            <div class="name">Vega Sicilia vertical</div>
+            <div class="desc">Patron-tier exclusive · 8 seats · 3 left</div>
+          </div>
+          <div class="somm-event-time">20:30</div>
+        </div>
+        <div class="somm-event-row">
+          <div class="somm-event-date">
+            <div class="day">02</div>
+            <div class="month">Jun</div>
+          </div>
+          <div class="somm-event-info">
+            <div class="name">Bordeaux's left bank, blind</div>
+            <div class="desc">Masterclass · 6 wines · just announced</div>
+          </div>
+          <div class="somm-event-time">20:00</div>
+        </div>
+      </div>
+
+      <div class="somm-payout-card">
+        <div class="somm-card-h">
+          <span>This month</span>
+        </div>
+        <div class="payout-meta">Internal view · sommelier earnings dashboard</div>
+        <div class="payout-amount">
+          <span class="currency">€</span>4,260
+        </div>
+        <div class="payout-meta">Net earnings · May 2026</div>
+        <div class="payout-row">
+          <span class="lbl">Events delivered</span>
+          <span class="val">9</span>
+        </div>
+        <div class="payout-row">
+          <span class="lbl">Gross billed</span>
+          <span class="val">€6,400</span>
+        </div>
+        <div class="payout-row">
+          <span class="lbl">T&T platform fee</span>
+          <span class="val">— €1,920</span>
+        </div>
+        <div class="payout-row">
+          <span class="lbl">Tips & bonuses</span>
+          <span class="val green">+ €240</span>
+        </div>
+        <div class="payout-row">
+          <span class="lbl">Net earnings</span>
+          <span class="val" style="color: var(--gold);">€4,260</span>
+        </div>
+        <div class="payout-meta" style="margin-top: 16px; font-size: 12px;">
+          Payment processed monthly on the 5th. SEPA transfer · ES verified.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 4. CHECKOUT ============= -->
+<section class="screen" id="check">
+  <div class="check-page">
+    <div class="page-header">
+      <div>
+        <div class="page-kicker">— Last step · Confirm and pay</div>
+        <h1 class="page-title">Make it<br><em>yours</em>.</h1>
+      </div>
+      <div class="page-meta">
+        Secure · <span class="gold">SSL</span><br>
+        Step · <span class="gold">4 of 4</span>
+      </div>
+    </div>
+
+    <div class="check-grid">
+      <div class="check-form">
+        <div class="check-block">
+          <div class="check-block-h">
+            <span>Where it ships</span>
+            <span class="step-num">01</span>
+          </div>
+          <p class="check-block-help">First box ships within 48 hours of confirmation.</p>
+          <div class="shipping-confirmation">
+            <div class="shipping-confirmation-info">
+              <div class="label">Verified address</div>
+              <div class="addr">Calle de Velázquez 47, 4º Izq · Madrid 28001</div>
+              <div class="addr-meta">Salamanca district · standard delivery zone</div>
+            </div>
+            <span class="change-link">Change →</span>
+          </div>
+        </div>
+
+        <div class="check-block">
+          <div class="check-block-h">
+            <span>How it ships</span>
+            <span class="step-num">02</span>
+          </div>
+          <p class="check-block-help">All deliveries with chilled transit and signature on receipt.</p>
+          <div class="delivery-options">
+            <div class="delivery-option selected">
+              <div class="delivery-name">Standard · 3-5 days</div>
+              <div class="delivery-meta">Included</div>
+              <div class="delivery-extra">Climate-controlled to 16°C</div>
+            </div>
+            <div class="delivery-option">
+              <div class="delivery-name">Express · next day</div>
+              <div class="delivery-meta">+ €12</div>
+              <div class="delivery-extra">Madrid only · ordered before 14:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="check-block">
+          <div class="check-block-h">
+            <span>How you pay</span>
+            <span class="step-num">03</span>
+          </div>
+          <p class="check-block-help">Charged monthly. Cancel any time, no fees.</p>
+          <div class="payment-options">
+            <div class="payment-option selected">
+              <div class="payment-radio"></div>
+              <div class="payment-info">
+                <div class="name">Card · Visa ·· 4287</div>
+                <div class="meta">Expires 09 / 28</div>
+              </div>
+              <div class="payment-icons">
+                <span class="pay-icon">VISA</span>
+              </div>
+            </div>
+            <div class="payment-option">
+              <div class="payment-radio"></div>
+              <div class="payment-info">
+                <div class="name">Add a different card</div>
+                <div class="meta">Visa, Mastercard, Amex</div>
+              </div>
+            </div>
+            <div class="payment-option">
+              <div class="payment-radio"></div>
+              <div class="payment-info">
+                <div class="name">SEPA Direct Debit</div>
+                <div class="meta">Lower processing · 5-day setup</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <h3 class="summary-h">Your order</h3>
+        <div class="summary-tier">
+          <div class="summary-tier-name">Connoisseur tier</div>
+          <div class="summary-tier-tag">For those who want their evenings hosted as much as their cellar curated.</div>
+        </div>
+        <div class="summary-row">
+          <span class="lbl">Monthly box (4 bottles)</span>
+          <span class="val">€149</span>
+        </div>
+        <div class="summary-row">
+          <span class="lbl">Monthly credits</span>
+          <span class="val">160 cr</span>
+        </div>
+        <div class="summary-row">
+          <span class="lbl">Standard shipping</span>
+          <span class="val">Included</span>
+        </div>
+        <div class="summary-row discount divider">
+          <span class="lbl">Welcome bonus · first month</span>
+          <span class="val">— €30</span>
+        </div>
+        <div class="summary-row total">
+          <span class="lbl">Today</span>
+          <span class="val">€119<em>/ first month</em></span>
+        </div>
+        <button class="summary-cta" onclick="goTo('cal')">
+          Confirm & pay €119 →
+        </button>
+        <p class="summary-trust">Cancel anytime · €149/mo from second month · all wines CAP-verified</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 5. TASTING CENTER ============= -->
+<section class="screen" id="center">
+  <div class="center-page">
+    <div class="page-header" style="margin-bottom: 32px;">
+      <div>
+        <div class="page-kicker">— Our first physical center · Operating · 8 months in</div>
+        <h1 class="page-title">The <em>Madrid</em> center.</h1>
+      </div>
+      <div class="page-meta">
+        Status · <span class="gold">Live</span><br>
+        Bookings open · <span class="gold">Through Aug 2026</span>
+      </div>
+    </div>
+
+    <div class="center-hero">
+      <div class="center-hero-meta">
+        <span><span class="dot"></span>Operating</span>
+        <span>Calle Serrano 87 · Salamanca</span>
+        <span>320 m²</span>
+        <span>Cap. 60 guests</span>
+      </div>
+      <h2 class="center-hero-name">Tasting Center<br><em>№ 01 Madrid</em></h2>
+      <div class="center-hero-bottom">
+        <p class="center-hero-bottom-left">A 19th-century townhouse converted into three spaces — a tasting hall, an intimate cellar, and a producer showcase room. Available for our own events, partner distributors, and producer rentals.</p>
+        <button class="btn btn-gold">Book a space →</button>
+      </div>
+    </div>
+
+    <div class="center-stats">
+      <div class="center-stat">
+        <div class="lbl">Events hosted</div>
+        <div class="val">82</div>
+      </div>
+      <div class="center-stat">
+        <div class="lbl">Utilization · last 30d</div>
+        <div class="val">71 <em>%</em></div>
+      </div>
+      <div class="center-stat">
+        <div class="lbl">Partner bookings</div>
+        <div class="val">24</div>
+      </div>
+      <div class="center-stat">
+        <div class="lbl">Avg. NPS</div>
+        <div class="val">62</div>
+      </div>
+    </div>
+
+    <h2 class="center-section-title">Three <em>spaces</em> inside.</h2>
+    <div class="spaces-grid">
+      <div class="space-card" onclick="goTo('cal')">
+        <div class="space-image space-image-1">
+          <div class="space-image-decor">Hall.</div>
+        </div>
+        <div class="space-content">
+          <div class="space-tag">Main tasting hall</div>
+          <div class="space-name">El Salón</div>
+          <div class="space-features">Long oak table · 24 guests · 18 sommelier-set glassware standards · audio system · projection</div>
+          <div class="space-bottom">
+            <div>
+              <div class="space-rate">€220 / hour</div>
+              <span class="space-rate-meta">3-hour minimum</span>
+            </div>
+            <span class="event-tile-cta">Book →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-card" onclick="goTo('cal')">
+        <div class="space-image space-image-2">
+          <div class="space-image-decor">Cellar.</div>
+        </div>
+        <div class="space-content">
+          <div class="space-tag">Private cellar room</div>
+          <div class="space-name">La Bodega</div>
+          <div class="space-features">Vaulted brick cellar · 8 guests max · climate-stable 14°C · ideal for verticals · candlelight only</div>
+          <div class="space-bottom">
+            <div>
+              <div class="space-rate">€340 / hour</div>
+              <span class="space-rate-meta">2-hour minimum</span>
+            </div>
+            <span class="event-tile-cta">Book →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-card" onclick="goTo('cal')">
+        <div class="space-image space-image-3">
+          <div class="space-image-decor">Showcase.</div>
+        </div>
+        <div class="space-content">
+          <div class="space-tag">Producer showcase</div>
+          <div class="space-name">El Patio</div>
+          <div class="space-features">Open-plan glass-walled · 40 guests standing · pour stations · ideal for trade days and producer launches</div>
+          <div class="space-bottom">
+            <div>
+              <div class="space-rate">€180 / hour</div>
+              <span class="space-rate-meta">4-hour minimum</span>
+            </div>
+            <span class="event-tile-cta">Book →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 6. CALENDAR ============= -->
+<section class="screen" id="cal">
+  <div class="cal-page">
+    <div class="page-header" style="margin-bottom: 32px;">
+      <div>
+        <div class="page-kicker">— Tasting Center № 01 Madrid · Booking calendar</div>
+        <h1 class="page-title">When can <em>you</em> have it?</h1>
+      </div>
+      <div class="page-meta">
+        Now booking · <span class="gold">May–Aug 2026</span><br>
+        Today · <span class="gold">Fri 1 May</span>
+      </div>
+    </div>
+
+    <div class="cal-controls">
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <h2 class="cal-month">May <em>2026</em></h2>
+        <div class="cal-nav">
+          <button class="cal-nav-btn">‹</button>
+          <button class="cal-nav-btn">›</button>
+        </div>
+      </div>
+      <div class="cal-legend">
+        <div class="cal-legend-item"><span class="cal-legend-dot tasting"></span>Tasting / event</div>
+        <div class="cal-legend-item"><span class="cal-legend-dot private"></span>Private booking</div>
+        <div class="cal-legend-item"><span class="cal-legend-dot b2b"></span>Partner / producer</div>
+        <div class="cal-legend-item"><span class="cal-legend-dot maint"></span>Maintenance</div>
+      </div>
+    </div>
+
+    <div class="cal-grid">
+      <div class="cal-day-header">Mon</div>
+      <div class="cal-day-header">Tue</div>
+      <div class="cal-day-header">Wed</div>
+      <div class="cal-day-header">Thu</div>
+      <div class="cal-day-header">Fri</div>
+      <div class="cal-day-header">Sat</div>
+      <div class="cal-day-header">Sun</div>
+
+      <div class="cal-cell muted"><div class="cal-date">28</div></div>
+      <div class="cal-cell muted"><div class="cal-date">29</div></div>
+      <div class="cal-cell muted"><div class="cal-date">30</div></div>
+      <div class="cal-cell today">
+        <div class="cal-date">1</div>
+        <div class="cal-event tasting">19:30 · Group · Riesling</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">2</div>
+        <div class="cal-event tasting">20:00 · Verdejo workshop</div>
+        <div class="cal-event b2b">22:30 · Adir launch</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">3</div>
+        <div class="cal-event private">18:00 · Birthday · 12 pax</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">4</div>
+        <div class="cal-event maint">All day · Cellar restock</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-date">5</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">6</div>
+        <div class="cal-event tasting">20:00 · Old-world reds</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">7</div>
+        <div class="cal-event b2b">14:00 · Lueria trade day</div>
+        <div class="cal-event tasting">20:30 · Italian whites</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">8</div>
+        <div class="cal-event tasting">19:00 · Burgundy intro</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">9</div>
+        <div class="cal-event private">19:30 · Corp · 24 pax</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">10</div>
+        <div class="cal-event tasting">17:00 · Saturday school</div>
+        <div class="cal-event tasting">21:00 · Chianti night</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">11</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-date">12</div>
+        <div class="cal-event tasting">20:00 · Tempranillo N→S</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">13</div>
+        <div class="cal-event b2b">11:00 · Distrib. summit</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">14</div>
+        <div class="cal-event tasting">20:00 · Riesling debate</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">15</div>
+        <div class="cal-event private">19:00 · Wedding tasting</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">16</div>
+        <div class="cal-event tasting">19:30 · Sangiovese vs Nebbiolo</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">17</div>
+        <div class="cal-event tasting">17:00 · Saturday school</div>
+        <div class="cal-event b2b">21:30 · Drimia release</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">18</div>
+        <div class="cal-event maint">Closed · staff training</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-date">19</div>
+        <div class="cal-event private">19:30 · Galicia Forum corp</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">20</div>
+        <div class="cal-event tasting">20:00 · Vintage 2018 retro</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">21</div>
+        <div class="cal-event tasting">20:30 · Curated dinner</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">22</div>
+        <div class="cal-event tasting">19:00 · Argentina special</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">23</div>
+        <div class="cal-event private">20:00 · Anniversary · 6</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">24</div>
+        <div class="cal-event tasting">17:00 · Saturday school</div>
+        <div class="cal-event tasting">20:00 · Rioja blind</div>
+        <div class="cal-event-more">+ 1 more</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">25</div>
+        <div class="cal-event tasting">20:30 · Vega Sicilia vert.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-date">26</div>
+        <div class="cal-event tasting">19:00 · Burgundy labels</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">27</div>
+        <div class="cal-event b2b">14:00 · Producer trade day</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">28</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">29</div>
+        <div class="cal-event tasting">20:00 · Champagne 101</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">30</div>
+        <div class="cal-event tasting">Travel · Ribera weekend</div>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-date">31</div>
+      </div>
+      <div class="cal-cell muted"><div class="cal-date">1</div></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function goTo(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.proto-tab').forEach(t => t.classList.remove('active'));
+    const target = document.getElementById(id);
+    if (target) {
+      target.classList.add('active');
+      const tab = document.querySelector('.proto-tab[data-screen="' + id + '"]');
+      if (tab) tab.classList.add('active');
+      window.scrollTo({top: 0, behavior: 'instant'});
+    }
+  }
+  document.querySelectorAll('.proto-tab').forEach(tab => {
+    tab.addEventListener('click', () => goTo(tab.dataset.screen));
+  });
+
+  // Filter pill toggle
+  document.querySelectorAll('.filter-pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.filter-pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+    });
+  });
+
+  // Preference chip toggle
+  document.querySelectorAll('.preference-chip').forEach(c => {
+    c.addEventListener('click', () => {
+      c.classList.toggle('selected');
+    });
+  });
+
+  // Payment option select
+  document.querySelectorAll('.payment-option').forEach(o => {
+    o.addEventListener('click', () => {
+      document.querySelectorAll('.payment-option').forEach(x => x.classList.remove('selected'));
+      o.classList.add('selected');
+    });
+  });
+
+  // Delivery option select
+  document.querySelectorAll('.delivery-option').forEach(o => {
+    o.addEventListener('click', () => {
+      document.querySelectorAll('.delivery-option').forEach(x => x.classList.remove('selected'));
+      o.classList.add('selected');
+    });
+  });
+</script>
+
+<!-- ============= TT site footer ============= -->
+<div class="tt-prelaunch-banner">
+  Pre-launch · Pending Spanish licenses · Not yet operating commercially
+</div>
+<footer class="tt-footer">
+  <div class="tt-footer-inner">
+    <div class="tt-footer-col">
+      <div class="tt-footer-brand">Tasting<span class="amp">&</span>Toasting</div>
+      <p class="tt-footer-tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Prototypes</h4>
+      <ul>
+        <li><a href="prototype.html">Member &amp; subscription</a></li>
+        <li><a href="game-flow.html">Game flow</a></li>
+        <li><a href="operations.html">Operations</a></li>
+        <li><a href="wave1.html">Wave 1 player</a></li>
+      </ul>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="legal.html">Legal Notice &amp; Cookies</a></li>
+      </ul>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></li>
+        <li><a href="mailto:privacy@tastingandtoasting.com">privacy@tastingandtoasting.com</a></li>
+        <li><a href="mailto:legal@tastingandtoasting.com">legal@tastingandtoasting.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tt-footer-bottom">
+    <span>© 2026 Tasting And Toasting Inc. · Delaware Corp · Filing No. 7494277</span>
+    <div class="legal-jurisdictions">
+      <span>Operating subsidiary: Tasting And Toasting SL (Spain)</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

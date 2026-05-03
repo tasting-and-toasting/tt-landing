@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasting & Toasting — Wine experiences in Spain</title>
+<meta name="description" content="Tasting & Toasting is a wine experience company entering the European market — tastings, toasts, gatherings. Currently in pre-launch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0F0B0A;
+  --bg-2: #1A1413;
+  --bg-3: #241B19;
+  --ink: #F4EDE4;
+  --ink-2: #C7B8A8;
+  --ink-3: #8A7A6B;
+  --wine: #6B1E2C;
+  --wine-2: #8B2838;
+  --wine-bright: #B83246;
+  --gold: #C9A961;
+  --gold-bright: #E8C77A;
+  --green: #4A6B3D;
+  --line: rgba(244,237,228,0.08);
+  --line-2: rgba(244,237,228,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+body { overflow-x: hidden; min-height: 100vh; }
+a { color: inherit; text-decoration: none; }
+.serif { font-family: 'Fraunces', serif; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Subtle grain overlay across the whole page */
+.page-grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' /></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.4'/></svg>");
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+/* Top bar */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(15,11,10,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  z-index: 100;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.topbar-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+.topbar-brand .amp { color: var(--wine-bright); font-style: italic; font-weight: 400; }
+.topbar-links { display: flex; gap: 24px; align-items: center; }
+.topbar-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  transition: color 0.2s ease;
+}
+.topbar-links a:hover { color: var(--ink); }
+.topbar-status {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+}
+.topbar-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  padding: 140px 32px 96px;
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 2;
+}
+.hero-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  margin-bottom: 32px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.hero-meta .dot { color: var(--wine-bright); }
+.hero-headline {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(48px, 8vw, 96px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  max-width: 1000px;
+}
+.hero-headline .em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+.hero-headline .amp {
+  color: var(--wine-bright);
+  font-style: italic;
+  font-weight: 400;
+}
+.hero-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 999px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: 1px solid;
+}
+.hero-btn-primary {
+  background: var(--wine);
+  color: var(--ink);
+  border-color: var(--wine);
+}
+.hero-btn-primary:hover {
+  background: var(--wine-bright);
+  border-color: var(--wine-bright);
+  transform: translateY(-1px);
+}
+.hero-btn-ghost {
+  background: transparent;
+  color: var(--ink-2);
+  border-color: var(--line-2);
+}
+.hero-btn-ghost:hover {
+  color: var(--ink);
+  border-color: var(--ink-3);
+}
+
+/* Pre-launch banner */
+.banner {
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+.banner-inner {
+  background: rgba(201, 169, 97, 0.08);
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-radius: 12px;
+  padding: 22px 28px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.banner-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.banner-text { color: var(--ink-2); font-size: 14px; line-height: 1.6; }
+.banner-text strong { color: var(--gold); font-weight: 500; }
+
+/* PROTOTYPES SECTION */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 32px;
+  position: relative;
+  z-index: 2;
+}
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--wine-bright);
+}
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(32px, 4.5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+.section-title .em { font-style: italic; color: var(--gold); }
+.section-intro {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 620px;
+  margin-bottom: 48px;
+}
+
+/* Prototype cards */
+.proto-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.proto-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.proto-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--wine-bright), transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.proto-card:hover {
+  border-color: var(--line-2);
+  background: var(--bg-3);
+  transform: translateY(-2px);
+}
+.proto-card:hover::before { opacity: 1; }
+
+.proto-card-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-3);
+}
+.proto-card-meta .num { color: var(--gold); }
+.proto-card h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.proto-card h3 .em { font-style: italic; color: var(--gold); }
+.proto-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.proto-card-screens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+.proto-card-screens .chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  background: rgba(244,237,228,0.04);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-3);
+}
+.proto-card-cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-2);
+  transition: color 0.25s ease, gap 0.25s ease;
+}
+.proto-card:hover .proto-card-cta {
+  color: var(--gold);
+  gap: 14px;
+}
+
+/* About section */
+.about {
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-top: 48px;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.about-text p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin-bottom: 18px;
+}
+.about-text p:first-of-type {
+  font-size: 19px;
+  color: var(--ink);
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  line-height: 1.55;
+}
+.about-card {
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px;
+}
+.about-card h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+.about-card dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 12px 18px;
+  font-size: 13px;
+}
+.about-card dt {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+}
+.about-card dd { color: var(--ink-2); }
+
+/* Footer (same as injected into prototypes — kept inline for index since no inject) */
+.tt-footer {
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  padding: 56px 32px 40px;
+  margin-top: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink-3);
+  position: relative;
+  z-index: 2;
+}
+.tt-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.tt-footer-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+}
+.tt-footer-brand .amp { color: var(--wine-bright); font-style: italic; font-weight: 400; }
+.tt-footer-tagline { font-size: 13px; line-height: 1.6; color: var(--ink-3); max-width: 320px; }
+.tt-footer-col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  margin-bottom: 16px;
+}
+.tt-footer-col ul { list-style: none; }
+.tt-footer-col li { margin-bottom: 10px; }
+.tt-footer-col a {
+  color: var(--ink-2);
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+.tt-footer-col a:hover { color: var(--gold); }
+.tt-footer-bottom {
+  max-width: 1200px;
+  margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .topbar { padding: 12px 20px; }
+  .topbar-links { display: none; }
+  .hero { padding: 120px 20px 64px; }
+  .banner { padding: 0 20px; margin-bottom: 56px; }
+  .section { padding: 56px 20px; }
+  .proto-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .tt-footer-inner { grid-template-columns: 1fr 1fr; }
+  .tt-footer-bottom { flex-direction: column; }
+}
+@media (max-width: 600px) {
+  .tt-footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .tt-footer { padding: 40px 20px 32px; }
+}
+</style>
+</head>
+<body>
+<div class="page-grain"></div>
+
+<header class="topbar">
+  <div class="topbar-brand">TASTING<span class="amp">&</span>TOASTING</div>
+  <div class="topbar-links">
+    <a href="#prototypes">Prototypes</a>
+    <a href="#about">About</a>
+    <a href="legal.html">Legal</a>
+  </div>
+  <div class="topbar-status">Pre-launch</div>
+</header>
+
+<section class="hero">
+  <div class="hero-meta">
+    <span>Madrid · Valencia</span>
+    <span class="dot">·</span>
+    <span>Pre-launch · v0.1</span>
+    <span class="dot">·</span>
+    <span>Delaware Corp · 7494277</span>
+  </div>
+  <h1 class="hero-headline">
+    A wine company<br>
+    <span class="em">tastes its way</span><br>
+    into Europe.
+  </h1>
+  <p class="hero-sub">
+    Tasting <span class="serif" style="font-style:italic; color: var(--wine-bright);">&amp;</span> Toasting is being built as a multi-functional wine experience company — tastings, toasts, gatherings. Below are the prototypes that show where we&rsquo;re going.
+  </p>
+  <div class="hero-actions">
+    <a href="#prototypes" class="hero-btn hero-btn-primary">Explore prototypes <span>↓</span></a>
+    <a href="#about" class="hero-btn hero-btn-ghost">About the company</a>
+  </div>
+</section>
+
+<div class="banner">
+  <div class="banner-inner">
+    <div class="banner-icon">⚖️</div>
+    <div class="banner-text">
+      <strong>Pre-launch notice.</strong> The Tasting &amp; Toasting platform is in technical development and pre-licensing phase. No commercial wine sales, event ticketing, or paid services are offered through this website until all required Spanish licenses (alcohol distribution, sanitary registration, excise duty, and others) are obtained and the operating subsidiary <em>Tasting And Toasting SL</em> is fully registered and operational. Information presented here is for illustrative and informational purposes only.
+    </div>
+  </div>
+</div>
+
+<section class="section" id="prototypes">
+  <div class="section-label">The work, in motion</div>
+  <h2 class="section-title">Four <span class="em">prototypes</span>, one direction.</h2>
+  <p class="section-intro">
+    These are working visual prototypes — not the live product. Each one explores a different surface of what we&rsquo;re building. Click any to step inside and walk through the screens.
+  </p>
+
+  <div class="proto-grid">
+
+    <a class="proto-card" href="prototype.html">
+      <div class="proto-card-meta"><span class="num">01</span> · Member &amp; subscription</div>
+      <h3>The <span class="em">brand</span> face.</h3>
+      <p>Subscription tiers, member dashboard, producer view, event booking. The cinematic prototype showing how someone enters the world of Tasting &amp; Toasting and what their first months look like.</p>
+      <div class="proto-card-screens">
+        <span class="chip">Landing</span>
+        <span class="chip">Subscription</span>
+        <span class="chip">Dashboard</span>
+        <span class="chip">CAP scan</span>
+        <span class="chip">Producer</span>
+        <span class="chip">Event</span>
+      </div>
+      <div class="proto-card-cta">Open prototype <span>→</span></div>
+    </a>
+
+    <a class="proto-card" href="game-flow.html">
+      <div class="proto-card-meta"><span class="num">02</span> · Game flow</div>
+      <h3>The <span class="em">tasting</span> game.</h3>
+      <p>A blind tasting party game played across phones. Setup, wine reveals, scoring, and the moment everyone learns who guessed right. The core experience that gives the brand its name.</p>
+      <div class="proto-card-screens">
+        <span class="chip">Setup</span>
+        <span class="chip">Wines</span>
+        <span class="chip">Round</span>
+        <span class="chip">Scoresheet</span>
+        <span class="chip">Reveal</span>
+        <span class="chip">After</span>
+      </div>
+      <div class="proto-card-cta">Open prototype <span>→</span></div>
+    </a>
+
+    <a class="proto-card" href="operations.html">
+      <div class="proto-card-meta"><span class="num">03</span> · Operations</div>
+      <h3>The <span class="em">company</span>, working.</h3>
+      <p>Sign up, event scheduling, sommelier engagement, checkout, the tasting center calendar. The infrastructure side — what keeps the experience running in the background.</p>
+      <div class="proto-card-screens">
+        <span class="chip">Sign up</span>
+        <span class="chip">Events</span>
+        <span class="chip">Sommelier</span>
+        <span class="chip">Checkout</span>
+        <span class="chip">Tasting Center</span>
+        <span class="chip">Calendar</span>
+      </div>
+      <div class="proto-card-cta">Open prototype <span>→</span></div>
+    </a>
+
+    <a class="proto-card" href="wave1.html">
+      <div class="proto-card-meta"><span class="num">04</span> · Wave 1 player</div>
+      <h3>The <span class="em">first</span> release.</h3>
+      <p>A focused MVP slice of the player experience: auth, home, joining a game, browsing the catalog, ordering a kit. Closer to what the first real users will hold in their hand.</p>
+      <div class="proto-card-screens">
+        <span class="chip">Auth</span>
+        <span class="chip">Home</span>
+        <span class="chip">Join</span>
+        <span class="chip">Event</span>
+        <span class="chip">Home game</span>
+        <span class="chip">Catalog</span>
+        <span class="chip">Cart</span>
+      </div>
+      <div class="proto-card-cta">Open prototype <span>→</span></div>
+    </a>
+
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="section">
+    <div class="section-label">The company</div>
+    <h2 class="section-title">Who we <span class="em">are</span>.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Tasting &amp; Toasting is being built to be a wine experience company — entering the European market through Spain.</p>
+        <p>We position ourselves as multi-functional. Wine education, curated kits, hosted tastings, event organization, sommelier engagement — these are the directions. Today, we&rsquo;re in pre-launch and pre-licensing. No commercial wine activity yet.</p>
+        <p>The prototypes you see here are the design and product work we&rsquo;ve done while the legal and operational foundation is being prepared. They&rsquo;re a window into where we&rsquo;re headed, not a live storefront.</p>
+        <p>If you&rsquo;d like to be in touch — about wine, design, partnership, regulation, or just curiosity — write to us.</p>
+      </div>
+      <div class="about-card">
+        <h4>Company facts</h4>
+        <dl>
+          <dt>Parent</dt>
+          <dd>Tasting And Toasting Inc.</dd>
+          <dt>Form</dt>
+          <dd>Delaware Corporation, USA</dd>
+          <dt>Filing No.</dt>
+          <dd>7494277</dd>
+          <dt>Incorporated</dt>
+          <dd>02 June 2023</dd>
+          <dt>Spanish entity</dt>
+          <dd>Tasting And Toasting SL <em>(in registration)</em></dd>
+          <dt>Operating base</dt>
+          <dd>Valencia, Spain</dd>
+          <dt>Status</dt>
+          <dd style="color: var(--gold);">Pre-launch · Pre-licensing</dd>
+          <dt>Contact</dt>
+          <dd><a href="mailto:hello@tastingandtoasting.com" style="color: var(--ink-2); text-decoration: underline;">hello@tastingandtoasting.com</a></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="tt-footer">
+  <div class="tt-footer-inner">
+    <div class="tt-footer-col">
+      <div class="tt-footer-brand">Tasting<span class="amp">&</span>Toasting</div>
+      <p class="tt-footer-tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Prototypes</h4>
+      <ul>
+        <li><a href="prototype.html">Member &amp; subscription</a></li>
+        <li><a href="game-flow.html">Game flow</a></li>
+        <li><a href="operations.html">Operations</a></li>
+        <li><a href="wave1.html">Wave 1 player</a></li>
+      </ul>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="legal.html">Legal Notice &amp; Cookies</a></li>
+      </ul>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></li>
+        <li><a href="mailto:privacy@tastingandtoasting.com">privacy@tastingandtoasting.com</a></li>
+        <li><a href="mailto:legal@tastingandtoasting.com">legal@tastingandtoasting.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tt-footer-bottom">
+    <span>© 2026 Tasting And Toasting Inc. · Delaware Corp · Filing No. 7494277</span>
+    <div class="legal-jurisdictions">
+      <span>Operating subsidiary: Tasting And Toasting SL (Spain)</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll for in-page anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>

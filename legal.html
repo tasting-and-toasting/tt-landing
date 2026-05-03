@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEGAL NOTICE — Tasting &amp; Toasting</title>
+<meta name="description" content="LEGAL NOTICE for the website tastingandtoasting.com — pre-launch / development phase.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0F0B0A;
+  --bg-2: #1A1413;
+  --bg-3: #241B19;
+  --ink: #F4EDE4;
+  --ink-2: #C7B8A8;
+  --ink-3: #8A7A6B;
+  --wine: #6B1E2C;
+  --wine-2: #8B2838;
+  --wine-bright: #B83246;
+  --gold: #C9A961;
+  --gold-bright: #E8C77A;
+  --green: #4A6B3D;
+  --line: rgba(244,237,228,0.08);
+  --line-2: rgba(244,237,228,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+body { overflow-x: hidden; }
+a { color: var(--gold); text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: var(--gold-bright); }
+
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(15,11,10,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  z-index: 100;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.topbar-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.topbar-brand .amp { color: var(--wine-bright); font-style: italic; font-weight: 400; }
+.topbar-back {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+.topbar-back:hover { color: var(--ink); border-color: var(--line-2); background: var(--bg-2); }
+.topbar-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.topbar-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Page hero */
+.legal-hero {
+  padding: 140px 32px 56px;
+  max-width: 880px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--line);
+}
+.legal-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  margin-bottom: 18px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.legal-kicker .dot { color: var(--wine-bright); }
+.legal-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.legal-title-es {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 22px;
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+.legal-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.legal-prelaunch {
+  background: rgba(201, 169, 97, 0.08);
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  padding: 18px 22px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-top: 24px;
+}
+.legal-prelaunch .prelaunch-label {
+  color: var(--gold);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  display: block;
+  margin-bottom: 6px;
+}
+.legal-prelaunch strong { color: var(--ink); font-weight: 500; }
+
+/* Body */
+.legal-body {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 64px 32px 96px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+.legal-body h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-top: 64px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 100px;
+}
+.legal-body h1:first-child { margin-top: 0; }
+.legal-body h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin-top: 40px;
+  margin-bottom: 14px;
+  scroll-margin-top: 100px;
+}
+.legal-body h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin-top: 28px;
+  margin-bottom: 10px;
+  text-transform: none;
+}
+.legal-body p { margin-bottom: 14px; }
+.legal-body strong { color: var(--ink); font-weight: 500; }
+.legal-body em { color: var(--ink-2); font-style: italic; }
+.legal-body ul, .legal-body ol {
+  margin: 12px 0 18px;
+  padding-left: 24px;
+}
+.legal-body li { margin-bottom: 8px; }
+.legal-body li::marker { color: var(--wine-bright); }
+.legal-body code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--bg-2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--gold);
+  border: 1px solid var(--line);
+}
+.legal-body table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px 0 28px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 13px;
+}
+.legal-body table th,
+.legal-body table td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.legal-body table tr:last-child th,
+.legal-body table tr:last-child td { border-bottom: none; }
+.legal-body table th {
+  background: var(--bg-3);
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  width: 35%;
+  border-right: 1px solid var(--line);
+}
+.legal-body table td { color: var(--ink-2); }
+.legal-body blockquote {
+  border-left: 2px solid var(--wine);
+  padding-left: 18px;
+  margin: 16px 0;
+  color: var(--ink-3);
+  font-style: italic;
+}
+.legal-body hr {
+  border: none;
+  height: 1px;
+  background: var(--line);
+  margin: 40px 0;
+}
+
+/* Sticky doc nav (table of contents) on desktop */
+.legal-layout {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 48px;
+  padding: 64px 32px 96px;
+}
+.legal-toc {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.legal-toc h4 {
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  margin-bottom: 14px;
+  color: var(--gold);
+}
+.legal-toc ul { list-style: none; padding: 0; }
+.legal-toc li { margin-bottom: 8px; }
+.legal-toc a {
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: block;
+  padding: 2px 0;
+  border-left: 2px solid transparent;
+  padding-left: 10px;
+  margin-left: -12px;
+}
+.legal-toc a:hover { color: var(--ink); border-left-color: var(--wine-bright); }
+
+.legal-body-only {
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Footer */
+.tt-footer {
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  padding: 56px 32px 40px;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink-3);
+}
+.tt-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.tt-footer-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+}
+.tt-footer-brand .amp { color: var(--wine-bright); font-style: italic; font-weight: 400; }
+.tt-footer-tagline { font-size: 13px; line-height: 1.6; color: var(--ink-3); max-width: 320px; }
+.tt-footer-col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  margin-bottom: 16px;
+}
+.tt-footer-col ul { list-style: none; padding: 0; }
+.tt-footer-col li { margin-bottom: 10px; }
+.tt-footer-col a {
+  color: var(--ink-2);
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+.tt-footer-col a:hover { color: var(--gold); }
+.tt-footer-bottom {
+  max-width: 1200px;
+  margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+
+@media (max-width: 1080px) {
+  .legal-layout { grid-template-columns: 1fr; gap: 32px; }
+  .legal-toc { position: static; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 700px) {
+  .topbar { padding: 12px 20px; }
+  .legal-hero { padding: 120px 20px 48px; }
+  .legal-layout { padding: 48px 20px 64px; }
+  .legal-body table { font-size: 12px; }
+  .legal-body table th, .legal-body table td { padding: 10px 12px; }
+  .tt-footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .tt-footer { padding: 40px 20px 32px; }
+  .tt-footer-bottom { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="topbar-brand">TASTING<span class="amp">&</span>TOASTING</a>
+  <a href="index.html" class="topbar-back"><span>←</span><span>Back to site</span></a>
+  <div class="topbar-status">Pre-launch</div>
+</header>
+
+<section class="legal-hero">
+  <div class="legal-kicker">
+    <span>Legal</span>
+    <span class="dot">·</span>
+    <span>LEGAL NOTICE</span>
+  </div>
+  <h1 class="legal-title">LEGAL NOTICE</h1>
+  <div class="legal-title-es">Aviso Legal</div>
+  <div class="legal-meta">Information required by LSSI-CE Article 10   ·   Effective: [DATE]</div>
+  <div class="legal-prelaunch">
+    <span class="prelaunch-label">Pre-launch notice</span>
+    This Legal Notice is published in compliance with Spanish Law 34/2002 on Information Society Services and Electronic Commerce (LSSI-CE), Article 10. The Service is currently in pre-launch / development phase. No commercial transactions are processed until all required Spanish licenses are obtained and Tasting And Toasting SL is fully operational.
+  </div>
+</section>
+
+<div class="legal-layout">
+  <main class="legal-body legal-body-only">
+<h1 id="1-service-provider-identification">1. Service Provider Identification</h1>
+<p>In compliance with Article 10 of Spanish Law 34/2002 of 11 July, on Information Society Services and Electronic Commerce ("LSSI-CE"), the following information is provided regarding the operator of the website tastingandtoasting.com (and related domains):</p>
+<table>
+<thead>
+<tr>
+<th><strong>Trade name</strong></th>
+<th>Tasting &amp; Toasting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Service operator (parent)</strong></td>
+<td>Tasting And Toasting Inc.</td>
+</tr>
+<tr>
+<td><strong>Type of legal entity</strong></td>
+<td>Corporation organized under the laws of the State of Delaware, United States of America</td>
+</tr>
+<tr>
+<td><strong>Filing number (Delaware)</strong></td>
+<td>7494277</td>
+</tr>
+<tr>
+<td><strong>Date of incorporation</strong></td>
+<td>02 June 2023</td>
+</tr>
+<tr>
+<td><strong>Registered agent (USA)</strong></td>
+<td>[A Registered Agent, Inc. — full address TO BE COMPLETED]</td>
+</tr>
+<tr>
+<td><strong>Local subsidiary (Spain)</strong></td>
+<td>Tasting And Toasting SL</td>
+</tr>
+<tr>
+<td><strong>Spanish NIF/CIF</strong></td>
+<td>[TO BE COMPLETED ONCE SL IS FULLY REGISTERED]</td>
+</tr>
+<tr>
+<td><strong>Mercantile Registry</strong></td>
+<td>[Registro Mercantil de Valencia: Tomo X, Folio Y, Hoja Z, Inscripción 1ª — TO BE COMPLETED]</td>
+</tr>
+<tr>
+<td><strong>Registered office (Spain)</strong></td>
+<td>[Full Valencia address — TO BE COMPLETED]</td>
+</tr>
+<tr>
+<td><strong>General contact email</strong></td>
+<td>hello@tastingandtoasting.com</td>
+</tr>
+<tr>
+<td><strong>Privacy contact email</strong></td>
+<td>privacy@tastingandtoasting.com</td>
+</tr>
+<tr>
+<td><strong>Legal contact email</strong></td>
+<td>legal@tastingandtoasting.com</td>
+</tr>
+<tr>
+<td><strong>Telephone (when available)</strong></td>
+<td>[TO BE COMPLETED]</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-activity">2. Activity</h1>
+<p>The Company is being established to operate as a wine education platform, distributor, and event organizer in Spain, combining digital products (mobile and web applications), physical wine kits, and live tasting events. Full commercial operations will commence only after obtaining all required licenses and registrations under Spanish and EU law.</p>
+<h1 id="3-required-licenses-to-be-obtained-before-operational-launch">3. Required Licenses (To Be Obtained Before Operational Launch)</h1>
+<p>Before commencing commercial wine sales, the Company will obtain:</p>
+<ul>
+<li>
+<p>Registro Territorial de Impuestos Especiales (RTIE) — for handling alcoholic beverages subject to excise duty</p>
+</li>
+<li>
+<p>Sanitary Registration — if applicable to handling/packaging operations</p>
+</li>
+<li>
+<p>EMCS (Excise Movement and Control System) competence — for alcohol movement within the EU</p>
+</li>
+<li>
+<p>Trademark registration with EUIPO (European Union Intellectual Property Office)</p>
+</li>
+<li>
+<p>Registration with AEPD (Agencia Española de Protección de Datos) for data processing activities</p>
+</li>
+<li>
+<p>Standard Spanish corporate registrations (Hacienda, Seguridad Social, IAE)</p>
+</li>
+</ul>
+<h1 id="4-intellectual-property">4. Intellectual Property</h1>
+<p>All content on the Service — including but not limited to text, graphics, logos, icons, images, audio clips, software, and the wine tasting game mechanics — is the property of Tasting And Toasting Inc., its subsidiaries, or its licensors, and is protected by Spanish, EU, and international intellectual property laws.</p>
+<p>The names "Tasting &amp; Toasting", "Tasting And Toasting", and the associated logos and visual identity are pending or registered trademarks of Tasting And Toasting Inc.</p>
+<p>Any reproduction, distribution, public communication, transformation, or other use of this content without express written permission is prohibited.</p>
+<h1 id="5-use-of-the-website">5. Use of the Website</h1>
+<p>Use of the website is governed by these terms together with the separate Terms of Service and Privacy Policy. By accessing or using the website, you accept these terms.</p>
+<p>The Company reserves the right to modify or discontinue any portion of the website at any time, without prior notice.</p>
+<h1 id="6-liability">6. Liability</h1>
+<p>To the maximum extent permitted by Spanish law, the Company is not liable for:</p>
+<ul>
+<li>
+<p>Temporary unavailability of the website</p>
+</li>
+<li>
+<p>Errors or inaccuracies in published information</p>
+</li>
+<li>
+<p>Damages arising from misuse of the website</p>
+</li>
+<li>
+<p>Content of third-party websites linked from this site</p>
+</li>
+</ul>
+<p>The Company will exercise reasonable care to maintain accurate information and continuous availability, but does not guarantee uninterrupted access.</p>
+<h1 id="7-applicable-law-and-jurisdiction">7. Applicable Law and Jurisdiction</h1>
+<p>This Legal Notice is governed by the laws of the Kingdom of Spain. For any dispute, the courts of Valencia, Spain, shall have exclusive jurisdiction, except where mandatory consumer protection law assigns jurisdiction elsewhere.</p>
+<h1 id="8-online-dispute-resolution-platform">8. Online Dispute Resolution Platform</h1>
+<p>Pursuant to Article 14(1) of EU Regulation 524/2013, the European Commission provides an online platform for the resolution of consumer disputes:</p>
+<p>https://ec.europa.eu/consumers/odr/</p>
+<h1 id="9-modifications">9. Modifications</h1>
+<p>The Company reserves the right to update this Legal Notice at any time. The version published on the website at the time of access is binding.</p>
+<p><em>TASTING </em><em>&amp;</em><em> TOASTING</em></p>
+<p><strong>COOKIE POLICY</strong></p>
+<p><em>Política de Cookies</em></p>
+<p>Effective: [DATE]   ·   Version 1.0</p>
+<h1 id="1-what-are-cookies">1. What Are Cookies</h1>
+<p>Cookies are small text files that websites place on your device (computer, smartphone, tablet) when you visit them. They allow the website to recognize your device on subsequent visits and to remember information about you, such as your preferences or login state.</p>
+<p>"Cookies" in this Policy includes similar tracking technologies (web beacons, pixels, local storage, fingerprinting techniques) that may be used for the same purposes as cookies.</p>
+<h1 id="2-legal-framework">2. Legal Framework</h1>
+<p>Cookies on this website are governed by:</p>
+<ul>
+<li>
+<p>Article 22.2 of Spanish Law 34/2002 (LSSI-CE)</p>
+</li>
+<li>
+<p>Articles 6 and 7 of GDPR (consent requirements)</p>
+</li>
+<li>
+<p>AEPD Cookie Guidelines (most recent version)</p>
+</li>
+<li>
+<p>European Data Protection Board Guidelines 5/2020 on consent</p>
+</li>
+</ul>
+<p>Non-essential cookies are activated only with your prior, informed, specific, and unambiguous consent.</p>
+<h1 id="3-categories-of-cookies-we-use">3. Categories of Cookies We Use</h1>
+<h2 id="31-strictly-necessary-cookies-no-consent-required">3.1 Strictly Necessary Cookies (No Consent Required)</h2>
+<p>These cookies are essential for the basic operation of the website. They cannot be disabled. They include:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Cookie name</strong></th>
+<th><strong>Purpose</strong></th>
+<th><strong>Provider</strong></th>
+<th><strong>Duration</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cf_clearance</td>
+<td>Cloudflare security/bot protection</td>
+<td>Cloudflare</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td>__cf_bm</td>
+<td>Cloudflare bot management</td>
+<td>Cloudflare</td>
+<td>30 minutes</td>
+</tr>
+<tr>
+<td>session_id</td>
+<td>Maintain user session</td>
+<td>Tasting &amp; Toasting</td>
+<td>Session</td>
+</tr>
+<tr>
+<td>cookie_consent</td>
+<td>Remember your cookie preferences</td>
+<td>Tasting &amp; Toasting</td>
+<td>12 months</td>
+</tr>
+<tr>
+<td>csrf_token</td>
+<td>Security against cross-site forgery</td>
+<td>Tasting &amp; Toasting</td>
+<td>Session</td>
+</tr>
+</tbody>
+</table>
+<h2 id="32-analytics-cookies-consent-required">3.2 Analytics Cookies (Consent Required)</h2>
+<p>These cookies help us understand how visitors interact with the website, allowing us to improve user experience. They are activated only with your consent.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Cookie name</strong></th>
+<th><strong>Purpose</strong></th>
+<th><strong>Provider</strong></th>
+<th><strong>Duration</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>pa</em>*</td>
+<td>Aggregated usage analytics (privacy-friendly, no personal data)</td>
+<td>Plausible Analytics</td>
+<td>Up to 24 hours</td>
+</tr>
+<tr>
+<td>ph_*</td>
+<td>Product analytics (with consent only)</td>
+<td>PostHog</td>
+<td>Up to 1 year</td>
+</tr>
+</tbody>
+</table>
+<p><em>NOTE: Final selection of analytics provider is pending. We aim to use privacy-first solutions such as Plausible Analytics that do not require cookies in many configurations. This Cookie Policy will be updated upon final implementation. We do NOT plan to use Google Analytics, Meta Pixel, or similar high-tracking services in the pre-launch phase.</em></p>
+<h2 id="33-marketing-cookies-consent-required">3.3 Marketing Cookies (Consent Required)</h2>
+<p>Currently, we do NOT use marketing or advertising cookies. If we add such cookies in the future (for example, after launch for retargeting campaigns), this Policy will be updated and your consent will be requested before activation.</p>
+<h2 id="34-third-party-cookies">3.4 Third-Party Cookies</h2>
+<p>When you authenticate via third-party providers (Google, Apple) or watch embedded video content, those providers may set their own cookies. We are not responsible for cookies set by third parties — please consult their respective privacy and cookie policies:</p>
+<ul>
+<li>
+<p>Google: https://policies.google.com/privacy</p>
+</li>
+<li>
+<p>Apple: https://www.apple.com/legal/privacy/</p>
+</li>
+<li>
+<p>Cloudflare: https://www.cloudflare.com/privacypolicy/</p>
+</li>
+</ul>
+<h1 id="4-your-cookie-choices">4. Your Cookie Choices</h1>
+<h2 id="41-cookie-consent-banner">4.1 Cookie Consent Banner</h2>
+<p>When you first visit our website, you will see a cookie consent banner allowing you to:</p>
+<ul>
+<li>
+<p>Accept all cookies</p>
+</li>
+<li>
+<p>Reject all non-essential cookies</p>
+</li>
+<li>
+<p>Customize your preferences (selecting which categories to allow)</p>
+</li>
+</ul>
+<p>Your choice is recorded for 12 months, after which we will ask again.</p>
+<h2 id="42-changing-your-preferences">4.2 Changing Your Preferences</h2>
+<p>You can change your cookie preferences at any time by:</p>
+<ul>
+<li>
+<p>Clicking the "Cookie Preferences" link in the website footer</p>
+</li>
+<li>
+<p>Clearing cookies in your browser (this will reset preferences)</p>
+</li>
+<li>
+<p>Configuring your browser to block all or specific cookies</p>
+</li>
+</ul>
+<h2 id="43-browser-level-cookie-controls">4.3 Browser-Level Cookie Controls</h2>
+<p>Most browsers allow you to manage cookies through their settings. Instructions for major browsers:</p>
+<ul>
+<li>
+<p>Chrome: Settings → Privacy and security → Cookies and other site data</p>
+</li>
+<li>
+<p>Firefox: Settings → Privacy &amp; Security → Cookies and Site Data</p>
+</li>
+<li>
+<p>Safari: Preferences → Privacy → Manage Website Data</p>
+</li>
+<li>
+<p>Edge: Settings → Privacy, search, and services → Cookies</p>
+</li>
+</ul>
+<p>Note: Disabling all cookies may affect website functionality. Strictly necessary cookies are required for the website to function properly.</p>
+<h2 id="44-withdrawing-consent">4.4 Withdrawing Consent</h2>
+<p>You may withdraw your consent for non-essential cookies at any time without affecting the lawfulness of processing based on consent before withdrawal. Use the "Cookie Preferences" link in the website footer.</p>
+<h1 id="5-cookies-and-personal-data">5. Cookies and Personal Data</h1>
+<p>Some cookies may collect personal data such as IP address or device identifiers. Such processing is governed by our Privacy Policy. You have all the rights described in the Privacy Policy with respect to this data, including:</p>
+<ul>
+<li>
+<p>Right to access your data</p>
+</li>
+<li>
+<p>Right to rectification</p>
+</li>
+<li>
+<p>Right to erasure</p>
+</li>
+<li>
+<p>Right to object</p>
+</li>
+<li>
+<p>Right to lodge a complaint with the AEPD</p>
+</li>
+</ul>
+<h1 id="6-international-data-transfers">6. International Data Transfers</h1>
+<p>Some cookie providers (e.g., Cloudflare) are based outside the EEA. Such transfers are protected by appropriate safeguards (Standard Contractual Clauses, EU-US Data Privacy Framework certifications). See our Privacy Policy for details.</p>
+<h1 id="7-cookie-policy-updates">7. Cookie Policy Updates</h1>
+<p>We may update this Cookie Policy when we add, remove, or modify cookies on the website. The "Effective" date at the top will reflect the latest version. Material changes will be notified via the cookie consent banner, requesting renewed consent where required.</p>
+<h1 id="8-contact">8. Contact</h1>
+<p>For questions about this Cookie Policy, contact privacy@tastingandtoasting.com.</p>
+<p>To file a complaint with the Spanish Data Protection Agency: www.aepd.es</p>
+<p>Cookie Policy and Legal Notice last updated: [DATE]. Spanish versions available at /aviso-legal and /cookies.</p>
+<p>© Tasting And Toasting Inc. and Tasting And Toasting SL.</p>
+  </main>
+  <aside class="legal-toc">
+    <h4>On this page</h4>
+    <ul>
+      <li><a href="#1-service-provider-identification">1. Service Provider Identification</a></li>
+      <li><a href="#2-activity">2. Activity</a></li>
+      <li><a href="#3-required-licenses-to-be-obtained-before-operational-launch">3. Required Licenses (To Be Obtained Before Ope…</a></li>
+      <li><a href="#4-intellectual-property">4. Intellectual Property</a></li>
+      <li><a href="#5-use-of-the-website">5. Use of the Website</a></li>
+      <li><a href="#6-liability">6. Liability</a></li>
+      <li><a href="#7-applicable-law-and-jurisdiction">7. Applicable Law and Jurisdiction</a></li>
+      <li><a href="#8-online-dispute-resolution-platform">8. Online Dispute Resolution Platform</a></li>
+      <li><a href="#9-modifications">9. Modifications</a></li>
+      <li><a href="#1-what-are-cookies">1. What Are Cookies</a></li>
+      <li><a href="#2-legal-framework">2. Legal Framework</a></li>
+      <li><a href="#3-categories-of-cookies-we-use">3. Categories of Cookies We Use</a></li>
+      <li><a href="#4-your-cookie-choices">4. Your Cookie Choices</a></li>
+      <li><a href="#5-cookies-and-personal-data">5. Cookies and Personal Data</a></li>
+      <li><a href="#6-international-data-transfers">6. International Data Transfers</a></li>
+      <li><a href="#7-cookie-policy-updates">7. Cookie Policy Updates</a></li>
+      <li><a href="#8-contact">8. Contact</a></li>
+    </ul>
+  </aside>
+</div>
+
+<footer class="tt-footer">
+  <div class="tt-footer-inner">
+    <div class="tt-footer-col">
+      <div class="tt-footer-brand">Tasting<span class="amp">&</span>Toasting</div>
+      <p class="tt-footer-tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Prototypes</h4>
+      <ul>
+        <li><a href="prototype.html">Member &amp; subscription</a></li>
+        <li><a href="game-flow.html">Game flow</a></li>
+        <li><a href="operations.html">Operations</a></li>
+        <li><a href="wave1.html">Wave 1 player</a></li>
+      </ul>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="legal.html">Legal Notice &amp; Cookies</a></li>
+      </ul>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></li>
+        <li><a href="mailto:privacy@tastingandtoasting.com">privacy@tastingandtoasting.com</a></li>
+        <li><a href="mailto:legal@tastingandtoasting.com">legal@tastingandtoasting.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tt-footer-bottom">
+    <span>© 2026 Tasting And Toasting Inc. · Delaware Corp · Filing No. 7494277</span>
+    <div class="legal-jurisdictions">
+      <span>Operating subsidiary: Tasting And Toasting SL (Spain)</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

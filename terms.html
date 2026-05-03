@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TERMS OF SERVICE — Tasting &amp; Toasting</title>
+<meta name="description" content="TERMS OF SERVICE for the website tastingandtoasting.com — pre-launch / development phase.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0F0B0A;
+  --bg-2: #1A1413;
+  --bg-3: #241B19;
+  --ink: #F4EDE4;
+  --ink-2: #C7B8A8;
+  --ink-3: #8A7A6B;
+  --wine: #6B1E2C;
+  --wine-2: #8B2838;
+  --wine-bright: #B83246;
+  --gold: #C9A961;
+  --gold-bright: #E8C77A;
+  --green: #4A6B3D;
+  --line: rgba(244,237,228,0.08);
+  --line-2: rgba(244,237,228,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+body { overflow-x: hidden; }
+a { color: var(--gold); text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: var(--gold-bright); }
+
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(15,11,10,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  z-index: 100;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.topbar-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.topbar-brand .amp { color: var(--wine-bright); font-style: italic; font-weight: 400; }
+.topbar-back {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+.topbar-back:hover { color: var(--ink); border-color: var(--line-2); background: var(--bg-2); }
+.topbar-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.topbar-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Page hero */
+.legal-hero {
+  padding: 140px 32px 56px;
+  max-width: 880px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--line);
+}
+.legal-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  margin-bottom: 18px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.legal-kicker .dot { color: var(--wine-bright); }
+.legal-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.legal-title-es {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 22px;
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+.legal-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.legal-prelaunch {
+  background: rgba(201, 169, 97, 0.08);
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  padding: 18px 22px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-top: 24px;
+}
+.legal-prelaunch .prelaunch-label {
+  color: var(--gold);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  display: block;
+  margin-bottom: 6px;
+}
+.legal-prelaunch strong { color: var(--ink); font-weight: 500; }
+
+/* Body */
+.legal-body {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 64px 32px 96px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+.legal-body h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-top: 64px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 100px;
+}
+.legal-body h1:first-child { margin-top: 0; }
+.legal-body h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin-top: 40px;
+  margin-bottom: 14px;
+  scroll-margin-top: 100px;
+}
+.legal-body h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin-top: 28px;
+  margin-bottom: 10px;
+  text-transform: none;
+}
+.legal-body p { margin-bottom: 14px; }
+.legal-body strong { color: var(--ink); font-weight: 500; }
+.legal-body em { color: var(--ink-2); font-style: italic; }
+.legal-body ul, .legal-body ol {
+  margin: 12px 0 18px;
+  padding-left: 24px;
+}
+.legal-body li { margin-bottom: 8px; }
+.legal-body li::marker { color: var(--wine-bright); }
+.legal-body code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--bg-2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--gold);
+  border: 1px solid var(--line);
+}
+.legal-body table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px 0 28px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 13px;
+}
+.legal-body table th,
+.legal-body table td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.legal-body table tr:last-child th,
+.legal-body table tr:last-child td { border-bottom: none; }
+.legal-body table th {
+  background: var(--bg-3);
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  width: 35%;
+  border-right: 1px solid var(--line);
+}
+.legal-body table td { color: var(--ink-2); }
+.legal-body blockquote {
+  border-left: 2px solid var(--wine);
+  padding-left: 18px;
+  margin: 16px 0;
+  color: var(--ink-3);
+  font-style: italic;
+}
+.legal-body hr {
+  border: none;
+  height: 1px;
+  background: var(--line);
+  margin: 40px 0;
+}
+
+/* Sticky doc nav (table of contents) on desktop */
+.legal-layout {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 48px;
+  padding: 64px 32px 96px;
+}
+.legal-toc {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.legal-toc h4 {
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  margin-bottom: 14px;
+  color: var(--gold);
+}
+.legal-toc ul { list-style: none; padding: 0; }
+.legal-toc li { margin-bottom: 8px; }
+.legal-toc a {
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: block;
+  padding: 2px 0;
+  border-left: 2px solid transparent;
+  padding-left: 10px;
+  margin-left: -12px;
+}
+.legal-toc a:hover { color: var(--ink); border-left-color: var(--wine-bright); }
+
+.legal-body-only {
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Footer */
+.tt-footer {
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  padding: 56px 32px 40px;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink-3);
+}
+.tt-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.tt-footer-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+}
+.tt-footer-brand .amp { color: var(--wine-bright); font-style: italic; font-weight: 400; }
+.tt-footer-tagline { font-size: 13px; line-height: 1.6; color: var(--ink-3); max-width: 320px; }
+.tt-footer-col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  margin-bottom: 16px;
+}
+.tt-footer-col ul { list-style: none; padding: 0; }
+.tt-footer-col li { margin-bottom: 10px; }
+.tt-footer-col a {
+  color: var(--ink-2);
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+.tt-footer-col a:hover { color: var(--gold); }
+.tt-footer-bottom {
+  max-width: 1200px;
+  margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+
+@media (max-width: 1080px) {
+  .legal-layout { grid-template-columns: 1fr; gap: 32px; }
+  .legal-toc { position: static; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 700px) {
+  .topbar { padding: 12px 20px; }
+  .legal-hero { padding: 120px 20px 48px; }
+  .legal-layout { padding: 48px 20px 64px; }
+  .legal-body table { font-size: 12px; }
+  .legal-body table th, .legal-body table td { padding: 10px 12px; }
+  .tt-footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .tt-footer { padding: 40px 20px 32px; }
+  .tt-footer-bottom { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="topbar-brand">TASTING<span class="amp">&</span>TOASTING</a>
+  <a href="index.html" class="topbar-back"><span>←</span><span>Back to site</span></a>
+  <div class="topbar-status">Pre-launch</div>
+</header>
+
+<section class="legal-hero">
+  <div class="legal-kicker">
+    <span>Legal</span>
+    <span class="dot">·</span>
+    <span>TERMS OF SERVICE</span>
+  </div>
+  <h1 class="legal-title">TERMS OF SERVICE</h1>
+  <div class="legal-title-es">Términos y Condiciones de Uso</div>
+  <div class="legal-meta">Effective date: [DATE]   ·   Version 1.0</div>
+  <div class="legal-prelaunch">
+    <span class="prelaunch-label">Pre-launch notice</span>
+    These Terms govern access to and use of the website tastingandtoasting.com during a pre-launch / development phase. The Service is currently in technical development and pre-licensing phase. No commercial wine sales, event ticketing, or paid services are offered until all required Spanish licenses are obtained and Tasting And Toasting SL is fully operational. Sections of these Terms relating to commercial transactions, alcohol delivery, and event services apply only after operational launch and will be activated by separate notification to users.
+  </div>
+</section>
+
+<div class="legal-layout">
+  <main class="legal-body legal-body-only">
+<h1 id="1-acceptance-of-terms">1. Acceptance of Terms</h1>
+<p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User", "you") and Tasting And Toasting Inc. (a Delaware corporation) together with its subsidiary Tasting And Toasting SL (a Spanish company) (collectively "Tasting &amp; Toasting", "we", "our", "Company").</p>
+<p>By accessing or using the website tastingandtoasting.com, its subdomains, or any associated mobile applications (collectively, the "Service"), you agree to be bound by these Terms and our Privacy Policy.</p>
+<p>If you do not agree, do not use the Service.</p>
+<h1 id="2-company-information-lssi-ce-article-10">2. Company Information (LSSI-CE Article 10)</h1>
+<p>In compliance with Article 10 of Spanish Law 34/2002 on Information Society Services and Electronic Commerce ("LSSI-CE"), the following information is provided:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Service operator (parent)</strong></th>
+<th>Tasting And Toasting Inc.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td>Corporation under Delaware law (USA)</td>
+</tr>
+<tr>
+<td><strong>Filing number</strong></td>
+<td>7494277</td>
+</tr>
+<tr>
+<td><strong>Date of incorporation</strong></td>
+<td>02 June 2023</td>
+</tr>
+<tr>
+<td><strong>Local subsidiary (Spain)</strong></td>
+<td>Tasting And Toasting SL</td>
+</tr>
+<tr>
+<td><strong>Spanish NIF/CIF</strong></td>
+<td>[TO BE COMPLETED]</td>
+</tr>
+<tr>
+<td><strong>Registered office (Spain)</strong></td>
+<td>Valencia, Spain [exact address — TO BE COMPLETED]</td>
+</tr>
+<tr>
+<td><strong>General email</strong></td>
+<td>hello@tastingandtoasting.com</td>
+</tr>
+<tr>
+<td><strong>Privacy email</strong></td>
+<td>privacy@tastingandtoasting.com</td>
+</tr>
+<tr>
+<td><strong>Legal email</strong></td>
+<td>legal@tastingandtoasting.com</td>
+</tr>
+<tr>
+<td><strong>Mercantile Registry</strong></td>
+<td>[Registro Mercantil de Valencia, Tomo X, Folio Y, Hoja Z — TO BE COMPLETED]</td>
+</tr>
+</tbody>
+</table>
+<h1 id="3-description-of-the-service">3. Description of the Service</h1>
+<p>Tasting &amp; Toasting is developing a wine education and tasting platform that, when fully operational, will offer:</p>
+<ul>
+<li>
+<p>A blind wine tasting game (mobile and web)</p>
+</li>
+<li>
+<p>Curated wine tasting kits delivered to your home</p>
+</li>
+<li>
+<p>Live tasting events with trained mediators</p>
+</li>
+<li>
+<p>Subscription-based wine experiences</p>
+</li>
+<li>
+<p>A platform connecting players, mediators, and winery partners</p>
+</li>
+</ul>
+<p>During the pre-launch phase, the Service offers only:</p>
+<ul>
+<li>
+<p>Information about the upcoming product</p>
+</li>
+<li>
+<p>Waitlist registration for launch notifications</p>
+</li>
+<li>
+<p>Contact and inquiry channels</p>
+</li>
+</ul>
+<h1 id="4-eligibility-and-age-requirements">4. Eligibility and Age Requirements</h1>
+<p>You may use the Service only if:</p>
+<ul>
+<li>
+<p>You are at least 18 years of age (the legal drinking age in Spain and the EU)</p>
+</li>
+<li>
+<p>You have legal capacity to enter into binding contracts under applicable law</p>
+</li>
+<li>
+<p>You are not prohibited from receiving the Service under any applicable law</p>
+</li>
+<li>
+<p>You reside in a jurisdiction where alcohol-related services are legal</p>
+</li>
+</ul>
+<p>Use of the Service by minors under 18 is strictly prohibited. We reserve the right to verify your age at any time, and in particular at the point of physical delivery, where a valid government-issued ID may be required.</p>
+<p>For the limited purpose of website browsing during pre-launch (without alcohol-related transactions), Spanish law (Article 7 LOPDGDD) permits digital consent from age 14. However, registration for the Service requires confirmation of being 18 or older.</p>
+<h1 id="5-account-registration-and-security">5. Account Registration and Security</h1>
+<h2 id="51-account-creation">5.1 Account Creation</h2>
+<p>To use certain features (when available), you must create an account. You agree to:</p>
+<ul>
+<li>
+<p>Provide accurate, current, and complete information</p>
+</li>
+<li>
+<p>Maintain and promptly update your information</p>
+</li>
+<li>
+<p>Maintain the security of your account credentials</p>
+</li>
+<li>
+<p>Notify us immediately of any unauthorized access</p>
+</li>
+<li>
+<p>Accept responsibility for all activities under your account</p>
+</li>
+</ul>
+<h2 id="52-one-account-per-person">5.2 One Account Per Person</h2>
+<p>Each individual may register only one account. Sharing accounts, creating multiple accounts, or transferring an account is prohibited.</p>
+<h2 id="53-authentication">5.3 Authentication</h2>
+<p>We use phone-based one-time password (OTP) authentication. You are responsible for maintaining access to the phone number associated with your account.</p>
+<h1 id="6-acceptable-use-policy">6. Acceptable Use Policy</h1>
+<p>You agree NOT to:</p>
+<ul>
+<li>
+<p>Use the Service for any unlawful purpose or in violation of any applicable laws or regulations</p>
+</li>
+<li>
+<p>Use the Service if you are under 18 years of age</p>
+</li>
+<li>
+<p>Resell, redistribute, or commercialize wine purchased through the Service without authorization</p>
+</li>
+<li>
+<p>Provide false, misleading, or fraudulent information</p>
+</li>
+<li>
+<p>Impersonate any person or entity, or misrepresent your affiliation</p>
+</li>
+<li>
+<p>Interfere with or disrupt the Service or servers</p>
+</li>
+<li>
+<p>Attempt to gain unauthorized access to any part of the Service</p>
+</li>
+<li>
+<p>Reverse engineer, decompile, or disassemble any part of the Service</p>
+</li>
+<li>
+<p>Use automated systems (bots, scrapers, crawlers) to access the Service without our express written permission</p>
+</li>
+<li>
+<p>Upload or transmit viruses, malware, or other harmful code</p>
+</li>
+<li>
+<p>Harass, threaten, or abuse other users, mediators, or our staff</p>
+</li>
+<li>
+<p>Post content that is defamatory, obscene, hateful, or violates the rights of others</p>
+</li>
+<li>
+<p>Collect personal data of other users without their consent</p>
+</li>
+<li>
+<p>Use the Service to send unsolicited commercial communications (spam)</p>
+</li>
+<li>
+<p>Bypass age verification or other security measures</p>
+</li>
+<li>
+<p>Engage in any activity that constitutes unfair competition under Spanish or EU law</p>
+</li>
+</ul>
+<h1 id="7-user-generated-content">7. User-Generated Content</h1>
+<h2 id="71-your-content">7.1 Your Content</h2>
+<p>When you post tasting notes, reviews, photos, or other content ("User Content"), you retain ownership but grant us a worldwide, non-exclusive, royalty-free, sublicensable license to use, reproduce, distribute, display, and modify your User Content for the purpose of operating, improving, and promoting the Service.</p>
+<h2 id="72-content-standards">7.2 Content Standards</h2>
+<p>User Content must not:</p>
+<ul>
+<li>
+<p>Violate any law or regulation</p>
+</li>
+<li>
+<p>Infringe intellectual property rights</p>
+</li>
+<li>
+<p>Be defamatory, obscene, or harmful to minors</p>
+</li>
+<li>
+<p>Promote excessive alcohol consumption or drinking by minors</p>
+</li>
+<li>
+<p>Contain personal data of other persons without consent</p>
+</li>
+</ul>
+<h2 id="73-moderation">7.3 Moderation</h2>
+<p>We reserve the right (but have no obligation) to review, edit, or remove User Content at our sole discretion. We may suspend or terminate accounts that repeatedly violate these standards.</p>
+<h1 id="8-intellectual-property">8. Intellectual Property</h1>
+<h2 id="81-our-ip">8.1 Our IP</h2>
+<p>All content on the Service, including text, graphics, logos, images, audio, video, software, and the wine tasting game mechanics ("Our Content"), is owned by Tasting &amp; Toasting or licensed to us, and is protected by Spanish, EU, and international intellectual property laws.</p>
+<p>The trademarks "Tasting &amp; Toasting", the logo, and related visual identity are pending registration with EUIPO and remain the exclusive property of Tasting And Toasting Inc. or its licensees.</p>
+<h2 id="82-limited-license-to-you">8.2 Limited License to You</h2>
+<p>We grant you a limited, non-exclusive, non-transferable, revocable license to access and use the Service for your personal, non-commercial use, subject to these Terms.</p>
+<h2 id="83-restrictions">8.3 Restrictions</h2>
+<p>You may not:</p>
+<ul>
+<li>
+<p>Copy, reproduce, distribute, or create derivative works of Our Content without permission</p>
+</li>
+<li>
+<p>Use Our Content for commercial purposes without express written permission</p>
+</li>
+<li>
+<p>Remove copyright, trademark, or other proprietary notices</p>
+</li>
+<li>
+<p>Use any data mining, robots, or similar data gathering tools</p>
+</li>
+</ul>
+<h1 id="9-purchases-and-payments-post-launch">9. Purchases and Payments (Post-Launch)</h1>
+<p><em>THIS SECTION APPLIES ONLY AFTER OPERATIONAL LAUNCH. During pre-launch, no purchases or payments are processed through the Service.</em></p>
+<h2 id="91-pricing">9.1 Pricing</h2>
+<p>All prices are stated in Euros (EUR) and include applicable IVA (Spanish VAT) at the rate in force at the time of purchase. Shipping and handling fees are added at checkout.</p>
+<h2 id="92-payment-methods">9.2 Payment Methods</h2>
+<p>We accept payment via:</p>
+<ul>
+<li>
+<p>Bizum (Spain)</p>
+</li>
+<li>
+<p>Credit and debit cards (Visa, Mastercard, American Express)</p>
+</li>
+<li>
+<p>Apple Pay and Google Pay</p>
+</li>
+<li>
+<p>SEPA bank transfer (for certain order types)</p>
+</li>
+</ul>
+<p>Payment processing is handled by certified payment processors. We do not store full credit card details.</p>
+<h2 id="93-order-acceptance">9.3 Order Acceptance</h2>
+<p>Your order is accepted only when we send you an order confirmation email. We reserve the right to refuse or cancel orders for reasons including stock availability, pricing errors, suspected fraud, or inability to verify age at delivery.</p>
+<h2 id="94-withdrawal-right-14-days">9.4 Withdrawal Right (14 days)</h2>
+<p>Under Spanish consumer law (Royal Legislative Decree 1/2007), consumers have a 14-day right of withdrawal for distance contracts. However, important exceptions apply to wine purchases:</p>
+<ul>
+<li>
+<p>The withdrawal right does NOT apply to sealed goods that have been unsealed after delivery and are not suitable for return for hygiene/health reasons (Art. 103.e RDL 1/2007) — this includes opened wine bottles</p>
+</li>
+<li>
+<p>The withdrawal right DOES apply to sealed/unopened wine kits and bottles, returned in their original condition</p>
+</li>
+<li>
+<p>Custom or personalized products are not subject to withdrawal right</p>
+</li>
+</ul>
+<p>To exercise withdrawal, contact us within 14 days of delivery at hello@tastingandtoasting.com. Return shipping costs are borne by the buyer unless the product was defective.</p>
+<h2 id="95-subscriptions">9.5 Subscriptions</h2>
+<p>Subscription services renew automatically until cancelled. You may cancel, pause, or modify your subscription at any time through your account, with effect from the next billing period. No refunds are provided for the current billing period upon cancellation, except where required by law.</p>
+<h2 id="96-defective-products-and-legal-warranties">9.6 Defective Products and Legal Warranties</h2>
+<p>Under Spanish consumer law, you have a legal warranty of conformity for 3 years from delivery (Art. 120 RDL 1/2007). For defective wine (corked, oxidized, damaged in transit):</p>
+<ul>
+<li>
+<p>Notify us within a reasonable time of discovery, with photos where applicable</p>
+</li>
+<li>
+<p>We will replace the defective product or provide a refund at our discretion</p>
+</li>
+<li>
+<p>In case of dispute, you may contact the Spanish consumer arbitration system (Junta Arbitral de Consumo)</p>
+</li>
+</ul>
+<h1 id="10-alcohol-policy-and-responsible-consumption">10. Alcohol Policy and Responsible Consumption</h1>
+<p>We are committed to responsible consumption of alcohol:</p>
+<ul>
+<li>
+<p>We do NOT promote excessive consumption</p>
+</li>
+<li>
+<p>We do NOT target minors in any communications</p>
+</li>
+<li>
+<p>We comply with Spanish alcohol marketing regulations and the Código de Autorregulación de Comunicaciones Comerciales de las Bebidas Espirituosas</p>
+</li>
+<li>
+<p>We require age verification at delivery — couriers are instructed to verify ID and refuse delivery to anyone unable to prove they are 18+</p>
+</li>
+<li>
+<p>We refuse service to anyone visibly intoxicated at events</p>
+</li>
+<li>
+<p>We provide information about responsible consumption and recommended limits</p>
+</li>
+</ul>
+<p>If you or someone you know struggles with alcohol consumption, support is available through the Spanish health system and organizations such as Alcohólicos Anónimos España.</p>
+<h1 id="11-delivery-post-launch">11. Delivery (Post-Launch)</h1>
+<p><em>THIS SECTION APPLIES ONLY AFTER OPERATIONAL LAUNCH.</em></p>
+<ul>
+<li>
+<p>Initial delivery area: Spanish mainland and Balearic Islands</p>
+</li>
+<li>
+<p>Delivery is handled by licensed Spanish couriers (e.g., SEUR, MRW)</p>
+</li>
+<li>
+<p>Estimated delivery times: 2-5 business days from order confirmation</p>
+</li>
+<li>
+<p>Mandatory ID check at delivery — package will be returned if recipient cannot verify being 18+</p>
+</li>
+<li>
+<p>Risk of loss transfers to you upon delivery to the address you provided</p>
+</li>
+<li>
+<p>We are not responsible for delays caused by force majeure, courier issues, or incorrect address information</p>
+</li>
+</ul>
+<h1 id="12-third-party-services-and-links">12. Third-Party Services and Links</h1>
+<p>The Service may contain links to third-party websites and services. We are not responsible for the content, privacy practices, or terms of such third parties. Your use of third-party services is governed by their own terms and policies.</p>
+<h1 id="13-disclaimers">13. Disclaimers</h1>
+<p>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, EXCEPT FOR WARRANTIES THAT CANNOT BE EXCLUDED UNDER SPANISH CONSUMER LAW.</p>
+<p>We do not warrant:</p>
+<ul>
+<li>
+<p>That the Service will be uninterrupted, secure, or error-free</p>
+</li>
+<li>
+<p>That defects will be corrected</p>
+</li>
+<li>
+<p>That the Service is free of viruses or other harmful components</p>
+</li>
+<li>
+<p>The accuracy, completeness, or usefulness of any information on the Service</p>
+</li>
+</ul>
+<p>Your statutory rights as a consumer under Spanish law are not affected by these disclaimers.</p>
+<h1 id="14-limitation-of-liability">14. Limitation of Liability</h1>
+<p>To the maximum extent permitted by Spanish law, our total liability for any claim arising from these Terms or your use of the Service shall not exceed the amount you paid us in the 12 months preceding the claim, or €100, whichever is greater.</p>
+<p>Notwithstanding the above, nothing in these Terms limits or excludes our liability for:</p>
+<ul>
+<li>
+<p>Death or personal injury caused by our negligence</p>
+</li>
+<li>
+<p>Fraud or fraudulent misrepresentation</p>
+</li>
+<li>
+<p>Any liability that cannot be limited or excluded under Spanish law</p>
+</li>
+<li>
+<p>Defective products under Spanish product liability law</p>
+</li>
+</ul>
+<h1 id="15-indemnification">15. Indemnification</h1>
+<p>You agree to indemnify and hold harmless Tasting &amp; Toasting, its affiliates, officers, employees, and agents from any claims, damages, losses, liabilities, and expenses (including reasonable legal fees) arising from your breach of these Terms, your User Content, or your misuse of the Service.</p>
+<h1 id="16-termination">16. Termination</h1>
+<h2 id="161-termination-by-you">16.1 Termination by You</h2>
+<p>You may stop using the Service and close your account at any time through your account settings or by contacting hello@tastingandtoasting.com.</p>
+<h2 id="162-termination-by-us">16.2 Termination by Us</h2>
+<p>We may suspend or terminate your access to the Service, with or without notice, for:</p>
+<ul>
+<li>
+<p>Breach of these Terms</p>
+</li>
+<li>
+<p>Suspected fraud or unlawful activity</p>
+</li>
+<li>
+<p>Failure to verify identity or age</p>
+</li>
+<li>
+<p>Extended inactivity</p>
+</li>
+<li>
+<p>Discontinuation of the Service</p>
+</li>
+</ul>
+<h2 id="163-effect-of-termination">16.3 Effect of Termination</h2>
+<p>Upon termination:</p>
+<ul>
+<li>
+<p>Your right to use the Service immediately ceases</p>
+</li>
+<li>
+<p>We may delete your account and User Content (subject to legal retention obligations)</p>
+</li>
+<li>
+<p>Provisions that by their nature should survive (IP, liability, dispute resolution) remain in effect</p>
+</li>
+</ul>
+<h1 id="17-modifications-to-the-service-and-terms">17. Modifications to the Service and Terms</h1>
+<p>We may modify the Service or these Terms at any time. Material changes will be communicated via:</p>
+<ul>
+<li>
+<p>Email notification (if you have provided your email)</p>
+</li>
+<li>
+<p>Notice on the Service</p>
+</li>
+<li>
+<p>Update to the "Effective Date" at the top of these Terms</p>
+</li>
+</ul>
+<p>Material changes affecting your rights take effect after a 30-day notice period. Continued use after the effective date constitutes acceptance.</p>
+<h1 id="18-governing-law-and-jurisdiction">18. Governing Law and Jurisdiction</h1>
+<p>These Terms are governed by the laws of the Kingdom of Spain, without regard to conflict of law principles. The United Nations Convention on Contracts for the International Sale of Goods does not apply.</p>
+<p>For consumer disputes, you may bring proceedings before the courts of your domicile in the EU, in accordance with EU consumer protection law. For non-consumer disputes, the exclusive jurisdiction is the courts of Valencia, Spain.</p>
+<h2 id="181-online-dispute-resolution">18.1 Online Dispute Resolution</h2>
+<p>In accordance with Article 14(1) of EU Regulation 524/2013, we inform you of the European Online Dispute Resolution platform: https://ec.europa.eu/consumers/odr/</p>
+<h2 id="182-spanish-consumer-arbitration">18.2 Spanish Consumer Arbitration</h2>
+<p>You may also seek resolution through the Spanish consumer arbitration system (Sistema Arbitral de Consumo), administered by the Junta Arbitral de Consumo of your autonomous community.</p>
+<h1 id="19-general-provisions">19. General Provisions</h1>
+<h2 id="191-entire-agreement">19.1 Entire Agreement</h2>
+<p>These Terms, together with the Privacy Policy and Cookie Policy, constitute the entire agreement between you and us.</p>
+<h2 id="192-severability">19.2 Severability</h2>
+<p>If any provision is found invalid or unenforceable, the remaining provisions remain in full effect.</p>
+<h2 id="193-no-waiver">19.3 No Waiver</h2>
+<p>Our failure to enforce any right or provision does not constitute a waiver of such right or provision.</p>
+<h2 id="194-assignment">19.4 Assignment</h2>
+<p>You may not assign these Terms without our written consent. We may assign these Terms to a successor in interest in connection with merger, acquisition, or sale of assets.</p>
+<h2 id="195-force-majeure">19.5 Force Majeure</h2>
+<p>Neither party is liable for failure to perform due to events beyond reasonable control (natural disasters, war, pandemic, government action, supplier failures).</p>
+<h2 id="196-language">19.6 Language</h2>
+<p>These Terms are provided in English and Spanish. In case of conflict, the [English / Spanish — TO BE DECIDED] version prevails.</p>
+<h2 id="197-contact">19.7 Contact</h2>
+<p>For questions about these Terms, contact legal@tastingandtoasting.com.</p>
+<p>These Terms of Service were last updated on [DATE]. A Spanish version is available at tastingandtoasting.com/terminos.</p>
+<p>© Tasting And Toasting Inc. and Tasting And Toasting SL. All rights reserved.</p>
+  </main>
+  <aside class="legal-toc">
+    <h4>On this page</h4>
+    <ul>
+      <li><a href="#1-acceptance-of-terms">1. Acceptance of Terms</a></li>
+      <li><a href="#2-company-information-lssi-ce-article-10">2. Company Information (LSSI-CE Article 10)</a></li>
+      <li><a href="#3-description-of-the-service">3. Description of the Service</a></li>
+      <li><a href="#4-eligibility-and-age-requirements">4. Eligibility and Age Requirements</a></li>
+      <li><a href="#5-account-registration-and-security">5. Account Registration and Security</a></li>
+      <li><a href="#6-acceptable-use-policy">6. Acceptable Use Policy</a></li>
+      <li><a href="#7-user-generated-content">7. User-Generated Content</a></li>
+      <li><a href="#8-intellectual-property">8. Intellectual Property</a></li>
+      <li><a href="#9-purchases-and-payments-post-launch">9. Purchases and Payments (Post-Launch)</a></li>
+      <li><a href="#10-alcohol-policy-and-responsible-consumption">10. Alcohol Policy and Responsible Consumption</a></li>
+      <li><a href="#11-delivery-post-launch">11. Delivery (Post-Launch)</a></li>
+      <li><a href="#12-third-party-services-and-links">12. Third-Party Services and Links</a></li>
+      <li><a href="#13-disclaimers">13. Disclaimers</a></li>
+      <li><a href="#14-limitation-of-liability">14. Limitation of Liability</a></li>
+      <li><a href="#15-indemnification">15. Indemnification</a></li>
+      <li><a href="#16-termination">16. Termination</a></li>
+      <li><a href="#17-modifications-to-the-service-and-terms">17. Modifications to the Service and Terms</a></li>
+      <li><a href="#18-governing-law-and-jurisdiction">18. Governing Law and Jurisdiction</a></li>
+      <li><a href="#19-general-provisions">19. General Provisions</a></li>
+    </ul>
+  </aside>
+</div>
+
+<footer class="tt-footer">
+  <div class="tt-footer-inner">
+    <div class="tt-footer-col">
+      <div class="tt-footer-brand">Tasting<span class="amp">&</span>Toasting</div>
+      <p class="tt-footer-tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Prototypes</h4>
+      <ul>
+        <li><a href="prototype.html">Member &amp; subscription</a></li>
+        <li><a href="game-flow.html">Game flow</a></li>
+        <li><a href="operations.html">Operations</a></li>
+        <li><a href="wave1.html">Wave 1 player</a></li>
+      </ul>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="legal.html">Legal Notice &amp; Cookies</a></li>
+      </ul>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></li>
+        <li><a href="mailto:privacy@tastingandtoasting.com">privacy@tastingandtoasting.com</a></li>
+        <li><a href="mailto:legal@tastingandtoasting.com">legal@tastingandtoasting.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tt-footer-bottom">
+    <span>© 2026 Tasting And Toasting Inc. · Delaware Corp · Filing No. 7494277</span>
+    <div class="legal-jurisdictions">
+      <span>Operating subsidiary: Tasting And Toasting SL (Spain)</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

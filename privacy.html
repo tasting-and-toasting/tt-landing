@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRIVACY POLICY — Tasting &amp; Toasting</title>
+<meta name="description" content="PRIVACY POLICY for the website tastingandtoasting.com — pre-launch / development phase.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0F0B0A;
+  --bg-2: #1A1413;
+  --bg-3: #241B19;
+  --ink: #F4EDE4;
+  --ink-2: #C7B8A8;
+  --ink-3: #8A7A6B;
+  --wine: #6B1E2C;
+  --wine-2: #8B2838;
+  --wine-bright: #B83246;
+  --gold: #C9A961;
+  --gold-bright: #E8C77A;
+  --green: #4A6B3D;
+  --line: rgba(244,237,228,0.08);
+  --line-2: rgba(244,237,228,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+body { overflow-x: hidden; }
+a { color: var(--gold); text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: var(--gold-bright); }
+
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(15,11,10,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  z-index: 100;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.topbar-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.topbar-brand .amp { color: var(--wine-bright); font-style: italic; font-weight: 400; }
+.topbar-back {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+.topbar-back:hover { color: var(--ink); border-color: var(--line-2); background: var(--bg-2); }
+.topbar-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.topbar-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Page hero */
+.legal-hero {
+  padding: 140px 32px 56px;
+  max-width: 880px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--line);
+}
+.legal-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  margin-bottom: 18px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.legal-kicker .dot { color: var(--wine-bright); }
+.legal-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.legal-title-es {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 22px;
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+.legal-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.legal-prelaunch {
+  background: rgba(201, 169, 97, 0.08);
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  padding: 18px 22px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-top: 24px;
+}
+.legal-prelaunch .prelaunch-label {
+  color: var(--gold);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  display: block;
+  margin-bottom: 6px;
+}
+.legal-prelaunch strong { color: var(--ink); font-weight: 500; }
+
+/* Body */
+.legal-body {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 64px 32px 96px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+.legal-body h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-top: 64px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 100px;
+}
+.legal-body h1:first-child { margin-top: 0; }
+.legal-body h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin-top: 40px;
+  margin-bottom: 14px;
+  scroll-margin-top: 100px;
+}
+.legal-body h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin-top: 28px;
+  margin-bottom: 10px;
+  text-transform: none;
+}
+.legal-body p { margin-bottom: 14px; }
+.legal-body strong { color: var(--ink); font-weight: 500; }
+.legal-body em { color: var(--ink-2); font-style: italic; }
+.legal-body ul, .legal-body ol {
+  margin: 12px 0 18px;
+  padding-left: 24px;
+}
+.legal-body li { margin-bottom: 8px; }
+.legal-body li::marker { color: var(--wine-bright); }
+.legal-body code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--bg-2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--gold);
+  border: 1px solid var(--line);
+}
+.legal-body table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px 0 28px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 13px;
+}
+.legal-body table th,
+.legal-body table td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.legal-body table tr:last-child th,
+.legal-body table tr:last-child td { border-bottom: none; }
+.legal-body table th {
+  background: var(--bg-3);
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  width: 35%;
+  border-right: 1px solid var(--line);
+}
+.legal-body table td { color: var(--ink-2); }
+.legal-body blockquote {
+  border-left: 2px solid var(--wine);
+  padding-left: 18px;
+  margin: 16px 0;
+  color: var(--ink-3);
+  font-style: italic;
+}
+.legal-body hr {
+  border: none;
+  height: 1px;
+  background: var(--line);
+  margin: 40px 0;
+}
+
+/* Sticky doc nav (table of contents) on desktop */
+.legal-layout {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 48px;
+  padding: 64px 32px 96px;
+}
+.legal-toc {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.legal-toc h4 {
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  margin-bottom: 14px;
+  color: var(--gold);
+}
+.legal-toc ul { list-style: none; padding: 0; }
+.legal-toc li { margin-bottom: 8px; }
+.legal-toc a {
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: block;
+  padding: 2px 0;
+  border-left: 2px solid transparent;
+  padding-left: 10px;
+  margin-left: -12px;
+}
+.legal-toc a:hover { color: var(--ink); border-left-color: var(--wine-bright); }
+
+.legal-body-only {
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Footer */
+.tt-footer {
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  padding: 56px 32px 40px;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink-3);
+}
+.tt-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.tt-footer-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+}
+.tt-footer-brand .amp { color: var(--wine-bright); font-style: italic; font-weight: 400; }
+.tt-footer-tagline { font-size: 13px; line-height: 1.6; color: var(--ink-3); max-width: 320px; }
+.tt-footer-col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  margin-bottom: 16px;
+}
+.tt-footer-col ul { list-style: none; padding: 0; }
+.tt-footer-col li { margin-bottom: 10px; }
+.tt-footer-col a {
+  color: var(--ink-2);
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+.tt-footer-col a:hover { color: var(--gold); }
+.tt-footer-bottom {
+  max-width: 1200px;
+  margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+
+@media (max-width: 1080px) {
+  .legal-layout { grid-template-columns: 1fr; gap: 32px; }
+  .legal-toc { position: static; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 700px) {
+  .topbar { padding: 12px 20px; }
+  .legal-hero { padding: 120px 20px 48px; }
+  .legal-layout { padding: 48px 20px 64px; }
+  .legal-body table { font-size: 12px; }
+  .legal-body table th, .legal-body table td { padding: 10px 12px; }
+  .tt-footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .tt-footer { padding: 40px 20px 32px; }
+  .tt-footer-bottom { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="topbar-brand">TASTING<span class="amp">&</span>TOASTING</a>
+  <a href="index.html" class="topbar-back"><span>←</span><span>Back to site</span></a>
+  <div class="topbar-status">Pre-launch</div>
+</header>
+
+<section class="legal-hero">
+  <div class="legal-kicker">
+    <span>Legal</span>
+    <span class="dot">·</span>
+    <span>PRIVACY POLICY</span>
+  </div>
+  <h1 class="legal-title">PRIVACY POLICY</h1>
+  <div class="legal-title-es">Política de Privacidad</div>
+  <div class="legal-meta">Effective date: [DATE TO BE COMPLETED]   ·   Version 1.0</div>
+  <div class="legal-prelaunch">
+    <span class="prelaunch-label">Pre-launch notice</span>
+    This Privacy Policy applies to the website tastingandtoasting.com (and related subdomains) during a pre-launch / development phase. The Tasting <strong>&amp;</strong> Toasting platform is currently in technical development and pre-licensing phase. No commercial wine sales, event ticketing, or paid services are offered through this website until all required Spanish licenses (including but not limited to alcohol distribution licenses, sanitary registration, and excise duty registration) have been obtained and the operating subsidiary Tasting And Toasting SL is fully registered and operational.
+  </div>
+</section>
+
+<div class="legal-layout">
+  <main class="legal-body legal-body-only">
+<h1 id="1-introduction-and-data-controller">1. Introduction and Data Controller</h1>
+<p>This Privacy Policy describes how Tasting And Toasting Inc., together with its subsidiary Tasting And Toasting SL (collectively "we", "us", "our", "the Company"), collects, uses, stores, and protects personal data of visitors and users ("you", "your") of the website tastingandtoasting.com, its subdomains, and any associated mobile applications (collectively, the "Service").</p>
+<p>This Policy is issued in compliance with:</p>
+<ul>
+<li>
+<p>Regulation (EU) 2016/679 of the European Parliament and of the Council ("GDPR")</p>
+</li>
+<li>
+<p>Spanish Organic Law 3/2018 on Personal Data Protection and Guarantee of Digital Rights ("LOPDGDD")</p>
+</li>
+<li>
+<p>Spanish Law 34/2002 on Information Society Services and Electronic Commerce ("LSSI-CE")</p>
+</li>
+<li>
+<p>Spanish General Telecommunications Law 11/2022</p>
+</li>
+<li>
+<p>Other applicable Spanish and European Union laws</p>
+</li>
+</ul>
+<h2 id="data-controller-identification">Data Controller Identification</h2>
+<p>The data controller for personal data processed through this Service is:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Legal name</strong></th>
+<th>Tasting And Toasting Inc.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type of entity</strong></td>
+<td>Corporation organized under the laws of the State of Delaware, USA</td>
+</tr>
+<tr>
+<td><strong>Registration number</strong></td>
+<td>7494277 (Delaware Division of Corporations)</td>
+</tr>
+<tr>
+<td><strong>Date of incorporation</strong></td>
+<td>02 June 2023</td>
+</tr>
+<tr>
+<td><strong>Registered office</strong></td>
+<td>[ADDRESS OF DELAWARE REGISTERED AGENT — TO BE COMPLETED]</td>
+</tr>
+<tr>
+<td><strong>Local subsidiary (Spain)</strong></td>
+<td>Tasting And Toasting SL [pending registration / registered with]</td>
+</tr>
+<tr>
+<td><strong>Spanish tax ID (NIF/CIF)</strong></td>
+<td>[TO BE COMPLETED ONCE SL IS REGISTERED]</td>
+</tr>
+<tr>
+<td><strong>Spanish operational address</strong></td>
+<td>Valencia, Spain [exact address to be completed]</td>
+</tr>
+<tr>
+<td><strong>Privacy contact email</strong></td>
+<td>privacy@tastingandtoasting.com</td>
+</tr>
+<tr>
+<td><strong>General contact email</strong></td>
+<td>hello@tastingandtoasting.com</td>
+</tr>
+</tbody>
+</table>
+<h2 id="data-protection-officer">Data Protection Officer</h2>
+<p>At this stage of development, the Company has determined that appointment of a formal Data Protection Officer (DPO) is not legally required under Article 37 GDPR or Spanish law, given the limited scope and volume of data processing. This determination is reviewed regularly. For all privacy-related inquiries, contact privacy@tastingandtoasting.com.</p>
+<h1 id="2-categories-of-personal-data-we-collect">2. Categories of Personal Data We Collect</h1>
+<h2 id="21-information-you-provide-directly">2.1 Information You Provide Directly</h2>
+<h3>Waitlist and Pre-Registration</h3>
+<p>When you sign up to be notified about our launch:</p>
+<ul>
+<li>
+<p>Email address</p>
+</li>
+<li>
+<p>First name (optional)</p>
+</li>
+<li>
+<p>Country / region of interest (optional)</p>
+</li>
+<li>
+<p>Source of referral (how you heard about us — optional)</p>
+</li>
+</ul>
+<h3>Contact and Inquiries</h3>
+<p>When you contact us through forms or email:</p>
+<ul>
+<li>
+<p>Name and email address</p>
+</li>
+<li>
+<p>Content of your message</p>
+</li>
+<li>
+<p>Any additional information you choose to share</p>
+</li>
+</ul>
+<h3>Future Service Account (Post-Launch)</h3>
+<p>When the Service becomes operational, account registration will additionally collect:</p>
+<ul>
+<li>
+<p>Phone number (for OTP authentication)</p>
+</li>
+<li>
+<p>Date of birth (for age verification — must be 18+ for any wine-related services)</p>
+</li>
+<li>
+<p>Display name</p>
+</li>
+<li>
+<p>Profile picture (optional)</p>
+</li>
+<li>
+<p>Wine preferences and tasting history (as you generate it through Service use)</p>
+</li>
+<li>
+<p>Delivery address (for physical kit deliveries)</p>
+</li>
+<li>
+<p>Payment information (processed by third-party payment processors — see Section 5)</p>
+</li>
+</ul>
+<h2 id="22-information-collected-automatically">2.2 Information Collected Automatically</h2>
+<h3>Technical Data</h3>
+<ul>
+<li>
+<p>IP address (anonymized after 30 days)</p>
+</li>
+<li>
+<p>Browser type and version</p>
+</li>
+<li>
+<p>Operating system</p>
+</li>
+<li>
+<p>Device identifiers</p>
+</li>
+<li>
+<p>Referral URL</p>
+</li>
+<li>
+<p>Pages viewed and time spent</p>
+</li>
+<li>
+<p>Date and time of access</p>
+</li>
+<li>
+<p>Approximate geographic location (country/region level only, derived from IP)</p>
+</li>
+</ul>
+<h3>Cookies and Similar Technologies</h3>
+<p>See our separate Cookie Policy for details on cookies, web beacons, and similar tracking technologies. Non-essential cookies are activated only with your prior, informed consent in accordance with Article 22 LSSI-CE.</p>
+<h2 id="23-information-from-third-parties">2.3 Information from Third Parties</h2>
+<p>We may receive limited information from:</p>
+<ul>
+<li>
+<p>Authentication providers (if you choose to log in via Google, Apple, or similar — limited to public profile information you authorize)</p>
+</li>
+<li>
+<p>Payment processors (transaction confirmations, never full card details)</p>
+</li>
+<li>
+<p>Analytics providers (aggregated usage data)</p>
+</li>
+</ul>
+<h2 id="24-what-we-do-not-collect">2.4 What We Do NOT Collect</h2>
+<p>We do not collect:</p>
+<ul>
+<li>
+<p>Special categories of personal data (race, ethnic origin, political opinions, religious beliefs, health data, sexual orientation) under Article 9 GDPR, except where you voluntarily share such information in tasting notes or correspondence</p>
+</li>
+<li>
+<p>Government identification numbers (NIE, DNI, passport) except where strictly required for age verification at delivery</p>
+</li>
+<li>
+<p>Banking credentials or full payment card numbers (these are processed exclusively by certified payment processors)</p>
+</li>
+<li>
+<p>Data of children under 14 (the Spanish minimum age for digital consent under Article 7 LOPDGDD)</p>
+</li>
+</ul>
+<h1 id="3-legal-basis-for-processing">3. Legal Basis for Processing</h1>
+<p>We process your personal data on the following legal bases under Article 6 GDPR:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Processing activity</strong></th>
+<th><strong>Legal basis (GDPR Art. 6)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Waitlist registration</td>
+<td>Consent — Art. 6(1)(a)</td>
+</tr>
+<tr>
+<td>Responding to inquiries</td>
+<td>Pre-contractual measures — Art. 6(1)(b)</td>
+</tr>
+<tr>
+<td>Account creation and authentication (post-launch)</td>
+<td>Performance of contract — Art. 6(1)(b)</td>
+</tr>
+<tr>
+<td>Order processing and delivery (post-launch)</td>
+<td>Performance of contract — Art. 6(1)(b)</td>
+</tr>
+<tr>
+<td>Marketing emails</td>
+<td>Consent — Art. 6(1)(a) (with double opt-in per AEPD guidance)</td>
+</tr>
+<tr>
+<td>Service improvement and analytics</td>
+<td>Legitimate interest — Art. 6(1)(f)</td>
+</tr>
+<tr>
+<td>Security, fraud prevention</td>
+<td>Legitimate interest — Art. 6(1)(f)</td>
+</tr>
+<tr>
+<td>Legal compliance (tax, alcohol regulations)</td>
+<td>Legal obligation — Art. 6(1)(c)</td>
+</tr>
+<tr>
+<td>Age verification for alcohol services</td>
+<td>Legal obligation — Art. 6(1)(c)</td>
+</tr>
+</tbody>
+</table>
+<p>You can withdraw consent at any time without affecting the lawfulness of processing based on consent before its withdrawal.</p>
+<h1 id="4-purposes-of-processing">4. Purposes of Processing</h1>
+<p>We process your personal data for the following specific purposes:</p>
+<h2 id="41-pre-launch-phase-current">4.1 Pre-Launch Phase (current)</h2>
+<ul>
+<li>
+<p>Sending you launch-related notifications when you join the waitlist</p>
+</li>
+<li>
+<p>Responding to your inquiries and requests</p>
+</li>
+<li>
+<p>Improving our website and pre-launch communications</p>
+</li>
+<li>
+<p>Building demonstration materials for partners and investors (using only aggregated, anonymized data)</p>
+</li>
+<li>
+<p>Complying with legal and regulatory obligations</p>
+</li>
+</ul>
+<h2 id="42-post-launch-phase-after-operational-licenses-obtained">4.2 Post-Launch Phase (after operational licenses obtained)</h2>
+<ul>
+<li>
+<p>Creating and managing your user account</p>
+</li>
+<li>
+<p>Processing orders for wine kits, event tickets, and subscriptions</p>
+</li>
+<li>
+<p>Coordinating delivery (including age verification at delivery)</p>
+</li>
+<li>
+<p>Providing customer support</p>
+</li>
+<li>
+<p>Personalizing wine recommendations based on your tasting history</p>
+</li>
+<li>
+<p>Sending transactional notifications (order confirmations, delivery updates)</p>
+</li>
+<li>
+<p>Sending marketing communications (only with separate, explicit consent)</p>
+</li>
+<li>
+<p>Operating the wine tasting game functionality</p>
+</li>
+<li>
+<p>Connecting players, mediators, and winery partners</p>
+</li>
+<li>
+<p>Generating aggregated analytics for winery partners (you cannot be individually identified)</p>
+</li>
+<li>
+<p>Fraud prevention and security</p>
+</li>
+<li>
+<p>Tax compliance, accounting, and regulatory reporting</p>
+</li>
+</ul>
+<h1 id="5-recipients-of-your-personal-data">5. Recipients of Your Personal Data</h1>
+<p>We share personal data only with the following categories of recipients, and only to the extent necessary for the stated purposes:</p>
+<h2 id="51-service-providers-processors-under-article-28-gdpr">5.1 Service Providers (Processors under Article 28 GDPR)</h2>
+<p>All processors are bound by Data Processing Agreements containing the safeguards required by GDPR Article 28:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Category</strong></th>
+<th><strong>Provider examples</strong></th>
+<th><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cloud hosting</td>
+<td>Amazon Web Services, Cloudflare</td>
+<td>Hosting infrastructure</td>
+</tr>
+<tr>
+<td>Authentication and SMS</td>
+<td>Twilio</td>
+<td>OTP delivery, phone verification</td>
+</tr>
+<tr>
+<td>Email delivery</td>
+<td>Resend, Postmark, or equivalent</td>
+<td>Transactional and marketing emails</td>
+</tr>
+<tr>
+<td>Payment processing</td>
+<td>Stripe, Bizum (via Redsys)</td>
+<td>Order payment processing</td>
+</tr>
+<tr>
+<td>Analytics</td>
+<td>Plausible Analytics, PostHog, or equivalent</td>
+<td>Aggregated usage analytics</td>
+</tr>
+<tr>
+<td>Customer support</td>
+<td>Help desk software (TBD)</td>
+<td>Support ticket management</td>
+</tr>
+<tr>
+<td>Shipping and delivery</td>
+<td>SEUR, MRW, or equivalent Spanish couriers</td>
+<td>Order delivery (post-launch)</td>
+</tr>
+<tr>
+<td>Accounting</td>
+<td>Spanish gestoría / accounting software</td>
+<td>Tax and financial compliance</td>
+</tr>
+</tbody>
+</table>
+<h2 id="52-group-companies">5.2 Group Companies</h2>
+<p>Personal data may be shared between Tasting And Toasting Inc. (Delaware, USA) and Tasting And Toasting SL (Valencia, Spain) as part of group operations. International transfers between these entities are governed by Standard Contractual Clauses (SCCs) approved by the European Commission.</p>
+<h2 id="53-authorities">5.3 Authorities</h2>
+<p>We may disclose personal data to public authorities (tax authorities, courts, regulatory bodies including AEPD, Hacienda) when required by law, court order, or formal legal request.</p>
+<h2 id="54-business-transfers">5.4 Business Transfers</h2>
+<p>In the event of a merger, acquisition, sale of assets, or insolvency, your personal data may be transferred as part of such transaction, subject to ongoing protection equivalent to this Policy.</p>
+<h2 id="55-what-we-do-not-do">5.5 What We Do NOT Do</h2>
+<ul>
+<li>
+<p>We do not sell your personal data to third parties</p>
+</li>
+<li>
+<p>We do not share your individual data with winery partners or advertisers</p>
+</li>
+<li>
+<p>We do not engage in cross-context behavioral advertising based on your activity</p>
+</li>
+</ul>
+<h1 id="6-international-data-transfers">6. International Data Transfers</h1>
+<p>Some of our service providers may process personal data outside the European Economic Area (EEA), including in the United States. When we transfer personal data outside the EEA, we ensure appropriate safeguards under Chapter V GDPR:</p>
+<ul>
+<li>
+<p>Standard Contractual Clauses (SCCs) approved by the European Commission (Decision 2021/914)</p>
+</li>
+<li>
+<p>Adequacy decisions where applicable (e.g., EU-US Data Privacy Framework for certified providers)</p>
+</li>
+<li>
+<p>Supplementary technical and organizational measures (encryption in transit and at rest)</p>
+</li>
+</ul>
+<p>You may request a copy of the safeguards in place for any specific transfer by contacting privacy@tastingandtoasting.com.</p>
+<h1 id="7-data-retention-periods">7. Data Retention Periods</h1>
+<table>
+<thead>
+<tr>
+<th><strong>Data category</strong></th>
+<th><strong>Retention period</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Waitlist data (pre-launch)</td>
+<td>Until launch + 6 months, or until you unsubscribe</td>
+</tr>
+<tr>
+<td>Account data</td>
+<td>Duration of account + 3 years after closure (Spanish commercial law)</td>
+</tr>
+<tr>
+<td>Order and transaction data</td>
+<td>6 years (Spanish commercial law and tax requirements)</td>
+</tr>
+<tr>
+<td>Marketing consent records</td>
+<td>Until consent is withdrawn + 3 years (proof of consent)</td>
+</tr>
+<tr>
+<td>Server logs and analytics (raw)</td>
+<td>90 days, then anonymized</td>
+</tr>
+<tr>
+<td>Customer support correspondence</td>
+<td>3 years from last contact</td>
+</tr>
+<tr>
+<td>Cookie consent records</td>
+<td>12 months or until withdrawal</td>
+</tr>
+<tr>
+<td>Age verification records</td>
+<td>Duration of account + 5 years (alcohol regulations)</td>
+</tr>
+</tbody>
+</table>
+<p>After the retention period expires, data is either deleted or anonymized. Aggregated, anonymized data may be retained indefinitely for analytical purposes, as it no longer constitutes personal data.</p>
+<h1 id="8-your-rights-as-a-data-subject">8. Your Rights as a Data Subject</h1>
+<p>Under GDPR Articles 15-22 and the LOPDGDD, you have the following rights regarding your personal data:</p>
+<h2 id="81-right-of-access-article-15-gdpr">8.1 Right of Access (Article 15 GDPR)</h2>
+<p>Obtain confirmation of whether we process your personal data, and access to that data, including the purposes, categories, recipients, retention period, and your other rights.</p>
+<h2 id="82-right-to-rectification-article-16-gdpr">8.2 Right to Rectification (Article 16 GDPR)</h2>
+<p>Request correction of inaccurate or incomplete personal data we hold about you.</p>
+<h2 id="83-right-to-erasure-right-to-be-forgotten-article-17-gdpr">8.3 Right to Erasure / "Right to be Forgotten" (Article 17 GDPR)</h2>
+<p>Request deletion of your personal data when one of the legal grounds applies (no longer necessary for the purposes, you withdraw consent and there is no other legal basis, you object to processing, etc.).</p>
+<h2 id="84-right-to-restriction-of-processing-article-18-gdpr">8.4 Right to Restriction of Processing (Article 18 GDPR)</h2>
+<p>Request that we limit processing of your data in certain circumstances.</p>
+<h2 id="85-right-to-data-portability-article-20-gdpr">8.5 Right to Data Portability (Article 20 GDPR)</h2>
+<p>Receive your personal data in a structured, commonly used, machine-readable format, and transmit it to another controller.</p>
+<h2 id="86-right-to-object-article-21-gdpr">8.6 Right to Object (Article 21 GDPR)</h2>
+<p>Object at any time to processing based on legitimate interests, including profiling. For direct marketing purposes, your right to object is absolute.</p>
+<h2 id="87-right-to-withdraw-consent-article-73-gdpr">8.7 Right to Withdraw Consent (Article 7(3) GDPR)</h2>
+<p>Withdraw consent at any time, without affecting the lawfulness of processing based on consent before withdrawal.</p>
+<h2 id="88-rights-under-spanish-law-lopdgdd-articles-79-97">8.8 Rights Under Spanish Law (LOPDGDD Articles 79-97)</h2>
+<ul>
+<li>
+<p>Right to digital education</p>
+</li>
+<li>
+<p>Right to digital disconnection</p>
+</li>
+<li>
+<p>Right to update of personal data in digital media</p>
+</li>
+<li>
+<p>Right to be forgotten in internet searches and on social media</p>
+</li>
+<li>
+<p>Right to digital testament</p>
+</li>
+</ul>
+<h2 id="89-how-to-exercise-your-rights">8.9 How to Exercise Your Rights</h2>
+<p>To exercise any of these rights, contact privacy@tastingandtoasting.com. We will respond within one (1) month, extendable by two (2) additional months for complex requests, in accordance with Article 12 GDPR. We may request reasonable identification to verify your identity before processing the request.</p>
+<h2 id="810-right-to-lodge-a-complaint">8.10 Right to Lodge a Complaint</h2>
+<p>You have the right to lodge a complaint with the Spanish Data Protection Agency (Agencia Española de Protección de Datos):</p>
+<ul>
+<li>
+<p>Website: www.aepd.es</p>
+</li>
+<li>
+<p>Address: C/ Jorge Juan, 6, 28001 Madrid, Spain</p>
+</li>
+<li>
+<p>Phone: +34 901 100 099 / +34 91 266 35 17</p>
+</li>
+</ul>
+<h1 id="9-data-security">9. Data Security</h1>
+<p>We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction, in accordance with Article 32 GDPR:</p>
+<ul>
+<li>
+<p>Encryption of data in transit (TLS 1.3) and at rest (AES-256)</p>
+</li>
+<li>
+<p>Role-based access controls and principle of least privilege</p>
+</li>
+<li>
+<p>Multi-factor authentication for administrative access</p>
+</li>
+<li>
+<p>Regular security audits and vulnerability assessments</p>
+</li>
+<li>
+<p>Logging and monitoring of access to personal data</p>
+</li>
+<li>
+<p>Vendor due diligence and Data Processing Agreements with all processors</p>
+</li>
+<li>
+<p>Incident response procedures and breach notification protocols</p>
+</li>
+<li>
+<p>Regular backups with encryption</p>
+</li>
+<li>
+<p>Employee training on data protection</p>
+</li>
+</ul>
+<p>In the event of a personal data breach likely to result in high risk to your rights and freedoms, we will notify you and the AEPD within 72 hours as required by Articles 33-34 GDPR.</p>
+<h1 id="10-automated-decision-making-and-profiling">10. Automated Decision-Making and Profiling</h1>
+<p>We do not engage in solely automated decision-making with legal or similarly significant effects on you (Article 22 GDPR).</p>
+<p>Limited profiling occurs for the following purposes, with appropriate safeguards:</p>
+<ul>
+<li>
+<p>Wine recommendations based on your tasting history (you can opt out)</p>
+</li>
+<li>
+<p>Fraud detection (low-risk classification only)</p>
+</li>
+<li>
+<p>Aggregated analytics for service improvement (anonymized)</p>
+</li>
+</ul>
+<p>You have the right to obtain human intervention, express your point of view, and contest any automated decision. AI-based features comply with the EU AI Act where applicable.</p>
+<h1 id="11-childrens-privacy">11. Children's Privacy</h1>
+<p>Our Service is intended for adults aged 18 or older, given its alcohol-related nature. We do not knowingly collect personal data from minors under 18.</p>
+<p>Under Article 7 LOPDGDD, the minimum age for valid consent for digital services in Spain is 14. However, due to the alcohol-related nature of our Service, we apply a strict 18+ requirement enforced through:</p>
+<ul>
+<li>
+<p>Date of birth verification at registration</p>
+</li>
+<li>
+<p>Age verification at delivery (ID check by courier)</p>
+</li>
+<li>
+<p>Compliance with Spanish alcohol sales regulations</p>
+</li>
+</ul>
+<p>If we become aware that we have inadvertently collected data from a minor under 18, we will delete it promptly. If you believe we hold data of a minor, contact privacy@tastingandtoasting.com.</p>
+<h1 id="12-cookies-and-tracking-technologies">12. Cookies and Tracking Technologies</h1>
+<p>Detailed information about cookies and similar technologies is provided in our separate Cookie Policy, available at tastingandtoasting.com/cookies. Non-essential cookies are activated only with your prior, informed consent in accordance with Article 22.2 LSSI-CE and AEPD Cookie Guidelines.</p>
+<h1 id="13-changes-to-this-privacy-policy">13. Changes to This Privacy Policy</h1>
+<p>We may update this Privacy Policy to reflect changes in our practices, technology, legal requirements, or other factors. Material changes will be notified to you by:</p>
+<ul>
+<li>
+<p>Email notification (if you have provided your email)</p>
+</li>
+<li>
+<p>Prominent notice on the website</p>
+</li>
+<li>
+<p>Update to the "Effective Date" at the top of this Policy</p>
+</li>
+</ul>
+<p>Material changes affecting your rights become effective only after a reasonable notice period (typically 30 days). Continued use of the Service after the effective date constitutes acceptance of the updated Policy.</p>
+<h1 id="14-contact-us">14. Contact Us</h1>
+<p>For any questions, concerns, or requests regarding this Privacy Policy or our data processing practices:</p>
+<p><strong>Privacy contact: </strong>privacy@tastingandtoasting.com</p>
+<p><strong>General contact: </strong>hello@tastingandtoasting.com</p>
+<p><strong>Postal address: </strong>Tasting And Toasting SL, [Valencia address — TO BE COMPLETED]</p>
+<p>This Privacy Policy was last updated on [DATE]. A Spanish-language version is available at tastingandtoasting.com/privacidad. In case of inconsistency between language versions, the [English / Spanish — TO BE DECIDED] version prevails.</p>
+<p>© Tasting And Toasting Inc. and Tasting And Toasting SL. All rights reserved.</p>
+  </main>
+  <aside class="legal-toc">
+    <h4>On this page</h4>
+    <ul>
+      <li><a href="#1-introduction-and-data-controller">1. Introduction and Data Controller</a></li>
+      <li><a href="#2-categories-of-personal-data-we-collect">2. Categories of Personal Data We Collect</a></li>
+      <li><a href="#3-legal-basis-for-processing">3. Legal Basis for Processing</a></li>
+      <li><a href="#4-purposes-of-processing">4. Purposes of Processing</a></li>
+      <li><a href="#5-recipients-of-your-personal-data">5. Recipients of Your Personal Data</a></li>
+      <li><a href="#6-international-data-transfers">6. International Data Transfers</a></li>
+      <li><a href="#7-data-retention-periods">7. Data Retention Periods</a></li>
+      <li><a href="#8-your-rights-as-a-data-subject">8. Your Rights as a Data Subject</a></li>
+      <li><a href="#9-data-security">9. Data Security</a></li>
+      <li><a href="#10-automated-decision-making-and-profiling">10. Automated Decision-Making and Profiling</a></li>
+      <li><a href="#11-childrens-privacy">11. Children's Privacy</a></li>
+      <li><a href="#12-cookies-and-tracking-technologies">12. Cookies and Tracking Technologies</a></li>
+      <li><a href="#13-changes-to-this-privacy-policy">13. Changes to This Privacy Policy</a></li>
+      <li><a href="#14-contact-us">14. Contact Us</a></li>
+    </ul>
+  </aside>
+</div>
+
+<footer class="tt-footer">
+  <div class="tt-footer-inner">
+    <div class="tt-footer-col">
+      <div class="tt-footer-brand">Tasting<span class="amp">&</span>Toasting</div>
+      <p class="tt-footer-tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Prototypes</h4>
+      <ul>
+        <li><a href="prototype.html">Member &amp; subscription</a></li>
+        <li><a href="game-flow.html">Game flow</a></li>
+        <li><a href="operations.html">Operations</a></li>
+        <li><a href="wave1.html">Wave 1 player</a></li>
+      </ul>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="legal.html">Legal Notice &amp; Cookies</a></li>
+      </ul>
+    </div>
+    <div class="tt-footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></li>
+        <li><a href="mailto:privacy@tastingandtoasting.com">privacy@tastingandtoasting.com</a></li>
+        <li><a href="mailto:legal@tastingandtoasting.com">legal@tastingandtoasting.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tt-footer-bottom">
+    <span>© 2026 Tasting And Toasting Inc. · Delaware Corp · Filing No. 7494277</span>
+    <div class="legal-jurisdictions">
+      <span>Operating subsidiary: Tasting And Toasting SL (Spain)</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
