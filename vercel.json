@@ -16,11 +16,5 @@
         { "key": "Content-Type", "value": "application/json" }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/.well-known/apple-app-site-association",
-      "destination": "/public/.well-known/apple-app-site-association"
-    }
   ]
 }
