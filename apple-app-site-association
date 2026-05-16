@@ -4,7 +4,11 @@
     "details": [
       {
         "appID": "4N3W42SWLG.Tasting.And.Toasting",
-        "paths": ["/onboarding/*"]
+        "paths": [
+          "/onboarding/*",
+          "/invite/*",
+          "/join/*"
+        ]
       }
     ]
   }
