@@ -1,0 +1,110 @@
+{
+  "en": {
+    "sommelier_title": "Your AI Sommelier",
+    "sommelier_subtitle": "Wine expertise in your pocket",
+    "sommelier_body": "Ask anything about wine. Get instant recommendations based on your taste, budget, and occasion. Available in the app with a single long press.",
+    "commerce_title": "Buy Wine You Love",
+    "commerce_subtitle": "From game to glass",
+    "commerce_body": "Discover wines during a tasting, then order them directly through the app. Partner wineries ship to your door. Test mode active now, live orders coming soon.",
+    "voice_title": "Tasting by Voice",
+    "voice_subtitle": "Coming soon",
+    "voice_body": "Host a tasting through Alexa, Siri, or Google. Lead a toast, guide guests, and let the app do the rest. Hands free, glass full.",
+    "voice_badge": "Coming soon"
+  },
+  "fr": {
+    "sommelier_title": "Ton sommelier IA",
+    "sommelier_subtitle": "Du vin pro dans ta poche",
+    "sommelier_body": "Pose n'importe quelle question sur le vin. Reçois des idées tout de suite selon tes goûts, ton budget et l'occasion. Dans l'appli, un long appui suffit.",
+    "commerce_title": "Achète le vin que tu aimes",
+    "commerce_subtitle": "Du jeu au verre",
+    "commerce_body": "Découvre des vins pendant une dégustation, puis commande-les direct dans l'appli. Les domaines partenaires livrent chez toi. Mode test ouvert, commandes live bientôt.",
+    "voice_title": "Déguster à la voix",
+    "voice_subtitle": "Bientôt",
+    "voice_body": "Lance une dégustation avec Alexa, Siri ou Google. Porte un toast, guide les invités, et laisse l'appli gérer le reste. Les mains libres, le verre plein.",
+    "voice_badge": "Bientôt"
+  },
+  "ru": {
+    "sommelier_title": "Твой ИИ-сомелье",
+    "sommelier_subtitle": "Винный эксперт всегда с тобой",
+    "sommelier_body": "Спрашивай что угодно о вине. Мгновенные подсказки под твой вкус, бюджет и повод. В приложении всё это открывается одним длинным нажатием.",
+    "commerce_title": "Покупай вино, которое полюбил",
+    "commerce_subtitle": "От игры до бокала",
+    "commerce_body": "Находи вина на дегустации и заказывай их прямо в приложении. Партнёрские винодельни привезут к тебе. Сейчас тестовый режим, скоро живые заказы.",
+    "voice_title": "Дегустация голосом",
+    "voice_subtitle": "Скоро",
+    "voice_body": "Веди дегустацию через Alexa, Siri или Google. Произноси тосты, веди гостей, а приложение подстрахует. Руки свободны, бокал полон.",
+    "voice_badge": "Скоро"
+  },
+  "es": {
+    "sommelier_title": "Tu sommelier con IA",
+    "sommelier_subtitle": "Experto en vino en el bolsillo",
+    "sommelier_body": "Pregunta lo que quieras sobre vino. Recibe ideas al momento según tu gusto, presupuesto y ocasión. En la app, con una pulsación larga.",
+    "commerce_title": "Compra el vino que te gusta",
+    "commerce_subtitle": "Del juego a la copa",
+    "commerce_body": "Descubre vinos en una cata y pídelos desde la app. Bodegas socias te lo envían a casa. Modo prueba activo, pedidos reales muy pronto.",
+    "voice_title": "Cata con la voz",
+    "voice_subtitle": "Muy pronto",
+    "voice_body": "Dirige una cata con Alexa, Siri o Google. Propón un brindis, guía a los invitados y deja que la app haga el resto. Manos libres, copa llena.",
+    "voice_badge": "Muy pronto"
+  },
+  "uk": {
+    "sommelier_title": "Твій ІІ-сомельє",
+    "sommelier_subtitle": "Експерт з вина завжди з тобою",
+    "sommelier_body": "Питай що завгодно про вино. Миттєві поради під твій смак, бюджет і привід. У застосунку це відкривається одним довгим натиском.",
+    "commerce_title": "Купуй вино, яке полюбив",
+    "commerce_subtitle": "Від гри до келиха",
+    "commerce_body": "Знаходь вина на дегустації й замовляй прямо в застосунку. Партнерські виноробні доставляють до дверей. Зараз тестовий режим, живі замовлення скоро.",
+    "voice_title": "Дегустація голосом",
+    "voice_subtitle": "Незабаром",
+    "voice_body": "Веди дегустацію через Alexa, Siri чи Google. Говори тости, веди гостей, а застосунок підхопить решту. Руки вільні, келих повний.",
+    "voice_badge": "Незабаром"
+  },
+  "it": {
+    "sommelier_title": "Il tuo sommelier IA",
+    "sommelier_subtitle": "Esperienza sul vino in tasca",
+    "sommelier_body": "Chiedi quello che vuoi sul vino. Consigli subito in base a gusto, budget e occasione. Nell'app basta una pressione lunga.",
+    "commerce_title": "Compra il vino che ami",
+    "commerce_subtitle": "Dal gioco al calice",
+    "commerce_body": "Scopri vini durante una degustazione e ordinali dall'app. Cantine partner spediscono a casa. Modalità test attiva, ordini veri in arrivo.",
+    "voice_title": "Degustazione a voce",
+    "voice_subtitle": "In arrivo",
+    "voice_body": "Guida una degustazione con Alexa, Siri o Google. Proponi un brindisi, accompagna gli ospiti e lascia che l'app faccia il resto. Mani libere, calice pieno.",
+    "voice_badge": "In arrivo"
+  },
+  "de": {
+    "sommelier_title": "Dein KI-Sommelier",
+    "sommelier_subtitle": "Weinwissen in der Tasche",
+    "sommelier_body": "Frag alles über Wein. Sofort Ideen zu deinem Geschmack, Budget und Anlass. In der App mit einem langen Druck.",
+    "commerce_title": "Kauf Wein, den du liebst",
+    "commerce_subtitle": "Vom Spiel ins Glas",
+    "commerce_body": "Entdecke Weine bei einer Verkostung und bestell sie direkt in der App. Partner-Weingüter liefern zu dir. Testmodus an, echte Bestellungen bald.",
+    "voice_title": "Verkostung per Stimme",
+    "voice_subtitle": "Demnächst",
+    "voice_body": "Leite eine Verkostung mit Alexa, Siri oder Google. Bring einen Toast aus, führe Gäste, die App übernimmt den Rest. Hände frei, Glas voll.",
+    "voice_badge": "Demnächst"
+  },
+  "he": {
+    "sommelier_title": "הסומלייה החכמה שלך",
+    "sommelier_subtitle": "מומחיות יין בכיס",
+    "sommelier_body": "שאל כל שאלה על יין. קבל המלצות מיד לפי טעם, תקציב ומקרה. באפליקציה עם לחיצה ארוכה.",
+    "commerce_title": "קנה יין שאתה אוהב",
+    "commerce_subtitle": "מהמשחק לכוס",
+    "commerce_body": "גלה יינות בטעימה והזמין ישירות דרך האפליקציה. יקבים שותפים שולחים אליך. מצב בדיקה פעיל, הזמנות חיות בקרוב.",
+    "voice_title": "טעימה בקול",
+    "voice_subtitle": "בקרוב",
+    "voice_body": "ניהול טעימה עם Alexa, Siri או Google. הובל טוסט, הנחה אורחים, והאפליקציה תשלים. ידיים פנויות, כוס מלאה.",
+    "voice_badge": "בקרוב"
+  },
+  "pt": {
+    "sommelier_title": "O teu sommelier de IA",
+    "sommelier_subtitle": "Expertise em vinho no bolso",
+    "sommelier_body": "Pergunta o que quiseres sobre vinho. Recebe ideias na hora para o teu gosto, orçamento e ocasião. Na app, com um toque longo.",
+    "commerce_title": "Compra o vinho que amas",
+    "commerce_subtitle": "Do jogo ao copo",
+    "commerce_body": "Descobre vinhos numa prova e encomenda-os na app. Adegas parceiras enviam até ti. Modo teste ativo, encomendas reais em breve.",
+    "voice_title": "Prova por voz",
+    "voice_subtitle": "Em breve",
+    "voice_body": "Conduz uma prova com Alexa, Siri ou Google. Propõe um brinde, guia convidados e deixa a app fazer o resto. Mãos livres, copo cheio.",
+    "voice_badge": "Em breve"
+  }
+}

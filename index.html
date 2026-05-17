@@ -450,6 +450,40 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink-3);
 }
 
+/* TT-141: app feature rows (Sommelier, Commerce, Voice) */
+.tt141-feature-row {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 28px;
+  align-items: start;
+  max-width: 720px;
+}
+.tt141-feature-icon svg { display: block; }
+.tt141-intro-tight {
+  margin-bottom: 14px !important;
+  max-width: 640px;
+}
+.tt141-body {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 620px;
+  white-space: pre-line;
+}
+.tt141-chip {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  background: rgba(244,237,228,0.04);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .topbar { padding: 12px 20px; }
@@ -461,6 +495,7 @@ a { color: inherit; text-decoration: none; }
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
   .tt-footer-inner { grid-template-columns: 1fr 1fr; }
   .tt-footer-bottom { flex-direction: column; }
+  .tt141-feature-row { grid-template-columns: 48px 1fr; gap: 20px; }
 }
 @media (max-width: 600px) {
   .tt-footer-inner { grid-template-columns: 1fr; gap: 32px; }
@@ -621,6 +656,46 @@ a { color: inherit; text-decoration: none; }
   </div>
 </section>
 
+<section class="section tt141-feature" id="sommelier">
+  <div class="tt141-feature-row">
+    <div class="tt141-feature-icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="M12 11c3.5 0 6-2.5 6-5.5V4H6v1.5C6 8.5 8.5 11 12 11Z"/></svg>
+    </div>
+    <div>
+      <h2 class="section-title" data-i18n="sommelier_title">Your AI Sommelier</h2>
+      <p class="section-intro tt141-intro-tight" data-i18n="sommelier_subtitle">Wine expertise in your pocket</p>
+      <p class="tt141-body" data-i18n="sommelier_body">Ask anything about wine. Get instant recommendations based on your taste, budget, and occasion. Available in the app with a single long press.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section tt141-feature" id="commerce">
+  <div class="tt141-feature-row">
+    <div class="tt141-feature-icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    </div>
+    <div>
+      <h2 class="section-title" data-i18n="commerce_title">Buy Wine You Love</h2>
+      <p class="section-intro tt141-intro-tight" data-i18n="commerce_subtitle">From game to glass</p>
+      <p class="tt141-body" data-i18n="commerce_body">Discover wines during a tasting, then order them directly through the app. Partner wineries ship to your door. Test mode active now, live orders coming soon.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section tt141-feature" id="voice">
+  <div class="tt141-feature-row">
+    <div class="tt141-feature-icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg>
+    </div>
+    <div>
+      <h2 class="section-title" data-i18n="voice_title">Tasting by Voice</h2>
+      <p class="section-intro tt141-intro-tight" data-i18n="voice_subtitle">Coming soon</p>
+      <span class="tt141-chip" data-i18n="voice_badge" role="status">Coming soon</span>
+      <p class="tt141-body" data-i18n="voice_body">Host a tasting through Alexa, Siri, or Google. Lead a toast, guide guests, and let the app do the rest. Hands free, glass full.</p>
+    </div>
+  </div>
+</section>
+
 <footer class="tt-footer">
   <div class="tt-footer-inner">
     <div class="tt-footer-col">
@@ -661,6 +736,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </footer>
 
+<script src="src/i18n/apply-tt141.js" defer></script>
 <script>
   // Smooth scroll for in-page anchors
   document.querySelectorAll('a[href^="#"]').forEach(a => {
