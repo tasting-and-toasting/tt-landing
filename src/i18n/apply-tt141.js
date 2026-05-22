@@ -1,14 +1,28 @@
 (function () {
   var ALLOWED = ["en", "fr", "ru", "es", "uk", "it", "de", "he", "pt", "ka", "ro"];
 
+  function normalizeCode(raw) {
+    var c = (raw || "").toLowerCase().split("-")[0] || "en";
+    if (c === "iw") c = "he";
+    return c;
+  }
+
   function pickLang() {
     var qLang = new URLSearchParams(window.location.search).get("lang");
-    if (!qLang) return "en";
-    var raw = qLang.toLowerCase();
-    raw = raw.split("-")[0] || raw;
-    if (raw === "iw") raw = "he";
-    if (ALLOWED.indexOf(raw) === -1) return "en";
-    return raw;
+    if (qLang) {
+      var raw = normalizeCode(qLang);
+      if (ALLOWED.indexOf(raw) === -1) return "en";
+      return raw;
+    }
+    var list =
+      typeof navigator !== "undefined" && navigator.languages && navigator.languages.length
+        ? navigator.languages
+        : [navigator && navigator.language ? navigator.language : "en"];
+    for (var i = 0; i < list.length; i++) {
+      var cand = normalizeCode(list[i]);
+      if (ALLOWED.indexOf(cand) !== -1) return cand;
+    }
+    return "en";
   }
 
   function htmlLang(code) {
@@ -22,7 +36,7 @@
     document.documentElement.setAttribute("dir", lang === "he" ? "rtl" : "ltr");
   }
 
-  /** Current language (?lang first; default EN). */
+  /** Language: ?lang= first, else first supported browser locale, else EN (matches TT-141 apply-tt141.js behavior). */
   function applySwitcherState(lang) {
     document.querySelectorAll("[data-lang-link]").forEach(function (el) {
       var code = el.getAttribute("data-lang-link") || "";
