@@ -1,5 +1,5 @@
 (function () {
-  var ALLOWED = ["en", "fr", "ru", "es", "uk", "it", "de", "he", "pt"];
+  var ALLOWED = ["en", "fr", "ru", "es", "uk", "it", "de", "he", "pt", "ka", "ro"];
 
   function pickLang() {
     var qLang = new URLSearchParams(window.location.search).get("lang");
@@ -13,7 +13,8 @@
 
   function htmlLang(code) {
     if (code === "pt") return "pt-PT";
-    return code === "uk" ? "uk" : code;
+    if (code === "uk") return "uk";
+    return code;
   }
 
   function setDocumentLangAttr(lang) {
@@ -32,13 +33,23 @@
     });
   }
 
+  function localeTable(data, lang) {
+    var base = data.en || {};
+    var loc = data[lang] || {};
+    return Object.assign({}, base, loc);
+  }
+
   function apply(data) {
     var lang = pickLang();
     setDocumentLangAttr(lang);
-    var T = data[lang] || data.en;
+    var T = localeTable(data, lang);
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       var key = el.getAttribute("data-i18n");
       if (key && T[key] != null) el.textContent = T[key];
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-html");
+      if (key && T[key] != null) el.innerHTML = T[key];
     });
     applySwitcherState(lang);
   }

@@ -9,7 +9,15 @@
     "voice_title": "Tasting by Voice",
     "voice_subtitle": "Coming soon",
     "voice_body": "Host a tasting through Alexa, Siri, or Google. Lead a toast, guide guests, and let the app do the rest. Hands free, glass full.",
-    "voice_badge": "Coming soon"
+    "voice_badge": "Coming soon",
+    "hero_headline": "A wine company<br><span class=\"em\">tastes its way</span><br>into Europe.",
+    "hero_sub": "Tasting <span class=\"serif\" style=\"font-style:italic; color: var(--wine-bright);\">&amp;</span> Toasting is being built as a multi-functional wine experience company , tastings, toasts, gatherings. Below are the prototypes that show where we&rsquo;re going.",
+    "cta_start": "Explore prototypes <span>↓</span>",
+    "cta_scan": "About the company",
+    "nav_game": "Game",
+    "nav_toasts": "Toasts",
+    "nav_sommelier": "Sommelier",
+    "footer_tagline": "A wine experience company entering the European market. Tastings, toasts, gatherings."
   },
   "fr": {
     "sommelier_title": "Ton sommelier IA",
@@ -106,5 +114,33 @@
     "voice_subtitle": "Em breve",
     "voice_body": "Conduz uma prova com Alexa, Siri ou Google. Propõe um brinde, guia convidados e deixa a app fazer o resto. Mãos livres, copo cheio.",
     "voice_badge": "Em breve"
+  },
+  "ka": {
+    "hero_headline": "ბოთლი ისტორიას ჰყვება. ჩვენ გეხმარებით მის წაკითხვაში.",
+    "hero_sub": "ყოველთვიური სადეგუსტაციო ყუთი, სომელიეებთან ერთად შერჩეული ღონისძიებები მთელ ევროპაში და ციფრული პასპორტი ყოველი ღვინისთვის.",
+    "cta_start": "დაიწყე გამოწერა",
+    "cta_scan": "დაასკანერე ბოთლი",
+    "nav_game": "თამაში",
+    "nav_toasts": "სადღეგრძელოები",
+    "nav_sommelier": "სომელიე",
+    "sommelier_title": "შენი AI სომელიე",
+    "sommelier_subtitle": "ჰკითხე ყველაფერი ღვინოზე. მიიღე პასუხები მსოფლიო დონის სომელიესგან.",
+    "voice_title": "აღნიშნე ყოველი მომენტი სადღეგრძელოთი",
+    "voice_subtitle": "იპოვე იდეალური სადღეგრძელო ნებისმიერი შემთხვევისთვის, ნებისმიერ ენაზე.",
+    "footer_tagline": "სადეგუსტაციო თამაში ღვინის მოყვარულებისთვის."
+  },
+  "ro": {
+    "hero_headline": "O sticlă spune o poveste. Noi te ajutăm s-o citești.",
+    "hero_sub": "O cutie lunară de degustare, evenimente curatoriate cu somelieri în toată Europa și un pașaport digital pentru fiecare vin.",
+    "cta_start": "Începe abonamentul",
+    "cta_scan": "Scanează o sticlă",
+    "nav_game": "Jocul",
+    "nav_toasts": "Toasturi",
+    "nav_sommelier": "Somelier",
+    "sommelier_title": "Somelierul tău AI",
+    "sommelier_subtitle": "Întreabă orice despre vin. Primești răspunsuri de la un somelier de clasă mondială.",
+    "voice_title": "Ridică un toast pentru fiecare moment",
+    "voice_subtitle": "Găsește toastul perfect pentru orice ocazie, în orice limbă.",
+    "footer_tagline": "Un joc de degustare pentru iubitorii de vin."
   }
 }

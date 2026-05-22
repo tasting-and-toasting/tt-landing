@@ -98,7 +98,7 @@ a { color: inherit; text-decoration: none; }
   gap: 6px;
   align-items: center;
   justify-content: flex-end;
-  max-width: 240px;
+  max-width: 340px;
 }
 .lang-flag-link {
   display: inline-flex;
@@ -550,8 +550,9 @@ html[dir="rtl"] .tt141-feature-row { direction: rtl; }
 <header class="topbar">
   <div class="topbar-brand">TASTING<span class="amp">&</span>TOASTING</div>
   <div class="topbar-links">
-    <a href="#prototypes">Prototypes</a>
-    <a href="#about">About</a>
+    <a href="#prototypes" data-i18n="nav_game">Game</a>
+    <a href="#voice" data-i18n="nav_toasts">Toasts</a>
+    <a href="#sommelier" data-i18n="nav_sommelier">Sommelier</a>
     <a href="legal.html">Legal</a>
   </div>
   <div class="topbar-trail">
@@ -566,6 +567,8 @@ html[dir="rtl"] .tt141-feature-row { direction: rtl; }
         <a class="lang-flag-link" data-lang-link="de" href="?lang=de" title="Deutsch" aria-label="Deutsch"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#000" d="M0 0h3v.67H0z"/><path fill="#D00" d="M0 .67h3v.66H0z"/><path fill="#FFCE00" d="M0 1.33h3v.67H0z"/></svg></a>
         <a class="lang-flag-link" data-lang-link="he" href="?lang=he" title="עברית" aria-label="עברית"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4" aria-hidden="true"><path fill="#fff" d="M0 0h6v4H0z"/><path fill="#0038b8" d="M0 .55h6v0.42H0zm0 2.48h6v0.42H0z"/><g fill="#0038b8" transform="translate(3 2.02)"><polygon points="0,-0.55 0.48,0.28 -0.48,0.28"/><polygon points="0,0.55 -0.48,-0.28 0.48,-0.28"/></g></svg></a>
         <a class="lang-flag-link" data-lang-link="pt" href="?lang=pt" title="Português" aria-label="Português (Portugal)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#006600" d="M0 0h1.2v2H0z"/><path fill="#ff0000" d="M1.2 0h1.8v2H1.2z"/><circle cx=".75" cy="1" fill="#ffd900" stroke="#ffd900" stroke-width=".015" r=".22"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ka" href="?lang=ka" title="ქართული" aria-label="ქართული"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="white"/><rect x="12.5" width="5" height="20" fill="#FF0000"/><rect y="7.5" width="30" height="5" fill="#FF0000"/><rect x="1" y="1" width="2" height="6" fill="#FF0000"/><rect y="3" width="4" height="2" fill="#FF0000"/><rect x="24" y="1" width="2" height="6" fill="#FF0000"/><rect x="23" y="3" width="4" height="2" fill="#FF0000"/><rect x="1" y="13" width="2" height="6" fill="#FF0000"/><rect y="15" width="4" height="2" fill="#FF0000"/><rect x="24" y="13" width="2" height="6" fill="#FF0000"/><rect x="23" y="15" width="4" height="2" fill="#FF0000"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ro" href="?lang=ro" title="Română (Moldova)" aria-label="Română (Moldova)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#003DA5"/><rect x="10" width="10" height="20" fill="#FFD100"/><rect x="20" width="10" height="20" fill="#CC0000"/><text x="15" y="13" text-anchor="middle" font-size="9" fill="#003DA5" font-family="serif, Georgia">✦</text></svg></a>
       </div>
     </nav>
     <div class="topbar-status">Pre-launch</div>
@@ -580,17 +583,17 @@ html[dir="rtl"] .tt141-feature-row { direction: rtl; }
     <span class="dot">·</span>
     <span>Delaware Corp · 7494277</span>
   </div>
-  <h1 class="hero-headline">
+  <h1 class="hero-headline" data-i18n-html="hero_headline">
     A wine company<br>
     <span class="em">tastes its way</span><br>
     into Europe.
   </h1>
-  <p class="hero-sub">
+  <p class="hero-sub" data-i18n-html="hero_sub">
     Tasting <span class="serif" style="font-style:italic; color: var(--wine-bright);">&amp;</span> Toasting is being built as a multi-functional wine experience company , tastings, toasts, gatherings. Below are the prototypes that show where we&rsquo;re going.
   </p>
   <div class="hero-actions">
-    <a href="#prototypes" class="hero-btn hero-btn-primary">Explore prototypes <span>↓</span></a>
-    <a href="#about" class="hero-btn hero-btn-ghost">About the company</a>
+    <a href="#prototypes" class="hero-btn hero-btn-primary" data-i18n-html="cta_start">Explore prototypes <span>↓</span></a>
+    <a href="#about" class="hero-btn hero-btn-ghost" data-i18n-html="cta_scan">About the company</a>
   </div>
 </section>
 
@@ -756,7 +759,7 @@ html[dir="rtl"] .tt141-feature-row { direction: rtl; }
   <div class="tt-footer-inner">
     <div class="tt-footer-col">
       <div class="tt-footer-brand">Tasting<span class="amp">&</span>Toasting</div>
-      <p class="tt-footer-tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
+      <p class="tt-footer-tagline" data-i18n="footer_tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
     </div>
     <div class="tt-footer-col">
       <h4>Prototypes</h4>
