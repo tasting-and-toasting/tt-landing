@@ -29,7 +29,15 @@
     "voice_title": "Déguster à la voix",
     "voice_subtitle": "Bientôt",
     "voice_body": "Lance une dégustation avec Alexa, Siri ou Google. Porte un toast, guide les invités, et laisse l'appli gérer le reste. Les mains libres, le verre plein.",
-    "voice_badge": "Bientôt"
+    "voice_badge": "Bientôt",
+    "hero_headline": "Une maison du vin<br><span class=\"em\">trace son chemin</span><br>vers l’Europe.",
+    "hero_sub": "Tasting <span class=\"serif\" style=\"font-style:italic; color: var(--wine-bright);\">&amp;</span> Toasting se construit comme une société multiservice du vin , dégustations, toasts, rencontres. Voici les prototypes qui montrent où nous allons.",
+    "cta_start": "Explorer les prototypes <span>↓</span>",
+    "cta_scan": "À propos de l’entreprise",
+    "nav_game": "Jeu",
+    "nav_toasts": "Toasts",
+    "nav_sommelier": "Sommelier",
+    "footer_tagline": "Une expérience vinicole entrée sur le marché européen. Dégustations, toasts, rencontres."
   },
   "ru": {
     "sommelier_title": "Твой ИИ-сомелье",
@@ -41,7 +49,15 @@
     "voice_title": "Дегустация голосом",
     "voice_subtitle": "Скоро",
     "voice_body": "Веди дегустацию через Alexa, Siri или Google. Произноси тосты, веди гостей, а приложение подстрахует. Руки свободны, бокал полон.",
-    "voice_badge": "Скоро"
+    "voice_badge": "Скоро",
+    "hero_headline": "Винная компания<br><span class=\"em\">прокладывает путь</span><br>в Европу.",
+    "hero_sub": "Tasting <span class=\"serif\" style=\"font-style:italic; color: var(--wine-bright);\">&amp;</span> Toasting создаётся как мультисервисная винная компания , дегустации, тосты, встречи. Ниже — прототипы нашего направления.",
+    "cta_start": "Открыть прототипы <span>↓</span>",
+    "cta_scan": "О компании",
+    "nav_game": "Игра",
+    "nav_toasts": "Тосты",
+    "nav_sommelier": "Сомелье",
+    "footer_tagline": "Винный сервис, выходящий на европейский рынок. Дегустации, тосты и встречи."
   },
   "es": {
     "sommelier_title": "Tu sommelier con IA",
@@ -53,7 +69,15 @@
     "voice_title": "Cata con la voz",
     "voice_subtitle": "Muy pronto",
     "voice_body": "Dirige una cata con Alexa, Siri o Google. Propón un brindis, guía a los invitados y deja que la app haga el resto. Manos libres, copa llena.",
-    "voice_badge": "Muy pronto"
+    "voice_badge": "Muy pronto",
+    "hero_headline": "Una empresa del vino<br><span class=\"em\">se abre paso</span><br>hacia Europa.",
+    "hero_sub": "Tasting <span class=\"serif\" style=\"font-style:italic; color: var(--wine-bright);\">&amp;</span> Toasting se está construyendo como compañía multifuncional del vino , catas, brindis, encuentros. Abajo verás prototipos de hacia dónde vamos.",
+    "cta_start": "Explorar prototipos <span>↓</span>",
+    "cta_scan": "Sobre la compañía",
+    "nav_game": "Juego",
+    "nav_toasts": "Brindis",
+    "nav_sommelier": "Sumiller",
+    "footer_tagline": "Una empresa de experiencias vinícolas que entra en el mercado europeo. Catas, brindis, encuentros."
   },
   "uk": {
     "sommelier_title": "Твій ІІ-сомельє",
@@ -65,7 +89,15 @@
     "voice_title": "Дегустація голосом",
     "voice_subtitle": "Незабаром",
     "voice_body": "Веди дегустацію через Alexa, Siri чи Google. Говори тости, веди гостей, а застосунок підхопить решту. Руки вільні, келих повний.",
-    "voice_badge": "Незабаром"
+    "voice_badge": "Незабаром",
+    "hero_headline": "Винна компанія<br><span class=\"em\">перемальовує смаками</span><br>дорогу до Європи.",
+    "hero_sub": "Tasting <span class=\"serif\" style=\"font-style:italic; color: var(--wine-bright);\">&amp;</span> Toasting будуть як мультисервісна винна компанія , дегустації, тости, події. Нижче прототипи того, на що ми рухаємося.",
+    "cta_start": "Подивитися прототипи <span>↓</span>",
+    "cta_scan": "Про компанію",
+    "nav_game": "Гра",
+    "nav_toasts": "Тости",
+    "nav_sommelier": "Сомельє",
+    "footer_tagline": "Винний сервіс, що заходить на європейський ринок. Дегустації, тости, зібрання."
   },
   "it": {
     "sommelier_title": "Il tuo sommelier IA",
@@ -77,7 +109,15 @@
     "voice_title": "Degustazione a voce",
     "voice_subtitle": "In arrivo",
     "voice_body": "Guida una degustazione con Alexa, Siri o Google. Proponi un brindisi, accompagna gli ospiti e lascia che l'app faccia il resto. Mani libere, calice pieno.",
-    "voice_badge": "In arrivo"
+    "voice_badge": "In arrivo",
+    "hero_headline": "Una casa del vino<br><span class=\"em\">assiaggia la strada</span><br>verso l’Europa.",
+    "hero_sub": "Tasting <span class=\"serif\" style=\"font-style:italic; color: var(--wine-bright);\">&amp;</span> Toasting nasce come azienda polifunzionale del vino , degustazioni, brindisi, incontri. Qui sotto ci sono i prototipi che mostrano la direzione.",
+    "cta_start": "Esplora i prototipi <span>↓</span>",
+    "cta_scan": "Chi siamo",
+    "nav_game": "Gioco",
+    "nav_toasts": "Brindisi",
+    "nav_sommelier": "Sommelier",
+    "footer_tagline": "Un’azienda vinícola che entra nel mercato europeo. Degustazioni, brindisi, ritrovi."
   },
   "de": {
     "sommelier_title": "Dein KI-Sommelier",
@@ -89,7 +129,15 @@
     "voice_title": "Verkostung per Stimme",
     "voice_subtitle": "Demnächst",
     "voice_body": "Leite eine Verkostung mit Alexa, Siri oder Google. Bring einen Toast aus, führe Gäste, die App übernimmt den Rest. Hände frei, Glas voll.",
-    "voice_badge": "Demnächst"
+    "voice_badge": "Demnächst",
+    "hero_headline": "Ein Weinunternehmen<br><span class=\"em\">arbeitet seinen Weg</span><br>nach Europa vor.",
+    "hero_sub": "Tasting <span class=\"serif\" style=\"font-style:italic; color: var(--wine-bright);\">&amp;</span> Toasting entsteht als multifunktionales Weinunternehmen mit Verkostungen, Ritualen zum Anstoßen und Begegnungen. Unten findest du Prototypen, die zeigen wohin es geht.",
+    "cta_start": "Zu den Prototypen <span>↓</span>",
+    "cta_scan": "Über das Unternehmen",
+    "nav_game": "Spiel",
+    "nav_toasts": "Toasts",
+    "nav_sommelier": "Sommelier",
+    "footer_tagline": "Ein Weinerleben für den europäischen Markt in der Entstehung. Verkostungen, Toasts, Zusammentreffen."
   },
   "he": {
     "sommelier_title": "הסומלייה החכמה שלך",
@@ -101,7 +149,15 @@
     "voice_title": "טעימה בקול",
     "voice_subtitle": "בקרוב",
     "voice_body": "ניהול טעימה עם Alexa, Siri או Google. הובל טוסט, הנחה אורחים, והאפליקציה תשלים. ידיים פנויות, כוס מלאה.",
-    "voice_badge": "בקרוב"
+    "voice_badge": "בקרוב",
+    "hero_headline": "חברת יין<br><span class=\"em\">טועמת את דרכה</span><br>לאירופה.",
+    "hero_sub": "Tasting <span class=\"serif\" style=\"font-style:italic; color: var(--wine-bright);\">&amp;</span> Toasting נבנית כחברת יין רב־תחומית של טעימות, טוסטים והתכנסויות. להלן אב־טיפוסים שנותנים את הכיוון.",
+    "cta_start": "לצפות בפרוטוטיפים <span>↓</span>",
+    "cta_scan": "על החברה",
+    "nav_game": "משחק",
+    "nav_toasts": "טוסטים",
+    "nav_sommelier": "סומלייה",
+    "footer_tagline": "חוויית יין בפתח לשוק האירופי. טעימות, טוסטים ומפגשים."
   },
   "pt": {
     "sommelier_title": "O teu sommelier de IA",
@@ -113,9 +169,27 @@
     "voice_title": "Prova por voz",
     "voice_subtitle": "Em breve",
     "voice_body": "Conduz uma prova com Alexa, Siri ou Google. Propõe um brinde, guia convidados e deixa a app fazer o resto. Mãos livres, copo cheio.",
-    "voice_badge": "Em breve"
+    "voice_badge": "Em breve",
+    "hero_headline": "Uma empresa de vinhos<br><span class=\"em\">abra caminho pelo paladar</span><br>a entrar na Europa.",
+    "hero_sub": "Tasting <span class=\"serif\" style=\"font-style:italic; color: var(--wine-bright);\">&amp;</span> Toasting está a ganhar forma como empresa multifacetada do vinho , provas, brindes, encontros. Aqui estão os protótipos que mostram a direção.",
+    "cta_start": "Explorar protótipos <span>↓</span>",
+    "cta_scan": "Sobre a empresa",
+    "nav_game": "Jogo",
+    "nav_toasts": "Brindes",
+    "nav_sommelier": "Sommelier",
+    "footer_tagline": "Uma empresa de experiências de vinho a entrar no mercado europeu. Provas, brindes, encontros."
   },
   "ka": {
+    "sommelier_title": "შენი AI სომელიე",
+    "sommelier_subtitle": "ჰკითხე ყველაფერი ღვინოზე. მიიღე პასუხები მსოფლიო დონის სომელიესგან.",
+    "sommelier_body": "ჰკითხე ნებისმიერი რამ ღვინის შესახებ. მალე გირჩევ შენს გემოზე, ბიუჯეტსა და შემთხვევაზე. აპლიკაციაში ეს იხსნება ერთი გრძელი შეხებით. TODO(native-review)",
+    "commerce_title": "იყიდე ის ღვინო, რაც გიყვარს",
+    "commerce_subtitle": "თამაშიდან ჭიქამდე",
+    "commerce_body": "აღმოაჩინე ღვინოები სადეგუსტაციაზე და შეუკვეთე პირდაპირ აპიდან. პარტნიორი მარანები მოგიტანენ შენთან სახლში. ტესტის რეჟიმი აქტიურია — ონლაინ შეკვეთები მალე. TODO(native-review)",
+    "voice_title": "აღნიშნე ყოველი მომენტი სადღეგრძელოთი",
+    "voice_subtitle": "იპოვე იდეალური სადღეგრძელო ნებისმიერი შემთხვევისთვის, ნებისმიერ ენაზე.",
+    "voice_body": "Host a tasting through Alexa, Siri, or Google. Lead a toast, guide guests, and let the app do the rest. Hands free, glass full. TODO(native-review)",
+    "voice_badge": "მალე",
     "hero_headline": "ბოთლი ისტორიას ჰყვება. ჩვენ გეხმარებით მის წაკითხვაში.",
     "hero_sub": "ყოველთვიური სადეგუსტაციო ყუთი, სომელიეებთან ერთად შერჩეული ღონისძიებები მთელ ევროპაში და ციფრული პასპორტი ყოველი ღვინისთვის.",
     "cta_start": "დაიწყე გამოწერა",
@@ -123,13 +197,19 @@
     "nav_game": "თამაში",
     "nav_toasts": "სადღეგრძელოები",
     "nav_sommelier": "სომელიე",
-    "sommelier_title": "შენი AI სომელიე",
-    "sommelier_subtitle": "ჰკითხე ყველაფერი ღვინოზე. მიიღე პასუხები მსოფლიო დონის სომელიესგან.",
-    "voice_title": "აღნიშნე ყოველი მომენტი სადღეგრძელოთი",
-    "voice_subtitle": "იპოვე იდეალური სადღეგრძელო ნებისმიერი შემთხვევისთვის, ნებისმიერ ენაზე.",
     "footer_tagline": "სადეგუსტაციო თამაში ღვინის მოყვარულებისთვის."
   },
   "ro": {
+    "sommelier_title": "Somelierul tău AI",
+    "sommelier_subtitle": "Întreabă orice despre vin. Primești răspunsuri de la un somelier de clasă mondială.",
+    "sommelier_body": "Întreabă orice despre vin. Recomandări instant pentru gustul, bugetul și ocazia ta. În app printr-o singură apăsare lungă. TODO(native-review)",
+    "commerce_title": "Cumpără vinul pe care îl iubești",
+    "commerce_subtitle": "De la joc la pahar",
+    "commerce_body": "Descoperă vinuri la degustări și comandă-le direct din app. Podgorii partenere îți livrează la ușă. Mod de test activ; comenzile reale sunt în curs. TODO(native-review)",
+    "voice_title": "Ridică un toast pentru fiecare moment",
+    "voice_subtitle": "Găsește toastul perfect pentru orice ocazie, în orice limbă.",
+    "voice_body": "Ghid o degustare prin Alexa, Siri sau Google. Propune toast, conduți invitații și lasă restul în seama app-ului. Mâini libere, pahar plin. TODO(native-review)",
+    "voice_badge": "În curând",
     "hero_headline": "O sticlă spune o poveste. Noi te ajutăm s-o citești.",
     "hero_sub": "O cutie lunară de degustare, evenimente curatoriate cu somelieri în toată Europa și un pașaport digital pentru fiecare vin.",
     "cta_start": "Începe abonamentul",
@@ -137,10 +217,6 @@
     "nav_game": "Jocul",
     "nav_toasts": "Toasturi",
     "nav_sommelier": "Somelier",
-    "sommelier_title": "Somelierul tău AI",
-    "sommelier_subtitle": "Întreabă orice despre vin. Primești răspunsuri de la un somelier de clasă mondială.",
-    "voice_title": "Ridică un toast pentru fiecare moment",
-    "voice_subtitle": "Găsește toastul perfect pentru orice ocazie, în orice limbă.",
     "footer_tagline": "Un joc de degustare pentru iubitorii de vin."
   }
 }
