@@ -33,8 +33,15 @@ SECTION_DOC_TITLE_KEY: dict[str, str] = {
 
 # Preserve merge order inside each bucket.
 SECTION_FILES: tuple[tuple[str, tuple[str, ...]], ...] = (
-    ("proto", ("tools/chatgpt-proto_chatgpt.txt",)),
-    ("gameflow", ("tools/chatgpt-gameflow_chatgpt.txt",)),
+    ("proto", (
+        "tools/chatgpt-proto_chatgpt.txt",
+        "tools/proto-part1-8langs-translated.json",
+        "tools/proto-part2-8langs-translated.json",
+    )),
+    ("gameflow", (
+        "tools/chatgpt-gameflow_chatgpt.txt",
+        "tools/gameflow-8langs-translated.json",
+    )),
     (
         "ops",
         ("tools/chatgpt-ops_chatgpt.txt", "tools/ops-missing7-translated.json"),
