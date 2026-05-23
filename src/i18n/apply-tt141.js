@@ -58,12 +58,32 @@
     setDocumentLangAttr(lang);
     var T = localeTable(data, lang);
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      if (el.querySelector("[data-i18n], [data-i18n-html]")) return;
       var key = el.getAttribute("data-i18n");
-      if (key && T[key] != null) el.textContent = T[key];
+      if (!key || T[key] == null) return;
+      el.textContent = T[key];
     });
     document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+      if (el.querySelector("[data-i18n], [data-i18n-html]")) return;
       var key = el.getAttribute("data-i18n-html");
-      if (key && T[key] != null) el.innerHTML = T[key];
+      if (!key || T[key] == null) return;
+      el.innerHTML = T[key];
+    });
+    document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-title");
+      if (!key || T[key] == null) return;
+      el.setAttribute("title", T[key]);
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-placeholder");
+      if (!key || T[key] == null) return;
+      el.setAttribute("placeholder", T[key]);
+    });
+    document.querySelectorAll("[data-i18n-value]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-value");
+      if (!key || T[key] == null) return;
+      el.setAttribute("value", T[key]);
+      if ("value" in el) el.value = T[key];
     });
     applySwitcherState(lang);
   }

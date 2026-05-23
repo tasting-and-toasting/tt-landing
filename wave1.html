@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tasting & Toasting , Wave 1 Player MVP</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-i18n="wave1_doc_title">Tasting &amp; Toasting , Wave 1 Player MVP</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&amp;family=JetBrains+Mono:wght@300;400;500&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
 :root {
   --bg: #0F0B0A;
@@ -1933,1340 +1934,1302 @@ body { overflow-x: hidden; }
 </style>
 </head>
 <body>
-
 <nav class="proto-nav">
-  <a href="index.html" class="tt-hub-link" title="Back to overview"><span class="arrow">←</span><span class="label-full">Hub</span></a>
-  <div class="proto-brand">
-    <span class="name">TASTING<span class="amp">&</span>TOASTING</span>
-    <span class="tag">Wave 1 · 30 Player screens</span>
-  </div>
-  <div class="section-jump">
-    <button class="jump-btn active" data-jump="auth">Auth</button>
-    <button class="jump-btn" data-jump="home">Home</button>
-    <button class="jump-btn" data-jump="join">Join</button>
-    <button class="jump-btn" data-jump="event">Event</button>
-    <button class="jump-btn" data-jump="hgam">Home game</button>
-    <button class="jump-btn" data-jump="catalog">Catalog</button>
-    <button class="jump-btn" data-jump="cart">Cart</button>
-  </div>
+<a class="tt-hub-link" data-i18n-title="nav_link_title_attr" href="index.html" title="Back to overview"><span class="arrow">←</span><span class="label-full" data-i18n="nav_label_full">Hub</span></a>
+<div class="proto-brand">
+<span class="name">TASTING<span class="amp">&amp;</span>TOASTING</span>
+<span class="tag" data-i18n="nav_tag">Wave 1 · 30 Player screens</span>
+</div>
+<div class="section-jump">
+<button class="jump-btn active" data-i18n="nav_jump_btn" data-jump="auth">Auth</button>
+<button class="jump-btn" data-i18n="page_lbl_9" data-jump="home">Home</button>
+<button class="jump-btn" data-i18n="nav_jump_btn_3" data-jump="join">Join</button>
+<button class="jump-btn" data-i18n="nav_jump_btn_4" data-jump="event">Event</button>
+<button class="jump-btn" data-i18n="nav_jump_btn_5" data-jump="hgam">Home game</button>
+<button class="jump-btn" data-jump="catalog">Catalog</button>
+<button class="jump-btn" data-i18n="nav_jump_btn_7" data-jump="cart">Cart</button>
+</div>
 </nav>
-
 <!-- ============= HERO ============= -->
 <div class="hero-banner">
-  <div class="super">, Wave 1 P0 · 30 Player screens · iOS / Android · Soft Modern</div>
-  <h1>The <em>player</em> app,<br>screen by screen.</h1>
-  <p class="sub">Every P0 screen from the inventory, rendered in the editorial premium style. Click any screen frame to interact. Use the section pills above to jump between flows.</p>
-  <div class="stats-row">
-    <span><span class="gold">30</span> screens</span>
-    <span><span class="gold">7</span> flows</span>
-    <span><span class="gold">Wave 1</span> only</span>
-    <span><span class="gold">P0</span> priority</span>
-  </div>
+<div class="super">, Wave 1 P0 · 30 Player screens · iOS / Android · Soft Modern</div>
+<h1 data-i18n="hero_banner_h1">The <em>player</em> app,<br/>screen by screen.</h1>
+<p class="sub" data-i18n="hero_banner_sub">Every P0 screen from the inventory, rendered in the editorial premium style. Click any screen frame to interact. Use the section pills above to jump between flows.</p>
+<div class="stats-row">
+<span><span class="gold" data-i18n="hero_banner_gold">30</span> screens</span>
+<span><span class="gold">7</span> flows</span>
+<span><span class="gold" data-i18n="hero_banner_gold_3">Wave 1</span> only</span>
+<span><span class="gold" data-i18n="hero_banner_gold_4">P0</span> priority</span>
 </div>
-
+</div>
 <!-- ============= AUTH FLOW ============= -->
 <div class="section-divider" id="auth">
-  <div class="kicker">, AUTH · 5 screens</div>
-  <h2 class="heading">Onboarding & <em>auth</em>.</h2>
-  <p class="desc">Welcome → phone → OTP → profile. Phone-only signup, no passwords ever. Age-gate enforced legally.</p>
+<div class="kicker" data-i18n="auth_kicker">, AUTH · 5 screens</div>
+<h2 class="heading" data-i18n="auth_heading">Onboarding &amp; <em>auth</em>.</h2>
+<p class="desc" data-i18n="auth_desc">Welcome → phone → OTP → profile. Phone-only signup, no passwords ever. Age-gate enforced legally.</p>
 </div>
-
 <div class="phone-grid">
-  <!-- AUTH-01 Welcome -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status">
-          <span>9:41</span>
-          <span class="right">●●● 5G ▮▮▮</span>
-        </div>
-        <div class="screen-content">
-          <div class="auth-welcome">
-            <div class="auth-grain"></div>
-            <div class="welcome-brand">TASTING <span class="amp">&</span> TOASTING</div>
-            <div class="welcome-hero">
-              <h1 class="welcome-headline">A bottle <em>tells</em> <span class="light">a story.</span><br>We help you <em>read</em> it.</h1>
-              <p class="welcome-sub">A monthly tasting box, live games with friends, and a digital passport for every wine.</p>
-            </div>
-            <div class="welcome-actions">
-              <button class="mob-btn mob-btn-primary">Get started →</button>
-              <button class="mob-btn mob-btn-ghost">I already have an account</button>
-              <p class="welcome-tos">By continuing you agree to our <a href="#">Terms</a> · 18+ only</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">AUTH-01 · Welcome</div>
-      <div class="label">Splash + brand intro</div>
-    </div>
-  </div>
-
-  <!-- AUTH-02 Phone -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title"></span>
-            <span></span>
-          </div>
-          <div class="auth-form">
-            <h2 class="auth-form-h">Your <em>number</em>.</h2>
-            <p class="auth-form-sub">We send a code to verify. No passwords, ever.</p>
-            <label class="input-label">Phone number</label>
-            <div class="phone-input-row">
-              <input type="text" class="country-code" value="+34" readonly>
-              <input type="tel" class="phone-input" value="612 845 209">
-            </div>
-            <p class="input-helper">Standard SMS rates may apply</p>
-            <div class="spacer"></div>
-            <button class="mob-btn mob-btn-primary">Send code →</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">AUTH-02 · Phone entry</div>
-      <div class="label">+34 default · Twilio backend</div>
-    </div>
-  </div>
-
-  <!-- AUTH-03 OTP -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title"></span>
-            <span></span>
-          </div>
-          <div class="auth-form">
-            <h2 class="auth-form-h">Check your <em>phone</em>.</h2>
-            <p class="auth-form-sub">We sent a 6-digit code to +34 612 845 209</p>
-            <div class="otp-row">
-              <div class="otp-cell filled">8</div>
-              <div class="otp-cell filled">4</div>
-              <div class="otp-cell filled">2</div>
-              <div class="otp-cell cursor"></div>
-              <div class="otp-cell"></div>
-              <div class="otp-cell"></div>
-            </div>
-            <p class="otp-resend">Resend in <span class="timer">00:43</span></p>
-            <div class="spacer"></div>
-            <button class="mob-btn mob-btn-text">Didn't receive a code? Use email instead</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">AUTH-03 · OTP</div>
-      <div class="label">6-digit · 60s resend cooldown</div>
-    </div>
-  </div>
-
-  <!-- AUTH-04 Profile setup -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content scroll">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Set up your profile</span>
-            <span></span>
-          </div>
-          <div class="profile-form">
-            <h2 class="auth-form-h">A few <em>details</em>.</h2>
-            <p class="auth-form-sub">We use these to send your kits and confirm you're old enough to play.</p>
-            <div class="input-group">
-              <label class="input-label">Your name</label>
-              <input type="text" class="input-text" value="Maksim Geller">
-            </div>
-            <div class="input-group">
-              <label class="input-label">Date of birth</label>
-              <div class="dob-row">
-                <input type="text" class="input-text" value="14" placeholder="DD">
-                <input type="text" class="input-text" value="07" placeholder="MM">
-                <input type="text" class="input-text" value="1985" placeholder="YYYY">
-              </div>
-            </div>
-            <div class="legal-notice">You must be 18 or older. Wine deliveries require ID at the door.</div>
-            <div class="spacer"></div>
-            <button class="mob-btn mob-btn-primary" style="margin-top: 16px;">Continue →</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">AUTH-04 · Profile setup</div>
-      <div class="label">Name + DOB · age check enforced</div>
-    </div>
-  </div>
-
-  <!-- AUTH-05 Login (returning) -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title"></span>
-            <span></span>
-          </div>
-          <div class="auth-form">
-            <h2 class="auth-form-h">Welcome <em>back</em>.</h2>
-            <p class="auth-form-sub">Enter your number , we'll send a fresh code. No password to remember.</p>
-            <label class="input-label">Phone number</label>
-            <div class="phone-input-row">
-              <input type="text" class="country-code" value="+34" readonly>
-              <input type="tel" class="phone-input" placeholder="612 845 209">
-            </div>
-            <p class="input-helper">Same number as your last login</p>
-            <div class="spacer"></div>
-            <button class="mob-btn mob-btn-primary">Send code →</button>
-            <button class="mob-btn mob-btn-text" style="margin-top: 12px;">New here? Create an account</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">AUTH-05 · Login</div>
-      <div class="label">Phone OTP only · no passwords</div>
-    </div>
-  </div>
+<!-- AUTH-01 Welcome -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status">
+<span>9:41</span>
+<span class="right">●●● 5G ▮▮▮</span>
 </div>
-
+<div class="screen-content">
+<div class="auth-welcome">
+<div class="auth-grain"></div>
+<div class="welcome-brand" data-i18n="nav_name">TASTING <span class="amp">&amp;</span> TOASTING</div>
+<div class="welcome-hero">
+<h1 class="welcome-headline" data-i18n="page_welcome_headline">A bottle <em>tells</em> <span class="light">a story.</span><br/>We help you <em>read</em> it.</h1>
+<p class="welcome-sub" data-i18n="page_welcome_sub">A monthly tasting box, live games with friends, and a digital passport for every wine.</p>
+</div>
+<div class="welcome-actions">
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn">Get started →</button>
+<button class="mob-btn mob-btn-ghost" data-i18n="page_mob_btn_2">I already have an account</button>
+<p class="welcome-tos" data-i18n="page_welcome_tos">By continuing you agree to our <a data-i18n="page_a" href="#">Terms</a> · 18+ only</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">AUTH-01 · Welcome</div>
+<div class="label" data-i18n="page_label">Splash + brand intro</div>
+</div>
+</div>
+<!-- AUTH-02 Phone -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title"></span>
+<span></span>
+</div>
+<div class="auth-form">
+<h2 class="auth-form-h" data-i18n="page_auth_form_h">Your <em>number</em>.</h2>
+<p class="auth-form-sub" data-i18n="page_auth_form_sub">We send a code to verify. No passwords, ever.</p>
+<label class="input-label" data-i18n="page_input_label">Phone number</label>
+<div class="phone-input-row">
+<input class="country-code" data-i18n-value="page_country_code" readonly="" type="text" value="+34"/>
+<input class="phone-input" data-i18n-value="page_phone_input" type="tel" value="612 845 209"/>
+</div>
+<p class="input-helper" data-i18n="page_input_helper">Standard SMS rates may apply</p>
+<div class="spacer"></div>
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_3">Send code →</button>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">AUTH-02 · Phone entry</div>
+<div class="label" data-i18n="page_label_2">+34 default · Twilio backend</div>
+</div>
+</div>
+<!-- AUTH-03 OTP -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title"></span>
+<span></span>
+</div>
+<div class="auth-form">
+<h2 class="auth-form-h" data-i18n="page_auth_form_h_2">Check your <em>phone</em>.</h2>
+<p class="auth-form-sub" data-i18n="page_auth_form_sub_2">We sent a 6-digit code to +34 612 845 209</p>
+<div class="otp-row">
+<div class="otp-cell filled">8</div>
+<div class="otp-cell filled">4</div>
+<div class="otp-cell filled">2</div>
+<div class="otp-cell cursor"></div>
+<div class="otp-cell"></div>
+<div class="otp-cell"></div>
+</div>
+<p class="otp-resend" data-i18n="page_otp_resend">Resend in <span class="timer">00:43</span></p>
+<div class="spacer"></div>
+<button class="mob-btn mob-btn-text" data-i18n="page_mob_btn_4">Didn't receive a code? Use email instead</button>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">AUTH-03 · OTP</div>
+<div class="label" data-i18n="page_label_3">6-digit · 60s resend cooldown</div>
+</div>
+</div>
+<!-- AUTH-04 Profile setup -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content scroll">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">Set up your profile</span>
+<span></span>
+</div>
+<div class="profile-form">
+<h2 class="auth-form-h" data-i18n="page_auth_form_h_3">A few <em>details</em>.</h2>
+<p class="auth-form-sub" data-i18n="page_auth_form_sub_3">We use these to send your kits and confirm you're old enough to play.</p>
+<div class="input-group">
+<label class="input-label" data-i18n="page_input_label_2">Your name</label>
+<input class="input-text" data-i18n-value="page_input_text" type="text" value="Maksim Geller"/>
+</div>
+<div class="input-group">
+<label class="input-label" data-i18n="page_input_label_3">Date of birth</label>
+<div class="dob-row">
+<input class="input-text" data-i18n-placeholder="page_input_text_2" data-i18n-value="page_input_text_3" placeholder="DD" type="text" value="14"/>
+<input class="input-text" data-i18n-placeholder="page_input_text_4" data-i18n-value="page_input_text_5" placeholder="MM" type="text" value="07"/>
+<input class="input-text" data-i18n-placeholder="page_input_text_6" data-i18n-value="page_input_text_7" placeholder="YYYY" type="text" value="1985"/>
+</div>
+</div>
+<div class="legal-notice">You must be 18 or older. Wine deliveries require ID at the door.</div>
+<div class="spacer"></div>
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_5" style="margin-top: 16px;">Continue →</button>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">AUTH-04 · Profile setup</div>
+<div class="label" data-i18n="page_label_4">Name + DOB · age check enforced</div>
+</div>
+</div>
+<!-- AUTH-05 Login (returning) -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title"></span>
+<span></span>
+</div>
+<div class="auth-form">
+<h2 class="auth-form-h" data-i18n="page_auth_form_h_4">Welcome <em>back</em>.</h2>
+<p class="auth-form-sub" data-i18n="page_auth_form_sub_4">Enter your number , we'll send a fresh code. No password to remember.</p>
+<label class="input-label" data-i18n="page_input_label_4">Phone number</label>
+<div class="phone-input-row">
+<input class="country-code" data-i18n-value="page_country_code_2" readonly="" type="text" value="+34"/>
+<input class="phone-input" data-i18n-placeholder="page_phone_input_2" placeholder="612 845 209" type="tel"/>
+</div>
+<p class="input-helper" data-i18n="page_input_helper_2">Same number as your last login</p>
+<div class="spacer"></div>
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_6">Send code →</button>
+<button class="mob-btn mob-btn-text" data-i18n="page_mob_btn_7" style="margin-top: 12px;">New here? Create an account</button>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">AUTH-05 · Login</div>
+<div class="label" data-i18n="page_label_5">Phone OTP only · no passwords</div>
+</div>
+</div>
+</div>
 <!-- ============= HOME FLOW ============= -->
 <div class="section-divider" id="home">
-  <div class="kicker">, HOME · 2 screens</div>
-  <h2 class="heading">The <em>home</em> tab.</h2>
-  <p class="desc">First-time view encourages joining a game or ordering a kit. Returning users see history, achievements, the next thing to do.</p>
+<div class="kicker" data-i18n="home_kicker">, HOME · 2 screens</div>
+<h2 class="heading" data-i18n="home_heading">The <em>home</em> tab.</h2>
+<p class="desc" data-i18n="home_desc">First-time view encourages joining a game or ordering a kit. Returning users see history, achievements, the next thing to do.</p>
 </div>
-
 <div class="phone-grid">
-  <!-- HOME-01 Empty state -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="home-empty">
-            <div class="mob-mono gold" style="margin-bottom: 16px;">, Welcome, Maksim</div>
-            <h2 class="home-empty-h">Your first <em>pour</em> awaits.</h2>
-            <p class="home-empty-sub">You haven't played yet. Two ways to begin: join an event near you, or get a kit shipped to your door.</p>
-            <div class="home-empty-actions">
-              <button class="mob-btn mob-btn-primary">Join a game →</button>
-              <button class="mob-btn mob-btn-ghost">Order a kit</button>
-              <button class="mob-btn mob-btn-text">How does it work?</button>
-            </div>
-          </div>
-          <div class="bottom-nav">
-            <div class="tab active"><div class="icon">●</div><div class="lbl">Home</div></div>
-            <div class="tab"><div class="icon">⊞</div><div class="lbl">Catalog</div></div>
-            <div class="tab"><div class="icon">⌂</div><div class="lbl">Kits</div></div>
-            <div class="tab"><div class="icon">○</div><div class="lbl">You</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">HOME-01 · Empty state</div>
-      <div class="label">First-time user · no history</div>
-    </div>
-  </div>
-
-  <!-- HOME-03 With history -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="home-content scroll">
-            <div class="home-greeting">
-              <div class="hi">Hi, <em>Maksim</em>.</div>
-              <div class="meta">Friday · 22 events near Madrid this week</div>
-            </div>
-            <div class="home-hero">
-              <div class="kicker">, Suggested for you</div>
-              <h3 class="h-title">A vertical of<br><em>Upper Galilee</em>.</h3>
-              <p class="h-sub">Four bottles. One night. Hosted by Carlos.</p>
-              <div class="home-hero-actions">
-                <button class="mob-btn mob-btn-primary">Reserve · 120 cr</button>
-              </div>
-            </div>
-            <div class="home-section-h">
-              <div class="h">Your <em>history</em></div>
-              <div class="all">All →</div>
-            </div>
-            <div class="history-card">
-              <div class="info">
-                <div class="when">2 days ago</div>
-                <div class="title-l">Tempranillo blind tasting</div>
-              </div>
-              <div class="score"><em>3/5</em></div>
-            </div>
-            <div class="history-card">
-              <div class="info">
-                <div class="when">1 week ago</div>
-                <div class="title-l">Old-world reds night</div>
-              </div>
-              <div class="score"><em>4/5</em></div>
-            </div>
-            <div class="home-section-h">
-              <div class="h">Your <em>achievements</em></div>
-              <div class="all">All →</div>
-            </div>
-            <div class="achievements-row">
-              <div class="achievement">
-                <div class="glyph">★</div>
-                <div class="name">First pour</div>
-              </div>
-              <div class="achievement">
-                <div class="glyph">●</div>
-                <div class="name">5 games</div>
-              </div>
-              <div class="achievement locked">
-                <div class="glyph">◆</div>
-                <div class="name">Perfect</div>
-              </div>
-              <div class="achievement locked">
-                <div class="glyph">▲</div>
-                <div class="name">10 regions</div>
-              </div>
-            </div>
-          </div>
-          <div class="bottom-nav">
-            <div class="tab active"><div class="icon">●</div><div class="lbl">Home</div></div>
-            <div class="tab"><div class="icon">⊞</div><div class="lbl">Catalog</div></div>
-            <div class="tab"><div class="icon">⌂</div><div class="lbl">Kits</div></div>
-            <div class="tab"><div class="icon">○</div><div class="lbl">You</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">HOME-03 · With history</div>
-      <div class="label">Returning user · recent games + achievements</div>
-    </div>
-  </div>
+<!-- HOME-01 Empty state -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="home-empty">
+<div class="mob-mono gold" style="margin-bottom: 16px;">, Welcome, Maksim</div>
+<h2 class="home-empty-h" data-i18n="page_home_empty_h">Your first <em>pour</em> awaits.</h2>
+<p class="home-empty-sub" data-i18n="page_home_empty_sub">You haven't played yet. Two ways to begin: join an event near you, or get a kit shipped to your door.</p>
+<div class="home-empty-actions">
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_8">Join a game →</button>
+<button class="mob-btn mob-btn-ghost" data-i18n="page_mob_btn_9">Order a kit</button>
+<button class="mob-btn mob-btn-text" data-i18n="page_mob_btn_10">How does it work?</button>
 </div>
-
+</div>
+<div class="bottom-nav">
+<div class="tab active"><div class="icon">●</div><div class="lbl" data-i18n="nav_jump_btn_2">Home</div></div>
+<div class="tab"><div class="icon">⊞</div><div class="lbl" data-i18n="nav_jump_btn_6">Catalog</div></div>
+<div class="tab"><div class="icon">⌂</div><div class="lbl" data-i18n="page_lbl_11">Kits</div></div>
+<div class="tab"><div class="icon">○</div><div class="lbl" data-i18n="page_lbl_12">You</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">HOME-01 · Empty state</div>
+<div class="label" data-i18n="page_label_6">First-time user · no history</div>
+</div>
+</div>
+<!-- HOME-03 With history -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="home-content scroll">
+<div class="home-greeting">
+<div class="hi">Hi, <em>Maksim</em>.</div>
+<div class="meta" data-i18n="page_meta">Friday · 22 events near Madrid this week</div>
+</div>
+<div class="home-hero">
+<div class="kicker" data-i18n="page_kicker">, Suggested for you</div>
+<h3 class="h-title" data-i18n="page_h_title">A vertical of<br/><em>Upper Galilee</em>.</h3>
+<p class="h-sub" data-i18n="page_h_sub">Four bottles. One night. Hosted by Carlos.</p>
+<div class="home-hero-actions">
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_11">Reserve · 120 cr</button>
+</div>
+</div>
+<div class="home-section-h">
+<div class="h">Your <em>history</em></div>
+<div class="all">All →</div>
+</div>
+<div class="history-card">
+<div class="info">
+<div class="when">2 days ago</div>
+<div class="title-l">Tempranillo blind tasting</div>
+</div>
+<div class="score"><em>3/5</em></div>
+</div>
+<div class="history-card">
+<div class="info">
+<div class="when">1 week ago</div>
+<div class="title-l">Old-world reds night</div>
+</div>
+<div class="score"><em>4/5</em></div>
+</div>
+<div class="home-section-h">
+<div class="h">Your <em>achievements</em></div>
+<div class="all">All →</div>
+</div>
+<div class="achievements-row">
+<div class="achievement">
+<div class="glyph">★</div>
+<div class="name" data-i18n="page_name_8">First pour</div>
+</div>
+<div class="achievement">
+<div class="glyph">●</div>
+<div class="name" data-i18n="page_name_9">5 games</div>
+</div>
+<div class="achievement locked">
+<div class="glyph">◆</div>
+<div class="name" data-i18n="page_name_10">Perfect</div>
+</div>
+<div class="achievement locked">
+<div class="glyph">▲</div>
+<div class="name" data-i18n="page_name_11">10 regions</div>
+</div>
+</div>
+</div>
+<div class="bottom-nav">
+<div class="tab active"><div class="icon">●</div><div class="lbl" data-i18n="page_lbl">Home</div></div>
+<div class="tab"><div class="icon">⊞</div><div class="lbl" data-i18n="page_lbl_10">Catalog</div></div>
+<div class="tab"><div class="icon">⌂</div><div class="lbl" data-i18n="page_lbl_3">Kits</div></div>
+<div class="tab"><div class="icon">○</div><div class="lbl" data-i18n="page_lbl_4">You</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">HOME-03 · With history</div>
+<div class="label" data-i18n="page_label_7">Returning user · recent games + achievements</div>
+</div>
+</div>
+</div>
 <!-- ============= JOIN FLOW ============= -->
 <div class="section-divider" id="join">
-  <div class="kicker">, JOIN · 3 screens</div>
-  <h2 class="heading">Joining a <em>game</em>.</h2>
-  <p class="desc">Two ways in: scan a QR (mediator's tablet, kit packaging) or type a 6-character code. Friendly errors if the code is bad.</p>
+<div class="kicker" data-i18n="join_kicker">, JOIN · 3 screens</div>
+<h2 class="heading" data-i18n="join_heading">Joining a <em>game</em>.</h2>
+<p class="desc" data-i18n="join_desc">Two ways in: scan a QR (mediator's tablet, kit packaging) or type a 6-character code. Friendly errors if the code is bad.</p>
 </div>
-
 <div class="phone-grid">
-  <!-- JOIN-01 Code entry -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Join a game</span>
-            <span></span>
-          </div>
-          <div class="join-screen">
-            <h2 class="auth-form-h">Got a <em>code</em>?</h2>
-            <p class="auth-form-sub">From your mediator, friend, or kit. Six characters, with a hyphen.</p>
-            <div class="code-display">
-              <div class="code-cell filled">T</div>
-              <div class="code-cell filled">7</div>
-              <div class="code-cell dash">,</div>
-              <div class="code-cell filled">4</div>
-              <div class="code-cell">&nbsp;</div>
-              <div class="code-cell">&nbsp;</div>
-            </div>
-            <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 12px; color: var(--ink-3); text-align: center;">Format: T7,4Q9</p>
-            <div class="spacer"></div>
-            <button class="mob-btn mob-btn-primary">Join game →</button>
-            <button class="mob-btn mob-btn-text" style="margin-top: 12px;">Scan a QR code instead</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">JOIN-01 · Code entry</div>
-      <div class="label">6-char with hyphen format</div>
-    </div>
-  </div>
-
-  <!-- JOIN-02 QR scanner -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="qr-scanner">
-            <div class="qr-top-meta">
-              <span class="back" style="background: rgba(0,0,0,0.6); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--ink); font-size: 22px;">‹</span>
-              <span class="mob-mono gold">Point at QR</span>
-              <span style="background: rgba(0,0,0,0.6); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 14px;">⚡</span>
-            </div>
-            <div class="qr-frame">
-              <div class="qr-corner tl"></div>
-              <div class="qr-corner tr"></div>
-              <div class="qr-corner bl"></div>
-              <div class="qr-corner br"></div>
-              <div class="qr-line"></div>
-            </div>
-            <div class="qr-overlay">
-              <div class="h">Scan the game QR</div>
-              <div class="sub">Found on the mediator's tablet, your kit box, or shared by a friend.</div>
-              <button class="mob-btn mob-btn-ghost" style="background: rgba(255,255,255,0.06);">Enter code instead</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">JOIN-02 · QR scanner</div>
-      <div class="label">Camera viewport · with fallback</div>
-    </div>
-  </div>
-
-  <!-- JOIN-04 Code invalid -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Hmm.</span>
-            <span></span>
-          </div>
-          <div class="error-screen">
-            <div class="error-icon">!</div>
-            <h2 class="auth-form-h" style="text-align: center;">That code <em>doesn't work</em>.</h2>
-            <p class="auth-form-sub" style="text-align: center; max-width: 260px; margin: 12px auto 32px;">Maybe it's expired, or there's a typo. Codes are case-sensitive and look like T7,4Q9.</p>
-            <div class="spacer"></div>
-            <button class="mob-btn mob-btn-primary">Try a different code</button>
-            <button class="mob-btn mob-btn-ghost" style="margin-top: 10px;">Scan a QR instead</button>
-            <button class="mob-btn mob-btn-text" style="margin-top: 12px;">Need help?</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">JOIN-04 · Invalid code</div>
-      <div class="label">Friendly error · clear next step</div>
-    </div>
-  </div>
+<!-- JOIN-01 Code entry -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">Join a game</span>
+<span></span>
 </div>
-
+<div class="join-screen">
+<h2 class="auth-form-h" data-i18n="page_auth_form_h_5">Got a <em>code</em>?</h2>
+<p class="auth-form-sub" data-i18n="page_auth_form_sub_5">From your mediator, friend, or kit. Six characters, with a hyphen.</p>
+<div class="code-display">
+<div class="code-cell filled">T</div>
+<div class="code-cell filled" data-i18n="hero_banner_gold_2">7</div>
+<div class="code-cell dash">,</div>
+<div class="code-cell filled">4</div>
+<div class="code-cell"> </div>
+<div class="code-cell"> </div>
+</div>
+<p data-i18n="page_p" style="font-family: 'Fraunces', serif; font-style: italic; font-size: 12px; color: var(--ink-3); text-align: center;">Format: T7,4Q9</p>
+<div class="spacer"></div>
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_12">Join game →</button>
+<button class="mob-btn mob-btn-text" data-i18n="page_mob_btn_13" style="margin-top: 12px;">Scan a QR code instead</button>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">JOIN-01 · Code entry</div>
+<div class="label" data-i18n="page_label_8">6-char with hyphen format</div>
+</div>
+</div>
+<!-- JOIN-02 QR scanner -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="qr-scanner">
+<div class="qr-top-meta">
+<span class="back" style="background: rgba(0,0,0,0.6); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--ink); font-size: 22px;">‹</span>
+<span class="mob-mono gold" data-i18n="page_mob_mono">Point at QR</span>
+<span style="background: rgba(0,0,0,0.6); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 14px;">⚡</span>
+</div>
+<div class="qr-frame">
+<div class="qr-corner tl"></div>
+<div class="qr-corner tr"></div>
+<div class="qr-corner bl"></div>
+<div class="qr-corner br"></div>
+<div class="qr-line"></div>
+</div>
+<div class="qr-overlay">
+<div class="h">Scan the game QR</div>
+<div class="sub">Found on the mediator's tablet, your kit box, or shared by a friend.</div>
+<button class="mob-btn mob-btn-ghost" data-i18n="page_mob_btn_14" style="background: rgba(255,255,255,0.06);">Enter code instead</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">JOIN-02 · QR scanner</div>
+<div class="label" data-i18n="page_label_9">Camera viewport · with fallback</div>
+</div>
+</div>
+<!-- JOIN-04 Code invalid -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">Hmm.</span>
+<span></span>
+</div>
+<div class="error-screen">
+<div class="error-icon">!</div>
+<h2 class="auth-form-h" data-i18n="page_auth_form_h_6" style="text-align: center;">That code <em>doesn't work</em>.</h2>
+<p class="auth-form-sub" data-i18n="page_auth_form_sub_6" style="text-align: center; max-width: 260px; margin: 12px auto 32px;">Maybe it's expired, or there's a typo. Codes are case-sensitive and look like T7,4Q9.</p>
+<div class="spacer"></div>
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_15">Try a different code</button>
+<button class="mob-btn mob-btn-ghost" data-i18n="page_mob_btn_16" style="margin-top: 10px;">Scan a QR instead</button>
+<button class="mob-btn mob-btn-text" data-i18n="page_mob_btn_17" style="margin-top: 12px;">Need help?</button>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">JOIN-04 · Invalid code</div>
+<div class="label" data-i18n="page_label_10">Friendly error · clear next step</div>
+</div>
+</div>
+</div>
 <!-- ============= EVENT GAME ============= -->
 <div class="section-divider" id="event">
-  <div class="kicker">, EVNT · 8 screens</div>
-  <h2 class="heading">The live <em>event</em>.</h2>
-  <p class="desc">Lobby → ritual → tasting card per pour → guess all wines → submit → wait → reveal → leaderboard. The core loop. Iconic moments dark and dramatic.</p>
+<div class="kicker" data-i18n="event_kicker">, EVNT · 8 screens</div>
+<h2 class="heading" data-i18n="event_heading">The live <em>event</em>.</h2>
+<p class="desc" data-i18n="event_desc">Lobby → ritual → tasting card per pour → guess all wines → submit → wait → reveal → leaderboard. The core loop. Iconic moments dark and dramatic.</p>
 </div>
-
 <div class="phone-grid">
-  <!-- EVNT-01 Lobby -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Lobby</span>
-            <span class="action">Leave</span>
-          </div>
-          <div class="lobby">
-            <div class="lobby-h">
-              <div class="lobby-code">Game · T7,4Q9</div>
-              <h2 class="lobby-title">A vertical of<br><em>Upper Galilee</em>.</h2>
-              <p class="lobby-sub">Hosted by Carlos Mendoza, MS</p>
-              <div class="lobby-meta-row">
-                <span><span class="gold">5</span> wines</span>
-                <span><span class="gold">75</span> min</span>
-                <span><span class="gold">4 / 5</span> players</span>
-              </div>
-            </div>
-            <div class="lobby-players">
-              <div class="lobby-player host">
-                <div class="lobby-avatar">CM</div>
-                <span class="name">Carlos Mendoza</span>
-                <span class="role">Host</span>
-              </div>
-              <div class="lobby-player">
-                <div class="lobby-avatar">M</div>
-                <span class="name">Maksim (you)</span>
-                <span class="ready">Ready</span>
-              </div>
-              <div class="lobby-player">
-                <div class="lobby-avatar">S</div>
-                <span class="name">Sara Levy</span>
-                <span class="ready">Ready</span>
-              </div>
-              <div class="lobby-player">
-                <div class="lobby-avatar">A</div>
-                <span class="name">Ana Ruiz</span>
-                <span class="ready">Ready</span>
-              </div>
-              <div class="lobby-player">
-                <div class="lobby-avatar">M</div>
-                <span class="name">Marco Dell'Orto</span>
-                <span class="ready">Ready</span>
-              </div>
-            </div>
-            <div class="lobby-footer">
-              <p class="lobby-waiting">All players ready. Carlos will start any moment.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">EVNT-01 · Lobby</div>
-      <div class="label">Player list + game code · mediator starts</div>
-    </div>
-  </div>
-
-  <!-- EVNT-02 Glass One ritual -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="glass-one">
-            <div class="ritual-num">, Pour 1 of 5 ,</div>
-            <svg class="glass-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="r-fill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#8B2838" stop-opacity="0.85"/>
-                  <stop offset="100%" stop-color="#3a0e14" stop-opacity="0.95"/>
-                </linearGradient>
-              </defs>
-              <ellipse cx="50" cy="180" rx="30" ry="3" fill="rgba(244,237,228,0.15)"/>
-              <rect x="49" y="120" width="2" height="58" fill="rgba(244,237,228,0.15)"/>
-              <path d="M 25 50 Q 25 42 33 42 L 67 42 Q 75 42 75 50 L 75 80 Q 75 120 50 122 Q 25 120 25 80 Z" fill="rgba(244,237,228,0.05)" stroke="rgba(244,237,228,0.3)" stroke-width="1"/>
-              <path d="M 35 80 Q 35 110 50 113 Q 65 110 65 80 Z" fill="url(#r-fill)"/>
-              <ellipse cx="50" cy="80" rx="15" ry="3" fill="rgba(184,50,70,0.6)"/>
-            </svg>
-            <p class="ritual-text">Take a moment. <em>Look</em> at the colour.<br>That's the wine introducing itself.</p>
-            <div class="ritual-instruction">, Don't drink yet ,</div>
-            <div class="tap-prompt">Tap when ready</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">EVNT-02 · Glass One ritual</div>
-      <div class="label">Iconic moment · sets emotional tone</div>
-    </div>
-  </div>
-
-  <!-- EVNT-03 Tasting card -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="tasting-card">
-            <div class="tasting-top">
-              <span class="pour-counter">Pour 3 of 5</span>
-              <span class="tasting-timer">02:34</span>
-            </div>
-            <div class="tasting-num">3</div>
-            <p class="tasting-label">Which wine is this?</p>
-            <div class="descriptors">
-              <span class="descriptor-chip active">Blackcurrant</span>
-              <span class="descriptor-chip active">Graphite</span>
-              <span class="descriptor-chip">Cedar</span>
-              <span class="descriptor-chip active">High tannin</span>
-              <span class="descriptor-chip">Vanilla</span>
-              <span class="descriptor-chip">Cool finish</span>
-              <span class="descriptor-chip">Earthy</span>
-            </div>
-            <div class="tasting-notes">Dark fruit, blackcurrant. There's a coolness in the back , high altitude feel. Tight tannin, longer finish than #2. Something graphite-like.</div>
-            <div class="rating-bar">
-              <span class="lbl">My rating</span>
-              <div class="rating-stars-mob">
-                <div class="rating-star-mob filled"></div>
-                <div class="rating-star-mob filled"></div>
-                <div class="rating-star-mob filled"></div>
-                <div class="rating-star-mob filled"></div>
-                <div class="rating-star-mob"></div>
-              </div>
-            </div>
-            <div class="tasting-bottom">
-              <button class="mob-btn mob-btn-ghost" style="flex: 1;">‹ Pour 2</button>
-              <button class="mob-btn mob-btn-primary" style="flex: 2;">Save & continue</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">EVNT-03 · Tasting card</div>
-      <div class="label">One per wine · timer · descriptors · rating</div>
-    </div>
-  </div>
-
-  <!-- EVNT-05 Guessing -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Match the wines</span>
-            <span></span>
-          </div>
-          <div class="guess-screen">
-            <div class="guess-h-block">
-              <h2>Which wine was <em>which pour</em>?</h2>
-              <p class="help">Tap a wine, then tap its glass. Change before submit.</p>
-            </div>
-            <div class="guess-pool">
-              <div class="wine-pill placed">Lueria '18</div>
-              <div class="wine-pill placed">Adir Edition '20</div>
-              <div class="wine-pill selected">Drimia '20</div>
-              <div class="wine-pill">Plato '18</div>
-              <div class="wine-pill">The Cave '18</div>
-            </div>
-            <div class="glasses-stack">
-              <div class="glass-slot has-guess">
-                <div class="num">1</div>
-                <div class="guess-name">Lueria '18</div>
-                <div class="change">Change</div>
-              </div>
-              <div class="glass-slot has-guess">
-                <div class="num">2</div>
-                <div class="guess-name">Adir Winemaker '20</div>
-                <div class="change">Change</div>
-              </div>
-              <div class="glass-slot">
-                <div class="num">3</div>
-                <div class="guess-name empty">Tap to place wine →</div>
-              </div>
-              <div class="glass-slot">
-                <div class="num">4</div>
-                <div class="guess-name empty">Tap to place wine →</div>
-              </div>
-              <div class="glass-slot">
-                <div class="num">5</div>
-                <div class="guess-name empty">Tap to place wine →</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">EVNT-05 · Guessing / matching</div>
-      <div class="label">Drag wine names to numbered glasses</div>
-    </div>
-  </div>
-
-  <!-- EVNT-06 Submit confirmation -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Last look</span>
-            <span></span>
-          </div>
-          <div class="confirm-screen">
-            <h2 class="auth-form-h">Lock in your <em>guesses</em>?</h2>
-            <p class="auth-form-sub">Once you submit, you can't change your answers. The reveal is coming.</p>
-            <div class="confirm-warning">After this point, your answers are final. The mediator will reveal the truth once everyone has submitted.</div>
-            <div class="confirm-list">
-              <div class="confirm-row"><div class="num">1</div><div class="guess">Lueria '18</div></div>
-              <div class="confirm-row"><div class="num">2</div><div class="guess">Adir Winemaker '20</div></div>
-              <div class="confirm-row"><div class="num">3</div><div class="guess">Drimia '20</div></div>
-              <div class="confirm-row"><div class="num">4</div><div class="guess">Plato '18</div></div>
-              <div class="confirm-row"><div class="num">5</div><div class="guess">The Cave '18</div></div>
-            </div>
-            <div class="spacer"></div>
-            <button class="mob-btn mob-btn-primary">Submit final answers →</button>
-            <button class="mob-btn mob-btn-text" style="margin-top: 8px;">‹ Go back and change</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">EVNT-06 · Submit confirmation</div>
-      <div class="label">Last chance · then locked</div>
-    </div>
-  </div>
-
-  <!-- EVNT-07 Waiting for others -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="waiting-screen">
-            <div class="mob-mono gold" style="margin-bottom: 32px;">, Submitted ,</div>
-            <div class="waiting-orbital">
-              <div class="center">Waiting<br><em>for the table</em></div>
-              <div class="waiting-avatar done" style="top: 0; left: 50%; transform: translateX(-50%);">M</div>
-              <div class="waiting-avatar done" style="top: 25%; right: 0;">S</div>
-              <div class="waiting-avatar pending" style="bottom: 25%; right: 0;">A</div>
-              <div class="waiting-avatar pending" style="bottom: 0; left: 50%; transform: translateX(-50%);">M</div>
-            </div>
-            <h3 class="waiting-h"><em>2 of 4</em> have submitted</h3>
-            <p class="waiting-sub">Sit tight. Carlos will reveal the truth once everyone is in.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">EVNT-07 · Waiting for others</div>
-      <div class="label">Avatars showing who's submitted</div>
-    </div>
-  </div>
-
-  <!-- EVNT-08 Reveal score -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="reveal-score">
-            <div class="reveal-kicker">, Your score ,</div>
-            <div class="reveal-num">3</div>
-            <div class="reveal-of">of 5 correct</div>
-            <p class="reveal-msg">Respectable. The Drimia tripped you up , Petit Verdot at altitude reads younger.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">EVNT-08 · Reveal score</div>
-      <div class="label">Iconic dark moment · big number</div>
-    </div>
-  </div>
-
-  <!-- EVNT-09 Leaderboard -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="leaderboard">
-            <div class="leader-h">
-              <div class="kicker">, Round 1 standings ,</div>
-              <h2 class="title">Top two<br><em>advance</em>.</h2>
-            </div>
-            <div class="leaders-list">
-              <div class="leader-row advance">
-                <div class="rank">1</div>
-                <div class="info">
-                  <div class="name">Sara Levy</div>
-                  <div class="meta">+ 12 min faster</div>
-                </div>
-                <div class="score">4</div>
-                <div class="leader-tag">Advance</div>
-              </div>
-              <div class="leader-row advance you">
-                <div class="rank">2</div>
-                <div class="info">
-                  <div class="name">Maksim (you)</div>
-                  <div class="meta">Tie · faster on Drimia</div>
-                </div>
-                <div class="score">3</div>
-                <div class="leader-tag">Advance</div>
-              </div>
-              <div class="leader-divider">, Cut line ,</div>
-              <div class="leader-row">
-                <div class="rank">3</div>
-                <div class="info">
-                  <div class="name">Marco Dell'Orto</div>
-                  <div class="meta">3 correct · slower</div>
-                </div>
-                <div class="score">3</div>
-              </div>
-              <div class="leader-row">
-                <div class="rank">4</div>
-                <div class="info">
-                  <div class="name">Ana Ruiz</div>
-                  <div class="meta">Final standing</div>
-                </div>
-                <div class="score">2</div>
-              </div>
-            </div>
-            <div class="leader-rules"><strong>Tiebreak:</strong> when two players score the same, the one who locked their guess on the trickiest pour faster wins.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">EVNT-09 · Leaderboard</div>
-      <div class="label">Top 2 advance · tiebreak rules visible</div>
-    </div>
-  </div>
+<!-- EVNT-01 Lobby -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">Lobby</span>
+<span class="action">Leave</span>
 </div>
-
+<div class="lobby">
+<div class="lobby-h">
+<div class="lobby-code" data-i18n="page_lobby_code">Game · T7,4Q9</div>
+<h2 class="lobby-title" data-i18n="page_lobby_title">A vertical of<br/><em>Upper Galilee</em>.</h2>
+<p class="lobby-sub" data-i18n="page_lobby_sub">Hosted by Carlos Mendoza, MS</p>
+<div class="lobby-meta-row">
+<span><span class="gold" data-i18n="page_gold">5</span> wines</span>
+<span><span class="gold" data-i18n="page_gold_2">75</span> min</span>
+<span><span class="gold" data-i18n="page_gold_3">4 / 5</span> players</span>
+</div>
+</div>
+<div class="lobby-players">
+<div class="lobby-player host">
+<div class="lobby-avatar">CM</div>
+<span class="name" data-i18n="page_name">Carlos Mendoza</span>
+<span class="role">Host</span>
+</div>
+<div class="lobby-player">
+<div class="lobby-avatar">M</div>
+<span class="name" data-i18n="page_name_2">Maksim (you)</span>
+<span class="ready">Ready</span>
+</div>
+<div class="lobby-player">
+<div class="lobby-avatar">S</div>
+<span class="name" data-i18n="page_name_3">Sara Levy</span>
+<span class="ready">Ready</span>
+</div>
+<div class="lobby-player">
+<div class="lobby-avatar">A</div>
+<span class="name" data-i18n="page_name_4">Ana Ruiz</span>
+<span class="ready">Ready</span>
+</div>
+<div class="lobby-player">
+<div class="lobby-avatar">M</div>
+<span class="name" data-i18n="page_name_5">Marco Dell'Orto</span>
+<span class="ready">Ready</span>
+</div>
+</div>
+<div class="lobby-footer">
+<p class="lobby-waiting" data-i18n="page_lobby_waiting">All players ready. Carlos will start any moment.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">EVNT-01 · Lobby</div>
+<div class="label" data-i18n="page_label_11">Player list + game code · mediator starts</div>
+</div>
+</div>
+<!-- EVNT-02 Glass One ritual -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="glass-one">
+<div class="ritual-num" data-i18n="page_ritual_num">, Pour 1 of 5 ,</div>
+<svg class="glass-svg" viewbox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="r-fill" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#8B2838" stop-opacity="0.85"></stop>
+<stop offset="100%" stop-color="#3a0e14" stop-opacity="0.95"></stop>
+</lineargradient>
+</defs>
+<ellipse cx="50" cy="180" fill="rgba(244,237,228,0.15)" rx="30" ry="3"></ellipse>
+<rect fill="rgba(244,237,228,0.15)" height="58" width="2" x="49" y="120"></rect>
+<path d="M 25 50 Q 25 42 33 42 L 67 42 Q 75 42 75 50 L 75 80 Q 75 120 50 122 Q 25 120 25 80 Z" fill="rgba(244,237,228,0.05)" stroke="rgba(244,237,228,0.3)" stroke-width="1"></path>
+<path d="M 35 80 Q 35 110 50 113 Q 65 110 65 80 Z" fill="url(#r-fill)"></path>
+<ellipse cx="50" cy="80" fill="rgba(184,50,70,0.6)" rx="15" ry="3"></ellipse>
+</svg>
+<p class="ritual-text" data-i18n="page_ritual_text">Take a moment. <em>Look</em> at the colour.<br/>That's the wine introducing itself.</p>
+<div class="ritual-instruction" data-i18n="page_ritual_instruction">, Don't drink yet ,</div>
+<div class="tap-prompt" data-i18n="page_tap_prompt">Tap when ready</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">EVNT-02 · Glass One ritual</div>
+<div class="label" data-i18n="page_label_12">Iconic moment · sets emotional tone</div>
+</div>
+</div>
+<!-- EVNT-03 Tasting card -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="tasting-card">
+<div class="tasting-top">
+<span class="pour-counter">Pour 3 of 5</span>
+<span class="tasting-timer">02:34</span>
+</div>
+<div class="tasting-num">3</div>
+<p class="tasting-label" data-i18n="page_tasting_label">Which wine is this?</p>
+<div class="descriptors">
+<span class="descriptor-chip active" data-i18n="page_descriptor_chip">Blackcurrant</span>
+<span class="descriptor-chip active" data-i18n="page_descriptor_chip_2">Graphite</span>
+<span class="descriptor-chip" data-i18n="page_descriptor_chip_3">Cedar</span>
+<span class="descriptor-chip active" data-i18n="page_descriptor_chip_4">High tannin</span>
+<span class="descriptor-chip" data-i18n="page_descriptor_chip_5">Vanilla</span>
+<span class="descriptor-chip" data-i18n="page_descriptor_chip_6">Cool finish</span>
+<span class="descriptor-chip" data-i18n="page_descriptor_chip_7">Earthy</span>
+</div>
+<div class="tasting-notes">Dark fruit, blackcurrant. There's a coolness in the back , high altitude feel. Tight tannin, longer finish than #2. Something graphite-like.</div>
+<div class="rating-bar">
+<span class="lbl">My rating</span>
+<div class="rating-stars-mob">
+<div class="rating-star-mob filled"></div>
+<div class="rating-star-mob filled"></div>
+<div class="rating-star-mob filled"></div>
+<div class="rating-star-mob filled"></div>
+<div class="rating-star-mob"></div>
+</div>
+</div>
+<div class="tasting-bottom">
+<button class="mob-btn mob-btn-ghost" data-i18n="page_mob_btn_18" style="flex: 1;">‹ Pour 2</button>
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_19" style="flex: 2;">Save &amp; continue</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">EVNT-03 · Tasting card</div>
+<div class="label" data-i18n="page_label_13">One per wine · timer · descriptors · rating</div>
+</div>
+</div>
+<!-- EVNT-05 Guessing -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">Match the wines</span>
+<span></span>
+</div>
+<div class="guess-screen">
+<div class="guess-h-block" data-i18n="page_guess_h_block">
+<h2 data-i18n="page_h2">Which wine was <em>which pour</em>?</h2>
+<p class="help" data-i18n="page_help">Tap a wine, then tap its glass. Change before submit.</p>
+</div>
+<div class="guess-pool">
+<div class="wine-pill placed">Lueria '18</div>
+<div class="wine-pill placed">Adir Edition '20</div>
+<div class="wine-pill selected">Drimia '20</div>
+<div class="wine-pill">Plato '18</div>
+<div class="wine-pill">The Cave '18</div>
+</div>
+<div class="glasses-stack">
+<div class="glass-slot has-guess">
+<div class="num">1</div>
+<div class="guess-name">Lueria '18</div>
+<div class="change">Change</div>
+</div>
+<div class="glass-slot has-guess">
+<div class="num" data-i18n="page_num_7">2</div>
+<div class="guess-name">Adir Winemaker '20</div>
+<div class="change">Change</div>
+</div>
+<div class="glass-slot">
+<div class="num" data-i18n="page_num_3">3</div>
+<div class="guess-name empty">Tap to place wine →</div>
+</div>
+<div class="glass-slot">
+<div class="num" data-i18n="page_num_4">4</div>
+<div class="guess-name empty">Tap to place wine →</div>
+</div>
+<div class="glass-slot">
+<div class="num" data-i18n="page_num_10">5</div>
+<div class="guess-name empty">Tap to place wine →</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">EVNT-05 · Guessing / matching</div>
+<div class="label" data-i18n="page_label_14">Drag wine names to numbered glasses</div>
+</div>
+</div>
+<!-- EVNT-06 Submit confirmation -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">Last look</span>
+<span></span>
+</div>
+<div class="confirm-screen">
+<h2 class="auth-form-h" data-i18n="page_auth_form_h_7">Lock in your <em>guesses</em>?</h2>
+<p class="auth-form-sub" data-i18n="page_auth_form_sub_7">Once you submit, you can't change your answers. The reveal is coming.</p>
+<div class="confirm-warning" data-i18n="page_confirm_warning">After this point, your answers are final. The mediator will reveal the truth once everyone has submitted.</div>
+<div class="confirm-list">
+<div class="confirm-row"><div class="num">1</div><div class="guess">Lueria '18</div></div>
+<div class="confirm-row"><div class="num">2</div><div class="guess">Adir Winemaker '20</div></div>
+<div class="confirm-row"><div class="num" data-i18n="page_num_8">3</div><div class="guess">Drimia '20</div></div>
+<div class="confirm-row"><div class="num" data-i18n="page_num_9">4</div><div class="guess">Plato '18</div></div>
+<div class="confirm-row"><div class="num" data-i18n="page_num_5">5</div><div class="guess">The Cave '18</div></div>
+</div>
+<div class="spacer"></div>
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_20">Submit final answers →</button>
+<button class="mob-btn mob-btn-text" data-i18n="page_mob_btn_21" style="margin-top: 8px;">‹ Go back and change</button>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">EVNT-06 · Submit confirmation</div>
+<div class="label" data-i18n="page_label_15">Last chance · then locked</div>
+</div>
+</div>
+<!-- EVNT-07 Waiting for others -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="waiting-screen">
+<div class="mob-mono gold" style="margin-bottom: 32px;">, Submitted ,</div>
+<div class="waiting-orbital">
+<div class="center" data-i18n="page_center">Waiting<br/><em>for the table</em></div>
+<div class="waiting-avatar done" style="top: 0; left: 50%; transform: translateX(-50%);">M</div>
+<div class="waiting-avatar done" style="top: 25%; right: 0;">S</div>
+<div class="waiting-avatar pending" style="bottom: 25%; right: 0;">A</div>
+<div class="waiting-avatar pending" style="bottom: 0; left: 50%; transform: translateX(-50%);">M</div>
+</div>
+<h3 class="waiting-h" data-i18n="page_waiting_h"><em>2 of 4</em> have submitted</h3>
+<p class="waiting-sub" data-i18n="page_waiting_sub">Sit tight. Carlos will reveal the truth once everyone is in.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">EVNT-07 · Waiting for others</div>
+<div class="label" data-i18n="page_label_16">Avatars showing who's submitted</div>
+</div>
+</div>
+<!-- EVNT-08 Reveal score -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="reveal-score">
+<div class="reveal-kicker" data-i18n="page_reveal_kicker">, Your score ,</div>
+<div class="reveal-num">3</div>
+<div class="reveal-of" data-i18n="page_reveal_of">of 5 correct</div>
+<p class="reveal-msg" data-i18n="page_reveal_msg">Respectable. The Drimia tripped you up , Petit Verdot at altitude reads younger.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">EVNT-08 · Reveal score</div>
+<div class="label" data-i18n="page_label_17">Iconic dark moment · big number</div>
+</div>
+</div>
+<!-- EVNT-09 Leaderboard -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="leaderboard">
+<div class="leader-h">
+<div class="kicker" data-i18n="page_kicker_2">, Round 1 standings ,</div>
+<h2 class="title" data-i18n="page_title">Top two<br/><em>advance</em>.</h2>
+</div>
+<div class="leaders-list">
+<div class="leader-row advance">
+<div class="rank">1</div>
+<div class="info">
+<div class="name" data-i18n="page_name_12">Sara Levy</div>
+<div class="meta" data-i18n="page_meta_2">+ 12 min faster</div>
+</div>
+<div class="score">4</div>
+<div class="leader-tag">Advance</div>
+</div>
+<div class="leader-row advance you">
+<div class="rank">2</div>
+<div class="info">
+<div class="name" data-i18n="page_name_13">Maksim (you)</div>
+<div class="meta" data-i18n="page_meta_3">Tie · faster on Drimia</div>
+</div>
+<div class="score">3</div>
+<div class="leader-tag">Advance</div>
+</div>
+<div class="leader-divider">, Cut line ,</div>
+<div class="leader-row">
+<div class="rank">3</div>
+<div class="info">
+<div class="name" data-i18n="page_name_14">Marco Dell'Orto</div>
+<div class="meta" data-i18n="page_meta_4">3 correct · slower</div>
+</div>
+<div class="score">3</div>
+</div>
+<div class="leader-row">
+<div class="rank">4</div>
+<div class="info">
+<div class="name" data-i18n="page_name_15">Ana Ruiz</div>
+<div class="meta" data-i18n="page_meta_5">Final standing</div>
+</div>
+<div class="score">2</div>
+</div>
+</div>
+<div class="leader-rules"><strong>Tiebreak:</strong> when two players score the same, the one who locked their guess on the trickiest pour faster wins.</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">EVNT-09 · Leaderboard</div>
+<div class="label" data-i18n="page_label_18">Top 2 advance · tiebreak rules visible</div>
+</div>
+</div>
+</div>
 <!-- ============= HOME GAME ============= -->
 <div class="section-divider" id="hgam">
-  <div class="kicker">, HGAM · 7 screens</div>
-  <h2 class="heading">The <em>home</em> game.</h2>
-  <p class="desc">Self-hosted with friends. Kit arrived → scan → choose mode → invite → host pours → game runs → emotional pitch for subscription at the peak.</p>
+<div class="kicker" data-i18n="hgam_kicker">, HGAM · 7 screens</div>
+<h2 class="heading" data-i18n="hgam_heading">The <em>home</em> game.</h2>
+<p class="desc" data-i18n="hgam_desc">Self-hosted with friends. Kit arrived → scan → choose mode → invite → host pours → game runs → emotional pitch for subscription at the peak.</p>
 </div>
-
 <div class="phone-grid">
-  <!-- HGAM-01 Kit arrived -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title"></span>
-            <span></span>
-          </div>
-          <div class="kit-arrived">
-            <div class="kit-arrived-top">
-              <div class="kit-arrived-kicker">, Your kit just landed ,</div>
-              <h2 class="kit-arrived-h">Five wines<br><em>at your door</em>.</h2>
-              <p class="kit-arrived-sub">Time to set up the night. We'll walk you through everything , pour by pour. No prior knowledge needed.</p>
-            </div>
-            <div class="kit-illustration">
-              <div class="mini-bottle"></div>
-              <div class="mini-bottle b2"></div>
-              <div class="mini-bottle b3"></div>
-              <div class="mini-bottle b4"></div>
-              <div class="mini-bottle b5"></div>
-            </div>
-            <div>
-              <button class="mob-btn mob-btn-primary">Set up the game →</button>
-              <button class="mob-btn mob-btn-text" style="margin-top: 10px;">Maybe later</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">HGAM-01 · Kit arrived</div>
-      <div class="label">Triggered by courier or +24h</div>
-    </div>
-  </div>
-
-  <!-- HGAM-02 Scan QR on kit -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Scan your kit</span>
-            <span></span>
-          </div>
-          <div class="kit-setup">
-            <div class="kit-setup-overlay"></div>
-            <div class="kit-setup-frame">
-              <div class="qr-frame" style="width: 180px; height: 180px;">
-                <div class="qr-corner tl"></div>
-                <div class="qr-corner tr"></div>
-                <div class="qr-corner bl"></div>
-                <div class="qr-corner br"></div>
-                <div class="qr-line"></div>
-              </div>
-              <p class="kit-setup-instruction">Point at the QR<br>on the inside of your kit lid.</p>
-              <button class="mob-btn mob-btn-text" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(244,237,228,0.15); padding: 10px 18px; border-radius: 999px; font-size: 11px; width: auto;">Or enter kit ID manually</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">HGAM-02 · Scan kit QR</div>
-      <div class="label">Auto-loads wines from kit ID</div>
-    </div>
-  </div>
-
-  <!-- HGAM-03 Choose mode -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Set up the game</span>
-            <span></span>
-          </div>
-          <div class="choose-mode">
-            <h2 class="auth-form-h">Solo or <em>group</em>?</h2>
-            <p class="auth-form-sub">You can switch any time before the first pour.</p>
-            <div class="mode-options">
-              <div class="mode-card selected">
-                <div class="mode-name">Group · play with <em>friends</em></div>
-                <div class="mode-desc">Invite up to 4 others. Each scores their own. Best wine personality wins.</div>
-              </div>
-              <div class="mode-card">
-                <div class="mode-name">Solo · just <em>me</em></div>
-                <div class="mode-desc">No invites needed. Track your own progress, tasting notes, and accuracy.</div>
-              </div>
-            </div>
-            <div class="spacer"></div>
-            <button class="mob-btn mob-btn-primary" style="margin-top: 24px;">Continue with Group →</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">HGAM-03 · Choose mode</div>
-      <div class="label">Solo skips invite step</div>
-    </div>
-  </div>
-
-  <!-- HGAM-04 Invite friends -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Invite</span>
-            <span></span>
-          </div>
-          <div class="invite-screen">
-            <h2 class="auth-form-h">Bring the <em>table</em>.</h2>
-            <p class="auth-form-sub">Share this code or link. Anyone who joins becomes a player in your game.</p>
-            <div class="invite-link-block">
-              <div class="invite-code">M9,K2P</div>
-              <div class="invite-code-help">Tap to copy · expires in 2 hours</div>
-            </div>
-            <div class="invite-options">
-              <div class="invite-option">
-                <div class="icon">▢</div>
-                <div class="info">
-                  <div class="name">Share a link</div>
-                  <div class="desc">WhatsApp · Telegram · iMessage</div>
-                </div>
-                <div class="mob-mono gold">→</div>
-              </div>
-              <div class="invite-option">
-                <div class="icon">⊞</div>
-                <div class="info">
-                  <div class="name">Show a QR code</div>
-                  <div class="desc">Scan with phone camera</div>
-                </div>
-                <div class="mob-mono gold">→</div>
-              </div>
-              <div class="invite-option">
-                <div class="icon">○</div>
-                <div class="info">
-                  <div class="name">Pick from contacts</div>
-                  <div class="desc">Past T&T players</div>
-                </div>
-                <div class="mob-mono gold">→</div>
-              </div>
-            </div>
-            <div class="spacer"></div>
-            <button class="mob-btn mob-btn-primary">Continue without inviting →</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">HGAM-04 · Invite friends</div>
-      <div class="label">Link · QR · contacts</div>
-    </div>
-  </div>
-
-  <!-- HGAM-05 Friend joined -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Lobby</span>
-            <span class="action">Start</span>
-          </div>
-          <div class="friend-joined">
-            <div class="toast-notification">
-              <div class="toast-avatar">S</div>
-              <div class="info">
-                <div class="h-text"><strong>Sara</strong> joined the game</div>
-                <div class="h-meta">Just now · ready to play</div>
-              </div>
-            </div>
-            <div class="lobby-h" style="margin-top: 80px;">
-              <div class="lobby-code">Game · M9,K2P</div>
-              <h2 class="lobby-title">Your <em>guests</em>.</h2>
-              <p class="lobby-sub">Start when you're ready, or wait for more.</p>
-            </div>
-            <div class="lobby-players" style="padding-top: 20px;">
-              <div class="lobby-player host">
-                <div class="lobby-avatar">M</div>
-                <span class="name">Maksim (you, host)</span>
-                <span class="role">Host</span>
-              </div>
-              <div class="lobby-player">
-                <div class="lobby-avatar">S</div>
-                <span class="name">Sara</span>
-                <span class="ready">Just joined</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">HGAM-05 · Friend joined</div>
-      <div class="label">Toast · avatar appears in lobby</div>
-    </div>
-  </div>
-
-  <!-- HGAM-06 Pour guidance host -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">You're hosting</span>
-            <span class="action">Help</span>
-          </div>
-          <div class="pour-guidance">
-            <div class="pour-step-meta">
-              <div class="pour-step-num">, Step 4 of 5 ,</div>
-              <h2 class="pour-headline">Pour glass <em>three</em>.</h2>
-            </div>
-            <div class="pour-illust">
-              <svg class="stage-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="hg-w" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#8B2838" stop-opacity="0.85"/>
-                    <stop offset="100%" stop-color="#3a0e14" stop-opacity="0.95"/>
-                  </linearGradient>
-                </defs>
-                <ellipse cx="100" cy="220" rx="55" ry="5" fill="rgba(244,237,228,0.1)"/>
-                <rect x="98" y="150" width="4" height="68" fill="rgba(244,237,228,0.2)"/>
-                <path d="M 50 50 Q 50 40 60 40 L 140 40 Q 150 40 150 50 L 150 100 Q 150 150 100 152 Q 50 150 50 100 Z" fill="rgba(244,237,228,0.04)" stroke="rgba(244,237,228,0.25)" stroke-width="1"/>
-                <path d="M 65 100 Q 65 135 100 138 Q 135 135 135 100 Z" fill="url(#hg-w)"/>
-                <ellipse cx="100" cy="100" rx="35" ry="4" fill="rgba(184,50,70,0.6)"/>
-              </svg>
-            </div>
-            <div class="pour-instructions">
-              <p class="step-text">Open <em>bottle marked C</em>. Pour about <em>5ml</em> into each player's glass , one quick, level slug.</p>
-            </div>
-            <div class="pour-progress-row">
-              <div class="pour-progress-dot done"></div>
-              <div class="pour-progress-dot done"></div>
-              <div class="pour-progress-dot current"></div>
-              <div class="pour-progress-dot"></div>
-              <div class="pour-progress-dot"></div>
-            </div>
-            <div class="pour-bottom-row">
-              <button class="mob-btn mob-btn-ghost" style="flex: 1;">‹ Back</button>
-              <button class="mob-btn mob-btn-primary" style="flex: 2;">Pour done →</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">HGAM-06 · Pour guidance (host)</div>
-      <div class="label">Step-by-step · host follows along</div>
-    </div>
-  </div>
-
-  <!-- HGAM-08 End game / sub pitch -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content scroll">
-          <div class="end-game">
-            <div class="end-game-celebration">
-              <div class="end-game-kicker">, Round complete · You scored ,</div>
-              <h2 class="end-game-h">3 of 5.<br>Not <em>bad</em>.</h2>
-            </div>
-            <div class="sub-pitch">
-              <div class="sub-pitch-kicker">, A nightly habit, sent home ,</div>
-              <h3 class="sub-pitch-h">Get a <em>kit like this</em><br>every month.</h3>
-              <div class="sub-pitch-tier">
-                <span class="price">€89</span>
-                <span class="period">/ month</span>
-              </div>
-              <ul class="sub-pitch-features">
-                <li>3 curated wines, every month</li>
-                <li>Tasting cards & game brochure</li>
-                <li>Cancel any time, no questions</li>
-              </ul>
-              <button class="mob-btn mob-btn-gold">Start your subscription →</button>
-            </div>
-            <div class="end-game-bottom">
-              <button class="mob-btn mob-btn-ghost">Buy these wines individually</button>
-              <button class="mob-btn mob-btn-text" style="margin-top: 4px;">Maybe later · play another game</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">HGAM-08 · End game / sub pitch</div>
-      <div class="label">Pitch lands at peak emotion</div>
-    </div>
-  </div>
+<!-- HGAM-01 Kit arrived -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title"></span>
+<span></span>
 </div>
-
+<div class="kit-arrived">
+<div class="kit-arrived-top">
+<div class="kit-arrived-kicker" data-i18n="page_kit_arrived_kicker">, Your kit just landed ,</div>
+<h2 class="kit-arrived-h" data-i18n="page_kit_arrived_h">Five wines<br/><em>at your door</em>.</h2>
+<p class="kit-arrived-sub" data-i18n="page_kit_arrived_sub">Time to set up the night. We'll walk you through everything , pour by pour. No prior knowledge needed.</p>
+</div>
+<div class="kit-illustration">
+<div class="mini-bottle"></div>
+<div class="mini-bottle b2"></div>
+<div class="mini-bottle b3"></div>
+<div class="mini-bottle b4"></div>
+<div class="mini-bottle b5"></div>
+</div>
+<div>
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_22">Set up the game →</button>
+<button class="mob-btn mob-btn-text" data-i18n="page_mob_btn_23" style="margin-top: 10px;">Maybe later</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">HGAM-01 · Kit arrived</div>
+<div class="label" data-i18n="page_label_19">Triggered by courier or +24h</div>
+</div>
+</div>
+<!-- HGAM-02 Scan QR on kit -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">Scan your kit</span>
+<span></span>
+</div>
+<div class="kit-setup">
+<div class="kit-setup-overlay"></div>
+<div class="kit-setup-frame">
+<div class="qr-frame" style="width: 180px; height: 180px;">
+<div class="qr-corner tl"></div>
+<div class="qr-corner tr"></div>
+<div class="qr-corner bl"></div>
+<div class="qr-corner br"></div>
+<div class="qr-line"></div>
+</div>
+<p class="kit-setup-instruction" data-i18n="page_kit_setup_instruction">Point at the QR<br/>on the inside of your kit lid.</p>
+<button class="mob-btn mob-btn-text" data-i18n="page_mob_btn_24" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(244,237,228,0.15); padding: 10px 18px; border-radius: 999px; font-size: 11px; width: auto;">Or enter kit ID manually</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">HGAM-02 · Scan kit QR</div>
+<div class="label" data-i18n="page_label_20">Auto-loads wines from kit ID</div>
+</div>
+</div>
+<!-- HGAM-03 Choose mode -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">Set up the game</span>
+<span></span>
+</div>
+<div class="choose-mode">
+<h2 class="auth-form-h" data-i18n="page_auth_form_h_8">Solo or <em>group</em>?</h2>
+<p class="auth-form-sub" data-i18n="page_auth_form_sub_8">You can switch any time before the first pour.</p>
+<div class="mode-options">
+<div class="mode-card selected">
+<div class="mode-name">Group · play with <em>friends</em></div>
+<div class="mode-desc">Invite up to 4 others. Each scores their own. Best wine personality wins.</div>
+</div>
+<div class="mode-card">
+<div class="mode-name">Solo · just <em>me</em></div>
+<div class="mode-desc">No invites needed. Track your own progress, tasting notes, and accuracy.</div>
+</div>
+</div>
+<div class="spacer"></div>
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_25" style="margin-top: 24px;">Continue with Group →</button>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">HGAM-03 · Choose mode</div>
+<div class="label" data-i18n="page_label_21">Solo skips invite step</div>
+</div>
+</div>
+<!-- HGAM-04 Invite friends -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">Invite</span>
+<span></span>
+</div>
+<div class="invite-screen">
+<h2 class="auth-form-h" data-i18n="page_auth_form_h_9">Bring the <em>table</em>.</h2>
+<p class="auth-form-sub" data-i18n="page_auth_form_sub_9">Share this code or link. Anyone who joins becomes a player in your game.</p>
+<div class="invite-link-block">
+<div class="invite-code">M9,K2P</div>
+<div class="invite-code-help" data-i18n="page_invite_code_help">Tap to copy · expires in 2 hours</div>
+</div>
+<div class="invite-options">
+<div class="invite-option">
+<div class="icon">▢</div>
+<div class="info">
+<div class="name" data-i18n="page_name_16">Share a link</div>
+<div class="desc" data-i18n="page_desc">WhatsApp · Telegram · iMessage</div>
+</div>
+<div class="mob-mono gold">→</div>
+</div>
+<div class="invite-option">
+<div class="icon">⊞</div>
+<div class="info">
+<div class="name" data-i18n="page_name_17">Show a QR code</div>
+<div class="desc" data-i18n="page_desc_2">Scan with phone camera</div>
+</div>
+<div class="mob-mono gold">→</div>
+</div>
+<div class="invite-option">
+<div class="icon">○</div>
+<div class="info">
+<div class="name" data-i18n="page_name_18">Pick from contacts</div>
+<div class="desc" data-i18n="page_desc_3">Past T&amp;T players</div>
+</div>
+<div class="mob-mono gold">→</div>
+</div>
+</div>
+<div class="spacer"></div>
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_26">Continue without inviting →</button>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">HGAM-04 · Invite friends</div>
+<div class="label" data-i18n="page_label_22">Link · QR · contacts</div>
+</div>
+</div>
+<!-- HGAM-05 Friend joined -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">Lobby</span>
+<span class="action">Start</span>
+</div>
+<div class="friend-joined">
+<div class="toast-notification">
+<div class="toast-avatar">S</div>
+<div class="info">
+<div class="h-text" data-i18n="page_h_text"><strong data-i18n="page_name_7">Sara</strong> joined the game</div>
+<div class="h-meta" data-i18n="page_h_meta">Just now · ready to play</div>
+</div>
+</div>
+<div class="lobby-h" style="margin-top: 80px;">
+<div class="lobby-code" data-i18n="page_lobby_code_2">Game · M9,K2P</div>
+<h2 class="lobby-title" data-i18n="page_lobby_title_2">Your <em>guests</em>.</h2>
+<p class="lobby-sub" data-i18n="page_lobby_sub_2">Start when you're ready, or wait for more.</p>
+</div>
+<div class="lobby-players" style="padding-top: 20px;">
+<div class="lobby-player host">
+<div class="lobby-avatar">M</div>
+<span class="name" data-i18n="page_name_6">Maksim (you, host)</span>
+<span class="role">Host</span>
+</div>
+<div class="lobby-player">
+<div class="lobby-avatar">S</div>
+<span class="name">Sara</span>
+<span class="ready">Just joined</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">HGAM-05 · Friend joined</div>
+<div class="label" data-i18n="page_label_23">Toast · avatar appears in lobby</div>
+</div>
+</div>
+<!-- HGAM-06 Pour guidance host -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">You're hosting</span>
+<span class="action">Help</span>
+</div>
+<div class="pour-guidance">
+<div class="pour-step-meta">
+<div class="pour-step-num" data-i18n="page_pour_step_num">, Step 4 of 5 ,</div>
+<h2 class="pour-headline" data-i18n="page_pour_headline">Pour glass <em>three</em>.</h2>
+</div>
+<div class="pour-illust">
+<svg class="stage-svg" viewbox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="hg-w" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#8B2838" stop-opacity="0.85"></stop>
+<stop offset="100%" stop-color="#3a0e14" stop-opacity="0.95"></stop>
+</lineargradient>
+</defs>
+<ellipse cx="100" cy="220" fill="rgba(244,237,228,0.1)" rx="55" ry="5"></ellipse>
+<rect fill="rgba(244,237,228,0.2)" height="68" width="4" x="98" y="150"></rect>
+<path d="M 50 50 Q 50 40 60 40 L 140 40 Q 150 40 150 50 L 150 100 Q 150 150 100 152 Q 50 150 50 100 Z" fill="rgba(244,237,228,0.04)" stroke="rgba(244,237,228,0.25)" stroke-width="1"></path>
+<path d="M 65 100 Q 65 135 100 138 Q 135 135 135 100 Z" fill="url(#hg-w)"></path>
+<ellipse cx="100" cy="100" fill="rgba(184,50,70,0.6)" rx="35" ry="4"></ellipse>
+</svg>
+</div>
+<div class="pour-instructions">
+<p class="step-text" data-i18n="page_step_text">Open <em>bottle marked C</em>. Pour about <em>5ml</em> into each player's glass , one quick, level slug.</p>
+</div>
+<div class="pour-progress-row">
+<div class="pour-progress-dot done"></div>
+<div class="pour-progress-dot done"></div>
+<div class="pour-progress-dot current"></div>
+<div class="pour-progress-dot"></div>
+<div class="pour-progress-dot"></div>
+</div>
+<div class="pour-bottom-row">
+<button class="mob-btn mob-btn-ghost" data-i18n="page_mob_btn_27" style="flex: 1;">‹ Back</button>
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_28" style="flex: 2;">Pour done →</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">HGAM-06 · Pour guidance (host)</div>
+<div class="label" data-i18n="page_label_24">Step-by-step · host follows along</div>
+</div>
+</div>
+<!-- HGAM-08 End game / sub pitch -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content scroll">
+<div class="end-game">
+<div class="end-game-celebration">
+<div class="end-game-kicker">, Round complete · You scored ,</div>
+<h2 class="end-game-h" data-i18n="page_end_game_h">3 of 5.<br/>Not <em>bad</em>.</h2>
+</div>
+<div class="sub-pitch">
+<div class="sub-pitch-kicker" data-i18n="page_sub_pitch_kicker">, A nightly habit, sent home ,</div>
+<h3 class="sub-pitch-h" data-i18n="page_sub_pitch_h">Get a <em>kit like this</em><br/>every month.</h3>
+<div class="sub-pitch-tier">
+<span class="price">€89</span>
+<span class="period">/ month</span>
+</div>
+<ul class="sub-pitch-features">
+<li data-i18n="page_li">3 curated wines, every month</li>
+<li data-i18n="page_li_2">Tasting cards &amp; game brochure</li>
+<li data-i18n="page_li_3">Cancel any time, no questions</li>
+</ul>
+<button class="mob-btn mob-btn-gold" data-i18n="page_mob_btn_29">Start your subscription →</button>
+</div>
+<div class="end-game-bottom">
+<button class="mob-btn mob-btn-ghost" data-i18n="page_mob_btn_30">Buy these wines individually</button>
+<button class="mob-btn mob-btn-text" data-i18n="page_mob_btn_31" style="margin-top: 4px;">Maybe later · play another game</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">HGAM-08 · End game / sub pitch</div>
+<div class="label" data-i18n="page_label_25">Pitch lands at peak emotion</div>
+</div>
+</div>
+</div>
 <!-- ============= CATALOG ============= -->
 <div class="section-divider" id="catalog">
-  <div class="kicker">, CTLG · 2 screens</div>
-  <h2 class="heading">The <em>catalog</em>.</h2>
-  <p class="desc">Browse every wine in our world. Filter by region, grape, price. Each wine has its own page , story, stats, food pairing, buy button.</p>
+<div class="kicker" data-i18n="catalog_kicker">, CTLG · 2 screens</div>
+<h2 class="heading" data-i18n="catalog_heading">The <em>catalog</em>.</h2>
+<p class="desc" data-i18n="catalog_desc">Browse every wine in our world. Filter by region, grape, price. Each wine has its own page , story, stats, food pairing, buy button.</p>
 </div>
-
 <div class="phone-grid">
-  <!-- CTLG-01 Browse -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Catalog</span>
-            <span class="action">Filter</span>
-          </div>
-          <div class="catalog-screen">
-            <div class="catalog-search"><input type="text" placeholder="Search wines, regions, producers..." value=""></div>
-            <div class="filter-chips-row">
-              <span class="cat-chip active">All</span>
-              <span class="cat-chip">Red</span>
-              <span class="cat-chip">White</span>
-              <span class="cat-chip">Rosé</span>
-              <span class="cat-chip">Sparkling</span>
-              <span class="cat-chip">€20–40</span>
-              <span class="cat-chip">In our games</span>
-            </div>
-            <div class="catalog-list">
-              <div class="cat-card">
-                <div class="cat-bottle-mini"></div>
-                <div class="cat-info">
-                  <div class="vintage">2018 · Reserva</div>
-                  <div class="name">Lueria Grand Vital</div>
-                  <div class="region">Upper Galilee</div>
-                </div>
-                <div class="cat-price">€42</div>
-              </div>
-              <div class="cat-card">
-                <div class="cat-bottle-mini dark"></div>
-                <div class="cat-info">
-                  <div class="vintage">2020 · Limited</div>
-                  <div class="name">Adir Winemaker Edition</div>
-                  <div class="region">Kerem Ben Zimra</div>
-                </div>
-                <div class="cat-price">€58</div>
-              </div>
-              <div class="cat-card">
-                <div class="cat-bottle-mini"></div>
-                <div class="cat-info">
-                  <div class="vintage">2020 · Numbered</div>
-                  <div class="name">Drimia</div>
-                  <div class="region">Yatir Hills</div>
-                </div>
-                <div class="cat-price">€72</div>
-              </div>
-              <div class="cat-card">
-                <div class="cat-bottle-mini"></div>
-                <div class="cat-info">
-                  <div class="vintage">2018 · Reserve</div>
-                  <div class="name">Plato</div>
-                  <div class="region">Upper Galilee · Adir</div>
-                </div>
-                <div class="cat-price">€48</div>
-              </div>
-              <div class="cat-card">
-                <div class="cat-bottle-mini white"></div>
-                <div class="cat-info">
-                  <div class="vintage">2022 · Estate</div>
-                  <div class="name">Albariño Atlántico</div>
-                  <div class="region">Rías Baixas</div>
-                </div>
-                <div class="cat-price">€26</div>
-              </div>
-            </div>
-          </div>
-          <div class="bottom-nav">
-            <div class="tab"><div class="icon">○</div><div class="lbl">Home</div></div>
-            <div class="tab active"><div class="icon">●</div><div class="lbl">Catalog</div></div>
-            <div class="tab"><div class="icon">⌂</div><div class="lbl">Kits</div></div>
-            <div class="tab"><div class="icon">○</div><div class="lbl">You</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">CTLG-01 · Browse</div>
-      <div class="label">Search bar · filter chips · scroll list</div>
-    </div>
-  </div>
-
-  <!-- CTLG-02 Wine detail -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title"></span>
-            <span class="action">Save</span>
-          </div>
-          <div class="wine-detail">
-            <div class="wine-hero-block">
-              <div class="wine-hero-bottle"></div>
-              <div class="wine-hero-vintage">2018 · Reserva · Bottle 1224 / 2400</div>
-              <h2 class="wine-hero-name">Lueria<br>Grand Vital</h2>
-              <p class="wine-hero-region">Upper Galilee, Israel</p>
-            </div>
-            <div class="wine-stats-row">
-              <div class="wine-stat">
-                <div class="lbl">Body</div>
-                <div class="val">Full</div>
-              </div>
-              <div class="wine-stat">
-                <div class="lbl">Tannin</div>
-                <div class="val">High</div>
-              </div>
-              <div class="wine-stat">
-                <div class="lbl">ABV</div>
-                <div class="val">14.5%</div>
-              </div>
-            </div>
-            <div class="wine-detail-section">
-              <h4>The story</h4>
-              <p>Cabernet Sauvignon 70%, Merlot 20%, Cabernet Franc 10%. Drawn from select sections of Yosef Sayada's vineyard, with the varietal mix shifting harvest by harvest , never the same blend twice.</p>
-            </div>
-            <div class="wine-detail-section">
-              <h4>Pairs with</h4>
-              <div class="pair-row">
-                <span class="pair-chip">Lamb</span>
-                <span class="pair-chip">Aged hard cheese</span>
-                <span class="pair-chip">Mushroom risotto</span>
-                <span class="pair-chip">Grilled red meat</span>
-              </div>
-            </div>
-            <div class="buy-row">
-              <div class="buy-price">
-                <div class="price">€42</div>
-                <div class="meta">Free shipping · ID at door</div>
-              </div>
-              <button class="add-btn">Add to cart →</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">CTLG-02 · Wine detail</div>
-      <div class="label">Hero bottle · story · stats · pair · buy</div>
-    </div>
-  </div>
+<!-- CTLG-01 Browse -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title" data-i18n="page_lbl_6">Catalog</span>
+<span class="action">Filter</span>
 </div>
-
+<div class="catalog-screen">
+<div class="catalog-search"><input data-i18n-placeholder="page_input_placeholder" placeholder="Search wines, regions, producers..." type="text" value=""/></div>
+<div class="filter-chips-row">
+<span class="cat-chip active" data-i18n="page_cat_chip">All</span>
+<span class="cat-chip" data-i18n="page_cat_chip_2">Red</span>
+<span class="cat-chip" data-i18n="page_cat_chip_3">White</span>
+<span class="cat-chip" data-i18n="page_cat_chip_4">Rosé</span>
+<span class="cat-chip" data-i18n="page_cat_chip_5">Sparkling</span>
+<span class="cat-chip" data-i18n="page_cat_chip_6">€20–40</span>
+<span class="cat-chip" data-i18n="page_cat_chip_7">In our games</span>
+</div>
+<div class="catalog-list">
+<div class="cat-card">
+<div class="cat-bottle-mini"></div>
+<div class="cat-info">
+<div class="vintage" data-i18n="page_vintage">2018 · Reserva</div>
+<div class="name" data-i18n="page_name_19">Lueria Grand Vital</div>
+<div class="region" data-i18n="page_region">Upper Galilee</div>
+</div>
+<div class="cat-price">€42</div>
+</div>
+<div class="cat-card">
+<div class="cat-bottle-mini dark"></div>
+<div class="cat-info">
+<div class="vintage" data-i18n="page_vintage_2">2020 · Limited</div>
+<div class="name" data-i18n="page_name_20">Adir Winemaker Edition</div>
+<div class="region" data-i18n="page_region_2">Kerem Ben Zimra</div>
+</div>
+<div class="cat-price">€58</div>
+</div>
+<div class="cat-card">
+<div class="cat-bottle-mini"></div>
+<div class="cat-info">
+<div class="vintage" data-i18n="page_vintage_3">2020 · Numbered</div>
+<div class="name" data-i18n="page_name_21">Drimia</div>
+<div class="region" data-i18n="page_region_3">Yatir Hills</div>
+</div>
+<div class="cat-price">€72</div>
+</div>
+<div class="cat-card">
+<div class="cat-bottle-mini"></div>
+<div class="cat-info">
+<div class="vintage" data-i18n="page_vintage_4">2018 · Reserve</div>
+<div class="name" data-i18n="page_name_22">Plato</div>
+<div class="region" data-i18n="page_region_4">Upper Galilee · Adir</div>
+</div>
+<div class="cat-price">€48</div>
+</div>
+<div class="cat-card">
+<div class="cat-bottle-mini white"></div>
+<div class="cat-info">
+<div class="vintage" data-i18n="page_vintage_5">2022 · Estate</div>
+<div class="name" data-i18n="page_name_23">Albariño Atlántico</div>
+<div class="region" data-i18n="page_region_5">Rías Baixas</div>
+</div>
+<div class="cat-price">€26</div>
+</div>
+</div>
+</div>
+<div class="bottom-nav">
+<div class="tab"><div class="icon">○</div><div class="lbl" data-i18n="page_lbl_5">Home</div></div>
+<div class="tab active"><div class="icon">●</div><div class="lbl" data-i18n="page_lbl_2">Catalog</div></div>
+<div class="tab"><div class="icon">⌂</div><div class="lbl" data-i18n="page_lbl_7">Kits</div></div>
+<div class="tab"><div class="icon">○</div><div class="lbl" data-i18n="page_lbl_8">You</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">CTLG-01 · Browse</div>
+<div class="label" data-i18n="page_label_26">Search bar · filter chips · scroll list</div>
+</div>
+</div>
+<!-- CTLG-02 Wine detail -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title"></span>
+<span class="action">Save</span>
+</div>
+<div class="wine-detail">
+<div class="wine-hero-block">
+<div class="wine-hero-bottle"></div>
+<div class="wine-hero-vintage">2018 · Reserva · Bottle 1224 / 2400</div>
+<h2 class="wine-hero-name" data-i18n="page_wine_hero_name">Lueria<br/>Grand Vital</h2>
+<p class="wine-hero-region" data-i18n="page_wine_hero_region">Upper Galilee, Israel</p>
+</div>
+<div class="wine-stats-row">
+<div class="wine-stat">
+<div class="lbl" data-i18n="page_lbl_13">Body</div>
+<div class="val" data-i18n="page_val">Full</div>
+</div>
+<div class="wine-stat">
+<div class="lbl" data-i18n="page_lbl_14">Tannin</div>
+<div class="val" data-i18n="page_val_2">High</div>
+</div>
+<div class="wine-stat">
+<div class="lbl" data-i18n="page_lbl_15">ABV</div>
+<div class="val" data-i18n="page_val_3">14.5%</div>
+</div>
+</div>
+<div class="wine-detail-section">
+<h4 data-i18n="page_h4">The story</h4>
+<p data-i18n="page_p_2">Cabernet Sauvignon 70%, Merlot 20%, Cabernet Franc 10%. Drawn from select sections of Yosef Sayada's vineyard, with the varietal mix shifting harvest by harvest , never the same blend twice.</p>
+</div>
+<div class="wine-detail-section">
+<h4 data-i18n="page_h4_2">Pairs with</h4>
+<div class="pair-row">
+<span class="pair-chip" data-i18n="page_pair_chip">Lamb</span>
+<span class="pair-chip" data-i18n="page_pair_chip_2">Aged hard cheese</span>
+<span class="pair-chip" data-i18n="page_pair_chip_3">Mushroom risotto</span>
+<span class="pair-chip" data-i18n="page_pair_chip_4">Grilled red meat</span>
+</div>
+</div>
+<div class="buy-row">
+<div class="buy-price">
+<div class="price">€42</div>
+<div class="meta" data-i18n="page_meta_6">Free shipping · ID at door</div>
+</div>
+<button class="add-btn" data-i18n="page_add_btn">Add to cart →</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">CTLG-02 · Wine detail</div>
+<div class="label" data-i18n="page_label_27">Hero bottle · story · stats · pair · buy</div>
+</div>
+</div>
+</div>
 <!-- ============= CART ============= -->
 <div class="section-divider" id="cart">
-  <div class="kicker">, KIT · 1 screen (P0)</div>
-  <h2 class="heading">The <em>cart</em>.</h2>
-  <p class="desc">Mixed cart: kits, individual bottles, and a subscription can all live together. Bizum and card both supported in checkout.</p>
+<div class="kicker" data-i18n="cart_kicker">, KIT · 1 screen (P0)</div>
+<h2 class="heading" data-i18n="cart_heading">The <em>cart</em>.</h2>
+<p class="desc" data-i18n="cart_desc">Mixed cart: kits, individual bottles, and a subscription can all live together. Bizum and card both supported in checkout.</p>
 </div>
-
 <div class="phone-grid">
-  <!-- KIT-03 Cart -->
-  <div class="phone-cell">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
-        <div class="screen-content">
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">Cart · 3 items</span>
-            <span></span>
-          </div>
-          <div class="cart-screen">
-            <div class="cart-list">
-              <div class="cart-item kit">
-                <div class="cart-item-bottle"></div>
-                <div class="cart-item-info">
-                  <div class="name">Galilee Vertical Kit</div>
-                  <div class="meta">5 wines · party of 4–5</div>
-                  <div class="price">€95</div>
-                </div>
-                <div class="qty-control">
-                  <button class="qty-btn">−</button>
-                  <span class="qty-num">1</span>
-                  <button class="qty-btn">+</button>
-                </div>
-              </div>
-              <div class="cart-item">
-                <div class="cart-item-bottle"></div>
-                <div class="cart-item-info">
-                  <div class="name">Lueria Grand Vital '18</div>
-                  <div class="meta">Cab Sauv blend · 750ml</div>
-                  <div class="price">€42</div>
-                </div>
-                <div class="qty-control">
-                  <button class="qty-btn">−</button>
-                  <span class="qty-num">2</span>
-                  <button class="qty-btn">+</button>
-                </div>
-              </div>
-              <div class="cart-item">
-                <div class="cart-item-bottle"></div>
-                <div class="cart-item-info">
-                  <div class="name">Drimia '20</div>
-                  <div class="meta">Cab + Petit Verdot · 750ml</div>
-                  <div class="price">€72</div>
-                </div>
-                <div class="qty-control">
-                  <button class="qty-btn">−</button>
-                  <span class="qty-num">1</span>
-                  <button class="qty-btn">+</button>
-                </div>
-              </div>
-            </div>
-            <div class="cart-summary">
-              <div class="cart-row"><span class="lbl">Subtotal</span><span>€251</span></div>
-              <div class="cart-row"><span class="lbl">Shipping (Madrid)</span><span style="color: var(--green-bright);">Free</span></div>
-              <div class="cart-row"><span class="lbl">VAT</span><span>included</span></div>
-              <div class="cart-row total"><span class="lbl">Total</span><span class="val">€251</span></div>
-            </div>
-            <div class="cart-cta">
-              <button class="mob-btn mob-btn-primary">Checkout · Bizum or card →</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-meta">
-      <div class="id">KIT-03 · Cart</div>
-      <div class="label">Mixed cart · kits + bottles + sub</div>
-    </div>
-  </div>
+<!-- KIT-03 Cart -->
+<div class="phone-cell">
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-status"><span>9:41</span><span class="right">●●● 5G ▮▮▮</span></div>
+<div class="screen-content">
+<div class="app-header">
+<span class="back">‹</span>
+<span class="title">Cart · 3 items</span>
+<span></span>
 </div>
-
+<div class="cart-screen">
+<div class="cart-list">
+<div class="cart-item kit">
+<div class="cart-item-bottle"></div>
+<div class="cart-item-info">
+<div class="name" data-i18n="page_name_24">Galilee Vertical Kit</div>
+<div class="meta" data-i18n="page_meta_7">5 wines · party of 4–5</div>
+<div class="price">€95</div>
+</div>
+<div class="qty-control">
+<button class="qty-btn">−</button>
+<span class="qty-num" data-i18n="page_num">1</span>
+<button class="qty-btn">+</button>
+</div>
+</div>
+<div class="cart-item">
+<div class="cart-item-bottle"></div>
+<div class="cart-item-info">
+<div class="name" data-i18n="page_name_25">Lueria Grand Vital '18</div>
+<div class="meta" data-i18n="page_meta_8">Cab Sauv blend · 750ml</div>
+<div class="price">€42</div>
+</div>
+<div class="qty-control">
+<button class="qty-btn">−</button>
+<span class="qty-num" data-i18n="page_num_2">2</span>
+<button class="qty-btn">+</button>
+</div>
+</div>
+<div class="cart-item">
+<div class="cart-item-bottle"></div>
+<div class="cart-item-info">
+<div class="name" data-i18n="page_name_26">Drimia '20</div>
+<div class="meta" data-i18n="page_meta_9">Cab + Petit Verdot · 750ml</div>
+<div class="price">€72</div>
+</div>
+<div class="qty-control">
+<button class="qty-btn">−</button>
+<span class="qty-num" data-i18n="page_num_6">1</span>
+<button class="qty-btn">+</button>
+</div>
+</div>
+</div>
+<div class="cart-summary">
+<div class="cart-row"><span class="lbl">Subtotal</span><span>€251</span></div>
+<div class="cart-row"><span class="lbl">Shipping (Madrid)</span><span style="color: var(--green-bright);">Free</span></div>
+<div class="cart-row"><span class="lbl">VAT</span><span>included</span></div>
+<div class="cart-row total"><span class="lbl">Total</span><span class="val">€251</span></div>
+</div>
+<div class="cart-cta">
+<button class="mob-btn mob-btn-primary" data-i18n="page_mob_btn_32">Checkout · Bizum or card →</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="phone-meta">
+<div class="id">KIT-03 · Cart</div>
+<div class="label" data-i18n="page_label_28">Mixed cart · kits + bottles + sub</div>
+</div>
+</div>
+</div>
 <script>
   // Smooth scroll on jump
   document.querySelectorAll('.jump-btn').forEach(btn => {
@@ -3367,50 +3330,50 @@ body { overflow-x: hidden; }
     });
   });
 </script>
-
 <!-- ============= TT site footer ============= -->
 <div class="tt-prelaunch-banner">
   Pre-launch · Pending Spanish licenses · Not yet operating commercially
 </div>
 <footer class="tt-footer">
-  <div class="tt-footer-inner">
-    <div class="tt-footer-col">
-      <div class="tt-footer-brand">Tasting<span class="amp">&</span>Toasting</div>
-      <p class="tt-footer-tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
-    </div>
-    <div class="tt-footer-col">
-      <h4>Prototypes</h4>
-      <ul>
-        <li><a href="prototype.html">Member &amp; subscription</a></li>
-        <li><a href="game-flow.html">Game flow</a></li>
-        <li><a href="operations.html">Operations</a></li>
-        <li><a href="wave1.html">Wave 1 player</a></li>
-      </ul>
-    </div>
-    <div class="tt-footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <li><a href="legal.html">Legal Notice &amp; Cookies</a></li>
-      </ul>
-    </div>
-    <div class="tt-footer-col">
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></li>
-        <li><a href="mailto:privacy@tastingandtoasting.com">privacy@tastingandtoasting.com</a></li>
-        <li><a href="mailto:legal@tastingandtoasting.com">legal@tastingandtoasting.com</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="tt-footer-bottom">
-    <span>© 2026 Tasting And Toasting Inc. · Delaware Corp · Filing No. 7494277</span>
-    <div class="legal-jurisdictions">
-      <span>Operating subsidiary: Tasting And Toasting SL (Spain)</span>
-    </div>
-  </div>
+<div class="tt-footer-inner">
+<div class="tt-footer-col">
+<div class="tt-footer-brand">Tasting<span class="amp">&amp;</span>Toasting</div>
+<p class="tt-footer-tagline" data-i18n="footer_tt_footer_tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
+</div>
+<div class="tt-footer-col">
+<h4 data-i18n="footer_h4">Prototypes</h4>
+<ul>
+<li data-i18n="footer_li"><a data-i18n="footer_a" href="prototype.html">Member &amp; subscription</a></li>
+<li data-i18n="footer_li_2"><a data-i18n="footer_a_2" href="game-flow.html">Game flow</a></li>
+<li data-i18n="footer_li_3"><a data-i18n="footer_a_3" href="operations.html">Operations</a></li>
+<li data-i18n="footer_li_4"><a data-i18n="footer_a_4" href="wave1.html">Wave 1 player</a></li>
+</ul>
+</div>
+<div class="tt-footer-col">
+<h4 data-i18n="footer_h4_2">Legal</h4>
+<ul>
+<li data-i18n="footer_li_5"><a data-i18n="footer_a_5" href="privacy.html">Privacy Policy</a></li>
+<li data-i18n="footer_li_6"><a data-i18n="footer_a_6" href="terms.html">Terms of Service</a></li>
+<li data-i18n="footer_li_7"><a data-i18n="footer_a_7" href="legal.html">Legal Notice &amp; Cookies</a></li>
+</ul>
+</div>
+<div class="tt-footer-col">
+<h4 data-i18n="footer_h4_3">Contact</h4>
+<ul>
+<li data-i18n="footer_li_8"><a data-i18n="footer_a_8" href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></li>
+<li data-i18n="footer_li_9"><a data-i18n="footer_a_9" href="mailto:privacy@tastingandtoasting.com">privacy@tastingandtoasting.com</a></li>
+<li data-i18n="footer_li_10"><a data-i18n="footer_a_10" href="mailto:legal@tastingandtoasting.com">legal@tastingandtoasting.com</a></li>
+</ul>
+</div>
+</div>
+<div class="tt-footer-bottom">
+<span>© 2026 Tasting And Toasting Inc. · Delaware Corp · Filing No. 7494277</span>
+<div class="legal-jurisdictions">
+<span>Operating subsidiary: Tasting And Toasting SL (Spain)</span>
+</div>
+</div>
 </footer>
 
+<script defer="" src="src/i18n/apply-tt141.js"></script>
 </body>
 </html>

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tasting & Toasting , Game Flow Prototype</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-i18n="gameflow_doc_title">Tasting &amp; Toasting , Game Flow Prototype</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&amp;family=JetBrains+Mono:wght@300;400;500&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
 :root {
   --bg: #0F0B0A;
@@ -1061,776 +1062,733 @@ body { overflow-x: hidden; }
 </style>
 </head>
 <body>
-
 <nav class="proto-nav">
-  <a href="index.html" class="tt-hub-link" title="Back to overview"><span class="arrow">←</span><span class="label-full">Hub</span></a>
-  <div class="proto-brand">
-    <span class="name">TASTING<span class="amp">&</span>TOASTING</span>
-    <span class="tag">game flow · v0.1</span>
-  </div>
-  <div class="proto-tabs">
-    <button class="proto-tab active" data-screen="setup">Setup</button>
-    <button class="proto-tab" data-screen="reveal">Wines</button>
-    <button class="proto-tab" data-screen="tasting">Round</button>
-    <button class="proto-tab" data-screen="score">Scoresheet</button>
-    <button class="proto-tab" data-screen="final">Reveal</button>
-    <button class="proto-tab" data-screen="after">After</button>
-  </div>
+<a class="tt-hub-link" data-i18n-title="nav_link_title_attr" href="index.html" title="Back to overview"><span class="arrow">←</span><span class="label-full" data-i18n="nav_label_full">Hub</span></a>
+<div class="proto-brand">
+<span class="name" data-i18n="nav_name">TASTING<span class="amp">&amp;</span>TOASTING</span>
+<span class="tag" data-i18n="nav_tag">game flow · v0.1</span>
+</div>
+<div class="proto-tabs">
+<button class="proto-tab active" data-i18n="nav_proto_tab" data-screen="setup">Setup</button>
+<button class="proto-tab" data-i18n="nav_proto_tab_2" data-screen="reveal">Wines</button>
+<button class="proto-tab" data-screen="tasting">Round</button>
+<button class="proto-tab" data-i18n="nav_proto_tab_4" data-screen="score">Scoresheet</button>
+<button class="proto-tab" data-i18n="nav_proto_tab_5" data-screen="final">Reveal</button>
+<button class="proto-tab" data-i18n="nav_proto_tab_6" data-screen="after">After</button>
+</div>
 </nav>
-
 <!-- ============= 1. SETUP ============= -->
 <section class="screen active" id="setup">
-  <div class="setup-page">
-    <div class="page-header">
-      <div>
-        <div class="page-kicker">Tonight's tasting · 20:00 · Salamanca, Madrid</div>
-        <h1 class="page-title">Set the <em>table</em>.</h1>
-      </div>
-      <div class="page-meta">
-        Game ID · <span class="gold">TT-2026-04812</span><br>
-        Format · <span class="gold">Qualification</span><br>
+<div class="setup-page">
+<div class="page-header">
+<div>
+<div class="page-kicker">Tonight's tasting · 20:00 · Salamanca, Madrid</div>
+<h1 class="page-title" data-i18n="setup_page_title">Set the <em>table</em>.</h1>
+</div>
+<div class="page-meta">
+        Game ID · <span class="gold" data-i18n="score_gold">TT-2026-04812</span><br/>
+        Format · <span class="gold">Qualification</span><br/>
         Started · 19:42
       </div>
-    </div>
-
-    <div class="setup-grid">
-      <div class="setup-block">
-        <h3>Your sommelier</h3>
-        <p class="help">Hosts the evening. Pours blind. Marks correct guesses on the scoresheet.</p>
-        <div class="host-card">
-          <div class="host-avatar">CM</div>
-          <div class="host-info">
-            <div class="name">Carlos Mendoza</div>
-            <div class="role">Master Sommelier · Madrid</div>
-            <div class="bio">14 years across Rioja and Ribera. Specializes in old-world reds and difficult comparisons.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="setup-block">
-        <h3>Players tonight</h3>
-        <p class="help">Two to five players. Maximum five , beyond that the palate gets tired before the truth.</p>
-        <ul class="players-list">
-          <li class="player-row">
-            <div class="player-num">01</div>
-            <div class="player-name">Maksim</div>
-            <div class="player-status">Ready</div>
-          </li>
-          <li class="player-row">
-            <div class="player-num">02</div>
-            <div class="player-name">Sara Levy</div>
-            <div class="player-status">Ready</div>
-          </li>
-          <li class="player-row">
-            <div class="player-num">03</div>
-            <div class="player-name">Ana Ruiz</div>
-            <div class="player-status">Ready</div>
-          </li>
-          <li class="player-row">
-            <div class="player-num">04</div>
-            <div class="player-name">Marco Dell'Orto</div>
-            <div class="player-status">Ready</div>
-          </li>
-        </ul>
-        <button class="add-player">+ Add fifth player</button>
-      </div>
-
-      <div class="setup-block">
-        <h3>Format</h3>
-        <p class="help">Qualification is the standard round of five wines. Finals is a tighter three-wine playoff for ties.</p>
-        <div class="format-grid">
-          <div class="format-card selected">
-            <div class="format-name">Qualification</div>
-            <div class="format-detail">Five wines, one pour each. Players guess which is which after every taste.</div>
-            <div class="format-stats">~ 75 min · 5 wines · 5 ml each</div>
-          </div>
-          <div class="format-card">
-            <div class="format-name">Finals</div>
-            <div class="format-detail">Three wines, used for tiebreakers. Faster, more intense.</div>
-            <div class="format-stats">~ 35 min · 3 wines</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="setup-block">
-        <h3>Wine selection</h3>
-        <p class="help">How tonight's wines were chosen. Sommelier curation is default.</p>
-        <div class="curation-options">
-          <div class="curation-option selected">
-            <div class="label">Curated by Carlos</div>
-            <div class="meta">Tonight · Vertical of Galilee</div>
-          </div>
-          <div class="curation-option">
-            <div class="label">From your cellar</div>
-            <div class="meta">12 bottles available</div>
-          </div>
-          <div class="curation-option">
-            <div class="label">Theme-based</div>
-            <div class="meta">Choose region or grape</div>
-          </div>
-          <div class="curation-option">
-            <div class="label">Random from carte</div>
-            <div class="meta">Surprise mode</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="setup-cta-row">
-      <p class="setup-cta-summary">
+</div>
+<div class="setup-grid">
+<div class="setup-block">
+<h3 data-i18n="setup_h3">Your sommelier</h3>
+<p class="help" data-i18n="setup_help">Hosts the evening. Pours blind. Marks correct guesses on the scoresheet.</p>
+<div class="host-card">
+<div class="host-avatar">CM</div>
+<div class="host-info">
+<div class="name" data-i18n="reveal_gold_2">Carlos Mendoza</div>
+<div class="role">Master Sommelier · Madrid</div>
+<div class="bio">14 years across Rioja and Ribera. Specializes in old-world reds and difficult comparisons.</div>
+</div>
+</div>
+</div>
+<div class="setup-block">
+<h3 data-i18n="setup_h3_2">Players tonight</h3>
+<p class="help" data-i18n="setup_help_2">Two to five players. Maximum five , beyond that the palate gets tired before the truth.</p>
+<ul class="players-list">
+<li class="player-row" data-i18n="setup_player_row">
+<div class="player-num">01</div>
+<div class="player-name">Maksim</div>
+<div class="player-status">Ready</div>
+</li>
+<li class="player-row" data-i18n="setup_player_row_2">
+<div class="player-num">02</div>
+<div class="player-name">Sara Levy</div>
+<div class="player-status">Ready</div>
+</li>
+<li class="player-row" data-i18n="setup_player_row_3">
+<div class="player-num">03</div>
+<div class="player-name">Ana Ruiz</div>
+<div class="player-status">Ready</div>
+</li>
+<li class="player-row" data-i18n="setup_player_row_4">
+<div class="player-num">04</div>
+<div class="player-name">Marco Dell'Orto</div>
+<div class="player-status">Ready</div>
+</li>
+</ul>
+<button class="add-player" data-i18n="setup_add_player">+ Add fifth player</button>
+</div>
+<div class="setup-block">
+<h3 data-i18n="setup_h3_3">Format</h3>
+<p class="help" data-i18n="setup_help_3">Qualification is the standard round of five wines. Finals is a tighter three-wine playoff for ties.</p>
+<div class="format-grid">
+<div class="format-card selected">
+<div class="format-name" data-i18n="setup_gold_2">Qualification</div>
+<div class="format-detail">Five wines, one pour each. Players guess which is which after every taste.</div>
+<div class="format-stats">~ 75 min · 5 wines · 5 ml each</div>
+</div>
+<div class="format-card">
+<div class="format-name">Finals</div>
+<div class="format-detail">Three wines, used for tiebreakers. Faster, more intense.</div>
+<div class="format-stats">~ 35 min · 3 wines</div>
+</div>
+</div>
+</div>
+<div class="setup-block">
+<h3 data-i18n="setup_h3_4">Wine selection</h3>
+<p class="help" data-i18n="setup_help_4">How tonight's wines were chosen. Sommelier curation is default.</p>
+<div class="curation-options">
+<div class="curation-option selected">
+<div class="label" data-i18n="setup_label">Curated by Carlos</div>
+<div class="meta" data-i18n="setup_meta">Tonight · Vertical of Galilee</div>
+</div>
+<div class="curation-option">
+<div class="label" data-i18n="setup_label_2">From your cellar</div>
+<div class="meta" data-i18n="setup_meta_2">12 bottles available</div>
+</div>
+<div class="curation-option">
+<div class="label" data-i18n="setup_label_3">Theme-based</div>
+<div class="meta" data-i18n="setup_meta_3">Choose region or grape</div>
+</div>
+<div class="curation-option">
+<div class="label" data-i18n="setup_label_4">Random from carte</div>
+<div class="meta" data-i18n="setup_meta_4">Surprise mode</div>
+</div>
+</div>
+</div>
+</div>
+<div class="setup-cta-row">
+<p class="setup-cta-summary" data-i18n="setup_setup_cta_summary">
         4 players · 5 wines · curated by <strong>Carlos</strong> · all <strong>CAP verified</strong>
-      </p>
-      <button class="btn btn-primary" onclick="goTo('reveal')">
+</p>
+<button class="btn btn-primary" data-i18n="setup_btn" onclick="goTo('reveal')">
         Begin tasting <span class="btn-arrow">→</span>
-      </button>
-    </div>
-  </div>
+</button>
+</div>
+</div>
 </section>
-
 <!-- ============= 2. WINE REVEAL ============= -->
 <section class="screen" id="reveal">
-  <div class="reveal-page">
-    <div class="page-header">
-      <div>
-        <div class="page-kicker">Step 1 of 6 · The wines, briefly</div>
-        <h1 class="page-title">Meet your <em>five</em>.</h1>
-        <p class="reveal-instruction">A short look. Names, vintages, regions , visible now, hidden during the pour. Your job is to remember what they look like before they go behind the curtain.</p>
-      </div>
-      <div class="page-meta">
-        Vertical · <span class="gold">Upper Galilee</span><br>
-        Curator · <span class="gold">Carlos Mendoza</span><br>
-        Memorize · <span class="gold">90 sec</span>
-      </div>
-    </div>
-
-    <div class="wine-shelf">
-      <div class="wine-card">
-        <div class="position-num">A</div>
-        <div class="wine-card-bottle">
-          <svg viewBox="0 0 80 220" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="b1" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#3a1418"/>
-                <stop offset="100%" stop-color="#2A0E12"/>
-              </linearGradient>
-            </defs>
-            <rect x="32" y="0" width="16" height="18" fill="#1A1413"/>
-            <path d="M 34 18 L 34 50 Q 34 56 28 64 L 20 80 Q 16 88 16 100 L 16 215 Q 16 220 21 220 L 59 220 Q 64 220 64 215 L 64 100 Q 64 88 60 80 L 52 64 Q 46 56 46 50 L 46 18 Z" fill="url(#b1)" stroke="#0F0B0A"/>
-            <rect x="22" y="120" width="36" height="56" fill="#F4EDE4"/>
-            <text x="40" y="140" text-anchor="middle" font-family="JetBrains Mono" font-size="6" fill="#6B1E2C">2018</text>
-            <text x="40" y="155" text-anchor="middle" font-family="Fraunces" font-size="7" fill="#0F0B0A" font-weight="500">LUERIA</text>
-            <text x="40" y="167" text-anchor="middle" font-family="JetBrains Mono" font-size="4" fill="#6B1E2C">GRAND VITAL</text>
-          </svg>
-        </div>
-        <div class="wine-card-vintage">2018 · Reserva</div>
-        <div class="wine-card-name">Lueria Grand Vital</div>
-        <div class="wine-card-region">Upper Galilee</div>
-        <div class="wine-card-grape">Cabernet Sauvignon 70 · Merlot 20 · Cab Franc 10</div>
-      </div>
-
-      <div class="wine-card">
-        <div class="position-num">B</div>
-        <div class="wine-card-bottle">
-          <svg viewBox="0 0 80 220" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="b2" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#1a1010"/>
-                <stop offset="100%" stop-color="#0F0808"/>
-              </linearGradient>
-            </defs>
-            <rect x="32" y="0" width="16" height="18" fill="#1A1413"/>
-            <path d="M 34 18 L 34 50 Q 34 56 28 64 L 20 80 Q 16 88 16 100 L 16 215 Q 16 220 21 220 L 59 220 Q 64 220 64 215 L 64 100 Q 64 88 60 80 L 52 64 Q 46 56 46 50 L 46 18 Z" fill="url(#b2)" stroke="#0F0B0A"/>
-            <rect x="22" y="120" width="36" height="56" fill="#0F0B0A" stroke="#C9A961"/>
-            <text x="40" y="140" text-anchor="middle" font-family="Fraunces" font-size="6" fill="#C9A961">winemaker</text>
-            <text x="40" y="152" text-anchor="middle" font-family="Fraunces" font-size="6" fill="#C9A961" font-style="italic">edition</text>
-            <text x="40" y="167" text-anchor="middle" font-family="JetBrains Mono" font-size="4" fill="#C9A961">ADIR · 2020</text>
-          </svg>
-        </div>
-        <div class="wine-card-vintage">2020 · Limited</div>
-        <div class="wine-card-name">Adir Winemaker Edition</div>
-        <div class="wine-card-region">Kerem Ben Zimra</div>
-        <div class="wine-card-grape">Cabernet Sauvignon 100 · single vineyard</div>
-      </div>
-
-      <div class="wine-card">
-        <div class="position-num">C</div>
-        <div class="wine-card-bottle">
-          <svg viewBox="0 0 80 220" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="b3" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#3a3128"/>
-                <stop offset="100%" stop-color="#26201A"/>
-              </linearGradient>
-            </defs>
-            <rect x="32" y="0" width="16" height="18" fill="#241B19"/>
-            <path d="M 34 18 L 34 50 Q 34 56 28 64 L 20 80 Q 16 88 16 100 L 16 215 Q 16 220 21 220 L 59 220 Q 64 220 64 215 L 64 100 Q 64 88 60 80 L 52 64 Q 46 56 46 50 L 46 18 Z" fill="url(#b3)" stroke="#0F0B0A"/>
-            <rect x="22" y="120" width="36" height="56" fill="#241B19"/>
-            <text x="40" y="148" text-anchor="middle" font-family="Fraunces" font-size="9" fill="#C9A961" font-weight="500">DRIMIA</text>
-            <text x="40" y="162" text-anchor="middle" font-family="JetBrains Mono" font-size="4" fill="#C9A961">2020 · NO. 1224</text>
-          </svg>
-        </div>
-        <div class="wine-card-vintage">2020 · Numbered</div>
-        <div class="wine-card-name">Drimia</div>
-        <div class="wine-card-region">Yatir Hills · 884m</div>
-        <div class="wine-card-grape">Cabernet Sauvignon 80 · Petit Verdot 20</div>
-      </div>
-
-      <div class="wine-card">
-        <div class="position-num">D</div>
-        <div class="wine-card-bottle">
-          <svg viewBox="0 0 80 220" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="b4" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#4a1a22"/>
-                <stop offset="100%" stop-color="#2A0E12"/>
-              </linearGradient>
-            </defs>
-            <rect x="32" y="0" width="16" height="18" fill="#1A1413"/>
-            <path d="M 34 18 L 34 50 Q 34 56 28 64 L 20 80 Q 16 88 16 100 L 16 215 Q 16 220 21 220 L 59 220 Q 64 220 64 215 L 64 100 Q 64 88 60 80 L 52 64 Q 46 56 46 50 L 46 18 Z" fill="url(#b4)" stroke="#0F0B0A"/>
-            <rect x="22" y="120" width="36" height="56" fill="#F4EDE4"/>
-            <text x="40" y="142" text-anchor="middle" font-family="Fraunces" font-size="10" fill="#0F0B0A" font-weight="500" font-style="italic">Plato</text>
-            <text x="40" y="160" text-anchor="middle" font-family="JetBrains Mono" font-size="4" fill="#6B1E2C">2018 · ADIR</text>
-          </svg>
-        </div>
-        <div class="wine-card-vintage">2018 · Reserve</div>
-        <div class="wine-card-name">Plato</div>
-        <div class="wine-card-region">Upper Galilee · Adir</div>
-        <div class="wine-card-grape">Cabernet Sauvignon 90 · Shiraz 10</div>
-      </div>
-
-      <div class="wine-card">
-        <div class="position-num">E</div>
-        <div class="wine-card-bottle">
-          <svg viewBox="0 0 80 220" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="b5" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#3a1418"/>
-                <stop offset="100%" stop-color="#1F0808"/>
-              </linearGradient>
-            </defs>
-            <rect x="32" y="0" width="16" height="18" fill="#0F0B0A"/>
-            <path d="M 34 18 L 34 50 Q 34 56 28 64 L 20 80 Q 16 88 16 100 L 16 215 Q 16 220 21 220 L 59 220 Q 64 220 64 215 L 64 100 Q 64 88 60 80 L 52 64 Q 46 56 46 50 L 46 18 Z" fill="url(#b5)" stroke="#0F0B0A"/>
-            <rect x="22" y="118" width="36" height="60" fill="#241B19" stroke="#8A7A6B" stroke-width="0.5"/>
-            <text x="40" y="138" text-anchor="middle" font-family="Fraunces" font-size="6" fill="#C9A961" font-style="italic">The</text>
-            <text x="40" y="152" text-anchor="middle" font-family="Fraunces" font-size="9" fill="#C9A961" font-weight="500">CAVE</text>
-            <text x="40" y="168" text-anchor="middle" font-family="JetBrains Mono" font-size="4" fill="#C9A961">GALILEE 2018</text>
-          </svg>
-        </div>
-        <div class="wine-card-vintage">2018 · Cellar reserve</div>
-        <div class="wine-card-name">The Cave</div>
-        <div class="wine-card-region">Carmel · ancient cellar</div>
-        <div class="wine-card-grape">Cab Sauv 65 · Merlot 30 · Petit Verdot 5</div>
-      </div>
-    </div>
-
-    <div class="reveal-cta-row">
-      <p class="reveal-warning">, After this screen, the wines hide. Look once more.</p>
-      <button class="btn btn-primary" onclick="goTo('tasting')">
+<div class="reveal-page">
+<div class="page-header">
+<div>
+<div class="page-kicker">Step 1 of 6 · The wines, briefly</div>
+<h1 class="page-title" data-i18n="reveal_page_title">Meet your <em>five</em>.</h1>
+<p class="reveal-instruction" data-i18n="reveal_reveal_instruction">A short look. Names, vintages, regions , visible now, hidden during the pour. Your job is to remember what they look like before they go behind the curtain.</p>
+</div>
+<div class="page-meta">
+        Vertical · <span class="gold" data-i18n="reveal_gold">Upper Galilee</span><br/>
+        Curator · <span class="gold" data-i18n="setup_name">Carlos Mendoza</span><br/>
+        Memorize · <span class="gold" data-i18n="reveal_gold_3">90 sec</span>
+</div>
+</div>
+<div class="wine-shelf">
+<div class="wine-card">
+<div class="position-num">A</div>
+<div class="wine-card-bottle">
+<svg viewbox="0 0 80 220" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="b1" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#3a1418"></stop>
+<stop offset="100%" stop-color="#2A0E12"></stop>
+</lineargradient>
+</defs>
+<rect fill="#1A1413" height="18" width="16" x="32" y="0"></rect>
+<path d="M 34 18 L 34 50 Q 34 56 28 64 L 20 80 Q 16 88 16 100 L 16 215 Q 16 220 21 220 L 59 220 Q 64 220 64 215 L 64 100 Q 64 88 60 80 L 52 64 Q 46 56 46 50 L 46 18 Z" fill="url(#b1)" stroke="#0F0B0A"></path>
+<rect fill="#F4EDE4" height="56" width="36" x="22" y="120"></rect>
+<text fill="#6B1E2C" font-family="JetBrains Mono" font-size="6" text-anchor="middle" x="40" y="140">2018</text>
+<text fill="#0F0B0A" font-family="Fraunces" font-size="7" font-weight="500" text-anchor="middle" x="40" y="155">LUERIA</text>
+<text fill="#6B1E2C" font-family="JetBrains Mono" font-size="4" text-anchor="middle" x="40" y="167">GRAND VITAL</text>
+</svg>
+</div>
+<div class="wine-card-vintage">2018 · Reserva</div>
+<div class="wine-card-name">Lueria Grand Vital</div>
+<div class="wine-card-region">Upper Galilee</div>
+<div class="wine-card-grape">Cabernet Sauvignon 70 · Merlot 20 · Cab Franc 10</div>
+</div>
+<div class="wine-card">
+<div class="position-num">B</div>
+<div class="wine-card-bottle">
+<svg viewbox="0 0 80 220" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="b2" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#1a1010"></stop>
+<stop offset="100%" stop-color="#0F0808"></stop>
+</lineargradient>
+</defs>
+<rect fill="#1A1413" height="18" width="16" x="32" y="0"></rect>
+<path d="M 34 18 L 34 50 Q 34 56 28 64 L 20 80 Q 16 88 16 100 L 16 215 Q 16 220 21 220 L 59 220 Q 64 220 64 215 L 64 100 Q 64 88 60 80 L 52 64 Q 46 56 46 50 L 46 18 Z" fill="url(#b2)" stroke="#0F0B0A"></path>
+<rect fill="#0F0B0A" height="56" stroke="#C9A961" width="36" x="22" y="120"></rect>
+<text fill="#C9A961" font-family="Fraunces" font-size="6" text-anchor="middle" x="40" y="140">winemaker</text>
+<text fill="#C9A961" font-family="Fraunces" font-size="6" font-style="italic" text-anchor="middle" x="40" y="152">edition</text>
+<text fill="#C9A961" font-family="JetBrains Mono" font-size="4" text-anchor="middle" x="40" y="167">ADIR · 2020</text>
+</svg>
+</div>
+<div class="wine-card-vintage">2020 · Limited</div>
+<div class="wine-card-name">Adir Winemaker Edition</div>
+<div class="wine-card-region">Kerem Ben Zimra</div>
+<div class="wine-card-grape">Cabernet Sauvignon 100 · single vineyard</div>
+</div>
+<div class="wine-card">
+<div class="position-num">C</div>
+<div class="wine-card-bottle">
+<svg viewbox="0 0 80 220" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="b3" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#3a3128"></stop>
+<stop offset="100%" stop-color="#26201A"></stop>
+</lineargradient>
+</defs>
+<rect fill="#241B19" height="18" width="16" x="32" y="0"></rect>
+<path d="M 34 18 L 34 50 Q 34 56 28 64 L 20 80 Q 16 88 16 100 L 16 215 Q 16 220 21 220 L 59 220 Q 64 220 64 215 L 64 100 Q 64 88 60 80 L 52 64 Q 46 56 46 50 L 46 18 Z" fill="url(#b3)" stroke="#0F0B0A"></path>
+<rect fill="#241B19" height="56" width="36" x="22" y="120"></rect>
+<text fill="#C9A961" font-family="Fraunces" font-size="9" font-weight="500" text-anchor="middle" x="40" y="148">DRIMIA</text>
+<text fill="#C9A961" font-family="JetBrains Mono" font-size="4" text-anchor="middle" x="40" y="162">2020 · NO. 1224</text>
+</svg>
+</div>
+<div class="wine-card-vintage">2020 · Numbered</div>
+<div class="wine-card-name">Drimia</div>
+<div class="wine-card-region">Yatir Hills · 884m</div>
+<div class="wine-card-grape">Cabernet Sauvignon 80 · Petit Verdot 20</div>
+</div>
+<div class="wine-card">
+<div class="position-num">D</div>
+<div class="wine-card-bottle">
+<svg viewbox="0 0 80 220" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="b4" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#4a1a22"></stop>
+<stop offset="100%" stop-color="#2A0E12"></stop>
+</lineargradient>
+</defs>
+<rect fill="#1A1413" height="18" width="16" x="32" y="0"></rect>
+<path d="M 34 18 L 34 50 Q 34 56 28 64 L 20 80 Q 16 88 16 100 L 16 215 Q 16 220 21 220 L 59 220 Q 64 220 64 215 L 64 100 Q 64 88 60 80 L 52 64 Q 46 56 46 50 L 46 18 Z" fill="url(#b4)" stroke="#0F0B0A"></path>
+<rect fill="#F4EDE4" height="56" width="36" x="22" y="120"></rect>
+<text data-i18n="tasting_label_4" fill="#0F0B0A" font-family="Fraunces" font-size="10" font-style="italic" font-weight="500" text-anchor="middle" x="40" y="142">Plato</text>
+<text fill="#6B1E2C" font-family="JetBrains Mono" font-size="4" text-anchor="middle" x="40" y="160">2018 · ADIR</text>
+</svg>
+</div>
+<div class="wine-card-vintage">2018 · Reserve</div>
+<div class="wine-card-name">Plato</div>
+<div class="wine-card-region">Upper Galilee · Adir</div>
+<div class="wine-card-grape">Cabernet Sauvignon 90 · Shiraz 10</div>
+</div>
+<div class="wine-card">
+<div class="position-num">E</div>
+<div class="wine-card-bottle">
+<svg viewbox="0 0 80 220" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="b5" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#3a1418"></stop>
+<stop offset="100%" stop-color="#1F0808"></stop>
+</lineargradient>
+</defs>
+<rect fill="#0F0B0A" height="18" width="16" x="32" y="0"></rect>
+<path d="M 34 18 L 34 50 Q 34 56 28 64 L 20 80 Q 16 88 16 100 L 16 215 Q 16 220 21 220 L 59 220 Q 64 220 64 215 L 64 100 Q 64 88 60 80 L 52 64 Q 46 56 46 50 L 46 18 Z" fill="url(#b5)" stroke="#0F0B0A"></path>
+<rect fill="#241B19" height="60" stroke="#8A7A6B" stroke-width="0.5" width="36" x="22" y="118"></rect>
+<text fill="#C9A961" font-family="Fraunces" font-size="6" font-style="italic" text-anchor="middle" x="40" y="138">The</text>
+<text fill="#C9A961" font-family="Fraunces" font-size="9" font-weight="500" text-anchor="middle" x="40" y="152">CAVE</text>
+<text fill="#C9A961" font-family="JetBrains Mono" font-size="4" text-anchor="middle" x="40" y="168">GALILEE 2018</text>
+</svg>
+</div>
+<div class="wine-card-vintage">2018 · Cellar reserve</div>
+<div class="wine-card-name">The Cave</div>
+<div class="wine-card-region">Carmel · ancient cellar</div>
+<div class="wine-card-grape">Cab Sauv 65 · Merlot 30 · Petit Verdot 5</div>
+</div>
+</div>
+<div class="reveal-cta-row">
+<p class="reveal-warning" data-i18n="reveal_reveal_warning">, After this screen, the wines hide. Look once more.</p>
+<button class="btn btn-primary" data-i18n="reveal_btn" onclick="goTo('tasting')">
         I'm ready · pour the first <span class="btn-arrow">→</span>
-      </button>
-    </div>
-  </div>
+</button>
+</div>
+</div>
 </section>
-
 <!-- ============= 3. ACTIVE TASTING ============= -->
 <section class="screen" id="tasting">
-  <div class="tasting-page">
-    <div class="tasting-left">
-      <div class="round-meta">
-        <span>Pour <span class="gold">3 of 5</span></span>
-        <span>Room · <span class="gold">17.8°C</span></span>
-        <span>Decanted · <span class="gold">No</span></span>
-      </div>
-      <div class="glass-stage">
-        <div class="pour-num">3</div>
-        <svg class="glass-svg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="wine-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8B2838" stop-opacity="0.85"/>
-              <stop offset="100%" stop-color="#3a0e14" stop-opacity="0.95"/>
-            </linearGradient>
-            <linearGradient id="glass-shine" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-              <stop offset="40%" stop-color="rgba(255,255,255,0.15)"/>
-              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-            </linearGradient>
-          </defs>
-          <ellipse cx="100" cy="240" rx="55" ry="6" fill="rgba(255,255,255,0.06)"/>
-          <rect x="98" y="160" width="4" height="80" fill="rgba(244,237,228,0.2)"/>
-          <path d="M 50 60 Q 50 50 60 50 L 140 50 Q 150 50 150 60 L 150 110 Q 150 165 100 165 Q 50 165 50 110 Z"
-                fill="rgba(244,237,228,0.04)" stroke="rgba(244,237,228,0.25)" stroke-width="1"/>
-          <path d="M 70 110 Q 70 145 100 150 Q 130 145 130 110 Z" fill="url(#wine-fill)"/>
-          <ellipse cx="100" cy="110" rx="30" ry="5" fill="rgba(184,50,70,0.6)"/>
-          <path d="M 50 60 Q 50 50 60 50 L 75 50 L 75 130 Q 70 145 65 110 Z" fill="url(#glass-shine)"/>
-          <ellipse cx="100" cy="244" rx="55" ry="3" fill="rgba(244,237,228,0.15)"/>
-        </svg>
-      </div>
-      <div class="timer-block" id="timer">02:34</div>
-      <div class="timer-label">Time on this pour</div>
-      <div class="host-only-badge">
+<div class="tasting-page">
+<div class="tasting-left">
+<div class="round-meta">
+<span>Pour <span class="gold" data-i18n="tasting_gold">3 of 5</span></span>
+<span>Room · <span class="gold" data-i18n="tasting_gold_2">17.8°C</span></span>
+<span>Decanted · <span class="gold" data-i18n="tasting_gold_3">No</span></span>
+</div>
+<div class="glass-stage">
+<div class="pour-num">3</div>
+<svg class="glass-svg" viewbox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="wine-fill" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#8B2838" stop-opacity="0.85"></stop>
+<stop offset="100%" stop-color="#3a0e14" stop-opacity="0.95"></stop>
+</lineargradient>
+<lineargradient id="glass-shine" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="rgba(255,255,255,0)"></stop>
+<stop offset="40%" stop-color="rgba(255,255,255,0.15)"></stop>
+<stop offset="100%" stop-color="rgba(255,255,255,0)"></stop>
+</lineargradient>
+</defs>
+<ellipse cx="100" cy="240" fill="rgba(255,255,255,0.06)" rx="55" ry="6"></ellipse>
+<rect fill="rgba(244,237,228,0.2)" height="80" width="4" x="98" y="160"></rect>
+<path d="M 50 60 Q 50 50 60 50 L 140 50 Q 150 50 150 60 L 150 110 Q 150 165 100 165 Q 50 165 50 110 Z" fill="rgba(244,237,228,0.04)" stroke="rgba(244,237,228,0.25)" stroke-width="1"></path>
+<path d="M 70 110 Q 70 145 100 150 Q 130 145 130 110 Z" fill="url(#wine-fill)"></path>
+<ellipse cx="100" cy="110" fill="rgba(184,50,70,0.6)" rx="30" ry="5"></ellipse>
+<path d="M 50 60 Q 50 50 60 50 L 75 50 L 75 130 Q 70 145 65 110 Z" fill="url(#glass-shine)"></path>
+<ellipse cx="100" cy="244" fill="rgba(244,237,228,0.15)" rx="55" ry="3"></ellipse>
+</svg>
+</div>
+<div class="timer-block" id="timer">02:34</div>
+<div class="timer-label">Time on this pour</div>
+<div class="host-only-badge">
         Host view · True wine: <span class="truth">Drimia 2020</span>
-      </div>
-    </div>
-
-    <div class="tasting-right">
-      <div class="tasting-current-player">
-        <div class="current-label">Whose turn</div>
-        <div class="current-player-row">
-          <div class="current-player-avatar">M</div>
-          <div class="current-player-info">
-            <div class="name">Maksim</div>
-            <div class="meta">Player 1 of 4 · 2/2 correct so far</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="notes-prompt">
-        <div class="notes-prompt-label">Your notes , kept private</div>
-        <textarea class="notes-textarea" placeholder="Aromatics, structure, what it reminds you of..."> Dark fruit, blackcurrant. High altitude feel , there's a coolness in the back. Tight tannin, longer finish than the second pour. Something graphite-like.</textarea>
-      </div>
-
-      <div class="guess-h">
+</div>
+</div>
+<div class="tasting-right">
+<div class="tasting-current-player">
+<div class="current-label">Whose turn</div>
+<div class="current-player-row">
+<div class="current-player-avatar">M</div>
+<div class="current-player-info">
+<div class="name">Maksim</div>
+<div class="meta" data-i18n="tasting_meta">Player 1 of 4 · 2/2 correct so far</div>
+</div>
+</div>
+</div>
+<div class="notes-prompt">
+<div class="notes-prompt-label">Your notes , kept private</div>
+<textarea class="notes-textarea" data-i18n="tasting_notes_textarea" placeholder="Aromatics, structure, what it reminds you of..."> Dark fruit, blackcurrant. High altitude feel , there's a coolness in the back. Tight tannin, longer finish than the second pour. Something graphite-like.</textarea>
+</div>
+<div class="guess-h">
         Which wine is <em>this</em>?
       </div>
-      <div class="guess-options">
-        <div class="guess-button">
-          <div class="num">A</div>
-          <div class="label">Lueria</div>
-        </div>
-        <div class="guess-button">
-          <div class="num">B</div>
-          <div class="label">Adir</div>
-        </div>
-        <div class="guess-button selected" id="guess-c">
-          <div class="num">C</div>
-          <div class="label">Drimia</div>
-        </div>
-        <div class="guess-button">
-          <div class="num">D</div>
-          <div class="label">Plato</div>
-        </div>
-        <div class="guess-button">
-          <div class="num">E</div>
-          <div class="label">Cave</div>
-        </div>
-      </div>
-
-      <div class="tasting-actions">
-        <button class="btn" onclick="goTo('reveal')">← Back to wines</button>
-        <button class="btn btn-primary" onclick="goTo('score')">
+<div class="guess-options">
+<div class="guess-button">
+<div class="num">A</div>
+<div class="label" data-i18n="tasting_label">Lueria</div>
+</div>
+<div class="guess-button">
+<div class="num" data-i18n="tasting_num_2">B</div>
+<div class="label" data-i18n="tasting_label_2">Adir</div>
+</div>
+<div class="guess-button selected" id="guess-c">
+<div class="num" data-i18n="tasting_num_3">C</div>
+<div class="label" data-i18n="tasting_label_3">Drimia</div>
+</div>
+<div class="guess-button">
+<div class="num" data-i18n="tasting_num_4">D</div>
+<div class="label">Plato</div>
+</div>
+<div class="guess-button">
+<div class="num" data-i18n="tasting_num_5">E</div>
+<div class="label" data-i18n="tasting_label_5">Cave</div>
+</div>
+</div>
+<div class="tasting-actions">
+<button class="btn" data-i18n="tasting_btn" onclick="goTo('reveal')">← Back to wines</button>
+<button class="btn btn-primary" data-i18n="tasting_btn_2" onclick="goTo('score')">
           Lock in · pass to Sara <span class="btn-arrow">→</span>
-        </button>
-      </div>
-    </div>
-  </div>
+</button>
+</div>
+</div>
+</div>
 </section>
-
 <!-- ============= 4. SCORESHEET ============= -->
 <section class="screen" id="score">
-  <div class="score-page">
-    <div class="page-header">
-      <div>
-        <div class="page-kicker">Live · pour 3 of 5 in progress</div>
-        <h1 class="page-title">The <em>scoresheet</em>.</h1>
-      </div>
-      <div class="page-meta">
-        Game · <span class="gold">TT-2026-04812</span><br>
-        Time · <span class="gold">21:14</span><br>
-        Host · <span class="gold">C. Mendoza</span>
-      </div>
-    </div>
-
-    <div class="score-meta-row">
-      <span class="item"><span class="lbl">Round</span><span class="val">Qualification</span></span>
-      <span class="item"><span class="lbl">Pours done</span><span class="val">2 / 5</span></span>
-      <span class="item"><span class="lbl">In progress</span><span class="val">Wine #3 · Drimia 2020</span></span>
-      <span class="item"><span class="lbl">Leader</span><span class="val">Sara · 2/2</span></span>
-    </div>
-
-    <div class="scoreboard">
-      <table class="score-table">
-        <thead>
-          <tr>
-            <th style="width: 280px;">Player</th>
-            <th><span class="wine-num">1</span>Lueria</th>
-            <th><span class="wine-num">2</span>Adir</th>
-            <th><span class="wine-num">3</span>Drimia</th>
-            <th><span class="wine-num">4</span>Plato</th>
-            <th><span class="wine-num">5</span>The Cave</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="player-cell">
-              <div class="player-cell-inner">
-                <div class="player-cell-avatar">M</div>
-                <div class="player-cell-name">Maksim</div>
-              </div>
-            </td>
-            <td><span class="glyph correct">✓</span></td>
-            <td><span class="glyph correct">✓</span></td>
-            <td><span class="glyph live">·</span></td>
-            <td><span class="glyph pending">,</span></td>
-            <td><span class="glyph pending">,</span></td>
-            <td class="score-total">2 <span class="of">/2</span></td>
-          </tr>
-          <tr>
-            <td class="player-cell">
-              <div class="player-cell-inner">
-                <div class="player-cell-avatar">S</div>
-                <div class="player-cell-name">Sara Levy</div>
-              </div>
-            </td>
-            <td><span class="glyph correct">✓</span></td>
-            <td><span class="glyph correct">✓</span></td>
-            <td><span class="glyph pending">,</span></td>
-            <td><span class="glyph pending">,</span></td>
-            <td><span class="glyph pending">,</span></td>
-            <td class="score-total">2 <span class="of">/2</span></td>
-          </tr>
-          <tr>
-            <td class="player-cell">
-              <div class="player-cell-inner">
-                <div class="player-cell-avatar">A</div>
-                <div class="player-cell-name">Ana Ruiz</div>
-              </div>
-            </td>
-            <td><span class="glyph wrong">×</span></td>
-            <td><span class="glyph correct">✓</span></td>
-            <td><span class="glyph pending">,</span></td>
-            <td><span class="glyph pending">,</span></td>
-            <td><span class="glyph pending">,</span></td>
-            <td class="score-total">1 <span class="of">/2</span></td>
-          </tr>
-          <tr>
-            <td class="player-cell">
-              <div class="player-cell-inner">
-                <div class="player-cell-avatar">M</div>
-                <div class="player-cell-name">Marco Dell'Orto</div>
-              </div>
-            </td>
-            <td><span class="glyph correct">✓</span></td>
-            <td><span class="glyph wrong">×</span></td>
-            <td><span class="glyph pending">,</span></td>
-            <td><span class="glyph pending">,</span></td>
-            <td><span class="glyph pending">,</span></td>
-            <td class="score-total">1 <span class="of">/2</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="score-leader-strip">
-      <div class="score-leader-text">
-        <strong>Maksim</strong> and <strong>Sara</strong> both at full score. <em>Three pours left to settle this.</em>
-      </div>
-      <button class="btn btn-primary" onclick="goTo('tasting')">
+<div class="score-page">
+<div class="page-header">
+<div>
+<div class="page-kicker">Live · pour 3 of 5 in progress</div>
+<h1 class="page-title" data-i18n="score_page_title">The <em>scoresheet</em>.</h1>
+</div>
+<div class="page-meta">
+        Game · <span class="gold" data-i18n="setup_gold">TT-2026-04812</span><br/>
+        Time · <span class="gold" data-i18n="score_gold_2">21:14</span><br/>
+        Host · <span class="gold" data-i18n="score_gold_3">C. Mendoza</span>
+</div>
+</div>
+<div class="score-meta-row">
+<span class="item"><span class="lbl" data-i18n="nav_proto_tab_3">Round</span><span class="val">Qualification</span></span>
+<span class="item"><span class="lbl">Pours done</span><span class="val">2 / 5</span></span>
+<span class="item"><span class="lbl">In progress</span><span class="val">Wine #3 · Drimia 2020</span></span>
+<span class="item"><span class="lbl">Leader</span><span class="val">Sara · 2/2</span></span>
+</div>
+<div class="scoreboard">
+<table class="score-table">
+<thead>
+<tr>
+<th data-i18n="score_th" style="width: 280px;">Player</th>
+<th data-i18n="score_th_2"><span class="wine-num">1</span>Lueria</th>
+<th data-i18n="score_th_3"><span class="wine-num">2</span>Adir</th>
+<th data-i18n="score_th_4"><span class="wine-num" data-i18n="after_val">3</span>Drimia</th>
+<th data-i18n="score_th_5"><span class="wine-num">4</span>Plato</th>
+<th data-i18n="score_th_6"><span class="wine-num">5</span>The Cave</th>
+<th data-i18n="score_th_7">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="player-cell">
+<div class="player-cell-inner" data-i18n="score_player_cell">
+<div class="player-cell-avatar">M</div>
+<div class="player-cell-name" data-i18n="tasting_name">Maksim</div>
+</div>
+</td>
+<td><span class="glyph correct" data-i18n="score_td">✓</span></td>
+<td><span class="glyph correct" data-i18n="score_td_2">✓</span></td>
+<td><span class="glyph live">·</span></td>
+<td><span class="glyph pending">,</span></td>
+<td><span class="glyph pending">,</span></td>
+<td class="score-total" data-i18n="score_score_total">2 <span class="of">/2</span></td>
+</tr>
+<tr>
+<td class="player-cell">
+<div class="player-cell-inner" data-i18n="score_player_cell_2">
+<div class="player-cell-avatar">S</div>
+<div class="player-cell-name">Sara Levy</div>
+</div>
+</td>
+<td><span class="glyph correct" data-i18n="score_td_3">✓</span></td>
+<td><span class="glyph correct" data-i18n="score_td_4">✓</span></td>
+<td><span class="glyph pending">,</span></td>
+<td><span class="glyph pending">,</span></td>
+<td><span class="glyph pending">,</span></td>
+<td class="score-total" data-i18n="score_score_total_2">2 <span class="of">/2</span></td>
+</tr>
+<tr>
+<td class="player-cell">
+<div class="player-cell-inner" data-i18n="score_player_cell_3">
+<div class="player-cell-avatar" data-i18n="tasting_num">A</div>
+<div class="player-cell-name">Ana Ruiz</div>
+</div>
+</td>
+<td><span class="glyph wrong" data-i18n="score_td_5">×</span></td>
+<td><span class="glyph correct" data-i18n="score_td_6">✓</span></td>
+<td><span class="glyph pending">,</span></td>
+<td><span class="glyph pending">,</span></td>
+<td><span class="glyph pending">,</span></td>
+<td class="score-total" data-i18n="score_score_total_3">1 <span class="of">/2</span></td>
+</tr>
+<tr>
+<td class="player-cell">
+<div class="player-cell-inner" data-i18n="score_player_cell_4">
+<div class="player-cell-avatar">M</div>
+<div class="player-cell-name">Marco Dell'Orto</div>
+</div>
+</td>
+<td><span class="glyph correct" data-i18n="score_td_7">✓</span></td>
+<td><span class="glyph wrong" data-i18n="score_td_8">×</span></td>
+<td><span class="glyph pending">,</span></td>
+<td><span class="glyph pending">,</span></td>
+<td><span class="glyph pending">,</span></td>
+<td class="score-total" data-i18n="score_score_total_4">1 <span class="of">/2</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="score-leader-strip">
+<div class="score-leader-text">
+<strong>Maksim</strong> and <strong>Sara</strong> both at full score. <em>Three pours left to settle this.</em>
+</div>
+<button class="btn btn-primary" data-i18n="score_btn" onclick="goTo('tasting')">
         Continue tasting <span class="btn-arrow">→</span>
-      </button>
-    </div>
-  </div>
+</button>
+</div>
+</div>
 </section>
-
 <!-- ============= 5. FINAL REVEAL ============= -->
 <section class="screen" id="final">
-  <div class="final-page">
-    <div class="final-banner">
-      <div class="final-kicker">, Round complete · The verdict ,</div>
-      <h1 class="final-headline">Sara was<br><em>right</em> four times.</h1>
-
-      <div class="final-winner-card">
-        <div class="final-winner-label">Winner of the qualification</div>
-        <div class="final-winner-row">
-          <div class="final-winner-avatar">S</div>
-          <div class="final-winner-info">
-            <div class="final-winner-name">Sara Levy</div>
-            <div class="final-winner-score"><em>4 / 5</em> correct · 12 minutes faster than runner-up</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="final-section-title">The wines, <em>revealed</em>.</h2>
-    <div class="reveal-grid">
-      <div class="reveal-card">
-        <div class="position-badge">Pour 1</div>
-        <div class="reveal-card-bottle">
-          <svg viewBox="0 0 60 140" xmlns="http://www.w3.org/2000/svg">
-            <rect x="22" y="0" width="16" height="14" fill="#1A1413"/>
-            <path d="M 24 14 L 24 35 Q 24 40 19 46 L 13 56 Q 10 62 10 70 L 10 137 Q 10 140 14 140 L 46 140 Q 50 140 50 137 L 50 70 Q 50 62 47 56 L 41 46 Q 36 40 36 35 L 36 14 Z" fill="#3a1418"/>
-            <rect x="14" y="76" width="32" height="36" fill="#F4EDE4"/>
-            <text x="30" y="92" text-anchor="middle" font-family="Fraunces" font-size="6" fill="#0F0B0A" font-weight="500">LUERIA</text>
-            <text x="30" y="102" text-anchor="middle" font-family="JetBrains Mono" font-size="3.5" fill="#6B1E2C">2018</text>
-          </svg>
-        </div>
-        <div class="reveal-card-vintage">2018</div>
-        <div class="reveal-card-name">Lueria Grand Vital</div>
-        <div class="reveal-card-meta">Upper Galilee</div>
-        <div class="reveal-card-results">
-          <span class="num">3</span>
+<div class="final-page">
+<div class="final-banner">
+<div class="final-kicker">, Round complete · The verdict ,</div>
+<h1 class="final-headline" data-i18n="final_final_headline">Sara was<br/><em>right</em> four times.</h1>
+<div class="final-winner-card">
+<div class="final-winner-label">Winner of the qualification</div>
+<div class="final-winner-row">
+<div class="final-winner-avatar">S</div>
+<div class="final-winner-info">
+<div class="final-winner-name">Sara Levy</div>
+<div class="final-winner-score"><em>4 / 5</em> correct · 12 minutes faster than runner-up</div>
+</div>
+</div>
+</div>
+</div>
+<h2 class="final-section-title" data-i18n="final_final_section_title">The wines, <em>revealed</em>.</h2>
+<div class="reveal-grid">
+<div class="reveal-card">
+<div class="position-badge">Pour 1</div>
+<div class="reveal-card-bottle">
+<svg viewbox="0 0 60 140" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#1A1413" height="14" width="16" x="22" y="0"></rect>
+<path d="M 24 14 L 24 35 Q 24 40 19 46 L 13 56 Q 10 62 10 70 L 10 137 Q 10 140 14 140 L 46 140 Q 50 140 50 137 L 50 70 Q 50 62 47 56 L 41 46 Q 36 40 36 35 L 36 14 Z" fill="#3a1418"></path>
+<rect fill="#F4EDE4" height="36" width="32" x="14" y="76"></rect>
+<text fill="#0F0B0A" font-family="Fraunces" font-size="6" font-weight="500" text-anchor="middle" x="30" y="92">LUERIA</text>
+<text fill="#6B1E2C" font-family="JetBrains Mono" font-size="3.5" text-anchor="middle" x="30" y="102">2018</text>
+</svg>
+</div>
+<div class="reveal-card-vintage">2018</div>
+<div class="reveal-card-name">Lueria Grand Vital</div>
+<div class="reveal-card-meta">Upper Galilee</div>
+<div class="reveal-card-results">
+<span class="num" data-i18n="tasting_pour_num">3</span>
           guessed correctly <span class="of">of 4</span>
-        </div>
-      </div>
-
-      <div class="reveal-card">
-        <div class="position-badge">Pour 2</div>
-        <div class="reveal-card-bottle">
-          <svg viewBox="0 0 60 140" xmlns="http://www.w3.org/2000/svg">
-            <rect x="22" y="0" width="16" height="14" fill="#1A1413"/>
-            <path d="M 24 14 L 24 35 Q 24 40 19 46 L 13 56 Q 10 62 10 70 L 10 137 Q 10 140 14 140 L 46 140 Q 50 140 50 137 L 50 70 Q 50 62 47 56 L 41 46 Q 36 40 36 35 L 36 14 Z" fill="#1a1010"/>
-            <rect x="14" y="76" width="32" height="36" fill="#0F0B0A" stroke="#C9A961" stroke-width="0.5"/>
-            <text x="30" y="90" text-anchor="middle" font-family="Fraunces" font-size="5" fill="#C9A961" font-style="italic">edition</text>
-            <text x="30" y="103" text-anchor="middle" font-family="Fraunces" font-size="5" fill="#C9A961">ADIR</text>
-          </svg>
-        </div>
-        <div class="reveal-card-vintage">2020</div>
-        <div class="reveal-card-name">Adir Winemaker</div>
-        <div class="reveal-card-meta">Kerem Ben Zimra</div>
-        <div class="reveal-card-results">
-          <span class="num">3</span>
+</div>
+</div>
+<div class="reveal-card">
+<div class="position-badge">Pour 2</div>
+<div class="reveal-card-bottle">
+<svg viewbox="0 0 60 140" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#1A1413" height="14" width="16" x="22" y="0"></rect>
+<path d="M 24 14 L 24 35 Q 24 40 19 46 L 13 56 Q 10 62 10 70 L 10 137 Q 10 140 14 140 L 46 140 Q 50 140 50 137 L 50 70 Q 50 62 47 56 L 41 46 Q 36 40 36 35 L 36 14 Z" fill="#1a1010"></path>
+<rect fill="#0F0B0A" height="36" stroke="#C9A961" stroke-width="0.5" width="32" x="14" y="76"></rect>
+<text fill="#C9A961" font-family="Fraunces" font-size="5" font-style="italic" text-anchor="middle" x="30" y="90">edition</text>
+<text fill="#C9A961" font-family="Fraunces" font-size="5" text-anchor="middle" x="30" y="103">ADIR</text>
+</svg>
+</div>
+<div class="reveal-card-vintage">2020</div>
+<div class="reveal-card-name">Adir Winemaker</div>
+<div class="reveal-card-meta">Kerem Ben Zimra</div>
+<div class="reveal-card-results">
+<span class="num">3</span>
           guessed correctly <span class="of">of 4</span>
-        </div>
-      </div>
-
-      <div class="reveal-card">
-        <div class="position-badge">Pour 3</div>
-        <div class="reveal-card-bottle">
-          <svg viewBox="0 0 60 140" xmlns="http://www.w3.org/2000/svg">
-            <rect x="22" y="0" width="16" height="14" fill="#241B19"/>
-            <path d="M 24 14 L 24 35 Q 24 40 19 46 L 13 56 Q 10 62 10 70 L 10 137 Q 10 140 14 140 L 46 140 Q 50 140 50 137 L 50 70 Q 50 62 47 56 L 41 46 Q 36 40 36 35 L 36 14 Z" fill="#3a3128"/>
-            <rect x="14" y="76" width="32" height="36" fill="#241B19"/>
-            <text x="30" y="96" text-anchor="middle" font-family="Fraunces" font-size="7" fill="#C9A961" font-weight="500">DRIMIA</text>
-          </svg>
-        </div>
-        <div class="reveal-card-vintage">2020</div>
-        <div class="reveal-card-name">Drimia</div>
-        <div class="reveal-card-meta">Yatir Hills · 884m</div>
-        <div class="reveal-card-results">
-          <span class="num">2</span>
+</div>
+</div>
+<div class="reveal-card">
+<div class="position-badge">Pour 3</div>
+<div class="reveal-card-bottle">
+<svg viewbox="0 0 60 140" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#241B19" height="14" width="16" x="22" y="0"></rect>
+<path d="M 24 14 L 24 35 Q 24 40 19 46 L 13 56 Q 10 62 10 70 L 10 137 Q 10 140 14 140 L 46 140 Q 50 140 50 137 L 50 70 Q 50 62 47 56 L 41 46 Q 36 40 36 35 L 36 14 Z" fill="#3a3128"></path>
+<rect fill="#241B19" height="36" width="32" x="14" y="76"></rect>
+<text fill="#C9A961" font-family="Fraunces" font-size="7" font-weight="500" text-anchor="middle" x="30" y="96">DRIMIA</text>
+</svg>
+</div>
+<div class="reveal-card-vintage">2020</div>
+<div class="reveal-card-name">Drimia</div>
+<div class="reveal-card-meta">Yatir Hills · 884m</div>
+<div class="reveal-card-results">
+<span class="num">2</span>
           guessed correctly <span class="of">of 4</span>
-        </div>
-      </div>
-
-      <div class="reveal-card">
-        <div class="position-badge">Pour 4</div>
-        <div class="reveal-card-bottle">
-          <svg viewBox="0 0 60 140" xmlns="http://www.w3.org/2000/svg">
-            <rect x="22" y="0" width="16" height="14" fill="#1A1413"/>
-            <path d="M 24 14 L 24 35 Q 24 40 19 46 L 13 56 Q 10 62 10 70 L 10 137 Q 10 140 14 140 L 46 140 Q 50 140 50 137 L 50 70 Q 50 62 47 56 L 41 46 Q 36 40 36 35 L 36 14 Z" fill="#4a1a22"/>
-            <rect x="14" y="76" width="32" height="36" fill="#F4EDE4"/>
-            <text x="30" y="95" text-anchor="middle" font-family="Fraunces" font-size="8" fill="#0F0B0A" font-weight="500" font-style="italic">Plato</text>
-            <text x="30" y="106" text-anchor="middle" font-family="JetBrains Mono" font-size="3" fill="#6B1E2C">2018</text>
-          </svg>
-        </div>
-        <div class="reveal-card-vintage">2018</div>
-        <div class="reveal-card-name">Plato</div>
-        <div class="reveal-card-meta">Adir · old vines</div>
-        <div class="reveal-card-results">
-          <span class="num">4</span>
+</div>
+</div>
+<div class="reveal-card">
+<div class="position-badge">Pour 4</div>
+<div class="reveal-card-bottle">
+<svg data-i18n="after_name_4" viewbox="0 0 60 140" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#1A1413" height="14" width="16" x="22" y="0"></rect>
+<path d="M 24 14 L 24 35 Q 24 40 19 46 L 13 56 Q 10 62 10 70 L 10 137 Q 10 140 14 140 L 46 140 Q 50 140 50 137 L 50 70 Q 50 62 47 56 L 41 46 Q 36 40 36 35 L 36 14 Z" fill="#4a1a22"></path>
+<rect fill="#F4EDE4" height="36" width="32" x="14" y="76"></rect>
+<text fill="#0F0B0A" font-family="Fraunces" font-size="8" font-style="italic" font-weight="500" text-anchor="middle" x="30" y="95">Plato</text>
+<text fill="#6B1E2C" font-family="JetBrains Mono" font-size="3" text-anchor="middle" x="30" y="106">2018</text>
+</svg>
+</div>
+<div class="reveal-card-vintage">2018</div>
+<div class="reveal-card-name">Plato</div>
+<div class="reveal-card-meta">Adir · old vines</div>
+<div class="reveal-card-results">
+<span class="num">4</span>
           guessed correctly <span class="of">of 4</span>
-        </div>
-      </div>
-
-      <div class="reveal-card">
-        <div class="position-badge">Pour 5</div>
-        <div class="reveal-card-bottle">
-          <svg viewBox="0 0 60 140" xmlns="http://www.w3.org/2000/svg">
-            <rect x="22" y="0" width="16" height="14" fill="#0F0B0A"/>
-            <path d="M 24 14 L 24 35 Q 24 40 19 46 L 13 56 Q 10 62 10 70 L 10 137 Q 10 140 14 140 L 46 140 Q 50 140 50 137 L 50 70 Q 50 62 47 56 L 41 46 Q 36 40 36 35 L 36 14 Z" fill="#3a1418"/>
-            <rect x="14" y="74" width="32" height="40" fill="#241B19" stroke="#8A7A6B" stroke-width="0.5"/>
-            <text x="30" y="88" text-anchor="middle" font-family="Fraunces" font-size="4" fill="#C9A961" font-style="italic">The</text>
-            <text x="30" y="100" text-anchor="middle" font-family="Fraunces" font-size="7" fill="#C9A961" font-weight="500">CAVE</text>
-          </svg>
-        </div>
-        <div class="reveal-card-vintage">2018</div>
-        <div class="reveal-card-name">The Cave</div>
-        <div class="reveal-card-meta">Carmel · ancient cellar</div>
-        <div class="reveal-card-results">
-          <span class="num">2</span>
+</div>
+</div>
+<div class="reveal-card">
+<div class="position-badge">Pour 5</div>
+<div class="reveal-card-bottle">
+<svg viewbox="0 0 60 140" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#0F0B0A" height="14" width="16" x="22" y="0"></rect>
+<path d="M 24 14 L 24 35 Q 24 40 19 46 L 13 56 Q 10 62 10 70 L 10 137 Q 10 140 14 140 L 46 140 Q 50 140 50 137 L 50 70 Q 50 62 47 56 L 41 46 Q 36 40 36 35 L 36 14 Z" fill="#3a1418"></path>
+<rect fill="#241B19" height="40" stroke="#8A7A6B" stroke-width="0.5" width="32" x="14" y="74"></rect>
+<text fill="#C9A961" font-family="Fraunces" font-size="4" font-style="italic" text-anchor="middle" x="30" y="88">The</text>
+<text fill="#C9A961" font-family="Fraunces" font-size="7" font-weight="500" text-anchor="middle" x="30" y="100">CAVE</text>
+</svg>
+</div>
+<div class="reveal-card-vintage">2018</div>
+<div class="reveal-card-name">The Cave</div>
+<div class="reveal-card-meta">Carmel · ancient cellar</div>
+<div class="reveal-card-results">
+<span class="num">2</span>
           guessed correctly <span class="of">of 4</span>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="final-section-title">Final <em>standings</em>.</h2>
-    <div class="results-row">
-      <div class="player-result first">
-        <div class="player-result-avatar">S</div>
-        <div class="player-result-name">Sara Levy</div>
-        <div class="player-result-rank">1st place</div>
-        <div class="player-result-score">4</div>
-        <div class="player-result-of">of 5 correct</div>
-      </div>
-      <div class="player-result">
-        <div class="player-result-avatar">M</div>
-        <div class="player-result-name">Maksim</div>
-        <div class="player-result-rank">2nd place</div>
-        <div class="player-result-score">3</div>
-        <div class="player-result-of">of 5 correct</div>
-      </div>
-      <div class="player-result">
-        <div class="player-result-avatar">M</div>
-        <div class="player-result-name">Marco</div>
-        <div class="player-result-rank">3rd place</div>
-        <div class="player-result-score">3</div>
-        <div class="player-result-of">of 5 correct</div>
-      </div>
-      <div class="player-result">
-        <div class="player-result-avatar">A</div>
-        <div class="player-result-name">Ana Ruiz</div>
-        <div class="player-result-rank">4th place</div>
-        <div class="player-result-score">2</div>
-        <div class="player-result-of">of 5 correct</div>
-      </div>
-    </div>
-
-    <div class="sommelier-quote">
-      <div class="sommelier-quote-label">, A word from your sommelier</div>
-      <p class="sommelier-quote-text">"The Drimia tripped you up. It always does. Petit Verdot at altitude reads younger than its vintage suggests , that's the trick of Yatir. Sara, your nose was sharp tonight. Maksim, you misread the Cave for the Lueria , same family, different houses. Pour again next month?"</p>
-      <div class="sommelier-quote-author">
-        <div class="sommelier-quote-avatar">CM</div>
-        <div class="sommelier-quote-info">
-          <div class="name">Carlos Mendoza, MS</div>
-          <div class="role">Master Sommelier · Madrid</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="final-cta-row">
-      <button class="btn" onclick="goTo('score')">← Review scoresheet</button>
-      <button class="btn btn-primary" onclick="goTo('after')">
+</div>
+</div>
+</div>
+<h2 class="final-section-title" data-i18n="final_final_section_title_2">Final <em>standings</em>.</h2>
+<div class="results-row">
+<div class="player-result first">
+<div class="player-result-avatar">S</div>
+<div class="player-result-name">Sara Levy</div>
+<div class="player-result-rank">1st place</div>
+<div class="player-result-score">4</div>
+<div class="player-result-of">of 5 correct</div>
+</div>
+<div class="player-result">
+<div class="player-result-avatar">M</div>
+<div class="player-result-name">Maksim</div>
+<div class="player-result-rank">2nd place</div>
+<div class="player-result-score">3</div>
+<div class="player-result-of">of 5 correct</div>
+</div>
+<div class="player-result">
+<div class="player-result-avatar">M</div>
+<div class="player-result-name">Marco</div>
+<div class="player-result-rank">3rd place</div>
+<div class="player-result-score">3</div>
+<div class="player-result-of">of 5 correct</div>
+</div>
+<div class="player-result">
+<div class="player-result-avatar">A</div>
+<div class="player-result-name">Ana Ruiz</div>
+<div class="player-result-rank">4th place</div>
+<div class="player-result-score">2</div>
+<div class="player-result-of">of 5 correct</div>
+</div>
+</div>
+<div class="sommelier-quote">
+<div class="sommelier-quote-label">, A word from your sommelier</div>
+<p class="sommelier-quote-text" data-i18n="final_sommelier_quote_text">"The Drimia tripped you up. It always does. Petit Verdot at altitude reads younger than its vintage suggests , that's the trick of Yatir. Sara, your nose was sharp tonight. Maksim, you misread the Cave for the Lueria , same family, different houses. Pour again next month?"</p>
+<div class="sommelier-quote-author">
+<div class="sommelier-quote-avatar">CM</div>
+<div class="sommelier-quote-info">
+<div class="name" data-i18n="final_name">Carlos Mendoza, MS</div>
+<div class="role">Master Sommelier · Madrid</div>
+</div>
+</div>
+</div>
+<div class="final-cta-row">
+<button class="btn" data-i18n="final_btn" onclick="goTo('score')">← Review scoresheet</button>
+<button class="btn btn-primary" data-i18n="final_btn_2" onclick="goTo('after')">
         Save the night <span class="btn-arrow">→</span>
-      </button>
-    </div>
-  </div>
+</button>
+</div>
+</div>
 </section>
-
 <!-- ============= 6. AFTERMATH ============= -->
 <section class="screen" id="after">
-  <div class="after-page">
-    <div class="page-header">
-      <div>
-        <div class="page-kicker">, The night, kept</div>
-        <h1 class="page-title">Your <em>cellar</em> remembers.</h1>
-      </div>
-      <div class="page-meta">
-        Saved · <span class="gold">12 May 2026 · 22:48</span><br>
+<div class="after-page">
+<div class="page-header">
+<div>
+<div class="page-kicker">, The night, kept</div>
+<h1 class="page-title" data-i18n="after_page_title">Your <em>cellar</em> remembers.</h1>
+</div>
+<div class="page-meta">
+        Saved · <span class="gold" data-i18n="after_gold">12 May 2026 · 22:48</span><br/>
         Synced to your account
       </div>
-    </div>
-
-    <div class="after-hero">
-      <div class="after-summary">
-        <h2 class="after-summary-h">Three out of five.<br>And the <em>Drimia</em> is on you.</h2>
-        <p class="after-summary-body">A respectable second place. Carlos was right , Petit Verdot at altitude tastes younger. You guessed Lueria when the answer was The Cave: same vineyard family, but a different terroir signature. Worth a return match.</p>
-      </div>
-      <div class="after-stats">
-        <h4>The night by numbers</h4>
-        <div class="after-stat-row"><span class="lbl">Wines tasted</span><span class="val">5</span></div>
-        <div class="after-stat-row"><span class="lbl">Correct guesses</span><span class="val gold">3</span></div>
-        <div class="after-stat-row"><span class="lbl">Time on game</span><span class="val">1h 14m</span></div>
-        <div class="after-stat-row"><span class="lbl">Place</span><span class="val">2nd of 4</span></div>
-        <div class="after-stat-row"><span class="lbl">Notes saved</span><span class="val green">5 / 5</span></div>
-        <div class="after-stat-row"><span class="lbl">Credits earned</span><span class="val gold">+15 cr</span></div>
-      </div>
-    </div>
-
-    <h2 class="your-wines-h">Rate your <em>five</em>.</h2>
-    <div class="wine-review-list">
-      <div class="wine-review-row">
-        <div class="wine-review-num">01</div>
-        <div class="wine-review-info">
-          <div class="name">Lueria Grand Vital 2018</div>
-          <div class="meta">Upper Galilee · Cab Sauv-led blend</div>
-        </div>
-        <div class="wine-review-status correct">Correct</div>
-        <div class="rating-stars">
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star"></div>
-        </div>
-      </div>
-
-      <div class="wine-review-row">
-        <div class="wine-review-num">02</div>
-        <div class="wine-review-info">
-          <div class="name">Adir Winemaker Edition 2020</div>
-          <div class="meta">Kerem Ben Zimra · single vineyard Cab</div>
-        </div>
-        <div class="wine-review-status correct">Correct</div>
-        <div class="rating-stars">
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star"></div>
-          <div class="rating-star"></div>
-        </div>
-      </div>
-
-      <div class="wine-review-row">
-        <div class="wine-review-num">03</div>
-        <div class="wine-review-info">
-          <div class="name">Drimia 2020</div>
-          <div class="meta">Yatir Hills · the trick of the night</div>
-        </div>
-        <div class="wine-review-status wrong">Missed</div>
-        <div class="rating-stars">
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-        </div>
-      </div>
-
-      <div class="wine-review-row">
-        <div class="wine-review-num">04</div>
-        <div class="wine-review-info">
-          <div class="name">Plato 2018</div>
-          <div class="meta">Adir · the friendly one</div>
-        </div>
-        <div class="wine-review-status correct">Correct</div>
-        <div class="rating-stars">
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star"></div>
-          <div class="rating-star"></div>
-        </div>
-      </div>
-
-      <div class="wine-review-row">
-        <div class="wine-review-num">05</div>
-        <div class="wine-review-info">
-          <div class="name">The Cave 2018</div>
-          <div class="meta">Carmel · 19th-century cellar</div>
-        </div>
-        <div class="wine-review-status wrong">Missed</div>
-        <div class="rating-stars">
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star filled"></div>
-          <div class="rating-star"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cta-strip">
-      <div class="cta-strip-text">
+</div>
+<div class="after-hero">
+<div class="after-summary">
+<h2 class="after-summary-h" data-i18n="after_after_summary_h">Three out of five.<br/>And the <em>Drimia</em> is on you.</h2>
+<p class="after-summary-body" data-i18n="after_after_summary_body">A respectable second place. Carlos was right , Petit Verdot at altitude tastes younger. You guessed Lueria when the answer was The Cave: same vineyard family, but a different terroir signature. Worth a return match.</p>
+</div>
+<div class="after-stats">
+<h4 data-i18n="after_h4">The night by numbers</h4>
+<div class="after-stat-row"><span class="lbl">Wines tasted</span><span class="val">5</span></div>
+<div class="after-stat-row"><span class="lbl">Correct guesses</span><span class="val gold">3</span></div>
+<div class="after-stat-row"><span class="lbl">Time on game</span><span class="val">1h 14m</span></div>
+<div class="after-stat-row"><span class="lbl">Place</span><span class="val">2nd of 4</span></div>
+<div class="after-stat-row"><span class="lbl">Notes saved</span><span class="val green">5 / 5</span></div>
+<div class="after-stat-row"><span class="lbl">Credits earned</span><span class="val gold" data-i18n="after_val_2">+15 cr</span></div>
+</div>
+</div>
+<h2 class="your-wines-h" data-i18n="after_your_wines_h">Rate your <em>five</em>.</h2>
+<div class="wine-review-list">
+<div class="wine-review-row">
+<div class="wine-review-num">01</div>
+<div class="wine-review-info">
+<div class="name" data-i18n="after_name">Lueria Grand Vital 2018</div>
+<div class="meta" data-i18n="after_meta">Upper Galilee · Cab Sauv-led blend</div>
+</div>
+<div class="wine-review-status correct">Correct</div>
+<div class="rating-stars">
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star"></div>
+</div>
+</div>
+<div class="wine-review-row">
+<div class="wine-review-num">02</div>
+<div class="wine-review-info">
+<div class="name" data-i18n="after_name_2">Adir Winemaker Edition 2020</div>
+<div class="meta" data-i18n="after_meta_2">Kerem Ben Zimra · single vineyard Cab</div>
+</div>
+<div class="wine-review-status correct">Correct</div>
+<div class="rating-stars">
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star"></div>
+<div class="rating-star"></div>
+</div>
+</div>
+<div class="wine-review-row">
+<div class="wine-review-num">03</div>
+<div class="wine-review-info">
+<div class="name" data-i18n="after_name_3">Drimia 2020</div>
+<div class="meta" data-i18n="after_meta_3">Yatir Hills · the trick of the night</div>
+</div>
+<div class="wine-review-status wrong">Missed</div>
+<div class="rating-stars">
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+</div>
+</div>
+<div class="wine-review-row">
+<div class="wine-review-num">04</div>
+<div class="wine-review-info">
+<div class="name">Plato 2018</div>
+<div class="meta" data-i18n="after_meta_4">Adir · the friendly one</div>
+</div>
+<div class="wine-review-status correct">Correct</div>
+<div class="rating-stars">
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star"></div>
+<div class="rating-star"></div>
+</div>
+</div>
+<div class="wine-review-row">
+<div class="wine-review-num">05</div>
+<div class="wine-review-info">
+<div class="name" data-i18n="after_name_5">The Cave 2018</div>
+<div class="meta" data-i18n="after_meta_5">Carmel · 19th-century cellar</div>
+</div>
+<div class="wine-review-status wrong">Missed</div>
+<div class="rating-stars">
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star filled"></div>
+<div class="rating-star"></div>
+</div>
+</div>
+</div>
+<div class="cta-strip">
+<div class="cta-strip-text">
         Tonight's bottles are <em>available</em> in your member shop. Reorder favourites or send tonight's box to a friend.
       </div>
-      <div class="cta-strip-actions">
-        <button class="btn">Send as gift</button>
-        <button class="btn btn-gold">Reorder bottles →</button>
-      </div>
-    </div>
-  </div>
+<div class="cta-strip-actions">
+<button class="btn" data-i18n="after_btn">Send as gift</button>
+<button class="btn btn-gold" data-i18n="after_btn_2">Reorder bottles →</button>
+</div>
+</div>
+</div>
 </section>
-
 <script>
   function goTo(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -1889,50 +1847,50 @@ body { overflow-x: hidden; }
     });
   });
 </script>
-
 <!-- ============= TT site footer ============= -->
 <div class="tt-prelaunch-banner">
   Pre-launch · Pending Spanish licenses · Not yet operating commercially
 </div>
 <footer class="tt-footer">
-  <div class="tt-footer-inner">
-    <div class="tt-footer-col">
-      <div class="tt-footer-brand">Tasting<span class="amp">&</span>Toasting</div>
-      <p class="tt-footer-tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
-    </div>
-    <div class="tt-footer-col">
-      <h4>Prototypes</h4>
-      <ul>
-        <li><a href="prototype.html">Member &amp; subscription</a></li>
-        <li><a href="game-flow.html">Game flow</a></li>
-        <li><a href="operations.html">Operations</a></li>
-        <li><a href="wave1.html">Wave 1 player</a></li>
-      </ul>
-    </div>
-    <div class="tt-footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <li><a href="legal.html">Legal Notice &amp; Cookies</a></li>
-      </ul>
-    </div>
-    <div class="tt-footer-col">
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></li>
-        <li><a href="mailto:privacy@tastingandtoasting.com">privacy@tastingandtoasting.com</a></li>
-        <li><a href="mailto:legal@tastingandtoasting.com">legal@tastingandtoasting.com</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="tt-footer-bottom">
-    <span>© 2026 Tasting And Toasting Inc. · Delaware Corp · Filing No. 7494277</span>
-    <div class="legal-jurisdictions">
-      <span>Operating subsidiary: Tasting And Toasting SL (Spain)</span>
-    </div>
-  </div>
+<div class="tt-footer-inner">
+<div class="tt-footer-col">
+<div class="tt-footer-brand">Tasting<span class="amp">&amp;</span>Toasting</div>
+<p class="tt-footer-tagline" data-i18n="footer_tt_footer_tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
+</div>
+<div class="tt-footer-col">
+<h4 data-i18n="footer_h4">Prototypes</h4>
+<ul>
+<li data-i18n="footer_li"><a data-i18n="footer_a" href="prototype.html">Member &amp; subscription</a></li>
+<li data-i18n="footer_li_2"><a data-i18n="footer_a_2" href="game-flow.html">Game flow</a></li>
+<li data-i18n="footer_li_3"><a data-i18n="footer_a_3" href="operations.html">Operations</a></li>
+<li data-i18n="footer_li_4"><a data-i18n="footer_a_4" href="wave1.html">Wave 1 player</a></li>
+</ul>
+</div>
+<div class="tt-footer-col">
+<h4 data-i18n="footer_h4_2">Legal</h4>
+<ul>
+<li data-i18n="footer_li_5"><a data-i18n="footer_a_5" href="privacy.html">Privacy Policy</a></li>
+<li data-i18n="footer_li_6"><a data-i18n="footer_a_6" href="terms.html">Terms of Service</a></li>
+<li data-i18n="footer_li_7"><a data-i18n="footer_a_7" href="legal.html">Legal Notice &amp; Cookies</a></li>
+</ul>
+</div>
+<div class="tt-footer-col">
+<h4 data-i18n="footer_h4_3">Contact</h4>
+<ul>
+<li data-i18n="footer_li_8"><a data-i18n="footer_a_8" href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></li>
+<li data-i18n="footer_li_9"><a data-i18n="footer_a_9" href="mailto:privacy@tastingandtoasting.com">privacy@tastingandtoasting.com</a></li>
+<li data-i18n="footer_li_10"><a data-i18n="footer_a_10" href="mailto:legal@tastingandtoasting.com">legal@tastingandtoasting.com</a></li>
+</ul>
+</div>
+</div>
+<div class="tt-footer-bottom">
+<span>© 2026 Tasting And Toasting Inc. · Delaware Corp · Filing No. 7494277</span>
+<div class="legal-jurisdictions">
+<span>Operating subsidiary: Tasting And Toasting SL (Spain)</span>
+</div>
+</div>
 </footer>
 
+<script defer="" src="src/i18n/apply-tt141.js"></script>
 </body>
 </html>
