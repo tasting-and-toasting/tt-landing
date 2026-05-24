@@ -109,13 +109,13 @@
     var wrap = document.createElement("div");
     wrap.className = "tt-lang-switcher";
     wrap.style.cssText =
-      "position:fixed;top:14px;right:16px;z-index:9999;font-family:monospace;";
+      "position:fixed;top:10px;right:72px;z-index:9999;font-family:monospace;";
 
     var btn = document.createElement("button");
     btn.type = "button";
     btn.innerHTML = FLAGS[currentLang] || FLAGS.en;
     btn.style.cssText =
-      "width:36px;height:24px;border:1.5px solid rgba(201,169,110,0.6);border-radius:3px;cursor:pointer;background:none;padding:0;display:flex;align-items:center;justify-content:center;overflow:hidden;";
+      "width:36px;height:24px;border:1.5px solid rgba(201,169,110,0.6);border-radius:3px;cursor:pointer;background:none;padding:0;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,0.4);";
     btn.setAttribute("aria-label", "Select language");
     btn.setAttribute("aria-expanded", "false");
     btn.setAttribute("aria-haspopup", "listbox");
