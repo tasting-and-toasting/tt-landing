@@ -81,6 +81,12 @@
   function injectLangSelector(currentLang) {
     if (document.querySelector(".tt-lang-switcher")) return;
 
+    var navEl =
+      document.querySelector("nav") ||
+      document.querySelector("header nav") ||
+      document.querySelector(".nav-links") ||
+      document.querySelector("[class*=\"nav\"]");
+
     var FLAGS = {
       en:
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg>',
@@ -109,13 +115,13 @@
     var wrap = document.createElement("div");
     wrap.className = "tt-lang-switcher";
     wrap.style.cssText =
-      "position:fixed;top:10px;right:72px;z-index:9999;font-family:monospace;";
+      "margin-left:auto;display:flex;align-items:center;position:relative;flex-shrink:0;font-family:monospace;";
 
     var btn = document.createElement("button");
     btn.type = "button";
     btn.innerHTML = FLAGS[currentLang] || FLAGS.en;
     btn.style.cssText =
-      "width:36px;height:24px;border:1.5px solid rgba(201,169,110,0.6);border-radius:3px;cursor:pointer;background:none;padding:0;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,0.4);";
+      "width:32px;height:22px;border:1.5px solid rgba(201,169,110,0.6);border-radius:3px;cursor:pointer;background:none;padding:0;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,0.4);";
     btn.setAttribute("aria-label", "Select language");
     btn.setAttribute("aria-expanded", "false");
     btn.setAttribute("aria-haspopup", "listbox");
@@ -123,7 +129,8 @@
     var dropdown = document.createElement("div");
     dropdown.setAttribute("role", "listbox");
     dropdown.style.cssText =
-      "display:none;position:absolute;top:30px;right:0;background:rgba(10,5,5,0.95);border:1px solid rgba(201,169,110,0.3);border-radius:4px;padding:8px;flex-wrap:wrap;gap:6px;width:160px;box-sizing:border-box;";
+      "display:none;position:absolute;top:26px;right:0;background:rgba(10,5,5,0.95);border:1px solid rgba(201,169,110,0.3);border-radius:4px;padding:8px;flex-wrap:wrap;gap:6px;width:160px;box-sizing:border-box;";
+
 
 
     var langsList = ["en", "fr", "ru", "es", "uk", "it", "de", "he", "pt", "ka", "ro"];
@@ -134,7 +141,7 @@
       a.innerHTML = FLAGS[code];
       var borderGold = code === currentLang ? "2px solid #c9a96e" : "1px solid #333";
       a.style.cssText =
-        "width:36px;height:24px;display:inline-flex;border-radius:2px;overflow:hidden;border:" +
+        "width:32px;height:22px;display:inline-flex;border-radius:2px;overflow:hidden;border:" +
         borderGold +
         ";opacity:" +
         (code === currentLang ? "1" : "0.7") +
@@ -163,7 +170,13 @@
     wrap.appendChild(btn);
     wrap.appendChild(dropdown);
 
-    document.body.appendChild(wrap);
+    if (navEl && navEl.appendChild) {
+      navEl.appendChild(wrap);
+    } else {
+      wrap.style.cssText =
+        "margin-left:0;display:flex;align-items:center;position:fixed;top:58px;right:16px;z-index:9999;font-family:monospace;";
+      document.body.appendChild(wrap);
+    }
 
     if (!document.getElementById("tt-lang-switcher-style")) {
       var style = document.createElement("style");
