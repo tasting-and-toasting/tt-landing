@@ -81,39 +81,96 @@
   function injectLangSelector(currentLang) {
     if (document.querySelector(".tt-lang-switcher")) return;
 
-    var langs = [
-      { code: "en", label: "EN" },
-      { code: "fr", label: "FR" },
-      { code: "ru", label: "RU" },
-      { code: "es", label: "ES" },
-      { code: "uk", label: "UK" },
-      { code: "it", label: "IT" },
-      { code: "de", label: "DE" },
-      { code: "he", label: "HE" },
-      { code: "pt", label: "PT" },
-      { code: "ka", label: "KA" },
-      { code: "ro", label: "RO" },
-    ];
+    var FLAGS = {
+      en:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg>',
+      fr:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="10" height="20" fill="#002395"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ED2939"/></svg>',
+      ru:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="30" height="7" fill="#fff"/><rect y="7" width="30" height="6" fill="#0033A0"/><rect y="13" width="30" height="7" fill="#CC0000"/></svg>',
+      es:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>',
+      uk:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="30" height="10" fill="#005BBB"/><rect y="10" width="30" height="10" fill="#FFD500"/></svg>',
+      it:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="10" height="20" fill="#009246"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE2B37"/></svg>',
+      de:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="30" height="7" fill="#000"/><rect y="7" width="30" height="6" fill="#DD0000"/><rect y="13" width="30" height="7" fill="#FFCE00"/></svg>',
+      he:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><rect y="3" width="30" height="3" fill="#0038b8"/><rect y="14" width="30" height="3" fill="#0038b8"/><polygon points="15,7 18.5,13 11.5,13" fill="none" stroke="#0038b8" stroke-width="1.2"/><polygon points="15,13 18.5,7 11.5,7" fill="none" stroke="#0038b8" stroke-width="1.2"/></svg>',
+      pt:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="12" height="20" fill="#006600"/><rect x="12" width="18" height="20" fill="#FF0000"/><circle cx="12" cy="10" r="4" fill="#FFD700" stroke="#003399" stroke-width="0.8"/></svg>',
+      ka:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><rect x="12" width="6" height="20" fill="#FF0000"/><rect y="7" width="30" height="6" fill="#FF0000"/></svg>',
+      ro:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="10" height="20" fill="#002B7F"/><rect x="10" width="10" height="20" fill="#FCD116"/><rect x="20" width="10" height="20" fill="#CE1126"/></svg>',
+    };
 
-    var switcher = document.createElement("div");
-    switcher.className = "tt-lang-switcher";
-    switcher.style.cssText =
-      "position:fixed;top:12px;right:16px;z-index:9999;display:flex;gap:4px;flex-wrap:wrap;max-width:200px;background:rgba(0,0,0,0.7);padding:6px 8px;border-radius:4px;";
+    var wrap = document.createElement("div");
+    wrap.className = "tt-lang-switcher";
+    wrap.style.cssText =
+      "position:fixed;top:14px;right:16px;z-index:9999;font-family:monospace;";
 
-    langs.forEach(function (item) {
-      var ln = document.createElement("a");
-      ln.href = "?lang=" + encodeURIComponent(item.code);
-      ln.textContent = item.label;
-      ln.style.cssText =
-        "font-size:11px;color:" +
-        (item.code === currentLang ? "#c9a96e" : "#888") +
-        ";font-weight:" +
-        (item.code === currentLang ? "700" : "400") +
-        ";text-decoration:none;font-family:monospace;";
-      switcher.appendChild(ln);
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.innerHTML = FLAGS[currentLang] || FLAGS.en;
+    btn.style.cssText =
+      "width:36px;height:24px;border:1.5px solid rgba(201,169,110,0.6);border-radius:3px;cursor:pointer;background:none;padding:0;display:flex;align-items:center;justify-content:center;overflow:hidden;";
+    btn.setAttribute("aria-label", "Select language");
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-haspopup", "listbox");
+
+    var dropdown = document.createElement("div");
+    dropdown.setAttribute("role", "listbox");
+    dropdown.style.cssText =
+      "display:none;position:absolute;top:30px;right:0;background:rgba(10,5,5,0.95);border:1px solid rgba(201,169,110,0.3);border-radius:4px;padding:8px;flex-wrap:wrap;gap:6px;width:160px;box-sizing:border-box;";
+
+
+    var langsList = ["en", "fr", "ru", "es", "uk", "it", "de", "he", "pt", "ka", "ro"];
+
+    langsList.forEach(function (code) {
+      var a = document.createElement("a");
+      a.href = "?lang=" + encodeURIComponent(code);
+      a.innerHTML = FLAGS[code];
+      var borderGold = code === currentLang ? "2px solid #c9a96e" : "1px solid #333";
+      a.style.cssText =
+        "width:36px;height:24px;display:inline-flex;border-radius:2px;overflow:hidden;border:" +
+        borderGold +
+        ";opacity:" +
+        (code === currentLang ? "1" : "0.7") +
+        ";";
+      a.setAttribute("aria-label", code.toUpperCase());
+      a.title = code.toUpperCase();
+      dropdown.appendChild(a);
     });
 
-    document.body.appendChild(switcher);
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = dropdown.style.display !== "flex";
+      dropdown.style.display = open ? "flex" : "none";
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    document.addEventListener(
+      "click",
+      function () {
+        dropdown.style.display = "none";
+        btn.setAttribute("aria-expanded", "false");
+      },
+      false
+    );
+
+    wrap.appendChild(btn);
+    wrap.appendChild(dropdown);
+
+    document.body.appendChild(wrap);
+
+    if (!document.getElementById("tt-lang-switcher-style")) {
+      var style = document.createElement("style");
+      style.id = "tt-lang-switcher-style";
+      style.textContent = ".tt-lang-switcher svg{width:100%;height:100%;display:block}";
+      document.head.appendChild(style);
+    }
   }
 
   /** Language: ?lang= first, persist to tt_lang, then localStorage, else browser locales. */
