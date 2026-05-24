@@ -57,6 +57,7 @@ SECTION_FILES: tuple[tuple[str, tuple[str, ...]], ...] = (
             "tools/chatgpt-wave1-batch1-fr-ru_chatgpt.txt",
         ),
     ),
+    ("index", ("tools/index-landing-translated.json",)),
 )
 
 
@@ -76,7 +77,7 @@ def load_json_any(path: Path) -> dict:
 
 def merge_english_sections(base: dict, all_pages_en: dict) -> None:
     base.setdefault("en", {})
-    for section in ("proto", "gameflow", "wave1", "ops"):
+    for section in ("proto", "gameflow", "wave1", "ops", "index"):
         block = dict(all_pages_en.get(section) or {})
         alias = SECTION_DOC_TITLE_KEY.get(section)
         if alias and isinstance(block.get("doc_title"), str):
