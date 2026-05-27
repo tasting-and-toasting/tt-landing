@@ -92,6 +92,42 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 18px;
 }
+.topbar-cta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 6px 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.topbar-cta:hover {
+  background: var(--gold);
+  color: #120c0a;
+}
+.tt-ios-invite {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  margin-top: 18px;
+  max-width: 560px;
+  line-height: 1.6;
+}
+.tt-ios-invite a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 169, 97, 0.35);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.tt-ios-invite a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--gold);
+}
 .lang-switcher-flags {
   display: flex;
   flex-wrap: wrap;
@@ -556,6 +592,7 @@ html[dir="rtl"] .tt141-feature-row { direction: rtl; }
     <a href="legal.html">Legal</a>
   </div>
   <div class="topbar-trail">
+    <a href="https://web.tastingandtoasting.com" class="topbar-cta" data-i18n="cta_play_now">Play now</a>
     <nav class="lang-switcher tt-lang-switcher" aria-label="Language">
       <div class="lang-switcher-flags">
         <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
@@ -615,18 +652,9 @@ html[dir="rtl"] .tt141-feature-row { direction: rtl; }
        font-weight:600;
      ">Play now</a>
 
-  <a href="https://testflight.apple.com/join/REPLACE_WITH_LINK"
-     class="tt-btn-secondary"
-     data-i18n="cta_download_ios"
-     style="
-       border:1px solid #c9a96e;
-       color:#c9a96e;
-       padding:12px 24px;
-       border-radius:6px;
-       font-size:13px;
-       letter-spacing:2px;
-       text-decoration:none;
-     ">Download for iPhone</a>
+</div>
+<div class="tt-ios-invite" data-i18n-html="cta_ios_invite_html">
+  iOS app · Invitation only. Request access &rarr; <a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a>
 </div>
 </section>
 
