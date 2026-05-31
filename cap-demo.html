@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasting &amp; Toasting CAP — консоль винодельни + паспорт</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b0d; --void-2:#121013; --panel:#171318; --panel-2:#1d181e;
+  --burg:#4a1a26; --burg-2:#2a1620; --wine:#6b2737; --wine-soft:#7d2f41;
+  --cream:#f4eee6; --cream-soft:#cbbfb0;
+  --gold:#cba24f; --gold-soft:#e0c486;
+  --green:#86a878; --coral:#c66a7c;
+  --line:#2c252e; --line-2:#231d27; --ink-dim:#86807f;
+  --serif:"Playfair Display", Georgia, serif;
+  --body:"Spectral", Georgia, serif;
+  --mono:"Spline Sans Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{ scroll-behavior:smooth; }
+body{ background:var(--void); color:var(--cream); font-family:var(--body); font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
+.mono{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--ink-dim); }
+.wrap{ max-width:1180px; margin:0 auto; padding:0 28px; }
+.serif{ font-family:var(--serif); }
+
+/* ===== UNIFIED NAVBAR ===== */
+.navbar{ border-bottom:1px solid var(--line); background:rgba(12,11,13,.9); position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); }
+.navbar .wrap{ display:flex; align-items:center; justify-content:space-between; height:58px; gap:18px; }
+.nb-brand{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--cream); white-space:nowrap; }
+.nb-brand b{ color:var(--gold-soft); font-weight:600; }
+.nb-nav{ display:flex; gap:26px; }
+.nb-nav .ni{ font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-dim); cursor:pointer; padding:8px 2px; border-bottom:1.5px solid transparent; transition:.2s; user-select:none; white-space:nowrap; }
+.nb-nav .ni.active{ color:var(--cream); border-bottom-color:var(--gold); }
+.nb-pill{ display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:9px; letter-spacing:.16em; color:var(--green); border:1px solid #3a4a34; border-radius:40px; padding:5px 11px; white-space:nowrap; }
+.nb-dot{ width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 8px #86a87890; }
+.nb-strip{ border-bottom:1px solid var(--line); background:var(--void-2); }
+.nb-strip .wrap{ padding-top:9px; padding-bottom:9px; }
+.nb-strip .t{ font-family:var(--serif); font-style:italic; font-size:14px; color:var(--cream-soft); }
+.nb-strip .t b{ color:var(--gold-soft); font-style:normal; font-weight:500; }
+
+/* view toggle */
+.view{ display:none; }
+.view.show{ display:block; animation:vfade .4s ease; }
+@keyframes vfade{ from{opacity:0;} to{opacity:1;} }
+
+/* ===== SHARED PRIMITIVES ===== */
+section{ padding:60px 0; border-bottom:1px solid var(--line); }
+.sec-h{ display:flex; align-items:baseline; gap:16px; margin-bottom:8px; }
+.sec-h .idx{ font-family:var(--serif); font-style:italic; color:var(--gold); font-size:20px; }
+h2{ font-family:var(--serif); font-weight:700; font-size:clamp(26px,3.4vw,38px); line-height:1.1; }
+.sub{ color:var(--cream-soft); max-width:660px; margin-top:10px; font-size:16px; }
+
+/* ===== CONSOLE: HERO ===== */
+.hero{ padding:74px 0 52px; border-bottom:1px solid var(--line); background:radial-gradient(120% 80% at 80% -10%, #25141c 0%, var(--void) 55%); }
+.hero .kick{ margin-bottom:22px; }
+.hero h1{ font-family:var(--serif); font-weight:800; font-size:clamp(40px,7vw,80px); line-height:1.0; letter-spacing:-.5px; }
+.hero h1 em{ color:var(--gold-soft); font-style:italic; font-weight:500; }
+.hero p{ margin-top:22px; max-width:560px; color:var(--cream-soft); font-size:17px; }
+.hero .meta{ margin-top:30px; display:flex; gap:34px; flex-wrap:wrap; }
+.hero .meta div .n{ font-family:var(--serif); font-size:26px; color:var(--cream); }
+.hero .meta div .l{ display:block; margin-top:2px; }
+
+/* door */
+.door{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:30px; }
+.door .step{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px 20px; position:relative; overflow:hidden; }
+.door .step .num{ font-family:var(--serif); font-style:italic; font-size:40px; color:#3a3340; line-height:1; }
+.door .step h3{ font-family:var(--serif); font-weight:700; font-size:19px; margin:10px 0 6px; }
+.door .step p{ font-size:14px; color:var(--cream-soft); }
+.door .step .tag{ position:absolute; top:18px; right:18px; }
+.tag-done{ font-family:var(--mono); font-size:9px; letter-spacing:.16em; color:var(--green); border:1px solid #3a4a34; border-radius:30px; padding:4px 9px; }
+.door .step.is-key{ background:linear-gradient(160deg,#241019,#171318); border-color:#3a2230; }
+.door-result{ margin-top:18px; display:flex; align-items:center; gap:14px; font-family:var(--serif); font-size:22px; color:var(--gold-soft); }
+.door-result svg{ flex:0 0 auto; }
+
+/* stepper */
+.stepper{ display:flex; gap:8px; flex-wrap:wrap; margin:26px 0 22px; }
+.stepper .s{ font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; color:var(--ink-dim); border:1px solid var(--line); border-radius:30px; padding:6px 12px; transition:.3s; }
+.stepper .s.active{ color:var(--gold-soft); border-color:#4a3a22; background:#1c1610; }
+.stepper .s.complete{ color:var(--green); border-color:#3a4a34; }
+
+/* split */
+.split{ display:grid; grid-template-columns:1.05fr .95fr; gap:24px; align-items:start; }
+.console{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:26px; }
+.console .blocklabel{ margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; }
+.fieldset{ border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:16px; background:var(--void-2); }
+.fieldset > .mono{ display:block; margin-bottom:10px; color:var(--gold); }
+.field{ font-family:var(--serif); font-size:20px; color:var(--cream); }
+.field.small{ font-size:15px; font-family:var(--body); color:var(--cream-soft); font-weight:300; }
+.editbadge{ font-family:var(--mono); font-size:8px; letter-spacing:.14em; color:var(--ink-dim); border:1px dashed #3a3340; border-radius:5px; padding:2px 6px; margin-left:8px; vertical-align:middle; }
+
+/* DNA (shared) */
+.dna{ margin:6px 0 2px; }
+.dna .bar{ display:flex; align-items:center; gap:11px; margin:8px 0; }
+.dna .bar .name{ width:150px; font-size:13px; color:var(--cream-soft); }
+.dna .bar .track{ flex:1; height:7px; background:#241e26; border-radius:6px; overflow:hidden; }
+.dna .bar .fill{ height:100%; background:linear-gradient(90deg,var(--wine),var(--gold)); border-radius:6px; }
+.dna .bar .pct{ width:40px; text-align:right; font-family:var(--mono); font-size:10.5px; color:var(--gold-soft); letter-spacing:.04em; }
+
+/* serial */
+.serial{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+.serial .big{ font-family:var(--serif); font-size:38px; color:var(--cream); }
+.serial .big b{ color:var(--gold-soft); }
+.serial input[type=range]{ width:100%; margin-top:12px; accent-color:var(--gold); }
+.serial .edition{ font-family:var(--mono); font-size:10px; color:var(--ink-dim); letter-spacing:.16em; }
+
+/* journey author rows (console) */
+.jrow{ display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--line); }
+.jrow:last-child{ border-bottom:none; }
+.jrow .jc{ width:13px; height:13px; border-radius:50%; border:2px solid #4a3f48; flex:0 0 auto; transition:.3s; }
+.jrow.signed .jc{ background:var(--green); border-color:var(--green); box-shadow:0 0 9px #86a87870; }
+.jrow .jt{ flex:1; }
+.jrow .jt .h{ font-family:var(--serif); font-size:15.5px; color:var(--cream); }
+.jrow .jt .d{ font-size:12.5px; color:var(--ink-dim); }
+.signbtn{ font-family:var(--mono); font-size:9px; letter-spacing:.14em; cursor:pointer; user-select:none; border:1px solid #4a3a22; color:var(--gold-soft); background:#1c1610; border-radius:30px; padding:7px 13px; transition:.25s; }
+.signbtn:hover{ background:#2a2113; }
+.jrow.signed .signbtn{ border-color:#3a4a34; color:var(--green); background:#141a12; pointer-events:none; }
+
+.carrier{ display:flex; gap:16px; align-items:center; }
+.qr{ width:74px; height:74px; border-radius:10px; background:var(--cream); padding:9px; flex:0 0 auto; }
+.qr svg{ width:100%; height:100%; }
+.carrier .ct .h{ font-family:var(--serif); font-size:17px; }
+.carrier .ct .d{ font-size:13px; color:var(--cream-soft); }
+
+.signall{ width:100%; margin-top:6px; font-family:var(--mono); font-size:11px; letter-spacing:.16em; cursor:pointer; border:none; border-radius:10px; padding:15px; color:#1a1206; background:linear-gradient(90deg,var(--gold),var(--gold-soft)); transition:.25s; font-weight:600; }
+.signall:hover{ filter:brightness(1.07); }
+.signall:disabled{ background:#2a2410; color:#6a5f3f; cursor:default; }
+
+/* console mini passport preview */
+.cpassport{ background:linear-gradient(180deg,#141015,#0e0c0f); border:1px solid var(--line); border-radius:16px; overflow:hidden; position:sticky; top:130px; }
+.cpassport .pp-top{ display:flex; justify-content:space-between; padding:11px 16px; border-bottom:1px solid var(--line); }
+.cpassport .pp-body{ padding:26px 22px 22px; text-align:center; }
+.cpassport .pp-check{ width:54px; height:54px; border-radius:50%; border:1.5px solid #3a4a34; margin:6px auto 12px; display:flex; align-items:center; justify-content:center; transition:.4s; }
+.cpassport .pp-status{ font-family:var(--mono); font-size:9.5px; letter-spacing:.2em; color:var(--ink-dim); transition:.3s; }
+.cpassport .pp-verdict{ font-family:var(--serif); font-size:23px; margin:7px 0 2px; color:var(--cream-soft); transition:.3s; }
+.cpassport.live .pp-check{ border-color:var(--green); background:#141a1240; }
+.cpassport.live .pp-status{ color:var(--green); }
+.cpassport.live .pp-verdict{ color:var(--cream); }
+.cpassport .pp-meta{ font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; color:var(--gold-soft); margin:16px 0 4px; }
+.cpassport .pp-name{ font-family:var(--serif); font-size:30px; line-height:1.05; }
+.cpassport .pp-region{ font-style:italic; color:var(--cream-soft); font-size:14px; margin-top:3px; }
+.cpassport .pp-tabs{ display:flex; gap:18px; justify-content:center; margin:18px 0 4px; font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; color:var(--ink-dim); }
+.cpassport .pp-tabs .on{ color:var(--cream); border-bottom:1px solid var(--gold); padding-bottom:5px; }
+.cpassport .pp-line{ height:1px; background:var(--line); margin:14px -22px; }
+.cpassport .pp-tl{ text-align:left; }
+.cpassport .pp-tl .e{ display:flex; gap:11px; padding:7px 0; opacity:.4; transition:.4s; }
+.cpassport .pp-tl .e.on{ opacity:1; }
+.cpassport .pp-tl .e .c{ width:11px; height:11px; border-radius:50%; border:1.5px solid #4a3f48; margin-top:3px; flex:0 0 auto; }
+.cpassport .pp-tl .e.on .c{ background:var(--green); border-color:var(--green); }
+.cpassport .pp-tl .e .h{ font-family:var(--serif); font-size:14px; }
+.cpassport .pp-tl .e .d{ font-size:11.5px; color:var(--ink-dim); }
+.cpassport .pp-quote{ text-align:left; border-left:2px solid var(--wine); padding:8px 0 8px 14px; margin-top:6px; font-style:italic; color:var(--cream-soft); font-size:13.5px; }
+.cpassport .pp-quote .a{ font-style:normal; font-family:var(--mono); font-size:8.5px; letter-spacing:.14em; color:var(--ink-dim); margin-top:7px; }
+.cpassport .pp-foot{ font-family:var(--mono); font-size:8px; letter-spacing:.14em; color:var(--ink-dim); text-align:center; padding:13px; border-top:1px solid var(--line); line-height:1.7; }
+
+/* economy */
+.eco{ display:grid; grid-template-columns:1.2fr 1fr; gap:24px; margin-top:28px; align-items:start; }
+.eco-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.metric{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px; }
+.metric .n{ font-family:var(--serif); font-size:34px; color:var(--cream); line-height:1; }
+.metric .n .u{ font-size:14px; color:var(--gold-soft); }
+.metric .l{ margin-top:8px; }
+.metric .delta{ font-family:var(--mono); font-size:10px; letter-spacing:.08em; margin-top:5px; }
+.metric .delta.g{ color:var(--green); } .metric .delta.c{ color:var(--coral); }
+.cost{ background:linear-gradient(160deg,#1d1018,#161217); border:1px solid #34232c; border-radius:14px; padding:22px; }
+.cost h3{ font-family:var(--serif); font-size:20px; margin-bottom:4px; }
+.cost .price{ font-family:var(--serif); font-size:40px; color:var(--gold-soft); margin:8px 0; }
+.cost .price small{ font-size:14px; color:var(--cream-soft); }
+.cost ul{ list-style:none; margin-top:8px; }
+.cost li{ display:flex; gap:9px; font-size:13.5px; color:var(--cream-soft); padding:5px 0; }
+.cost li svg{ flex:0 0 auto; margin-top:4px; }
+.exchange{ font-family:var(--serif); font-style:italic; color:var(--gold-soft); font-size:17px; margin-top:18px; }
+
+/* ===== PASSPORT VIEW (consumer) ===== */
+#view-passport.show{ display:block; padding:40px 16px 20px; background:radial-gradient(130% 80% at 50% -5%, #1c1019 0%, var(--void) 55%); }
+.caption{ text-align:center; max-width:430px; margin:0 auto 26px; }
+.caption .t{ font-family:var(--serif); font-style:italic; font-size:20px; color:var(--gold-soft); }
+.caption .s{ color:var(--cream-soft); font-size:13.5px; margin-top:6px; }
+.phone{ width:420px; max-width:100%; margin:0 auto; border-radius:34px; background:#000; padding:9px; box-shadow:0 40px 90px -30px #000, 0 0 0 1px #2a2330, inset 0 0 0 1px #1a161c; position:relative; }
+.notch{ position:absolute; top:14px; left:50%; transform:translateX(-50%); width:96px; height:6px; border-radius:6px; background:#1a161c; z-index:5; }
+.screen{ border-radius:27px; overflow:hidden; background:linear-gradient(180deg,#141015,#0e0c0f); height:760px; overflow-y:auto; position:relative; }
+.screen::-webkit-scrollbar{ width:0; }
+.p-top{ display:flex; justify-content:space-between; padding:14px 18px 12px; border-bottom:1px solid var(--line-2); position:sticky; top:0; background:rgba(14,12,15,.92); backdrop-filter:blur(8px); z-index:4; }
+.seal-wrap{ text-align:center; padding:26px 22px 10px; }
+.seal{ width:62px; height:62px; border-radius:50%; border:1.5px solid var(--green); margin:0 auto 13px; display:flex; align-items:center; justify-content:center; background:#141a1230; animation:pop .6s cubic-bezier(.2,.8,.2,1.4); }
+@keyframes pop{ 0%{transform:scale(.6); opacity:0;} 100%{transform:scale(1); opacity:1;} }
+.seal-status{ font-family:var(--mono); font-size:10px; letter-spacing:.26em; color:var(--green); }
+.verdict{ font-family:var(--serif); font-weight:500; font-size:26px; margin-top:6px; letter-spacing:.3px; }
+.bottlemeta{ text-align:center; padding:6px 22px 18px; }
+.bottlemeta .line{ font-family:var(--mono); font-size:9.5px; letter-spacing:.22em; color:var(--gold-soft); }
+.bottlemeta h1{ font-family:var(--serif); font-weight:700; font-size:31px; line-height:1.05; margin:9px 0 2px; }
+.bottlemeta .region{ font-style:italic; color:var(--cream-soft); font-size:14px; }
+.tabs{ display:flex; justify-content:center; gap:26px; border-bottom:1px solid var(--line-2); padding:0 22px; position:sticky; top:47px; background:rgba(14,12,15,.95); backdrop-filter:blur(8px); z-index:3; }
+.tab{ font-family:var(--mono); font-size:10px; letter-spacing:.18em; color:var(--ink-dim); padding:15px 2px; cursor:pointer; border-bottom:1.5px solid transparent; transition:.2s; user-select:none; }
+.tab.active{ color:var(--cream); border-bottom-color:var(--gold); }
+.panel{ display:none; padding:22px; animation:fade .35s ease; }
+.panel.show{ display:block; }
+@keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+.block-label{ display:block; margin:0 0 9px; }
+.divider{ height:1px; background:var(--line-2); margin:20px 0; }
+.composition p{ font-size:15px; color:var(--cream-soft); line-height:1.65; }
+.timeline{ position:relative; padding-left:6px; }
+.tl-item{ display:flex; gap:13px; padding:10px 0; }
+.tl-item .c{ width:12px; height:12px; border-radius:50%; border:2px solid var(--green); background:#141a12; margin-top:4px; flex:0 0 auto; position:relative; }
+.tl-item:not(:last-child) .c::after{ content:""; position:absolute; left:50%; top:14px; transform:translateX(-50%); width:1.5px; height:34px; background:var(--line); }
+.tl-item.live .c{ border-color:var(--gold); background:var(--gold); box-shadow:0 0 9px var(--gold); }
+.tl-item .h{ font-family:var(--serif); font-size:15px; }
+.tl-item .d{ font-size:12.5px; color:var(--ink-dim); }
+.quote{ border-left:2px solid var(--wine); padding:4px 0 4px 16px; }
+.quote p{ font-style:italic; font-size:16px; line-height:1.55; color:var(--cream); font-family:var(--serif); font-weight:400; }
+.quote .by{ font-family:var(--mono); font-size:9px; letter-spacing:.16em; color:var(--ink-dim); margin-top:10px; }
+.chain-banner{ display:flex; align-items:center; gap:10px; background:#141a12; border:1px solid #3a4a34; border-radius:10px; padding:11px 13px; margin-bottom:18px; }
+.chain-banner svg{ flex:0 0 auto; }
+.chain-banner .x{ font-size:13px; color:var(--cream); }
+.chain-banner .x b{ color:var(--green); }
+.jcard{ background:var(--panel-2); border:1px solid var(--line); border-radius:12px; padding:15px 15px 13px; margin-bottom:13px; }
+.jcard.current{ border-color:#4a3a22; background:linear-gradient(160deg,#1c1610,#1a151b); }
+.jcard .jhead{ display:flex; justify-content:space-between; align-items:baseline; }
+.jcard .jtype{ font-family:var(--mono); font-size:9px; letter-spacing:.2em; color:var(--gold-soft); }
+.jcard .jtime{ font-family:var(--mono); font-size:9px; color:var(--ink-dim); letter-spacing:.08em; }
+.jcard .jplace{ font-family:var(--serif); font-size:17px; margin:6px 0 3px; }
+.jcard .jsub{ font-size:12.5px; color:var(--cream-soft); }
+.jmeta{ margin-top:11px; padding-top:11px; border-top:1px solid var(--line-2); display:flex; flex-direction:column; gap:7px; }
+.jr{ display:flex; align-items:center; gap:8px; font-size:12px; }
+.jr .k{ font-family:var(--mono); font-size:8.5px; letter-spacing:.12em; color:var(--ink-dim); width:74px; flex:0 0 auto; }
+.jr .v{ color:var(--cream-soft); }
+.sigchip{ display:inline-flex; align-items:center; gap:5px; font-family:var(--mono); font-size:8.5px; letter-spacing:.1em; color:var(--green); border:1px solid #3a4a34; border-radius:20px; padding:2px 8px; }
+.sigchip.live{ color:var(--gold-soft); border-color:#4a3a22; }
+.hash{ font-family:var(--mono); font-size:10px; color:var(--gold-soft); letter-spacing:.02em; }
+.pending{ color:var(--gold-soft); }
+.manifesto .pull{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:23px; line-height:1.35; color:var(--cream); }
+.manifesto .pull .accent{ color:var(--gold-soft); }
+.manifesto p{ font-size:14.5px; color:var(--cream-soft); line-height:1.7; margin:13px 0; }
+.man-facts{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:16px 0; }
+.man-facts .f{ background:var(--panel-2); border:1px solid var(--line); border-radius:10px; padding:12px; }
+.man-facts .f .n{ font-family:var(--serif); font-size:21px; color:var(--cream); }
+.man-facts .f .l{ margin-top:3px; }
+.sign-row{ display:flex; align-items:center; gap:11px; margin-top:6px; padding:12px; background:var(--panel-2); border:1px solid var(--line); border-radius:10px; }
+.sign-row .av{ width:38px; height:38px; border-radius:50%; flex:0 0 auto; background:radial-gradient(circle at 35% 30%, var(--gold-soft), var(--wine) 75%); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:14px; color:#1a0e12; font-weight:700; }
+.sign-row .nm{ flex:1; }
+.sign-row .nm .h{ font-family:var(--serif); font-size:15px; }
+.sign-row .nm .d{ font-size:11.5px; color:var(--ink-dim); }
+.actions{ display:flex; gap:10px; padding:4px 22px 20px; }
+.actions a{ flex:1; text-align:center; text-decoration:none; font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; padding:13px 8px; border-radius:10px; border:1px solid var(--line); color:var(--cream); transition:.2s; }
+.actions a.primary{ background:linear-gradient(90deg,var(--gold),var(--gold-soft)); color:#1a1206; border:none; font-weight:600; }
+.actions a:hover{ border-color:var(--gold); }
+.pfoot{ font-family:var(--mono); font-size:8px; letter-spacing:.13em; color:var(--ink-dim); text-align:center; padding:14px 18px 22px; border-top:1px solid var(--line-2); line-height:1.8; }
+
+/* shared page footer */
+footer.page{ padding:38px 0 56px; }
+.prelaunch{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; color:var(--coral); border:1px solid #4a2a32; border-radius:30px; padding:7px 14px; display:inline-block; }
+footer.page .fine{ color:var(--ink-dim); font-size:13px; margin-top:18px; }
+footer.page .fine b{ color:var(--cream-soft); }
+
+@media(max-width:880px){
+  .split,.eco,.door{ grid-template-columns:1fr; }
+  .cpassport{ position:static; }
+  .nb-strip{ display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<div class="navbar"><div class="wrap">
+  <div class="nb-brand"><a href="https://www.tastingandtoasting.com/index.html" style="color:var(--ink-dim);text-decoration:none;">←&nbsp;HUB</a>&nbsp;&nbsp;·&nbsp;&nbsp;TASTING &amp; TOASTING <b>CAP</b></div>
+  <div class="nb-nav">
+    <div class="ni active" data-v="console">Консоль винодельни</div>
+    <div class="ni" data-v="passport">Паспорт</div>
+  </div>
+  <div class="nb-pill"><span class="nb-dot"></span> CAP-2024-LU-018</div>
+</div></div>
+<div class="nb-strip"><div class="wrap">
+  <span class="t">Две стороны одной правды: <b>винодельня создаёт и подписывает</b> — мир читает.</span>
+</div></div>
+
+<!-- ============================================================= -->
+<!-- VIEW 1 · CONSOLE -->
+<!-- ============================================================= -->
+<div id="view-console" class="view show">
+
+  <div class="hero"><div class="wrap">
+    <div class="kick mono">Lueria Winery · Верхняя Галилея · семейная с 2003 · 4 га</div>
+    <h1>Как винодельня<br><em>открывает дверь</em>.</h1>
+    <p>Винодельня — точка входа во всю систему. Ничто не существует в CAP, пока производитель не создал это и не подписал. Ниже — путь одного продукта: от ДНК до живого паспорта, который увидит мир.</p>
+    <div class="meta">
+      <div><span class="n">1</span><span class="l mono">Продукт</span></div>
+      <div><span class="n">2 400</span><span class="l mono">Бутылок в тираже</span></div>
+      <div><span class="n">#1224</span><span class="l mono">Эта бутылка</span></div>
+      <div><span class="n">DPP</span><span class="l mono">Ready</span></div>
+    </div>
+  </div></div>
+
+  <section><div class="wrap">
+    <div class="sec-h"><span class="idx">01</span><span class="mono">Дверь верификации</span></div>
+    <h2>Сначала проверяют не вино — а того, кто за него ручается.</h2>
+    <p class="sub">Производитель проходит три уровня. Только пройдя их, винодельня получает ключ подписи — и право создавать паспорта. Это и есть «открыть дверь».</p>
+    <div class="door">
+      <div class="step"><span class="tag tag-done">✓ Пройдено</span><div class="num">1</div><h3>Заявка</h3><p>Винодельня регистрируется и заявляет свою идентичность. Статус: «зарегистрировано производителем».</p></div>
+      <div class="step"><span class="tag tag-done">✓ Пройдено</span><div class="num">2</div><h3>Документы</h3><p>Проверка регистрации бизнеса, владения префиксом GS1 и контроля над доменом. Статус: «производитель верифицирован».</p></div>
+      <div class="step is-key"><span class="tag tag-done">✓ Выдан</span><div class="num">3</div><h3>Ключ подписи</h3><p>Винодельня получает ключ. Теперь каждое событие, которое она создаёт, несёт её подпись — основу доверия.</p></div>
+    </div>
+    <div class="door-result">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e0c486" stroke-width="1.6"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.4" fill="#e0c486"/></svg>
+      Дверь открыта. Lueria Winery может создавать и подписывать паспорта.
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="sec-h"><span class="idx">02</span><span class="mono">Создание паспорта · ДНК продукта</span></div>
+    <h2>Слева винодельня заполняет и подписывает. Справа собирается то, что увидит мир.</h2>
+    <p class="sub">Один продукт — Lueria Grand Vital 2018. Каждое поле слева превращается в строку паспорта справа. Паспорт оживёт, когда весь путь будет подписан.</p>
+
+    <div class="stepper" id="stepper">
+      <span class="s active" data-k="dna">ДНК</span>
+      <span class="s" data-k="serial">Сериализация</span>
+      <span class="s" data-k="journey">Путь · подписи</span>
+      <span class="s" data-k="carrier">Носитель</span>
+      <span class="s" data-k="live">Живой паспорт</span>
+    </div>
+
+    <div class="split">
+      <div class="console">
+        <div class="blocklabel"><span class="mono" style="color:var(--gold)">Консоль винодельни</span><span class="mono">черновик · редактируется</span></div>
+
+        <div class="fieldset">
+          <span class="mono">Идентичность</span>
+          <div class="field">Lueria Grand Vital <span class="editbadge">edit</span></div>
+          <div class="field small">2018 · Reserva · Верхняя Галилея, Израиль</div>
+        </div>
+
+        <div class="fieldset dna" id="dnaBox">
+          <span class="mono">ДНК · состав (по урожаю)</span>
+          <div class="bar"><span class="name">Cabernet Sauvignon</span><span class="track"><span class="fill" style="width:70%"></span></span><span class="pct">70%</span></div>
+          <div class="bar"><span class="name">Merlot</span><span class="track"><span class="fill" style="width:20%"></span></span><span class="pct">20%</span></div>
+          <div class="bar"><span class="name">Cabernet Franc</span><span class="track"><span class="fill" style="width:10%"></span></span><span class="pct">10%</span></div>
+          <div class="field small" style="margin-top:10px;">+ ингредиенты, ABV, аллергены — данные e-label ЕС <span class="editbadge">edit</span></div>
+        </div>
+
+        <div class="fieldset">
+          <span class="mono">Сериализация · номер бутылки</span>
+          <div class="serial">
+            <div class="big">Bottle #<b id="serialNum">1224</b></div>
+            <div class="edition">/ ТИРАЖ 2400</div>
+          </div>
+          <input type="range" id="serialRange" min="1" max="2400" value="1224">
+        </div>
+
+        <div class="fieldset">
+          <span class="mono">Путь продукта · каждое событие подписывается</span>
+          <div class="jrow" data-e="0"><span class="jc"></span><div class="jt"><div class="h">Сбор урожая</div><div class="d">Sayada Vineyards, участок 7B · 21 СЕН 2018</div></div><span class="signbtn">Подписать</span></div>
+          <div class="jrow" data-e="1"><span class="jc"></span><div class="jt"><div class="h">Розлив</div><div class="d">Lueria Winery, Верхняя Галилея · 14 МАР 2020</div></div><span class="signbtn">Подписать</span></div>
+          <div class="jrow" data-e="2"><span class="jc"></span><div class="jt"><div class="h">Выдержка</div><div class="d">Частный погреб Lueria, 14 °C · 2020–2026</div></div><span class="signbtn">Подписать</span></div>
+          <div class="jrow" data-e="3"><span class="jc"></span><div class="jt"><div class="h">Дистрибуция</div><div class="d">Tasting &amp; Toasting, Мадрид · 12 АПР 2026</div></div><span class="signbtn">Подписать</span></div>
+        </div>
+
+        <div class="fieldset">
+          <span class="mono">Носитель на бутылке</span>
+          <div class="carrier">
+            <div class="qr"><svg viewBox="0 0 21 21" shape-rendering="crispEdges"><path fill="#171318" d="M0 0h7v7h-7zM2 2h3v3h-3zM14 0h7v7h-7zM16 2h3v3h-3zM0 14h7v7h-7zM2 16h3v3h-3zM9 0h2v2h-2zM9 3h2v3h-2zM12 9h2v2h-2zM9 9h2v2h-2zM16 9h2v2h-2zM19 9h2v2h-2zM9 12h3v2h-3zM14 14h2v2h-2zM18 14h3v2h-3zM9 17h2v4h-2zM12 16h2v2h-2zM15 18h2v3h-2zM18 18h3v3h-3z"/></svg></div>
+            <div class="ct"><div class="h">QR · GS1 Digital Link</div><div class="d">/01/{GTIN}/21/1224 — открытый стандарт, NFC опционально для премиума</div></div>
+          </div>
+        </div>
+
+        <button class="signall" id="signAll">Подписать весь путь и открыть паспорт →</button>
+      </div>
+
+      <div class="cpassport" id="cpassport">
+        <div class="pp-top"><span class="mono">cap.tastingandtoasting.com</span><span class="mono" id="ppScan">черновик</span></div>
+        <div class="pp-body">
+          <div class="pp-check" id="ppCheck">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2" id="ppTick" style="opacity:.25"><path d="M5 12l5 5L20 6"/></svg>
+          </div>
+          <div class="pp-status" id="ppStatus">НЕ ПОДПИСАНО</div>
+          <div class="pp-verdict" id="ppVerdict">Ожидает подписи</div>
+          <div class="pp-meta">2018 · BOTTLE <span id="ppSerial">1224</span> / 2400</div>
+          <div class="pp-name">Lueria Grand&nbsp;Vital</div>
+          <div class="pp-region">Верхняя Галилея, Израиль</div>
+          <div class="pp-tabs"><span class="on">STORY</span><span>JOURNEY</span><span>MANIFESTO</span></div>
+          <div class="pp-line"></div>
+          <div class="pp-tl">
+            <span class="mono" style="display:block;margin-bottom:6px;">От бутылки к бутылке</span>
+            <div class="e" data-e="0"><span class="c"></span><div><div class="h">Сбор урожая</div><div class="d">Sayada Vineyards, 7B · 21 СЕН 2018</div></div></div>
+            <div class="e" data-e="1"><span class="c"></span><div><div class="h">Розлив</div><div class="d">Lueria Winery · 14 МАР 2020</div></div></div>
+            <div class="e" data-e="2"><span class="c"></span><div><div class="h">Выдержка</div><div class="d">Погреб Lueria, 14 °C · 2020–2026</div></div></div>
+            <div class="e" data-e="3"><span class="c"></span><div><div class="h">Дистрибуция</div><div class="d">T&amp;T, Мадрид · 12 АПР 2026</div></div></div>
+          </div>
+          <div class="pp-line"></div>
+          <div class="pp-quote">«We don't make Bordeaux. We make Galilee. The aim isn't to imitate; it is to translate this hillside into something that could come from nowhere else.»
+            <div class="a">Yosef Sayada · Lueria Winery</div></div>
+        </div>
+        <div class="pp-foot">VERIFIED BY TASTING &amp; TOASTING CAP · ISO/IEC 15459 · DPP-READY<br>проверяемая правда, а не обещание подлинности</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section style="border-bottom:none;"><div class="wrap">
+    <div class="sec-h"><span class="idx">03</span><span class="mono">Экономика винодельни</span></div>
+    <h2>Что винодельня получает — и что платит.</h2>
+    <p class="sub">Обмен простой: винодельня платит за инфраструктуру доверия, а взамен получает защиту бренда, соответствие закону ЕС и прямой канал к вовлечённой аудитории.</p>
+    <div class="eco">
+      <div class="eco-grid">
+        <div class="metric"><div class="n">14 820</div><div class="l mono">Бутылок в CAP</div><div class="delta g">+ 2 400 в этом сезоне</div></div>
+        <div class="metric"><div class="n">3 247</div><div class="l mono">Сканов за месяц</div><div class="delta g">+ 18% к прошлому</div></div>
+        <div class="metric"><div class="n">0</div><div class="l mono">Попыток подделки</div><div class="delta g">чисто · 90 дней</div></div>
+        <div class="metric"><div class="n">14 <span class="u">стран</span></div><div class="l mono">Рынков охвачено</div><div class="delta c">алёрт: скан из Норвегии — реэкспорт?</div></div>
+      </div>
+      <div class="cost">
+        <h3>Producer SaaS</h3>
+        <div class="price">€<span>от 0</span><small> / на старте · оплата за сериализацию</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> Соответствие e-label ЕС «из коробки»</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> Сериализация и защита от контрафакта</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> Дашборд: сканы, рынки, аномалии</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> Канал к дегустаторам Tasting &amp; Toasting</li>
+        </ul>
+        <div class="exchange">Платит производитель. Потребитель сканирует бесплатно.</div>
+      </div>
+    </div>
+  </div></section>
+
+</div>
+
+<!-- ============================================================= -->
+<!-- VIEW 2 · PASSPORT (consumer) -->
+<!-- ============================================================= -->
+<div id="view-passport" class="view">
+  <div class="caption">
+    <div class="t">CAP Passport · потребительский вид</div>
+    <div class="s">Результат скана бутылки. Три вкладки: история, проверяемый путь, манифест производителя.</div>
+  </div>
+
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen">
+      <div class="p-top"><span class="mono">cap.tastingandtoasting.com</span><span class="mono">NFC scan · 19:42</span></div>
+
+      <div class="seal-wrap">
+        <div class="seal"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2"><path d="M5 12l5 5L20 6"/></svg></div>
+        <div class="seal-status">VERIFIED</div>
+        <div class="verdict">Verified &amp; traceable</div>
+      </div>
+
+      <div class="bottlemeta">
+        <div class="line">2018 · BOTTLE 1224 / 2400</div>
+        <h1>Lueria Grand&nbsp;Vital</h1>
+        <div class="region">Upper Galilee, Israel</div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab active" data-t="story">STORY</div>
+        <div class="tab" data-t="journey">JOURNEY</div>
+        <div class="tab" data-t="manifesto">MANIFESTO</div>
+      </div>
+
+      <!-- STORY -->
+      <div class="panel show" id="story">
+        <span class="mono block-label">Composition</span>
+        <div class="composition"><p>Cabernet Sauvignon 70%, Merlot 20%, Cabernet Franc 10%. Drawn from select sections of Yosef Sayada's vineyard, with the varietal mix shifting harvest by harvest.</p></div>
+        <div class="dna">
+          <div class="bar"><span class="name">Cabernet Sauvignon</span><span class="track"><span class="fill" style="width:70%"></span></span><span class="pct">70%</span></div>
+          <div class="bar"><span class="name">Merlot</span><span class="track"><span class="fill" style="width:20%"></span></span><span class="pct">20%</span></div>
+          <div class="bar"><span class="name">Cabernet Franc</span><span class="track"><span class="fill" style="width:10%"></span></span><span class="pct">10%</span></div>
+        </div>
+        <div class="divider"></div>
+        <span class="mono block-label">From bottle to bottle</span>
+        <div class="timeline">
+          <div class="tl-item"><span class="c"></span><div><div class="h">Сбор урожая</div><div class="d">Sayada Vineyards, участок 7B · 21 СЕН 2018 · 04:30</div></div></div>
+          <div class="tl-item"><span class="c"></span><div><div class="h">Розлив</div><div class="d">Lueria Winery, Верхняя Галилея · 14 МАР 2020</div></div></div>
+          <div class="tl-item"><span class="c"></span><div><div class="h">Выдержка</div><div class="d">Частный погреб Lueria, 14 °C · 2020–2026</div></div></div>
+          <div class="tl-item"><span class="c"></span><div><div class="h">Дистрибуция</div><div class="d">Tasting &amp; Toasting, Мадрид · 12 АПР 2026</div></div></div>
+          <div class="tl-item live"><span class="c"></span><div><div class="h">В твоих руках</div><div class="d">Мадрид, ES · сейчас · отсканировано в 19:42</div></div></div>
+        </div>
+        <div class="divider"></div>
+        <span class="mono block-label">From the producer</span>
+        <div class="quote">
+          <p>"We don't make Bordeaux. We make Galilee. The aim isn't to imitate; it is to translate this hillside into something that tastes like it could come from nowhere else."</p>
+          <div class="by">Yosef Sayada · Lueria Winery</div>
+        </div>
+      </div>
+
+      <!-- JOURNEY -->
+      <div class="panel" id="journey">
+        <div class="chain-banner">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          <div class="x">Цепочка <b>подтверждена</b> до дистрибуции. Каждое звено подписано участником.</div>
+        </div>
+        <div class="jcard">
+          <div class="jhead"><span class="jtype">Harvest · Сбор</span><span class="jtime">21 SEP 2018 · 04:30</span></div>
+          <div class="jplace">Sayada Vineyards, участок 7B</div>
+          <div class="jsub">Ручной сбор до рассвета · 884 м над уровнем моря</div>
+          <div class="jmeta">
+            <div class="jr"><span class="k">Подписал</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>producer ✓</span></span></div>
+            <div class="jr"><span class="k">Доказ.</span><span class="v hash">harvest-log-18-7B · sha256:9f2a4c…e10b</span></div>
+          </div>
+        </div>
+        <div class="jcard">
+          <div class="jhead"><span class="jtype">Bottling · Розлив</span><span class="jtime">14 MAR 2020</span></div>
+          <div class="jplace">Lueria Winery, Верхняя Галилея</div>
+          <div class="jsub">Тираж 2400 · присвоен GTIN · отчеканен серийник #1224</div>
+          <div class="jmeta">
+            <div class="jr"><span class="k">Подписал</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>producer ✓</span></span></div>
+            <div class="jr"><span class="k">Доказ.</span><span class="v hash">bottling-rec-GV18 · sha256:1d77b2…44af</span></div>
+          </div>
+        </div>
+        <div class="jcard">
+          <div class="jhead"><span class="jtype">Cellared · Выдержка</span><span class="jtime">2020 — 2026</span></div>
+          <div class="jplace">Частный погреб Lueria</div>
+          <div class="jsub">Постоянные 14 °C · контроль влажности</div>
+          <div class="jmeta">
+            <div class="jr"><span class="k">Подписал</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>producer ✓</span></span></div>
+            <div class="jr"><span class="k">Доказ.</span><span class="v hash">cellar-log-20-26 · sha256:7be9a1…02cd</span></div>
+          </div>
+        </div>
+        <div class="jcard">
+          <div class="jhead"><span class="jtype">Distribution · Дистрибуция</span><span class="jtime">12 APR 2026</span></div>
+          <div class="jplace">Tasting &amp; Toasting, Мадрид</div>
+          <div class="jsub">Передача владения · co-подписано двумя сторонами</div>
+          <div class="jmeta">
+            <div class="jr"><span class="k">Передал</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>✓</span></span></div>
+            <div class="jr"><span class="k">Принял</span><span class="v">Tasting &amp; Toasting <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>T&amp;T ✓</span></span></div>
+            <div class="jr"><span class="k">Доказ.</span><span class="v hash">shipment-ES-0412 · sha256:c4f018…9a7e</span></div>
+          </div>
+        </div>
+        <div class="jcard current">
+          <div class="jhead"><span class="jtype">In your hands · Скан</span><span class="jtime">сейчас · 19:42</span></div>
+          <div class="jplace">Мадрид, ES</div>
+          <div class="jsub">Текущее событие скана · ещё не часть подписанной цепочки</div>
+          <div class="jmeta">
+            <div class="jr"><span class="k">Статус</span><span class="v pending">живой скан · NFC challenge пройден <span class="sigchip live"><span style="width:5px;height:5px;border-radius:50%;background:#e0c486;display:inline-block"></span>live</span></span></div>
+          </div>
+        </div>
+        <p class="mono" style="text-align:center;margin-top:14px;line-height:1.8;">CAP не утверждает «подлинно».<br>CAP показывает, кто что подписал — проверьте сами.</p>
+      </div>
+
+      <!-- MANIFESTO -->
+      <div class="panel manifesto" id="manifesto">
+        <div class="pull">«We don't make Bordeaux. <span class="accent">We make Galilee.»</span></div>
+        <p>Эта бутылка не пытается быть кем-то ещё. Она пытается быть точным переводом одного склона в Верхней Галилее — его почвы, его света, его ночной прохлады — на язык вина.</p>
+        <p>Cabernet здесь ведёт себя не как в Медоке. Дни жарче, ночи резче, известняк ближе к корню. Мы не исправляем это под чужой эталон — мы это слушаем. Состав смещается от урожая к урожаю, потому что склон не повторяется дважды.</p>
+        <p>Семья работает на этих четырёх гектарах с 2003 года. Каждое решение — ручной сбор до рассвета, выдержка в собственном погребе при 14 °C — это отказ от ярлыка «как Бордо» в пользу одного: чтобы вино могло прийти ниоткуда, кроме отсюда.</p>
+        <div class="man-facts">
+          <div class="f"><div class="n">2003</div><div class="l mono">Семья на этой земле</div></div>
+          <div class="f"><div class="n">4 га</div><div class="l mono">Виноградник</div></div>
+          <div class="f"><div class="n">884 м</div><div class="l mono">Над уровнем моря</div></div>
+          <div class="f"><div class="n">14 °C</div><div class="l mono">Погреб, постоянно</div></div>
+        </div>
+        <span class="mono block-label">Манифест подписан производителем</span>
+        <div class="sign-row">
+          <div class="av">YS</div>
+          <div class="nm"><div class="h">Yosef Sayada</div><div class="d">Lueria Winery · Верхняя Галилея</div></div>
+          <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>signed ✓</span>
+        </div>
+      </div>
+
+      <!-- АУДИТ НАВИГАЦИИ: на сайте нет отдельных producer.html/events.html.
+           "Producer view" и "Event booking" — это СЕКЦИИ внутри prototype.html.
+           Ниже — якоря на эти секции. Сверь точные id в исходнике prototype.html
+           (видимые имена секций: "Producer view", "Event booking") и поправь #producer / #events при необходимости. -->
+      <div class="actions">
+        <a href="https://www.tastingandtoasting.com/prototype.html#producer" rel="noopener">Посмотреть производителя</a>
+        <a href="https://www.tastingandtoasting.com/prototype.html#events" rel="noopener" class="primary">Найти дегустацию</a>
+      </div>
+
+      <div class="pfoot">VERIFIED BY TASTING &amp; TOASTING CAP · ISO/IEC 15459 · DPP-READY<br>проверяемая правда, не обещание подлинности</div>
+    </div>
+  </div>
+</div>
+
+<!-- shared footer -->
+<footer class="page"><div class="wrap">
+  <span class="prelaunch">PRE-LAUNCH · PENDING SPANISH LICENSES · NOT YET OPERATING COMMERCIALLY</span>
+  <div class="fine"><b>Tasting And Toasting Inc.</b> · Delaware Corp · Filing No. 7494277 · Operating subsidiary: Tasting And Toasting SL (Spain)<br>
+  Демо · консоль винодельни + паспорт · вердикт «Verified &amp; traceable» по Принципу VI — CAP не утверждает «подлинно», а показывает проверяемую цепочку.</div>
+</div></footer>
+
+<script>
+(function(){
+  /* ---- view switch ---- */
+  var nis = document.querySelectorAll('.nb-nav .ni');
+  var views = { console:document.getElementById('view-console'), passport:document.getElementById('view-passport') };
+  nis.forEach(function(ni){
+    ni.addEventListener('click', function(){
+      nis.forEach(function(x){ x.classList.remove('active'); });
+      ni.classList.add('active');
+      var v = ni.getAttribute('data-v');
+      Object.keys(views).forEach(function(k){ views[k].classList.toggle('show', k===v); });
+      window.scrollTo({ top:0, behavior:'smooth' });
+    });
+  });
+
+  /* ---- console signing ---- */
+  var signed = [false,false,false,false];
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#view-console .jrow'));
+  var ppEvents = Array.prototype.slice.call(document.querySelectorAll('#cpassport .pp-tl .e'));
+  var stepper = document.getElementById('stepper');
+  var cpassport = document.getElementById('cpassport');
+
+  function setStep(key,state){ var el=stepper.querySelector('[data-k="'+key+'"]'); if(!el)return; el.classList.remove('active','complete'); if(state)el.classList.add(state); }
+  function refresh(){
+    var count = signed.filter(Boolean).length;
+    ppEvents.forEach(function(e,i){ e.classList.toggle('on', signed[i]); });
+    setStep('journey', count>0 ? (count===4?'complete':'active') : null);
+    if(count>0){ setStep('dna','complete'); setStep('serial','complete'); }
+    if(count===4){
+      setStep('carrier','complete'); setStep('live','complete');
+      cpassport.classList.add('live');
+      document.getElementById('ppTick').style.opacity='1';
+      document.getElementById('ppStatus').textContent='VERIFIED';
+      document.getElementById('ppVerdict').textContent='Verified & traceable';
+      document.getElementById('ppScan').textContent='NFC scan · 19:42';
+      var b=document.getElementById('signAll'); b.disabled=true; b.textContent='✓ Паспорт подписан и опубликован';
+    }
+  }
+  rows.forEach(function(r){ r.querySelector('.signbtn').addEventListener('click', function(){ var i=+r.getAttribute('data-e'); signed[i]=true; r.classList.add('signed'); refresh(); }); });
+  document.getElementById('signAll').addEventListener('click', function(){ rows.forEach(function(r,i){ signed[i]=true; r.classList.add('signed'); }); refresh(); });
+
+  var range = document.getElementById('serialRange');
+  range.addEventListener('input', function(){
+    document.getElementById('serialNum').textContent=this.value;
+    document.getElementById('ppSerial').textContent=this.value;
+    setStep('serial','active');
+  });
+  var dnaBox=document.getElementById('dnaBox'); if(dnaBox) dnaBox.addEventListener('mouseenter', function(){ setStep('dna','active'); });
+
+  /* ---- passport tabs ---- */
+  var tabs = document.querySelectorAll('#view-passport .tab');
+  var panels = { story:document.getElementById('story'), journey:document.getElementById('journey'), manifesto:document.getElementById('manifesto') };
+  var screen = document.querySelector('#view-passport .screen');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(x){ x.classList.remove('active'); });
+      t.classList.add('active');
+      var key=t.getAttribute('data-t');
+      Object.keys(panels).forEach(function(k){ panels[k].classList.toggle('show', k===key); });
+      if(screen) screen.scrollTo({ top:230, behavior:'smooth' });
+    });
+  });
+})();
+</script>
+</body>
+</html>

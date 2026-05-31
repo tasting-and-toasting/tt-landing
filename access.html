@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Confidential Access · Tasting &amp; Toasting CAP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400&family=Spectral:ital,wght@0,300;0,400;0,500;1,300&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b0d; --panel:#171318; --panel-2:#1d181e;
+  --wine:#6b2737; --gold:#cba24f; --gold-soft:#e0c486;
+  --green:#86a878; --coral:#c66a7c;
+  --cream:#f4eee6; --cream-soft:#cbbfb0;
+  --line:#2c252e; --line-2:#231d27; --ink-dim:#86807f;
+  --serif:"Playfair Display", Georgia, serif;
+  --body:"Spectral", Georgia, serif;
+  --mono:"Spline Sans Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ background:radial-gradient(130% 90% at 50% -10%, #1c1019 0%, var(--void) 55%); min-height:100vh;
+  color:var(--cream); font-family:var(--body); font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased;
+  display:flex; align-items:center; justify-content:center; padding:38px 16px; }
+.mono{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:9.5px; color:var(--ink-dim); }
+.gate{ width:560px; max-width:100%; background:linear-gradient(180deg,#171318,#0f0d11);
+  border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 50px 110px -40px #000; }
+.gate-top{ display:flex; justify-content:space-between; align-items:center; padding:14px 22px; border-bottom:1px solid var(--line-2); }
+.brand{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; }
+.brand b{ color:var(--gold-soft); }
+.top-right{ display:flex; align-items:center; gap:14px; }
+.lang{ display:flex; gap:9px; }
+.lang button{ background:none; border:none; cursor:pointer; font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; color:var(--ink-dim); padding:2px 1px; transition:.2s; }
+.lang button.on{ color:var(--gold-soft); border-bottom:1px solid var(--gold); }
+.lang button:hover{ color:var(--cream); }
+.lock-pill{ display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:9px; letter-spacing:.14em; color:var(--coral); border:1px solid #4a2a32; border-radius:40px; padding:5px 10px; white-space:nowrap; }
+.gate-head{ padding:26px 30px 6px; }
+.gate-head .k{ margin-bottom:13px; }
+.gate-head h1{ font-family:var(--serif); font-weight:700; font-size:30px; line-height:1.1; }
+.gate-head h1 em{ color:var(--gold-soft); font-style:italic; }
+.gate-head p{ color:var(--cream-soft); font-size:14.5px; margin-top:10px; }
+.nda{ margin:18px 30px 0; border:1px solid var(--line); border-radius:10px; background:var(--void); }
+.nda .nda-h{ padding:11px 16px; border-bottom:1px solid var(--line-2); }
+.nda-body{ max-height:178px; overflow-y:auto; padding:14px 16px; font-size:12.6px; color:var(--cream-soft); line-height:1.6; }
+.nda-body::-webkit-scrollbar{ width:8px; } .nda-body::-webkit-scrollbar-thumb{ background:#2c252e; border-radius:8px; }
+.nda-body h4{ font-family:var(--serif); font-size:13px; color:var(--cream); margin:11px 0 3px; }
+.nda-body h4:first-child{ margin-top:0; }
+.nda-body ol{ padding-left:18px; } .nda-body li{ margin:4px 0; }
+.scroll-note{ font-family:var(--mono); font-size:8px; letter-spacing:.12em; color:var(--ink-dim); text-align:center; padding:7px; border-top:1px solid var(--line-2); }
+.form{ padding:18px 30px 4px; }
+.row{ display:flex; gap:12px; }
+.fld{ flex:1; margin-bottom:13px; }
+.fld label{ display:block; font-family:var(--mono); font-size:8.5px; letter-spacing:.13em; color:var(--ink-dim); margin-bottom:6px; text-transform:uppercase; }
+.fld input{ width:100%; background:var(--void); border:1px solid var(--line); border-radius:8px; padding:11px 12px; color:var(--cream); font-family:var(--body); font-size:15px; outline:none; transition:.2s; }
+.fld input:focus{ border-color:#4a3a22; }
+.fld input.agreed-ok{ border-color:var(--green); }
+.optin{ display:flex; gap:11px; align-items:flex-start; margin:6px 0 4px; cursor:pointer; user-select:none; }
+.optin input{ width:17px; height:17px; margin-top:3px; accent-color:var(--gold); flex:0 0 auto; }
+.optin span{ font-size:13px; color:var(--cream-soft); }
+.optin b{ color:var(--cream); }
+.agreed-hint{ font-family:var(--mono); font-size:8.5px; letter-spacing:.08em; color:var(--ink-dim); margin-top:-4px; margin-bottom:6px; }
+.agreed-hint b{ color:var(--gold-soft); }
+.enter{ width:100%; margin:8px 0 4px; font-family:var(--mono); font-size:11px; letter-spacing:.16em; cursor:pointer; border:none; border-radius:10px; padding:15px; color:#1a1206; background:linear-gradient(90deg,var(--gold),var(--gold-soft)); font-weight:600; transition:.2s; }
+.enter:hover:not(:disabled){ filter:brightness(1.08); }
+.enter:disabled{ background:#241f12; color:#6a5f3f; cursor:not-allowed; }
+.recorded{ display:none; text-align:center; padding:8px 0 4px; }
+.recorded.show{ display:block; }
+.recorded .ok{ font-family:var(--serif); color:var(--green); font-size:16px; }
+.recorded .ts{ font-family:var(--mono); font-size:9px; letter-spacing:.08em; color:var(--ink-dim); margin-top:4px; }
+.gate-foot{ padding:14px 30px 24px; }
+.caveat{ background:#16131a; border:1px solid var(--line-2); border-left:3px solid var(--coral); border-radius:0 8px 8px 0; padding:10px 13px; }
+.caveat .t{ font-family:var(--mono); font-size:8.5px; letter-spacing:.13em; color:var(--coral); }
+.caveat p{ font-size:11.5px; color:var(--ink-dim); margin-top:5px; line-height:1.55; }
+.legal{ font-family:var(--mono); font-size:8px; letter-spacing:.1em; color:var(--ink-dim); text-align:center; margin-top:14px; line-height:1.8; }
+</style>
+</head>
+<body>
+<div class="gate">
+  <div class="gate-top">
+    <div class="brand">TASTING &amp; TOASTING <b>CAP</b></div>
+    <div class="top-right">
+      <div class="lang" id="lang">
+        <button data-lang="en">EN</button><button data-lang="ru">RU</button><button data-lang="es">ES</button><button data-lang="de">DE</button><button data-lang="it">IT</button>
+      </div>
+      <div class="lock-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#c66a7c" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> <span data-i18n="chip">CONFIDENTIAL</span></div>
+    </div>
+  </div>
+
+  <div class="gate-head">
+    <div class="k mono" data-i18n="kicker">Pre-launch · access by agreement</div>
+    <h1 data-i18n="h1">Confidential <em>access</em>.</h1>
+    <p data-i18n="intro">What follows is non-public CAP demo material. To continue, confirm the confidentiality agreement.</p>
+  </div>
+
+  <div class="nda">
+    <div class="nda-h mono" data-i18n="nda_h">Non-Disclosure Agreement (NDA) — summary</div>
+    <div class="nda-body" id="ndaBody">
+      <h4 data-i18n="s1h">1. Subject</h4>
+      <p data-i18n="s1">…</p>
+      <h4 data-i18n="s2h">2. Purpose</h4>
+      <p data-i18n="s2">…</p>
+      <h4 data-i18n="s3h">3. Obligations</h4>
+      <ol>
+        <li data-i18n="s3a">…</li>
+        <li data-i18n="s3b">…</li>
+        <li data-i18n="s3c">…</li>
+        <li data-i18n="s3d">…</li>
+      </ol>
+      <h4 data-i18n="s4h">4. No warranty</h4>
+      <p data-i18n="s4">…</p>
+      <h4 data-i18n="s5h">5. Term and law</h4>
+      <p data-i18n="s5">…</p>
+      <h4 data-i18n="s6h">6. Confirmation</h4>
+      <p data-i18n="s6">…</p>
+    </div>
+    <div class="scroll-note" data-i18n="scroll">↑ scroll the full agreement</div>
+  </div>
+
+  <div class="form" id="formArea">
+    <div class="row">
+      <div class="fld"><label data-i18n="l_name">Full name *</label><input type="text" id="fName" autocomplete="name" data-i18n-ph="ph_name" placeholder="Your name"></div>
+      <div class="fld"><label data-i18n="l_org">Organization / role</label><input type="text" id="fOrg" data-i18n-ph="ph_org" placeholder="e.g. winery, investor"></div>
+    </div>
+    <div class="fld"><label data-i18n="l_email">E-mail *</label><input type="email" id="fEmail" autocomplete="email" placeholder="you@example.com"></div>
+
+    <label class="optin"><input type="checkbox" id="chk"><span data-i18n="chk">I have read and <b>accept</b> the Confidentiality Agreement above.</span></label>
+
+    <div class="fld" style="margin-top:6px;">
+      <label data-i18n="l_agree">Confirmation — type the word “agreed” *</label>
+      <input type="text" id="fAgree" placeholder="agreed" autocomplete="off" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="agreed-hint" data-i18n="hint">Opt-in confirmation: exactly the word <b>agreed</b>.</div>
+
+    <button class="enter" id="enterBtn" disabled data-i18n="enter">Enter the demo →</button>
+    <div class="recorded" id="recorded">
+      <div class="ok" data-i18n="rec_ok">✓ Consent recorded</div>
+      <div class="ts" id="recTs"></div>
+    </div>
+  </div>
+
+  <div class="gate-foot">
+    <div class="caveat">
+      <div class="t" data-i18n="cav_t">Technical note</div>
+      <p data-i18n="cav_p">This is a contractual click-through gate, not technical protection.</p>
+    </div>
+    <div class="legal" data-i18n="legal">NDA — TEMPLATE, REQUIRES REVIEW BY A LAWYER · NOT LEGAL ADVICE<br>© 2026 TASTING AND TOASTING INC. · DELAWARE · NOINDEX</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var I18N = {
+    en:{
+      chip:`CONFIDENTIAL`, kicker:`Pre-launch · access by agreement`,
+      h1:`Confidential <em>access</em>.`,
+      intro:`What follows is non-public CAP demo material (winery console and passport). To continue, confirm the confidentiality agreement.`,
+      nda_h:`Non-Disclosure Agreement (NDA) — summary`,
+      s1h:`1. Subject`, s1:`You are accessing non-public materials of Tasting And Toasting Inc. about the CAP (Certified Authenticity Passport) platform: prototypes, design, architecture, business model and related data (“Materials”).`,
+      s2h:`2. Purpose`, s2:`The Materials are provided solely for review and evaluation. Any other use is prohibited.`,
+      s3h:`3. Obligations`,
+      s3a:`Not disclose the Materials to third parties without written consent.`,
+      s3b:`Not copy, publish, or take screenshots for distribution.`,
+      s3c:`Not use the Materials to build a competing product, and not reverse-engineer them.`,
+      s3d:`On request, stop using and delete all copies.`,
+      s4h:`4. No warranty`, s4:`The Materials are provided “as is”, are preliminary and may change. They are not an offer, a promise of functionality, or a confirmation of licenses.`,
+      s5h:`5. Term and law`, s5:`Confidentiality obligations last 3 years from the date of confirmation. Governing law and jurisdiction by separate agreement of the Parties (default: State of Delaware, USA / Tasting And Toasting SL, Spain).`,
+      s6h:`6. Confirmation`, s6:`By entering your name and the word “agreed” below, you confirm that you have read and agree to be bound by this Agreement.`,
+      scroll:`↑ scroll the full agreement`,
+      l_name:`Full name *`, ph_name:`Your name`, l_org:`Organization / role`, ph_org:`e.g. winery, investor`, l_email:`E-mail *`,
+      chk:`I have read and <b>accept</b> the Confidentiality Agreement above.`,
+      l_agree:`Confirmation — type the word “agreed” *`,
+      hint:`Opt-in confirmation: exactly the word <b>agreed</b> · recorded with a timestamp.`,
+      enter:`Enter the demo →`, opening:`Opening the demo…`, rec_ok:`✓ Consent recorded`,
+      cav_t:`Technical note`, cav_p:`This is a contractual click-through gate (records consent), not technical protection. For real access restriction, enable <b>Vercel Deployment / Password Protection</b> on this page — the gate is the agreement, the Vercel password is the lock.`,
+      legal:`NDA — TEMPLATE, REQUIRES REVIEW BY A LAWYER · NOT LEGAL ADVICE<br>© 2026 TASTING AND TOASTING INC. · DELAWARE · NOINDEX`
+    },
+    ru:{
+      chip:`КОНФИДЕНЦИАЛЬНО`, kicker:`Pre-launch · доступ по соглашению`,
+      h1:`Конфиденциальный <em>доступ</em>.`,
+      intro:`Дальше — непубличный демо-материал CAP (консоль винодельни и паспорт). Чтобы продолжить, подтвердите соглашение о конфиденциальности.`,
+      nda_h:`Соглашение о конфиденциальности (NDA) — кратко`,
+      s1h:`1. Предмет`, s1:`Вы получаете доступ к непубличным материалам Tasting And Toasting Inc. о платформе CAP (Certified Authenticity Passport): прототипам, дизайну, архитектуре, бизнес-модели и связанным данным («Материалы»).`,
+      s2h:`2. Цель`, s2:`Материалы предоставлены исключительно для ознакомления и оценки. Любое иное использование запрещено.`,
+      s3h:`3. Обязательства`,
+      s3a:`Не раскрывать Материалы третьим лицам без письменного согласия.`,
+      s3b:`Не копировать, не публиковать, не делать скриншоты для распространения.`,
+      s3c:`Не использовать Материалы для создания конкурирующего продукта и не подвергать обратной разработке.`,
+      s3d:`По запросу — прекратить использование и удалить копии.`,
+      s4h:`4. Без гарантий`, s4:`Материалы предоставлены «как есть», носят предварительный характер и могут измениться. Они не являются офертой, обещанием функциональности или подтверждением лицензий.`,
+      s5h:`5. Срок и право`, s5:`Обязательства о конфиденциальности действуют 3 года с даты подтверждения. Применимое право и юрисдикция — по отдельному соглашению Сторон (по умолчанию — штат Делавэр, США / Tasting And Toasting SL, Испания).`,
+      s6h:`6. Подтверждение`, s6:`Вводя своё имя и слово «agreed» ниже, вы подтверждаете, что прочли и согласны соблюдать настоящее Соглашение.`,
+      scroll:`↑ прокрутите соглашение полностью`,
+      l_name:`Имя и фамилия *`, ph_name:`Ваше имя`, l_org:`Организация / роль`, ph_org:`напр. винодельня, инвестор`, l_email:`E-mail *`,
+      chk:`Я прочитал(а) и <b>принимаю</b> Соглашение о конфиденциальности выше.`,
+      l_agree:`Подтверждение — напечатайте слово «agreed» *`,
+      hint:`Opt-in подтверждение: ровно слово <b>agreed</b> · фиксируется с отметкой времени.`,
+      enter:`Войти в демо →`, opening:`Открываю демо…`, rec_ok:`✓ Согласие зафиксировано`,
+      cav_t:`Техническое примечание`, cav_p:`Это контрактный click-through-гейт (фиксирует согласие), а не техническая защита. Для реального ограничения доступа включите <b>Vercel Deployment / Password Protection</b> на этой странице — гейт = соглашение, пароль Vercel = замок.`,
+      legal:`NDA — ШАБЛОН, ТРЕБУЕТ ПРОВЕРКИ ЮРИСТОМ · НЕ ЯВЛЯЕТСЯ ЮРИДИЧЕСКОЙ КОНСУЛЬТАЦИЕЙ<br>© 2026 TASTING AND TOASTING INC. · DELAWARE · NOINDEX`
+    },
+    es:{
+      chip:`CONFIDENCIAL`, kicker:`Pre-launch · acceso por acuerdo`,
+      h1:`Acceso <em>confidencial</em>.`,
+      intro:`A continuación hay material demo no público de CAP (consola de bodega y pasaporte). Para continuar, confirma el acuerdo de confidencialidad.`,
+      nda_h:`Acuerdo de Confidencialidad (NDA) — resumen`,
+      s1h:`1. Objeto`, s1:`Accedes a materiales no públicos de Tasting And Toasting Inc. sobre la plataforma CAP (Certified Authenticity Passport): prototipos, diseño, arquitectura, modelo de negocio y datos relacionados («Materiales»).`,
+      s2h:`2. Finalidad`, s2:`Los Materiales se facilitan únicamente para su revisión y evaluación. Queda prohibido cualquier otro uso.`,
+      s3h:`3. Obligaciones`,
+      s3a:`No divulgar los Materiales a terceros sin consentimiento por escrito.`,
+      s3b:`No copiar, publicar ni hacer capturas de pantalla para su distribución.`,
+      s3c:`No usar los Materiales para crear un producto competidor ni someterlos a ingeniería inversa.`,
+      s3d:`A petición, cesar el uso y eliminar las copias.`,
+      s4h:`4. Sin garantías`, s4:`Los Materiales se ofrecen «tal cual», tienen carácter preliminar y pueden cambiar. No constituyen una oferta, una promesa de funcionalidad ni una confirmación de licencias.`,
+      s5h:`5. Plazo y ley`, s5:`Las obligaciones de confidencialidad duran 3 años desde la fecha de confirmación. Ley aplicable y jurisdicción según acuerdo separado de las Partes (por defecto: Estado de Delaware, EE. UU. / Tasting And Toasting SL, España).`,
+      s6h:`6. Confirmación`, s6:`Al introducir tu nombre y la palabra «agreed» abajo, confirmas que has leído y aceptas quedar vinculado por este Acuerdo.`,
+      scroll:`↑ desplázate por el acuerdo completo`,
+      l_name:`Nombre y apellidos *`, ph_name:`Tu nombre`, l_org:`Organización / rol`, ph_org:`p. ej. bodega, inversor`, l_email:`Correo electrónico *`,
+      chk:`He leído y <b>acepto</b> el Acuerdo de Confidencialidad anterior.`,
+      l_agree:`Confirmación — escribe la palabra «agreed» *`,
+      hint:`Confirmación opt-in: exactamente la palabra <b>agreed</b> · registrada con marca de tiempo.`,
+      enter:`Entrar a la demo →`, opening:`Abriendo la demo…`, rec_ok:`✓ Consentimiento registrado`,
+      cav_t:`Nota técnica`, cav_p:`Esto es una barrera contractual de aceptación (registra el consentimiento), no una protección técnica. Para una restricción de acceso real, activa <b>Vercel Deployment / Password Protection</b> en esta página: la barrera es el acuerdo, la contraseña de Vercel es el candado.`,
+      legal:`NDA — PLANTILLA, REQUIERE REVISIÓN DE UN ABOGADO · NO ES ASESORAMIENTO LEGAL<br>© 2026 TASTING AND TOASTING INC. · DELAWARE · NOINDEX`
+    },
+    de:{
+      chip:`VERTRAULICH`, kicker:`Pre-launch · Zugang nach Vereinbarung`,
+      h1:`Vertraulicher <em>Zugang</em>.`,
+      intro:`Es folgt nicht-öffentliches CAP-Demomaterial (Winzer-Konsole und Pass). Um fortzufahren, bestätige die Vertraulichkeitsvereinbarung.`,
+      nda_h:`Geheimhaltungsvereinbarung (NDA) — Kurzfassung`,
+      s1h:`1. Gegenstand`, s1:`Du erhältst Zugang zu nicht-öffentlichen Materialien der Tasting And Toasting Inc. zur CAP-Plattform (Certified Authenticity Passport): Prototypen, Design, Architektur, Geschäftsmodell und zugehörige Daten („Materialien“).`,
+      s2h:`2. Zweck`, s2:`Die Materialien werden ausschließlich zur Ansicht und Bewertung bereitgestellt. Jede andere Nutzung ist untersagt.`,
+      s3h:`3. Pflichten`,
+      s3a:`Die Materialien nicht ohne schriftliche Zustimmung an Dritte weitergeben.`,
+      s3b:`Nicht kopieren, veröffentlichen oder Screenshots zur Verbreitung anfertigen.`,
+      s3c:`Die Materialien nicht zur Entwicklung eines Konkurrenzprodukts nutzen und nicht zurückentwickeln.`,
+      s3d:`Auf Verlangen die Nutzung einstellen und Kopien löschen.`,
+      s4h:`4. Keine Gewährleistung`, s4:`Die Materialien werden „wie besehen“ bereitgestellt, sind vorläufig und können sich ändern. Sie sind kein Angebot, keine Funktionszusage und keine Bestätigung von Lizenzen.`,
+      s5h:`5. Laufzeit und Recht`, s5:`Die Vertraulichkeitspflichten gelten 3 Jahre ab dem Bestätigungsdatum. Anwendbares Recht und Gerichtsstand nach gesonderter Vereinbarung der Parteien (Standard: Bundesstaat Delaware, USA / Tasting And Toasting SL, Spanien).`,
+      s6h:`6. Bestätigung`, s6:`Durch Eingabe deines Namens und des Wortes „agreed“ unten bestätigst du, dass du diese Vereinbarung gelesen hast und an sie gebunden bist.`,
+      scroll:`↑ scrolle die vollständige Vereinbarung`,
+      l_name:`Vor- und Nachname *`, ph_name:`Dein Name`, l_org:`Organisation / Rolle`, ph_org:`z. B. Weingut, Investor`, l_email:`E-Mail *`,
+      chk:`Ich habe die obige Vertraulichkeitsvereinbarung gelesen und <b>akzeptiere</b> sie.`,
+      l_agree:`Bestätigung — tippe das Wort „agreed“ *`,
+      hint:`Opt-in-Bestätigung: genau das Wort <b>agreed</b> · mit Zeitstempel erfasst.`,
+      enter:`Zur Demo →`, opening:`Demo wird geöffnet…`, rec_ok:`✓ Zustimmung erfasst`,
+      cav_t:`Technischer Hinweis`, cav_p:`Dies ist eine vertragliche Click-through-Schranke (erfasst die Zustimmung), kein technischer Schutz. Für echte Zugangsbeschränkung aktiviere <b>Vercel Deployment / Password Protection</b> auf dieser Seite — die Schranke ist die Vereinbarung, das Vercel-Passwort ist das Schloss.`,
+      legal:`NDA — VORLAGE, MUSS VON EINEM ANWALT GEPRÜFT WERDEN · KEINE RECHTSBERATUNG<br>© 2026 TASTING AND TOASTING INC. · DELAWARE · NOINDEX`
+    },
+    it:{
+      chip:`RISERVATO`, kicker:`Pre-launch · accesso su accordo`,
+      h1:`Accesso <em>riservato</em>.`,
+      intro:`Di seguito trovi materiale demo non pubblico di CAP (console della cantina e passaporto). Per continuare, conferma l’accordo di riservatezza.`,
+      nda_h:`Accordo di Riservatezza (NDA) — sintesi`,
+      s1h:`1. Oggetto`, s1:`Accedi a materiali non pubblici di Tasting And Toasting Inc. sulla piattaforma CAP (Certified Authenticity Passport): prototipi, design, architettura, modello di business e dati correlati («Materiali»).`,
+      s2h:`2. Finalità`, s2:`I Materiali sono forniti esclusivamente per la consultazione e la valutazione. Qualsiasi altro uso è vietato.`,
+      s3h:`3. Obblighi`,
+      s3a:`Non divulgare i Materiali a terzi senza consenso scritto.`,
+      s3b:`Non copiare, pubblicare o fare screenshot per la distribuzione.`,
+      s3c:`Non usare i Materiali per creare un prodotto concorrente né sottoporli a reverse engineering.`,
+      s3d:`Su richiesta, cessare l’uso ed eliminare le copie.`,
+      s4h:`4. Nessuna garanzia`, s4:`I Materiali sono forniti «così come sono», hanno carattere preliminare e possono cambiare. Non costituiscono un’offerta, una promessa di funzionalità o una conferma di licenze.`,
+      s5h:`5. Durata e legge`, s5:`Gli obblighi di riservatezza durano 3 anni dalla data di conferma. Legge applicabile e foro competente secondo accordo separato delle Parti (predefinito: Stato del Delaware, USA / Tasting And Toasting SL, Spagna).`,
+      s6h:`6. Conferma`, s6:`Inserendo il tuo nome e la parola «agreed» qui sotto, confermi di aver letto e di accettare di essere vincolato dal presente Accordo.`,
+      scroll:`↑ scorri l’accordo completo`,
+      l_name:`Nome e cognome *`, ph_name:`Il tuo nome`, l_org:`Organizzazione / ruolo`, ph_org:`es. cantina, investitore`, l_email:`E-mail *`,
+      chk:`Ho letto e <b>accetto</b> l’Accordo di Riservatezza qui sopra.`,
+      l_agree:`Conferma — digita la parola «agreed» *`,
+      hint:`Conferma opt-in: esattamente la parola <b>agreed</b> · registrata con marca temporale.`,
+      enter:`Entra nella demo →`, opening:`Apertura della demo…`, rec_ok:`✓ Consenso registrato`,
+      cav_t:`Nota tecnica`, cav_p:`Questa è una barriera contrattuale click-through (registra il consenso), non una protezione tecnica. Per una vera restrizione d’accesso, attiva <b>Vercel Deployment / Password Protection</b> su questa pagina: la barriera è l’accordo, la password di Vercel è il lucchetto.`,
+      legal:`NDA — MODELLO, RICHIEDE REVISIONE DI UN AVVOCATO · NON È CONSULENZA LEGALE<br>© 2026 TASTING AND TOASTING INC. · DELAWARE · NOINDEX`
+    }
+  };
+
+  var SUPPORTED=['en','ru','es','de','it'];
+  var DEMO_URL='cap-demo.html';   // <- поменяй на свой путь, напр. '/cap-demo.html'
+
+  var params=new URLSearchParams(location.search);
+  var lang=(params.get('lang')||'en').toLowerCase();
+  if(SUPPORTED.indexOf(lang)<0) lang='en';
+
+  var els=document.querySelectorAll('[data-i18n]');
+  var phs=document.querySelectorAll('[data-i18n-ph]');
+  var langBtns=document.querySelectorAll('#lang button');
+
+  function apply(l){
+    var d=I18N[l]; if(!d) return;
+    document.documentElement.lang=l;
+    els.forEach(function(el){ var k=el.getAttribute('data-i18n'); if(d[k]!=null) el.innerHTML=d[k]; });
+    phs.forEach(function(el){ var k=el.getAttribute('data-i18n-ph'); if(d[k]!=null) el.setAttribute('placeholder',d[k]); });
+    langBtns.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang')===l); });
+    var p=new URLSearchParams(location.search); p.set('lang',l);
+    history.replaceState(null,'',location.pathname+'?'+p.toString());
+    lang=l; validate();
+  }
+  langBtns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); }); });
+
+  var name=document.getElementById('fName'), email=document.getElementById('fEmail'),
+      org=document.getElementById('fOrg'), chk=document.getElementById('chk'),
+      agree=document.getElementById('fAgree'), btn=document.getElementById('enterBtn'),
+      rec=document.getElementById('recorded'), recTs=document.getElementById('recTs');
+
+  function emailOk(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v); }
+  function agreedOk(){ return agree.value.trim().toLowerCase()==='agreed'; }
+  function validate(){
+    agree.classList.toggle('agreed-ok', agreedOk());
+    var ok=name.value.trim().length>1 && emailOk(email.value.trim()) && chk.checked && agreedOk();
+    btn.disabled=!ok; return ok;
+  }
+  [name,email,org,agree].forEach(function(el){ el.addEventListener('input',validate); });
+  chk.addEventListener('change',validate);
+
+  btn.addEventListener('click', function(){
+    if(!validate()) return;
+    var record={ name:name.value.trim(), org:org.value.trim(), email:email.value.trim(),
+      confirmation:'agreed', lang:lang, accepted_at:new Date().toISOString(), doc:'CAP NDA v1' };
+    // === ОПЦИОНАЛЬНО: запись согласия на сервер (контрактный след) ===
+    // fetch('https://YOUR-ENDPOINT',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(record)});
+    rec.classList.add('show');
+    recTs.textContent=record.name+' · '+new Date().toLocaleString()+' · "agreed"';
+    btn.disabled=true; btn.textContent=I18N[lang].opening;
+    setTimeout(function(){ window.location.href=DEMO_URL+'?lang='+lang+'#nda=ok-'+Date.now(); }, 900);
+  });
+
+  apply(lang);
+})();
+</script>
+</body>
+</html>
