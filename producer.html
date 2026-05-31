@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Producer · Lueria Winery · Tasting &amp; Toasting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b0d; --void-2:#121013; --panel:#171318; --panel-2:#1d181e;
+  --wine:#6b2737; --wine-soft:#7d2f41; --cream:#f4eee6; --cream-soft:#cbbfb0;
+  --gold:#cba24f; --gold-soft:#e0c486; --green:#86a878; --coral:#c66a7c;
+  --line:#2c252e; --line-2:#231d27; --ink-dim:#86807f;
+  --serif:"Playfair Display", Georgia, serif; --body:"Spectral", Georgia, serif; --mono:"Spline Sans Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ background:var(--void); color:var(--cream); font-family:var(--body); font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
+.mono{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--ink-dim); }
+.wrap{ max-width:1100px; margin:0 auto; padding:0 28px; }
+.navbar{ border-bottom:1px solid var(--line); background:rgba(12,11,13,.9); position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); }
+.navbar .wrap{ display:flex; align-items:center; justify-content:space-between; height:58px; gap:14px; }
+.nb-brand{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--cream); white-space:nowrap; }
+.nb-brand b{ color:var(--gold-soft); } .nb-brand a{ color:var(--ink-dim); text-decoration:none; }
+.lang{ display:flex; gap:7px; flex-wrap:wrap; }
+.lang button{ background:none; border:none; cursor:pointer; font-family:var(--mono); font-size:9px; letter-spacing:.08em; color:var(--ink-dim); padding:2px 1px; transition:.2s; }
+.lang button.on{ color:var(--gold-soft); border-bottom:1px solid var(--gold); }
+.lang button:hover{ color:var(--cream); }
+.phead{ padding:54px 0 40px; border-bottom:1px solid var(--line); background:radial-gradient(120% 80% at 85% -10%, #25141c 0%, var(--void) 55%); }
+.readonly{ margin-bottom:18px; }
+.phead h1{ font-family:var(--serif); font-weight:800; font-size:clamp(40px,7vw,76px); line-height:1; }
+.phead .sub{ color:var(--cream-soft); font-size:16px; margin-top:14px; }
+.verified{ display:inline-flex; align-items:center; gap:10px; margin-top:22px; border:1px solid #3a4a34; border-radius:40px; padding:8px 15px; }
+.verified .dot{ width:9px; height:9px; border-radius:50%; background:var(--green); box-shadow:0 0 9px #86a87880; }
+.verified .vt{ font-family:var(--mono); font-size:10px; letter-spacing:.16em; color:var(--green); }
+.verified .vid{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; color:var(--ink-dim); }
+section{ padding:48px 0; border-bottom:1px solid var(--line); }
+.stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.stat{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px; }
+.stat .n{ font-family:var(--serif); font-size:38px; color:var(--cream); line-height:1; }
+.stat .n .u{ font-size:15px; color:var(--gold-soft); }
+.stat .l{ margin-top:10px; }
+.stat .d{ font-family:var(--mono); font-size:9.5px; letter-spacing:.06em; margin-top:6px; }
+.stat .d.g{ color:var(--green); } .stat .d.c{ color:var(--coral); }
+.sec-h{ display:flex; align-items:baseline; gap:14px; margin-bottom:8px; }
+h2{ font-family:var(--serif); font-weight:700; font-size:clamp(22px,3vw,30px); }
+.since{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; color:var(--ink-dim); }
+.markets{ margin-top:22px; display:flex; flex-direction:column; gap:13px; }
+.mk{ display:grid; grid-template-columns:150px 1fr 70px; gap:16px; align-items:center; }
+.mk .name{ font-size:14.5px; color:var(--cream-soft); }
+.mk .track{ height:8px; background:#241e26; border-radius:6px; overflow:hidden; }
+.mk .fill{ height:100%; background:linear-gradient(90deg,var(--wine),var(--gold)); border-radius:6px; }
+.mk .val{ font-family:var(--mono); font-size:12px; color:var(--gold-soft); text-align:end; }
+.alerts{ margin-top:22px; display:flex; flex-direction:column; gap:14px; }
+.alert{ display:flex; gap:14px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }
+.alert .tag{ flex:0 0 auto; font-family:var(--mono); font-size:8.5px; letter-spacing:.14em; padding:5px 9px; border-radius:20px; height:fit-content; }
+.tag.coral{ color:var(--coral); border:1px solid #4a2a32; } .tag.gold{ color:var(--gold-soft); border:1px solid #4a3a22; } .tag.green{ color:var(--green); border:1px solid #3a4a34; }
+.alert .ab .at{ font-family:var(--mono); font-size:8.5px; letter-spacing:.12em; color:var(--ink-dim); margin-bottom:4px; }
+.alert .ab .ax{ font-size:14px; color:var(--cream-soft); }
+.cta{ padding:44px 0 0; }
+.cta a{ display:inline-block; text-decoration:none; background:linear-gradient(90deg,var(--gold),var(--gold-soft)); color:#1a1206; font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; padding:15px 26px; border-radius:9px; font-weight:600; }
+footer.page{ padding:38px 0 56px; }
+.prelaunch{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; color:var(--coral); border:1px solid #4a2a32; border-radius:30px; padding:7px 14px; display:inline-block; }
+footer.page .fine{ color:var(--ink-dim); font-size:13px; margin-top:18px; }
+footer.page .fine b{ color:var(--cream-soft); }
+@media(max-width:860px){ .stats{ grid-template-columns:1fr 1fr; } .mk{ grid-template-columns:110px 1fr 56px; gap:10px; } }
+</style>
+</head>
+<body>
+<div class="navbar"><div class="wrap">
+  <div class="nb-brand"><a href="https://www.tastingandtoasting.com/index.html">←&nbsp;HUB</a>&nbsp;&nbsp;·&nbsp;&nbsp;TASTING &amp; TOASTING <b>CAP</b></div>
+  <div class="lang" id="lang">
+    <button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="ru">RU</button><button data-lang="es">ES</button><button data-lang="uk">UK</button><button data-lang="it">IT</button><button data-lang="de">DE</button><button data-lang="he">HE</button><button data-lang="pt">PT</button>
+  </div>
+</div></div>
+
+<div class="phead"><div class="wrap">
+  <div class="readonly mono" data-i18n="readonly">Producer profile · read-only consumer view</div>
+  <h1>Lueria Winery</h1>
+  <div class="sub"><span data-i18n="p_sub">Upper Galilee · family-run since 2003 · 4 hectares</span></div>
+  <div class="verified"><span class="dot"></span><span class="vt" data-i18n="p_verified">CAP verified producer</span><span class="vid">· CAP-2024-LU-018</span></div>
+</div></div>
+
+<section><div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="n">14 820</div><div class="l mono" data-i18n="st1">Total bottles in CAP</div><div class="d g" data-i18n="st1d">+ 2 400 this season</div></div>
+    <div class="stat"><div class="n">3 247</div><div class="l mono" data-i18n="st2">Scans this month</div><div class="d g" data-i18n="st2d">+ 18% vs prior</div></div>
+    <div class="stat"><div class="n">0</div><div class="l mono" data-i18n="st3">Counterfeit attempts</div><div class="d g" data-i18n="st3d">all clean · 90 days</div></div>
+    <div class="stat"><div class="n">14 <span class="u" data-i18n="st4u">countries</span></div><div class="l mono" data-i18n="st4">Markets reached</div><div class="d g" data-i18n="st4d">+ 3 this year</div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-h"><h2 data-i18n="mk_h">Where you're being tasted</h2><span class="since" data-i18n="mk_since">last 30 days</span></div>
+  <div class="markets">
+    <div class="mk"><span class="name" data-i18n="ct_es">Spain</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">1 402</span></div>
+    <div class="mk"><span class="name" data-i18n="ct_fr">France</span><span class="track"><span class="fill" style="width:45%"></span></span><span class="val">628</span></div>
+    <div class="mk"><span class="name" data-i18n="ct_de">Germany</span><span class="track"><span class="fill" style="width:31%"></span></span><span class="val">441</span></div>
+    <div class="mk"><span class="name" data-i18n="ct_it">Italy</span><span class="track"><span class="fill" style="width:22%"></span></span><span class="val">312</span></div>
+    <div class="mk"><span class="name" data-i18n="ct_pt">Portugal</span><span class="track"><span class="fill" style="width:15%"></span></span><span class="val">204</span></div>
+    <div class="mk"><span class="name" data-i18n="ct_nl">Netherlands</span><span class="track"><span class="fill" style="width:11%"></span></span><span class="val">160</span></div>
+    <div class="mk"><span class="name" data-i18n="ct_be">Belgium</span><span class="track"><span class="fill" style="width:7%"></span></span><span class="val">100</span></div>
+  </div>
+</div></section>
+
+<section style="border-bottom:none;"><div class="wrap">
+  <div class="sec-h"><h2 data-i18n="al_h">Alerts</h2></div>
+  <div class="alerts">
+    <div class="alert"><span class="tag coral" data-i18n="al1_tag">Anomaly · 2h ago</span><div class="ab"><div class="ax" data-i18n="al1">Scan from a non-distributed market: Norway. Likely re-export. Worth investigating.</div></div></div>
+    <div class="alert"><span class="tag gold" data-i18n="al2_tag">Event · 1d ago</span><div class="ab"><div class="ax" data-i18n="al2">Lueria '18 selected for the "Vertical of Upper Galilee" tasting in Madrid, May 12.</div></div></div>
+    <div class="alert"><span class="tag green" data-i18n="al3_tag">Milestone · 4d ago</span><div class="ab"><div class="ax" data-i18n="al3">10,000th lifetime CAP scan. The most-scanned wine in your portfolio is now Lueria '18.</div></div></div>
+  </div>
+  <div class="cta"><a href="https://www.tastingandtoasting.com/tastings.html" data-i18n="cta">Find a tasting with this producer →</a></div>
+</div></section>
+
+<footer class="page"><div class="wrap">
+  <span class="prelaunch">PRE-LAUNCH · PENDING SPANISH LICENSES · NOT YET OPERATING COMMERCIALLY</span>
+  <div class="fine"><b>Tasting And Toasting Inc.</b> · Delaware Corp · Filing No. 7494277 · Operating subsidiary: Tasting And Toasting SL (Spain)<br>
+  <span data-i18n="foot">Verified by Tasting &amp; Toasting CAP · ISO/IEC 15459 · DPP-ready · verifiable truth, not a promise of authenticity.</span></div>
+</div></footer>
+
+<script>
+(function(){
+  var I18N={
+    en:{ readonly:`Producer profile · read-only consumer view`, p_sub:`Upper Galilee · family-run since 2003 · 4 hectares`, p_verified:`CAP verified producer`,
+      st1:`Total bottles in CAP`, st1d:`+ 2 400 this season`, st2:`Scans this month`, st2d:`+ 18% vs prior`, st3:`Counterfeit attempts`, st3d:`all clean · 90 days`, st4:`Markets reached`, st4u:`countries`, st4d:`+ 3 this year`,
+      mk_h:`Where you're being tasted`, mk_since:`last 30 days`,
+      ct_es:`Spain`, ct_fr:`France`, ct_de:`Germany`, ct_it:`Italy`, ct_pt:`Portugal`, ct_nl:`Netherlands`, ct_be:`Belgium`,
+      al_h:`Alerts`,
+      al1_tag:`Anomaly · 2h ago`, al1:`Scan from a non-distributed market: Norway. Likely re-export. Worth investigating.`,
+      al2_tag:`Event · 1d ago`, al2:`Lueria '18 selected for the "Vertical of Upper Galilee" tasting in Madrid, May 12.`,
+      al3_tag:`Milestone · 4d ago`, al3:`10,000th lifetime CAP scan. The most-scanned wine in your portfolio is now Lueria '18.`,
+      cta:`Find a tasting with this producer →`, foot:`Verified by Tasting & Toasting CAP · ISO/IEC 15459 · DPP-ready · verifiable truth, not a promise of authenticity.` },
+    fr:{ readonly:`Profil producteur · vue consommateur en lecture seule`, p_sub:`Haute Galilée · exploitation familiale depuis 2003 · 4 hectares`, p_verified:`Producteur vérifié CAP`,
+      st1:`Total de bouteilles dans CAP`, st1d:`+ 2 400 cette saison`, st2:`Scans ce mois-ci`, st2d:`+ 18% vs précédent`, st3:`Tentatives de contrefaçon`, st3d:`tout propre · 90 jours`, st4:`Marchés atteints`, st4u:`pays`, st4d:`+ 3 cette année`,
+      mk_h:`Où l'on vous déguste`, mk_since:`30 derniers jours`,
+      ct_es:`Espagne`, ct_fr:`France`, ct_de:`Allemagne`, ct_it:`Italie`, ct_pt:`Portugal`, ct_nl:`Pays-Bas`, ct_be:`Belgique`,
+      al_h:`Alertes`,
+      al1_tag:`Anomalie · il y a 2 h`, al1:`Scan depuis un marché non distribué : la Norvège. Probable réexportation. À investiguer.`,
+      al2_tag:`Événement · il y a 1 j`, al2:`Lueria '18 sélectionné pour la dégustation « Verticale de Haute Galilée » à Madrid, le 12 mai.`,
+      al3_tag:`Jalon · il y a 4 j`, al3:`10 000e scan CAP au total. Le vin le plus scanné de votre portefeuille est désormais Lueria '18.`,
+      cta:`Trouver une dégustation avec ce producteur →`, foot:`Vérifié par Tasting & Toasting CAP · ISO/IEC 15459 · DPP-ready · vérité vérifiable, pas une promesse d'authenticité.` },
+    ru:{ readonly:`Профиль производителя · просмотр только для чтения`, p_sub:`Верхняя Галилея · семейная с 2003 · 4 гектара`, p_verified:`Производитель CAP verified`,
+      st1:`Всего бутылок в CAP`, st1d:`+ 2 400 в этом сезоне`, st2:`Сканов за месяц`, st2d:`+ 18% к прошлому`, st3:`Попыток подделки`, st3d:`всё чисто · 90 дней`, st4:`Рынков охвачено`, st4u:`стран`, st4d:`+ 3 в этом году`,
+      mk_h:`Где вас дегустируют`, mk_since:`последние 30 дней`,
+      ct_es:`Испания`, ct_fr:`Франция`, ct_de:`Германия`, ct_it:`Италия`, ct_pt:`Португалия`, ct_nl:`Нидерланды`, ct_be:`Бельгия`,
+      al_h:`Алёрты`,
+      al1_tag:`Аномалия · 2 ч назад`, al1:`Скан из рынка вне дистрибуции: Норвегия. Вероятно, реэкспорт. Стоит проверить.`,
+      al2_tag:`Событие · 1 д назад`, al2:`Lueria '18 выбрано для дегустации «Вертикаль Верхней Галилеи» в Мадриде, 12 мая.`,
+      al3_tag:`Веха · 4 д назад`, al3:`10 000-й скан CAP за всё время. Самое сканируемое вино в вашем портфеле теперь Lueria '18.`,
+      cta:`Найти дегустацию с этим производителем →`, foot:`Проверено Tasting & Toasting CAP · ISO/IEC 15459 · DPP-ready · проверяемая правда, не обещание подлинности.` },
+    es:{ readonly:`Perfil del productor · vista de consumidor de solo lectura`, p_sub:`Alta Galilea · familiar desde 2003 · 4 hectáreas`, p_verified:`Productor verificado CAP`,
+      st1:`Total de botellas en CAP`, st1d:`+ 2 400 esta temporada`, st2:`Escaneos este mes`, st2d:`+ 18% vs anterior`, st3:`Intentos de falsificación`, st3d:`todo limpio · 90 días`, st4:`Mercados alcanzados`, st4u:`países`, st4d:`+ 3 este año`,
+      mk_h:`Dónde te están catando`, mk_since:`últimos 30 días`,
+      ct_es:`España`, ct_fr:`Francia`, ct_de:`Alemania`, ct_it:`Italia`, ct_pt:`Portugal`, ct_nl:`Países Bajos`, ct_be:`Bélgica`,
+      al_h:`Alertas`,
+      al1_tag:`Anomalía · hace 2 h`, al1:`Escaneo desde un mercado no distribuido: Noruega. Probable reexportación. Conviene investigar.`,
+      al2_tag:`Evento · hace 1 d`, al2:`Lueria '18 seleccionado para la cata «Vertical de Alta Galilea» en Madrid, el 12 de mayo.`,
+      al3_tag:`Hito · hace 4 d`, al3:`Escaneo CAP número 10 000 de su historia. El vino más escaneado de su cartera es ahora Lueria '18.`,
+      cta:`Buscar una cata con este productor →`, foot:`Verificado por Tasting & Toasting CAP · ISO/IEC 15459 · DPP-ready · verdad verificable, no una promesa de autenticidad.` },
+    uk:{ readonly:`Профіль виробника · перегляд лише для читання`, p_sub:`Верхня Галілея · сімейна з 2003 · 4 гектари`, p_verified:`Виробник CAP verified`,
+      st1:`Усього пляшок у CAP`, st1d:`+ 2 400 цього сезону`, st2:`Сканувань за місяць`, st2d:`+ 18% до минулого`, st3:`Спроб підробки`, st3d:`усе чисто · 90 днів`, st4:`Ринків охоплено`, st4u:`країн`, st4d:`+ 3 цього року`,
+      mk_h:`Де вас дегустують`, mk_since:`останні 30 днів`,
+      ct_es:`Іспанія`, ct_fr:`Франція`, ct_de:`Німеччина`, ct_it:`Італія`, ct_pt:`Португалія`, ct_nl:`Нідерланди`, ct_be:`Бельгія`,
+      al_h:`Сповіщення`,
+      al1_tag:`Аномалія · 2 год тому`, al1:`Сканування з ринку поза дистрибуцією: Норвегія. Імовірно, реекспорт. Варто перевірити.`,
+      al2_tag:`Подія · 1 д тому`, al2:`Lueria '18 обрано для дегустації «Вертикаль Верхньої Галілеї» в Мадриді, 12 травня.`,
+      al3_tag:`Віха · 4 д тому`, al3:`10 000-те сканування CAP за весь час. Найсканованіше вино у вашому портфелі тепер Lueria '18.`,
+      cta:`Знайти дегустацію з цим виробником →`, foot:`Перевірено Tasting & Toasting CAP · ISO/IEC 15459 · DPP-ready · перевірювана правда, не обіцянка справжності.` },
+    it:{ readonly:`Profilo del produttore · vista consumatore in sola lettura`, p_sub:`Alta Galilea · a conduzione familiare dal 2003 · 4 ettari`, p_verified:`Produttore verificato CAP`,
+      st1:`Totale bottiglie in CAP`, st1d:`+ 2 400 questa stagione`, st2:`Scansioni questo mese`, st2d:`+ 18% rispetto a prima`, st3:`Tentativi di contraffazione`, st3d:`tutto pulito · 90 giorni`, st4:`Mercati raggiunti`, st4u:`paesi`, st4d:`+ 3 quest'anno`,
+      mk_h:`Dove ti stanno degustando`, mk_since:`ultimi 30 giorni`,
+      ct_es:`Spagna`, ct_fr:`Francia`, ct_de:`Germania`, ct_it:`Italia`, ct_pt:`Portogallo`, ct_nl:`Paesi Bassi`, ct_be:`Belgio`,
+      al_h:`Avvisi`,
+      al1_tag:`Anomalia · 2 ore fa`, al1:`Scansione da un mercato non distribuito: Norvegia. Probabile riesportazione. Da approfondire.`,
+      al2_tag:`Evento · 1 g fa`, al2:`Lueria '18 selezionato per la degustazione «Verticale dell'Alta Galilea» a Madrid, 12 maggio.`,
+      al3_tag:`Traguardo · 4 g fa`, al3:`10 000ª scansione CAP di sempre. Il vino più scansionato del tuo portfolio è ora Lueria '18.`,
+      cta:`Trova una degustazione con questo produttore →`, foot:`Verificato da Tasting & Toasting CAP · ISO/IEC 15459 · DPP-ready · verità verificabile, non una promessa di autenticità.` },
+    de:{ readonly:`Produzentenprofil · schreibgeschützte Verbraucheransicht`, p_sub:`Obergaliläa · familiengeführt seit 2003 · 4 Hektar`, p_verified:`CAP-verifizierter Produzent`,
+      st1:`Flaschen in CAP gesamt`, st1d:`+ 2 400 diese Saison`, st2:`Scans diesen Monat`, st2d:`+ 18% ggü. zuvor`, st3:`Fälschungsversuche`, st3d:`alles sauber · 90 Tage`, st4:`Erreichte Märkte`, st4u:`Länder`, st4d:`+ 3 dieses Jahr`,
+      mk_h:`Wo du verkostet wirst`, mk_since:`letzte 30 Tage`,
+      ct_es:`Spanien`, ct_fr:`Frankreich`, ct_de:`Deutschland`, ct_it:`Italien`, ct_pt:`Portugal`, ct_nl:`Niederlande`, ct_be:`Belgien`,
+      al_h:`Warnungen`,
+      al1_tag:`Anomalie · vor 2 Std.`, al1:`Scan aus einem nicht belieferten Markt: Norwegen. Wahrscheinlich Re-Export. Sollte geprüft werden.`,
+      al2_tag:`Event · vor 1 T`, al2:`Lueria '18 ausgewählt für die Verkostung „Vertikale Obergaliläa" in Madrid, 12. Mai.`,
+      al3_tag:`Meilenstein · vor 4 T`, al3:`10.000ster CAP-Scan insgesamt. Der meistgescannte Wein in deinem Portfolio ist nun Lueria '18.`,
+      cta:`Eine Verkostung mit diesem Produzenten finden →`, foot:`Verifiziert von Tasting & Toasting CAP · ISO/IEC 15459 · DPP-ready · überprüfbare Wahrheit, kein Echtheitsversprechen.` },
+    he:{ readonly:`פרופיל יצרן · תצוגת צרכן לקריאה בלבד`, p_sub:`גליל עליון · עסק משפחתי מאז 2003 · 4 הקטר`, p_verified:`יצרן מאומת CAP`,
+      st1:`סה"כ בקבוקים ב-CAP`, st1d:`+ 2 400 העונה`, st2:`סריקות החודש`, st2d:`+ 18% לעומת הקודם`, st3:`ניסיונות זיוף`, st3d:`הכול נקי · 90 יום`, st4:`שווקים שהושגו`, st4u:`מדינות`, st4d:`+ 3 השנה`,
+      mk_h:`היכן טועמים אותך`, mk_since:`30 הימים האחרונים`,
+      ct_es:`ספרד`, ct_fr:`צרפת`, ct_de:`גרמניה`, ct_it:`איטליה`, ct_pt:`פורטוגל`, ct_nl:`הולנד`, ct_be:`בלגיה`,
+      al_h:`התראות`,
+      al1_tag:`חריגה · לפני שעתיים`, al1:`סריקה משוק שאינו מופץ: נורווגיה. ככל הנראה ייצוא חוזר. כדאי לבדוק.`,
+      al2_tag:`אירוע · לפני יום`, al2:`Lueria '18 נבחר לטעימת "ורטיקל גליל עליון" במדריד, 12 במאי.`,
+      al3_tag:`אבן דרך · לפני 4 ימים`, al3:`הסריקה ה-10,000 של CAP אי פעם. היין הנסרק ביותר בתיק שלך הוא כעת Lueria '18.`,
+      cta:`← מצאו טעימה עם היצרן הזה`, foot:`מאומת על ידי Tasting & Toasting CAP · ISO/IEC 15459 · DPP-ready · אמת ניתנת לאימות, לא הבטחה לאותנטיות.` },
+    pt:{ readonly:`Perfil do produtor · vista de consumidor só de leitura`, p_sub:`Alta Galileia · de gestão familiar desde 2003 · 4 hectares`, p_verified:`Produtor verificado CAP`,
+      st1:`Total de garrafas em CAP`, st1d:`+ 2 400 esta época`, st2:`Leituras este mês`, st2d:`+ 18% vs anterior`, st3:`Tentativas de contrafação`, st3d:`tudo limpo · 90 dias`, st4:`Mercados alcançados`, st4u:`países`, st4d:`+ 3 este ano`,
+      mk_h:`Onde está a ser provado`, mk_since:`últimos 30 dias`,
+      ct_es:`Espanha`, ct_fr:`França`, ct_de:`Alemanha`, ct_it:`Itália`, ct_pt:`Portugal`, ct_nl:`Países Baixos`, ct_be:`Bélgica`,
+      al_h:`Alertas`,
+      al1_tag:`Anomalia · há 2 h`, al1:`Leitura de um mercado não distribuído: Noruega. Provável reexportação. Vale a pena investigar.`,
+      al2_tag:`Evento · há 1 d`, al2:`Lueria '18 selecionado para a prova «Vertical da Alta Galileia» em Madrid, a 12 de maio.`,
+      al3_tag:`Marco · há 4 d`, al3:`10 000.ª leitura CAP de sempre. O vinho mais lido da sua carteira é agora o Lueria '18.`,
+      cta:`Encontrar uma prova com este produtor →`, foot:`Verificado por Tasting & Toasting CAP · ISO/IEC 15459 · DPP-ready · verdade verificável, não uma promessa de autenticidade.` }
+  };
+  var SUPPORTED=['en','fr','ru','es','uk','it','de','he','pt'];
+  var params=new URLSearchParams(location.search);
+  var lang=(params.get('lang')||'en').toLowerCase();
+  if(SUPPORTED.indexOf(lang)<0) lang='en';
+  var els=document.querySelectorAll('[data-i18n]');
+  var langBtns=document.querySelectorAll('#lang button');
+  function apply(l){
+    var d=I18N[l]; if(!d) return;
+    document.documentElement.lang=l;
+    document.documentElement.dir = (l==='he') ? 'rtl' : 'ltr';
+    els.forEach(function(el){ var k=el.getAttribute('data-i18n'); if(d[k]!=null) el.innerHTML=d[k]; });
+    langBtns.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang')===l); });
+    var p=new URLSearchParams(location.search); p.set('lang',l);
+    history.replaceState(null,'',location.pathname+'?'+p.toString());
+    lang=l;
+  }
+  langBtns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); }); });
+  apply(lang);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find a tasting · Tasting &amp; Toasting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b0d; --void-2:#121013; --panel:#171318; --panel-2:#1d181e;
+  --burg:#4a1a26; --burg-2:#2a1620; --wine:#6b2737; --wine-soft:#7d2f41;
+  --cream:#f4eee6; --cream-soft:#cbbfb0; --gold:#cba24f; --gold-soft:#e0c486;
+  --green:#86a878; --coral:#c66a7c; --line:#2c252e; --line-2:#231d27; --ink-dim:#86807f;
+  --serif:"Playfair Display", Georgia, serif; --body:"Spectral", Georgia, serif; --mono:"Spline Sans Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{ scroll-behavior:smooth; }
+body{ background:var(--void); color:var(--cream); font-family:var(--body); font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
+.mono{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--ink-dim); }
+.wrap{ max-width:1180px; margin:0 auto; padding:0 28px; }
+.navbar{ border-bottom:1px solid var(--line); background:rgba(12,11,13,.9); position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); }
+.navbar .wrap{ display:flex; align-items:center; justify-content:space-between; height:58px; gap:14px; }
+.nb-brand{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--cream); white-space:nowrap; }
+.nb-brand b{ color:var(--gold-soft); }
+.nb-brand a{ color:var(--ink-dim); text-decoration:none; }
+.nb-right{ display:flex; align-items:center; gap:14px; }
+.lang{ display:flex; gap:7px; flex-wrap:wrap; }
+.lang button{ background:none; border:none; cursor:pointer; font-family:var(--mono); font-size:9px; letter-spacing:.08em; color:var(--ink-dim); padding:2px 1px; transition:.2s; }
+.lang button.on{ color:var(--gold-soft); border-bottom:1px solid var(--gold); }
+.lang button:hover{ color:var(--cream); }
+.event-hero{ padding:54px 0; border-bottom:1px solid var(--line); }
+.event-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+.poster{ aspect-ratio:4/3; border-radius:14px; border:1px solid var(--line); position:relative; overflow:hidden; background:radial-gradient(120% 120% at 30% 20%, #3a1622 0%, #1a1016 60%, #120e12 100%); }
+.poster .date{ position:absolute; top:20px; inset-inline-start:20px; font-family:var(--mono); font-size:11px; letter-spacing:.18em; color:var(--gold-soft); background:#0c0b0d; border:1px solid var(--line); padding:8px 12px; }
+.poster .bigword{ position:absolute; bottom:14px; inset-inline-end:22px; font-family:var(--serif); font-style:italic; font-size:64px; color:#ffffff10; }
+.poster .stub{ position:absolute; inset-inline-start:22px; top:40%; font-family:var(--serif); font-size:15px; color:#ffffff14; line-height:2.2; }
+.ev-kick{ margin-bottom:14px; }
+.ev-title{ font-family:var(--serif); font-weight:700; font-size:clamp(34px,5vw,58px); line-height:1.04; }
+.ev-title .i{ font-style:italic; color:var(--wine-soft); font-weight:500; }
+.ev-desc{ color:var(--cream-soft); font-size:16px; margin-top:18px; max-width:520px; }
+.ev-meta{ margin-top:26px; border-top:1px solid var(--line); }
+.ev-row{ display:flex; justify-content:space-between; align-items:center; gap:16px; padding:13px 0; border-bottom:1px solid var(--line); }
+.ev-row .k{ font-family:var(--mono); font-size:10px; letter-spacing:.16em; color:var(--ink-dim); }
+.ev-row .v{ font-family:var(--serif); font-size:17px; color:var(--cream); text-align:end; }
+.reserve{ display:block; width:100%; text-align:center; margin-top:24px; text-decoration:none; background:var(--wine); color:var(--cream); font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; padding:18px; border-radius:8px; transition:.2s; }
+.reserve:hover{ background:var(--wine-soft); }
+.sched{ padding:56px 0; border-bottom:1px solid var(--line); }
+.sched h2{ font-family:var(--serif); font-weight:700; font-size:clamp(26px,3.4vw,40px); margin-bottom:26px; }
+.sl{ display:grid; grid-template-columns:120px 1fr; gap:24px; padding:22px 0; border-top:1px solid var(--line); }
+.sl .time{ font-family:var(--mono); font-size:12px; letter-spacing:.12em; color:var(--gold-soft); padding-top:5px; }
+.sl .h{ font-family:var(--serif); font-size:22px; color:var(--cream); }
+.sl .d{ color:var(--cream-soft); font-size:14.5px; margin-top:5px; max-width:680px; }
+.more{ padding:54px 0; }
+.more h3{ font-family:var(--serif); font-size:22px; margin-bottom:20px; }
+.cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.card{ background:var(--panel); border:1px solid var(--line); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; }
+.card .cap{ height:120px; background:radial-gradient(120% 120% at 30% 20%, #2e1a2a 0%, #161018 70%); position:relative; }
+.card .cap .w{ position:absolute; bottom:8px; inset-inline-end:14px; font-family:var(--serif); font-style:italic; font-size:30px; color:#ffffff12; }
+.card .cap .chip{ position:absolute; top:12px; inset-inline-start:12px; font-family:var(--mono); font-size:8.5px; letter-spacing:.14em; padding:4px 8px; border-radius:20px; }
+.chip.green{ color:var(--green); border:1px solid #3a4a34; } .chip.coral{ color:var(--coral); border:1px solid #4a2a32; }
+.card .body{ padding:15px 16px 17px; }
+.card .ct{ font-family:var(--mono); font-size:9px; letter-spacing:.14em; color:var(--ink-dim); }
+.card .cn{ font-family:var(--serif); font-size:18px; margin:8px 0 4px; }
+.card .cd{ font-size:13px; color:var(--cream-soft); font-style:italic; }
+.card .cf{ display:flex; justify-content:space-between; align-items:center; margin-top:13px; padding-top:12px; border-top:1px solid var(--line); }
+.card .price{ font-family:var(--mono); font-size:11px; color:var(--gold-soft); letter-spacing:.05em; }
+.card .resv{ font-family:var(--mono); font-size:9px; letter-spacing:.14em; color:var(--cream); text-decoration:none; }
+footer.page{ padding:38px 0 56px; border-top:1px solid var(--line); }
+.prelaunch{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; color:var(--coral); border:1px solid #4a2a32; border-radius:30px; padding:7px 14px; display:inline-block; }
+footer.page .fine{ color:var(--ink-dim); font-size:13px; margin-top:18px; }
+footer.page .fine b{ color:var(--cream-soft); }
+@media(max-width:860px){ .event-grid{ grid-template-columns:1fr; } .cards{ grid-template-columns:1fr; } .sl{ grid-template-columns:80px 1fr; gap:14px; } }
+</style>
+</head>
+<body>
+<div class="navbar"><div class="wrap">
+  <div class="nb-brand"><a href="https://www.tastingandtoasting.com/index.html">←&nbsp;HUB</a>&nbsp;&nbsp;·&nbsp;&nbsp;TASTING &amp; TOASTING</div>
+  <div class="nb-right">
+    <div class="lang" id="lang">
+      <button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="ru">RU</button><button data-lang="es">ES</button><button data-lang="uk">UK</button><button data-lang="it">IT</button><button data-lang="de">DE</button><button data-lang="he">HE</button><button data-lang="pt">PT</button>
+    </div>
+  </div>
+</div></div>
+
+<div class="event-hero"><div class="wrap">
+  <div class="event-grid">
+    <div class="poster">
+      <div class="date">TUE · MAY 12, 2026 · 20:00</div>
+      <div class="stub" data-i18n="poster_stub">Carlos Mendoza, MS<br>6 wines blind</div>
+      <div class="bigword">Vertical.</div>
+    </div>
+    <div>
+      <div class="ev-kick mono" data-i18n="ev_kick">Private masterclass · Madrid</div>
+      <h1 class="ev-title">Tempranillo, <span class="i" data-i18n="ev_title_i">north to south</span></h1>
+      <p class="ev-desc" data-i18n="ev_desc">A six-wine vertical with Master Sommelier Carlos Mendoza, fourteen years in Rioja and now in Madrid. We taste the same grape under three climates and ask whether terroir is real or rhetorical.</p>
+      <div class="ev-meta">
+        <div class="ev-row"><span class="k" data-i18n="m_somm">Sommelier</span><span class="v">Carlos Mendoza, MS</span></div>
+        <div class="ev-row"><span class="k" data-i18n="m_loc">Location</span><span class="v">T&amp;T Madrid · Salamanca</span></div>
+        <div class="ev-row"><span class="k" data-i18n="m_wines">Wines tasted</span><span class="v" data-i18n="m_wines_v">6 · all CAP verified</span></div>
+        <div class="ev-row"><span class="k" data-i18n="m_spots">Spots remaining</span><span class="v" data-i18n="m_spots_v">4 of 12</span></div>
+        <div class="ev-row"><span class="k" data-i18n="m_cost">Cost</span><span class="v" data-i18n="m_cost_v">120 credits · or €120</span></div>
+      </div>
+      <a href="#" class="reserve" data-i18n="reserve">Reserve your seat</a>
+    </div>
+  </div>
+</div></div>
+
+<div class="sched"><div class="wrap">
+  <h2 data-i18n="sched_h">The evening, hour by hour.</h2>
+  <div class="sl"><div class="time">20:00</div><div><div class="h">Welcome flight · <span data-i18n="s1t">Rueda Verdejo</span></div><div class="d" data-i18n="s1d">A palate cleanser. White, before we go red. Brief introduction to the evening's structure.</div></div></div>
+  <div class="sl"><div class="time">20:25</div><div><div class="h">Rioja · <span data-i18n="s2t">two crianzas, blind</span></div><div class="d" data-i18n="s2d">Same grape. Same DOCa. One mountain side, one valley floor. Guess which is which before Carlos reveals.</div></div></div>
+  <div class="sl"><div class="time">21:00</div><div><div class="h">Ribera del Duero · <span data-i18n="s3t">the elder brother</span></div><div class="d" data-i18n="s3d">Tinta del País at 800m altitude. We compare structure, tannin, and what changes when the river runs differently.</div></div></div>
+  <div class="sl"><div class="time">21:35</div><div><div class="h">Toro · <span data-i18n="s4t">the loud cousin</span></div><div class="d" data-i18n="s4d">Lower altitude, hotter days. Same DNA, different volume. Often the divisive bottle of the night.</div></div></div>
+  <div class="sl"><div class="time">22:10</div><div><div class="h" data-i18n="s5t">The verdict · open Q&amp;A</div><div class="d" data-i18n="s5d">Where does style end and terroir begin? Bring your scorecards. Carlos doesn't dodge.</div></div></div>
+  <div class="sl"><div class="time">22:45</div><div><div class="h">Goodbye glass · <span data-i18n="s6t">vintage port</span></div><div class="d" data-i18n="s6d">Optional. Stays open until last guest leaves.</div></div></div>
+</div></div>
+
+<div class="more"><div class="wrap">
+  <h3 data-i18n="more_h">More tastings this month</h3>
+  <div class="cards">
+    <div class="card"><div class="cap"><span class="chip green" data-i18n="c_spots1">12 spots</span><span class="w">Italia.</span></div>
+      <div class="body"><div class="ct" data-i18n="c_type1">Group tasting</div><div class="cn">Sangiovese vs Nebbiolo</div><div class="cd" data-i18n="c_sub1">Marta Sanguineti · 4 wines, the Italian question</div>
+        <div class="cf"><span class="price">40 cr · €40</span><a href="#" class="resv" data-i18n="reserve_s">Reserve →</a></div></div></div>
+    <div class="card"><div class="cap"><span class="chip coral" data-i18n="c_spots2">2 left</span><span class="w">Pairing.</span></div>
+      <div class="body"><div class="ct" data-i18n="c_type2">Curated dinner</div><div class="cn">Five courses, five wines</div><div class="cd" data-i18n="c_sub2">Chef Iván Cerdeño · partner restaurant Lavinia</div>
+        <div class="cf"><span class="price">200 cr · €200</span><a href="#" class="resv" data-i18n="reserve_s">Reserve →</a></div></div></div>
+    <div class="card"><div class="cap"><span class="chip coral" data-i18n="c_spots3">1 left</span><span class="w">Ribera.</span></div>
+      <div class="body"><div class="ct" data-i18n="c_type3">Vineyard travel</div><div class="cn">A weekend in Ribera del Duero</div><div class="cd" data-i18n="c_sub3">Three wineries · stayover at Vega Sicilia</div>
+        <div class="cf"><span class="price">650 cr · €650</span><a href="#" class="resv" data-i18n="reserve_s">Reserve →</a></div></div></div>
+  </div>
+</div></div>
+
+<footer class="page"><div class="wrap">
+  <span class="prelaunch">PRE-LAUNCH · PENDING SPANISH LICENSES · NOT YET OPERATING COMMERCIALLY</span>
+  <div class="fine"><b>Tasting And Toasting Inc.</b> · Delaware Corp · Filing No. 7494277 · Operating subsidiary: Tasting And Toasting SL (Spain)</div>
+</div></footer>
+
+<script>
+(function(){
+  var I18N={
+    en:{ poster_stub:`Carlos Mendoza, MS<br>6 wines blind`, ev_kick:`Private masterclass · Madrid`, ev_title_i:`north to south`,
+      ev_desc:`A six-wine vertical with Master Sommelier Carlos Mendoza, fourteen years in Rioja and now in Madrid. We taste the same grape under three climates and ask whether terroir is real or rhetorical.`,
+      m_somm:`Sommelier`, m_loc:`Location`, m_wines:`Wines tasted`, m_wines_v:`6 · all CAP verified`, m_spots:`Spots remaining`, m_spots_v:`4 of 12`, m_cost:`Cost`, m_cost_v:`120 credits · or €120`,
+      reserve:`Reserve your seat`, sched_h:`The evening, hour by hour.`,
+      s1t:`Rueda Verdejo`, s1d:`A palate cleanser. White, before we go red. Brief introduction to the evening's structure.`,
+      s2t:`two crianzas, blind`, s2d:`Same grape. Same DOCa. One mountain side, one valley floor. Guess which is which before Carlos reveals.`,
+      s3t:`the elder brother`, s3d:`Tinta del País at 800m altitude. We compare structure, tannin, and what changes when the river runs differently.`,
+      s4t:`the loud cousin`, s4d:`Lower altitude, hotter days. Same DNA, different volume. Often the divisive bottle of the night.`,
+      s5t:`The verdict · open Q&A`, s5d:`Where does style end and terroir begin? Bring your scorecards. Carlos doesn't dodge.`,
+      s6t:`vintage port`, s6d:`Optional. Stays open until last guest leaves.`,
+      more_h:`More tastings this month`, reserve_s:`Reserve →`,
+      c_type1:`Group tasting`, c_sub1:`Marta Sanguineti · 4 wines, the Italian question`, c_spots1:`12 spots`,
+      c_type2:`Curated dinner`, c_sub2:`Chef Iván Cerdeño · partner restaurant Lavinia`, c_spots2:`2 left`,
+      c_type3:`Vineyard travel`, c_sub3:`Three wineries · stayover at Vega Sicilia`, c_spots3:`1 left` },
+    fr:{ poster_stub:`Carlos Mendoza, MS<br>6 vins à l'aveugle`, ev_kick:`Masterclass privée · Madrid`, ev_title_i:`du nord au sud`,
+      ev_desc:`Une verticale de six vins avec le maître sommelier Carlos Mendoza, quatorze ans à Rioja et désormais à Madrid. Nous goûtons le même cépage sous trois climats et demandons si le terroir est réel ou rhétorique.`,
+      m_somm:`Sommelier`, m_loc:`Lieu`, m_wines:`Vins dégustés`, m_wines_v:`6 · tous vérifiés CAP`, m_spots:`Places restantes`, m_spots_v:`4 sur 12`, m_cost:`Tarif`, m_cost_v:`120 crédits · ou 120 €`,
+      reserve:`Réservez votre place`, sched_h:`La soirée, heure par heure.`,
+      s1t:`Rueda Verdejo`, s1d:`Un nettoyant pour le palais. Blanc, avant de passer au rouge. Brève introduction à la structure de la soirée.`,
+      s2t:`deux crianzas, à l'aveugle`, s2d:`Même cépage. Même DOCa. Un versant de montagne, un fond de vallée. Devinez lequel est lequel avant que Carlos ne révèle.`,
+      s3t:`le grand frère`, s3d:`Tinta del País à 800 m d'altitude. Nous comparons structure, tanin et ce qui change quand la rivière coule autrement.`,
+      s4t:`le cousin bruyant`, s4d:`Altitude plus basse, journées plus chaudes. Même ADN, volume différent. Souvent la bouteille qui divise la soirée.`,
+      s5t:`Le verdict · questions ouvertes`, s5d:`Où finit le style et où commence le terroir ? Apportez vos fiches. Carlos n'esquive pas.`,
+      s6t:`porto millésimé`, s6d:`Facultatif. Reste ouvert jusqu'au départ du dernier invité.`,
+      more_h:`Plus de dégustations ce mois-ci`, reserve_s:`Réserver →`,
+      c_type1:`Dégustation de groupe`, c_sub1:`Marta Sanguineti · 4 vins, la question italienne`, c_spots1:`12 places`,
+      c_type2:`Dîner accordé`, c_sub2:`Chef Iván Cerdeño · restaurant partenaire Lavinia`, c_spots2:`2 restantes`,
+      c_type3:`Voyage au vignoble`, c_sub3:`Trois domaines · nuitée à Vega Sicilia`, c_spots3:`1 restante` },
+    ru:{ poster_stub:`Carlos Mendoza, MS<br>6 вин вслепую`, ev_kick:`Частный мастер-класс · Мадрид`, ev_title_i:`с севера на юг`,
+      ev_desc:`Вертикальная дегустация шести вин с мастером-сомелье Карлосом Мендосой, четырнадцать лет в Риохе, теперь в Мадриде. Мы пробуем один и тот же сорт винограда в трёх климатах и спрашиваем, терруар реален или это риторика.`,
+      m_somm:`Сомелье`, m_loc:`Локация`, m_wines:`Вин в дегустации`, m_wines_v:`6 · все CAP verified`, m_spots:`Осталось мест`, m_spots_v:`4 из 12`, m_cost:`Стоимость`, m_cost_v:`120 кредитов · или €120`,
+      reserve:`Забронировать место`, sched_h:`Вечер, час за часом.`,
+      s1t:`Rueda Verdejo`, s1d:`Очищение нёба. Белое, прежде чем перейти к красному. Короткое введение в структуру вечера.`,
+      s2t:`две crianza, вслепую`, s2d:`Один сорт. Одна DOCa. Один склон горы, одно дно долины. Угадайте, что есть что, до того как Карлос раскроет.`,
+      s3t:`старший брат`, s3d:`Tinta del País на высоте 800 м. Сравниваем структуру, танин и то, что меняется, когда река течёт иначе.`,
+      s4t:`шумный кузен`, s4d:`Ниже высота, жарче дни. Тот же ДНК, другая громкость. Часто самая спорная бутылка вечера.`,
+      s5t:`Вердикт · открытый Q&A`, s5d:`Где заканчивается стиль и начинается терруар? Берите свои карточки. Карлос не уклоняется.`,
+      s6t:`винтажный портвейн`, s6d:`По желанию. Открыто, пока не уйдёт последний гость.`,
+      more_h:`Больше дегустаций в этом месяце`, reserve_s:`Забронировать →`,
+      c_type1:`Групповая дегустация`, c_sub1:`Marta Sanguineti · 4 вина, итальянский вопрос`, c_spots1:`12 мест`,
+      c_type2:`Кураторский ужин`, c_sub2:`Шеф Iván Cerdeño · ресторан-партнёр Lavinia`, c_spots2:`2 осталось`,
+      c_type3:`Путешествие по виноградникам`, c_sub3:`Три винодельни · ночёвка в Vega Sicilia`, c_spots3:`1 осталось` },
+    es:{ poster_stub:`Carlos Mendoza, MS<br>6 vinos a ciegas`, ev_kick:`Masterclass privada · Madrid`, ev_title_i:`de norte a sur`,
+      ev_desc:`Una vertical de seis vinos con el Master Sommelier Carlos Mendoza, catorce años en Rioja y ahora en Madrid. Catamos la misma uva bajo tres climas y preguntamos si el terruño es real o retórico.`,
+      m_somm:`Sumiller`, m_loc:`Ubicación`, m_wines:`Vinos catados`, m_wines_v:`6 · todos verificados CAP`, m_spots:`Plazas disponibles`, m_spots_v:`4 de 12`, m_cost:`Precio`, m_cost_v:`120 créditos · o 120 €`,
+      reserve:`Reserva tu plaza`, sched_h:`La velada, hora a hora.`,
+      s1t:`Rueda Verdejo`, s1d:`Un limpiador de paladar. Blanco, antes de pasar al tinto. Breve introducción a la estructura de la velada.`,
+      s2t:`dos crianzas, a ciegas`, s2d:`Misma uva. Misma DOCa. Una ladera de montaña, un fondo de valle. Adivina cuál es cuál antes de que Carlos lo revele.`,
+      s3t:`el hermano mayor`, s3d:`Tinta del País a 800 m de altitud. Comparamos estructura, tanino y lo que cambia cuando el río corre de otra forma.`,
+      s4t:`el primo ruidoso`, s4d:`Menor altitud, días más cálidos. Mismo ADN, distinto volumen. A menudo la botella que divide la noche.`,
+      s5t:`El veredicto · preguntas abiertas`, s5d:`¿Dónde acaba el estilo y empieza el terruño? Trae tus fichas. Carlos no esquiva.`,
+      s6t:`oporto añejo`, s6d:`Opcional. Sigue abierto hasta que se marche el último invitado.`,
+      more_h:`Más catas este mes`, reserve_s:`Reservar →`,
+      c_type1:`Cata en grupo`, c_sub1:`Marta Sanguineti · 4 vinos, la cuestión italiana`, c_spots1:`12 plazas`,
+      c_type2:`Cena maridada`, c_sub2:`Chef Iván Cerdeño · restaurante asociado Lavinia`, c_spots2:`2 libres`,
+      c_type3:`Viaje al viñedo`, c_sub3:`Tres bodegas · noche en Vega Sicilia`, c_spots3:`1 libre` },
+    uk:{ poster_stub:`Carlos Mendoza, MS<br>6 вин наосліп`, ev_kick:`Приватний майстер-клас · Мадрид`, ev_title_i:`з півночі на південь`,
+      ev_desc:`Вертикальна дегустація шести вин із майстром-сомельє Карлосом Мендосою, чотирнадцять років у Ріосі, тепер у Мадриді. Куштуємо той самий сорт винограду в трьох кліматах і запитуємо, чи теруар реальний, чи це риторика.`,
+      m_somm:`Сомельє`, m_loc:`Локація`, m_wines:`Вин у дегустації`, m_wines_v:`6 · усі CAP verified`, m_spots:`Залишилось місць`, m_spots_v:`4 з 12`, m_cost:`Вартість`, m_cost_v:`120 кредитів · або €120`,
+      reserve:`Забронювати місце`, sched_h:`Вечір, година за годиною.`,
+      s1t:`Rueda Verdejo`, s1d:`Очищення піднебіння. Біле, перш ніж перейти до червоного. Короткий вступ до структури вечора.`,
+      s2t:`дві crianza, наосліп`, s2d:`Той самий сорт. Та сама DOCa. Один схил гори, одне дно долини. Вгадайте, що є що, перш ніж Карлос розкриє.`,
+      s3t:`старший брат`, s3d:`Tinta del País на висоті 800 м. Порівнюємо структуру, танін і те, що змінюється, коли річка тече інакше.`,
+      s4t:`галасливий кузен`, s4d:`Нижча висота, спекотніші дні. Той самий ДНК, інша гучність. Часто найсуперечливіша пляшка вечора.`,
+      s5t:`Вердикт · відкриті запитання`, s5d:`Де закінчується стиль і починається теруар? Беріть свої картки. Карлос не ухиляється.`,
+      s6t:`вінтажний портвейн`, s6d:`За бажанням. Відкрито, доки не піде останній гість.`,
+      more_h:`Більше дегустацій цього місяця`, reserve_s:`Забронювати →`,
+      c_type1:`Групова дегустація`, c_sub1:`Marta Sanguineti · 4 вина, італійське питання`, c_spots1:`12 місць`,
+      c_type2:`Кураторська вечеря`, c_sub2:`Шеф Iván Cerdeño · ресторан-партнер Lavinia`, c_spots2:`2 залишилось`,
+      c_type3:`Подорож виноградниками`, c_sub3:`Три винодельні · ночівля у Vega Sicilia`, c_spots3:`1 залишилось` },
+    it:{ poster_stub:`Carlos Mendoza, MS<br>6 vini alla cieca`, ev_kick:`Masterclass privata · Madrid`, ev_title_i:`da nord a sud`,
+      ev_desc:`Una verticale di sei vini con il Master Sommelier Carlos Mendoza, quattordici anni a Rioja e ora a Madrid. Degustiamo lo stesso vitigno sotto tre climi e ci chiediamo se il terroir sia reale o retorico.`,
+      m_somm:`Sommelier`, m_loc:`Luogo`, m_wines:`Vini degustati`, m_wines_v:`6 · tutti verificati CAP`, m_spots:`Posti rimasti`, m_spots_v:`4 su 12`, m_cost:`Costo`, m_cost_v:`120 crediti · o 120 €`,
+      reserve:`Prenota il tuo posto`, sched_h:`La serata, ora per ora.`,
+      s1t:`Rueda Verdejo`, s1d:`Un detergente per il palato. Bianco, prima di passare al rosso. Breve introduzione alla struttura della serata.`,
+      s2t:`due crianza, alla cieca`, s2d:`Stesso vitigno. Stessa DOCa. Un versante di montagna, un fondovalle. Indovina quale sia quale prima che Carlos riveli.`,
+      s3t:`il fratello maggiore`, s3d:`Tinta del País a 800 m di altitudine. Confrontiamo struttura, tannino e ciò che cambia quando il fiume scorre diversamente.`,
+      s4t:`il cugino chiassoso`, s4d:`Altitudine più bassa, giornate più calde. Stesso DNA, volume diverso. Spesso la bottiglia che divide la serata.`,
+      s5t:`Il verdetto · domande aperte`, s5d:`Dove finisce lo stile e inizia il terroir? Portate le vostre schede. Carlos non si sottrae.`,
+      s6t:`porto d'annata`, s6d:`Facoltativo. Resta aperto finché non se ne va l'ultimo ospite.`,
+      more_h:`Altre degustazioni questo mese`, reserve_s:`Prenota →`,
+      c_type1:`Degustazione di gruppo`, c_sub1:`Marta Sanguineti · 4 vini, la questione italiana`, c_spots1:`12 posti`,
+      c_type2:`Cena in abbinamento`, c_sub2:`Chef Iván Cerdeño · ristorante partner Lavinia`, c_spots2:`2 rimasti`,
+      c_type3:`Viaggio in vigna`, c_sub3:`Tre cantine · pernottamento a Vega Sicilia`, c_spots3:`1 rimasto` },
+    de:{ poster_stub:`Carlos Mendoza, MS<br>6 Weine blind`, ev_kick:`Private Masterclass · Madrid`, ev_title_i:`von Nord nach Süd`,
+      ev_desc:`Eine Vertikale aus sechs Weinen mit Master Sommelier Carlos Mendoza, vierzehn Jahre in Rioja und nun in Madrid. Wir verkosten dieselbe Rebsorte unter drei Klimazonen und fragen, ob Terroir real ist oder Rhetorik.`,
+      m_somm:`Sommelier`, m_loc:`Ort`, m_wines:`Verkostete Weine`, m_wines_v:`6 · alle CAP-verifiziert`, m_spots:`Freie Plätze`, m_spots_v:`4 von 12`, m_cost:`Preis`, m_cost_v:`120 Credits · oder 120 €`,
+      reserve:`Platz reservieren`, sched_h:`Der Abend, Stunde für Stunde.`,
+      s1t:`Rueda Verdejo`, s1d:`Ein Gaumenreiniger. Weiß, bevor es rot wird. Kurze Einführung in die Struktur des Abends.`,
+      s2t:`zwei Crianzas, blind`, s2d:`Gleiche Rebsorte. Gleiche DOCa. Ein Berghang, ein Talboden. Erraten Sie, was was ist, bevor Carlos auflöst.`,
+      s3t:`der ältere Bruder`, s3d:`Tinta del País auf 800 m Höhe. Wir vergleichen Struktur, Tannin und was sich ändert, wenn der Fluss anders fließt.`,
+      s4t:`der laute Cousin`, s4d:`Niedrigere Höhe, heißere Tage. Gleiche DNA, andere Lautstärke. Oft die strittigste Flasche des Abends.`,
+      s5t:`Das Urteil · offene Fragerunde`, s5d:`Wo endet der Stil und wo beginnt das Terroir? Bringen Sie Ihre Notizbögen. Carlos weicht nicht aus.`,
+      s6t:`Vintage Port`, s6d:`Optional. Bleibt offen, bis der letzte Gast geht.`,
+      more_h:`Weitere Verkostungen diesen Monat`, reserve_s:`Reservieren →`,
+      c_type1:`Gruppenverkostung`, c_sub1:`Marta Sanguineti · 4 Weine, die italienische Frage`, c_spots1:`12 Plätze`,
+      c_type2:`Kuratiertes Dinner`, c_sub2:`Chef Iván Cerdeño · Partnerrestaurant Lavinia`, c_spots2:`2 frei`,
+      c_type3:`Weinbergsreise`, c_sub3:`Drei Weingüter · Übernachtung in Vega Sicilia`, c_spots3:`1 frei` },
+    he:{ poster_stub:`Carlos Mendoza, MS<br>6 יינות בעיוור`, ev_kick:`מאסטרקלאס פרטי · מדריד`, ev_title_i:`מצפון לדרום`,
+      ev_desc:`ורטיקל של שישה יינות עם המאסטר סומלייה קרלוס מנדוזה, ארבע-עשרה שנים ברְיוֹחָה וכעת במדריד. אנו טועמים את אותו זן בשלושה אקלימים ושואלים אם הטרואר אמיתי או רטוריקה.`,
+      m_somm:`סומלייה`, m_loc:`מיקום`, m_wines:`יינות לטעימה`, m_wines_v:`6 · כולם מאומתי CAP`, m_spots:`מקומות שנותרו`, m_spots_v:`4 מתוך 12`, m_cost:`עלות`, m_cost_v:`120 קרדיטים · או €120`,
+      reserve:`שריינו מקום`, sched_h:`הערב, שעה אחר שעה.`,
+      s1t:`Rueda Verdejo`, s1d:`מנקה חך. לבן, לפני שעוברים לאדום. הקדמה קצרה למבנה הערב.`,
+      s2t:`שתי crianza, בעיוור`, s2d:`אותו זן. אותה DOCa. מדרון הר אחד, קרקעית עמק אחת. נחשו מי מי לפני שקרלוס חושף.`,
+      s3t:`האח הבכור`, s3d:`Tinta del País בגובה 800 מ'. משווים מבנה, טאנין ומה משתנה כשהנהר זורם אחרת.`,
+      s4t:`בן הדוד הרועש`, s4d:`גובה נמוך יותר, ימים חמים יותר. אותו DNA, עוצמה שונה. לעיתים הבקבוק השנוי במחלוקת של הערב.`,
+      s5t:`פסק הדין · שאלות פתוחות`, s5d:`היכן נגמר הסגנון ומתחיל הטרואר? הביאו את כרטיסי הניקוד. קרלוס לא מתחמק.`,
+      s6t:`פורט וינטג'`, s6d:`רשות. נשאר פתוח עד שהאורח האחרון עוזב.`,
+      more_h:`טעימות נוספות החודש`, reserve_s:`שריון →`,
+      c_type1:`טעימה קבוצתית`, c_sub1:`Marta Sanguineti · 4 יינות, השאלה האיטלקית`, c_spots1:`12 מקומות`,
+      c_type2:`ארוחה מותאמת`, c_sub2:`שף Iván Cerdeño · מסעדת שותף Lavinia`, c_spots2:`2 נותרו`,
+      c_type3:`מסע לכרם`, c_sub3:`שלושה יקבים · לינה ב-Vega Sicilia`, c_spots3:`1 נותר` },
+    pt:{ poster_stub:`Carlos Mendoza, MS<br>6 vinhos às cegas`, ev_kick:`Masterclass privada · Madrid`, ev_title_i:`de norte a sul`,
+      ev_desc:`Uma vertical de seis vinhos com o Master Sommelier Carlos Mendoza, catorze anos em Rioja e agora em Madrid. Provamos a mesma casta sob três climas e perguntamos se o terroir é real ou retórico.`,
+      m_somm:`Escanção`, m_loc:`Local`, m_wines:`Vinhos provados`, m_wines_v:`6 · todos verificados CAP`, m_spots:`Lugares disponíveis`, m_spots_v:`4 de 12`, m_cost:`Custo`, m_cost_v:`120 créditos · ou 120 €`,
+      reserve:`Reserve o seu lugar`, sched_h:`A noite, hora a hora.`,
+      s1t:`Rueda Verdejo`, s1d:`Um limpa-palato. Branco, antes de passarmos ao tinto. Breve introdução à estrutura da noite.`,
+      s2t:`duas crianzas, às cegas`, s2d:`Mesma casta. Mesma DOCa. Uma encosta de montanha, um fundo de vale. Adivinhe qual é qual antes de Carlos revelar.`,
+      s3t:`o irmão mais velho`, s3d:`Tinta del País a 800 m de altitude. Comparamos estrutura, tanino e o que muda quando o rio corre de outra forma.`,
+      s4t:`o primo barulhento`, s4d:`Menor altitude, dias mais quentes. Mesmo ADN, volume diferente. Muitas vezes a garrafa que divide a noite.`,
+      s5t:`O veredicto · perguntas abertas`, s5d:`Onde acaba o estilo e começa o terroir? Tragam as vossas fichas. Carlos não se esquiva.`,
+      s6t:`porto vintage`, s6d:`Opcional. Fica aberto até sair o último convidado.`,
+      more_h:`Mais provas este mês`, reserve_s:`Reservar →`,
+      c_type1:`Prova em grupo`, c_sub1:`Marta Sanguineti · 4 vinhos, a questão italiana`, c_spots1:`12 lugares`,
+      c_type2:`Jantar harmonizado`, c_sub2:`Chef Iván Cerdeño · restaurante parceiro Lavinia`, c_spots2:`2 livres`,
+      c_type3:`Viagem à vinha`, c_sub3:`Três quintas · pernoita em Vega Sicilia`, c_spots3:`1 livre` }
+  };
+  var SUPPORTED=['en','fr','ru','es','uk','it','de','he','pt'];
+  var params=new URLSearchParams(location.search);
+  var lang=(params.get('lang')||'en').toLowerCase();
+  if(SUPPORTED.indexOf(lang)<0) lang='en';
+  var els=document.querySelectorAll('[data-i18n]');
+  var langBtns=document.querySelectorAll('#lang button');
+  function apply(l){
+    var d=I18N[l]; if(!d) return;
+    document.documentElement.lang=l;
+    document.documentElement.dir = (l==='he') ? 'rtl' : 'ltr';
+    els.forEach(function(el){ var k=el.getAttribute('data-i18n'); if(d[k]!=null) el.innerHTML=d[k]; });
+    langBtns.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang')===l); });
+    var p=new URLSearchParams(location.search); p.set('lang',l);
+    history.replaceState(null,'',location.pathname+'?'+p.toString());
+    lang=l;
+  }
+  langBtns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); }); });
+  apply(lang);
+})();
+</script>
+</body>
+</html>
