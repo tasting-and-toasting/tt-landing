@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tasting &amp; Toasting CAP — консоль винодельни + паспорт</title>
+<title>Tasting &amp; Toasting CAP — winery console + passport</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -24,36 +24,31 @@ html{ scroll-behavior:smooth; }
 body{ background:var(--void); color:var(--cream); font-family:var(--body); font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
 .mono{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--ink-dim); }
 .wrap{ max-width:1180px; margin:0 auto; padding:0 28px; }
-.serif{ font-family:var(--serif); }
-
-/* ===== UNIFIED NAVBAR ===== */
 .navbar{ border-bottom:1px solid var(--line); background:rgba(12,11,13,.9); position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); }
-.navbar .wrap{ display:flex; align-items:center; justify-content:space-between; height:58px; gap:18px; }
+.navbar .wrap{ display:flex; align-items:center; justify-content:space-between; height:58px; gap:14px; }
 .nb-brand{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--cream); white-space:nowrap; }
 .nb-brand b{ color:var(--gold-soft); font-weight:600; }
-.nb-nav{ display:flex; gap:26px; }
-.nb-nav .ni{ font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-dim); cursor:pointer; padding:8px 2px; border-bottom:1.5px solid transparent; transition:.2s; user-select:none; white-space:nowrap; }
-.nb-nav .ni.active{ color:var(--cream); border-bottom-color:var(--gold); }
+.nb-mid{ display:flex; gap:22px; }
+.nb-mid .ni{ font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-dim); cursor:pointer; padding:8px 2px; border-bottom:1.5px solid transparent; transition:.2s; user-select:none; white-space:nowrap; }
+.nb-mid .ni.active{ color:var(--cream); border-bottom-color:var(--gold); }
+.nb-right{ display:flex; align-items:center; gap:14px; }
+.lang{ display:flex; gap:8px; }
+.lang button{ background:none; border:none; cursor:pointer; font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; color:var(--ink-dim); padding:2px 1px; transition:.2s; }
+.lang button.on{ color:var(--gold-soft); border-bottom:1px solid var(--gold); }
+.lang button:hover{ color:var(--cream); }
 .nb-pill{ display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:9px; letter-spacing:.16em; color:var(--green); border:1px solid #3a4a34; border-radius:40px; padding:5px 11px; white-space:nowrap; }
 .nb-dot{ width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 8px #86a87890; }
 .nb-strip{ border-bottom:1px solid var(--line); background:var(--void-2); }
 .nb-strip .wrap{ padding-top:9px; padding-bottom:9px; }
 .nb-strip .t{ font-family:var(--serif); font-style:italic; font-size:14px; color:var(--cream-soft); }
 .nb-strip .t b{ color:var(--gold-soft); font-style:normal; font-weight:500; }
-
-/* view toggle */
-.view{ display:none; }
-.view.show{ display:block; animation:vfade .4s ease; }
+.view{ display:none; } .view.show{ display:block; animation:vfade .4s ease; }
 @keyframes vfade{ from{opacity:0;} to{opacity:1;} }
-
-/* ===== SHARED PRIMITIVES ===== */
 section{ padding:60px 0; border-bottom:1px solid var(--line); }
 .sec-h{ display:flex; align-items:baseline; gap:16px; margin-bottom:8px; }
 .sec-h .idx{ font-family:var(--serif); font-style:italic; color:var(--gold); font-size:20px; }
 h2{ font-family:var(--serif); font-weight:700; font-size:clamp(26px,3.4vw,38px); line-height:1.1; }
 .sub{ color:var(--cream-soft); max-width:660px; margin-top:10px; font-size:16px; }
-
-/* ===== CONSOLE: HERO ===== */
 .hero{ padding:74px 0 52px; border-bottom:1px solid var(--line); background:radial-gradient(120% 80% at 80% -10%, #25141c 0%, var(--void) 55%); }
 .hero .kick{ margin-bottom:22px; }
 .hero h1{ font-family:var(--serif); font-weight:800; font-size:clamp(40px,7vw,80px); line-height:1.0; letter-spacing:-.5px; }
@@ -62,8 +57,6 @@ h2{ font-family:var(--serif); font-weight:700; font-size:clamp(26px,3.4vw,38px);
 .hero .meta{ margin-top:30px; display:flex; gap:34px; flex-wrap:wrap; }
 .hero .meta div .n{ font-family:var(--serif); font-size:26px; color:var(--cream); }
 .hero .meta div .l{ display:block; margin-top:2px; }
-
-/* door */
 .door{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:30px; }
 .door .step{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px 20px; position:relative; overflow:hidden; }
 .door .step .num{ font-family:var(--serif); font-style:italic; font-size:40px; color:#3a3340; line-height:1; }
@@ -74,14 +67,10 @@ h2{ font-family:var(--serif); font-weight:700; font-size:clamp(26px,3.4vw,38px);
 .door .step.is-key{ background:linear-gradient(160deg,#241019,#171318); border-color:#3a2230; }
 .door-result{ margin-top:18px; display:flex; align-items:center; gap:14px; font-family:var(--serif); font-size:22px; color:var(--gold-soft); }
 .door-result svg{ flex:0 0 auto; }
-
-/* stepper */
 .stepper{ display:flex; gap:8px; flex-wrap:wrap; margin:26px 0 22px; }
 .stepper .s{ font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; color:var(--ink-dim); border:1px solid var(--line); border-radius:30px; padding:6px 12px; transition:.3s; }
 .stepper .s.active{ color:var(--gold-soft); border-color:#4a3a22; background:#1c1610; }
 .stepper .s.complete{ color:var(--green); border-color:#3a4a34; }
-
-/* split */
 .split{ display:grid; grid-template-columns:1.05fr .95fr; gap:24px; align-items:start; }
 .console{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:26px; }
 .console .blocklabel{ margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; }
@@ -90,23 +79,17 @@ h2{ font-family:var(--serif); font-weight:700; font-size:clamp(26px,3.4vw,38px);
 .field{ font-family:var(--serif); font-size:20px; color:var(--cream); }
 .field.small{ font-size:15px; font-family:var(--body); color:var(--cream-soft); font-weight:300; }
 .editbadge{ font-family:var(--mono); font-size:8px; letter-spacing:.14em; color:var(--ink-dim); border:1px dashed #3a3340; border-radius:5px; padding:2px 6px; margin-left:8px; vertical-align:middle; }
-
-/* DNA (shared) */
 .dna{ margin:6px 0 2px; }
 .dna .bar{ display:flex; align-items:center; gap:11px; margin:8px 0; }
 .dna .bar .name{ width:150px; font-size:13px; color:var(--cream-soft); }
 .dna .bar .track{ flex:1; height:7px; background:#241e26; border-radius:6px; overflow:hidden; }
 .dna .bar .fill{ height:100%; background:linear-gradient(90deg,var(--wine),var(--gold)); border-radius:6px; }
 .dna .bar .pct{ width:40px; text-align:right; font-family:var(--mono); font-size:10.5px; color:var(--gold-soft); letter-spacing:.04em; }
-
-/* serial */
 .serial{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
 .serial .big{ font-family:var(--serif); font-size:38px; color:var(--cream); }
 .serial .big b{ color:var(--gold-soft); }
 .serial input[type=range]{ width:100%; margin-top:12px; accent-color:var(--gold); }
 .serial .edition{ font-family:var(--mono); font-size:10px; color:var(--ink-dim); letter-spacing:.16em; }
-
-/* journey author rows (console) */
 .jrow{ display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--line); }
 .jrow:last-child{ border-bottom:none; }
 .jrow .jc{ width:13px; height:13px; border-radius:50%; border:2px solid #4a3f48; flex:0 0 auto; transition:.3s; }
@@ -117,18 +100,14 @@ h2{ font-family:var(--serif); font-weight:700; font-size:clamp(26px,3.4vw,38px);
 .signbtn{ font-family:var(--mono); font-size:9px; letter-spacing:.14em; cursor:pointer; user-select:none; border:1px solid #4a3a22; color:var(--gold-soft); background:#1c1610; border-radius:30px; padding:7px 13px; transition:.25s; }
 .signbtn:hover{ background:#2a2113; }
 .jrow.signed .signbtn{ border-color:#3a4a34; color:var(--green); background:#141a12; pointer-events:none; }
-
 .carrier{ display:flex; gap:16px; align-items:center; }
 .qr{ width:74px; height:74px; border-radius:10px; background:var(--cream); padding:9px; flex:0 0 auto; }
 .qr svg{ width:100%; height:100%; }
 .carrier .ct .h{ font-family:var(--serif); font-size:17px; }
 .carrier .ct .d{ font-size:13px; color:var(--cream-soft); }
-
 .signall{ width:100%; margin-top:6px; font-family:var(--mono); font-size:11px; letter-spacing:.16em; cursor:pointer; border:none; border-radius:10px; padding:15px; color:#1a1206; background:linear-gradient(90deg,var(--gold),var(--gold-soft)); transition:.25s; font-weight:600; }
 .signall:hover{ filter:brightness(1.07); }
 .signall:disabled{ background:#2a2410; color:#6a5f3f; cursor:default; }
-
-/* console mini passport preview */
 .cpassport{ background:linear-gradient(180deg,#141015,#0e0c0f); border:1px solid var(--line); border-radius:16px; overflow:hidden; position:sticky; top:130px; }
 .cpassport .pp-top{ display:flex; justify-content:space-between; padding:11px 16px; border-bottom:1px solid var(--line); }
 .cpassport .pp-body{ padding:26px 22px 22px; text-align:center; }
@@ -154,8 +133,6 @@ h2{ font-family:var(--serif); font-weight:700; font-size:clamp(26px,3.4vw,38px);
 .cpassport .pp-quote{ text-align:left; border-left:2px solid var(--wine); padding:8px 0 8px 14px; margin-top:6px; font-style:italic; color:var(--cream-soft); font-size:13.5px; }
 .cpassport .pp-quote .a{ font-style:normal; font-family:var(--mono); font-size:8.5px; letter-spacing:.14em; color:var(--ink-dim); margin-top:7px; }
 .cpassport .pp-foot{ font-family:var(--mono); font-size:8px; letter-spacing:.14em; color:var(--ink-dim); text-align:center; padding:13px; border-top:1px solid var(--line); line-height:1.7; }
-
-/* economy */
 .eco{ display:grid; grid-template-columns:1.2fr 1fr; gap:24px; margin-top:28px; align-items:start; }
 .eco-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
 .metric{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px; }
@@ -172,8 +149,6 @@ h2{ font-family:var(--serif); font-weight:700; font-size:clamp(26px,3.4vw,38px);
 .cost li{ display:flex; gap:9px; font-size:13.5px; color:var(--cream-soft); padding:5px 0; }
 .cost li svg{ flex:0 0 auto; margin-top:4px; }
 .exchange{ font-family:var(--serif); font-style:italic; color:var(--gold-soft); font-size:17px; margin-top:18px; }
-
-/* ===== PASSPORT VIEW (consumer) ===== */
 #view-passport.show{ display:block; padding:40px 16px 20px; background:radial-gradient(130% 80% at 50% -5%, #1c1019 0%, var(--void) 55%); }
 .caption{ text-align:center; max-width:430px; margin:0 auto 26px; }
 .caption .t{ font-family:var(--serif); font-style:italic; font-size:20px; color:var(--gold-soft); }
@@ -224,7 +199,7 @@ h2{ font-family:var(--serif); font-weight:700; font-size:clamp(26px,3.4vw,38px);
 .jcard .jsub{ font-size:12.5px; color:var(--cream-soft); }
 .jmeta{ margin-top:11px; padding-top:11px; border-top:1px solid var(--line-2); display:flex; flex-direction:column; gap:7px; }
 .jr{ display:flex; align-items:center; gap:8px; font-size:12px; }
-.jr .k{ font-family:var(--mono); font-size:8.5px; letter-spacing:.12em; color:var(--ink-dim); width:74px; flex:0 0 auto; }
+.jr .k{ font-family:var(--mono); font-size:8.5px; letter-spacing:.12em; color:var(--ink-dim); width:84px; flex:0 0 auto; }
 .jr .v{ color:var(--cream-soft); }
 .sigchip{ display:inline-flex; align-items:center; gap:5px; font-family:var(--mono); font-size:8.5px; letter-spacing:.1em; color:var(--green); border:1px solid #3a4a34; border-radius:20px; padding:2px 8px; }
 .sigchip.live{ color:var(--gold-soft); border-color:#4a3a22; }
@@ -247,397 +222,633 @@ h2{ font-family:var(--serif); font-weight:700; font-size:clamp(26px,3.4vw,38px);
 .actions a.primary{ background:linear-gradient(90deg,var(--gold),var(--gold-soft)); color:#1a1206; border:none; font-weight:600; }
 .actions a:hover{ border-color:var(--gold); }
 .pfoot{ font-family:var(--mono); font-size:8px; letter-spacing:.13em; color:var(--ink-dim); text-align:center; padding:14px 18px 22px; border-top:1px solid var(--line-2); line-height:1.8; }
-
-/* shared page footer */
 footer.page{ padding:38px 0 56px; }
 .prelaunch{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; color:var(--coral); border:1px solid #4a2a32; border-radius:30px; padding:7px 14px; display:inline-block; }
 footer.page .fine{ color:var(--ink-dim); font-size:13px; margin-top:18px; }
 footer.page .fine b{ color:var(--cream-soft); }
-
-@media(max-width:880px){
-  .split,.eco,.door{ grid-template-columns:1fr; }
-  .cpassport{ position:static; }
-  .nb-strip{ display:none; }
-}
+@media(max-width:880px){ .split,.eco,.door{ grid-template-columns:1fr; } .cpassport{ position:static; } .nb-strip{ display:none; } .nb-mid{ gap:14px; } }
 </style>
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
 <div class="navbar"><div class="wrap">
   <div class="nb-brand"><a href="https://www.tastingandtoasting.com/index.html" style="color:var(--ink-dim);text-decoration:none;">←&nbsp;HUB</a>&nbsp;&nbsp;·&nbsp;&nbsp;TASTING &amp; TOASTING <b>CAP</b></div>
-  <div class="nb-nav">
-    <div class="ni active" data-v="console">Консоль винодельни</div>
-    <div class="ni" data-v="passport">Паспорт</div>
+  <div class="nb-mid">
+    <div class="ni active" data-v="console" data-i18n="nav_console">Winery console</div>
+    <div class="ni" data-v="passport" data-i18n="nav_passport">Passport</div>
   </div>
-  <div class="nb-pill"><span class="nb-dot"></span> CAP-2024-LU-018</div>
+  <div class="nb-right">
+    <div class="lang" id="lang"><button data-lang="en">EN</button><button data-lang="ru">RU</button><button data-lang="es">ES</button><button data-lang="de">DE</button><button data-lang="it">IT</button></div>
+    <div class="nb-pill"><span class="nb-dot"></span> CAP-2024-LU-018</div>
+  </div>
 </div></div>
-<div class="nb-strip"><div class="wrap">
-  <span class="t">Две стороны одной правды: <b>винодельня создаёт и подписывает</b> — мир читает.</span>
-</div></div>
+<div class="nb-strip"><div class="wrap"><span class="t" data-i18n="strip">Two sides of one truth: <b>the winery creates and signs</b> — the world reads.</span></div></div>
 
-<!-- ============================================================= -->
-<!-- VIEW 1 · CONSOLE -->
-<!-- ============================================================= -->
+<!-- ===== CONSOLE ===== -->
 <div id="view-console" class="view show">
-
   <div class="hero"><div class="wrap">
-    <div class="kick mono">Lueria Winery · Верхняя Галилея · семейная с 2003 · 4 га</div>
-    <h1>Как винодельня<br><em>открывает дверь</em>.</h1>
-    <p>Винодельня — точка входа во всю систему. Ничто не существует в CAP, пока производитель не создал это и не подписал. Ниже — путь одного продукта: от ДНК до живого паспорта, который увидит мир.</p>
+    <div class="kick mono" data-i18n="hero_kick">Lueria Winery · Upper Galilee · family-run since 2003 · 4 ha</div>
+    <h1 data-i18n="hero_h1">How a winery <em>opens the door</em>.</h1>
+    <p data-i18n="hero_p">The winery is the entry point to the whole system. Nothing exists in CAP until the producer created it and signed it. Below — the path of one product: from DNA to a living passport the world will read.</p>
     <div class="meta">
-      <div><span class="n">1</span><span class="l mono">Продукт</span></div>
-      <div><span class="n">2 400</span><span class="l mono">Бутылок в тираже</span></div>
-      <div><span class="n">#1224</span><span class="l mono">Эта бутылка</span></div>
+      <div><span class="n">1</span><span class="l mono" data-i18n="m1">Product</span></div>
+      <div><span class="n">2 400</span><span class="l mono" data-i18n="m2">Bottles in the run</span></div>
+      <div><span class="n">#1224</span><span class="l mono" data-i18n="m3">This bottle</span></div>
       <div><span class="n">DPP</span><span class="l mono">Ready</span></div>
     </div>
   </div></div>
 
   <section><div class="wrap">
-    <div class="sec-h"><span class="idx">01</span><span class="mono">Дверь верификации</span></div>
-    <h2>Сначала проверяют не вино — а того, кто за него ручается.</h2>
-    <p class="sub">Производитель проходит три уровня. Только пройдя их, винодельня получает ключ подписи — и право создавать паспорта. Это и есть «открыть дверь».</p>
+    <div class="sec-h"><span class="idx">01</span><span class="mono" data-i18n="s1_kick">The verification door</span></div>
+    <h2 data-i18n="s1_h2">First they verify not the wine — but who vouches for it.</h2>
+    <p class="sub" data-i18n="s1_sub">The producer passes three levels. Only then does the winery receive a signing key — and the right to create passports. That is what it means to open the door.</p>
     <div class="door">
-      <div class="step"><span class="tag tag-done">✓ Пройдено</span><div class="num">1</div><h3>Заявка</h3><p>Винодельня регистрируется и заявляет свою идентичность. Статус: «зарегистрировано производителем».</p></div>
-      <div class="step"><span class="tag tag-done">✓ Пройдено</span><div class="num">2</div><h3>Документы</h3><p>Проверка регистрации бизнеса, владения префиксом GS1 и контроля над доменом. Статус: «производитель верифицирован».</p></div>
-      <div class="step is-key"><span class="tag tag-done">✓ Выдан</span><div class="num">3</div><h3>Ключ подписи</h3><p>Винодельня получает ключ. Теперь каждое событие, которое она создаёт, несёт её подпись — основу доверия.</p></div>
+      <div class="step"><span class="tag tag-done" data-i18n="t_passed">✓ Passed</span><div class="num">1</div><h3 data-i18n="d1h">Application</h3><p data-i18n="d1p">The winery registers and asserts its identity. Status: registered by producer.</p></div>
+      <div class="step"><span class="tag tag-done" data-i18n="t_passed2">✓ Passed</span><div class="num">2</div><h3 data-i18n="d2h">Documents</h3><p data-i18n="d2p">Verification of business registration, GS1 prefix ownership and domain control. Status: producer verified.</p></div>
+      <div class="step is-key"><span class="tag tag-done" data-i18n="t_issued">✓ Issued</span><div class="num">3</div><h3 data-i18n="d3h">Signing key</h3><p data-i18n="d3p">The winery receives a key. Now every event it creates carries its signature — the basis of trust.</p></div>
     </div>
     <div class="door-result">
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e0c486" stroke-width="1.6"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.4" fill="#e0c486"/></svg>
-      Дверь открыта. Lueria Winery может создавать и подписывать паспорта.
+      <span data-i18n="door_res">The door is open. Lueria Winery can create and sign passports.</span>
     </div>
   </div></section>
 
   <section><div class="wrap">
-    <div class="sec-h"><span class="idx">02</span><span class="mono">Создание паспорта · ДНК продукта</span></div>
-    <h2>Слева винодельня заполняет и подписывает. Справа собирается то, что увидит мир.</h2>
-    <p class="sub">Один продукт — Lueria Grand Vital 2018. Каждое поле слева превращается в строку паспорта справа. Паспорт оживёт, когда весь путь будет подписан.</p>
+    <div class="sec-h"><span class="idx">02</span><span class="mono" data-i18n="s2_kick">Creating the passport · product DNA</span></div>
+    <h2 data-i18n="s2_h2">On the left the winery fills in and signs. On the right, what the world will see assembles.</h2>
+    <p class="sub" data-i18n="s2_sub">One product — Lueria Grand Vital 2018. Every field on the left becomes a line of the passport on the right. The passport comes alive once the whole path is signed.</p>
 
     <div class="stepper" id="stepper">
-      <span class="s active" data-k="dna">ДНК</span>
-      <span class="s" data-k="serial">Сериализация</span>
-      <span class="s" data-k="journey">Путь · подписи</span>
-      <span class="s" data-k="carrier">Носитель</span>
-      <span class="s" data-k="live">Живой паспорт</span>
+      <span class="s active" data-k="dna" data-i18n="st_dna">DNA</span>
+      <span class="s" data-k="serial" data-i18n="st_serial">Serialization</span>
+      <span class="s" data-k="journey" data-i18n="st_journey">Path · signatures</span>
+      <span class="s" data-k="carrier" data-i18n="st_carrier">Carrier</span>
+      <span class="s" data-k="live" data-i18n="st_live">Living passport</span>
     </div>
 
     <div class="split">
       <div class="console">
-        <div class="blocklabel"><span class="mono" style="color:var(--gold)">Консоль винодельни</span><span class="mono">черновик · редактируется</span></div>
+        <div class="blocklabel"><span class="mono" style="color:var(--gold)" data-i18n="cons_label">Winery console</span><span class="mono" data-i18n="cons_draft">draft · editable</span></div>
 
         <div class="fieldset">
-          <span class="mono">Идентичность</span>
+          <span class="mono" data-i18n="fs_identity">Identity</span>
           <div class="field">Lueria Grand Vital <span class="editbadge">edit</span></div>
-          <div class="field small">2018 · Reserva · Верхняя Галилея, Израиль</div>
+          <div class="field small" data-i18n="identity_sub">2018 · Reserva · Upper Galilee, Israel</div>
         </div>
 
         <div class="fieldset dna" id="dnaBox">
-          <span class="mono">ДНК · состав (по урожаю)</span>
+          <span class="mono" data-i18n="fs_dna">DNA · composition (by harvest)</span>
           <div class="bar"><span class="name">Cabernet Sauvignon</span><span class="track"><span class="fill" style="width:70%"></span></span><span class="pct">70%</span></div>
           <div class="bar"><span class="name">Merlot</span><span class="track"><span class="fill" style="width:20%"></span></span><span class="pct">20%</span></div>
           <div class="bar"><span class="name">Cabernet Franc</span><span class="track"><span class="fill" style="width:10%"></span></span><span class="pct">10%</span></div>
-          <div class="field small" style="margin-top:10px;">+ ингредиенты, ABV, аллергены — данные e-label ЕС <span class="editbadge">edit</span></div>
+          <div class="field small" style="margin-top:10px;" data-i18n="dna_note">+ ingredients, ABV, allergens — EU e-label data <span class="editbadge">edit</span></div>
         </div>
 
         <div class="fieldset">
-          <span class="mono">Сериализация · номер бутылки</span>
+          <span class="mono" data-i18n="fs_serial">Serialization · bottle number</span>
           <div class="serial">
             <div class="big">Bottle #<b id="serialNum">1224</b></div>
-            <div class="edition">/ ТИРАЖ 2400</div>
+            <div class="edition" data-i18n="edition">/ RUN 2400</div>
           </div>
           <input type="range" id="serialRange" min="1" max="2400" value="1224">
         </div>
 
         <div class="fieldset">
-          <span class="mono">Путь продукта · каждое событие подписывается</span>
-          <div class="jrow" data-e="0"><span class="jc"></span><div class="jt"><div class="h">Сбор урожая</div><div class="d">Sayada Vineyards, участок 7B · 21 СЕН 2018</div></div><span class="signbtn">Подписать</span></div>
-          <div class="jrow" data-e="1"><span class="jc"></span><div class="jt"><div class="h">Розлив</div><div class="d">Lueria Winery, Верхняя Галилея · 14 МАР 2020</div></div><span class="signbtn">Подписать</span></div>
-          <div class="jrow" data-e="2"><span class="jc"></span><div class="jt"><div class="h">Выдержка</div><div class="d">Частный погреб Lueria, 14 °C · 2020–2026</div></div><span class="signbtn">Подписать</span></div>
-          <div class="jrow" data-e="3"><span class="jc"></span><div class="jt"><div class="h">Дистрибуция</div><div class="d">Tasting &amp; Toasting, Мадрид · 12 АПР 2026</div></div><span class="signbtn">Подписать</span></div>
+          <span class="mono" data-i18n="fs_journey">Product path · each event is signed</span>
+          <div class="jrow" data-e="0"><span class="jc"></span><div class="jt"><div class="h" data-i18n="jr0h">Harvest</div><div class="d">Sayada Vineyards, plot 7B · 21 SEP 2018</div></div><span class="signbtn" data-i18n="sign">Sign</span></div>
+          <div class="jrow" data-e="1"><span class="jc"></span><div class="jt"><div class="h" data-i18n="jr1h">Bottling</div><div class="d">Lueria Winery, Upper Galilee · 14 MAR 2020</div></div><span class="signbtn" data-i18n="sign">Sign</span></div>
+          <div class="jrow" data-e="2"><span class="jc"></span><div class="jt"><div class="h" data-i18n="jr2h">Cellared</div><div class="d">Lueria private cellar, 14 °C · 2020–2026</div></div><span class="signbtn" data-i18n="sign">Sign</span></div>
+          <div class="jrow" data-e="3"><span class="jc"></span><div class="jt"><div class="h" data-i18n="jr3h">Distribution</div><div class="d">Tasting &amp; Toasting, Madrid · 12 APR 2026</div></div><span class="signbtn" data-i18n="sign">Sign</span></div>
         </div>
 
         <div class="fieldset">
-          <span class="mono">Носитель на бутылке</span>
+          <span class="mono" data-i18n="fs_carrier">Carrier on the bottle</span>
           <div class="carrier">
             <div class="qr"><svg viewBox="0 0 21 21" shape-rendering="crispEdges"><path fill="#171318" d="M0 0h7v7h-7zM2 2h3v3h-3zM14 0h7v7h-7zM16 2h3v3h-3zM0 14h7v7h-7zM2 16h3v3h-3zM9 0h2v2h-2zM9 3h2v3h-2zM12 9h2v2h-2zM9 9h2v2h-2zM16 9h2v2h-2zM19 9h2v2h-2zM9 12h3v2h-3zM14 14h2v2h-2zM18 14h3v2h-3zM9 17h2v4h-2zM12 16h2v2h-2zM15 18h2v3h-2zM18 18h3v3h-3z"/></svg></div>
-            <div class="ct"><div class="h">QR · GS1 Digital Link</div><div class="d">/01/{GTIN}/21/1224 — открытый стандарт, NFC опционально для премиума</div></div>
+            <div class="ct"><div class="h">QR · GS1 Digital Link</div><div class="d" data-i18n="carrier_d">/01/{GTIN}/21/1224 — open standard, NFC optional for premium</div></div>
           </div>
         </div>
 
-        <button class="signall" id="signAll">Подписать весь путь и открыть паспорт →</button>
+        <button class="signall" id="signAll" data-i18n="signall">Sign the whole path and open the passport →</button>
       </div>
 
       <div class="cpassport" id="cpassport">
-        <div class="pp-top"><span class="mono">cap.tastingandtoasting.com</span><span class="mono" id="ppScan">черновик</span></div>
+        <div class="pp-top"><span class="mono">cap.tastingandtoasting.com</span><span class="mono" id="ppScan" data-i18n="pp_draft">draft</span></div>
         <div class="pp-body">
-          <div class="pp-check" id="ppCheck">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2" id="ppTick" style="opacity:.25"><path d="M5 12l5 5L20 6"/></svg>
-          </div>
-          <div class="pp-status" id="ppStatus">НЕ ПОДПИСАНО</div>
-          <div class="pp-verdict" id="ppVerdict">Ожидает подписи</div>
+          <div class="pp-check" id="ppCheck"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2" id="ppTick" style="opacity:.25"><path d="M5 12l5 5L20 6"/></svg></div>
+          <div class="pp-status" id="ppStatus" data-i18n="pp_unsigned">NOT SIGNED</div>
+          <div class="pp-verdict" id="ppVerdict" data-i18n="pp_await">Awaiting signature</div>
           <div class="pp-meta">2018 · BOTTLE <span id="ppSerial">1224</span> / 2400</div>
           <div class="pp-name">Lueria Grand&nbsp;Vital</div>
-          <div class="pp-region">Верхняя Галилея, Израиль</div>
+          <div class="pp-region">Upper Galilee, Israel</div>
           <div class="pp-tabs"><span class="on">STORY</span><span>JOURNEY</span><span>MANIFESTO</span></div>
           <div class="pp-line"></div>
           <div class="pp-tl">
-            <span class="mono" style="display:block;margin-bottom:6px;">От бутылки к бутылке</span>
-            <div class="e" data-e="0"><span class="c"></span><div><div class="h">Сбор урожая</div><div class="d">Sayada Vineyards, 7B · 21 СЕН 2018</div></div></div>
-            <div class="e" data-e="1"><span class="c"></span><div><div class="h">Розлив</div><div class="d">Lueria Winery · 14 МАР 2020</div></div></div>
-            <div class="e" data-e="2"><span class="c"></span><div><div class="h">Выдержка</div><div class="d">Погреб Lueria, 14 °C · 2020–2026</div></div></div>
-            <div class="e" data-e="3"><span class="c"></span><div><div class="h">Дистрибуция</div><div class="d">T&amp;T, Мадрид · 12 АПР 2026</div></div></div>
+            <span class="mono" style="display:block;margin-bottom:6px;" data-i18n="b2b">From bottle to bottle</span>
+            <div class="e" data-e="0"><span class="c"></span><div><div class="h" data-i18n="jr0h">Harvest</div><div class="d">Sayada Vineyards, 7B · 21 SEP 2018</div></div></div>
+            <div class="e" data-e="1"><span class="c"></span><div><div class="h" data-i18n="jr1h">Bottling</div><div class="d">Lueria Winery · 14 MAR 2020</div></div></div>
+            <div class="e" data-e="2"><span class="c"></span><div><div class="h" data-i18n="jr2h">Cellared</div><div class="d">Lueria cellar, 14 °C · 2020–2026</div></div></div>
+            <div class="e" data-e="3"><span class="c"></span><div><div class="h" data-i18n="jr3h">Distribution</div><div class="d">T&amp;T, Madrid · 12 APR 2026</div></div></div>
           </div>
           <div class="pp-line"></div>
-          <div class="pp-quote">«We don't make Bordeaux. We make Galilee. The aim isn't to imitate; it is to translate this hillside into something that could come from nowhere else.»
+          <div class="pp-quote">“We don't make Bordeaux. We make Galilee. The aim isn't to imitate; it is to translate this hillside into something that could come from nowhere else.”
             <div class="a">Yosef Sayada · Lueria Winery</div></div>
         </div>
-        <div class="pp-foot">VERIFIED BY TASTING &amp; TOASTING CAP · ISO/IEC 15459 · DPP-READY<br>проверяемая правда, а не обещание подлинности</div>
+        <div class="pp-foot">VERIFIED BY TASTING &amp; TOASTING CAP · ISO/IEC 15459 · DPP-READY<br><span data-i18n="foot_truth">verifiable truth, not a promise of authenticity</span></div>
       </div>
     </div>
   </div></section>
 
   <section style="border-bottom:none;"><div class="wrap">
-    <div class="sec-h"><span class="idx">03</span><span class="mono">Экономика винодельни</span></div>
-    <h2>Что винодельня получает — и что платит.</h2>
-    <p class="sub">Обмен простой: винодельня платит за инфраструктуру доверия, а взамен получает защиту бренда, соответствие закону ЕС и прямой канал к вовлечённой аудитории.</p>
+    <div class="sec-h"><span class="idx">03</span><span class="mono" data-i18n="s3_kick">Winery economics</span></div>
+    <h2 data-i18n="s3_h2">What the winery gets — and what it pays.</h2>
+    <p class="sub" data-i18n="s3_sub">A simple exchange: the winery pays for trust infrastructure and gets brand protection, EU compliance and a direct channel to an engaged audience.</p>
     <div class="eco">
       <div class="eco-grid">
-        <div class="metric"><div class="n">14 820</div><div class="l mono">Бутылок в CAP</div><div class="delta g">+ 2 400 в этом сезоне</div></div>
-        <div class="metric"><div class="n">3 247</div><div class="l mono">Сканов за месяц</div><div class="delta g">+ 18% к прошлому</div></div>
-        <div class="metric"><div class="n">0</div><div class="l mono">Попыток подделки</div><div class="delta g">чисто · 90 дней</div></div>
-        <div class="metric"><div class="n">14 <span class="u">стран</span></div><div class="l mono">Рынков охвачено</div><div class="delta c">алёрт: скан из Норвегии — реэкспорт?</div></div>
+        <div class="metric"><div class="n">14 820</div><div class="l mono" data-i18n="met1">Bottles in CAP</div><div class="delta g" data-i18n="met1d">+ 2 400 this season</div></div>
+        <div class="metric"><div class="n">3 247</div><div class="l mono" data-i18n="met2">Scans this month</div><div class="delta g" data-i18n="met2d">+ 18% vs prior</div></div>
+        <div class="metric"><div class="n">0</div><div class="l mono" data-i18n="met3">Counterfeit attempts</div><div class="delta g" data-i18n="met3d">clean · 90 days</div></div>
+        <div class="metric"><div class="n">14 <span class="u" data-i18n="met4u">countries</span></div><div class="l mono" data-i18n="met4">Markets reached</div><div class="delta c" data-i18n="met4d">alert: scan from Norway — re-export?</div></div>
       </div>
       <div class="cost">
         <h3>Producer SaaS</h3>
-        <div class="price">€<span>от 0</span><small> / на старте · оплата за сериализацию</small></div>
+        <div class="price">€<span data-i18n="price_from">from 0</span><small data-i18n="price_sub"> / at launch · pay per serialization</small></div>
         <ul>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> Соответствие e-label ЕС «из коробки»</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> Сериализация и защита от контрафакта</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> Дашборд: сканы, рынки, аномалии</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> Канал к дегустаторам Tasting &amp; Toasting</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> <span data-i18n="c1">EU e-label compliance out of the box</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> <span data-i18n="c2">Serialization and counterfeit protection</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> <span data-i18n="c3">Dashboard: scans, markets, anomalies</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> <span data-i18n="c4">A channel to Tasting &amp; Toasting tasters</span></li>
         </ul>
-        <div class="exchange">Платит производитель. Потребитель сканирует бесплатно.</div>
+        <div class="exchange" data-i18n="exchange">The producer pays. The consumer scans for free.</div>
       </div>
     </div>
   </div></section>
-
 </div>
 
-<!-- ============================================================= -->
-<!-- VIEW 2 · PASSPORT (consumer) -->
-<!-- ============================================================= -->
+<!-- ===== PASSPORT ===== -->
 <div id="view-passport" class="view">
   <div class="caption">
-    <div class="t">CAP Passport · потребительский вид</div>
-    <div class="s">Результат скана бутылки. Три вкладки: история, проверяемый путь, манифест производителя.</div>
+    <div class="t" data-i18n="cap_t">CAP Passport · consumer view</div>
+    <div class="s" data-i18n="cap_s">The result of scanning a bottle. Three tabs: story, verifiable path, producer manifesto.</div>
   </div>
-
   <div class="phone">
     <div class="notch"></div>
     <div class="screen">
       <div class="p-top"><span class="mono">cap.tastingandtoasting.com</span><span class="mono">NFC scan · 19:42</span></div>
-
       <div class="seal-wrap">
         <div class="seal"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2"><path d="M5 12l5 5L20 6"/></svg></div>
         <div class="seal-status">VERIFIED</div>
         <div class="verdict">Verified &amp; traceable</div>
       </div>
-
       <div class="bottlemeta">
         <div class="line">2018 · BOTTLE 1224 / 2400</div>
         <h1>Lueria Grand&nbsp;Vital</h1>
         <div class="region">Upper Galilee, Israel</div>
       </div>
-
       <div class="tabs">
         <div class="tab active" data-t="story">STORY</div>
         <div class="tab" data-t="journey">JOURNEY</div>
         <div class="tab" data-t="manifesto">MANIFESTO</div>
       </div>
 
-      <!-- STORY -->
       <div class="panel show" id="story">
-        <span class="mono block-label">Composition</span>
-        <div class="composition"><p>Cabernet Sauvignon 70%, Merlot 20%, Cabernet Franc 10%. Drawn from select sections of Yosef Sayada's vineyard, with the varietal mix shifting harvest by harvest.</p></div>
+        <span class="mono block-label" data-i18n="composition">Composition</span>
+        <div class="composition"><p data-i18n="comp_text">Cabernet Sauvignon 70%, Merlot 20%, Cabernet Franc 10%. Drawn from select sections of Yosef Sayada's vineyard, with the varietal mix shifting harvest by harvest.</p></div>
         <div class="dna">
           <div class="bar"><span class="name">Cabernet Sauvignon</span><span class="track"><span class="fill" style="width:70%"></span></span><span class="pct">70%</span></div>
           <div class="bar"><span class="name">Merlot</span><span class="track"><span class="fill" style="width:20%"></span></span><span class="pct">20%</span></div>
           <div class="bar"><span class="name">Cabernet Franc</span><span class="track"><span class="fill" style="width:10%"></span></span><span class="pct">10%</span></div>
         </div>
         <div class="divider"></div>
-        <span class="mono block-label">From bottle to bottle</span>
+        <span class="mono block-label" data-i18n="b2b">From bottle to bottle</span>
         <div class="timeline">
-          <div class="tl-item"><span class="c"></span><div><div class="h">Сбор урожая</div><div class="d">Sayada Vineyards, участок 7B · 21 СЕН 2018 · 04:30</div></div></div>
-          <div class="tl-item"><span class="c"></span><div><div class="h">Розлив</div><div class="d">Lueria Winery, Верхняя Галилея · 14 МАР 2020</div></div></div>
-          <div class="tl-item"><span class="c"></span><div><div class="h">Выдержка</div><div class="d">Частный погреб Lueria, 14 °C · 2020–2026</div></div></div>
-          <div class="tl-item"><span class="c"></span><div><div class="h">Дистрибуция</div><div class="d">Tasting &amp; Toasting, Мадрид · 12 АПР 2026</div></div></div>
-          <div class="tl-item live"><span class="c"></span><div><div class="h">В твоих руках</div><div class="d">Мадрид, ES · сейчас · отсканировано в 19:42</div></div></div>
+          <div class="tl-item"><span class="c"></span><div><div class="h" data-i18n="jr0h">Harvest</div><div class="d">Sayada Vineyards, plot 7B · 21 SEP 2018 · 04:30</div></div></div>
+          <div class="tl-item"><span class="c"></span><div><div class="h" data-i18n="jr1h">Bottling</div><div class="d">Lueria Winery, Upper Galilee · 14 MAR 2020</div></div></div>
+          <div class="tl-item"><span class="c"></span><div><div class="h" data-i18n="jr2h">Cellared</div><div class="d">Lueria private cellar, 14 °C · 2020–2026</div></div></div>
+          <div class="tl-item"><span class="c"></span><div><div class="h" data-i18n="jr3h">Distribution</div><div class="d">Tasting &amp; Toasting, Madrid · 12 APR 2026</div></div></div>
+          <div class="tl-item live"><span class="c"></span><div><div class="h" data-i18n="in_hands">In your hands</div><div class="d" data-i18n="in_hands_d">Madrid, ES · now · scanned 19:42</div></div></div>
         </div>
         <div class="divider"></div>
-        <span class="mono block-label">From the producer</span>
+        <span class="mono block-label" data-i18n="from_producer">From the producer</span>
         <div class="quote">
-          <p>"We don't make Bordeaux. We make Galilee. The aim isn't to imitate; it is to translate this hillside into something that tastes like it could come from nowhere else."</p>
+          <p>“We don't make Bordeaux. We make Galilee. The aim isn't to imitate; it is to translate this hillside into something that tastes like it could come from nowhere else.”</p>
           <div class="by">Yosef Sayada · Lueria Winery</div>
         </div>
       </div>
 
-      <!-- JOURNEY -->
       <div class="panel" id="journey">
         <div class="chain-banner">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#86a878" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-          <div class="x">Цепочка <b>подтверждена</b> до дистрибуции. Каждое звено подписано участником.</div>
+          <div class="x" data-i18n="chain">Chain <b>confirmed</b> through distribution. Every link signed by a participant.</div>
         </div>
         <div class="jcard">
-          <div class="jhead"><span class="jtype">Harvest · Сбор</span><span class="jtime">21 SEP 2018 · 04:30</span></div>
-          <div class="jplace">Sayada Vineyards, участок 7B</div>
-          <div class="jsub">Ручной сбор до рассвета · 884 м над уровнем моря</div>
+          <div class="jhead"><span class="jtype" data-i18n="jt_harvest">Harvest</span><span class="jtime">21 SEP 2018 · 04:30</span></div>
+          <div class="jplace">Sayada Vineyards, plot 7B</div>
+          <div class="jsub" data-i18n="js_harvest">Hand-picked before dawn · 884 m above sea level</div>
           <div class="jmeta">
-            <div class="jr"><span class="k">Подписал</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>producer ✓</span></span></div>
-            <div class="jr"><span class="k">Доказ.</span><span class="v hash">harvest-log-18-7B · sha256:9f2a4c…e10b</span></div>
+            <div class="jr"><span class="k" data-i18n="k_signed">Signed by</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>producer ✓</span></span></div>
+            <div class="jr"><span class="k" data-i18n="k_proof">Proof</span><span class="v hash">harvest-log-18-7B · sha256:9f2a4c…e10b</span></div>
           </div>
         </div>
         <div class="jcard">
-          <div class="jhead"><span class="jtype">Bottling · Розлив</span><span class="jtime">14 MAR 2020</span></div>
-          <div class="jplace">Lueria Winery, Верхняя Галилея</div>
-          <div class="jsub">Тираж 2400 · присвоен GTIN · отчеканен серийник #1224</div>
+          <div class="jhead"><span class="jtype" data-i18n="jt_bottling">Bottling</span><span class="jtime">14 MAR 2020</span></div>
+          <div class="jplace">Lueria Winery, Upper Galilee</div>
+          <div class="jsub" data-i18n="js_bottling">Run of 2400 · GTIN assigned · serial #1224 minted</div>
           <div class="jmeta">
-            <div class="jr"><span class="k">Подписал</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>producer ✓</span></span></div>
-            <div class="jr"><span class="k">Доказ.</span><span class="v hash">bottling-rec-GV18 · sha256:1d77b2…44af</span></div>
+            <div class="jr"><span class="k" data-i18n="k_signed">Signed by</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>producer ✓</span></span></div>
+            <div class="jr"><span class="k" data-i18n="k_proof">Proof</span><span class="v hash">bottling-rec-GV18 · sha256:1d77b2…44af</span></div>
           </div>
         </div>
         <div class="jcard">
-          <div class="jhead"><span class="jtype">Cellared · Выдержка</span><span class="jtime">2020 — 2026</span></div>
-          <div class="jplace">Частный погреб Lueria</div>
-          <div class="jsub">Постоянные 14 °C · контроль влажности</div>
+          <div class="jhead"><span class="jtype" data-i18n="jt_cellared">Cellared</span><span class="jtime">2020 — 2026</span></div>
+          <div class="jplace" data-i18n="jp_cellar">Lueria private cellar</div>
+          <div class="jsub" data-i18n="js_cellar">Constant 14 °C · humidity controlled</div>
           <div class="jmeta">
-            <div class="jr"><span class="k">Подписал</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>producer ✓</span></span></div>
-            <div class="jr"><span class="k">Доказ.</span><span class="v hash">cellar-log-20-26 · sha256:7be9a1…02cd</span></div>
+            <div class="jr"><span class="k" data-i18n="k_signed">Signed by</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>producer ✓</span></span></div>
+            <div class="jr"><span class="k" data-i18n="k_proof">Proof</span><span class="v hash">cellar-log-20-26 · sha256:7be9a1…02cd</span></div>
           </div>
         </div>
         <div class="jcard">
-          <div class="jhead"><span class="jtype">Distribution · Дистрибуция</span><span class="jtime">12 APR 2026</span></div>
-          <div class="jplace">Tasting &amp; Toasting, Мадрид</div>
-          <div class="jsub">Передача владения · co-подписано двумя сторонами</div>
+          <div class="jhead"><span class="jtype" data-i18n="jt_dist">Distribution</span><span class="jtime">12 APR 2026</span></div>
+          <div class="jplace">Tasting &amp; Toasting, Madrid</div>
+          <div class="jsub" data-i18n="js_dist">Transfer of custody · co-signed by both parties</div>
           <div class="jmeta">
-            <div class="jr"><span class="k">Передал</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>✓</span></span></div>
-            <div class="jr"><span class="k">Принял</span><span class="v">Tasting &amp; Toasting <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>T&amp;T ✓</span></span></div>
-            <div class="jr"><span class="k">Доказ.</span><span class="v hash">shipment-ES-0412 · sha256:c4f018…9a7e</span></div>
+            <div class="jr"><span class="k" data-i18n="k_from">Released by</span><span class="v">Lueria Winery <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>✓</span></span></div>
+            <div class="jr"><span class="k" data-i18n="k_to">Received by</span><span class="v">Tasting &amp; Toasting <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>T&amp;T ✓</span></span></div>
+            <div class="jr"><span class="k" data-i18n="k_proof">Proof</span><span class="v hash">shipment-ES-0412 · sha256:c4f018…9a7e</span></div>
           </div>
         </div>
         <div class="jcard current">
-          <div class="jhead"><span class="jtype">In your hands · Скан</span><span class="jtime">сейчас · 19:42</span></div>
-          <div class="jplace">Мадрид, ES</div>
-          <div class="jsub">Текущее событие скана · ещё не часть подписанной цепочки</div>
+          <div class="jhead"><span class="jtype" data-i18n="jt_hands">In your hands · Scan</span><span class="jtime" data-i18n="now1942">now · 19:42</span></div>
+          <div class="jplace">Madrid, ES</div>
+          <div class="jsub" data-i18n="js_hands">Current scan event · not yet part of the signed chain</div>
           <div class="jmeta">
-            <div class="jr"><span class="k">Статус</span><span class="v pending">живой скан · NFC challenge пройден <span class="sigchip live"><span style="width:5px;height:5px;border-radius:50%;background:#e0c486;display:inline-block"></span>live</span></span></div>
+            <div class="jr"><span class="k" data-i18n="k_status">Status</span><span class="v pending" data-i18n="v_live">live scan · NFC challenge passed <span class="sigchip live"><span style="width:5px;height:5px;border-radius:50%;background:#e0c486;display:inline-block"></span>live</span></span></div>
           </div>
         </div>
-        <p class="mono" style="text-align:center;margin-top:14px;line-height:1.8;">CAP не утверждает «подлинно».<br>CAP показывает, кто что подписал — проверьте сами.</p>
+        <p class="mono" style="text-align:center;margin-top:14px;line-height:1.8;" data-i18n="j_note">CAP does not claim “authentic”.<br>CAP shows who signed what — verify it yourself.</p>
       </div>
 
-      <!-- MANIFESTO -->
       <div class="panel manifesto" id="manifesto">
-        <div class="pull">«We don't make Bordeaux. <span class="accent">We make Galilee.»</span></div>
-        <p>Эта бутылка не пытается быть кем-то ещё. Она пытается быть точным переводом одного склона в Верхней Галилее — его почвы, его света, его ночной прохлады — на язык вина.</p>
-        <p>Cabernet здесь ведёт себя не как в Медоке. Дни жарче, ночи резче, известняк ближе к корню. Мы не исправляем это под чужой эталон — мы это слушаем. Состав смещается от урожая к урожаю, потому что склон не повторяется дважды.</p>
-        <p>Семья работает на этих четырёх гектарах с 2003 года. Каждое решение — ручной сбор до рассвета, выдержка в собственном погребе при 14 °C — это отказ от ярлыка «как Бордо» в пользу одного: чтобы вино могло прийти ниоткуда, кроме отсюда.</p>
+        <div class="pull">“We don't make Bordeaux. <span class="accent">We make Galilee.”</span></div>
+        <p data-i18n="man1">This bottle does not try to be something else. It tries to be a faithful translation of one hillside in Upper Galilee — its soil, its light, its night-cool — into the language of wine.</p>
+        <p data-i18n="man2">Cabernet behaves differently here than in the Médoc. Hotter days, sharper nights, limestone closer to the root. We do not correct it toward someone else's benchmark — we listen to it. The blend shifts harvest by harvest, because the hillside never repeats.</p>
+        <p data-i18n="man3">The family has worked these four hectares since 2003. Every choice — hand-picking before dawn, ageing in its own cellar at 14 °C — is a refusal of the label “like Bordeaux” in favour of one thing: a wine that could come from nowhere but here.</p>
         <div class="man-facts">
-          <div class="f"><div class="n">2003</div><div class="l mono">Семья на этой земле</div></div>
-          <div class="f"><div class="n">4 га</div><div class="l mono">Виноградник</div></div>
-          <div class="f"><div class="n">884 м</div><div class="l mono">Над уровнем моря</div></div>
-          <div class="f"><div class="n">14 °C</div><div class="l mono">Погреб, постоянно</div></div>
+          <div class="f"><div class="n">2003</div><div class="l mono" data-i18n="mf1">Family on this land</div></div>
+          <div class="f"><div class="n">4 ha</div><div class="l mono" data-i18n="mf2">Vineyard</div></div>
+          <div class="f"><div class="n">884 m</div><div class="l mono" data-i18n="mf3">Above sea level</div></div>
+          <div class="f"><div class="n">14 °C</div><div class="l mono" data-i18n="mf4">Cellar, constant</div></div>
         </div>
-        <span class="mono block-label">Манифест подписан производителем</span>
+        <span class="mono block-label" data-i18n="man_signed">Manifesto signed by the producer</span>
         <div class="sign-row">
           <div class="av">YS</div>
-          <div class="nm"><div class="h">Yosef Sayada</div><div class="d">Lueria Winery · Верхняя Галилея</div></div>
+          <div class="nm"><div class="h">Yosef Sayada</div><div class="d">Lueria Winery · Upper Galilee</div></div>
           <span class="sigchip"><span style="width:5px;height:5px;border-radius:50%;background:#86a878;display:inline-block"></span>signed ✓</span>
         </div>
       </div>
 
-      <!-- АУДИТ НАВИГАЦИИ: на сайте нет отдельных producer.html/events.html.
-           "Producer view" и "Event booking" — это СЕКЦИИ внутри prototype.html.
-           Ниже — якоря на эти секции. Сверь точные id в исходнике prototype.html
-           (видимые имена секций: "Producer view", "Event booking") и поправь #producer / #events при необходимости. -->
       <div class="actions">
-        <a href="https://www.tastingandtoasting.com/prototype.html#producer" rel="noopener">Посмотреть производителя</a>
-        <a href="https://www.tastingandtoasting.com/prototype.html#events" rel="noopener" class="primary">Найти дегустацию</a>
+        <a id="lnkProducer" href="producer.html" rel="noopener" data-i18n="a_producer">View producer</a>
+        <a id="lnkTasting" href="tastings.html" rel="noopener" class="primary" data-i18n="a_tasting">Find a tasting</a>
       </div>
-
-      <div class="pfoot">VERIFIED BY TASTING &amp; TOASTING CAP · ISO/IEC 15459 · DPP-READY<br>проверяемая правда, не обещание подлинности</div>
+      <div class="pfoot">VERIFIED BY TASTING &amp; TOASTING CAP · ISO/IEC 15459 · DPP-READY<br><span data-i18n="foot_truth">verifiable truth, not a promise of authenticity</span></div>
     </div>
   </div>
 </div>
 
-<!-- shared footer -->
 <footer class="page"><div class="wrap">
   <span class="prelaunch">PRE-LAUNCH · PENDING SPANISH LICENSES · NOT YET OPERATING COMMERCIALLY</span>
   <div class="fine"><b>Tasting And Toasting Inc.</b> · Delaware Corp · Filing No. 7494277 · Operating subsidiary: Tasting And Toasting SL (Spain)<br>
-  Демо · консоль винодельни + паспорт · вердикт «Verified &amp; traceable» по Принципу VI — CAP не утверждает «подлинно», а показывает проверяемую цепочку.</div>
+  <span data-i18n="foot_fine">Demo · winery console + passport · verdict “Verified &amp; traceable” per Principle VI — CAP does not claim “authentic”, it shows a verifiable chain.</span></div>
 </div></footer>
 
 <script>
 (function(){
-  /* ---- view switch ---- */
-  var nis = document.querySelectorAll('.nb-nav .ni');
-  var views = { console:document.getElementById('view-console'), passport:document.getElementById('view-passport') };
-  nis.forEach(function(ni){
-    ni.addEventListener('click', function(){
-      nis.forEach(function(x){ x.classList.remove('active'); });
-      ni.classList.add('active');
-      var v = ni.getAttribute('data-v');
-      Object.keys(views).forEach(function(k){ views[k].classList.toggle('show', k===v); });
-      window.scrollTo({ top:0, behavior:'smooth' });
-    });
-  });
+  var I18N={
+    en:{ nav_console:`Winery console`, nav_passport:`Passport`, strip:`Two sides of one truth: <b>the winery creates and signs</b> — the world reads.`,
+      hero_kick:`Lueria Winery · Upper Galilee · family-run since 2003 · 4 ha`, hero_h1:`How a winery <em>opens the door</em>.`,
+      hero_p:`The winery is the entry point to the whole system. Nothing exists in CAP until the producer created it and signed it. Below — the path of one product: from DNA to a living passport the world will read.`,
+      m1:`Product`, m2:`Bottles in the run`, m3:`This bottle`,
+      s1_kick:`The verification door`, s1_h2:`First they verify not the wine — but who vouches for it.`,
+      s1_sub:`The producer passes three levels. Only then does the winery receive a signing key — and the right to create passports. That is what it means to open the door.`,
+      t_passed:`✓ Passed`, t_passed2:`✓ Passed`, t_issued:`✓ Issued`,
+      d1h:`Application`, d1p:`The winery registers and asserts its identity. Status: registered by producer.`,
+      d2h:`Documents`, d2p:`Verification of business registration, GS1 prefix ownership and domain control. Status: producer verified.`,
+      d3h:`Signing key`, d3p:`The winery receives a key. Now every event it creates carries its signature — the basis of trust.`,
+      door_res:`The door is open. Lueria Winery can create and sign passports.`,
+      s2_kick:`Creating the passport · product DNA`, s2_h2:`On the left the winery fills in and signs. On the right, what the world will see assembles.`,
+      s2_sub:`One product — Lueria Grand Vital 2018. Every field on the left becomes a line of the passport on the right. The passport comes alive once the whole path is signed.`,
+      st_dna:`DNA`, st_serial:`Serialization`, st_journey:`Path · signatures`, st_carrier:`Carrier`, st_live:`Living passport`,
+      cons_label:`Winery console`, cons_draft:`draft · editable`, fs_identity:`Identity`, identity_sub:`2018 · Reserva · Upper Galilee, Israel`,
+      fs_dna:`DNA · composition (by harvest)`, dna_note:`+ ingredients, ABV, allergens — EU e-label data <span class="editbadge">edit</span>`,
+      fs_serial:`Serialization · bottle number`, edition:`/ RUN 2400`, fs_journey:`Product path · each event is signed`,
+      jr0h:`Harvest`, jr1h:`Bottling`, jr2h:`Cellared`, jr3h:`Distribution`, sign:`Sign`,
+      fs_carrier:`Carrier on the bottle`, carrier_d:`/01/{GTIN}/21/1224 — open standard, NFC optional for premium`,
+      signall:`Sign the whole path and open the passport →`, signall_done:`✓ Passport signed and published`,
+      pp_draft:`draft`, pp_unsigned:`NOT SIGNED`, pp_await:`Awaiting signature`, pp_scan:`NFC scan · 19:42`, pp_verified:`VERIFIED`, pp_verdict:`Verified & traceable`,
+      b2b:`From bottle to bottle`, foot_truth:`verifiable truth, not a promise of authenticity`,
+      s3_kick:`Winery economics`, s3_h2:`What the winery gets — and what it pays.`,
+      s3_sub:`A simple exchange: the winery pays for trust infrastructure and gets brand protection, EU compliance and a direct channel to an engaged audience.`,
+      met1:`Bottles in CAP`, met1d:`+ 2 400 this season`, met2:`Scans this month`, met2d:`+ 18% vs prior`,
+      met3:`Counterfeit attempts`, met3d:`clean · 90 days`, met4:`Markets reached`, met4u:`countries`, met4d:`alert: scan from Norway — re-export?`,
+      price_from:`from 0`, price_sub:` / at launch · pay per serialization`,
+      c1:`EU e-label compliance out of the box`, c2:`Serialization and counterfeit protection`, c3:`Dashboard: scans, markets, anomalies`, c4:`A channel to Tasting & Toasting tasters`,
+      exchange:`The producer pays. The consumer scans for free.`,
+      cap_t:`CAP Passport · consumer view`, cap_s:`The result of scanning a bottle. Three tabs: story, verifiable path, producer manifesto.`,
+      composition:`Composition`, comp_text:`Cabernet Sauvignon 70%, Merlot 20%, Cabernet Franc 10%. Drawn from select sections of Yosef Sayada's vineyard, with the varietal mix shifting harvest by harvest.`,
+      in_hands:`In your hands`, in_hands_d:`Madrid, ES · now · scanned 19:42`, from_producer:`From the producer`,
+      chain:`Chain <b>confirmed</b> through distribution. Every link signed by a participant.`,
+      jt_harvest:`Harvest`, js_harvest:`Hand-picked before dawn · 884 m above sea level`,
+      jt_bottling:`Bottling`, js_bottling:`Run of 2400 · GTIN assigned · serial #1224 minted`,
+      jt_cellared:`Cellared`, jp_cellar:`Lueria private cellar`, js_cellar:`Constant 14 °C · humidity controlled`,
+      jt_dist:`Distribution`, js_dist:`Transfer of custody · co-signed by both parties`,
+      jt_hands:`In your hands · Scan`, now1942:`now · 19:42`, js_hands:`Current scan event · not yet part of the signed chain`,
+      k_signed:`Signed by`, k_proof:`Proof`, k_from:`Released by`, k_to:`Received by`, k_status:`Status`,
+      v_live:`live scan · NFC challenge passed <span class="sigchip live"><span style="width:5px;height:5px;border-radius:50%;background:#e0c486;display:inline-block"></span>live</span>`,
+      j_note:`CAP does not claim “authentic”.<br>CAP shows who signed what — verify it yourself.`,
+      man1:`This bottle does not try to be something else. It tries to be a faithful translation of one hillside in Upper Galilee — its soil, its light, its night-cool — into the language of wine.`,
+      man2:`Cabernet behaves differently here than in the Médoc. Hotter days, sharper nights, limestone closer to the root. We do not correct it toward someone else's benchmark — we listen to it. The blend shifts harvest by harvest, because the hillside never repeats.`,
+      man3:`The family has worked these four hectares since 2003. Every choice — hand-picking before dawn, ageing in its own cellar at 14 °C — is a refusal of the label "like Bordeaux" in favour of one thing: a wine that could come from nowhere but here.`,
+      mf1:`Family on this land`, mf2:`Vineyard`, mf3:`Above sea level`, mf4:`Cellar, constant`,
+      man_signed:`Manifesto signed by the producer`, a_producer:`View producer`, a_tasting:`Find a tasting`,
+      foot_fine:`Demo · winery console + passport · verdict “Verified & traceable” per Principle VI — CAP does not claim “authentic”, it shows a verifiable chain.`
+    },
+    ru:{ nav_console:`Консоль винодельни`, nav_passport:`Паспорт`, strip:`Две стороны одной правды: <b>винодельня создаёт и подписывает</b> — мир читает.`,
+      hero_kick:`Lueria Winery · Верхняя Галилея · семейная с 2003 · 4 га`, hero_h1:`Как винодельня <em>открывает дверь</em>.`,
+      hero_p:`Винодельня — точка входа во всю систему. Ничто не существует в CAP, пока производитель не создал это и не подписал. Ниже — путь одного продукта: от ДНК до живого паспорта, который увидит мир.`,
+      m1:`Продукт`, m2:`Бутылок в тираже`, m3:`Эта бутылка`,
+      s1_kick:`Дверь верификации`, s1_h2:`Сначала проверяют не вино — а того, кто за него ручается.`,
+      s1_sub:`Производитель проходит три уровня. Только пройдя их, винодельня получает ключ подписи — и право создавать паспорта. Это и есть «открыть дверь».`,
+      t_passed:`✓ Пройдено`, t_passed2:`✓ Пройдено`, t_issued:`✓ Выдан`,
+      d1h:`Заявка`, d1p:`Винодельня регистрируется и заявляет свою идентичность. Статус: «зарегистрировано производителем».`,
+      d2h:`Документы`, d2p:`Проверка регистрации бизнеса, владения префиксом GS1 и контроля над доменом. Статус: «производитель верифицирован».`,
+      d3h:`Ключ подписи`, d3p:`Винодельня получает ключ. Теперь каждое событие, которое она создаёт, несёт её подпись — основу доверия.`,
+      door_res:`Дверь открыта. Lueria Winery может создавать и подписывать паспорта.`,
+      s2_kick:`Создание паспорта · ДНК продукта`, s2_h2:`Слева винодельня заполняет и подписывает. Справа собирается то, что увидит мир.`,
+      s2_sub:`Один продукт — Lueria Grand Vital 2018. Каждое поле слева превращается в строку паспорта справа. Паспорт оживёт, когда весь путь будет подписан.`,
+      st_dna:`ДНК`, st_serial:`Сериализация`, st_journey:`Путь · подписи`, st_carrier:`Носитель`, st_live:`Живой паспорт`,
+      cons_label:`Консоль винодельни`, cons_draft:`черновик · редактируется`, fs_identity:`Идентичность`, identity_sub:`2018 · Reserva · Верхняя Галилея, Израиль`,
+      fs_dna:`ДНК · состав (по урожаю)`, dna_note:`+ ингредиенты, ABV, аллергены — данные e-label ЕС <span class="editbadge">edit</span>`,
+      fs_serial:`Сериализация · номер бутылки`, edition:`/ ТИРАЖ 2400`, fs_journey:`Путь продукта · каждое событие подписывается`,
+      jr0h:`Сбор урожая`, jr1h:`Розлив`, jr2h:`Выдержка`, jr3h:`Дистрибуция`, sign:`Подписать`,
+      fs_carrier:`Носитель на бутылке`, carrier_d:`/01/{GTIN}/21/1224 — открытый стандарт, NFC опционально для премиума`,
+      signall:`Подписать весь путь и открыть паспорт →`, signall_done:`✓ Паспорт подписан и опубликован`,
+      pp_draft:`черновик`, pp_unsigned:`НЕ ПОДПИСАНО`, pp_await:`Ожидает подписи`, pp_scan:`NFC скан · 19:42`, pp_verified:`VERIFIED`, pp_verdict:`Verified & traceable`,
+      b2b:`От бутылки к бутылке`, foot_truth:`проверяемая правда, а не обещание подлинности`,
+      s3_kick:`Экономика винодельни`, s3_h2:`Что винодельня получает — и что платит.`,
+      s3_sub:`Обмен простой: винодельня платит за инфраструктуру доверия, а взамен получает защиту бренда, соответствие закону ЕС и прямой канал к вовлечённой аудитории.`,
+      met1:`Бутылок в CAP`, met1d:`+ 2 400 в этом сезоне`, met2:`Сканов за месяц`, met2d:`+ 18% к прошлому`,
+      met3:`Попыток подделки`, met3d:`чисто · 90 дней`, met4:`Рынков охвачено`, met4u:`стран`, met4d:`алёрт: скан из Норвегии — реэкспорт?`,
+      price_from:`от 0`, price_sub:` / на старте · оплата за сериализацию`,
+      c1:`Соответствие e-label ЕС «из коробки»`, c2:`Сериализация и защита от контрафакта`, c3:`Дашборд: сканы, рынки, аномалии`, c4:`Канал к дегустаторам Tasting & Toasting`,
+      exchange:`Платит производитель. Потребитель сканирует бесплатно.`,
+      cap_t:`CAP Passport · потребительский вид`, cap_s:`Результат скана бутылки. Три вкладки: история, проверяемый путь, манифест производителя.`,
+      composition:`Состав`, comp_text:`Cabernet Sauvignon 70%, Merlot 20%, Cabernet Franc 10%. Из отобранных участков виноградника Yosef Sayada; смесь сортов смещается от урожая к урожаю.`,
+      in_hands:`В твоих руках`, in_hands_d:`Мадрид, ES · сейчас · отсканировано в 19:42`, from_producer:`От производителя`,
+      chain:`Цепочка <b>подтверждена</b> до дистрибуции. Каждое звено подписано участником.`,
+      jt_harvest:`Сбор`, js_harvest:`Ручной сбор до рассвета · 884 м над уровнем моря`,
+      jt_bottling:`Розлив`, js_bottling:`Тираж 2400 · присвоен GTIN · отчеканен серийник #1224`,
+      jt_cellared:`Выдержка`, jp_cellar:`Частный погреб Lueria`, js_cellar:`Постоянные 14 °C · контроль влажности`,
+      jt_dist:`Дистрибуция`, js_dist:`Передача владения · co-подписано двумя сторонами`,
+      jt_hands:`В твоих руках · Скан`, now1942:`сейчас · 19:42`, js_hands:`Текущее событие скана · ещё не часть подписанной цепочки`,
+      k_signed:`Подписал`, k_proof:`Доказ.`, k_from:`Передал`, k_to:`Принял`, k_status:`Статус`,
+      v_live:`живой скан · NFC challenge пройден <span class="sigchip live"><span style="width:5px;height:5px;border-radius:50%;background:#e0c486;display:inline-block"></span>live</span>`,
+      j_note:`CAP не утверждает «подлинно».<br>CAP показывает, кто что подписал — проверьте сами.`,
+      man1:`Эта бутылка не пытается быть кем-то ещё. Она пытается быть точным переводом одного склона в Верхней Галилее — его почвы, его света, его ночной прохлады — на язык вина.`,
+      man2:`Cabernet здесь ведёт себя не как в Медоке. Дни жарче, ночи резче, известняк ближе к корню. Мы не исправляем это под чужой эталон — мы это слушаем. Состав смещается от урожая к урожаю, потому что склон не повторяется.`,
+      man3:`Семья работает на этих четырёх гектарах с 2003 года. Каждое решение — ручной сбор до рассвета, выдержка в собственном погребе при 14 °C — это отказ от ярлыка «как Бордо» в пользу одного: чтобы вино могло прийти ниоткуда, кроме отсюда.`,
+      mf1:`Семья на этой земле`, mf2:`Виноградник`, mf3:`Над уровнем моря`, mf4:`Погреб, постоянно`,
+      man_signed:`Манифест подписан производителем`, a_producer:`Посмотреть производителя`, a_tasting:`Найти дегустацию`,
+      foot_fine:`Демо · консоль винодельни + паспорт · вердикт «Verified & traceable» по Принципу VI — CAP не утверждает «подлинно», а показывает проверяемую цепочку.`
+    },
+    es:{ nav_console:`Consola de bodega`, nav_passport:`Pasaporte`, strip:`Dos caras de una misma verdad: <b>la bodega crea y firma</b> — el mundo lee.`,
+      hero_kick:`Lueria Winery · Alta Galilea · familiar desde 2003 · 4 ha`, hero_h1:`Cómo una bodega <em>abre la puerta</em>.`,
+      hero_p:`La bodega es el punto de entrada a todo el sistema. Nada existe en CAP hasta que el productor lo crea y lo firma. Abajo — el recorrido de un producto: del ADN a un pasaporte vivo que el mundo leerá.`,
+      m1:`Producto`, m2:`Botellas de la tirada`, m3:`Esta botella`,
+      s1_kick:`La puerta de verificación`, s1_h2:`Primero verifican no el vino — sino a quien responde por él.`,
+      s1_sub:`El productor pasa tres niveles. Solo entonces la bodega recibe una clave de firma — y el derecho a crear pasaportes. Eso es abrir la puerta.`,
+      t_passed:`✓ Superado`, t_passed2:`✓ Superado`, t_issued:`✓ Emitida`,
+      d1h:`Solicitud`, d1p:`La bodega se registra y declara su identidad. Estado: registrada por el productor.`,
+      d2h:`Documentos`, d2p:`Verificación del registro mercantil, la titularidad del prefijo GS1 y el control del dominio. Estado: productor verificado.`,
+      d3h:`Clave de firma`, d3p:`La bodega recibe una clave. Ahora cada evento que crea lleva su firma — la base de la confianza.`,
+      door_res:`La puerta está abierta. Lueria Winery puede crear y firmar pasaportes.`,
+      s2_kick:`Crear el pasaporte · ADN del producto`, s2_h2:`A la izquierda la bodega rellena y firma. A la derecha se construye lo que verá el mundo.`,
+      s2_sub:`Un producto — Lueria Grand Vital 2018. Cada campo de la izquierda se convierte en una línea del pasaporte de la derecha. El pasaporte cobra vida cuando todo el recorrido está firmado.`,
+      st_dna:`ADN`, st_serial:`Serialización`, st_journey:`Recorrido · firmas`, st_carrier:`Soporte`, st_live:`Pasaporte vivo`,
+      cons_label:`Consola de bodega`, cons_draft:`borrador · editable`, fs_identity:`Identidad`, identity_sub:`2018 · Reserva · Alta Galilea, Israel`,
+      fs_dna:`ADN · composición (por cosecha)`, dna_note:`+ ingredientes, ABV, alérgenos — datos de la e-label de la UE <span class="editbadge">edit</span>`,
+      fs_serial:`Serialización · número de botella`, edition:`/ TIRADA 2400`, fs_journey:`Recorrido del producto · cada evento se firma`,
+      jr0h:`Vendimia`, jr1h:`Embotellado`, jr2h:`Crianza`, jr3h:`Distribución`, sign:`Firmar`,
+      fs_carrier:`Soporte en la botella`, carrier_d:`/01/{GTIN}/21/1224 — estándar abierto, NFC opcional para premium`,
+      signall:`Firmar todo el recorrido y abrir el pasaporte →`, signall_done:`✓ Pasaporte firmado y publicado`,
+      pp_draft:`borrador`, pp_unsigned:`SIN FIRMAR`, pp_await:`A la espera de firma`, pp_scan:`NFC scan · 19:42`, pp_verified:`VERIFIED`, pp_verdict:`Verified & traceable`,
+      b2b:`De botella a botella`, foot_truth:`verdad verificable, no una promesa de autenticidad`,
+      s3_kick:`Economía de la bodega`, s3_h2:`Qué obtiene la bodega — y qué paga.`,
+      s3_sub:`Un intercambio sencillo: la bodega paga por la infraestructura de confianza y a cambio obtiene protección de marca, cumplimiento de la UE y un canal directo a una audiencia comprometida.`,
+      met1:`Botellas en CAP`, met1d:`+ 2 400 esta temporada`, met2:`Escaneos este mes`, met2d:`+ 18% vs anterior`,
+      met3:`Intentos de falsificación`, met3d:`limpio · 90 días`, met4:`Mercados alcanzados`, met4u:`países`, met4d:`alerta: escaneo desde Noruega — ¿reexportación?`,
+      price_from:`desde 0`, price_sub:` / al lanzar · pago por serialización`,
+      c1:`Cumplimiento de la e-label de la UE de serie`, c2:`Serialización y protección contra falsificaciones`, c3:`Panel: escaneos, mercados, anomalías`, c4:`Un canal hacia los catadores de Tasting & Toasting`,
+      exchange:`Paga el productor. El consumidor escanea gratis.`,
+      cap_t:`CAP Passport · vista del consumidor`, cap_s:`El resultado de escanear una botella. Tres pestañas: historia, recorrido verificable, manifiesto del productor.`,
+      composition:`Composición`, comp_text:`Cabernet Sauvignon 70%, Merlot 20%, Cabernet Franc 10%. De secciones seleccionadas del viñedo de Yosef Sayada; la mezcla de variedades cambia de cosecha en cosecha.`,
+      in_hands:`En tus manos`, in_hands_d:`Madrid, ES · ahora · escaneado a las 19:42`, from_producer:`Del productor`,
+      chain:`Cadena <b>confirmada</b> hasta la distribución. Cada eslabón firmado por un participante.`,
+      jt_harvest:`Vendimia`, js_harvest:`Recogida a mano antes del alba · 884 m sobre el nivel del mar`,
+      jt_bottling:`Embotellado`, js_bottling:`Tirada de 2400 · GTIN asignado · serie #1224 acuñada`,
+      jt_cellared:`Crianza`, jp_cellar:`Bodega privada de Lueria`, js_cellar:`14 °C constantes · humedad controlada`,
+      jt_dist:`Distribución`, js_dist:`Transferencia de custodia · co-firmada por ambas partes`,
+      jt_hands:`En tus manos · Escaneo`, now1942:`ahora · 19:42`, js_hands:`Evento de escaneo actual · aún no forma parte de la cadena firmada`,
+      k_signed:`Firmado por`, k_proof:`Prueba`, k_from:`Entregado por`, k_to:`Recibido por`, k_status:`Estado`,
+      v_live:`escaneo en vivo · NFC challenge superado <span class="sigchip live"><span style="width:5px;height:5px;border-radius:50%;background:#e0c486;display:inline-block"></span>live</span>`,
+      j_note:`CAP no afirma «auténtico».<br>CAP muestra quién firmó qué — verifícalo tú mismo.`,
+      man1:`Esta botella no intenta ser otra cosa. Intenta ser una traducción fiel de una ladera de la Alta Galilea — su suelo, su luz, su frescor nocturno — al idioma del vino.`,
+      man2:`El Cabernet se comporta aquí de forma distinta que en el Médoc. Días más cálidos, noches más marcadas, caliza más cerca de la raíz. No lo corregimos hacia el patrón de otro — lo escuchamos. La mezcla cambia de cosecha en cosecha, porque la ladera nunca se repite.`,
+      man3:`La familia trabaja estas cuatro hectáreas desde 2003. Cada decisión — vendimia a mano antes del alba, crianza en bodega propia a 14 °C — es un rechazo a la etiqueta «como Burdeos» a favor de una sola cosa: un vino que no podría venir de ningún otro lugar.`,
+      mf1:`Familia en esta tierra`, mf2:`Viñedo`, mf3:`Sobre el nivel del mar`, mf4:`Bodega, constante`,
+      man_signed:`Manifiesto firmado por el productor`, a_producer:`Ver productor`, a_tasting:`Buscar una cata`,
+      foot_fine:`Demo · consola de bodega + pasaporte · veredicto «Verified & traceable» según el Principio VI — CAP no afirma «auténtico», muestra una cadena verificable.`
+    },
+    de:{ nav_console:`Winzer-Konsole`, nav_passport:`Pass`, strip:`Zwei Seiten einer Wahrheit: <b>das Weingut erstellt und signiert</b> — die Welt liest.`,
+      hero_kick:`Lueria Winery · Obergaliläa · familiengeführt seit 2003 · 4 ha`, hero_h1:`Wie ein Weingut <em>die Tür öffnet</em>.`,
+      hero_p:`Das Weingut ist der Einstiegspunkt ins gesamte System. Nichts existiert in CAP, bis der Produzent es erstellt und signiert hat. Unten — der Weg eines Produkts: von der DNA zum lebendigen Pass, den die Welt liest.`,
+      m1:`Produkt`, m2:`Flaschen der Auflage`, m3:`Diese Flasche`,
+      s1_kick:`Die Verifizierungstür`, s1_h2:`Zuerst wird nicht der Wein geprüft — sondern wer für ihn bürgt.`,
+      s1_sub:`Der Produzent durchläuft drei Stufen. Erst dann erhält das Weingut einen Signierschlüssel — und das Recht, Pässe zu erstellen. Das heißt, die Tür zu öffnen.`,
+      t_passed:`✓ Bestanden`, t_passed2:`✓ Bestanden`, t_issued:`✓ Ausgestellt`,
+      d1h:`Antrag`, d1p:`Das Weingut registriert sich und gibt seine Identität an. Status: vom Produzenten registriert.`,
+      d2h:`Dokumente`, d2p:`Prüfung von Handelsregister, GS1-Präfix-Inhaberschaft und Domain-Kontrolle. Status: Produzent verifiziert.`,
+      d3h:`Signierschlüssel`, d3p:`Das Weingut erhält einen Schlüssel. Nun trägt jedes erstellte Ereignis seine Signatur — die Grundlage des Vertrauens.`,
+      door_res:`Die Tür ist offen. Lueria Winery kann Pässe erstellen und signieren.`,
+      s2_kick:`Pass erstellen · Produkt-DNA`, s2_h2:`Links füllt das Weingut aus und signiert. Rechts entsteht, was die Welt sehen wird.`,
+      s2_sub:`Ein Produkt — Lueria Grand Vital 2018. Jedes Feld links wird zu einer Zeile des Passes rechts. Der Pass erwacht, sobald der ganze Weg signiert ist.`,
+      st_dna:`DNA`, st_serial:`Serialisierung`, st_journey:`Weg · Signaturen`, st_carrier:`Träger`, st_live:`Lebendiger Pass`,
+      cons_label:`Winzer-Konsole`, cons_draft:`Entwurf · bearbeitbar`, fs_identity:`Identität`, identity_sub:`2018 · Reserva · Obergaliläa, Israel`,
+      fs_dna:`DNA · Zusammensetzung (je Ernte)`, dna_note:`+ Zutaten, ABV, Allergene — EU-E-Label-Daten <span class="editbadge">edit</span>`,
+      fs_serial:`Serialisierung · Flaschennummer`, edition:`/ AUFLAGE 2400`, fs_journey:`Produktweg · jedes Ereignis wird signiert`,
+      jr0h:`Ernte`, jr1h:`Abfüllung`, jr2h:`Reifung`, jr3h:`Distribution`, sign:`Signieren`,
+      fs_carrier:`Träger auf der Flasche`, carrier_d:`/01/{GTIN}/21/1224 — offener Standard, NFC optional für Premium`,
+      signall:`Ganzen Weg signieren und Pass öffnen →`, signall_done:`✓ Pass signiert und veröffentlicht`,
+      pp_draft:`Entwurf`, pp_unsigned:`NICHT SIGNIERT`, pp_await:`Wartet auf Signatur`, pp_scan:`NFC scan · 19:42`, pp_verified:`VERIFIED`, pp_verdict:`Verified & traceable`,
+      b2b:`Von Flasche zu Flasche`, foot_truth:`überprüfbare Wahrheit, kein Echtheitsversprechen`,
+      s3_kick:`Weingut-Ökonomie`, s3_h2:`Was das Weingut bekommt — und was es zahlt.`,
+      s3_sub:`Ein einfacher Tausch: Das Weingut zahlt für Vertrauensinfrastruktur und erhält dafür Markenschutz, EU-Konformität und einen direkten Kanal zu einem engagierten Publikum.`,
+      met1:`Flaschen in CAP`, met1d:`+ 2 400 diese Saison`, met2:`Scans diesen Monat`, met2d:`+ 18% ggü. zuvor`,
+      met3:`Fälschungsversuche`, met3d:`sauber · 90 Tage`, met4:`Erreichte Märkte`, met4u:`Länder`, met4d:`Warnung: Scan aus Norwegen — Re-Export?`,
+      price_from:`ab 0`, price_sub:` / zum Start · Zahlung pro Serialisierung`,
+      c1:`EU-E-Label-Konformität ab Werk`, c2:`Serialisierung und Fälschungsschutz`, c3:`Dashboard: Scans, Märkte, Anomalien`, c4:`Ein Kanal zu den Tasting-&-Toasting-Verkostern`,
+      exchange:`Der Produzent zahlt. Der Verbraucher scannt kostenlos.`,
+      cap_t:`CAP Passport · Verbraucheransicht`, cap_s:`Das Ergebnis des Scannens einer Flasche. Drei Reiter: Geschichte, überprüfbarer Weg, Produzenten-Manifest.`,
+      composition:`Zusammensetzung`, comp_text:`Cabernet Sauvignon 70%, Merlot 20%, Cabernet Franc 10%. Aus ausgewählten Lagen des Weinbergs von Yosef Sayada; die Rebsortenmischung verschiebt sich von Ernte zu Ernte.`,
+      in_hands:`In deinen Händen`, in_hands_d:`Madrid, ES · jetzt · gescannt um 19:42`, from_producer:`Vom Produzenten`,
+      chain:`Kette <b>bestätigt</b> bis zur Distribution. Jedes Glied von einem Teilnehmer signiert.`,
+      jt_harvest:`Ernte`, js_harvest:`Handlese vor Sonnenaufgang · 884 m über dem Meer`,
+      jt_bottling:`Abfüllung`, js_bottling:`Auflage 2400 · GTIN vergeben · Seriennr. #1224 geprägt`,
+      jt_cellared:`Reifung`, jp_cellar:`Lueria Privatkeller`, js_cellar:`Konstante 14 °C · Feuchtigkeit kontrolliert`,
+      jt_dist:`Distribution`, js_dist:`Übergabe der Obhut · von beiden Parteien co-signiert`,
+      jt_hands:`In deinen Händen · Scan`, now1942:`jetzt · 19:42`, js_hands:`Aktuelles Scan-Ereignis · noch nicht Teil der signierten Kette`,
+      k_signed:`Signiert von`, k_proof:`Nachweis`, k_from:`Übergeben von`, k_to:`Empfangen von`, k_status:`Status`,
+      v_live:`Live-Scan · NFC-Challenge bestanden <span class="sigchip live"><span style="width:5px;height:5px;border-radius:50%;background:#e0c486;display:inline-block"></span>live</span>`,
+      j_note:`CAP behauptet nicht „echt".<br>CAP zeigt, wer was signiert hat — prüfe es selbst.`,
+      man1:`Diese Flasche versucht nicht, etwas anderes zu sein. Sie versucht, eine getreue Übersetzung eines Hangs in Obergaliläa — seines Bodens, seines Lichts, seiner Nachtkühle — in die Sprache des Weins zu sein.`,
+      man2:`Cabernet verhält sich hier anders als im Médoc. Heißere Tage, schärfere Nächte, Kalkstein näher an der Wurzel. Wir korrigieren ihn nicht zu fremden Maßstäben — wir hören ihm zu. Die Cuvée verschiebt sich von Ernte zu Ernte, weil der Hang sich nie wiederholt.`,
+      man3:`Die Familie bewirtschaftet diese vier Hektar seit 2003. Jede Entscheidung — Handlese vor Sonnenaufgang, Reifung im eigenen Keller bei 14 °C — ist eine Absage an das Etikett „wie Bordeaux" zugunsten einer Sache: ein Wein, der von nirgendwo sonst kommen könnte.`,
+      mf1:`Familie auf diesem Land`, mf2:`Weinberg`, mf3:`Über dem Meer`, mf4:`Keller, konstant`,
+      man_signed:`Manifest vom Produzenten signiert`, a_producer:`Produzent ansehen`, a_tasting:`Verkostung finden`,
+      foot_fine:`Demo · Winzer-Konsole + Pass · Urteil „Verified & traceable" gemäß Prinzip VI — CAP behauptet nicht „echt", sondern zeigt eine überprüfbare Kette.`
+    },
+    it:{ nav_console:`Console della cantina`, nav_passport:`Passaporto`, strip:`Due facce di una stessa verità: <b>la cantina crea e firma</b> — il mondo legge.`,
+      hero_kick:`Lueria Winery · Alta Galilea · a conduzione familiare dal 2003 · 4 ha`, hero_h1:`Come una cantina <em>apre la porta</em>.`,
+      hero_p:`La cantina è il punto d'ingresso all'intero sistema. Nulla esiste in CAP finché il produttore non lo crea e lo firma. Sotto — il percorso di un prodotto: dal DNA a un passaporto vivo che il mondo leggerà.`,
+      m1:`Prodotto`, m2:`Bottiglie della tiratura`, m3:`Questa bottiglia`,
+      s1_kick:`La porta di verifica`, s1_h2:`Prima si verifica non il vino — ma chi ne risponde.`,
+      s1_sub:`Il produttore supera tre livelli. Solo allora la cantina riceve una chiave di firma — e il diritto di creare passaporti. Questo significa aprire la porta.`,
+      t_passed:`✓ Superato`, t_passed2:`✓ Superato`, t_issued:`✓ Emessa`,
+      d1h:`Richiesta`, d1p:`La cantina si registra e dichiara la propria identità. Stato: registrata dal produttore.`,
+      d2h:`Documenti`, d2p:`Verifica della registrazione aziendale, della titolarità del prefisso GS1 e del controllo del dominio. Stato: produttore verificato.`,
+      d3h:`Chiave di firma`, d3p:`La cantina riceve una chiave. Ora ogni evento che crea porta la sua firma — la base della fiducia.`,
+      door_res:`La porta è aperta. Lueria Winery può creare e firmare passaporti.`,
+      s2_kick:`Creare il passaporto · DNA del prodotto`, s2_h2:`A sinistra la cantina compila e firma. A destra si compone ciò che il mondo vedrà.`,
+      s2_sub:`Un prodotto — Lueria Grand Vital 2018. Ogni campo a sinistra diventa una riga del passaporto a destra. Il passaporto prende vita quando l'intero percorso è firmato.`,
+      st_dna:`DNA`, st_serial:`Serializzazione`, st_journey:`Percorso · firme`, st_carrier:`Supporto`, st_live:`Passaporto vivo`,
+      cons_label:`Console della cantina`, cons_draft:`bozza · modificabile`, fs_identity:`Identità`, identity_sub:`2018 · Reserva · Alta Galilea, Israele`,
+      fs_dna:`DNA · composizione (per vendemmia)`, dna_note:`+ ingredienti, ABV, allergeni — dati e-label UE <span class="editbadge">edit</span>`,
+      fs_serial:`Serializzazione · numero di bottiglia`, edition:`/ TIRATURA 2400`, fs_journey:`Percorso del prodotto · ogni evento viene firmato`,
+      jr0h:`Vendemmia`, jr1h:`Imbottigliamento`, jr2h:`Affinamento`, jr3h:`Distribuzione`, sign:`Firma`,
+      fs_carrier:`Supporto sulla bottiglia`, carrier_d:`/01/{GTIN}/21/1224 — standard aperto, NFC opzionale per il premium`,
+      signall:`Firma l'intero percorso e apri il passaporto →`, signall_done:`✓ Passaporto firmato e pubblicato`,
+      pp_draft:`bozza`, pp_unsigned:`NON FIRMATO`, pp_await:`In attesa di firma`, pp_scan:`NFC scan · 19:42`, pp_verified:`VERIFIED`, pp_verdict:`Verified & traceable`,
+      b2b:`Di bottiglia in bottiglia`, foot_truth:`verità verificabile, non una promessa di autenticità`,
+      s3_kick:`Economia della cantina`, s3_h2:`Cosa ottiene la cantina — e cosa paga.`,
+      s3_sub:`Uno scambio semplice: la cantina paga per l'infrastruttura di fiducia e in cambio ottiene protezione del marchio, conformità UE e un canale diretto verso un pubblico coinvolto.`,
+      met1:`Bottiglie in CAP`, met1d:`+ 2 400 questa stagione`, met2:`Scansioni questo mese`, met2d:`+ 18% rispetto a prima`,
+      met3:`Tentativi di contraffazione`, met3d:`pulito · 90 giorni`, met4:`Mercati raggiunti`, met4u:`paesi`, met4d:`avviso: scansione dalla Norvegia — riesportazione?`,
+      price_from:`da 0`, price_sub:` / al lancio · pagamento per serializzazione`,
+      c1:`Conformità e-label UE inclusa`, c2:`Serializzazione e protezione anti-contraffazione`, c3:`Dashboard: scansioni, mercati, anomalie`, c4:`Un canale verso i degustatori di Tasting & Toasting`,
+      exchange:`Paga il produttore. Il consumatore scansiona gratis.`,
+      cap_t:`CAP Passport · vista del consumatore`, cap_s:`Il risultato della scansione di una bottiglia. Tre schede: storia, percorso verificabile, manifesto del produttore.`,
+      composition:`Composizione`, comp_text:`Cabernet Sauvignon 70%, Merlot 20%, Cabernet Franc 10%. Da sezioni selezionate del vigneto di Yosef Sayada; la miscela di varietà cambia di vendemmia in vendemmia.`,
+      in_hands:`Nelle tue mani`, in_hands_d:`Madrid, ES · ora · scansionato alle 19:42`, from_producer:`Dal produttore`,
+      chain:`Catena <b>confermata</b> fino alla distribuzione. Ogni anello firmato da un partecipante.`,
+      jt_harvest:`Vendemmia`, js_harvest:`Raccolta a mano prima dell'alba · 884 m sul livello del mare`,
+      jt_bottling:`Imbottigliamento`, js_bottling:`Tiratura di 2400 · GTIN assegnato · seriale #1224 coniato`,
+      jt_cellared:`Affinamento`, jp_cellar:`Cantina privata Lueria`, js_cellar:`14 °C costanti · umidità controllata`,
+      jt_dist:`Distribuzione`, js_dist:`Trasferimento di custodia · co-firmato dalle due parti`,
+      jt_hands:`Nelle tue mani · Scansione`, now1942:`ora · 19:42`, js_hands:`Evento di scansione attuale · non ancora parte della catena firmata`,
+      k_signed:`Firmato da`, k_proof:`Prova`, k_from:`Ceduto da`, k_to:`Ricevuto da`, k_status:`Stato`,
+      v_live:`scansione live · NFC challenge superata <span class="sigchip live"><span style="width:5px;height:5px;border-radius:50%;background:#e0c486;display:inline-block"></span>live</span>`,
+      j_note:`CAP non afferma «autentico».<br>CAP mostra chi ha firmato cosa — verificalo tu stesso.`,
+      man1:`Questa bottiglia non cerca di essere altro. Cerca di essere una traduzione fedele di un pendio dell'Alta Galilea — il suo suolo, la sua luce, il suo fresco notturno — nella lingua del vino.`,
+      man2:`Il Cabernet qui si comporta diversamente che nel Médoc. Giorni più caldi, notti più nette, calcare più vicino alla radice. Non lo correggiamo verso il modello di altri — lo ascoltiamo. La miscela cambia di vendemmia in vendemmia, perché il pendio non si ripete mai.`,
+      man3:`La famiglia lavora questi quattro ettari dal 2003. Ogni scelta — raccolta a mano prima dell'alba, affinamento in cantina propria a 14 °C — è un rifiuto dell'etichetta «come Bordeaux» a favore di una cosa sola: un vino che non potrebbe venire da nessun altro luogo.`,
+      mf1:`Famiglia su questa terra`, mf2:`Vigneto`, mf3:`Sul livello del mare`, mf4:`Cantina, costante`,
+      man_signed:`Manifesto firmato dal produttore`, a_producer:`Vedi il produttore`, a_tasting:`Trova una degustazione`,
+      foot_fine:`Demo · console della cantina + passaporto · verdetto «Verified & traceable» secondo il Principio VI — CAP non afferma «autentico», mostra una catena verificabile.`
+    }
+  };
 
-  /* ---- console signing ---- */
-  var signed = [false,false,false,false];
-  var rows = Array.prototype.slice.call(document.querySelectorAll('#view-console .jrow'));
-  var ppEvents = Array.prototype.slice.call(document.querySelectorAll('#cpassport .pp-tl .e'));
-  var stepper = document.getElementById('stepper');
-  var cpassport = document.getElementById('cpassport');
+  var SUPPORTED=['en','ru','es','de','it'];
+  var params=new URLSearchParams(location.search);
+  var lang=(params.get('lang')||'en').toLowerCase();
+  if(SUPPORTED.indexOf(lang)<0) lang='en';
 
+  var els=document.querySelectorAll('[data-i18n]');
+  var langBtns=document.querySelectorAll('#lang button');
+  var signedAll=false;
+
+  function apply(l){
+    var d=I18N[l]; if(!d) return;
+    document.documentElement.lang=l;
+    els.forEach(function(el){ var k=el.getAttribute('data-i18n'); if(d[k]!=null) el.innerHTML=d[k]; });
+    langBtns.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang')===l); });
+    var lp=document.getElementById('lnkProducer'), lt=document.getElementById('lnkTasting');
+    if(lp) lp.href='producer.html?lang='+l;
+    if(lt) lt.href='tastings.html?lang='+l;
+    // dynamic strings depending on state
+    var ppStatus=document.getElementById('ppStatus'), ppVerdict=document.getElementById('ppVerdict'),
+        ppScan=document.getElementById('ppScan'), signAllBtn=document.getElementById('signAll');
+    if(signedAll){
+      ppStatus.textContent=d.pp_verified; ppVerdict.textContent=d.pp_verdict; ppScan.textContent=d.pp_scan; signAllBtn.textContent=d.signall_done;
+    } else {
+      ppStatus.textContent=d.pp_unsigned; ppVerdict.textContent=d.pp_await; ppScan.textContent=d.pp_draft;
+      if(!signAllBtn.disabled) signAllBtn.textContent=d.signall;
+    }
+    var p=new URLSearchParams(location.search); p.set('lang',l);
+    history.replaceState(null,'',location.pathname+'?'+p.toString()+location.hash);
+    lang=l;
+  }
+  langBtns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); }); });
+
+  // view switch
+  var nis=document.querySelectorAll('.nb-mid .ni');
+  var views={ console:document.getElementById('view-console'), passport:document.getElementById('view-passport') };
+  nis.forEach(function(ni){ ni.addEventListener('click', function(){
+    nis.forEach(function(x){ x.classList.remove('active'); }); ni.classList.add('active');
+    var v=ni.getAttribute('data-v'); Object.keys(views).forEach(function(k){ views[k].classList.toggle('show', k===v); });
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }); });
+
+  // console signing
+  var signed=[false,false,false,false];
+  var rows=Array.prototype.slice.call(document.querySelectorAll('#view-console .jrow'));
+  var ppEvents=Array.prototype.slice.call(document.querySelectorAll('#cpassport .pp-tl .e'));
+  var stepper=document.getElementById('stepper');
+  var cpassport=document.getElementById('cpassport');
   function setStep(key,state){ var el=stepper.querySelector('[data-k="'+key+'"]'); if(!el)return; el.classList.remove('active','complete'); if(state)el.classList.add(state); }
   function refresh(){
-    var count = signed.filter(Boolean).length;
+    var count=signed.filter(Boolean).length;
     ppEvents.forEach(function(e,i){ e.classList.toggle('on', signed[i]); });
     setStep('journey', count>0 ? (count===4?'complete':'active') : null);
     if(count>0){ setStep('dna','complete'); setStep('serial','complete'); }
     if(count===4){
-      setStep('carrier','complete'); setStep('live','complete');
-      cpassport.classList.add('live');
+      setStep('carrier','complete'); setStep('live','complete'); cpassport.classList.add('live');
       document.getElementById('ppTick').style.opacity='1';
-      document.getElementById('ppStatus').textContent='VERIFIED';
-      document.getElementById('ppVerdict').textContent='Verified & traceable';
-      document.getElementById('ppScan').textContent='NFC scan · 19:42';
-      var b=document.getElementById('signAll'); b.disabled=true; b.textContent='✓ Паспорт подписан и опубликован';
+      signedAll=true;
+      var d=I18N[lang];
+      document.getElementById('ppStatus').textContent=d.pp_verified;
+      document.getElementById('ppVerdict').textContent=d.pp_verdict;
+      document.getElementById('ppScan').textContent=d.pp_scan;
+      var b=document.getElementById('signAll'); b.disabled=true; b.textContent=d.signall_done;
     }
   }
   rows.forEach(function(r){ r.querySelector('.signbtn').addEventListener('click', function(){ var i=+r.getAttribute('data-e'); signed[i]=true; r.classList.add('signed'); refresh(); }); });
   document.getElementById('signAll').addEventListener('click', function(){ rows.forEach(function(r,i){ signed[i]=true; r.classList.add('signed'); }); refresh(); });
-
-  var range = document.getElementById('serialRange');
-  range.addEventListener('input', function(){
-    document.getElementById('serialNum').textContent=this.value;
-    document.getElementById('ppSerial').textContent=this.value;
-    setStep('serial','active');
-  });
+  var range=document.getElementById('serialRange');
+  range.addEventListener('input', function(){ document.getElementById('serialNum').textContent=this.value; document.getElementById('ppSerial').textContent=this.value; setStep('serial','active'); });
   var dnaBox=document.getElementById('dnaBox'); if(dnaBox) dnaBox.addEventListener('mouseenter', function(){ setStep('dna','active'); });
 
-  /* ---- passport tabs ---- */
-  var tabs = document.querySelectorAll('#view-passport .tab');
-  var panels = { story:document.getElementById('story'), journey:document.getElementById('journey'), manifesto:document.getElementById('manifesto') };
-  var screen = document.querySelector('#view-passport .screen');
-  tabs.forEach(function(t){
-    t.addEventListener('click', function(){
-      tabs.forEach(function(x){ x.classList.remove('active'); });
-      t.classList.add('active');
-      var key=t.getAttribute('data-t');
-      Object.keys(panels).forEach(function(k){ panels[k].classList.toggle('show', k===key); });
-      if(screen) screen.scrollTo({ top:230, behavior:'smooth' });
-    });
-  });
+  // passport tabs
+  var tabs=document.querySelectorAll('#view-passport .tab');
+  var panels={ story:document.getElementById('story'), journey:document.getElementById('journey'), manifesto:document.getElementById('manifesto') };
+  var screen=document.querySelector('#view-passport .screen');
+  tabs.forEach(function(t){ t.addEventListener('click', function(){
+    tabs.forEach(function(x){ x.classList.remove('active'); }); t.classList.add('active');
+    var key=t.getAttribute('data-t'); Object.keys(panels).forEach(function(k){ panels[k].classList.toggle('show', k===key); });
+    if(screen) screen.scrollTo({ top:230, behavior:'smooth' });
+  }); });
+
+  apply(lang);
 })();
 </script>
 </body>
