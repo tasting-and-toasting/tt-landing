@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAP QR Sticker · Regent 2021 · Stara Winna Góra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<style>
+:root{
+  --void:#120c0a; --card:#ffffff; --ink:#1a1206;
+  --gold:#b08a3e; --gold-soft:#c9a96e; --line:#e4d9c4; --dim:#8a7d63;
+  --serif:"Playfair Display", Georgia, serif;
+  --mono:"Spline Sans Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ background:var(--void); min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:40px 20px; font-family:var(--mono); }
+.toolbar{ display:flex; gap:12px; align-items:center; }
+.toolbar button{ font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#1a1206; background:linear-gradient(90deg,#c9a96e,#e0c486); border:none; border-radius:8px; padding:11px 18px; cursor:pointer; }
+.toolbar span{ font-size:9.5px; letter-spacing:.14em; color:#8a807a; }
+
+/* ---- sticker ---- */
+.sticker{ width:340px; background:var(--card); color:var(--ink); border-radius:16px; padding:30px 28px 26px; text-align:center;
+  box-shadow:0 18px 50px rgba(0,0,0,.5); position:relative; }
+.sticker::after{ content:""; position:absolute; inset:9px; border:1px solid var(--line); border-radius:10px; pointer-events:none; }
+.cap-verified{ font-family:var(--mono); font-weight:600; font-size:12px; letter-spacing:.34em; text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:9px; }
+.cap-verified svg{ width:15px; height:15px; }
+.rule{ width:46px; height:1px; background:var(--line); margin:16px auto; }
+.wine{ font-family:var(--serif); font-weight:800; font-size:30px; line-height:1.05; color:var(--ink); }
+.winery{ font-family:var(--serif); font-size:16px; font-style:italic; color:#5a4d36; margin-top:4px; }
+.edition{ font-family:var(--mono); font-size:10px; letter-spacing:.22em; color:var(--gold); margin-top:12px; }
+.qrbox{ width:188px; height:188px; margin:20px auto 14px; padding:10px; background:#fff; border:1px solid var(--line); border-radius:10px; }
+.qrbox img,.qrbox canvas{ display:block; width:100%!important; height:100%!important; }
+.url{ font-family:var(--mono); font-size:9.5px; letter-spacing:.04em; color:var(--dim); word-break:break-all; }
+.tagline{ font-family:var(--serif); font-style:italic; font-size:15px; color:#3a3022; margin-top:14px; }
+.brand{ font-family:var(--mono); font-size:8px; letter-spacing:.2em; text-transform:uppercase; color:#a89977; margin-top:16px; }
+
+@media print{
+  body{ background:#fff; padding:0; gap:0; }
+  .toolbar{ display:none; }
+  .sticker{ box-shadow:none; }
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <button onclick="window.print()">Print sticker</button>
+  <span id="lang-note">EN / PL · ?lang=pl · ?token=UUID</span>
+</div>
+
+<div class="sticker">
+  <div class="cap-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span id="t_verified">CAP VERIFIED</span></div>
+  <div class="rule"></div>
+  <div class="wine" id="wine">Regent 2021</div>
+  <div class="winery" id="winery">Stara Winna Góra</div>
+  <div class="edition" id="edition">BOTTLE 1 / 1200</div>
+  <div class="qrbox"><div id="qr"></div></div>
+  <div class="url" id="url"></div>
+  <div class="tagline" id="tagline">Scan to discover the story</div>
+  <div class="brand">Tasting &amp; Toasting · CAP</div>
+</div>
+
+<script>
+const T={ en:{ verified:"CAP VERIFIED", tagline:"Scan to discover the story", bottle:"BOTTLE" },
+         pl:{ verified:"CAP ZWERYFIKOWANO", tagline:"Zeskanuj, aby poznać historię", bottle:"BUTELKA" } };
+const qs=new URLSearchParams(location.search);
+const lang=(qs.get('lang')||'en').toLowerCase().startsWith('pl')?'pl':'en';
+const token=qs.get('token')||'faf6bd0a-cb26-450e-82ff-2d7161495428';
+// Printed pretty URL (per CAP spec). For a live demo, ?target= overrides what the QR encodes.
+const prettyUrl=`tastingandtoasting.com/cap/b/${token}`;
+const qrTarget=qs.get('target')||`https://${prettyUrl}`;
+
+document.getElementById('t_verified').textContent=T[lang].verified;
+document.getElementById('tagline').textContent=T[lang].tagline;
+document.getElementById('edition').textContent=`${T[lang].bottle} 1 / 1200`;
+document.getElementById('url').textContent=prettyUrl;
+new QRCode(document.getElementById('qr'),{ text:qrTarget, width:168, height:168,
+  colorDark:"#120c0a", colorLight:"#ffffff", correctLevel:QRCode.CorrectLevel.M });
+</script>
+</body>
+</html>

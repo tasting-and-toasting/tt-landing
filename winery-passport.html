@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winery Passport · Tasting &amp; Toasting CAP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b0d; --void-2:#121013; --panel:#171318; --panel-2:#1d181e;
+  --wine:#6b2737; --cream:#f4eee6; --cream-soft:#cbbfb0;
+  --gold:#cba24f; --gold-soft:#e0c486; --green:#86a878; --coral:#c66a7c;
+  --line:#2c252e; --ink-dim:#86807f;
+  --serif:"Playfair Display", Georgia, serif;
+  --body:"Spectral", Georgia, serif;
+  --mono:"Spline Sans Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ background:var(--void); color:var(--cream); font-family:var(--body); font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
+.mono{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--ink-dim); }
+.wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
+.navbar{ border-bottom:1px solid var(--line); background:rgba(12,11,13,.9); position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); }
+.navbar .wrap{ display:flex; align-items:center; justify-content:space-between; height:58px; gap:14px; }
+.nb-brand{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--cream); }
+.nb-brand b{ color:var(--gold-soft); font-weight:600; }
+.lang{ display:flex; gap:8px; }
+.lang button{ background:none; border:none; cursor:pointer; font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; color:var(--ink-dim); padding:2px 1px; transition:.2s; }
+.lang button.on{ color:var(--gold-soft); border-bottom:1px solid var(--gold); }
+.hero{ padding:74px 0 48px; border-bottom:1px solid var(--line); background:radial-gradient(120% 80% at 80% -10%, #25141c 0%, var(--void) 55%); }
+.hero .kick{ margin-bottom:18px; }
+.hero h1{ font-family:var(--serif); font-weight:800; font-size:clamp(40px,7vw,76px); line-height:1.0; letter-spacing:-.5px; }
+.hero .loc{ margin-top:18px; font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; color:var(--gold-soft); }
+.hero .tagline{ margin-top:20px; max-width:560px; color:var(--cream-soft); font-size:18px; font-style:italic; font-family:var(--serif); }
+.badge{ display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; border-radius:40px; padding:6px 13px; margin-top:24px; }
+.badge svg{ width:13px; height:13px; flex:0 0 auto; }
+.badge.claimed{ color:var(--gold-soft); border:1px solid #4a3a22; background:#1c1610; }
+.badge.review{ color:var(--gold-soft); border:1px solid #4a3a22; background:#1c1610; }
+.badge.verified{ color:var(--green); border:1px solid #3a4a34; background:#141a12; }
+.badge.unverified{ color:var(--coral); border:1px solid #4a2630; background:#1c1014; }
+section{ padding:54px 0; border-bottom:1px solid var(--line); }
+.sec-h{ display:flex; align-items:baseline; gap:14px; margin-bottom:26px; }
+.sec-h .idx{ font-family:var(--serif); font-style:italic; color:var(--gold); font-size:19px; }
+h2{ font-family:var(--serif); font-weight:700; font-size:clamp(24px,3.2vw,34px); line-height:1.1; }
+.dna-grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+.dna-card{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px; }
+.dna-card .mono{ display:block; color:var(--gold); margin-bottom:9px; }
+.dna-card p{ color:var(--cream-soft); font-size:15.5px; }
+.quote{ margin-top:26px; border-left:2px solid var(--wine); padding:6px 0 6px 22px; }
+.quote .q{ font-family:var(--serif); font-style:italic; font-weight:500; color:var(--gold-soft); font-size:clamp(20px,2.6vw,28px); line-height:1.35; }
+.quote .a{ display:block; margin-top:12px; font-family:var(--mono); font-size:9px; letter-spacing:.16em; color:var(--ink-dim); }
+.services{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.svc{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px 16px; text-align:center; }
+.svc .ic{ width:30px; height:30px; margin:0 auto 12px; color:var(--gold-soft); }
+.svc .ic svg{ width:100%; height:100%; }
+.svc .nm{ font-family:var(--serif); font-size:16px; color:var(--cream); }
+.svc .dt{ margin-top:5px; font-size:12.5px; color:var(--ink-dim); }
+.wines{ display:flex; flex-direction:column; gap:12px; }
+.wine{ display:flex; align-items:center; justify-content:space-between; gap:16px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px 22px; text-decoration:none; color:inherit; transition:.2s; }
+.wine:hover{ border-color:#4a3a22; background:var(--panel-2); }
+.wine .nm{ font-family:var(--serif); font-size:21px; color:var(--cream); }
+.wine .meta{ margin-top:4px; font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; color:var(--gold-soft); }
+.wine .arrow{ width:18px; height:18px; color:var(--gold); flex:0 0 auto; }
+.cta{ display:flex; gap:14px; flex-wrap:wrap; margin-top:6px; }
+.btn{ display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; text-decoration:none; border-radius:10px; padding:14px 22px; cursor:pointer; transition:.2s; }
+.btn svg{ width:15px; height:15px; }
+.btn-gold{ color:#1a1206; background:linear-gradient(90deg,var(--gold),var(--gold-soft)); border:none; font-weight:600; }
+.btn-gold:hover{ filter:brightness(1.07); }
+.btn-ghost{ color:var(--cream-soft); border:1px solid var(--line); background:var(--void-2); }
+.btn-ghost:hover{ border-color:#4a3a22; color:var(--cream); }
+.contact{ display:flex; gap:26px; flex-wrap:wrap; margin-bottom:22px; }
+.contact div .mono{ display:block; margin-bottom:4px; }
+.contact div .v{ font-family:var(--serif); font-size:17px; color:var(--cream); }
+.contact a{ color:var(--gold-soft); text-decoration:none; }
+footer{ padding:34px 0; text-align:center; }
+.state{ padding:120px 28px; text-align:center; color:var(--ink-dim); font-family:var(--mono); font-size:11px; letter-spacing:.18em; }
+@media(max-width:760px){ .services{ grid-template-columns:repeat(2,1fr); } .dna-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<nav class="navbar"><div class="wrap">
+  <div class="nb-brand">TASTING &amp; TOASTING · <b data-i18n="nav_tag">WINERY PASSPORT</b></div>
+  <div class="lang"><button data-lang="en">EN</button><button data-lang="pl">PL</button></div>
+</div></nav>
+
+<main id="app"><div class="state" data-i18n="loading">LOADING…</div></main>
+
+<script>
+const I18N = {
+  en:{ nav_tag:"WINERY PASSPORT", loading:"LOADING…", notfound:"Winery not found.",
+    founded:"Founded", dna_title:"Winery DNA", family:"The family", land:"The land",
+    philosophy:"Philosophy", story:"Origin", services_title:"Experiences", wines_title:"Wines",
+    contact_title:"Visit &amp; contact", view_passport:"View passport", book:"Book a tasting",
+    website:"Visit website", email:"Email", phone:"Phone", location:"Location",
+    b_claimed:"Producer-claimed", b_review:"Under review", b_verified:"Verified", b_unverified:"Unverified",
+    svc_degustation:"Tasting", svc_hotel:"Hotel", svc_restaurant:"Restaurant",
+    svc_spa_winotherapy:"Spa &amp; Winotherapy", svc_enotourism:"Enotourism",
+    svc_weddings_events:"Weddings &amp; Events", svc_gift_sets_shop:"Gift sets &amp; Shop",
+    svc_business_programs:"Business programs", first_registered:"First registered vineyard in Poland" },
+  pl:{ nav_tag:"PASZPORT WINNICY", loading:"WCZYTYWANIE…", notfound:"Nie znaleziono winnicy.",
+    founded:"Założono", dna_title:"DNA winnicy", family:"Rodzina", land:"Ziemia",
+    philosophy:"Filozofia", story:"Początek", services_title:"Doświadczenia", wines_title:"Wina",
+    contact_title:"Odwiedź i kontakt", view_passport:"Zobacz paszport", book:"Zarezerwuj degustację",
+    website:"Strona internetowa", email:"E-mail", phone:"Telefon", location:"Lokalizacja",
+    b_claimed:"Deklarowane przez producenta", b_review:"W weryfikacji", b_verified:"Zweryfikowano", b_unverified:"Niezweryfikowano",
+    svc_degustation:"Degustacja", svc_hotel:"Hotel", svc_restaurant:"Restauracja",
+    svc_spa_winotherapy:"Spa i winoterapia", svc_enotourism:"Enoturystyka",
+    svc_weddings_events:"Wesela i wydarzenia", svc_gift_sets_shop:"Zestawy prezentowe i sklep",
+    svc_business_programs:"Programy biznesowe", first_registered:"Pierwsza zarejestrowana winnica w Polsce" }
+};
+const ICONS = {
+  degustation:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M7 3h10l-1 7a4 4 0 0 1-8 0L7 3Z"/><path d="M12 14v6M8 21h8"/></svg>',
+  hotel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 18V8m0 4h18m0 6V10a2 2 0 0 0-2-2H9v4"/><circle cx="6" cy="11" r="1.4"/></svg>',
+  restaurant:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 3v8m3-8v8M7.5 11v10M6 3h3M16 3c-1.5 0-2.5 2-2.5 5s1 4 2.5 4v9"/></svg>',
+  spa_winotherapy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3s5 5.5 5 10a5 5 0 0 1-10 0c0-4.5 5-10 5-10Z"/></svg>',
+  enotourism:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>',
+  weddings_events:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="9" cy="14" r="4"/><circle cx="15" cy="14" r="4"/><path d="M9 10l1.5-3M15 10l-1.5-3"/></svg>',
+  gift_sets_shop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 9h16v11H4zM4 9l1.5-4h13L20 9M12 5v15"/></svg>',
+  business_programs:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
+};
+const ICO_CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l4 4L19 7"/></svg>';
+const ICO_SHIELD='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/></svg>';
+const ICO_ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const ICO_GLOBE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>';
+const ICO_CAL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>';
+
+const qs = new URLSearchParams(location.search);
+const slug = qs.get('slug') || 'stara-winna-gora';
+const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
+let lang = localStorage.getItem('cap_lang') || ((navigator.language||'en').toLowerCase().startsWith('pl') ? 'pl' : 'en');
+const t = k => (I18N[lang][k] ?? I18N.en[k] ?? k);
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function badge(status){
+  const map={ verified:['verified','b_verified',ICO_SHIELD], certified:['verified','b_verified',ICO_SHIELD],
+    rejected:['unverified','b_unverified',ICO_SHIELD], claimed:['claimed','b_claimed',ICO_CHECK],
+    documents_submitted:['review','b_review',ICO_CHECK], under_review:['review','b_review',ICO_CHECK] };
+  const [cls,key,ic]=map[status]||map.claimed;
+  return `<span class="badge ${cls}">${ic}${t(key)}</span>`;
+}
+
+async function load(){
+  let data;
+  try{
+    const r = await fetch(`${API}/wineries/${encodeURIComponent(slug)}`);
+    if(!r.ok) throw 0; data = await r.json();
+  }catch(e){ document.getElementById('app').innerHTML = `<div class="state">${t('notfound')}</div>`; return; }
+  const w=data.winery, dna=data.dna||{}, services=data.services||[];
+  let wines=[];
+  try{ const wr=await fetch(`${API}/wineries/${encodeURIComponent(slug)}/wines`); if(wr.ok) wines=(await wr.json()).wines||[]; }catch(e){}
+
+  const loc=[w.locality,w.region,w.country].filter(Boolean).join(' · ');
+  const svcHtml = services.map(s=>`<div class="svc"><div class="ic">${ICONS[s.service_type]||ICO_CHECK}</div>
+    <div class="nm">${t('svc_'+s.service_type)}</div>${s.details?`<div class="dt">${esc(s.details)}</div>`:''}</div>`).join('');
+  const wineHtml = wines.map(wi=>{
+    const meta=[wi.style, (wi.grape_varieties||[]).join(', ')].filter(Boolean).join(' · ');
+    return `<a class="wine" href="wine-passport.html?wineId=${encodeURIComponent(wi.id)}${lang==='pl'?'&lang=pl':''}">
+      <div><div class="nm">${esc(wi.name)}</div><div class="meta">${esc(meta)}</div></div>
+      <div class="arrow">${ICO_ARROW}</div></a>`; }).join('');
+
+  document.getElementById('app').innerHTML = `
+  <header class="hero"><div class="wrap">
+    <div class="kick mono" data-i18n="nav_tag">${t('nav_tag')}</div>
+    <h1>${esc(w.name)}</h1>
+    <div class="loc">${w.founded_year?`${t('founded')} ${w.founded_year}`:''}${loc?`&nbsp;&nbsp;·&nbsp;&nbsp;${esc(loc)}`:''}</div>
+    ${w.tagline?`<div class="tagline">${esc(w.tagline)}</div>`:''}
+    ${badge(w.verification_status)}
+  </div></header>
+
+  <section><div class="wrap">
+    <div class="sec-h"><span class="idx">01</span><h2>${t('dna_title')}</h2></div>
+    <div class="dna-grid">
+      ${dna.family?`<div class="dna-card"><span class="mono">${t('family')}</span><p>${esc(dna.family)}</p></div>`:''}
+      ${dna.land_story?`<div class="dna-card"><span class="mono">${t('land')}</span><p>${esc(dna.land_story)}</p></div>`:''}
+      ${dna.philosophy?`<div class="dna-card"><span class="mono">${t('philosophy')}</span><p>${esc(dna.philosophy)}</p></div>`:''}
+      ${dna.founding_story?`<div class="dna-card"><span class="mono">${t('story')}</span><p>${esc(dna.founding_story)}</p></div>`:''}
+    </div>
+    ${dna.signature_quote?`<div class="quote"><div class="q">“${esc(dna.signature_quote)}”</div><span class="a">— ${esc(dna.family||w.name)}</span></div>`:''}
+  </div></section>
+
+  ${services.length?`<section><div class="wrap">
+    <div class="sec-h"><span class="idx">02</span><h2>${t('services_title')}</h2></div>
+    <div class="services">${svcHtml}</div></div></section>`:''}
+
+  ${wines.length?`<section><div class="wrap">
+    <div class="sec-h"><span class="idx">03</span><h2>${t('wines_title')}</h2></div>
+    <div class="wines">${wineHtml}</div></div></section>`:''}
+
+  <section><div class="wrap">
+    <div class="sec-h"><span class="idx">04</span><h2>${t('contact_title')}</h2></div>
+    <div class="contact">
+      ${loc?`<div><span class="mono">${t('location')}</span><span class="v">${esc(loc)}</span></div>`:''}
+      ${w.contact_email?`<div><span class="mono">${t('email')}</span><span class="v"><a href="mailto:${esc(w.contact_email)}">${esc(w.contact_email)}</a></span></div>`:''}
+      ${w.contact_phone?`<div><span class="mono">${t('phone')}</span><span class="v"><a href="tel:${esc(w.contact_phone)}">${esc(w.contact_phone)}</a></span></div>`:''}
+    </div>
+    <div class="cta">
+      <a class="btn btn-gold" href="${w.website_url?esc(w.website_url):'#'}" target="_blank" rel="noopener">${ICO_CAL}${t('book')}</a>
+      ${w.website_url?`<a class="btn btn-ghost" href="${esc(w.website_url)}" target="_blank" rel="noopener">${ICO_GLOBE}${t('website')}</a>`:''}
+    </div>
+  </div></section>
+
+  <footer class="mono">TASTING &amp; TOASTING · CAP · ${esc(w.name)}</footer>`;
+}
+
+function setLang(l){ lang=l; localStorage.setItem('cap_lang',l); document.documentElement.lang=l;
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.innerHTML=t(el.dataset.i18n)); load(); }
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+setLang(lang);
+</script>
+</body>
+</html>
