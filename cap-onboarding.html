@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winery Onboarding · Tasting &amp; Toasting CAP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="src/i18n/cap-i18n.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<style>
+:root{
+  --void:#120c0a; --void-2:#1a1410; --panel:#1d1712; --panel-2:#241c15;
+  --wine:#6b2737; --cream:#f4eee6; --cream-soft:#cbbfb0;
+  --gold:#b08a3e; --gold-soft:#c9a96e; --gold-bright:#e0c486;
+  --green:#86a878; --coral:#c66a7c;
+  --line:#2e2620; --line-2:#251e18; --ink-dim:#8a7d63;
+  --serif:"Playfair Display", Georgia, serif;
+  --body:"Spectral", Georgia, serif;
+  --mono:"Spline Sans Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ background:var(--void); color:var(--cream); font-family:var(--body); font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; }
+.mono{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--ink-dim); }
+.wrap{ max-width:900px; margin:0 auto; padding:0 24px; }
+
+/* ---- navbar ---- */
+.navbar{ border-bottom:1px solid var(--line); background:rgba(18,12,10,.92); position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); }
+.navbar .wrap{ display:flex; align-items:center; justify-content:space-between; min-height:58px; gap:14px; padding-top:9px; padding-bottom:9px; flex-wrap:wrap; max-width:1080px; }
+.nb-brand{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--cream); }
+.nb-brand b{ color:var(--gold-soft); font-weight:600; }
+.lang-switcher-flags{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; justify-content:flex-end; max-width:340px; }
+.lang-flag-link{ display:inline-flex; align-items:center; justify-content:center; width:30px; height:20px; border-radius:3px; overflow:hidden; border:1px solid var(--line); opacity:.78; transition:opacity .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.lang-flag-link:hover{ opacity:1; }
+.lang-flag-link.is-current-lang{ opacity:1; border-color:var(--gold-soft); box-shadow:0 0 0 1px rgba(201,169,97,.35); }
+.lang-flag-link svg{ width:100%; height:100%; display:block; }
+html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
+html[dir="rtl"] .navbar .wrap{ flex-direction:row-reverse; }
+html[dir="rtl"] body{ text-align:right; }
+
+/* ---- header ---- */
+.head{ padding:46px 0 26px; background:radial-gradient(120% 80% at 80% -10%, #2a1a12 0%, var(--void) 55%); border-bottom:1px solid var(--line); }
+.head .kick{ margin-bottom:14px; }
+.head h1{ font-family:var(--serif); font-weight:800; font-size:clamp(30px,5vw,46px); line-height:1.04; letter-spacing:-.4px; }
+.head h1 em{ color:var(--gold-soft); font-style:italic; font-weight:500; }
+.head p{ margin-top:14px; max-width:560px; color:var(--cream-soft); font-size:16px; font-style:italic; font-family:var(--serif); }
+
+/* ---- progress ---- */
+.progress{ display:flex; gap:7px; flex-wrap:wrap; margin:24px 0 4px; }
+.pstep{ flex:1 1 96px; min-width:84px; border:1px solid var(--line); border-radius:9px; padding:9px 10px; transition:.3s; background:var(--void-2); }
+.pstep .pn{ font-family:var(--mono); font-size:9px; letter-spacing:.16em; color:var(--ink-dim); }
+.pstep .pl{ font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-dim); margin-top:5px; display:block; }
+.pstep.active{ border-color:#4a3a22; background:#221910; }
+.pstep.active .pn,.pstep.active .pl{ color:var(--gold-soft); }
+.pstep.complete{ border-color:#3a4a34; background:#16190f; }
+.pstep.complete .pn{ color:var(--green); }
+.pstep.complete .pl{ color:var(--cream-soft); }
+
+/* ---- form ---- */
+main{ padding:30px 0 80px; }
+.card{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:30px 28px; }
+.step{ display:none; }
+.step.show{ display:block; animation:vfade .35s ease; }
+@keyframes vfade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+.step-h{ display:flex; align-items:baseline; gap:14px; margin-bottom:6px; }
+.step-h .idx{ font-family:var(--serif); font-style:italic; color:var(--gold); font-size:20px; }
+.step-h h2{ font-family:var(--serif); font-weight:700; font-size:clamp(22px,3vw,30px); line-height:1.1; }
+.step-sub{ color:var(--cream-soft); font-size:14.5px; margin-bottom:22px; }
+
+.grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.grid .full{ grid-column:1/-1; }
+.fld{ display:flex; flex-direction:column; gap:7px; }
+.fld label{ font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-soft); display:flex; gap:8px; align-items:baseline; }
+.fld label .opt{ color:var(--ink-dim); letter-spacing:.1em; }
+.fld input, .fld select, .fld textarea{
+  font-family:var(--body); font-size:16px; font-weight:300; color:var(--cream);
+  background:var(--void-2); border:1px solid var(--line); border-radius:9px; padding:12px 14px; width:100%;
+  transition:border-color .2s, box-shadow .2s;
+}
+.fld textarea{ min-height:96px; resize:vertical; line-height:1.55; }
+.fld input::placeholder, .fld textarea::placeholder{ color:#5f574a; }
+.fld input:focus, .fld select:focus, .fld textarea:focus{ outline:none; border-color:var(--gold-soft); box-shadow:0 0 0 3px rgba(201,169,97,.13); }
+.fld select{ appearance:none; cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c9a96e' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:38px; }
+html[dir="rtl"] .fld select{ background-position:left 14px center; padding-right:14px; padding-left:38px; }
+
+/* ---- services grid ---- */
+.svc-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:13px; }
+.svc-tile{ position:relative; cursor:pointer; background:var(--void-2); border:1px solid var(--line); border-radius:12px; padding:20px 14px; text-align:center; transition:.2s; }
+.svc-tile:hover{ border-color:#4a3a22; }
+.svc-tile input{ position:absolute; opacity:0; pointer-events:none; }
+.svc-tile .ic{ width:30px; height:30px; margin:0 auto 11px; color:var(--ink-dim); transition:.2s; }
+.svc-tile .ic svg{ width:100%; height:100%; }
+.svc-tile .nm{ font-family:var(--serif); font-size:15px; color:var(--cream-soft); transition:.2s; }
+.svc-tile .tick{ position:absolute; top:9px; right:9px; width:18px; height:18px; border-radius:50%; border:1.5px solid var(--line); display:flex; align-items:center; justify-content:center; color:transparent; transition:.2s; }
+.svc-tile.on{ border-color:#4a3a22; background:#221910; }
+.svc-tile.on .ic{ color:var(--gold-soft); }
+.svc-tile.on .nm{ color:var(--cream); }
+.svc-tile.on .tick{ border-color:var(--gold); background:var(--gold); color:#1a1206; }
+.svc-tile .tick svg{ width:11px; height:11px; }
+
+/* ---- generate / bottles ---- */
+.gen-box{ text-align:center; padding:18px 0 4px; }
+.gen-result{ display:none; margin-top:24px; }
+.gen-result.show{ display:block; animation:vfade .4s ease; }
+.gen-row{ display:flex; gap:22px; align-items:center; flex-wrap:wrap; justify-content:center; }
+.token-card{ flex:1 1 240px; min-width:230px; background:var(--void-2); border:1px solid var(--line); border-radius:12px; padding:18px 20px; text-align:left; }
+.token-card .mono{ display:block; margin-bottom:7px; color:var(--gold-soft); }
+.token-card .tok{ font-family:var(--mono); font-size:13px; color:var(--cream); word-break:break-all; letter-spacing:.02em; }
+.token-card .cnt{ margin-top:14px; font-family:var(--serif); font-size:18px; color:var(--green); }
+/* sticker preview (white card, mirrors cap-qr-sticker.html) */
+.sticker{ width:230px; background:#fff; color:#1a1206; border-radius:14px; padding:22px 20px 18px; text-align:center; position:relative; box-shadow:0 16px 44px rgba(0,0,0,.45); }
+.sticker::after{ content:""; position:absolute; inset:8px; border:1px solid #e4d9c4; border-radius:9px; pointer-events:none; }
+.sticker .cv{ font-family:var(--mono); font-weight:600; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:7px; }
+.sticker .cv svg{ width:13px; height:13px; }
+.sticker .srule{ width:40px; height:1px; background:#e4d9c4; margin:13px auto; }
+.sticker .swine{ font-family:var(--serif); font-weight:800; font-size:22px; line-height:1.06; }
+.sticker .swinery{ font-family:var(--serif); font-style:italic; font-size:14px; color:#5a4d36; margin-top:3px; }
+.sticker .sed{ font-family:var(--mono); font-size:9px; letter-spacing:.2em; color:var(--gold); margin-top:9px; }
+.sticker .sqr{ width:150px; height:150px; margin:14px auto 10px; padding:8px; background:#fff; border:1px solid #e4d9c4; border-radius:9px; }
+.sticker .sqr img, .sticker .sqr canvas{ display:block; width:100%!important; height:100%!important; }
+.sticker .surl{ font-family:var(--mono); font-size:8.5px; letter-spacing:.02em; color:#8a7d63; word-break:break-all; }
+
+/* ---- preview cards ---- */
+.pv-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
+.pv-card{ display:flex; flex-direction:column; gap:10px; background:var(--void-2); border:1px solid var(--line); border-radius:13px; padding:22px 18px; text-decoration:none; color:inherit; transition:.2s; }
+.pv-card:hover{ border-color:#4a3a22; background:#221910; transform:translateY(-2px); }
+.pv-card .pic{ width:34px; height:34px; color:var(--gold-soft); }
+.pv-card .pic svg{ width:100%; height:100%; }
+.pv-card .pt{ font-family:var(--serif); font-size:19px; color:var(--cream); }
+.pv-card .pd{ font-size:13px; color:var(--cream-soft); flex:1; }
+.pv-card .pgo{ font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-soft); display:inline-flex; gap:7px; align-items:center; }
+.pv-card .pgo svg{ width:14px; height:14px; }
+html[dir="rtl"] .pv-card .pgo svg{ transform:scaleX(-1); }
+
+/* ---- submit / done ---- */
+.done{ text-align:center; padding:14px 0; }
+.done .seal{ width:78px; height:78px; border-radius:50%; border:1.5px solid #3a4a34; background:#16190f; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; color:var(--green); }
+.done .seal svg{ width:38px; height:38px; }
+.done h2{ font-family:var(--serif); font-weight:700; font-size:30px; }
+.done p{ color:var(--cream-soft); margin-top:10px; max-width:440px; margin-left:auto; margin-right:auto; }
+
+/* ---- nav buttons ---- */
+.navrow{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:26px; }
+.btn{ display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; text-decoration:none; border-radius:10px; padding:14px 24px; cursor:pointer; transition:.2s; border:1px solid transparent; }
+.btn svg{ width:15px; height:15px; flex:0 0 auto; }
+.btn-gold{ color:#1a1206; background:linear-gradient(90deg,var(--gold-soft),var(--gold-bright)); border:none; font-weight:600; }
+.btn-gold:hover{ filter:brightness(1.07); }
+.btn-gold:disabled{ filter:none; opacity:.5; cursor:default; }
+.btn-ghost{ color:var(--cream-soft); border-color:var(--line); background:var(--void-2); }
+.btn-ghost:hover{ border-color:#4a3a22; color:var(--cream); }
+.btn-ghost:disabled{ opacity:.35; cursor:default; }
+html[dir="rtl"] .btn svg.flip{ transform:scaleX(-1); }
+
+.notice{ margin-top:16px; border-radius:10px; padding:12px 15px; font-family:var(--mono); font-size:10px; letter-spacing:.08em; display:none; }
+.notice.show{ display:block; }
+.notice.err{ color:var(--coral); border:1px solid #4a2630; background:#1c1014; }
+.notice.warn{ color:var(--gold-soft); border:1px solid #4a3a22; background:#1c1610; }
+
+footer{ padding:30px 0; text-align:center; }
+@media(max-width:760px){
+  .grid{ grid-template-columns:1fr; }
+  .svc-grid{ grid-template-columns:repeat(2,1fr); }
+  .pv-grid{ grid-template-columns:1fr; }
+  .pstep .pl{ display:none; }
+  .pstep{ flex:1 1 30px; min-width:34px; text-align:center; }
+}
+</style>
+</head>
+<body>
+<nav class="navbar"><div class="wrap">
+  <div class="nb-brand">TASTING &amp; TOASTING · <b data-wz="nav">WINERY ONBOARDING</b></div>
+  <nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
+        <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ru" href="?lang=ru" title="Русский" aria-label="Русский"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#fff" d="M0 0h3v0.667H0z"/><path fill="#0039a6" d="M0 0.667h3v0.666H0z"/><path fill="#d52b1e" d="M0 1.333h3V2H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="es" href="?lang=es" title="Español" aria-label="Español"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#c60b1e" d="M0 0h3v2H0z"/><path fill="#ffc400" d="M0 0.45h3v1.1H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="uk" href="?lang=uk" title="Українська" aria-label="Українська"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#005BBB" d="M0 0h3v1H0z"/><path fill="#FFD500" d="M0 1h3v1H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="it" href="?lang=it" title="Italiano" aria-label="Italiano"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#009246" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ce2b37" d="M2 0h1v2H2z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="de" href="?lang=de" title="Deutsch" aria-label="Deutsch"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#000" d="M0 0h3v.67H0z"/><path fill="#D00" d="M0 .67h3v.66H0z"/><path fill="#FFCE00" d="M0 1.33h3v.67H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="he" href="?lang=he" title="עברית" aria-label="עברית"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4" aria-hidden="true"><path fill="#fff" d="M0 0h6v4H0z"/><path fill="#0038b8" d="M0 .55h6v0.42H0zm0 2.48h6v0.42H0z"/><g fill="#0038b8" transform="translate(3 2.02)"><polygon points="0,-0.55 0.48,0.28 -0.48,0.28"/><polygon points="0,0.55 -0.48,-0.28 0.48,-0.28"/></g></svg></a>
+        <a class="lang-flag-link" data-lang-link="pt" href="?lang=pt" title="Português" aria-label="Português (Portugal)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#006600" d="M0 0h1.2v2H0z"/><path fill="#ff0000" d="M1.2 0h1.8v2H1.2z"/><circle cx=".75" cy="1" fill="#ffd900" stroke="#ffd900" stroke-width=".015" r=".22"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ka" href="?lang=ka" title="ქართული" aria-label="ქართული"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="white"/><rect x="12.5" width="5" height="20" fill="#FF0000"/><rect y="7.5" width="30" height="5" fill="#FF0000"/><rect x="1" y="1" width="2" height="6" fill="#FF0000"/><rect y="3" width="4" height="2" fill="#FF0000"/><rect x="24" y="1" width="2" height="6" fill="#FF0000"/><rect x="23" y="3" width="4" height="2" fill="#FF0000"/><rect x="1" y="13" width="2" height="6" fill="#FF0000"/><rect y="15" width="4" height="2" fill="#FF0000"/><rect x="24" y="13" width="2" height="6" fill="#FF0000"/><rect x="23" y="15" width="4" height="2" fill="#FF0000"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ro" href="?lang=ro" title="Română (Moldova)" aria-label="Română (Moldova)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#003DA5"/><rect x="10" width="10" height="20" fill="#FFD100"/><rect x="20" width="10" height="20" fill="#CC0000"/><text x="15" y="13" text-anchor="middle" font-size="9" fill="#003DA5" font-family="serif, Georgia">✦</text></svg></a>
+        <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#dc143c"/></svg></a>
+  </div></nav>
+</div></nav>
+
+<header class="head"><div class="wrap">
+  <div class="kick mono" data-wz="nav">WINERY ONBOARDING</div>
+  <h1 data-wz-html="title">Create your <em>verified</em> passport</h1>
+  <p data-wz="tagline">From estate to bottle — build your CAP passport in eight steps.</p>
+  <div class="progress" id="progress"></div>
+</div></header>
+
+<main><div class="wrap"><div class="card">
+
+  <!-- STEP 1 -->
+  <section class="step" data-step="1">
+    <div class="step-h"><span class="idx">01</span><h2 data-wz="h1">Basic profile</h2></div>
+    <p class="step-sub" data-wz="sh1">Tell us who you are.</p>
+    <div class="grid">
+      <div class="fld full"><label data-wz="l_public_name">Public name</label><input id="f_public_name" placeholder="Stara Winna Góra"></div>
+      <div class="fld full"><label><span data-wz="l_legal_name">Legal name</span> <span class="opt" data-wz="optional">optional</span></label><input id="f_legal_name"></div>
+      <div class="fld"><label data-wz="l_country">Country</label><input id="f_country" placeholder="Poland"></div>
+      <div class="fld"><label><span data-wz="l_region">Region</span> <span class="opt" data-wz="optional">optional</span></label><input id="f_region" placeholder="Lubuskie"></div>
+      <div class="fld"><label><span data-wz="l_city">City</span> <span class="opt" data-wz="optional">optional</span></label><input id="f_city" placeholder="Górzykowo"></div>
+      <div class="fld"><label><span data-wz="l_founded">Founded year</span> <span class="opt" data-wz="optional">optional</span></label><input id="f_founded_year" type="number" min="1000" max="2100" placeholder="2004"></div>
+      <div class="fld"><label data-wz="l_email">Contact email</label><input id="f_contact_email" type="email" placeholder="hello@winery.com"></div>
+      <div class="fld"><label><span data-wz="l_website">Website</span> <span class="opt" data-wz="optional">optional</span></label><input id="f_website_url" type="url" placeholder="https://"></div>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step" data-step="2">
+    <div class="step-h"><span class="idx">02</span><h2 data-wz="h2">Winery DNA</h2></div>
+    <p class="step-sub" data-wz="sh2">The story behind the estate.</p>
+    <div class="grid">
+      <div class="fld full"><label data-wz="l_family_story">Family story</label><textarea id="f_family_story" data-wz-ph="ph_family"></textarea></div>
+      <div class="fld full"><label data-wz="l_founder_quote">Founder quote</label><textarea id="f_founder_quote" data-wz-ph="ph_quote"></textarea></div>
+      <div class="fld full"><label data-wz="l_land">Land description</label><textarea id="f_land_description" data-wz-ph="ph_land"></textarea></div>
+      <div class="fld full"><label data-wz="l_philosophy">Philosophy</label><textarea id="f_philosophy" data-wz-ph="ph_philosophy"></textarea></div>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step" data-step="3">
+    <div class="step-h"><span class="idx">03</span><h2 data-wz="h3">Services &amp; experiences</h2></div>
+    <p class="step-sub" data-wz="sh3">What can guests experience on-site?</p>
+    <div class="svc-grid" id="svcGrid"></div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="step" data-step="4">
+    <div class="step-h"><span class="idx">04</span><h2 data-wz="h4">First wine</h2></div>
+    <p class="step-sub" data-wz="sh4">Add your first wine.</p>
+    <div class="grid">
+      <div class="fld"><label data-wz="l_wine_name">Wine name</label><input id="f_wine_name" placeholder="Regent"></div>
+      <div class="fld"><label data-wz="l_wine_type">Wine type</label>
+        <select id="f_wine_type">
+          <option value="red" data-wz="wt_red">Red</option>
+          <option value="white" data-wz="wt_white">White</option>
+          <option value="rose" data-wz="wt_rose">Rosé</option>
+          <option value="sparkling" data-wz="wt_sparkling">Sparkling</option>
+          <option value="dessert" data-wz="wt_dessert">Dessert</option>
+        </select>
+      </div>
+      <div class="fld full"><label data-wz="l_grapes">Grape composition</label><input id="f_grape_composition" placeholder="100% Regent"></div>
+      <div class="fld full"><label data-wz="l_description">Description</label><textarea id="f_wine_description" data-wz-ph="ph_wine_desc"></textarea></div>
+    </div>
+  </section>
+
+  <!-- STEP 5 -->
+  <section class="step" data-step="5">
+    <div class="step-h"><span class="idx">05</span><h2 data-wz="h5">First vintage</h2></div>
+    <p class="step-sub" data-wz="sh5">Add the first vintage of this wine.</p>
+    <div class="grid">
+      <div class="fld"><label data-wz="l_year">Vintage year</label><input id="f_year" type="number" min="1900" max="2100" placeholder="2021"></div>
+      <div class="fld"><label data-wz="l_total_bottles">Total bottles</label><input id="f_total_bottles" type="number" min="1" placeholder="1200"></div>
+      <div class="fld"><label><span data-wz="l_harvest">Harvest start date</span> <span class="opt" data-wz="optional">optional</span></label><input id="f_harvest_start_date" type="date"></div>
+      <div class="fld"><label><span data-wz="l_bottling">Bottling date</span> <span class="opt" data-wz="optional">optional</span></label><input id="f_bottling_date" type="date"></div>
+      <div class="fld"><label><span data-wz="l_release">Release date</span> <span class="opt" data-wz="optional">optional</span></label><input id="f_release_date" type="date"></div>
+      <div class="fld"><label><span data-wz="l_vintage_story">Vintage story</span> <span class="opt" data-wz="optional">optional</span></label><input id="f_vintage_story" data-wz-ph="ph_vintage"></div>
+    </div>
+  </section>
+
+  <!-- STEP 6 -->
+  <section class="step" data-step="6">
+    <div class="step-h"><span class="idx">06</span><h2 data-wz="h6">Generate bottle CAPs</h2></div>
+    <p class="step-sub" data-wz="sh6">Mint demo bottle CAPs with QR codes.</p>
+    <div class="gen-box">
+      <button class="btn btn-gold" id="genBtn" style="margin:0 auto;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+        <span data-wz="b_generate">Generate 10 demo bottle CAPs</span>
+      </button>
+      <div class="gen-result" id="genResult">
+        <div class="gen-row">
+          <div class="token-card">
+            <span class="mono" data-wz="g_first">First bottle CAP</span>
+            <div class="mono" style="color:var(--ink-dim);margin-bottom:4px" data-wz="g_token">QR token</div>
+            <div class="tok" id="firstToken">—</div>
+            <div class="cnt" id="genCount">—</div>
+          </div>
+          <div class="sticker">
+            <div class="cv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span data-wz="cap_verified">CAP Verified</span></div>
+            <div class="srule"></div>
+            <div class="swine" id="stWine">—</div>
+            <div class="swinery" id="stWinery">—</div>
+            <div class="sed" id="stEdition">BOTTLE 1 / 10</div>
+            <div class="sqr"><div id="stQr"></div></div>
+            <div class="surl" id="stUrl"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 7 -->
+  <section class="step" data-step="7">
+    <div class="step-h"><span class="idx">07</span><h2 data-wz="h7">Preview your passport</h2></div>
+    <p class="step-sub" data-wz="sh7">See the live consumer-facing pages.</p>
+    <div class="pv-grid" id="pvGrid"></div>
+  </section>
+
+  <!-- STEP 8 -->
+  <section class="step" data-step="8">
+    <div class="step-h"><span class="idx">08</span><h2 data-wz="h8">Submit for review</h2></div>
+    <p class="step-sub" data-wz="sh8">Send your passport to Tasting &amp; Toasting.</p>
+    <div id="submitPane">
+      <button class="btn btn-gold" id="submitBtn" style="margin:6px auto 0;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l4 4L19 7"/></svg>
+        <span data-wz="b_submit">Submit passport</span>
+      </button>
+    </div>
+    <div class="done" id="donePane" style="display:none">
+      <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l4 4L19 7"/></svg></div>
+      <h2 data-wz="done_h">Submitted</h2>
+      <p data-wz="done_d">Your passport is submitted for T&amp;T review.</p>
+    </div>
+  </section>
+
+  <div class="notice" id="notice"></div>
+
+  <div class="navrow">
+    <button class="btn btn-ghost" id="backBtn">
+      <svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      <span data-wz="b_back">Back</span>
+    </button>
+    <button class="btn btn-gold" id="nextBtn">
+      <span data-wz="b_next">Save &amp; continue</span>
+      <svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+
+</div></div></main>
+
+<footer class="mono">TASTING &amp; TOASTING · CAP · WINERY ONBOARDING</footer>
+
+<script>
+/* ============================================================================
+ * cap-onboarding.html — 8-step winery onboarding wizard.
+ * Reuses cap-i18n.js for the 12-language flag switcher + shared svc_/color keys,
+ * and a wizard-local WZ table for the onboarding-specific copy.
+ * ==========================================================================*/
+
+const SERVICES = ["degustation","hotel","restaurant","spa_winotherapy","enotourism","business_programs","weddings_events","gift_sets_shop"];
+
+const ICONS = {
+  degustation:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M7 3h10l-1 7a4 4 0 0 1-8 0L7 3Z"/><path d="M12 14v6M8 21h8"/></svg>',
+  hotel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 18V8m0 4h18m0 6V10a2 2 0 0 0-2-2H9v4"/><circle cx="6" cy="11" r="1.4"/></svg>',
+  restaurant:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 3v8m3-8v8M7.5 11v10M6 3h3M16 3c-1.5 0-2.5 2-2.5 5s1 4 2.5 4v9"/></svg>',
+  spa_winotherapy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3s5 5.5 5 10a5 5 0 0 1-10 0c0-4.5 5-10 5-10Z"/></svg>',
+  enotourism:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>',
+  business_programs:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+  weddings_events:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="9" cy="14" r="4"/><circle cx="15" cy="14" r="4"/><path d="M9 10l1.5-3M15 10l-1.5-3"/></svg>',
+  gift_sets_shop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 9h16v11H4zM4 9l1.5-4h13L20 9M12 5v15"/></svg>'
+};
+const ICO_TICK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l4 4L19 7"/></svg>';
+const ICO_PASS='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M8 17h8"/></svg>';
+const ICO_SCAN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2M4 12h16"/></svg>';
+const ICO_QR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v7h-7M17 21h.01"/></svg>';
+const ICO_ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+/* ---- wizard i18n (12 languages) ---- */
+const WZ = {
+  en:{nav:"WINERY ONBOARDING", title:"Create your <em>verified</em> passport", tagline:"From estate to bottle — build your CAP passport in eight steps.",
+    s1:"Profile",s2:"DNA",s3:"Services",s4:"Wine",s5:"Vintage",s6:"Bottles",s7:"Preview",s8:"Submit",
+    h1:"Basic profile",h2:"Winery DNA",h3:"Services & experiences",h4:"First wine",h5:"First vintage",h6:"Generate bottle CAPs",h7:"Preview your passport",h8:"Submit for review",
+    sh1:"Tell us who you are.",sh2:"The story behind the estate.",sh3:"What can guests experience on-site?",sh4:"Add your first wine.",sh5:"Add the first vintage of this wine.",sh6:"Mint demo bottle CAPs with QR codes.",sh7:"See the live consumer-facing pages.",sh8:"Send your passport to Tasting & Toasting.",
+    l_public_name:"Public name",l_legal_name:"Legal name",l_country:"Country",l_region:"Region",l_city:"City",l_website:"Website",l_email:"Contact email",l_founded:"Founded year",
+    l_family_story:"Family story",l_founder_quote:"Founder quote",l_land:"Land description",l_philosophy:"Philosophy",
+    l_wine_name:"Wine name",l_wine_type:"Wine type",l_grapes:"Grape composition",l_description:"Description",
+    l_year:"Vintage year",l_total_bottles:"Total bottles",l_harvest:"Harvest start date",l_bottling:"Bottling date",l_release:"Release date",l_vintage_story:"Vintage story",
+    wt_red:"Red",wt_white:"White",wt_rose:"Rosé",wt_sparkling:"Sparkling",wt_dessert:"Dessert",
+    b_back:"Back",b_next:"Save & continue",b_generate:"Generate 10 demo bottle CAPs",b_submit:"Submit passport",b_finish:"Finish",
+    optional:"optional",saving:"Saving…",generating:"Generating…",
+    g_first:"First bottle CAP",g_token:"QR token",cap_verified:"CAP Verified",g_count:"{n} bottle CAPs generated",
+    pv_w:"Winery Passport",pv_wd:"Your public estate page.",pv_b:"Bottle Scan",pv_bd:"What a guest sees when scanning.",pv_s:"QR Sticker",pv_sd:"Printable label for the bottle.",pv_open:"Open",
+    done_h:"Submitted",done_d:"Your passport is submitted for T&T review.",
+    ph_family:"Three generations on the same hillside…",ph_quote:"We don't make wine, we raise it.",ph_land:"South-facing slopes of glacial loam…",ph_philosophy:"Minimal intervention, maximal patience…",ph_wine_desc:"A supple red with notes of dark cherry…",ph_vintage:"A warm, dry summer made this an exceptional year.",
+    err_required:"Please fill in the required fields.",err_save:"Could not save — check the connection and try again.",err_services:"Select at least one service.",warn_offline:"Saved locally — the server could not be reached. Continuing in demo mode."},
+  fr:{nav:"INTÉGRATION DU DOMAINE", title:"Créez votre passeport <em>vérifié</em>", tagline:"Du domaine à la bouteille — créez votre passeport CAP en huit étapes.",
+    s1:"Profil",s2:"ADN",s3:"Services",s4:"Vin",s5:"Millésime",s6:"Bouteilles",s7:"Aperçu",s8:"Envoyer",
+    h1:"Profil de base",h2:"ADN du domaine",h3:"Services & expériences",h4:"Premier vin",h5:"Premier millésime",h6:"Générer les CAP des bouteilles",h7:"Aperçu de votre passeport",h8:"Soumettre pour vérification",
+    sh1:"Présentez-vous.",sh2:"L'histoire derrière le domaine.",sh3:"Que peuvent vivre les visiteurs sur place ?",sh4:"Ajoutez votre premier vin.",sh5:"Ajoutez le premier millésime de ce vin.",sh6:"Créez des CAP de démonstration avec QR codes.",sh7:"Voyez les pages destinées au public.",sh8:"Envoyez votre passeport à Tasting & Toasting.",
+    l_public_name:"Nom public",l_legal_name:"Raison sociale",l_country:"Pays",l_region:"Région",l_city:"Ville",l_website:"Site web",l_email:"E-mail de contact",l_founded:"Année de fondation",
+    l_family_story:"Histoire familiale",l_founder_quote:"Citation du fondateur",l_land:"Description du terroir",l_philosophy:"Philosophie",
+    l_wine_name:"Nom du vin",l_wine_type:"Type de vin",l_grapes:"Encépagement",l_description:"Description",
+    l_year:"Millésime",l_total_bottles:"Nombre de bouteilles",l_harvest:"Début des vendanges",l_bottling:"Date de mise en bouteille",l_release:"Date de commercialisation",l_vintage_story:"Histoire du millésime",
+    wt_red:"Rouge",wt_white:"Blanc",wt_rose:"Rosé",wt_sparkling:"Effervescent",wt_dessert:"Liquoreux",
+    b_back:"Retour",b_next:"Enregistrer & continuer",b_generate:"Générer 10 CAP de démonstration",b_submit:"Soumettre le passeport",b_finish:"Terminer",
+    optional:"optionnel",saving:"Enregistrement…",generating:"Génération…",
+    g_first:"Premier CAP de bouteille",g_token:"Jeton QR",cap_verified:"CAP vérifié",g_count:"{n} CAP générés",
+    pv_w:"Passeport du domaine",pv_wd:"Votre page publique.",pv_b:"Scan de bouteille",pv_bd:"Ce que voit un visiteur en scannant.",pv_s:"Étiquette QR",pv_sd:"Étiquette imprimable pour la bouteille.",pv_open:"Ouvrir",
+    done_h:"Soumis",done_d:"Votre passeport est soumis à la vérification de T&T.",
+    ph_family:"Trois générations sur le même coteau…",ph_quote:"Nous ne faisons pas le vin, nous l'élevons.",ph_land:"Coteaux exposés au sud sur loam glaciaire…",ph_philosophy:"Intervention minimale, patience maximale…",ph_wine_desc:"Un rouge souple aux notes de cerise noire…",ph_vintage:"Un été chaud et sec en a fait une année exceptionnelle.",
+    err_required:"Veuillez remplir les champs obligatoires.",err_save:"Échec de l'enregistrement — vérifiez la connexion et réessayez.",err_services:"Sélectionnez au moins un service.",warn_offline:"Enregistré localement — serveur injoignable. Mode démonstration."},
+  ru:{nav:"РЕГИСТРАЦИЯ ВИНОДЕЛЬНИ", title:"Создайте <em>подтверждённый</em> паспорт", tagline:"От винодельни до бутылки — создайте CAP-паспорт за восемь шагов.",
+    s1:"Профиль",s2:"ДНК",s3:"Услуги",s4:"Вино",s5:"Урожай",s6:"Бутылки",s7:"Превью",s8:"Отправка",
+    h1:"Основной профиль",h2:"ДНК винодельни",h3:"Услуги и впечатления",h4:"Первое вино",h5:"Первый урожай",h6:"Создать CAP бутылок",h7:"Предпросмотр паспорта",h8:"Отправить на проверку",
+    sh1:"Расскажите о себе.",sh2:"История за винодельней.",sh3:"Что гости могут испытать на месте?",sh4:"Добавьте первое вино.",sh5:"Добавьте первый урожай этого вина.",sh6:"Создайте демо-CAP с QR-кодами.",sh7:"Посмотрите страницы для потребителей.",sh8:"Отправьте паспорт в Tasting & Toasting.",
+    l_public_name:"Публичное название",l_legal_name:"Юридическое название",l_country:"Страна",l_region:"Регион",l_city:"Город",l_website:"Сайт",l_email:"Контактный e-mail",l_founded:"Год основания",
+    l_family_story:"История семьи",l_founder_quote:"Цитата основателя",l_land:"Описание земли",l_philosophy:"Философия",
+    l_wine_name:"Название вина",l_wine_type:"Тип вина",l_grapes:"Состав сортов",l_description:"Описание",
+    l_year:"Год урожая",l_total_bottles:"Всего бутылок",l_harvest:"Начало сбора",l_bottling:"Дата розлива",l_release:"Дата выпуска",l_vintage_story:"История урожая",
+    wt_red:"Красное",wt_white:"Белое",wt_rose:"Розовое",wt_sparkling:"Игристое",wt_dessert:"Десертное",
+    b_back:"Назад",b_next:"Сохранить и продолжить",b_generate:"Создать 10 демо-CAP",b_submit:"Отправить паспорт",b_finish:"Готово",
+    optional:"необязательно",saving:"Сохранение…",generating:"Создание…",
+    g_first:"Первый CAP бутылки",g_token:"QR-токен",cap_verified:"CAP подтверждён",g_count:"Создано CAP: {n}",
+    pv_w:"Паспорт винодельни",pv_wd:"Ваша публичная страница.",pv_b:"Скан бутылки",pv_bd:"Что видит гость при сканировании.",pv_s:"QR-наклейка",pv_sd:"Печатная этикетка для бутылки.",pv_open:"Открыть",
+    done_h:"Отправлено",done_d:"Ваш паспорт отправлен на проверку T&T.",
+    ph_family:"Три поколения на одном склоне…",ph_quote:"Мы не делаем вино, мы его растим.",ph_land:"Южные склоны из ледникового суглинка…",ph_philosophy:"Минимум вмешательства, максимум терпения…",ph_wine_desc:"Мягкое красное с нотами тёмной вишни…",ph_vintage:"Тёплое сухое лето сделало год исключительным.",
+    err_required:"Пожалуйста, заполните обязательные поля.",err_save:"Не удалось сохранить — проверьте соединение и повторите.",err_services:"Выберите хотя бы одну услугу.",warn_offline:"Сохранено локально — сервер недоступен. Демо-режим."},
+  es:{nav:"ALTA DE BODEGA", title:"Crea tu pasaporte <em>verificado</em>", tagline:"De la bodega a la botella — crea tu pasaporte CAP en ocho pasos.",
+    s1:"Perfil",s2:"ADN",s3:"Servicios",s4:"Vino",s5:"Añada",s6:"Botellas",s7:"Vista previa",s8:"Enviar",
+    h1:"Perfil básico",h2:"ADN de la bodega",h3:"Servicios y experiencias",h4:"Primer vino",h5:"Primera añada",h6:"Generar CAP de botellas",h7:"Vista previa del pasaporte",h8:"Enviar a revisión",
+    sh1:"Cuéntanos quién eres.",sh2:"La historia detrás de la bodega.",sh3:"¿Qué pueden vivir los visitantes en la bodega?",sh4:"Añade tu primer vino.",sh5:"Añade la primera añada de este vino.",sh6:"Genera CAP de demostración con códigos QR.",sh7:"Mira las páginas para el consumidor.",sh8:"Envía tu pasaporte a Tasting & Toasting.",
+    l_public_name:"Nombre público",l_legal_name:"Razón social",l_country:"País",l_region:"Región",l_city:"Ciudad",l_website:"Sitio web",l_email:"Correo de contacto",l_founded:"Año de fundación",
+    l_family_story:"Historia familiar",l_founder_quote:"Cita del fundador",l_land:"Descripción de la tierra",l_philosophy:"Filosofía",
+    l_wine_name:"Nombre del vino",l_wine_type:"Tipo de vino",l_grapes:"Composición de uvas",l_description:"Descripción",
+    l_year:"Añada",l_total_bottles:"Botellas totales",l_harvest:"Inicio de vendimia",l_bottling:"Fecha de embotellado",l_release:"Fecha de salida",l_vintage_story:"Historia de la añada",
+    wt_red:"Tinto",wt_white:"Blanco",wt_rose:"Rosado",wt_sparkling:"Espumoso",wt_dessert:"Dulce",
+    b_back:"Atrás",b_next:"Guardar y continuar",b_generate:"Generar 10 CAP de demostración",b_submit:"Enviar pasaporte",b_finish:"Finalizar",
+    optional:"opcional",saving:"Guardando…",generating:"Generando…",
+    g_first:"Primer CAP de botella",g_token:"Token QR",cap_verified:"CAP verificado",g_count:"{n} CAP generados",
+    pv_w:"Pasaporte de la bodega",pv_wd:"Tu página pública.",pv_b:"Escaneo de botella",pv_bd:"Lo que ve un visitante al escanear.",pv_s:"Etiqueta QR",pv_sd:"Etiqueta imprimible para la botella.",pv_open:"Abrir",
+    done_h:"Enviado",done_d:"Tu pasaporte se ha enviado para revisión de T&T.",
+    ph_family:"Tres generaciones en la misma ladera…",ph_quote:"No hacemos vino, lo criamos.",ph_land:"Laderas orientadas al sur sobre loam glaciar…",ph_philosophy:"Mínima intervención, máxima paciencia…",ph_wine_desc:"Un tinto suave con notas de cereza negra…",ph_vintage:"Un verano cálido y seco lo hizo un año excepcional.",
+    err_required:"Por favor, completa los campos obligatorios.",err_save:"No se pudo guardar — comprueba la conexión e inténtalo de nuevo.",err_services:"Selecciona al menos un servicio.",warn_offline:"Guardado localmente — no se pudo contactar al servidor. Modo demo."},
+  uk:{nav:"РЕЄСТРАЦІЯ ВИНОРОБНІ", title:"Створіть <em>підтверджений</em> паспорт", tagline:"Від виноробні до пляшки — створіть CAP-паспорт за вісім кроків.",
+    s1:"Профіль",s2:"ДНК",s3:"Послуги",s4:"Вино",s5:"Врожай",s6:"Пляшки",s7:"Перегляд",s8:"Надіслати",
+    h1:"Основний профіль",h2:"ДНК виноробні",h3:"Послуги та враження",h4:"Перше вино",h5:"Перший врожай",h6:"Створити CAP пляшок",h7:"Перегляд паспорта",h8:"Надіслати на перевірку",
+    sh1:"Розкажіть про себе.",sh2:"Історія виноробні.",sh3:"Що гості можуть відчути на місці?",sh4:"Додайте перше вино.",sh5:"Додайте перший врожай цього вина.",sh6:"Створіть демо-CAP з QR-кодами.",sh7:"Перегляньте сторінки для споживачів.",sh8:"Надішліть паспорт до Tasting & Toasting.",
+    l_public_name:"Публічна назва",l_legal_name:"Юридична назва",l_country:"Країна",l_region:"Регіон",l_city:"Місто",l_website:"Сайт",l_email:"Контактний e-mail",l_founded:"Рік заснування",
+    l_family_story:"Історія родини",l_founder_quote:"Цитата засновника",l_land:"Опис землі",l_philosophy:"Філософія",
+    l_wine_name:"Назва вина",l_wine_type:"Тип вина",l_grapes:"Склад сортів",l_description:"Опис",
+    l_year:"Рік врожаю",l_total_bottles:"Усього пляшок",l_harvest:"Початок збору",l_bottling:"Дата розливу",l_release:"Дата випуску",l_vintage_story:"Історія врожаю",
+    wt_red:"Червоне",wt_white:"Біле",wt_rose:"Рожеве",wt_sparkling:"Ігристе",wt_dessert:"Десертне",
+    b_back:"Назад",b_next:"Зберегти й продовжити",b_generate:"Створити 10 демо-CAP",b_submit:"Надіслати паспорт",b_finish:"Готово",
+    optional:"необов'язково",saving:"Збереження…",generating:"Створення…",
+    g_first:"Перший CAP пляшки",g_token:"QR-токен",cap_verified:"CAP підтверджено",g_count:"Створено CAP: {n}",
+    pv_w:"Паспорт виноробні",pv_wd:"Ваша публічна сторінка.",pv_b:"Скан пляшки",pv_bd:"Що бачить гість під час сканування.",pv_s:"QR-наклейка",pv_sd:"Друкована етикетка для пляшки.",pv_open:"Відкрити",
+    done_h:"Надіслано",done_d:"Ваш паспорт надіслано на перевірку T&T.",
+    ph_family:"Три покоління на одному схилі…",ph_quote:"Ми не робимо вино, ми його вирощуємо.",ph_land:"Південні схили з льодовикового суглинку…",ph_philosophy:"Мінімум втручання, максимум терпіння…",ph_wine_desc:"М'яке червоне з нотами темної вишні…",ph_vintage:"Тепле сухе літо зробило рік винятковим.",
+    err_required:"Будь ласка, заповніть обов'язкові поля.",err_save:"Не вдалося зберегти — перевірте з'єднання та повторіть.",err_services:"Виберіть принаймні одну послугу.",warn_offline:"Збережено локально — сервер недоступний. Демо-режим."},
+  it:{nav:"REGISTRAZIONE CANTINA", title:"Crea il tuo passaporto <em>verificato</em>", tagline:"Dalla cantina alla bottiglia — crea il tuo passaporto CAP in otto passi.",
+    s1:"Profilo",s2:"DNA",s3:"Servizi",s4:"Vino",s5:"Annata",s6:"Bottiglie",s7:"Anteprima",s8:"Invia",
+    h1:"Profilo base",h2:"DNA della cantina",h3:"Servizi ed esperienze",h4:"Primo vino",h5:"Prima annata",h6:"Genera i CAP delle bottiglie",h7:"Anteprima del passaporto",h8:"Invia per la verifica",
+    sh1:"Raccontaci chi sei.",sh2:"La storia dietro la cantina.",sh3:"Cosa possono vivere gli ospiti in cantina?",sh4:"Aggiungi il tuo primo vino.",sh5:"Aggiungi la prima annata di questo vino.",sh6:"Genera CAP dimostrativi con codici QR.",sh7:"Guarda le pagine per il consumatore.",sh8:"Invia il tuo passaporto a Tasting & Toasting.",
+    l_public_name:"Nome pubblico",l_legal_name:"Ragione sociale",l_country:"Paese",l_region:"Regione",l_city:"Città",l_website:"Sito web",l_email:"E-mail di contatto",l_founded:"Anno di fondazione",
+    l_family_story:"Storia di famiglia",l_founder_quote:"Citazione del fondatore",l_land:"Descrizione del terroir",l_philosophy:"Filosofia",
+    l_wine_name:"Nome del vino",l_wine_type:"Tipo di vino",l_grapes:"Composizione delle uve",l_description:"Descrizione",
+    l_year:"Annata",l_total_bottles:"Bottiglie totali",l_harvest:"Inizio vendemmia",l_bottling:"Data di imbottigliamento",l_release:"Data di uscita",l_vintage_story:"Storia dell'annata",
+    wt_red:"Rosso",wt_white:"Bianco",wt_rose:"Rosato",wt_sparkling:"Spumante",wt_dessert:"Dolce",
+    b_back:"Indietro",b_next:"Salva e continua",b_generate:"Genera 10 CAP dimostrativi",b_submit:"Invia passaporto",b_finish:"Fine",
+    optional:"facoltativo",saving:"Salvataggio…",generating:"Generazione…",
+    g_first:"Primo CAP della bottiglia",g_token:"Token QR",cap_verified:"CAP verificato",g_count:"{n} CAP generati",
+    pv_w:"Passaporto della cantina",pv_wd:"La tua pagina pubblica.",pv_b:"Scansione bottiglia",pv_bd:"Ciò che vede un ospite scansionando.",pv_s:"Etichetta QR",pv_sd:"Etichetta stampabile per la bottiglia.",pv_open:"Apri",
+    done_h:"Inviato",done_d:"Il tuo passaporto è stato inviato per la verifica di T&T.",
+    ph_family:"Tre generazioni sullo stesso versante…",ph_quote:"Non facciamo il vino, lo cresciamo.",ph_land:"Versanti esposti a sud su loam glaciale…",ph_philosophy:"Minimo intervento, massima pazienza…",ph_wine_desc:"Un rosso morbido con note di ciliegia nera…",ph_vintage:"Un'estate calda e secca ha reso l'annata eccezionale.",
+    err_required:"Compila i campi obbligatori.",err_save:"Impossibile salvare — controlla la connessione e riprova.",err_services:"Seleziona almeno un servizio.",warn_offline:"Salvato localmente — server non raggiungibile. Modalità demo."},
+  de:{nav:"WEINGUT-ANMELDUNG", title:"Erstellen Sie Ihren <em>verifizierten</em> Pass", tagline:"Vom Weingut zur Flasche — erstellen Sie Ihren CAP-Pass in acht Schritten.",
+    s1:"Profil",s2:"DNA",s3:"Angebote",s4:"Wein",s5:"Jahrgang",s6:"Flaschen",s7:"Vorschau",s8:"Senden",
+    h1:"Basisprofil",h2:"DNA des Weinguts",h3:"Angebote & Erlebnisse",h4:"Erster Wein",h5:"Erster Jahrgang",h6:"Flaschen-CAPs erzeugen",h7:"Pass-Vorschau",h8:"Zur Prüfung einreichen",
+    sh1:"Erzählen Sie uns, wer Sie sind.",sh2:"Die Geschichte hinter dem Weingut.",sh3:"Was können Gäste vor Ort erleben?",sh4:"Fügen Sie Ihren ersten Wein hinzu.",sh5:"Fügen Sie den ersten Jahrgang dieses Weins hinzu.",sh6:"Erzeugen Sie Demo-CAPs mit QR-Codes.",sh7:"Sehen Sie die Verbraucherseiten.",sh8:"Senden Sie Ihren Pass an Tasting & Toasting.",
+    l_public_name:"Öffentlicher Name",l_legal_name:"Rechtlicher Name",l_country:"Land",l_region:"Region",l_city:"Stadt",l_website:"Website",l_email:"Kontakt-E-Mail",l_founded:"Gründungsjahr",
+    l_family_story:"Familiengeschichte",l_founder_quote:"Zitat des Gründers",l_land:"Beschreibung des Terroirs",l_philosophy:"Philosophie",
+    l_wine_name:"Weinname",l_wine_type:"Weintyp",l_grapes:"Rebsortenzusammensetzung",l_description:"Beschreibung",
+    l_year:"Jahrgang",l_total_bottles:"Flaschen gesamt",l_harvest:"Lesebeginn",l_bottling:"Abfülldatum",l_release:"Veröffentlichungsdatum",l_vintage_story:"Geschichte des Jahrgangs",
+    wt_red:"Rot",wt_white:"Weiß",wt_rose:"Rosé",wt_sparkling:"Schaumwein",wt_dessert:"Süßwein",
+    b_back:"Zurück",b_next:"Speichern & weiter",b_generate:"10 Demo-CAPs erzeugen",b_submit:"Pass einreichen",b_finish:"Fertig",
+    optional:"optional",saving:"Speichern…",generating:"Wird erzeugt…",
+    g_first:"Erster Flaschen-CAP",g_token:"QR-Token",cap_verified:"CAP verifiziert",g_count:"{n} CAPs erzeugt",
+    pv_w:"Weingut-Pass",pv_wd:"Ihre öffentliche Seite.",pv_b:"Flaschen-Scan",pv_bd:"Was ein Gast beim Scannen sieht.",pv_s:"QR-Etikett",pv_sd:"Druckbares Etikett für die Flasche.",pv_open:"Öffnen",
+    done_h:"Eingereicht",done_d:"Ihr Pass wurde zur Prüfung an T&T eingereicht.",
+    ph_family:"Drei Generationen am selben Hang…",ph_quote:"Wir machen keinen Wein, wir ziehen ihn auf.",ph_land:"Südhänge aus glazialem Lehm…",ph_philosophy:"Minimaler Eingriff, maximale Geduld…",ph_wine_desc:"Ein samtiger Rotwein mit Noten dunkler Kirsche…",ph_vintage:"Ein warmer, trockener Sommer machte das Jahr außergewöhnlich.",
+    err_required:"Bitte füllen Sie die Pflichtfelder aus.",err_save:"Speichern fehlgeschlagen — Verbindung prüfen und erneut versuchen.",err_services:"Wählen Sie mindestens ein Angebot.",warn_offline:"Lokal gespeichert — Server nicht erreichbar. Demo-Modus."},
+  he:{nav:"רישום יקב", title:"צרו את הדרכון <em>המאומת</em> שלכם", tagline:"מהיקב ועד הבקבוק — בנו את דרכון ה-CAP בשמונה שלבים.",
+    s1:"פרופיל",s2:"דנ\"א",s3:"שירותים",s4:"יין",s5:"בציר",s6:"בקבוקים",s7:"תצוגה",s8:"שליחה",
+    h1:"פרופיל בסיסי",h2:"הדנ\"א של היקב",h3:"שירותים וחוויות",h4:"היין הראשון",h5:"הבציר הראשון",h6:"יצירת CAP לבקבוקים",h7:"תצוגה מקדימה של הדרכון",h8:"שליחה לבדיקה",
+    sh1:"ספרו לנו מי אתם.",sh2:"הסיפור שמאחורי היקב.",sh3:"מה האורחים יכולים לחוות במקום?",sh4:"הוסיפו את היין הראשון שלכם.",sh5:"הוסיפו את הבציר הראשון של היין הזה.",sh6:"צרו CAP לדוגמה עם קודי QR.",sh7:"צפו בעמודים לצרכן.",sh8:"שלחו את הדרכון ל-Tasting & Toasting.",
+    l_public_name:"שם ציבורי",l_legal_name:"שם משפטי",l_country:"מדינה",l_region:"אזור",l_city:"עיר",l_website:"אתר",l_email:"דוא\"ל ליצירת קשר",l_founded:"שנת ייסוד",
+    l_family_story:"סיפור המשפחה",l_founder_quote:"ציטוט המייסד",l_land:"תיאור האדמה",l_philosophy:"פילוסופיה",
+    l_wine_name:"שם היין",l_wine_type:"סוג היין",l_grapes:"הרכב הזנים",l_description:"תיאור",
+    l_year:"שנת בציר",l_total_bottles:"סך הבקבוקים",l_harvest:"תחילת הבציר",l_bottling:"תאריך מילוי",l_release:"תאריך שחרור",l_vintage_story:"סיפור הבציר",
+    wt_red:"אדום",wt_white:"לבן",wt_rose:"רוזה",wt_sparkling:"מבעבע",wt_dessert:"קינוח",
+    b_back:"חזרה",b_next:"שמירה והמשך",b_generate:"צרו 10 CAP לדוגמה",b_submit:"שליחת דרכון",b_finish:"סיום",
+    optional:"רשות",saving:"שומר…",generating:"יוצר…",
+    g_first:"ה-CAP הראשון של הבקבוק",g_token:"אסימון QR",cap_verified:"CAP מאומת",g_count:"נוצרו {n} CAP",
+    pv_w:"דרכון היקב",pv_wd:"העמוד הציבורי שלכם.",pv_b:"סריקת בקבוק",pv_bd:"מה שאורח רואה בעת סריקה.",pv_s:"מדבקת QR",pv_sd:"תווית להדפסה לבקבוק.",pv_open:"פתחו",
+    done_h:"נשלח",done_d:"הדרכון שלכם נשלח לבדיקת T&T.",
+    ph_family:"שלושה דורות על אותה גבעה…",ph_quote:"אנחנו לא מייצרים יין, אנחנו מגדלים אותו.",ph_land:"מדרונות פונים דרומה על קרקע קרחונית…",ph_philosophy:"מינימום התערבות, מקסימום סבלנות…",ph_wine_desc:"אדום רך עם רמזים של דובדבן כהה…",ph_vintage:"קיץ חם ויבש הפך את השנה לשנה יוצאת דופן.",
+    err_required:"נא למלא את שדות החובה.",err_save:"השמירה נכשלה — בדקו את החיבור ונסו שוב.",err_services:"בחרו שירות אחד לפחות.",warn_offline:"נשמר מקומית — לא ניתן היה להגיע לשרת. מצב הדגמה."},
+  pt:{nav:"REGISTO DA QUINTA", title:"Crie o seu passaporte <em>verificado</em>", tagline:"Da quinta à garrafa — crie o seu passaporte CAP em oito passos.",
+    s1:"Perfil",s2:"ADN",s3:"Serviços",s4:"Vinho",s5:"Colheita",s6:"Garrafas",s7:"Pré-visualização",s8:"Enviar",
+    h1:"Perfil básico",h2:"ADN da quinta",h3:"Serviços e experiências",h4:"Primeiro vinho",h5:"Primeira colheita",h6:"Gerar CAP das garrafas",h7:"Pré-visualizar o passaporte",h8:"Enviar para verificação",
+    sh1:"Diga-nos quem é.",sh2:"A história por trás da quinta.",sh3:"O que podem os visitantes experienciar no local?",sh4:"Adicione o seu primeiro vinho.",sh5:"Adicione a primeira colheita deste vinho.",sh6:"Gere CAP de demonstração com códigos QR.",sh7:"Veja as páginas para o consumidor.",sh8:"Envie o seu passaporte para a Tasting & Toasting.",
+    l_public_name:"Nome público",l_legal_name:"Nome legal",l_country:"País",l_region:"Região",l_city:"Cidade",l_website:"Site",l_email:"E-mail de contacto",l_founded:"Ano de fundação",
+    l_family_story:"História da família",l_founder_quote:"Citação do fundador",l_land:"Descrição da terra",l_philosophy:"Filosofia",
+    l_wine_name:"Nome do vinho",l_wine_type:"Tipo de vinho",l_grapes:"Composição das castas",l_description:"Descrição",
+    l_year:"Colheita",l_total_bottles:"Total de garrafas",l_harvest:"Início da vindima",l_bottling:"Data de engarrafamento",l_release:"Data de lançamento",l_vintage_story:"História da colheita",
+    wt_red:"Tinto",wt_white:"Branco",wt_rose:"Rosé",wt_sparkling:"Espumante",wt_dessert:"Doce",
+    b_back:"Voltar",b_next:"Guardar e continuar",b_generate:"Gerar 10 CAP de demonstração",b_submit:"Enviar passaporte",b_finish:"Concluir",
+    optional:"opcional",saving:"A guardar…",generating:"A gerar…",
+    g_first:"Primeiro CAP da garrafa",g_token:"Token QR",cap_verified:"CAP verificado",g_count:"{n} CAP gerados",
+    pv_w:"Passaporte da quinta",pv_wd:"A sua página pública.",pv_b:"Leitura da garrafa",pv_bd:"O que um visitante vê ao digitalizar.",pv_s:"Etiqueta QR",pv_sd:"Etiqueta imprimível para a garrafa.",pv_open:"Abrir",
+    done_h:"Enviado",done_d:"O seu passaporte foi enviado para verificação da T&T.",
+    ph_family:"Três gerações na mesma encosta…",ph_quote:"Não fazemos vinho, criamo-lo.",ph_land:"Encostas viradas a sul sobre loam glaciar…",ph_philosophy:"Intervenção mínima, paciência máxima…",ph_wine_desc:"Um tinto suave com notas de cereja preta…",ph_vintage:"Um verão quente e seco tornou o ano excecional.",
+    err_required:"Preencha os campos obrigatórios.",err_save:"Não foi possível guardar — verifique a ligação e tente novamente.",err_services:"Selecione pelo menos um serviço.",warn_offline:"Guardado localmente — servidor inacessível. Modo demonstração."},
+  ka:{nav:"მარნის რეგისტრაცია", title:"შექმენით თქვენი <em>დადასტურებული</em> პასპორტი", tagline:"მარნიდან ბოთლამდე — შექმენით CAP პასპორტი რვა ნაბიჯში.",
+    s1:"პროფილი",s2:"დნმ",s3:"სერვისები",s4:"ღვინო",s5:"მოსავალი",s6:"ბოთლები",s7:"ხედი",s8:"გაგზავნა",
+    h1:"ძირითადი პროფილი",h2:"მარნის დნმ",h3:"სერვისები და გამოცდილებები",h4:"პირველი ღვინო",h5:"პირველი მოსავალი",h6:"ბოთლების CAP-ის გენერაცია",h7:"პასპორტის გადახედვა",h8:"გაგზავნა შესამოწმებლად",
+    sh1:"მოგვიყევით თქვენ შესახებ.",sh2:"მარნის ისტორია.",sh3:"რას განიცდიან სტუმრები ადგილზე?",sh4:"დაამატეთ პირველი ღვინო.",sh5:"დაამატეთ ამ ღვინის პირველი მოსავალი.",sh6:"შექმენით სადემონსტრაციო CAP QR კოდებით.",sh7:"იხილეთ მომხმარებლის გვერდები.",sh8:"გაუგზავნეთ პასპორტი Tasting & Toasting-ს.",
+    l_public_name:"საჯარო სახელი",l_legal_name:"იურიდიული სახელი",l_country:"ქვეყანა",l_region:"რეგიონი",l_city:"ქალაქი",l_website:"ვებგვერდი",l_email:"საკონტაქტო ელფოსტა",l_founded:"დაარსების წელი",
+    l_family_story:"ოჯახის ისტორია",l_founder_quote:"დამფუძნებლის ციტატა",l_land:"მიწის აღწერა",l_philosophy:"ფილოსოფია",
+    l_wine_name:"ღვინის სახელი",l_wine_type:"ღვინის ტიპი",l_grapes:"ჯიშების შემადგენლობა",l_description:"აღწერა",
+    l_year:"მოსავლის წელი",l_total_bottles:"სულ ბოთლები",l_harvest:"რთველის დაწყება",l_bottling:"ჩამოსხმის თარიღი",l_release:"გამოშვების თარიღი",l_vintage_story:"მოსავლის ისტორია",
+    wt_red:"წითელი",wt_white:"თეთრი",wt_rose:"ვარდისფერი",wt_sparkling:"ცქრიალა",wt_dessert:"სადესერტო",
+    b_back:"უკან",b_next:"შენახვა და გაგრძელება",b_generate:"10 სადემონსტრაციო CAP-ის შექმნა",b_submit:"პასპორტის გაგზავნა",b_finish:"დასრულება",
+    optional:"არასავალდებულო",saving:"ინახება…",generating:"იქმნება…",
+    g_first:"ბოთლის პირველი CAP",g_token:"QR ტოკენი",cap_verified:"CAP დადასტურებული",g_count:"შეიქმნა {n} CAP",
+    pv_w:"მარნის პასპორტი",pv_wd:"თქვენი საჯარო გვერდი.",pv_b:"ბოთლის სკანირება",pv_bd:"რას ხედავს სტუმარი სკანირებისას.",pv_s:"QR სტიკერი",pv_sd:"დასაბეჭდი ეტიკეტი ბოთლისთვის.",pv_open:"გახსნა",
+    done_h:"გაგზავნილია",done_d:"თქვენი პასპორტი გაიგზავნა T&T-ის შესამოწმებლად.",
+    ph_family:"სამი თაობა ერთსა და იმავე ფერდობზე…",ph_quote:"ჩვენ ღვინოს არ ვამზადებთ, ჩვენ მას ვზრდით.",ph_land:"სამხრეთისკენ მიმართული ფერდობები მყინვარული თიხნარით…",ph_philosophy:"მინიმალური ჩარევა, მაქსიმალური მოთმინება…",ph_wine_desc:"რბილი წითელი მუქი ალუბლის ნოტებით…",ph_vintage:"თბილმა და მშრალმა ზაფხულმა წელი განსაკუთრებული გახადა.",
+    err_required:"გთხოვთ, შეავსოთ სავალდებულო ველები.",err_save:"შენახვა ვერ მოხერხდა — შეამოწმეთ კავშირი და სცადეთ ხელახლა.",err_services:"აირჩიეთ მინიმუმ ერთი სერვისი.",warn_offline:"შენახულია ლოკალურად — სერვერი მიუწვდომელია. სადემონსტრაციო რეჟიმი."},
+  ro:{nav:"ÎNREGISTRARE CRAMĂ", title:"Creează-ți pașaportul <em>verificat</em>", tagline:"De la cramă la sticlă — creează-ți pașaportul CAP în opt pași.",
+    s1:"Profil",s2:"ADN",s3:"Servicii",s4:"Vin",s5:"Recoltă",s6:"Sticle",s7:"Previzualizare",s8:"Trimite",
+    h1:"Profil de bază",h2:"ADN-ul cramei",h3:"Servicii și experiențe",h4:"Primul vin",h5:"Prima recoltă",h6:"Generează CAP-urile sticlelor",h7:"Previzualizează pașaportul",h8:"Trimite spre verificare",
+    sh1:"Spune-ne cine ești.",sh2:"Povestea din spatele cramei.",sh3:"Ce pot experimenta vizitatorii la fața locului?",sh4:"Adaugă primul tău vin.",sh5:"Adaugă prima recoltă a acestui vin.",sh6:"Generează CAP-uri demo cu coduri QR.",sh7:"Vezi paginile pentru consumator.",sh8:"Trimite-ți pașaportul către Tasting & Toasting.",
+    l_public_name:"Nume public",l_legal_name:"Nume legal",l_country:"Țară",l_region:"Regiune",l_city:"Oraș",l_website:"Site web",l_email:"E-mail de contact",l_founded:"Anul fondării",
+    l_family_story:"Povestea familiei",l_founder_quote:"Citatul fondatorului",l_land:"Descrierea terenului",l_philosophy:"Filozofie",
+    l_wine_name:"Numele vinului",l_wine_type:"Tipul vinului",l_grapes:"Compoziția soiurilor",l_description:"Descriere",
+    l_year:"Recolta",l_total_bottles:"Total sticle",l_harvest:"Începutul culesului",l_bottling:"Data îmbutelierii",l_release:"Data lansării",l_vintage_story:"Povestea recoltei",
+    wt_red:"Roșu",wt_white:"Alb",wt_rose:"Rosé",wt_sparkling:"Spumant",wt_dessert:"Desert",
+    b_back:"Înapoi",b_next:"Salvează și continuă",b_generate:"Generează 10 CAP-uri demo",b_submit:"Trimite pașaportul",b_finish:"Finalizează",
+    optional:"opțional",saving:"Se salvează…",generating:"Se generează…",
+    g_first:"Primul CAP al sticlei",g_token:"Token QR",cap_verified:"CAP verificat",g_count:"{n} CAP-uri generate",
+    pv_w:"Pașaportul cramei",pv_wd:"Pagina ta publică.",pv_b:"Scanare sticlă",pv_bd:"Ce vede un vizitator la scanare.",pv_s:"Etichetă QR",pv_sd:"Etichetă imprimabilă pentru sticlă.",pv_open:"Deschide",
+    done_h:"Trimis",done_d:"Pașaportul tău a fost trimis spre verificare la T&T.",
+    ph_family:"Trei generații pe același versant…",ph_quote:"Nu facem vin, îl creștem.",ph_land:"Versanți însoriți pe lut glaciar…",ph_philosophy:"Intervenție minimă, răbdare maximă…",ph_wine_desc:"Un roșu suplu cu note de cireșe negre…",ph_vintage:"O vară caldă și uscată a făcut anul excepțional.",
+    err_required:"Te rugăm să completezi câmpurile obligatorii.",err_save:"Nu s-a putut salva — verifică conexiunea și încearcă din nou.",err_services:"Selectează cel puțin un serviciu.",warn_offline:"Salvat local — serverul nu a putut fi contactat. Mod demo."},
+  pl:{nav:"REJESTRACJA WINNICY", title:"Stwórz swój <em>zweryfikowany</em> paszport", tagline:"Od winnicy po butelkę — zbuduj paszport CAP w ośmiu krokach.",
+    s1:"Profil",s2:"DNA",s3:"Usługi",s4:"Wino",s5:"Rocznik",s6:"Butelki",s7:"Podgląd",s8:"Wyślij",
+    h1:"Profil podstawowy",h2:"DNA winnicy",h3:"Usługi i doświadczenia",h4:"Pierwsze wino",h5:"Pierwszy rocznik",h6:"Wygeneruj CAP butelek",h7:"Podgląd paszportu",h8:"Wyślij do weryfikacji",
+    sh1:"Powiedz nam, kim jesteś.",sh2:"Historia stojąca za winnicą.",sh3:"Czego goście mogą doświadczyć na miejscu?",sh4:"Dodaj swoje pierwsze wino.",sh5:"Dodaj pierwszy rocznik tego wina.",sh6:"Wygeneruj demonstracyjne CAP z kodami QR.",sh7:"Zobacz strony dla konsumenta.",sh8:"Wyślij paszport do Tasting & Toasting.",
+    l_public_name:"Nazwa publiczna",l_legal_name:"Nazwa prawna",l_country:"Kraj",l_region:"Region",l_city:"Miasto",l_website:"Strona www",l_email:"E-mail kontaktowy",l_founded:"Rok założenia",
+    l_family_story:"Historia rodziny",l_founder_quote:"Cytat założyciela",l_land:"Opis ziemi",l_philosophy:"Filozofia",
+    l_wine_name:"Nazwa wina",l_wine_type:"Rodzaj wina",l_grapes:"Skład szczepów",l_description:"Opis",
+    l_year:"Rocznik",l_total_bottles:"Łączna liczba butelek",l_harvest:"Początek zbiorów",l_bottling:"Data butelkowania",l_release:"Data wprowadzenia",l_vintage_story:"Historia rocznika",
+    wt_red:"Czerwone",wt_white:"Białe",wt_rose:"Różowe",wt_sparkling:"Musujące",wt_dessert:"Deserowe",
+    b_back:"Wstecz",b_next:"Zapisz i kontynuuj",b_generate:"Wygeneruj 10 demonstracyjnych CAP",b_submit:"Wyślij paszport",b_finish:"Zakończ",
+    optional:"opcjonalne",saving:"Zapisywanie…",generating:"Generowanie…",
+    g_first:"Pierwszy CAP butelki",g_token:"Token QR",cap_verified:"CAP zweryfikowano",g_count:"Wygenerowano {n} CAP",
+    pv_w:"Paszport winnicy",pv_wd:"Twoja strona publiczna.",pv_b:"Skan butelki",pv_bd:"Co widzi gość podczas skanowania.",pv_s:"Naklejka QR",pv_sd:"Etykieta do druku dla butelki.",pv_open:"Otwórz",
+    done_h:"Wysłano",done_d:"Twój paszport został wysłany do weryfikacji T&T.",
+    ph_family:"Trzy pokolenia na tym samym wzgórzu…",ph_quote:"Nie robimy wina, my je wychowujemy.",ph_land:"Południowe stoki na polodowcowej glinie…",ph_philosophy:"Minimum ingerencji, maksimum cierpliwości…",ph_wine_desc:"Aksamitne czerwone z nutami czarnej wiśni…",ph_vintage:"Ciepłe, suche lato uczyniło ten rok wyjątkowym.",
+    err_required:"Wypełnij wymagane pola.",err_save:"Nie udało się zapisać — sprawdź połączenie i spróbuj ponownie.",err_services:"Wybierz co najmniej jedną usługę.",warn_offline:"Zapisano lokalnie — nie udało się połączyć z serwerem. Tryb demo."}
+};
+
+const lang = (window.CAP && CAP.lang && WZ[CAP.lang]) ? CAP.lang : "en";
+const W = Object.assign({}, WZ.en, WZ[lang] || {});
+const tw = k => (W[k] != null ? W[k] : (WZ.en[k] != null ? WZ.en[k] : k));
+const lp = lang === "en" ? "" : ("&lang=" + lang);
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+
+const API = (new URLSearchParams(location.search)).get("api")
+  || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? "http://localhost:8088/api/cap" : "https://tt-stack-prod.onrender.com/api/cap");
+
+/* ---- static i18n apply ---- */
+function applyI18n(){
+  document.querySelectorAll("[data-wz]").forEach(el=>{ el.textContent = tw(el.getAttribute("data-wz")); });
+  document.querySelectorAll("[data-wz-html]").forEach(el=>{ el.innerHTML = tw(el.getAttribute("data-wz-html")); });
+  document.querySelectorAll("[data-wz-ph]").forEach(el=>{ el.setAttribute("placeholder", tw(el.getAttribute("data-wz-ph"))); });
+}
+
+/* ---- build progress + services + preview ---- */
+const STEP_KEYS = ["s1","s2","s3","s4","s5","s6","s7","s8"];
+function buildProgress(){
+  document.getElementById("progress").innerHTML = STEP_KEYS.map((k,i)=>
+    `<div class="pstep" data-p="${i+1}"><span class="pn">0${i+1}</span><span class="pl">${esc(tw(k))}</span></div>`).join("");
+}
+function buildServices(){
+  document.getElementById("svcGrid").innerHTML = SERVICES.map(s=>
+    `<label class="svc-tile" data-svc="${s}">
+       <input type="checkbox" value="${s}">
+       <span class="tick">${ICO_TICK}</span>
+       <span class="ic">${ICONS[s]||""}</span>
+       <span class="nm">${esc(CAP.t("svc_"+s))}</span>
+     </label>`).join("");
+  document.querySelectorAll(".svc-tile input").forEach(inp=>{
+    inp.addEventListener("change", ()=> inp.closest(".svc-tile").classList.toggle("on", inp.checked));
+  });
+}
+
+/* ---- state ---- */
+const store = {
+  get wineryId(){ return sessionStorage.getItem("cap_winery_id"); },
+  set wineryId(v){ v?sessionStorage.setItem("cap_winery_id",v):sessionStorage.removeItem("cap_winery_id"); },
+  get winerySlug(){ return sessionStorage.getItem("cap_winery_slug"); },
+  set winerySlug(v){ v?sessionStorage.setItem("cap_winery_slug",v):0; },
+  get wineId(){ return sessionStorage.getItem("cap_wine_id"); },
+  set wineId(v){ v?sessionStorage.setItem("cap_wine_id",v):0; },
+  get vintageId(){ return sessionStorage.getItem("cap_vintage_id"); },
+  set vintageId(v){ v?sessionStorage.setItem("cap_vintage_id",v):0; },
+  get token(){ return sessionStorage.getItem("cap_first_token"); },
+  set token(v){ v?sessionStorage.setItem("cap_first_token",v):0; },
+  wineName:"", wineryName:""
+};
+
+let step = 1;
+const TOTAL = 8;
+const val = id => (document.getElementById(id)?.value || "").trim();
+const notice = document.getElementById("notice");
+function showNotice(kind, msg){ notice.className = "notice show "+kind; notice.textContent = msg; }
+function clearNotice(){ notice.className = "notice"; notice.textContent = ""; }
+
+function render(){
+  document.querySelectorAll(".step").forEach(s=> s.classList.toggle("show", +s.dataset.step===step));
+  document.querySelectorAll(".pstep").forEach(p=>{
+    const n = +p.dataset.p;
+    p.classList.toggle("active", n===step);
+    p.classList.toggle("complete", n<step);
+  });
+  const back = document.getElementById("backBtn"), next = document.getElementById("nextBtn");
+  back.disabled = step===1;
+  // Steps 6 and 8 use their own action buttons; Next advances without a save.
+  next.style.display = (step===8) ? "none" : "inline-flex";
+  next.querySelector("[data-wz]").textContent = (step===7) ? tw("b_finish") : tw("b_next");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ---- POST helper ---- */
+async function post(path, body, method){
+  const r = await fetch(API+path, {
+    method: method||"POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(body)
+  });
+  if(!r.ok) throw new Error("HTTP "+r.status);
+  const txt = await r.text();
+  return txt ? JSON.parse(txt) : {};
+}
+const pick = (o, ...keys) => { for(const k of keys){ if(o && o[k]!=null) return o[k]; } return null; };
+function slugify(s){ return String(s||"winery").toLowerCase().normalize("NFKD").replace(/[^\w\s-]/g,"").trim().replace(/[\s_]+/g,"-").replace(/-+/g,"-").slice(0,80) || "winery"; }
+function uuid(){ try{ return crypto.randomUUID(); }catch(e){ return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{const r=crypto.getRandomValues(new Uint8Array(1))[0]%16,v=c==="x"?r:(r&0x3|0x8);return v.toString(16);}); } }
+
+/* ---- per-step save ---- */
+async function saveStep(n){
+  clearNotice();
+  if(n===1){
+    if(!val("f_public_name") || !val("f_country") || !val("f_contact_email")){ showNotice("err", tw("err_required")); return false; }
+    store.wineryName = val("f_public_name");
+    const slug = slugify(val("f_public_name"));
+    const body = {
+      public_name: val("f_public_name"), legal_name: val("f_legal_name")||null,
+      country: val("f_country"), region: val("f_region")||null, city: val("f_city")||null,
+      website_url: val("f_website_url")||null, contact_email: val("f_contact_email"),
+      founded_year: val("f_founded_year") ? Number(val("f_founded_year")) : null,
+      slug
+    };
+    try{
+      const d = await post("/wineries", body);
+      store.wineryId = pick(d.winery||d, "id") || uuid();
+      store.winerySlug = pick(d.winery||d, "slug") || slug;
+    }catch(e){
+      store.wineryId = store.wineryId || uuid(); store.winerySlug = slug;
+      showNotice("warn", tw("warn_offline"));
+    }
+    return true;
+  }
+  if(n===2){
+    const body = {
+      family_story: val("f_family_story")||null, founder_quote: val("f_founder_quote")||null,
+      land_description: val("f_land_description")||null, philosophy: val("f_philosophy")||null
+    };
+    try{ await post(`/wineries/${store.wineryId}/dna`, body); }
+    catch(e){ showNotice("warn", tw("warn_offline")); }
+    return true;
+  }
+  if(n===3){
+    const sel = [...document.querySelectorAll(".svc-tile input:checked")].map(i=>i.value);
+    if(!sel.length){ showNotice("err", tw("err_services")); return false; }
+    try{ for(const s of sel){ await post(`/wineries/${store.wineryId}/services`, {service_type:s}); } }
+    catch(e){ showNotice("warn", tw("warn_offline")); }
+    return true;
+  }
+  if(n===4){
+    if(!val("f_wine_name")){ showNotice("err", tw("err_required")); return false; }
+    store.wineName = val("f_wine_name");
+    const body = {
+      name: val("f_wine_name"), wine_type: val("f_wine_type"),
+      grape_composition: val("f_grape_composition")||null, description: val("f_wine_description")||null
+    };
+    try{ const d = await post(`/wineries/${store.wineryId}/wines`, body); store.wineId = pick(d.wine||d,"id")||uuid(); }
+    catch(e){ store.wineId = store.wineId || uuid(); showNotice("warn", tw("warn_offline")); }
+    return true;
+  }
+  if(n===5){
+    if(!val("f_year")){ showNotice("err", tw("err_required")); return false; }
+    const body = {
+      year: Number(val("f_year")),
+      total_bottles: val("f_total_bottles") ? Number(val("f_total_bottles")) : null,
+      harvest_start_date: val("f_harvest_start_date")||null, bottling_date: val("f_bottling_date")||null,
+      release_date: val("f_release_date")||null, vintage_story: val("f_vintage_story")||null
+    };
+    try{ const d = await post(`/wines/${store.wineId}/vintages`, body); store.vintageId = pick(d.vintage||d,"id")||uuid(); }
+    catch(e){ store.vintageId = store.vintageId || uuid(); showNotice("warn", tw("warn_offline")); }
+    return true;
+  }
+  if(n===6){
+    // Bottles are generated by the explicit button; require a token before leaving.
+    if(!store.token){ document.getElementById("genBtn").click(); return false; }
+    return true;
+  }
+  if(n===7){ return true; }
+  return true;
+}
+
+/* ---- generate bottles (step 6) ---- */
+async function generateBottles(){
+  const btn = document.getElementById("genBtn");
+  btn.disabled = true; btn.querySelector("span").textContent = tw("generating");
+  clearNotice();
+  const COUNT = 10;
+  let bottles = null;
+  try{
+    const d = await post(`/vintages/${store.vintageId}/bottles/generate`, {count:COUNT, start_number:1});
+    bottles = d.bottles || d.created || (Array.isArray(d)?d:null);
+  }catch(e){ showNotice("warn", tw("warn_offline")); }
+  if(!bottles || !bottles.length){
+    bottles = Array.from({length:COUNT}, (_,i)=>({ qr_token:uuid(), bottle_number:i+1, total_in_series:COUNT }));
+  }
+  const first = bottles[0];
+  const token = first.qr_token || first.token || uuid();
+  store.token = token;
+
+  const total = first.total_in_series || COUNT;
+  document.getElementById("firstToken").textContent = token;
+  document.getElementById("genCount").textContent = tw("g_count").replace("{n}", bottles.length);
+  document.getElementById("stWine").textContent = store.wineName || (store.wineName=val("f_wine_name")) || "—";
+  document.getElementById("stWinery").textContent = store.wineryName || "—";
+  document.getElementById("stEdition").textContent = (CAP.t("bottle_word")+" 1 / "+total).toUpperCase();
+  const prettyUrl = `tastingandtoasting.com/cap/b/${token}`;
+  document.getElementById("stUrl").textContent = prettyUrl;
+  const qrBox = document.getElementById("stQr"); qrBox.innerHTML = "";
+  new QRCode(qrBox, { text:`https://${prettyUrl}`, width:134, height:134, colorDark:"#120c0a", colorLight:"#ffffff", correctLevel:QRCode.CorrectLevel.M });
+
+  document.getElementById("genResult").classList.add("show");
+  btn.disabled = false; btn.querySelector("span").textContent = tw("b_generate");
+}
+
+/* ---- preview cards (step 7) ---- */
+function buildPreview(){
+  const slug = store.winerySlug || "stara-winna-gora";
+  const token = store.token || "";
+  const cards = [
+    { ic:ICO_PASS, t:"pv_w", d:"pv_wd", href:`winery-passport.html?slug=${encodeURIComponent(slug)}${lp}` },
+    { ic:ICO_SCAN, t:"pv_b", d:"pv_bd", href:`bottle-scan.html?token=${encodeURIComponent(token)}${lp}` },
+    { ic:ICO_QR,   t:"pv_s", d:"pv_sd", href:`cap-qr-sticker.html?token=${encodeURIComponent(token)}${lp}` }
+  ];
+  document.getElementById("pvGrid").innerHTML = cards.map(c=>
+    `<a class="pv-card" href="${c.href}" target="_blank" rel="noopener">
+       <span class="pic">${c.ic}</span>
+       <span class="pt">${esc(tw(c.t))}</span>
+       <span class="pd">${esc(tw(c.d))}</span>
+       <span class="pgo">${esc(tw("pv_open"))} ${ICO_ARROW}</span>
+     </a>`).join("");
+}
+
+/* ---- submit (step 8) ---- */
+async function submitPassport(){
+  const btn = document.getElementById("submitBtn");
+  btn.disabled = true; btn.querySelector("span").textContent = tw("saving");
+  clearNotice();
+  try{ await post(`/wineries/${store.wineryId}`, {status:"submitted"}, "PATCH"); }
+  catch(e){ showNotice("warn", tw("warn_offline")); }
+  document.getElementById("submitPane").style.display = "none";
+  document.getElementById("donePane").style.display = "block";
+  document.querySelectorAll(".pstep").forEach(p=> p.classList.add("complete"));
+}
+
+/* ---- nav handlers ---- */
+document.getElementById("nextBtn").addEventListener("click", async ()=>{
+  const btn = document.getElementById("nextBtn");
+  btn.disabled = true;
+  const savingLabel = btn.querySelector("[data-wz]");
+  const prev = savingLabel.textContent;
+  if(step<=5) savingLabel.textContent = tw("saving");
+  const ok = await saveStep(step);
+  savingLabel.textContent = prev;
+  btn.disabled = false;
+  if(!ok) return;
+  if(step<TOTAL){ step++; if(step===7) buildPreview(); render(); }
+});
+document.getElementById("backBtn").addEventListener("click", ()=>{ if(step>1){ step--; clearNotice(); render(); } });
+document.getElementById("genBtn").addEventListener("click", generateBottles);
+document.getElementById("submitBtn").addEventListener("click", submitPassport);
+
+/* ---- init ---- */
+CAP.wireSwitcher();
+applyI18n();
+buildProgress();
+buildServices();
+render();
+</script>
+</body>
+</html>
