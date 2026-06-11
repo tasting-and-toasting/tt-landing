@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="src/i18n/cap-i18n.js"></script>
 <style>
 :root{
   --void:#120c0a; --void-2:#171010; --panel:#1c1413; --panel-2:#221917;
@@ -20,9 +21,15 @@
 *{box-sizing:border-box; margin:0; padding:0;}
 body{ background:var(--void); color:var(--cream); font-family:var(--body); font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
 .mono{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--ink-dim); }
-.lang{ position:absolute; top:18px; right:20px; display:flex; gap:8px; z-index:10; }
-.lang button{ background:none; border:none; cursor:pointer; font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; color:var(--ink-dim); padding:2px 1px; }
-.lang button.on{ color:var(--gold-soft); border-bottom:1px solid var(--gold); }
+.langbar{ position:fixed; top:12px; right:14px; z-index:60; }
+html[dir="rtl"] .langbar{ right:auto; left:14px; }
+.lang-switcher-flags{ display:flex; flex-wrap:wrap; gap:5px; align-items:center; justify-content:flex-end; max-width:210px; padding:6px 8px; background:rgba(18,12,10,.72); border:1px solid var(--line); border-radius:8px; backdrop-filter:blur(8px); }
+.lang-flag-link{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:17px; border-radius:3px; overflow:hidden; border:1px solid var(--line); opacity:.78; transition:opacity .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.lang-flag-link:hover{ opacity:1; }
+.lang-flag-link.is-current-lang{ opacity:1; border-color:var(--gold); box-shadow:0 0 0 1px rgba(201,169,97,.35); }
+.lang-flag-link svg{ width:100%; height:100%; display:block; }
+html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
+html[dir="rtl"] body{ text-align:right; }
 .wrap{ max-width:680px; margin:0 auto; padding:0 24px; }
 
 /* ---- FIRST SCREEN: emotional ---- */
@@ -42,6 +49,7 @@ body{ background:var(--void); color:var(--cream); font-family:var(--body); font-
 
 /* ---- DETAIL ---- */
 .quoteband{ padding:64px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--void-2); text-align:center; }
+.quoteband .kick{ font-family:var(--mono); font-size:9px; letter-spacing:.22em; color:var(--gold); text-transform:uppercase; margin-bottom:22px; }
 .quoteband .q{ font-family:var(--serif); font-style:italic; font-weight:500; color:var(--gold-soft); font-size:clamp(22px,4vw,32px); line-height:1.4; }
 .quoteband .a{ display:block; margin-top:20px; font-family:var(--mono); font-size:9px; letter-spacing:.18em; color:var(--ink-dim); }
 section{ padding:52px 0; border-bottom:1px solid var(--line); }
@@ -54,13 +62,15 @@ h2{ font-family:var(--serif); font-weight:700; font-size:clamp(22px,3.4vw,30px);
 .badge.claimed,.badge.review{ color:var(--gold-soft); border:1px solid #4a3a22; background:#1c1610; }
 .badge.verified{ color:var(--green); border:1px solid #3a4a34; background:#141a12; }
 .badge.unverified{ color:var(--coral); border:1px solid #4a2630; background:#1c1014; }
-
 /* timeline */
 .tl{ position:relative; padding-left:30px; }
+html[dir="rtl"] .tl{ padding-left:0; padding-right:30px; }
 .tl::before{ content:""; position:absolute; left:6px; top:6px; bottom:6px; width:1.5px; background:linear-gradient(var(--wine),var(--gold)); }
+html[dir="rtl"] .tl::before{ left:auto; right:6px; }
 .tl .e{ position:relative; padding:0 0 30px; }
 .tl .e:last-child{ padding-bottom:0; }
 .tl .e .dot{ position:absolute; left:-30px; top:3px; width:13px; height:13px; border-radius:50%; background:var(--gold); border:2px solid var(--void); box-shadow:0 0 0 1px var(--gold); }
+html[dir="rtl"] .tl .e .dot{ left:auto; right:-30px; }
 .tl .e .ev{ font-family:var(--mono); font-size:9px; letter-spacing:.18em; color:var(--gold-soft); text-transform:uppercase; }
 .tl .e .dt{ font-family:var(--mono); font-size:9px; letter-spacing:.12em; color:var(--ink-dim); margin-left:8px; }
 .tl .e .d{ margin-top:7px; font-family:var(--serif); font-size:18px; color:var(--cream); line-height:1.4; }
@@ -81,29 +91,22 @@ footer{ padding:30px 0 50px; text-align:center; }
 </style>
 </head>
 <body>
-<div class="lang"><button data-lang="en">EN</button><button data-lang="pl">PL</button></div>
-<main id="app"><div class="state" data-i18n="loading">LOADING…</div></main>
+<div class="langbar"><nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
+        <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ru" href="?lang=ru" title="Русский" aria-label="Русский"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#fff" d="M0 0h3v0.667H0z"/><path fill="#0039a6" d="M0 0.667h3v0.666H0z"/><path fill="#d52b1e" d="M0 1.333h3V2H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="es" href="?lang=es" title="Español" aria-label="Español"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#c60b1e" d="M0 0h3v2H0z"/><path fill="#ffc400" d="M0 0.45h3v1.1H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="uk" href="?lang=uk" title="Українська" aria-label="Українська"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#005BBB" d="M0 0h3v1H0z"/><path fill="#FFD500" d="M0 1h3v1H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="it" href="?lang=it" title="Italiano" aria-label="Italiano"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#009246" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ce2b37" d="M2 0h1v2H2z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="de" href="?lang=de" title="Deutsch" aria-label="Deutsch"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#000" d="M0 0h3v.67H0z"/><path fill="#D00" d="M0 .67h3v.66H0z"/><path fill="#FFCE00" d="M0 1.33h3v.67H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="he" href="?lang=he" title="עברית" aria-label="עברית"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4" aria-hidden="true"><path fill="#fff" d="M0 0h6v4H0z"/><path fill="#0038b8" d="M0 .55h6v0.42H0zm0 2.48h6v0.42H0z"/><g fill="#0038b8" transform="translate(3 2.02)"><polygon points="0,-0.55 0.48,0.28 -0.48,0.28"/><polygon points="0,0.55 -0.48,-0.28 0.48,-0.28"/></g></svg></a>
+        <a class="lang-flag-link" data-lang-link="pt" href="?lang=pt" title="Português" aria-label="Português (Portugal)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#006600" d="M0 0h1.2v2H0z"/><path fill="#ff0000" d="M1.2 0h1.8v2H1.2z"/><circle cx=".75" cy="1" fill="#ffd900" stroke="#ffd900" stroke-width=".015" r=".22"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ka" href="?lang=ka" title="ქართული" aria-label="ქართული"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="white"/><rect x="12.5" width="5" height="20" fill="#FF0000"/><rect y="7.5" width="30" height="5" fill="#FF0000"/><rect x="1" y="1" width="2" height="6" fill="#FF0000"/><rect y="3" width="4" height="2" fill="#FF0000"/><rect x="24" y="1" width="2" height="6" fill="#FF0000"/><rect x="23" y="3" width="4" height="2" fill="#FF0000"/><rect x="1" y="13" width="2" height="6" fill="#FF0000"/><rect y="15" width="4" height="2" fill="#FF0000"/><rect x="24" y="13" width="2" height="6" fill="#FF0000"/><rect x="23" y="15" width="4" height="2" fill="#FF0000"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ro" href="?lang=ro" title="Română (Moldova)" aria-label="Română (Moldova)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#003DA5"/><rect x="10" width="10" height="20" fill="#FFD100"/><rect x="20" width="10" height="20" fill="#CC0000"/><text x="15" y="13" text-anchor="middle" font-size="9" fill="#003DA5" font-family="serif, Georgia">✦</text></svg></a>
+        <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#dc143c"/></svg></a>
+  </div></nav></div>
+<main id="app"><div class="state">…</div></main>
 <script>
-const I18N={
-  en:{ loading:"LOADING…", notfound:"This bottle could not be verified.",
-    verified:"Verified &amp; <em>Traceable</em>", bottle_of:"Bottle {n} of {t}",
-    biography:"Bottle biography", dna_title:"The winery", wine_title:"The wine",
-    view_winery:"View winery", book:"Book a tasting", share:"Share this bottle",
-    copied:"Link copied", first_registered:"First registered vineyard in Poland",
-    ev_harvest:"Harvest", ev_fermentation:"Fermentation", ev_ageing:"Ageing", ev_bottling:"Bottling", ev_release:"Release",
-    b_claimed:"Producer-claimed", b_review:"Under review", b_verified:"Verified", b_unverified:"Unverified",
-    color_red:"Red", color_white:"White", color_rose:"Rosé", color_orange:"Orange", color_sparkling:"Sparkling",
-    sweet_dry:"Dry", sweet_semi_dry:"Semi-dry", sweet_semi_sweet:"Semi-sweet", sweet_sweet:"Sweet" },
-  pl:{ loading:"WCZYTYWANIE…", notfound:"Nie udało się zweryfikować tej butelki.",
-    verified:"Zweryfikowano i <em>identyfikowalne</em>", bottle_of:"Butelka {n} z {t}",
-    biography:"Biografia butelki", dna_title:"Winnica", wine_title:"Wino",
-    view_winery:"Zobacz winnicę", book:"Zarezerwuj degustację", share:"Udostępnij butelkę",
-    copied:"Skopiowano link", first_registered:"Pierwsza zarejestrowana winnica w Polsce",
-    ev_harvest:"Zbiory", ev_fermentation:"Fermentacja", ev_ageing:"Dojrzewanie", ev_bottling:"Butelkowanie", ev_release:"Wprowadzenie na rynek",
-    b_claimed:"Deklarowane przez producenta", b_review:"W weryfikacji", b_verified:"Zweryfikowano", b_unverified:"Niezweryfikowano",
-    color_red:"Czerwone", color_white:"Białe", color_rose:"Różowe", color_orange:"Pomarańczowe", color_sparkling:"Musujące",
-    sweet_dry:"Wytrawne", sweet_semi_dry:"Półwytrawne", sweet_semi_sweet:"Półsłodkie", sweet_sweet:"Słodkie" }
-};
 const ICO_CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l4 4L19 7"/></svg>';
 const ICO_SHIELD='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/></svg>';
 const ICO_SEAL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9" stroke-width="1.6"/></svg>';
@@ -114,21 +117,18 @@ const ICO_SHARE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 
 const qs=new URLSearchParams(location.search);
 const token=qs.get('token');
+const lang=CAP.lang, t=CAP.t;
+const lp = lang === 'en' ? '' : ('&lang=' + lang);
 const API=qs.get('api')||(/^(localhost|127\.|0\.0)/.test(location.hostname)?'http://localhost:8088/api/cap':'https://tt-stack-prod.onrender.com/api/cap');
-let lang=qs.get('lang')||localStorage.getItem('cap_lang')||((navigator.language||'en').toLowerCase().startsWith('pl')?'pl':'en');
-const t=k=>(I18N[lang][k]??I18N.en[k]??k);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let DATA=null;
 function badge(s){const m={verified:['verified','b_verified',ICO_SHIELD],certified:['verified','b_verified',ICO_SHIELD],rejected:['unverified','b_unverified',ICO_SHIELD],claimed:['claimed','b_claimed',ICO_CHECK],documents_submitted:['review','b_review',ICO_CHECK],under_review:['review','b_review',ICO_CHECK]};const[c,k,i]=m[s]||m.claimed;return `<span class="badge ${c}">${i}${t(k)}</span>`;}
 
 async function load(){
-  if(!token){document.getElementById('app').innerHTML=`<div class="state">${t('notfound')}</div>`;return;}
-  if(!DATA){
-    try{const r=await fetch(`${API}/scan/${encodeURIComponent(token)}`);if(!r.ok)throw 0;DATA=await r.json();}
-    catch(e){document.getElementById('app').innerHTML=`<div class="state">${t('notfound')}</div>`;return;}
-  }
-  const d=DATA, w=d.winery, dna=d.dna||{}, wine=d.wine, v=d.vintage, b=d.bottle, tl=d.timeline||[];
-  const lp=lang==='pl'?'&lang=pl':'';
+  if(!token){document.getElementById('app').innerHTML=`<div class="state">${t('nf_bottle')}</div>`;return;}
+  let d;
+  try{const r=await fetch(`${API}/scan/${encodeURIComponent(token)}`);if(!r.ok)throw 0;d=await r.json();}
+  catch(e){document.getElementById('app').innerHTML=`<div class="state">${t('nf_bottle')}</div>`;return;}
+  const w=d.winery, dna=d.dna||{}, wine=d.wine, v=d.vintage, b=d.bottle, tl=d.timeline||[];
   const edition=t('bottle_of').replace('{n}',esc(b.bottle_number)).replace('{t}',esc(b.total_in_series));
   const tlHtml=tl.map(e=>`<div class="e"><div class="dot"></div>
     <span class="ev">${t('ev_'+e.event_type)}</span>${e.occurred_at?`<span class="dt">${esc(String(e.occurred_at).slice(0,10))}</span>`:''}
@@ -140,7 +140,7 @@ async function load(){
   document.getElementById('app').innerHTML=`
   <section class="cover">
     <div class="seal">${ICO_SEAL}</div>
-    <div class="verified">${t('verified')}</div>
+    <div class="verified">${t('verified_h')}</div>
     <div class="wine">${esc(wine.name)} <span class="yr">${esc(v.vintage_year)}</span></div>
     <div class="edition">${edition}</div>
     <div class="winery">${esc(w.name)}</div>
@@ -148,6 +148,7 @@ async function load(){
   </section>
 
   ${dna.signature_quote?`<div class="quoteband" id="story"><div class="wrap">
+    <div class="kick">${t('founder_words')}</div>
     <div class="q">“${esc(dna.signature_quote)}”</div><span class="a">— ${esc(dna.family||w.name)}</span></div></div>`:`<span id="story"></span>`}
 
   ${tl.length?`<section><div class="wrap">
@@ -155,7 +156,7 @@ async function load(){
     <div class="tl">${tlHtml}</div></div></section>`:''}
 
   <section><div class="wrap">
-    <div class="sec-h"><div class="l"><span class="idx">02</span><h2>${t('dna_title')}</h2></div>${badge(w.verification_status)}</div>
+    <div class="sec-h"><div class="l"><span class="idx">02</span><h2>${t('winery_section')}</h2></div>${badge(w.verification_status)}</div>
     <div class="dna">
       ${dnaSummary?`<p>${esc(dnaSummary)}</p>`:''}
       ${dna.family?`<div class="fam">${esc(dna.family)}${dna.is_first_registered_in_country?` · ${t('first_registered')}`:''}</div>`:''}
@@ -163,14 +164,14 @@ async function load(){
   </div></section>
 
   <section><div class="wrap">
-    <div class="sec-h"><div class="l"><span class="idx">03</span><h2>${t('wine_title')}</h2></div>${badge(wine.verification_status)}</div>
+    <div class="sec-h"><div class="l"><span class="idx">03</span><h2>${t('verified_facts')}</h2></div>${badge(wine.verification_status)}</div>
     <div class="winegrid">${tags.map(x=>`<span class="chip">${esc(x)}</span>`).join('')}</div>
     ${wine.description?`<p class="winedesc">${esc(wine.description)}</p>`:''}
   </div></section>
 
   <div class="wrap"><div class="cta">
     <a class="btn btn-gold" href="winery-passport.html?slug=${encodeURIComponent(w.slug)}${lp}">${ICO_ARROW}${t('view_winery')}</a>
-    <a class="btn btn-ghost" href="${w.website_url?esc(w.website_url):'#'}" target="_blank" rel="noopener">${ICO_CAL}${t('book')}</a>
+    <a class="btn btn-ghost" href="${w.website_url?esc(w.website_url):'#'}" target="_blank" rel="noopener">${ICO_CAL}${t('book_tasting')}</a>
     <button class="btn btn-ghost" id="shareBtn">${ICO_SHARE}<span id="shareLbl">${t('share')}</span></button>
   </div></div>
   <footer class="mono">TASTING &amp; TOASTING · CAP · ${esc(w.name)}</footer>`;
@@ -183,10 +184,8 @@ async function load(){
     catch(e){}
   });
 }
-function setLang(l){lang=l;localStorage.setItem('cap_lang',l);document.documentElement.lang=l;
-  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));load();}
-document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
-setLang(lang);
+CAP.wireSwitcher();
+load();
 </script>
 </body>
 </html>

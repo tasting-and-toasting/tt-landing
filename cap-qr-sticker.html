@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="src/i18n/cap-i18n.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <style>
 :root{
@@ -17,9 +18,16 @@
 }
 *{box-sizing:border-box; margin:0; padding:0;}
 body{ background:var(--void); min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:40px 20px; font-family:var(--mono); }
-.toolbar{ display:flex; gap:12px; align-items:center; }
+.toolbar{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:center; }
 .toolbar button{ font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#1a1206; background:linear-gradient(90deg,#c9a96e,#e0c486); border:none; border-radius:8px; padding:11px 18px; cursor:pointer; }
 .toolbar span{ font-size:9.5px; letter-spacing:.14em; color:#8a807a; }
+/* flag switcher (copied from index.html), hidden when printing */
+.lang-switcher-flags{ display:flex; flex-wrap:wrap; gap:5px; align-items:center; justify-content:center; max-width:300px; }
+.lang-flag-link{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:17px; border-radius:3px; overflow:hidden; border:1px solid #3a322a; opacity:.78; transition:opacity .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.lang-flag-link:hover{ opacity:1; }
+.lang-flag-link.is-current-lang{ opacity:1; border-color:var(--gold-soft); box-shadow:0 0 0 1px rgba(201,169,97,.35); }
+.lang-flag-link svg{ width:100%; height:100%; display:block; }
+html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
 
 /* ---- sticker ---- */
 .sticker{ width:340px; background:var(--card); color:var(--ink); border-radius:16px; padding:30px 28px 26px; text-align:center;
@@ -39,42 +47,53 @@ body{ background:var(--void); min-height:100vh; display:flex; flex-direction:col
 
 @media print{
   body{ background:#fff; padding:0; gap:0; }
-  .toolbar{ display:none; }
+  .toolbar, .lang-switcher{ display:none; }
   .sticker{ box-shadow:none; }
 }
 </style>
 </head>
 <body>
 <div class="toolbar">
-  <button onclick="window.print()">Print sticker</button>
-  <span id="lang-note">EN / PL · ?lang=pl · ?token=UUID</span>
+  <button onclick="window.print()" id="printBtn">Print sticker</button>
+  <nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
+        <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ru" href="?lang=ru" title="Русский" aria-label="Русский"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#fff" d="M0 0h3v0.667H0z"/><path fill="#0039a6" d="M0 0.667h3v0.666H0z"/><path fill="#d52b1e" d="M0 1.333h3V2H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="es" href="?lang=es" title="Español" aria-label="Español"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#c60b1e" d="M0 0h3v2H0z"/><path fill="#ffc400" d="M0 0.45h3v1.1H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="uk" href="?lang=uk" title="Українська" aria-label="Українська"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#005BBB" d="M0 0h3v1H0z"/><path fill="#FFD500" d="M0 1h3v1H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="it" href="?lang=it" title="Italiano" aria-label="Italiano"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#009246" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ce2b37" d="M2 0h1v2H2z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="de" href="?lang=de" title="Deutsch" aria-label="Deutsch"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#000" d="M0 0h3v.67H0z"/><path fill="#D00" d="M0 .67h3v.66H0z"/><path fill="#FFCE00" d="M0 1.33h3v.67H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="he" href="?lang=he" title="עברית" aria-label="עברית"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4" aria-hidden="true"><path fill="#fff" d="M0 0h6v4H0z"/><path fill="#0038b8" d="M0 .55h6v0.42H0zm0 2.48h6v0.42H0z"/><g fill="#0038b8" transform="translate(3 2.02)"><polygon points="0,-0.55 0.48,0.28 -0.48,0.28"/><polygon points="0,0.55 -0.48,-0.28 0.48,-0.28"/></g></svg></a>
+        <a class="lang-flag-link" data-lang-link="pt" href="?lang=pt" title="Português" aria-label="Português (Portugal)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#006600" d="M0 0h1.2v2H0z"/><path fill="#ff0000" d="M1.2 0h1.8v2H1.2z"/><circle cx=".75" cy="1" fill="#ffd900" stroke="#ffd900" stroke-width=".015" r=".22"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ka" href="?lang=ka" title="ქართული" aria-label="ქართული"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="white"/><rect x="12.5" width="5" height="20" fill="#FF0000"/><rect y="7.5" width="30" height="5" fill="#FF0000"/><rect x="1" y="1" width="2" height="6" fill="#FF0000"/><rect y="3" width="4" height="2" fill="#FF0000"/><rect x="24" y="1" width="2" height="6" fill="#FF0000"/><rect x="23" y="3" width="4" height="2" fill="#FF0000"/><rect x="1" y="13" width="2" height="6" fill="#FF0000"/><rect y="15" width="4" height="2" fill="#FF0000"/><rect x="24" y="13" width="2" height="6" fill="#FF0000"/><rect x="23" y="15" width="4" height="2" fill="#FF0000"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ro" href="?lang=ro" title="Română (Moldova)" aria-label="Română (Moldova)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#003DA5"/><rect x="10" width="10" height="20" fill="#FFD100"/><rect x="20" width="10" height="20" fill="#CC0000"/><text x="15" y="13" text-anchor="middle" font-size="9" fill="#003DA5" font-family="serif, Georgia">✦</text></svg></a>
+        <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#dc143c"/></svg></a>
+  </div></nav>
 </div>
 
 <div class="sticker">
-  <div class="cap-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span id="t_verified">CAP VERIFIED</span></div>
+  <div class="cap-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span id="t_verified" data-i18n="cap_verified">CAP Verified</span></div>
   <div class="rule"></div>
   <div class="wine" id="wine">Regent 2021</div>
   <div class="winery" id="winery">Stara Winna Góra</div>
   <div class="edition" id="edition">BOTTLE 1 / 1200</div>
   <div class="qrbox"><div id="qr"></div></div>
   <div class="url" id="url"></div>
-  <div class="tagline" id="tagline">Scan to discover the story</div>
+  <div class="tagline" id="tagline" data-i18n="scan_story">Scan to discover the story</div>
   <div class="brand">Tasting &amp; Toasting · CAP</div>
 </div>
 
 <script>
-const T={ en:{ verified:"CAP VERIFIED", tagline:"Scan to discover the story", bottle:"BOTTLE" },
-         pl:{ verified:"CAP ZWERYFIKOWANO", tagline:"Zeskanuj, aby poznać historię", bottle:"BUTELKA" } };
 const qs=new URLSearchParams(location.search);
-const lang=(qs.get('lang')||'en').toLowerCase().startsWith('pl')?'pl':'en';
+const t=CAP.t;
 const token=qs.get('token')||'faf6bd0a-cb26-450e-82ff-2d7161495428';
 // Printed pretty URL (per CAP spec). For a live demo, ?target= overrides what the QR encodes.
 const prettyUrl=`tastingandtoasting.com/cap/b/${token}`;
 const qrTarget=qs.get('target')||`https://${prettyUrl}`;
 
-document.getElementById('t_verified').textContent=T[lang].verified;
-document.getElementById('tagline').textContent=T[lang].tagline;
-document.getElementById('edition').textContent=`${T[lang].bottle} 1 / 1200`;
+CAP.wireSwitcher();
+CAP.applyStatic();
+document.getElementById('edition').textContent=(t('bottle_word')+' 1 / 1200').toUpperCase();
 document.getElementById('url').textContent=prettyUrl;
 new QRCode(document.getElementById('qr'),{ text:qrTarget, width:168, height:168,
   colorDark:"#120c0a", colorLight:"#ffffff", correctLevel:QRCode.CorrectLevel.M });

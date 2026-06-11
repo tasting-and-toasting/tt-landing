@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="src/i18n/cap-i18n.js"></script>
 <style>
 :root{
   --void:#0c0b0d; --void-2:#121013; --panel:#171318; --panel-2:#1d181e;
@@ -22,14 +23,20 @@ body{ background:var(--void); color:var(--cream); font-family:var(--body); font-
 .mono{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--ink-dim); }
 .wrap{ max-width:960px; margin:0 auto; padding:0 28px; }
 .navbar{ border-bottom:1px solid var(--line); background:rgba(12,11,13,.9); position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); }
-.navbar .wrap{ display:flex; align-items:center; justify-content:space-between; height:58px; gap:14px; }
+.navbar .wrap{ display:flex; align-items:center; justify-content:space-between; min-height:58px; gap:14px; padding-top:9px; padding-bottom:9px; flex-wrap:wrap; }
 .nb-brand{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--cream); }
 .nb-brand b{ color:var(--gold-soft); font-weight:600; }
-.lang{ display:flex; gap:8px; }
-.lang button{ background:none; border:none; cursor:pointer; font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; color:var(--ink-dim); padding:2px 1px; }
-.lang button.on{ color:var(--gold-soft); border-bottom:1px solid var(--gold); }
+.lang-switcher-flags{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; justify-content:flex-end; max-width:340px; }
+.lang-flag-link{ display:inline-flex; align-items:center; justify-content:center; width:30px; height:20px; border-radius:3px; overflow:hidden; border:1px solid var(--line); opacity:.78; transition:opacity .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.lang-flag-link:hover{ opacity:1; }
+.lang-flag-link.is-current-lang{ opacity:1; border-color:var(--gold); box-shadow:0 0 0 1px rgba(201,169,97,.35); }
+.lang-flag-link svg{ width:100%; height:100%; display:block; }
+html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
+html[dir="rtl"] .navbar .wrap{ flex-direction:row-reverse; }
+html[dir="rtl"] body{ text-align:right; }
 .back{ display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; color:var(--ink-dim); text-decoration:none; margin:30px 0 0; }
 .back svg{ width:14px; height:14px; } .back:hover{ color:var(--gold-soft); }
+html[dir="rtl"] .back svg{ transform:scaleX(-1); }
 .hero{ padding:24px 0 44px; border-bottom:1px solid var(--line); background:radial-gradient(120% 80% at 80% -10%, #25141c 0%, var(--void) 55%); }
 .hero .kick{ margin-bottom:14px; }
 .hero .yr{ font-family:var(--serif); font-weight:800; font-size:clamp(58px,12vw,128px); line-height:.92; color:var(--gold-soft); letter-spacing:-1px; }
@@ -56,38 +63,41 @@ footer{ padding:34px 0; text-align:center; }
 </head>
 <body>
 <nav class="navbar"><div class="wrap">
-  <div class="nb-brand">TASTING &amp; TOASTING · <b data-i18n="nav_tag">VINTAGE PASSPORT</b></div>
-  <div class="lang"><button data-lang="en">EN</button><button data-lang="pl">PL</button></div>
+  <div class="nb-brand">TASTING &amp; TOASTING · <b data-i18n="nav_vintage">VINTAGE PASSPORT</b></div>
+  <nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
+        <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ru" href="?lang=ru" title="Русский" aria-label="Русский"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#fff" d="M0 0h3v0.667H0z"/><path fill="#0039a6" d="M0 0.667h3v0.666H0z"/><path fill="#d52b1e" d="M0 1.333h3V2H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="es" href="?lang=es" title="Español" aria-label="Español"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#c60b1e" d="M0 0h3v2H0z"/><path fill="#ffc400" d="M0 0.45h3v1.1H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="uk" href="?lang=uk" title="Українська" aria-label="Українська"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#005BBB" d="M0 0h3v1H0z"/><path fill="#FFD500" d="M0 1h3v1H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="it" href="?lang=it" title="Italiano" aria-label="Italiano"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#009246" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ce2b37" d="M2 0h1v2H2z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="de" href="?lang=de" title="Deutsch" aria-label="Deutsch"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#000" d="M0 0h3v.67H0z"/><path fill="#D00" d="M0 .67h3v.66H0z"/><path fill="#FFCE00" d="M0 1.33h3v.67H0z"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="he" href="?lang=he" title="עברית" aria-label="עברית"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4" aria-hidden="true"><path fill="#fff" d="M0 0h6v4H0z"/><path fill="#0038b8" d="M0 .55h6v0.42H0zm0 2.48h6v0.42H0z"/><g fill="#0038b8" transform="translate(3 2.02)"><polygon points="0,-0.55 0.48,0.28 -0.48,0.28"/><polygon points="0,0.55 -0.48,-0.28 0.48,-0.28"/></g></svg></a>
+        <a class="lang-flag-link" data-lang-link="pt" href="?lang=pt" title="Português" aria-label="Português (Portugal)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#006600" d="M0 0h1.2v2H0z"/><path fill="#ff0000" d="M1.2 0h1.8v2H1.2z"/><circle cx=".75" cy="1" fill="#ffd900" stroke="#ffd900" stroke-width=".015" r=".22"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ka" href="?lang=ka" title="ქართული" aria-label="ქართული"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="white"/><rect x="12.5" width="5" height="20" fill="#FF0000"/><rect y="7.5" width="30" height="5" fill="#FF0000"/><rect x="1" y="1" width="2" height="6" fill="#FF0000"/><rect y="3" width="4" height="2" fill="#FF0000"/><rect x="24" y="1" width="2" height="6" fill="#FF0000"/><rect x="23" y="3" width="4" height="2" fill="#FF0000"/><rect x="1" y="13" width="2" height="6" fill="#FF0000"/><rect y="15" width="4" height="2" fill="#FF0000"/><rect x="24" y="13" width="2" height="6" fill="#FF0000"/><rect x="23" y="15" width="4" height="2" fill="#FF0000"/></svg></a>
+        <a class="lang-flag-link" data-lang-link="ro" href="?lang=ro" title="Română (Moldova)" aria-label="Română (Moldova)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#003DA5"/><rect x="10" width="10" height="20" fill="#FFD100"/><rect x="20" width="10" height="20" fill="#CC0000"/><text x="15" y="13" text-anchor="middle" font-size="9" fill="#003DA5" font-family="serif, Georgia">✦</text></svg></a>
+        <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#dc143c"/></svg></a>
+  </div></nav>
 </div></nav>
-<main id="app"><div class="state" data-i18n="loading">LOADING…</div></main>
+<main id="app"><div class="state">…</div></main>
 <script>
-const I18N={
-  en:{ nav_tag:"VINTAGE PASSPORT", loading:"LOADING…", notfound:"Vintage not found.",
-    back:"Wine passport", total_bottles:"Bottles produced", abv:"Alcohol", year:"Vintage year",
-    production:"The vintage", tasting:"Tasting", overview:"This vintage", ageing:"Ageing potential",
-    ageing_val:"Cellar-worthy", b_claimed:"Producer-claimed", b_review:"Under review", b_verified:"Verified", b_unverified:"Unverified" },
-  pl:{ nav_tag:"PASZPORT ROCZNIKA", loading:"WCZYTYWANIE…", notfound:"Nie znaleziono rocznika.",
-    back:"Paszport wina", total_bottles:"Wyprodukowane butelki", abv:"Alkohol", year:"Rocznik",
-    production:"Rocznik", tasting:"Degustacja", overview:"Ten rocznik", ageing:"Potencjał dojrzewania",
-    ageing_val:"Do leżakowania", b_claimed:"Deklarowane przez producenta", b_review:"W weryfikacji", b_verified:"Zweryfikowano", b_unverified:"Niezweryfikowano" }
-};
 const ICO_CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l4 4L19 7"/></svg>';
 const ICO_SHIELD='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/></svg>';
 const ICO_BACK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg>';
 const qs=new URLSearchParams(location.search);
 const vintageId=qs.get('vintageId');
+const lang=CAP.lang, t=CAP.t;
+const lp = lang === 'en' ? '' : ('&lang=' + lang);
 const API=qs.get('api')||(/^(localhost|127\.|0\.0)/.test(location.hostname)?'http://localhost:8088/api/cap':'https://tt-stack-prod.onrender.com/api/cap');
-let lang=qs.get('lang')||localStorage.getItem('cap_lang')||((navigator.language||'en').toLowerCase().startsWith('pl')?'pl':'en');
-const t=k=>(I18N[lang][k]??I18N.en[k]??k);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function badge(s){const m={verified:['verified','b_verified',ICO_SHIELD],certified:['verified','b_verified',ICO_SHIELD],rejected:['unverified','b_unverified',ICO_SHIELD],claimed:['claimed','b_claimed',ICO_CHECK],documents_submitted:['review','b_review',ICO_CHECK],under_review:['review','b_review',ICO_CHECK]};const[c,k,i]=m[s]||m.claimed;return `<span class="badge ${c}">${i}${t(k)}</span>`;}
 
 async function load(){
-  if(!vintageId){document.getElementById('app').innerHTML=`<div class="state">${t('notfound')}</div>`;return;}
+  if(!vintageId){document.getElementById('app').innerHTML=`<div class="state">${t('nf_vintage')}</div>`;return;}
   let data;
   try{const r=await fetch(`${API}/vintages/${encodeURIComponent(vintageId)}`);if(!r.ok)throw 0;data=await r.json();}
-  catch(e){document.getElementById('app').innerHTML=`<div class="state">${t('notfound')}</div>`;return;}
-  const v=data.vintage; const lp=lang==='pl'?'&lang=pl':'';
+  catch(e){document.getElementById('app').innerHTML=`<div class="state">${t('nf_vintage')}</div>`;return;}
+  const v=data.vintage;
   const stats=[];
   stats.push(`<div class="stat"><div class="n">${esc(v.vintage_year)}</div><div class="l mono">${t('year')}</div></div>`);
   if(v.bottles_produced) stats.push(`<div class="stat"><div class="n">${esc(v.bottles_produced)}</div><div class="l mono">${t('total_bottles')}</div></div>`);
@@ -95,15 +105,15 @@ async function load(){
   stats.push(`<div class="stat"><div class="n" style="font-size:22px">${t('ageing_val')}</div><div class="l mono">${t('ageing')}</div></div>`);
 
   document.getElementById('app').innerHTML=`
-  <div class="wrap"><a class="back" href="wine-passport.html?wineId=${encodeURIComponent(v.wine_id)}${lp}">${ICO_BACK}${t('back')}</a></div>
+  <div class="wrap"><a class="back" href="wine-passport.html?wineId=${encodeURIComponent(v.wine_id)}${lp}">${ICO_BACK}${t('back_wine')}</a></div>
   <header class="hero"><div class="wrap">
-    <div class="kick mono">${t('nav_tag')}</div>
+    <div class="kick mono">${t('nav_vintage')}</div>
     <div class="yr">${esc(v.vintage_year)}</div>
     <div class="wine">${esc(v.wine_name||'')}</div>
     ${badge(v.verification_status)}
   </div></header>
   <section><div class="wrap">
-    <div class="sec-h"><span class="idx">01</span><h2>${t('overview')}</h2></div>
+    <div class="sec-h"><span class="idx">01</span><h2>${t('overview_vintage')}</h2></div>
     <div class="stats">${stats.join('')}</div>
   </div></section>
   ${(v.production_notes||v.tasting_notes)?`<section><div class="wrap">
@@ -113,10 +123,9 @@ async function load(){
   </div></section>`:''}
   <footer class="mono">TASTING &amp; TOASTING · CAP</footer>`;
 }
-function setLang(l){lang=l;localStorage.setItem('cap_lang',l);document.documentElement.lang=l;
-  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));load();}
-document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
-setLang(lang);
+CAP.wireSwitcher();
+CAP.applyStatic();
+load();
 </script>
 </body>
 </html>
