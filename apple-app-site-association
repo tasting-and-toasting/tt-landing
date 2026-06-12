@@ -1,13 +1,15 @@
 {
   "applinks": {
-    "apps": [],
     "details": [
       {
-        "appID": "4N3W42SWLG.Tasting.And.Toasting",
-        "paths": [
-          "/onboarding/*",
-          "/invite/*",
-          "/join/*"
+        "appIDs": ["4N3W42SWLG.Tasting.And.Toasting"],
+        "components": [
+          { "/": "/bottle-scan.html", "comment": "CAP bottle scan" },
+          { "/": "/winery-passport.html", "comment": "Winery passport" },
+          { "/": "/cap/*", "comment": "All CAP routes" },
+          { "/": "/onboarding/*", "comment": "Winery onboarding" },
+          { "/": "/invite/*", "comment": "Winery invite (preserved)" },
+          { "/": "/join/*", "comment": "Winery join (preserved)" }
         ]
       }
     ]
