@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAMADA — Полный прототип</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#120c0a;--surf:#1e1008;--card:#2a1510;--gold:#c9a96e;--text:#f0e8df;--sec:#c4b09a;--mut:rgba(244,237,228,0.4);--brd:rgba(244,237,228,0.07);--brdg:rgba(201,169,110,0.3);--ru:#8B2838;--es:#C97B3D;--un:#5C7A6E}
+body{background:#0a0604;display:flex;justify-content:center;padding:20px;font-family:-apple-system,sans-serif;min-height:100vh}
+.phone{background:var(--bg);width:390px;min-height:780px;border-radius:40px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.8);display:flex;flex-direction:column;position:relative}
+.scr{display:none;flex-direction:column;min-height:780px}
+.scr.on{display:flex}
+.hdr{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid var(--brd);flex-shrink:0;gap:8px}
+.hdr-back{color:var(--mut);font-size:22px;cursor:pointer;width:28px}
+.hdr-title{color:var(--text);font-size:15px;letter-spacing:.8px;font-weight:500;flex:1;text-align:center}
+.hdr-r{width:28px;text-align:right;color:var(--mut);cursor:pointer;font-size:14px}
+.bd{flex:1;overflow-y:auto;padding:20px 16px}
+.ft{padding:12px 16px;flex-shrink:0}
+.pg-title{font-family:Georgia,serif;font-size:22px;color:var(--text);font-style:italic;margin-bottom:6px}
+.pg-sub{font-size:13px;color:var(--mut);line-height:1.6;margin-bottom:20px}
+.sec-lbl{font-size:10px;letter-spacing:3px;color:rgba(201,169,110,.55);margin-bottom:10px}
+.btn{background:var(--gold);color:#120c0a;border:none;height:52px;border-radius:6px;width:100%;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer}
+.btn-out{background:transparent;border:1px solid var(--brd);color:var(--mut);height:44px;border-radius:6px;width:100%;font-size:11px;cursor:pointer;margin-top:8px}
+.btn-back{background:var(--surf);border:1px solid var(--brd);color:var(--mut);height:52px;border-radius:6px;padding:0 18px;font-size:20px;cursor:pointer}
+.nav-row{display:flex;gap:8px}.nav-row .btn{flex:1}
+.dots{display:flex;gap:6px;justify-content:center;margin-bottom:22px}
+.d{width:6px;height:6px;border-radius:50%;background:rgba(244,237,228,.12)}
+.d.on{background:var(--gold);width:18px;border-radius:3px}
+.d.dn{background:rgba(201,169,110,.35)}
+.card{background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:14px;margin-bottom:10px}
+.mc{background:var(--surf);border:1px solid rgba(244,237,228,.08);border-radius:10px;padding:16px;margin-bottom:10px;cursor:pointer}
+.mc.sel.ru{border-color:var(--ru);background:rgba(139,40,56,.12)}
+.mc.sel.es{border-color:var(--es);background:rgba(201,123,61,.12)}
+.mc.sel.un{border-color:var(--un);background:rgba(92,122,110,.12)}
+.mc-top{display:flex;gap:12px;margin-bottom:8px}
+.glyph{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:18px;flex-shrink:0}
+.glyph.ru{background:rgba(139,40,56,.25);color:#C25060}
+.glyph.es{background:rgba(201,123,61,.25);color:#D4924A}
+.glyph.un{background:rgba(92,122,110,.25);color:#7A9E92}
+.mc-name{color:var(--text);font-size:15px;font-weight:500;margin-bottom:2px}
+.mc-desc{font-size:12px;color:var(--mut);line-height:1.5}
+.mc-tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(244,237,228,.05);color:rgba(244,237,228,.3)}
+.fld{margin-bottom:14px}
+.fld-lbl{font-size:10px;letter-spacing:2px;color:rgba(201,169,110,.55);margin-bottom:6px}
+.inp{background:var(--surf);border:1px solid rgba(244,237,228,.1);border-radius:6px;padding:11px 14px;color:var(--text);font-size:14px;width:100%;outline:none}
+.inp::placeholder{color:rgba(244,237,228,.2)}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}
+.chip{padding:7px 13px;border-radius:20px;border:1px solid rgba(244,237,228,.1);background:var(--surf);color:var(--mut);font-size:12px;cursor:pointer}
+.chip.on{border-color:var(--gold);background:rgba(201,169,110,.1);color:var(--gold)}
+.quote-block{background:rgba(139,40,56,.08);border-left:2px solid var(--ru);padding:11px 14px;border-radius:4px;margin-bottom:18px}
+.quote-block p{font-family:Georgia,serif;font-size:13px;color:rgba(244,237,228,.65);font-style:italic;line-height:1.6}
+.seg-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(244,237,228,.04)}
+.seg-t{font-size:11px;color:rgba(244,237,228,.28);min-width:42px;margin-top:1px;font-family:monospace}
+.seg-n{font-size:13px;color:var(--text)}
+.seg-tags{display:flex;gap:5px;margin-top:3px}
+.stag{font-size:9px;padding:2px 6px;border-radius:8px;letter-spacing:.5px}
+.stag.t{background:rgba(201,169,110,.1);color:rgba(201,169,110,.7);border:1px solid rgba(201,169,110,.2)}
+.stag.c{background:rgba(139,40,56,.1);color:rgba(194,80,96,.7);border:1px solid rgba(139,40,56,.2)}
+.seg-d{font-size:11px;color:rgba(244,237,228,.22);min-width:36px;text-align:right;margin-top:1px}
+.tc{background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:14px;margin-bottom:10px}
+.tc-top{display:flex;justify-content:space-between;margin-bottom:6px}
+.tc-time{font-size:10px;color:rgba(244,237,228,.28);letter-spacing:.8px}
+.tc-occ{font-size:10px;color:rgba(201,169,110,.5);letter-spacing:.8px}
+.tc-title{font-size:14px;color:var(--text);margin-bottom:3px}
+.tc-pre{font-size:12px;color:var(--mut);font-style:italic;line-height:1.5;margin-bottom:10px}
+.tc-assign{display:flex;align-items:center;justify-content:space-between}
+.av{width:28px;height:28px;border-radius:50%;background:rgba(201,169,110,.18);border:1px solid var(--brdg);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold)}
+.sm-btn{font-size:10px;color:rgba(201,169,110,.6);letter-spacing:.8px;border:1px solid var(--brdg);padding:4px 10px;border-radius:12px;background:transparent;cursor:pointer}
+.guest-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--brd)}
+.g-av{width:38px;height:38px;border-radius:50%;background:rgba(201,169,110,.15);border:1px solid var(--brdg);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);flex-shrink:0}
+.g-name{font-size:14px;color:var(--text)}
+.g-role{font-size:11px;color:var(--mut);margin-top:2px}
+.g-status{margin-left:auto;font-size:10px;padding:3px 8px;border-radius:10px;border:1px solid rgba(201,169,110,.25);color:rgba(201,169,110,.6)}
+.g-status.p{border-color:rgba(244,237,228,.1);color:rgba(244,237,228,.22)}
+.stat-row{display:flex;gap:8px;margin:16px 0}
+.stat{flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:12px;text-align:center;cursor:pointer}
+.stat-n{font-size:22px;color:var(--gold);font-family:Georgia,serif}
+.stat-l{font-size:10px;color:var(--mut);letter-spacing:1px;margin-top:2px}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.act-btn{flex:1;min-width:calc(50% - 4px);background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:12px;cursor:pointer;text-align:center}
+.act-icon{font-size:18px;margin-bottom:4px;color:var(--gold)}
+.act-lbl{font-size:11px;color:var(--sec);letter-spacing:.5px}
+.live-hdr{background:var(--card);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.live-prog-bar{height:2px;background:rgba(244,237,228,.1)}
+.live-prog-fill{height:100%;background:var(--gold)}
+.now-card{background:var(--card);border:1px solid var(--brdg);border-radius:10px;padding:18px;margin:12px 16px}
+.pulse{width:8px;height:8px;border-radius:50%;background:#c25060;display:inline-block;margin-right:6px;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.4}}
+.now-label{font-size:10px;letter-spacing:2px;color:rgba(194,80,96,.8);margin-bottom:8px;display:flex;align-items:center}
+.now-title{font-size:20px;color:var(--text);font-family:Georgia,serif;font-style:italic;margin-bottom:4px}
+.now-script{font-size:12px;color:rgba(244,237,228,.5);font-style:italic;line-height:1.6;margin:10px 0}
+.now-controls{display:flex;gap:8px;margin-top:12px}
+.ctrl-btn{flex:1;background:rgba(244,237,228,.05);border:1px solid var(--brd);border-radius:6px;padding:8px;font-size:11px;color:var(--mut);cursor:pointer}
+.up-next{background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:12px 16px;margin:0 16px}
+.live-btn-main{flex:1;background:var(--gold);color:#120c0a;border:none;height:48px;border-radius:6px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer}
+.live-btn-skip{background:transparent;border:1px solid rgba(244,237,228,.12);color:var(--mut);height:48px;border-radius:6px;padding:0 18px;font-size:11px;cursor:pointer}
+.bottom-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--brd)}
+.panic-btn{font-size:12px;color:rgba(244,237,228,.28);cursor:pointer}
+.fab{width:48px;height:48px;border-radius:50%;background:var(--gold);border:none;color:#120c0a;font-size:20px;cursor:pointer}
+.toast-full{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;background:radial-gradient(ellipse at center,#2a0e14 0%,#120c0a 70%)}
+.cap-opt{display:flex;align-items:center;gap:14px;padding:16px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;margin-bottom:10px;cursor:pointer}
+.cap-icon{width:44px;height:44px;border-radius:10px;background:rgba(201,169,110,.1);border:1px solid var(--brdg);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.panic-opt{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--brd);border-radius:8px;margin-bottom:8px;cursor:pointer;background:var(--surf)}
+.panic-num{font-size:12px;color:rgba(201,169,110,.5);font-family:monospace;min-width:24px}
+.shop-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(244,237,228,.04)}
+.shop-cb{width:20px;height:20px;border-radius:4px;border:1px solid rgba(244,237,228,.15);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--gold)}
+.sett-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(244,237,228,.04)}
+.toggle{width:44px;height:26px;border-radius:13px;background:rgba(244,237,228,.1);cursor:pointer;position:relative;flex-shrink:0}
+.toggle.on{background:var(--gold)}
+.toggle-knob{width:20px;height:20px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:left .2s}
+.toggle.on .toggle-knob{left:21px}
+.orb{width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(201,169,110,.4) 0%,rgba(139,40,56,.3) 60%,transparent 100%);border:1px solid var(--brdg);margin:0 auto 20px;animation:p 3s infinite}
+.story-hero{background:linear-gradient(180deg,#2a1510 0%,#120c0a 100%);padding:28px 16px 20px;text-align:center}
+.story-stats{display:flex;gap:8px;padding:14px 16px}
+.ss{flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:10px;text-align:center}
+.ss-n{font-size:18px;color:var(--gold);font-family:Georgia,serif}
+.ss-l{font-size:9px;color:var(--mut);letter-spacing:1px;margin-top:2px}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:14px}
+.photo-cell{aspect-ratio:1;background:var(--card);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(244,237,228,.1)}
+.share-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.share-btn{background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:12px;cursor:pointer;text-align:center}
+.check-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(244,237,228,.04)}
+.lp{padding:5px 14px;border-radius:20px;border:1px solid var(--brd);font-size:11px;color:var(--mut);cursor:pointer;margin:0 4px}
+.lp.on{border-color:var(--brdg);color:var(--gold)}
+.edit-seg{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(244,237,228,.04)}
+</style>
+</head>
+<body>
+<div class="phone" id="ph">
+
+<!-- S0 МОИ ВЕЧЕРА -->
+<div class="scr on" id="s0">
+<div class="hdr"><div class="hdr-back"></div><div class="hdr-title" style="font-family:Georgia,serif;font-style:italic">Тамада</div><div class="hdr-r">···</div></div>
+<div class="bd">
+  <div style="text-align:center;padding:24px 0 20px">
+    <div style="font-size:32px;color:rgba(201,169,110,.25);margin-bottom:12px">🕯</div>
+    <div class="pg-title">Мои вечера</div>
+    <div class="pg-sub" style="margin-bottom:0">Создайте вечер или продолжите начатый</div>
+  </div>
+  <div class="sec-lbl" style="margin-top:16px">ЧЕРНОВИК</div>
+  <div class="card" style="cursor:pointer" onclick="go('s7')">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+      <div style="font-size:15px;color:var(--text)">День рождения Анны</div>
+      <div style="font-size:10px;padding:3px 8px;border-radius:10px;border:1px solid rgba(244,237,228,.1);color:rgba(244,237,228,.28)">Черновик</div>
+    </div>
+    <div style="font-size:11px;color:rgba(244,237,228,.3);display:flex;gap:8px"><span>Русское Застолье</span><span>·</span><span>14 мая 2026</span><span>·</span><span>8 гостей</span></div>
+  </div>
+  <div class="sec-lbl" style="margin-top:18px">ПРОШЕДШИЕ</div>
+  <div class="card" style="cursor:pointer" onclick="go('s19')">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+      <div style="font-size:15px;color:var(--text)">Вечер у Артёма</div>
+      <div style="font-size:10px;padding:3px 8px;border-radius:10px;border:1px solid rgba(201,169,110,.22);color:rgba(201,169,110,.55)">Завершён</div>
+    </div>
+    <div style="font-size:11px;color:rgba(244,237,228,.3)">Испанская Собремеса · 27 мая 2026</div>
+  </div>
+</div>
+<div class="ft"><button class="btn" onclick="go('s1')">+ ПРОВЕСТИ НОВЫЙ ВЕЧЕР</button></div>
+</div>
+
+<!-- S1 ШАГ 1 КУЛЬТУРА -->
+<div class="scr" id="s1">
+<div class="hdr"><div class="hdr-back" onclick="go('s0')">‹</div><div class="hdr-title">ШАГ 1 ИЗ 5</div><div class="hdr-r"></div></div>
+<div class="bd">
+  <div class="dots"><div class="d on"></div><div class="d"></div><div class="d"></div><div class="d"></div><div class="d"></div></div>
+  <div class="pg-title">Выберите ритуал</div>
+  <div class="pg-sub">Режим задаёт расписание, темп тостов и атмосферу вечера</div>
+  <div class="mc sel ru" id="mc-ru" onclick="selMode('ru')">
+    <div class="mc-top"><div class="glyph ru">З</div><div><div class="mc-name">Русское Застолье</div><div class="mc-desc">Долгий стол. Глубокие тосты. Полный бокал.</div></div></div>
+    <div class="mc-tags"><div class="tag">11 моментов</div><div class="tag">4 часа</div><div class="tag">Церемониальный</div></div>
+  </div>
+  <div class="mc" id="mc-es" onclick="selMode('es')">
+    <div class="mc-top"><div class="glyph es">S</div><div><div class="mc-name">Испанская Собремеса</div><div class="mc-desc">Долгий разговор. Без спешки. Тепло.</div></div></div>
+    <div class="mc-tags"><div class="tag">9 моментов</div><div class="tag">4 часа</div><div class="tag">Неспешный</div></div>
+  </div>
+  <div class="mc" id="mc-un" onclick="selMode('un')">
+    <div class="mc-top"><div class="glyph un">U</div><div><div class="mc-name">Универсальный</div><div class="mc-desc">Лёгкая структура. По-своему.</div></div></div>
+    <div class="mc-tags"><div class="tag">Сам строишь</div><div class="tag">от 2 часов</div></div>
+  </div>
+  <div style="background:rgba(244,237,228,.03);border:1px dashed rgba(244,237,228,.06);border-radius:8px;padding:12px;text-align:center">
+    <div style="font-size:10px;letter-spacing:2px;color:rgba(244,237,228,.18);margin-bottom:8px">СКОРО</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center">
+      <span style="font-size:10px;color:rgba(244,237,228,.16);padding:3px 8px;border:1px solid rgba(244,237,228,.06);border-radius:12px">Грузинское Супра</span>
+      <span style="font-size:10px;color:rgba(244,237,228,.16);padding:3px 8px;border:1px solid rgba(244,237,228,.06);border-radius:12px">Итальянское Convivio</span>
+      <span style="font-size:10px;color:rgba(244,237,228,.16);padding:3px 8px;border:1px solid rgba(244,237,228,.06);border-radius:12px">Еврейская Симха</span>
+    </div>
+  </div>
+</div>
+<div class="ft"><div class="nav-row"><button class="btn-back" onclick="go('s0')">‹</button><button class="btn" onclick="go('s2')">ПРОДОЛЖИТЬ</button></div></div>
+</div>
+
+<!-- S2 ШАГ 2 ДЕТАЛИ -->
+<div class="scr" id="s2">
+<div class="hdr"><div class="hdr-back" onclick="go('s1')">‹</div><div class="hdr-title">ШАГ 2 ИЗ 5</div><div class="hdr-r"></div></div>
+<div class="bd">
+  <div class="dots"><div class="d dn"></div><div class="d on"></div><div class="d"></div><div class="d"></div><div class="d"></div></div>
+  <div class="pg-title">Детали вечера</div>
+  <div class="fld"><div class="fld-lbl">НАЗВАНИЕ</div><input class="inp" type="text" value="День рождения Анны"/></div>
+  <div class="fld"><div class="fld-lbl">ТИП</div><div class="chips"><div class="chip on" onclick="chipSel(this)">День рождения</div><div class="chip" onclick="chipSel(this)">Годовщина</div><div class="chip" onclick="chipSel(this)">Ужин</div><div class="chip" onclick="chipSel(this)">Дегустация</div></div></div>
+  <div style="display:flex;gap:10px">
+    <div class="fld" style="flex:1"><div class="fld-lbl">ДАТА</div><input class="inp" type="text" value="14 мая 2026"/></div>
+    <div class="fld" style="flex:1"><div class="fld-lbl">ВРЕМЯ</div><input class="inp" type="text" value="20:00"/></div>
+  </div>
+  <div class="fld"><div class="fld-lbl">МЕСТО</div><input class="inp" type="text" value="Casa Maria" placeholder="Дом, ресторан, сад..."/></div>
+  <div class="fld"><div class="fld-lbl">ГОСТЕЙ</div><div class="chips"><div class="chip" onclick="chipSel(this)">2–4</div><div class="chip on" onclick="chipSel(this)">5–8</div><div class="chip" onclick="chipSel(this)">9–15</div><div class="chip" onclick="chipSel(this)">16–30</div></div></div>
+  <div class="fld"><div class="fld-lbl">БЮДЖЕТ / ЧЕЛОВЕК</div><div class="chips"><div class="chip" onclick="chipSel(this)">до €20</div><div class="chip on" onclick="chipSel(this)">€20–40</div><div class="chip" onclick="chipSel(this)">€40–80</div><div class="chip" onclick="chipSel(this)">€80+</div></div></div>
+</div>
+<div class="ft"><div class="nav-row"><button class="btn-back" onclick="go('s1')">‹</button><button class="btn" onclick="go('s3')">ПРОДОЛЖИТЬ</button></div></div>
+</div>
+
+<!-- S3 ШАГ 3 РАСПИСАНИЕ -->
+<div class="scr" id="s3">
+<div class="hdr"><div class="hdr-back" onclick="go('s2')">‹</div><div class="hdr-title">ШАГ 3 ИЗ 5</div><div class="hdr-r"></div></div>
+<div class="bd">
+  <div class="dots"><div class="d dn"></div><div class="d dn"></div><div class="d on"></div><div class="d"></div><div class="d"></div></div>
+  <div class="pg-title">Ваш вечер</div>
+  <div class="quote-block"><p>Одиннадцать моментов тепла. Долго, медленно, искренне.</p></div>
+  <div class="sec-lbl">РУССКОЕ ЗАСТОЛЬЕ · 11 МОМЕНТОВ</div>
+  <div class="seg-row"><div class="seg-t">20:00</div><div style="flex:1"><div class="seg-n">Приём гостей</div></div><div class="seg-d">15м</div></div>
+  <div class="seg-row"><div class="seg-t">20:15</div><div style="flex:1"><div class="seg-n">Открывающий тост</div><div class="seg-tags"><div class="stag t">ТОСТ</div></div></div><div class="seg-d">10м</div></div>
+  <div class="seg-row"><div class="seg-t">20:25</div><div style="flex:1"><div class="seg-n">Закуски</div></div><div class="seg-d">30м</div></div>
+  <div class="seg-row"><div class="seg-t">20:55</div><div style="flex:1"><div class="seg-n">Тост за родителей</div><div class="seg-tags"><div class="stag t">ТОСТ</div></div></div><div class="seg-d">10м</div></div>
+  <div class="seg-row"><div class="seg-t">21:05</div><div style="flex:1"><div class="seg-n">Основное блюдо</div></div><div class="seg-d">45м</div></div>
+  <div class="seg-row"><div class="seg-t">21:50</div><div style="flex:1"><div class="seg-n">Тост памяти</div><div class="seg-tags"><div class="stag t">ТОСТ</div><div class="stag c">ЦЕРЕМОНИЯ</div></div></div><div class="seg-d">5м</div></div>
+  <div class="seg-row"><div class="seg-t">21:55</div><div style="flex:1"><div class="seg-n">Дружеский тост</div><div class="seg-tags"><div class="stag t">ТОСТ</div></div></div><div class="seg-d">10м</div></div>
+  <div class="seg-row"><div class="seg-t">22:05</div><div style="flex:1"><div class="seg-n">Десерт</div></div><div class="seg-d">30м</div></div>
+  <div class="seg-row"><div class="seg-t">22:35</div><div style="flex:1"><div class="seg-n">Музыка и танцы</div></div><div class="seg-d">60м</div></div>
+  <div class="seg-row"><div class="seg-t">23:35</div><div style="flex:1"><div class="seg-n">Тост благодарности</div><div class="seg-tags"><div class="stag t">ТОСТ</div></div></div><div class="seg-d">10м</div></div>
+  <div class="seg-row"><div class="seg-t">23:45</div><div style="flex:1"><div class="seg-n">Завершение</div></div><div class="seg-d">15м</div></div>
+  <div style="height:10px"></div>
+</div>
+<div class="ft"><div class="nav-row" style="margin-bottom:8px"><button class="btn-back" onclick="go('s2')">‹</button><button class="btn" onclick="go('s4')">ВЫГЛЯДИТ ХОРОШО</button></div><button class="btn-out" onclick="go('s8')">Изменить расписание</button></div>
+</div>
+
+<!-- S4 ШАГ 4 ТОСТЫ -->
+<div class="scr" id="s4">
+<div class="hdr"><div class="hdr-back" onclick="go('s3')">‹</div><div class="hdr-title">ШАГ 4 ИЗ 5</div><div class="hdr-r"></div></div>
+<div class="bd">
+  <div class="dots"><div class="d dn"></div><div class="d dn"></div><div class="d dn"></div><div class="d on"></div><div class="d"></div></div>
+  <div class="pg-title">Кто говорит сегодня?</div>
+  <div class="pg-sub">Назначьте тосты или выберите из библиотеки</div>
+  <div class="tc"><div class="tc-top"><span class="tc-time">20:15</span><span class="tc-occ">ОТКРЫТИЕ</span></div><div class="tc-title">Открывающий тост</div><div class="tc-pre">"За этот стол, за этих людей, за этот вечер..."</div><div class="tc-assign"><div style="display:flex;align-items:center;gap:8px"><div class="av">М</div><span style="font-size:12px;color:var(--sec)">Максим</span></div><button class="sm-btn">Изменить</button></div></div>
+  <div class="tc"><div class="tc-top"><span class="tc-time">21:50</span><span class="tc-occ" style="color:rgba(194,80,96,.7)">ТОСТ ПАМЯТИ · ЦЕРЕМОНИЯ</span></div><div class="tc-title">Тост памяти</div><div class="tc-pre">"К тем кто не за этим столом — но в наших сердцах..."</div><div class="tc-assign"><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:rgba(139,40,56,.3);border-color:rgba(194,80,96,.4);color:#C25060">А</div><span style="font-size:12px;color:var(--sec)">Анна</span></div><button class="sm-btn">Изменить</button></div></div>
+  <div class="tc" style="border-color:rgba(201,169,110,.15)"><div class="tc-top"><span class="tc-time">21:55</span><span class="tc-occ">ДРУЖБА</span></div><div class="tc-title">Дружеский тост</div><div class="tc-pre" style="margin-bottom:10px">Текст не выбран</div><div class="tc-assign"><div style="font-size:12px;color:rgba(244,237,228,.22)">+ Не назначен</div><button class="sm-btn" style="border-color:rgba(201,169,110,.35);color:rgba(201,169,110,.7)">Из библиотеки</button></div></div>
+  <div style="text-align:center;font-size:12px;color:rgba(244,237,228,.2);margin-top:8px">+ ещё 4 тоста в расписании</div>
+</div>
+<div class="ft"><div class="nav-row"><button class="btn-back" onclick="go('s3')">‹</button><button class="btn" onclick="go('s5')">К ГОСТЯМ →</button></div></div>
+</div>
+
+<!-- S5 ШАГ 5 ГОСТИ -->
+<div class="scr" id="s5">
+<div class="hdr"><div class="hdr-back" onclick="go('s4')">‹</div><div class="hdr-title">ШАГ 5 ИЗ 5</div><div class="hdr-r"></div></div>
+<div class="bd">
+  <div class="dots"><div class="d dn"></div><div class="d dn"></div><div class="d dn"></div><div class="d dn"></div><div class="d on"></div></div>
+  <div class="pg-title">Кто придёт?</div>
+  <div style="font-size:13px;color:rgba(244,237,228,.3);margin-bottom:16px">3 из 8 приняли приглашение</div>
+  <div class="guest-row"><div class="g-av">М</div><div><div class="g-name">Максим Геллер</div><div class="g-role">Хост · Тамада вечера</div></div></div>
+  <div class="guest-row"><div class="g-av" style="color:#C25060;background:rgba(139,40,56,.2);border-color:rgba(194,80,96,.3)">А</div><div><div class="g-name">Анна</div><div class="g-role">Именинница · Тост памяти</div></div><div class="g-status">Принял</div></div>
+  <div class="guest-row"><div class="g-av">С</div><div><div class="g-name">Сергей</div><div class="g-role">Гость · Тост за родителей</div></div><div class="g-status">Принял</div></div>
+  <div class="guest-row"><div class="g-av" style="color:rgba(244,237,228,.25);background:rgba(244,237,228,.04);border-color:rgba(244,237,228,.07)">М</div><div><div class="g-name">Мария</div><div class="g-role">Гость</div></div><div class="g-status p">Ожидает</div></div>
+  <div style="font-size:12px;color:rgba(244,237,228,.18);padding:10px 0">+ ещё 4 гостя</div>
+  <button class="btn-out" style="margin-top:0">+ Добавить гостя</button>
+  <div style="margin-top:14px;padding:14px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;cursor:pointer" onclick="go('s9')">
+    <div class="sec-lbl" style="margin-bottom:6px">СПИСОК ПОКУПОК</div>
+    <div style="font-size:13px;color:var(--text);margin-bottom:2px">Что купить для вечера</div>
+    <div style="font-size:12px;color:rgba(244,237,228,.3)">Вина, закуски, детали стола</div>
+  </div>
+</div>
+<div class="ft"><div class="nav-row" style="margin-bottom:8px"><button class="btn-back" onclick="go('s4')">‹</button><button class="btn" onclick="go('s7')">СОХРАНИТЬ →</button></div><button class="btn-out" onclick="go('s6')">Посмотреть приглашение</button></div>
+</div>
+
+<!-- S6 INVITATION PREVIEW -->
+<div class="scr" id="s6">
+<div class="hdr"><div class="hdr-back" onclick="go('s5')">‹</div><div class="hdr-title">ПРИГЛАШЕНИЕ</div><div class="hdr-r">✏</div></div>
+<div class="bd">
+  <div style="font-size:13px;color:rgba(244,237,228,.3);margin-bottom:16px">Так это будет выглядеть у гостей</div>
+  <div style="background:var(--card);border:1px solid var(--brdg);border-radius:10px;padding:24px;margin-bottom:16px">
+    <div style="font-size:9px;letter-spacing:3px;color:rgba(201,169,110,.5);text-align:center;margin-bottom:12px">TASTING &amp; TOASTING</div>
+    <div style="font-family:Georgia,serif;font-size:20px;color:var(--text);font-style:italic;text-align:center;margin-bottom:4px">День рождения Анны</div>
+    <div style="font-size:12px;color:rgba(244,237,228,.35);text-align:center;margin-bottom:14px">Русское Застолье · Хост: Максим</div>
+    <div style="border-top:1px solid rgba(201,169,110,.15);border-bottom:1px solid rgba(201,169,110,.15);padding:12px 0;margin-bottom:14px;text-align:center">
+      <div style="font-size:14px;color:var(--text);letter-spacing:1px">14 МАЯ 2026 · 20:00</div>
+      <div style="font-size:11px;color:rgba(201,169,110,.5);margin-top:4px">Casa Maria</div>
+    </div>
+    <div style="font-family:Georgia,serif;font-size:12px;color:rgba(244,237,228,.45);font-style:italic;text-align:center;line-height:1.7;margin-bottom:14px">"Долго, медленно, искренне."</div>
+    <div style="background:rgba(201,169,110,.07);border:1px solid rgba(201,169,110,.15);border-radius:6px;padding:10px">
+      <div style="font-size:9px;letter-spacing:2px;color:rgba(201,169,110,.5);margin-bottom:4px">ВАША РОЛЬ</div>
+      <div style="font-size:13px;color:var(--text)">Тост памяти</div>
+      <div style="font-size:11px;color:rgba(244,237,228,.4);margin-top:2px">Произносите в 21:50</div>
+    </div>
+  </div>
+  <button class="btn" onclick="alert('Приглашения отправлены!')">ОТПРАВИТЬ ПРИГЛАШЕНИЯ</button>
+  <button class="btn-out" onclick="go('s5')">← Назад</button>
+</div>
+</div>
+
+<!-- S7 EVENT DETAIL -->
+<div class="scr" id="s7">
+<div class="hdr"><div class="hdr-back" onclick="go('s0')">‹</div><div class="hdr-title">День рождения Анны</div><div class="hdr-r">···</div></div>
+<div class="bd">
+  <div style="font-size:12px;color:rgba(201,169,110,.5);letter-spacing:1px;margin-bottom:12px">Русское Застолье · 14 мая 2026 · Casa Maria</div>
+  <div style="background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.18);border-radius:8px;padding:8px 14px;display:inline-block;font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:16px">ЧЕРНОВИК</div>
+  <div class="stat-row">
+    <div class="stat" onclick="go('s8')"><div class="stat-n">11</div><div class="stat-l">МОМЕНТОВ</div></div>
+    <div class="stat" onclick="go('s5')"><div class="stat-n">8</div><div class="stat-l">ГОСТЕЙ</div></div>
+    <div class="stat" onclick="go('s4')"><div class="stat-n">7</div><div class="stat-l">ТОСТОВ</div></div>
+  </div>
+  <div class="sec-lbl">ВЕЧЕР</div>
+  <div class="card" style="padding:10px 14px">
+    <div class="seg-row" style="padding:7px 0"><div class="seg-t">20:00</div><div style="flex:1;font-size:13px;color:var(--text)">Приём гостей</div></div>
+    <div class="seg-row" style="padding:7px 0"><div class="seg-t">20:15</div><div style="flex:1;font-size:13px;color:var(--text)">Открывающий тост</div></div>
+    <div class="seg-row" style="padding:7px 0"><div class="seg-t">20:25</div><div style="flex:1;font-size:13px;color:var(--text)">Закуски</div></div>
+    <div style="text-align:center;padding:8px 0;font-size:12px;color:rgba(244,237,228,.2)">+ 8 моментов</div>
+  </div>
+  <div class="action-row">
+    <div class="act-btn" onclick="go('s8')"><div class="act-icon">📋</div><div class="act-lbl">Расписание</div></div>
+    <div class="act-btn" onclick="go('s5')"><div class="act-icon">👥</div><div class="act-lbl">Гости</div></div>
+    <div class="act-btn" onclick="go('s9')"><div class="act-icon">🛒</div><div class="act-lbl">Покупки</div></div>
+    <div class="act-btn" onclick="go('s10')"><div class="act-icon">⚙️</div><div class="act-lbl">Настройки</div></div>
+    <div class="act-btn" onclick="go('s6')"><div class="act-icon">✉️</div><div class="act-lbl">Приглашение</div></div>
+    <div class="act-btn" onclick="go('s4')"><div class="act-icon">🥂</div><div class="act-lbl">Тосты</div></div>
+  </div>
+</div>
+<div class="ft"><button class="btn" onclick="go('s11')">▶ НАЧАТЬ ВЕЧЕР</button></div>
+</div>
+
+<!-- S8 EDIT SCHEDULE -->
+<div class="scr" id="s8">
+<div class="hdr"><div class="hdr-back" onclick="go('s7')">‹</div><div class="hdr-title">РАСПИСАНИЕ</div><div class="hdr-r" onclick="go('s7')" style="font-size:12px;color:var(--gold)">Готово</div></div>
+<div class="bd">
+  <div style="font-size:12px;color:rgba(244,237,228,.28);margin-bottom:14px">Перетащите для изменения порядка. Нажмите ✏ для редактирования.</div>
+  <div class="edit-seg"><div style="color:rgba(244,237,228,.15);font-size:16px;cursor:grab">⋮⋮</div><div style="flex:1"><div style="font-size:10px;color:rgba(244,237,228,.28)">20:00 · 15 мин</div><div style="font-size:13px;color:var(--text)">Приём гостей</div></div><div style="color:rgba(201,169,110,.4);font-size:16px;cursor:pointer">✏</div></div>
+  <div class="edit-seg"><div style="color:rgba(244,237,228,.15);font-size:16px;cursor:grab">⋮⋮</div><div style="flex:1"><div style="font-size:10px;color:rgba(244,237,228,.28)">20:15 · 10 мин · ТОСТ</div><div style="font-size:13px;color:var(--text)">Открывающий тост</div></div><div style="color:rgba(201,169,110,.4);font-size:16px;cursor:pointer">✏</div></div>
+  <div class="edit-seg"><div style="color:rgba(244,237,228,.15);font-size:16px;cursor:grab">⋮⋮</div><div style="flex:1"><div style="font-size:10px;color:rgba(244,237,228,.28)">20:25 · 30 мин</div><div style="font-size:13px;color:var(--text)">Закуски</div></div><div style="color:rgba(201,169,110,.4);font-size:16px;cursor:pointer">✏</div></div>
+  <div class="edit-seg"><div style="color:rgba(244,237,228,.15);font-size:16px;cursor:grab">⋮⋮</div><div style="flex:1"><div style="font-size:10px;color:rgba(244,237,228,.28)">20:55 · 10 мин · ТОСТ</div><div style="font-size:13px;color:var(--text)">Тост за родителей</div></div><div style="color:rgba(201,169,110,.4);font-size:16px;cursor:pointer">✏</div></div>
+  <div class="edit-seg"><div style="color:rgba(244,237,228,.15);font-size:16px;cursor:grab">⋮⋮</div><div style="flex:1"><div style="font-size:10px;color:rgba(244,237,228,.28)">21:05 · 45 мин</div><div style="font-size:13px;color:var(--text)">Основное блюдо</div></div><div style="color:rgba(201,169,110,.4);font-size:16px;cursor:pointer">✏</div></div>
+  <div class="edit-seg"><div style="color:rgba(244,237,228,.15);font-size:16px;cursor:grab">⋮⋮</div><div style="flex:1"><div style="font-size:10px;color:rgba(244,237,228,.28)">21:50 · 5 мин · ТОСТ · ЦЕРЕМОНИЯ</div><div style="font-size:13px;color:var(--text)">Тост памяти</div></div><div style="color:rgba(201,169,110,.4);font-size:16px;cursor:pointer">✏</div></div>
+  <div class="edit-seg"><div style="color:rgba(244,237,228,.15);font-size:16px;cursor:grab">⋮⋮</div><div style="flex:1"><div style="font-size:10px;color:rgba(244,237,228,.28)">21:55 · 10 мин · ТОСТ</div><div style="font-size:13px;color:var(--text)">Дружеский тост</div></div><div style="color:rgba(201,169,110,.4);font-size:16px;cursor:pointer">✏</div></div>
+  <div class="edit-seg"><div style="color:rgba(244,237,228,.15);font-size:16px;cursor:grab">⋮⋮</div><div style="flex:1"><div style="font-size:10px;color:rgba(244,237,228,.28)">22:05 · 30 мин</div><div style="font-size:13px;color:var(--text)">Десерт</div></div><div style="color:rgba(201,169,110,.4);font-size:16px;cursor:pointer">✏</div></div>
+  <div class="edit-seg"><div style="color:rgba(244,237,228,.15);font-size:16px;cursor:grab">⋮⋮</div><div style="flex:1"><div style="font-size:10px;color:rgba(244,237,228,.28)">22:35 · 60 мин</div><div style="font-size:13px;color:var(--text)">Музыка и танцы</div></div><div style="color:rgba(201,169,110,.4);font-size:16px;cursor:pointer">✏</div></div>
+  <div class="edit-seg"><div style="color:rgba(244,237,228,.15);font-size:16px;cursor:grab">⋮⋮</div><div style="flex:1"><div style="font-size:10px;color:rgba(244,237,228,.28)">23:35 · 10 мин · ТОСТ</div><div style="font-size:13px;color:var(--text)">Тост благодарности</div></div><div style="color:rgba(201,169,110,.4);font-size:16px;cursor:pointer">✏</div></div>
+  <div class="edit-seg"><div style="color:rgba(244,237,228,.15);font-size:16px;cursor:grab">⋮⋮</div><div style="flex:1"><div style="font-size:10px;color:rgba(244,237,228,.28)">23:45 · 15 мин</div><div style="font-size:13px;color:var(--text)">Завершение</div></div><div style="color:rgba(201,169,110,.4);font-size:16px;cursor:pointer">✏</div></div>
+  <div style="display:flex;align-items:center;gap:8px;padding:14px 0;cursor:pointer"><span style="font-size:22px;color:rgba(201,169,110,.35)">+</span><span style="font-size:13px;color:rgba(244,237,228,.35)">Добавить момент</span></div>
+</div>
+<div class="ft"><button class="btn" onclick="go('s7')">СОХРАНИТЬ РАСПИСАНИЕ</button></div>
+</div>
+
+<!-- S9 SHOPPING LIST -->
+<div class="scr" id="s9">
+<div class="hdr"><div class="hdr-back" onclick="go('s7')">‹</div><div class="hdr-title">СПИСОК ПОКУПОК</div><div class="hdr-r">↗</div></div>
+<div class="bd">
+  <div style="font-size:13px;color:rgba(244,237,228,.35);margin-bottom:16px">Застолье · 8 человек · ~€180–220</div>
+  <div class="sec-lbl">ВИНА И НАПИТКИ</div>
+  <div class="shop-item"><div class="shop-cb">✓</div><div style="flex:1"><div style="font-size:13px;color:var(--text)">Красное вино × 3 бутылки</div><div style="font-size:11px;color:var(--mut)">Каберне Совиньон, €15–25</div></div><div style="font-size:10px;color:rgba(201,169,110,.5);cursor:pointer" onclick="go('s0')">Маркетплейс →</div></div>
+  <div class="shop-item"><div class="shop-cb"></div><div style="flex:1"><div style="font-size:13px;color:var(--text)">Белое вино × 2 бутылки</div><div style="font-size:11px;color:var(--mut)">Шардоне или Совиньон Блан</div></div></div>
+  <div class="shop-item"><div class="shop-cb"></div><div style="flex:1"><div style="font-size:13px;color:var(--text)">Игристое × 1 бутылка</div><div style="font-size:11px;color:var(--mut)">Для тостов</div></div></div>
+  <div class="shop-item"><div class="shop-cb">✓</div><div style="flex:1"><div style="font-size:13px;color:var(--text)">Безалкогольные × 4</div></div></div>
+  <div class="sec-lbl" style="margin-top:16px">ЗАКУСКИ · ЗАСТОЛЬЕ</div>
+  <div class="shop-item"><div class="shop-cb">✓</div><div style="flex:1"><div style="font-size:13px;color:var(--text)">Красная икра</div></div></div>
+  <div class="shop-item"><div class="shop-cb"></div><div style="flex:1"><div style="font-size:13px;color:var(--text)">Сёмга слабосолёная</div></div></div>
+  <div class="shop-item"><div class="shop-cb"></div><div style="flex:1"><div style="font-size:13px;color:var(--text)">Сыры × 3 вида</div></div></div>
+  <div class="shop-item"><div class="shop-cb"></div><div style="flex:1"><div style="font-size:13px;color:var(--text)">Соленья ассорти</div></div></div>
+  <div class="sec-lbl" style="margin-top:16px">ДЕТАЛИ СТОЛА</div>
+  <div class="shop-item"><div class="shop-cb"></div><div style="flex:1"><div style="font-size:13px;color:var(--text)">Свечи (для Тоста памяти)</div></div></div>
+  <div class="shop-item"><div class="shop-cb"></div><div style="flex:1"><div style="font-size:13px;color:var(--text)">Карточки с именами гостей</div></div></div>
+  <button class="btn-out" style="margin-top:8px">+ Добавить своё</button>
+  <div style="background:rgba(201,169,110,.06);border:1px solid rgba(201,169,110,.15);border-radius:8px;padding:12px;margin-top:16px;text-align:center">
+    <div style="font-size:12px;color:rgba(201,169,110,.55)">Примерный бюджет</div>
+    <div style="font-size:22px;color:var(--gold);font-family:Georgia,serif;margin:4px 0">€180 – €220</div>
+    <div style="font-size:11px;color:rgba(244,237,228,.28)">~€25 на человека</div>
+  </div>
+</div>
+<div class="ft"><button class="btn" onclick="go('s7')">СОХРАНИТЬ СПИСОК</button></div>
+</div>
+
+<!-- S10 SETTINGS -->
+<div class="scr" id="s10">
+<div class="hdr"><div class="hdr-back" onclick="go('s7')">‹</div><div class="hdr-title">НАСТРОЙКИ ВЕЧЕРА</div><div class="hdr-r"></div></div>
+<div class="bd">
+  <div class="sec-lbl">ОТОБРАЖЕНИЕ</div>
+  <div class="sett-row"><div><div style="font-size:13px;color:var(--text)">Язык тостов</div><div style="font-size:11px;color:var(--mut);margin-top:2px">RU / EN / ES</div></div><div style="font-size:12px;color:var(--gold)">RU →</div></div>
+  <div class="sett-row"><div><div style="font-size:13px;color:var(--text)">Расписание видно гостям</div></div><div class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div></div>
+  <div class="sec-lbl" style="margin-top:20px">ЗВУК И МУЗЫКА</div>
+  <div class="sett-row"><div><div style="font-size:13px;color:var(--text)">Плейлист по режиму</div><div style="font-size:11px;color:var(--mut);margin-top:2px">Русская классика + джаз</div></div><div class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div></div>
+  <div class="sett-row"><div><div style="font-size:13px;color:var(--text)">Открыть в Spotify</div></div><div style="font-size:12px;color:var(--gold)">→</div></div>
+  <div class="sett-row"><div><div style="font-size:13px;color:var(--text)">Звук перехода</div></div><div style="font-size:12px;color:var(--gold)">Мягкий →</div></div>
+  <div class="sec-lbl" style="margin-top:20px">ЭКРАН И ПРОЕКТОР</div>
+  <div class="sett-row"><div><div style="font-size:13px;color:var(--text)">AirPlay / Apple TV</div><div style="font-size:11px;color:var(--mut);margin-top:2px">Дублировать тост-экран</div></div><div class="toggle" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div></div>
+  <div class="sett-row"><div><div style="font-size:13px;color:var(--text)">Яркость во время тостов</div></div><div style="font-size:12px;color:var(--gold)">Авто →</div></div>
+  <div class="sec-lbl" style="margin-top:20px">ПРИВАТНОСТЬ</div>
+  <div class="sett-row"><div><div style="font-size:13px;color:var(--text)">Кто видит Story</div></div><div style="font-size:12px;color:var(--gold)">Гости →</div></div>
+  <div class="sett-row"><div><div style="font-size:13px;color:var(--text)">Фото от гостей</div><div style="font-size:11px;color:var(--mut);margin-top:2px">Разрешить вклад</div></div><div class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div></div>
+  <div class="sec-lbl" style="margin-top:20px">УВЕДОМЛЕНИЯ</div>
+  <div class="sett-row"><div><div style="font-size:13px;color:var(--text)">За день</div></div><div class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div></div>
+  <div class="sett-row"><div><div style="font-size:13px;color:var(--text)">За час</div></div><div class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div></div>
+</div>
+<div class="ft"><button class="btn" onclick="go('s7')">СОХРАНИТЬ</button></div>
+</div>
+
+<!-- S11 PRE-START -->
+<div class="scr" id="s11">
+<div class="hdr"><div class="hdr-back" onclick="go('s7')">‹</div><div class="hdr-title"></div><div class="hdr-r"></div></div>
+<div class="bd" style="display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:40px">
+  <div class="orb"></div>
+  <div class="pg-title" style="margin-bottom:8px">Вы готовы?</div>
+  <div style="font-size:13px;color:rgba(244,237,228,.4);line-height:1.7;max-width:280px;margin:0 auto 28px">Как только начнёте — вечер пойдёт по расписанию. Можно паузу, пропуск или завершение в любой момент.</div>
+  <div style="background:var(--surf);border:1px solid var(--brdg);border-radius:8px;padding:14px;width:100%;text-align:left;margin-bottom:20px">
+    <div class="sec-lbl" style="margin-bottom:6px">ПЕРВЫЙ МОМЕНТ</div>
+    <div style="font-size:15px;color:var(--text)">Приём гостей</div>
+    <div style="font-size:12px;color:rgba(244,237,228,.35);margin-top:4px">15 минут · Встречайте гостей тепло</div>
+  </div>
+  <div style="width:100%;text-align:left">
+    <div class="check-item"><div style="min-width:24px;font-size:14px">👥</div><div style="flex:1;font-size:13px;color:var(--text)">Гостей: 7 из 8 приняли</div><div style="font-size:12px;color:var(--un)">✓</div></div>
+    <div class="check-item"><div style="min-width:24px;font-size:14px">🍷</div><div style="flex:1;font-size:13px;color:var(--text)">Вина: куплены</div><div style="font-size:12px;color:var(--un)">✓</div></div>
+    <div class="check-item"><div style="min-width:24px;font-size:14px">📺</div><div style="flex:1;font-size:13px;color:var(--text)">Проектор: не подключён</div><div style="font-size:11px;color:rgba(201,169,110,.6);cursor:pointer" onclick="go('s10')">Подключить →</div></div>
+    <div class="check-item"><div style="min-width:24px;font-size:14px">📋</div><div style="flex:1;font-size:13px;color:var(--text)">Расписание: 11 моментов</div><div style="font-size:12px;color:var(--un)">✓</div></div>
+  </div>
+</div>
+<div class="ft"><button class="btn" style="margin-bottom:8px" onclick="go('s12')">▶ НАЧАТЬ ВЕЧЕР</button><button class="btn-out" onclick="go('s7')">Ещё не готов</button></div>
+</div>
+
+<!-- S12 LIVE DASHBOARD -->
+<div class="scr" id="s12">
+<div class="live-hdr">
+  <div style="font-size:14px;color:var(--text);font-weight:500">День рождения Анны</div>
+  <div style="font-size:12px;color:rgba(244,237,228,.3)">2ч 14м прошло</div>
+  <div style="font-size:18px;color:rgba(244,237,228,.3);cursor:pointer">···</div>
+</div>
+<div class="live-prog-bar"><div class="live-prog-fill" style="width:55%"></div></div>
+<div style="flex:1;overflow-y:auto;padding-bottom:10px">
+  <div class="now-card">
+    <div class="now-label"><span class="pulse"></span>СЕЙЧАС · 5 из 11</div>
+    <div style="display:flex;gap:6px;margin-bottom:8px"><div class="stag c">ЦЕРЕМОНИЯ</div><div class="stag t">ТОСТ</div></div>
+    <div class="now-title">Тост памяти</div>
+    <div class="now-script">"Пусть это будет тихий момент. Встаньте. Налейте. Не торопитесь."</div>
+    <div style="font-size:11px;color:rgba(244,237,228,.22);letter-spacing:1px;margin-bottom:10px">РЕКОМЕНДУЕМОЕ ВРЕМЯ · 21:50</div>
+    <div class="now-controls">
+      <button class="ctrl-btn" onclick="alert('Пауза')">⏸ Пауза</button>
+      <button class="ctrl-btn" onclick="alert('+5 минут добавлено')">+5 мин</button>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;padding:10px 16px">
+    <button class="live-btn-main" onclick="go('s13b')">Продолжить →</button>
+    <button class="live-btn-skip" onclick="go('s14')">Пропустить</button>
+  </div>
+  <div style="padding:0 16px;margin-bottom:10px"><button onclick="go('s13')" style="width:100%;background:rgba(201,169,110,.12);border:1px solid var(--brdg);color:var(--gold);height:44px;border-radius:6px;font-size:11px;letter-spacing:1.5px;cursor:pointer">🥂 ПОКАЗАТЬ ТОСТ НА ВЕСЬ ЭКРАН</button></div>
+  <div class="up-next" style="margin:0 16px">
+    <div style="font-size:10px;color:var(--mut);letter-spacing:1.5px;margin-bottom:4px">СЛЕДУЮЩИЙ</div>
+    <div style="font-size:14px;color:rgba(244,237,228,.6)">#6 Дружеский тост · 10 мин</div>
+  </div>
+</div>
+<div class="bottom-bar">
+  <div class="panic-btn" onclick="go('s15')">Я потерялся — что сейчас?</div>
+  <button class="fab" onclick="go('s16')">📷</button>
+</div>
+</div>
+
+<!-- S13 TOAST FULLSCREEN -->
+<div class="scr" id="s13">
+<div style="background:var(--bg);padding:14px 16px;display:flex;justify-content:flex-end"><div style="color:rgba(244,237,228,.3);font-size:20px;cursor:pointer" onclick="go('s12')">✕</div></div>
+<div class="toast-full">
+  <div style="font-size:10px;letter-spacing:3px;color:rgba(194,80,96,.6);margin-bottom:24px;text-align:center">ТОСТ ПАМЯТИ</div>
+  <div style="font-family:Georgia,serif;font-size:22px;color:var(--text);font-style:italic;text-align:center;line-height:1.7;margin-bottom:24px">"К тем кто не за этим столом — но в наших сердцах."</div>
+  <div style="width:60px;height:1px;background:var(--brdg);margin:0 auto 20px"></div>
+  <div style="font-size:12px;color:rgba(244,237,228,.4);text-align:center;margin-bottom:24px">Встаньте. Полный бокал. Пейте молча.</div>
+  <div style="display:flex;gap:8px;justify-content:center;margin-bottom:28px">
+    <div class="lp on">RU</div>
+    <div class="lp" onclick="alert('«To those not at this table — but in our hearts.»')">EN</div>
+    <div class="lp" onclick="alert('«Por aquellos que no están en esta mesa — pero en nuestros corazones.»')">ES</div>
+  </div>
+  <div style="font-size:11px;color:rgba(244,237,228,.28);text-align:center;letter-spacing:1px;margin-bottom:28px">ПРОИЗНОСИТ АННА</div>
+  <button class="btn" style="width:100%;max-width:280px" onclick="go('s12')">Завершено ✓</button>
+</div>
+</div>
+
+<!-- S13b POST-ADVANCE -->
+<div class="scr" id="s13b">
+<div class="live-hdr">
+  <div style="font-size:14px;color:var(--text)">День рождения Анны</div>
+  <div style="font-size:12px;color:rgba(244,237,228,.3)">2ч 22м прошло</div>
+  <div style="font-size:18px;color:rgba(244,237,228,.3)">···</div>
+</div>
+<div class="live-prog-bar"><div class="live-prog-fill" style="width:62%"></div></div>
+<div style="flex:1;overflow-y:auto">
+  <div class="now-card" style="margin-top:12px">
+    <div class="now-label"><span class="pulse" style="background:var(--gold)"></span>СЕЙЧАС · 6 из 11</div>
+    <div style="display:flex;gap:6px;margin-bottom:8px"><div class="stag t">ТОСТ</div></div>
+    <div class="now-title">Дружеский тост</div>
+    <div class="now-script">"За тех кто здесь. За этот стол. За эту ночь."</div>
+    <div style="font-size:11px;color:rgba(244,237,228,.22);letter-spacing:1px;margin-bottom:10px">РЕКОМЕНДУЕМОЕ ВРЕМЯ · 21:55</div>
+    <div class="now-controls">
+      <button class="ctrl-btn">⏸ Пауза</button>
+      <button class="ctrl-btn">+5 мин</button>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;padding:10px 16px">
+    <button class="live-btn-main" onclick="go('s17')">Завершить вечер</button>
+    <button class="live-btn-skip" onclick="go('s12')">← Назад</button>
+  </div>
+  <div class="up-next" style="margin:0 16px">
+    <div style="font-size:10px;color:var(--mut);letter-spacing:1.5px;margin-bottom:4px">СЛЕДУЮЩИЙ</div>
+    <div style="font-size:14px;color:rgba(244,237,228,.6)">#7 Десерт · 30 мин</div>
+  </div>
+</div>
+<div class="bottom-bar">
+  <div class="panic-btn" onclick="go('s15')">Я потерялся</div>
+  <button class="fab" onclick="go('s16')">📷</button>
+</div>
+</div>
+
+<!-- S14 SKIP CONFIRM -->
+<div class="scr" id="s14">
+<div class="hdr"><div class="hdr-back" onclick="go('s12')">‹</div><div class="hdr-title">ПРОПУСТИТЬ</div><div class="hdr-r"></div></div>
+<div class="bd" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:500px;text-align:center">
+  <div class="pg-title" style="margin-bottom:10px">Пропустить этот момент?</div>
+  <div style="font-size:13px;color:rgba(244,237,228,.4);max-width:260px;line-height:1.7;margin-bottom:32px">Тост памяти будет отмечен как пропущенный. Можно вернуться и произнести позже.</div>
+  <button class="btn" style="width:100%;margin-bottom:10px" onclick="go('s13b')">Пропустить →</button>
+  <button class="btn-out" onclick="go('s12')">Остаться в этом моменте</button>
+</div>
+</div>
+
+<!-- S15 PANIC -->
+<div class="scr" id="s15">
+<div class="hdr"><div class="hdr-back" onclick="go('s12')">‹</div><div class="hdr-title"></div><div class="hdr-r"></div></div>
+<div class="bd">
+  <div style="font-family:Georgia,serif;font-size:28px;color:var(--text);font-style:italic;margin:16px 0 24px">Спокойно.</div>
+  <div class="panic-opt" onclick="go('s12')"><div class="panic-num">01</div><div><div style="font-size:13px;color:var(--text)">Где я сейчас?</div><div style="font-size:11px;color:var(--mut);margin-top:2px">Вернуться к текущему моменту</div></div></div>
+  <div class="panic-opt" onclick="go('s13b')"><div class="panic-num">02</div><div><div style="font-size:13px;color:var(--text)">Следующий тост</div><div style="font-size:11px;color:var(--mut);margin-top:2px">Перейти к ближайшему тосту</div></div></div>
+  <div class="panic-opt" onclick="alert('+30 минут добавлено к расписанию')"><div class="panic-num">03</div><div><div style="font-size:13px;color:var(--text)">Дать больше времени</div><div style="font-size:11px;color:var(--mut);margin-top:2px">+15 / +30 / +60 мин</div></div></div>
+  <div class="panic-opt" onclick="alert('Свободный режим — расписание как ориентир, без таймера')"><div class="panic-num">04</div><div><div style="font-size:13px;color:var(--text)">Свободный режим</div><div style="font-size:11px;color:var(--mut);margin-top:2px">Идти интуитивно, без таймера</div></div></div>
+  <div class="panic-opt" onclick="go('s17')"><div class="panic-num">05</div><div><div style="font-size:13px;color:var(--text)">Завершить красиво</div><div style="font-size:11px;color:var(--mut);margin-top:2px">Story готова через несколько минут</div></div></div>
+</div>
+</div>
+
+<!-- S16 CAPTURE -->
+<div class="scr" id="s16">
+<div class="hdr"><div class="hdr-back" onclick="go('s12')">‹</div><div class="hdr-title">ЧТО ЗАПОМНИТЬ?</div><div class="hdr-r"></div></div>
+<div class="bd">
+  <div style="font-size:12px;color:rgba(244,237,228,.3);margin-bottom:16px">14 захватов этой ночью</div>
+  <div class="cap-opt" onclick="alert('Открывается камера')"><div class="cap-icon">📷</div><div><div style="font-size:14px;color:var(--text)">Сделать фото</div><div style="font-size:12px;color:var(--mut);margin-top:2px">Сохранить момент</div></div></div>
+  <div class="cap-opt" onclick="alert('Открывается диктофон')"><div class="cap-icon">🎤</div><div><div style="font-size:14px;color:var(--text)">Записать аудио</div><div style="font-size:12px;color:var(--mut);margin-top:2px">Тост, песня, смех</div></div></div>
+  <div class="cap-opt" onclick="alert('Открывается видеокамера')"><div class="cap-icon">🎥</div><div><div style="font-size:14px;color:var(--text)">Снять видео</div><div style="font-size:12px;color:var(--mut);margin-top:2px">До 3 минут</div></div></div>
+  <div class="cap-opt" onclick="alert('Открывается текстовый редактор')"><div class="cap-icon">✍️</div><div><div style="font-size:14px;color:var(--text)">Написать заметку</div><div style="font-size:12px;color:var(--mut);margin-top:2px">Мысль, цитата, наблюдение</div></div></div>
+  <div class="cap-opt" onclick="alert('QR-код для гостей — они сканируют и загружают свои фото')"><div class="cap-icon">📱</div><div><div style="font-size:14px;color:var(--text)">От гостей</div><div style="font-size:12px;color:var(--mut);margin-top:2px">QR — гости добавляют свои фото</div></div></div>
+  <div style="margin-top:16px">
+    <div class="sec-lbl">ПРИКРЕПИТЬ К МОМЕНТУ</div>
+    <div class="chips">
+      <div class="chip on" onclick="chipSel(this)">Тост памяти</div>
+      <div class="chip" onclick="chipSel(this)">Весь вечер</div>
+    </div>
+  </div>
+</div>
+<div class="ft"><button class="btn-out" onclick="go('s12')">← Назад к вечеру</button></div>
+</div>
+
+<!-- S17 SAVING -->
+<div class="scr" id="s17">
+<div class="hdr"><div class="hdr-back"></div><div class="hdr-title"></div><div class="hdr-r"></div></div>
+<div class="bd" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:600px;text-align:center">
+  <div class="orb" style="background:radial-gradient(circle at 40% 35%,rgba(92,122,110,.5) 0%,rgba(18,12,10,.3) 100%)"></div>
+  <div class="pg-title" style="margin-bottom:8px">Сохраняем вечер</div>
+  <div style="font-size:13px;color:rgba(244,237,228,.4);max-width:260px;line-height:1.7;margin:0 auto 28px">Каждое фото, каждый тост, каждая заметка.</div>
+  <div style="width:100%;text-align:left">
+    <div class="check-item"><div style="min-width:24px;color:var(--un)">✓</div><div style="flex:1;font-size:13px;color:var(--text)">11 моментов</div><div style="font-size:12px;color:var(--un)">✓</div></div>
+    <div class="check-item"><div style="min-width:24px;color:var(--un)">✓</div><div style="flex:1;font-size:13px;color:var(--text)">14 фото</div><div style="font-size:12px;color:var(--un)">✓</div></div>
+    <div class="check-item"><div style="min-width:24px;color:var(--un)">✓</div><div style="flex:1;font-size:13px;color:var(--text)">3 аудио</div><div style="font-size:12px;color:var(--un)">✓</div></div>
+    <div class="check-item"><div style="min-width:24px;color:var(--un)">✓</div><div style="flex:1;font-size:13px;color:var(--text)">7 тостов</div><div style="font-size:12px;color:var(--un)">✓</div></div>
+    <div class="check-item"><div style="min-width:24px">⟳</div><div style="flex:1;font-size:13px;color:var(--text)">Составляем историю...</div></div>
+  </div>
+</div>
+<div class="ft"><button class="btn" onclick="go('s18')">История готова →</button></div>
+</div>
+
+<!-- S18 STORY READY -->
+<div class="scr" id="s18">
+<div class="hdr"><div class="hdr-back"></div><div class="hdr-title"></div><div class="hdr-r"></div></div>
+<div class="bd" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:600px;text-align:center">
+  <div class="orb" style="background:radial-gradient(circle at 40% 35%,rgba(201,169,110,.5) 0%,rgba(18,12,10,.3) 100%)"></div>
+  <div class="pg-title" style="margin-bottom:8px">Ваша история готова</div>
+  <div style="font-size:13px;color:rgba(244,237,228,.4);line-height:1.7;max-width:260px;margin:0 auto 24px">День рождения Анны сохранён в вашем личном облаке навсегда.</div>
+  <div style="background:rgba(92,122,110,.15);border:1px solid rgba(92,122,110,.3);border-radius:20px;padding:5px 16px;font-size:11px;color:rgba(92,122,110,.9);letter-spacing:1px;margin-bottom:28px">СОХРАНЕНО НАВСЕГДА</div>
+</div>
+<div class="ft"><button class="btn" style="margin-bottom:8px" onclick="go('s19')">Открыть историю →</button><button class="btn-out" onclick="alert('Ссылка отправлена всем 8 гостям')">Поделиться с гостями</button></div>
+</div>
+
+<!-- S19 STORY OF THE DAY -->
+<div class="scr" id="s19">
+<div class="hdr"><div class="hdr-back" onclick="go('s0')">‹</div><div class="hdr-title">ИСТОРИЯ ВЕЧЕРА</div><div class="hdr-r">↗</div></div>
+<div style="flex:1;overflow-y:auto">
+  <div class="story-hero">
+    <div style="font-size:9px;letter-spacing:3px;color:rgba(201,169,110,.5);margin-bottom:8px">ВЕЧЕР В ПАМЯТИ</div>
+    <div style="font-family:Georgia,serif;font-size:24px;color:var(--text);font-style:italic;margin-bottom:4px">День рождения Анны</div>
+    <div style="font-size:12px;color:rgba(244,237,228,.35)">14 мая 2026 · Русское Застолье · 4 часа</div>
+    <div style="margin-top:10px;font-size:11px;color:rgba(244,237,228,.2);letter-spacing:1px">Приватно · 8 зрителей · Синхронизировано</div>
+  </div>
+  <div class="story-stats">
+    <div class="ss"><div class="ss-n">11</div><div class="ss-l">МОМЕНТОВ</div></div>
+    <div class="ss"><div class="ss-n">7</div><div class="ss-l">ТОСТОВ</div></div>
+    <div class="ss"><div class="ss-n">14</div><div class="ss-l">ФОТО</div></div>
+    <div class="ss"><div class="ss-n">3</div><div class="ss-l">АУДИО</div></div>
+  </div>
+  <div style="padding:0 16px;margin-bottom:14px">
+    <div class="sec-lbl" style="margin-bottom:10px">КАДРЫ ВЕЧЕРА</div>
+    <div class="photo-grid">
+      <div class="photo-cell">🌹</div><div class="photo-cell">🥂</div><div class="photo-cell">🕯</div>
+      <div class="photo-cell">🎂</div><div class="photo-cell">👥</div><div class="photo-cell" style="font-size:13px;color:rgba(244,237,228,.3)">+9</div>
+    </div>
+  </div>
+  <div style="padding:0 16px;margin-bottom:14px">
+    <div class="sec-lbl" style="margin-bottom:8px">ТОСТ КОТОРЫЙ ЗАПОМНИЛИ</div>
+    <div class="card">
+      <div style="font-size:11px;color:rgba(244,237,228,.3);margin-bottom:6px">АННА · ТОСТ ПАМЯТИ · 21:50</div>
+      <div style="font-family:Georgia,serif;font-size:14px;color:var(--text);font-style:italic;line-height:1.6;margin-bottom:10px">"К тем кто не за этим столом — но в наших сердцах."</div>
+      <div style="font-size:12px;color:rgba(201,169,110,.6);cursor:pointer">▶ Аудио 1:23</div>
+    </div>
+  </div>
+  <div style="padding:0 16px;margin-bottom:14px">
+    <div class="sec-lbl" style="margin-bottom:8px">ПОДЕЛИТЬСЯ</div>
+    <div class="share-grid">
+      <div class="share-btn" onclick="alert('Приватная ссылка скопирована')"><div style="font-size:18px;margin-bottom:4px;color:var(--gold)">👥</div><div style="font-size:11px;color:var(--sec)">Всем гостям</div></div>
+      <div class="share-btn" onclick="alert('Именная ссылка для Анны')"><div style="font-size:18px;margin-bottom:4px;color:var(--gold)">🎂</div><div style="font-size:11px;color:var(--sec)">Отправить Анне</div></div>
+      <div class="share-btn" onclick="alert('PDF Memory Book генерируется...')"><div style="font-size:18px;margin-bottom:4px;color:var(--gold)">📄</div><div style="font-size:11px;color:var(--sec)">Скачать PDF</div></div>
+      <div class="share-btn"><div style="font-size:18px;margin-bottom:4px;color:var(--gold)">🔒</div><div style="font-size:11px;color:var(--sec)">Оставить приватным</div></div>
+    </div>
+  </div>
+  <div style="padding:0 16px 24px"><button class="btn-out" onclick="go('s0')">← Все мои вечера</button></div>
+</div>
+</div>
+
+</div>
+<script>
+function go(id){document.querySelectorAll(".scr").forEach(function(s){s.classList.remove("on")});var el=document.getElementById(id);if(el){el.classList.add("on");var bd=el.querySelector(".bd");if(bd)bd.scrollTop=0}}
+function selMode(m){['ru','es','un'].forEach(function(x){var c=document.getElementById('mc-'+x);c.classList.remove('sel','ru','es','un')});document.getElementById('mc-'+m).classList.add('sel',m)}
+function chipSel(el){var g=el.closest('.chips');g.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')});el.classList.add('on')}
+document.querySelectorAll('.toggle').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on')})})
+document.querySelectorAll('.shop-cb').forEach(function(cb){cb.addEventListener('click',function(){this.textContent=this.textContent==='✓'?'':'✓'})})
+</script>
+</body>
+</html>
