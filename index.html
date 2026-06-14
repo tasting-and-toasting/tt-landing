@@ -579,6 +579,40 @@ html[dir="rtl"] .tt141-feature-row { direction: rtl; }
   .tt-footer-inner { grid-template-columns: 1fr; gap: 32px; }
   .tt-footer { padding: 40px 20px 32px; }
 }
+
+/* ── Lang dropdown — mobile ≤900px (BARREL patch) ── */
+.lang-dropdown { position: relative; display: none; }
+.lang-dd-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: none; border: 1px solid var(--line-2);
+  border-radius: 4px; padding: 5px 10px; cursor: pointer;
+  color: var(--ink-2); line-height: 1;
+}
+.lang-dd-btn .dd-flag {
+  width: 26px; height: 17px; border-radius: 2px;
+  overflow: hidden; flex-shrink: 0; display: block;
+}
+.lang-dd-btn .dd-flag svg { width: 100%; height: 100%; display: block; }
+.lang-dd-btn .dd-chev {
+  font-size: 9px; color: var(--ink-3);
+  transition: transform .2s ease; display: inline-block;
+  margin-left: 2px;
+}
+.lang-dd-btn[aria-expanded="true"] .dd-chev { transform: rotate(180deg); }
+.lang-dd-panel {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  background: var(--bg-2); border: 1px solid var(--line-2);
+  border-radius: 10px; padding: 10px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+  z-index: 300; box-shadow: 0 12px 36px rgba(0,0,0,0.6);
+  min-width: 168px;
+}
+.lang-dd-panel.is-hidden { display: none !important; }
+.lang-dd-panel .lang-flag-link { width: 34px; height: 23px; border-radius: 3px; }
+@media (max-width: 900px) {
+  .lang-switcher-flags { display: none !important; }
+  .lang-dropdown { display: block; }
+}
 </style>
 </head>
 <body>
@@ -595,6 +629,15 @@ html[dir="rtl"] .tt141-feature-row { direction: rtl; }
   <div class="topbar-trail">
     <a href="https://web.tastingandtoasting.com" class="topbar-cta" data-i18n="cta_play_now">Play now</a>
     <nav class="lang-switcher tt-lang-switcher" aria-label="Language">
+      <div class="lang-dropdown">
+        <button class="lang-dd-btn" id="lang-dd-btn"
+                aria-expanded="false" aria-haspopup="true"
+                aria-label="Select language">
+          <span class="dd-flag" id="lang-dd-flag"></span>
+          <span class="dd-chev">&#9660;</span>
+        </button>
+        <div class="lang-dd-panel is-hidden" id="lang-dd-panel"></div>
+      </div>
       <div class="lang-switcher-flags">
         <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
         <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
@@ -879,6 +922,55 @@ html[dir="rtl"] .tt141-feature-row { direction: rtl; }
       }
     });
   });
+</script>
+<script>
+/* BARREL — lang dropdown mobile */
+(function () {
+  var btn   = document.getElementById('lang-dd-btn');
+  var panel = document.getElementById('lang-dd-panel');
+  var ddFlag = document.getElementById('lang-dd-flag');
+  if (!btn || !panel || !ddFlag) return;
+
+  /* Clone all flag links into the dropdown panel */
+  var srcFlags = document.querySelectorAll('.lang-switcher-flags .lang-flag-link');
+  srcFlags.forEach(function (a) { panel.appendChild(a.cloneNode(true)); });
+
+  /* Show the current language flag in the button */
+  function syncFlag() {
+    var cur = document.querySelector('.lang-switcher-flags .is-current-lang')
+           || document.querySelector('.lang-switcher-flags .lang-flag-link');
+    if (cur) {
+      var svg = cur.querySelector('svg');
+      if (svg) ddFlag.innerHTML = svg.outerHTML;
+    }
+  }
+  syncFlag();
+
+  /* Watch for i18n script updating is-current-lang */
+  var srcRow = document.querySelector('.lang-switcher-flags');
+  if (srcRow) {
+    new MutationObserver(syncFlag).observe(srcRow, {
+      subtree: true, attributes: true, attributeFilter: ['class']
+    });
+  }
+
+  /* Toggle open / close */
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    panel.classList.toggle('is-hidden', open);
+  });
+
+  /* Close on outside click */
+  document.addEventListener('click', function () {
+    btn.setAttribute('aria-expanded', 'false');
+    panel.classList.add('is-hidden');
+  });
+
+  /* Prevent panel click from closing */
+  panel.addEventListener('click', function (e) { e.stopPropagation(); });
+}());
 </script>
 </body>
 </html>
