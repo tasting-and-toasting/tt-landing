@@ -182,7 +182,45 @@ async function submitForm(){
  const textAnswers=[...document.querySelectorAll('textarea.inp,input.inp[type=text],input.inp[type=number]')].map(el=>({q:el.previousElementSibling?.textContent||'',a:el.value})).filter(x=>x.a);
  const payload={name,email,lang,interests,answers,textAnswers,url:window.location.href,ts:new Date().toISOString()};
  try{await fetch('https://tt-stack-prod.onrender.com/api/partner-interest',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch(e){console.log('submit',e);}
- try{await fetch('https://formspree.io/f/xgobjyre',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,email:email,language:lang,interests:interests.join(', '),answers:answers.join(', '),notes:textAnswers.map(x=>x.q+': '+x.a).join(' | '),page_url:window.location.href})});}catch(e){console.log('formspree',e);}
+ const cardKeys=['dist','win','rest','col','str','inv'];
+ const cardNames={dist:'Wine Distribution',win:'Winery Connections',rest:'Restaurants & Events',col:'Collector Wine',str:'Strategic Partnership',inv:'Investment'};
+ const selectedCards=cardKeys.filter(k=>sel2.has(k)).map(k=>cardNames[k]);
+
+ const qaLines=[];
+ document.querySelectorAll('.step:not(#s5):not(#s6) .qg').forEach(group=>{
+   const label=group.querySelector('.ql');
+   if(!label)return;
+   const q=label.textContent.trim();
+   const selectedOpts=[...group.querySelectorAll('.opt.on')].map(o=>o.textContent.trim());
+   const inp=group.querySelector('input.inp:not([type=email]):not([value="Alexander"]),textarea.inp');
+   const textVal=inp&&inp.value.trim()?inp.value.trim():'';
+   let answer='';
+   if(selectedOpts.length)answer=selectedOpts.join(', ');
+   else if(textVal)answer=textVal;
+   else answer='—';
+   qaLines.push('Q: '+q+'\nA: '+answer);
+ });
+
+ const summary=[
+   'PARTNER: '+name,
+   'EMAIL: '+email,
+   'LANGUAGE: '+lang.toUpperCase(),
+   'PAGE: '+window.location.href,
+   '',
+   'INTERESTS SELECTED:',
+   selectedCards.length?selectedCards.map(c=>'  • '+c).join('\n'):'  none selected',
+   '',
+   'RESPONSES:',
+   qaLines.join('\n\n')
+ ].join('\n');
+
+ try{
+   await fetch('https://formspree.io/f/xgobjyre',{
+     method:'POST',
+     headers:{'Content-Type':'application/json','Accept':'application/json'},
+     body:JSON.stringify({_subject:'New CAP partner interest: '+name,name,email,summary})
+   });
+ }catch(e){console.log('formspree',e);}
  go(6);
 }
 
