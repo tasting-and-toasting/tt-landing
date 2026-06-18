@@ -25,6 +25,10 @@
     {
       "source": "/cap/b/:token",
       "destination": "/bottle-scan?token=:token"
+    },
+    {
+      "source": "/for/:name",
+      "destination": "/for/index.html"
     }
   ]
 }
