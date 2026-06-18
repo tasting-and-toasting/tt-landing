@@ -28,7 +28,7 @@
     },
     {
       "source": "/for/:name",
-      "destination": "/for/index.html"
+      "destination": "/for"
     }
   ]
 }
