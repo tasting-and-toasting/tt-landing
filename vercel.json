@@ -21,6 +21,10 @@
     {
       "source": "/.well-known/apple-app-site-association",
       "destination": "/apple-app-site-association"
+    },
+    {
+      "source": "/cap/b/:token",
+      "destination": "/bottle-scan?token=:token"
     }
   ]
 }

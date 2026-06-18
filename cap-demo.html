@@ -238,7 +238,7 @@ footer.page .fine b{ color:var(--cream-soft); }
     <div class="ni" data-v="passport" data-i18n="nav_passport">Passport</div>
   </div>
   <div class="nb-right">
-    <div class="lang" id="lang"><button data-lang="en">EN</button><button data-lang="ru">RU</button><button data-lang="es">ES</button><button data-lang="de">DE</button><button data-lang="it">IT</button></div>
+    <div class="lang" id="lang"><button data-lang="en">EN</button><button data-lang="ru">RU</button><button data-lang="es">ES</button><button data-lang="de">DE</button><button data-lang="it">IT</button><button data-lang="pl">PL</button></div>
     <div class="nb-pill"><span class="nb-dot"></span> CAP-2024-LU-018</div>
   </div>
 </div></div>
@@ -765,10 +765,58 @@ footer.page .fine b{ color:var(--cream-soft); }
       mf1:`Famiglia su questa terra`, mf2:`Vigneto`, mf3:`Sul livello del mare`, mf4:`Cantina, costante`,
       man_signed:`Manifesto firmato dal produttore`, a_producer:`Vedi il produttore`, a_tasting:`Trova una degustazione`,
       foot_fine:`Demo · console della cantina + passaporto · verdetto «Verified & traceable» secondo il Principio VI — CAP non afferma «autentico», mostra una catena verificabile.`
+    },
+    pl:{ nav_console:`Konsola winnicy`, nav_passport:`Paszport`, strip:`Dwie strony jednej prawdy: <b>winnica tworzy i podpisuje</b> — świat czyta.`,
+      hero_kick:`Lueria Winery · Górna Galilea · firma rodzinna od 2003 · 4 ha · (dane demonstracyjne)`, hero_h1:`Jak winnica <em>otwiera drzwi</em>.`,
+      hero_p:`Winnica jest punktem wejścia do całego systemu. W CAP nic nie istnieje, dopóki producent tego nie utworzy i nie podpisze. Poniżej — droga jednego produktu: od DNA po żywy paszport, który przeczyta świat.`,
+      m1:`Produkt`, m2:`Butelek w serii`, m3:`Ta butelka`,
+      s1_kick:`Drzwi weryfikacji`, s1_h2:`Najpierw weryfikują nie wino — lecz tego, kto za nie ręczy.`,
+      s1_sub:`Producent przechodzi trzy poziomy. Dopiero wtedy winnica otrzymuje klucz podpisujący — i prawo do tworzenia paszportów. To właśnie znaczy otworzyć drzwi.`,
+      t_passed:`✓ Zaliczono`, t_passed2:`✓ Zaliczono`, t_issued:`✓ Wydano`,
+      d1h:`Wniosek`, d1p:`Winnica rejestruje się i potwierdza swoją tożsamość. Status: zarejestrowana przez producenta.`,
+      d2h:`Dokumenty`, d2p:`Weryfikacja rejestracji działalności, własności prefiksu GS1 i kontroli domeny. Status: producent zweryfikowany.`,
+      d3h:`Klucz podpisujący`, d3p:`Winnica otrzymuje klucz. Teraz każde tworzone przez nią zdarzenie nosi jej podpis — podstawę zaufania.`,
+      door_res:`Drzwi są otwarte. Lueria Winery może tworzyć i podpisywać paszporty.`,
+      s2_kick:`Tworzenie paszportu · DNA produktu`, s2_h2:`Po lewej winnica wypełnia i podpisuje. Po prawej składa się to, co zobaczy świat.`,
+      s2_sub:`Jeden produkt — Lueria Grand Vital 2018. Każde pole po lewej staje się wierszem paszportu po prawej. Paszport ożywa, gdy cała droga zostanie podpisana.`,
+      st_dna:`DNA`, st_serial:`Serializacja`, st_journey:`Droga · podpisy`, st_carrier:`Nośnik`, st_live:`Żywy paszport`,
+      cons_label:`Konsola winnicy`, cons_draft:`szkic · edytowalny`, fs_identity:`Tożsamość`, identity_sub:`2018 · Reserva · Górna Galilea, Izrael`,
+      fs_dna:`DNA · skład (wg zbioru)`, dna_note:`+ składniki, ABV, alergeny — dane e-etykiety UE <span class="editbadge">edytuj</span>`,
+      fs_serial:`Serializacja · numer butelki`, edition:`/ SERIA 2400`, fs_journey:`Droga produktu · każde zdarzenie jest podpisane`,
+      jr0h:`Zbiór`, jr1h:`Butelkowanie`, jr2h:`Leżakowanie`, jr3h:`Dystrybucja`, sign:`Podpisz`,
+      fs_carrier:`Nośnik na butelce`, carrier_d:`/01/{GTIN}/21/1224 — otwarty standard, NFC opcjonalnie dla premium`,
+      signall:`Podpisz całą drogę i otwórz paszport →`, signall_done:`✓ Paszport podpisany i opublikowany`,
+      pp_draft:`szkic`, pp_unsigned:`NIEPODPISANY`, pp_await:`Oczekuje na podpis`, pp_scan:`Skan NFC · 19:42`, pp_verified:`ZWERYFIKOWANY`, pp_verdict:`Zweryfikowane i identyfikowalne`,
+      b2b:`Od butelki do butelki`, foot_truth:`weryfikowalna prawda, a nie obietnica autentyczności`,
+      s3_kick:`Ekonomia winnicy`, s3_h2:`Co winnica zyskuje — i za co płaci.`,
+      s3_sub:`Prosta wymiana: winnica płaci za infrastrukturę zaufania i otrzymuje ochronę marki, zgodność z UE oraz bezpośredni kanał do zaangażowanej publiczności.`,
+      met1:`Butelek w CAP`, met1d:`+ 2 400 w tym sezonie`, met2:`Skanów w tym miesiącu`, met2d:`+ 18% względem poprzedniego`,
+      met3:`Próby podrabiania`, met3d:`czysto · 90 dni`, met4:`Osiągnięte rynki`, met4u:`krajów`, met4d:`alert: skan z Norwegii — reeksport?`,
+      price_from:`od 0`, price_sub:` / na starcie · płatność za serializację`,
+      c1:`Zgodność z e-etykietą UE od ręki`, c2:`Serializacja i ochrona przed podróbkami`, c3:`Panel: skany, rynki, anomalie`, c4:`Kanał do degustatorów Tasting & Toasting`,
+      exchange:`Producent płaci. Konsument skanuje za darmo.`,
+      cap_t:`Paszport CAP · widok konsumenta`, cap_s:`Wynik zeskanowania butelki. Trzy zakładki: historia, weryfikowalna droga, manifest producenta.`,
+      composition:`Skład`, comp_text:`Cabernet Sauvignon 70%, Merlot 20%, Cabernet Franc 10%. Z wybranych części winnicy Yosefa Sayady, z mieszanką szczepów zmieniającą się z każdym zbiorem.`,
+      in_hands:`W twoich rękach`, in_hands_d:`Madryt, ES · teraz · zeskanowano 19:42`, from_producer:`Od producenta`,
+      chain:`Łańcuch <b>potwierdzony</b> przez dystrybucję. Każde ogniwo podpisane przez uczestnika.`,
+      jt_harvest:`Zbiór`, js_harvest:`Zbierane ręcznie przed świtem · 884 m n.p.m.`,
+      jt_bottling:`Butelkowanie`, js_bottling:`Seria 2400 · przypisany GTIN · wybity numer #1224`,
+      jt_cellared:`Leżakowanie`, jp_cellar:`Prywatna piwnica Lueria`, js_cellar:`Stałe 14 °C · kontrolowana wilgotność`,
+      jt_dist:`Dystrybucja`, js_dist:`Przekazanie pieczy · podpisane przez obie strony`,
+      jt_hands:`W twoich rękach · Skan`, now1942:`teraz · 19:42`, js_hands:`Bieżące zdarzenie skanu · jeszcze nie część podpisanego łańcucha`,
+      k_signed:`Podpisane przez`, k_proof:`Dowód`, k_from:`Wydane przez`, k_to:`Odebrane przez`, k_status:`Status`,
+      v_live:`skan na żywo · pomyślne wyzwanie NFC <span class="sigchip live"><span style="width:5px;height:5px;border-radius:50%;background:#e0c486;display:inline-block"></span>na żywo</span>`,
+      j_note:`CAP nie twierdzi, że wino jest „autentyczne”.<br>CAP pokazuje, kto co podpisał — sprawdź to sam.`,
+      man1:`Ta butelka nie próbuje być czymś innym. Próbuje być wiernym tłumaczeniem jednego wzgórza w Górnej Galilei — jego gleby, światła, nocnego chłodu — na język wina.`,
+      man2:`Cabernet zachowuje się tu inaczej niż w Médoc. Gorętsze dni, ostrzejsze noce, wapień bliżej korzeni. Nie korygujemy go ku cudzemu wzorcowi — słuchamy go. Kupaż zmienia się z każdym zbiorem, bo wzgórze nigdy się nie powtarza.`,
+      man3:`Rodzina uprawia te cztery hektary od 2003 roku. Każdy wybór — ręczny zbiór przed świtem, leżakowanie we własnej piwnicy w 14 °C — to odmowa etykiety „jak Bordeaux” na rzecz jednego: wina, które mogło powstać tylko tutaj.`,
+      mf1:`Rodzina na tej ziemi`, mf2:`Winnica`, mf3:`Nad poziomem morza`, mf4:`Piwnica, stałe`,
+      man_signed:`Manifest podpisany przez producenta`, a_producer:`Zobacz producenta`, a_tasting:`Znajdź degustację`,
+      foot_fine:`Dane demonstracyjne / Demo data · konsola winnicy + paszport · werdykt „Zweryfikowane i identyfikowalne” wg Zasady VI — CAP nie twierdzi, że wino jest „autentyczne”, pokazuje weryfikowalny łańcuch.`
     }
   };
 
-  var SUPPORTED=['en','ru','es','de','it'];
+  var SUPPORTED=['en','ru','es','de','it','pl'];
   var params=new URLSearchParams(location.search);
   var lang=(params.get('lang')||'en').toLowerCase();
   if(SUPPORTED.indexOf(lang)<0) lang='en';
