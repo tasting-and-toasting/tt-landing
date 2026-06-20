@@ -1,5 +1,5 @@
 (function () {
-  var ALLOWED = ["en", "fr", "ru", "es", "uk", "it", "de", "he", "pt", "ka", "ro"];
+  var ALLOWED = ["en", "fr", "ru", "es", "uk", "it", "de", "he", "pt", "ka", "ro", "pl"];
 
   function normalizeCode(raw) {
     var c = (raw || "").toLowerCase().split("-")[0] || "en";
@@ -110,6 +110,8 @@
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><rect x="12" width="6" height="20" fill="#FF0000"/><rect y="7" width="30" height="6" fill="#FF0000"/></svg>',
       ro:
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="10" height="20" fill="#002B7F"/><rect x="10" width="10" height="20" fill="#FCD116"/><rect x="20" width="10" height="20" fill="#CE1126"/></svg>',
+      pl:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><rect width="30" height="10" fill="#fff"/><rect y="10" width="30" height="10" fill="#DC143C"/></svg>',
     };
 
     var wrap = document.createElement("div");
@@ -133,7 +135,7 @@
 
 
 
-    var langsList = ["en", "fr", "ru", "es", "uk", "it", "de", "he", "pt", "ka", "ro"];
+    var langsList = ["en", "fr", "ru", "es", "uk", "it", "de", "he", "pt", "ka", "ro", "pl"];
 
     langsList.forEach(function (code) {
       var a = document.createElement("a");
