@@ -114,6 +114,7 @@ body{background:#160609;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',
 .modal-close{margin-top:18px;background:none;border:1px solid rgba(201,169,110,.3);border-radius:6px;padding:9px 18px;font-size:12px;color:#a08070;cursor:pointer;font-family:inherit}
 .modal-close:hover{color:#f5efe3;border-color:#c9a96e}
 @media(max-width:520px){.contact-row{grid-template-columns:1fr}.gen-bar{flex-direction:column;align-items:stretch}.gen-btn{width:100%}}
+.gate-email{letter-spacing:normal;font-size:15px;text-align:left;padding:13px 14px}
 </style>
 </head>
 <body>
@@ -125,6 +126,16 @@ body{background:#160609;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',
     <input class="gate-inp" id="g-inp" type="text" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off">
     <div class="gate-err" id="g-err"></div>
     <button class="gate-btn" id="g-btn" onclick="checkGate()"></button>
+  </div>
+</div>
+<div class="gate" id="email-gate" style="display:none">
+  <div class="gate-card">
+    <img src="/assets/logo_nav.png" alt="Tasting & Toasting">
+    <div class="gate-ttl" id="e-ttl"></div>
+    <div class="gate-hint" id="e-hint"></div>
+    <input class="gate-inp gate-email" id="e-inp" type="email" inputmode="email" placeholder="email@example.com" autocomplete="email">
+    <div class="gate-err" id="e-err"></div>
+    <button class="gate-btn" id="e-btn" onclick="submitEmail()"></button>
   </div>
 </div>
 <div class="wrap" id="app" style="display:none">
@@ -171,7 +182,17 @@ const UPLOAD_UI = {"pl": {"btn": "Dodaj plik", "files": "Pliki", "uploading": "W
 const PRIVACY = {"pl": {"link": "Prywatność i przetwarzanie danych", "title": "Prywatność i przetwarzanie danych", "body": "Ten formularz należy do Tasting & Toasting Inc. (Delaware, USA, nr 7494277). Twoje odpowiedzi i pliki są przesyłane bezpośrednio do założyciela, Maksima Gellera, i wykorzystywane wyłącznie do przygotowania pilotażu cyfrowego paszportu wina (CAP) dla Stara Winna Góra.\\n\\nPliki przechowywane są na prywatnym, zabezpieczonym serwerze (Amazon S3, Europa). Nie są publicznie dostępne. Nie udostępniamy Twoich danych stronom trzecim ani nie wykorzystujemy ich do reklamy.\\n\\nOdpowiedzi zapisują się automatycznie w Twojej przeglądarce, abyś mogła wrócić później. Możesz w każdej chwili poprosić o usunięcie swoich danych, pisząc do nas.\\n\\nTo dokument roboczy do planowania współpracy, nie jest umową prawną."}, "en": {"link": "Privacy & data handling", "title": "Privacy & data handling", "body": "This form belongs to Tasting & Toasting Inc. (Delaware, USA, no. 7494277). Your answers and files go directly to the founder, Maksim Geller, and are used only to prepare the digital wine passport (CAP) pilot for Stara Winna Góra.\\n\\nFiles are stored on a private, secured server (Amazon S3, Europe). They are not publicly accessible. We do not share your data with third parties or use it for advertising.\\n\\nAnswers save automatically in your browser so you can return later. You can ask us to delete your data at any time.\\n\\nThis is a working document for planning the collaboration, not a legal contract."}, "ru": {"link": "Конфиденциальность и данные", "title": "Конфиденциальность и обработка данных", "body": "Эта форма принадлежит Tasting & Toasting Inc. (Делавэр, США, № 7494277). Ваши ответы и файлы идут напрямую основателю, Максиму Геллеру, и используются только для подготовки пилота цифрового паспорта вина (CAP) для Stara Winna Góra.\\n\\nФайлы хранятся на приватном защищённом сервере (Amazon S3, Европа). Они недоступны публично. Мы не передаём ваши данные третьим лицам и не используем для рекламы.\\n\\nОтветы сохраняются автоматически в вашем браузере, чтобы вы могли вернуться позже. Вы можете в любой момент попросить удалить ваши данные.\\n\\nЭто рабочий документ для планирования сотрудничества, не юридический договор."}};
 const PWD = {"pl": {"title": "Wprowadź kod dostępu", "hint": "Czterocyfrowy kod, który otrzymałaś od Maksima", "err": "Nieprawidłowy kod", "enter": "Wejdź"}, "en": {"title": "Enter access code", "hint": "The four-digit code you received from Maksim", "err": "Wrong code", "enter": "Enter"}, "ru": {"title": "Введите код доступа", "hint": "Четырёхзначный код от Максима", "err": "Неверный код", "enter": "Войти"}};
 const ACCESS_CODE = "2001";
-const UPLOAD_ENDPOINT = "https://tt-stack-prod.onrender.com/api/winery-setup/upload";
+const API_BASE = "https://tt-stack-prod.onrender.com";
+const UPLOAD_ENDPOINT = API_BASE+"/api/winery-setup/upload";
+const SAVE_ENDPOINT = API_BASE+"/api/winery-setup/save";
+const LOAD_ENDPOINT = API_BASE+"/api/winery-setup/load";
+const EMAILSCR = {
+  pl:{title:"Wprowadź swój email",hint:"Twoje odpowiedzi zapiszą się pod tym adresem i będą dostępne z każdego urządzenia",btn:"Kontynuuj",err:"Wprowadź poprawny adres email",offline:"Brak połączenia z serwerem — używam zapisanej kopii."},
+  en:{title:"Enter your email",hint:"Your answers save under this address and are available from any device",btn:"Continue",err:"Enter a valid email address",offline:"No server connection — using your saved copy."},
+  ru:{title:"Введите ваш email",hint:"Ваши ответы сохранятся под этим адресом и будут доступны с любого устройства",btn:"Продолжить",err:"Введите корректный адрес email",offline:"Нет связи с сервером — использую сохранённую копию."}
+};
+function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
+let loadedEmail='';      // email whose data is currently loaded (for switch detection)
 let SECTIONS=[], UI={};
 // Question versioning (Variant A — JSON in repo): QV maps qid->version,
 // badges maps qid->'new'|'updated' computed once per load.
@@ -186,7 +207,72 @@ if(!state.files)state.files={};
 
 function loadState(){try{return JSON.parse(localStorage.getItem(KEY))||{ans:{},name:'',email:'',files:{}};}catch(e){return {ans:{},email:'',name:'',files:{}};}}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
-function saveState(){persist();flash();}
+// localStorage stays as a fast offline cache; the server (keyed by email) is the
+// source of truth. Every saveState writes the cache and debounce-syncs the server.
+function saveState(){persist();flash();saveToServer();}
+
+// --- Server persistence (keyed by email) -----------------------------------
+let _saveTimer=null;
+function saveToServer(){
+  if(!state.email||!validEmail(state.email))return; // need a valid email key
+  clearTimeout(_saveTimer);
+  _saveTimer=setTimeout(async()=>{
+    try{
+      const r=await fetch(SAVE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email:state.email,token:state.token,answers:state.ans,files:state.files,seen:state.seen||{}})});
+      const j=await r.json().catch(()=>null);
+      if(j&&j.ok)flash();
+    }catch(e){/* offline → localStorage cache already has it */}
+  },800);
+}
+async function loadFromServer(email){
+  try{
+    const r=await fetch(LOAD_ENDPOINT+'?email='+encodeURIComponent(email));
+    const j=await r.json();
+    if(j&&j.ok&&j.found){
+      state.ans=j.answers||{};
+      state.files=j.files||{};
+      state.seen=j.seen||{};
+      if(j.token)state.token=j.token;
+    }else if(j&&j.ok){ // found:false → fresh start for this email
+      state.ans={};state.files={};delete state.seen;
+    }
+    state.email=email;persist();
+  }catch(e){
+    // network error → fall back to whatever is cached locally; non-blocking notice
+    state.email=email;persist();
+    toast((EMAILSCR[lang]||EMAILSCR.en).offline);
+  }
+}
+// Switch the form to a given (already validated, lowercased) email.
+async function applyEmail(email){
+  loadedEmail=email;
+  await questionsReady;
+  if(!DATA){renderFail();return;}
+  await loadFromServer(email);
+  renderForm();
+}
+function renderForm(){computeBadges();renderLang();markSectionSeen(cur);}
+function renderFail(){
+  const intro=document.getElementById('u-intro');if(intro)intro.textContent=FAIL_MSG[lang]||FAIL_MSG.en;
+  const sec=document.getElementById('sections');if(sec)sec.innerHTML='<div style="padding:20px 0;color:#a08070;font-size:13px">'+(FAIL_MSG[lang]||FAIL_MSG.en)+'</div>';
+}
+function renderEmailScreen(){
+  const e=EMAILSCR[lang]||EMAILSCR.en;
+  document.getElementById('e-ttl').textContent=e.title;
+  document.getElementById('e-hint').textContent=e.hint;
+  document.getElementById('e-btn').textContent=e.btn;
+  const inp=document.getElementById('e-inp');if(inp&&!inp.value&&state.email)inp.value=state.email;
+}
+function submitEmail(){
+  const email=(document.getElementById('e-inp').value||'').trim().toLowerCase();
+  const e=EMAILSCR[lang]||EMAILSCR.en;
+  if(!validEmail(email)){document.getElementById('e-err').textContent=e.err;return;}
+  document.getElementById('e-err').textContent='';
+  document.getElementById('email-gate').style.display='none';
+  document.getElementById('app').style.display='block';
+  applyEmail(email);
+}
 
 // --- Question versioning ----------------------------------------------------
 // Compute new/updated badges once at load, from the seen-version snapshot.
@@ -195,7 +281,7 @@ function saveState(){persist();flash();}
 // question whose seen version is older than its current v is "updated".
 function computeBadges(){
   badges={};
-  const firstRun = !state.seen;
+  const firstRun = !state.seen || Object.keys(state.seen).length===0;
   if(firstRun){
     state.seen={};
     SECTIONS.forEach(s=>s.qs.forEach(q=>{state.seen[q.id]=q.v||1;}));
@@ -211,7 +297,7 @@ function computeBadges(){
 // Mark a single question as seen at its current version (on answer).
 function markSeenQ(qid){ if(!state.seen)state.seen={}; if(QV[qid]!=null) state.seen[qid]=QV[qid]; }
 // Mark all questions in a section as seen (on opening/viewing it).
-function markSectionSeen(i){ const s=SECTIONS[i]; if(!s)return; if(!state.seen)state.seen={}; s.qs.forEach(q=>{state.seen[q.id]=QV[q.id]||q.v||1;}); persist(); }
+function markSectionSeen(i){ const s=SECTIONS[i]; if(!s)return; if(!state.seen)state.seen={}; s.qs.forEach(q=>{state.seen[q.id]=QV[q.id]||q.v||1;}); persist(); saveToServer(); }
 function changedCount(){ return Object.keys(badges).length; }
 function sectionHasBadge(s){ return s.qs.some(q=>badges[q.id]); }
 function flash(){const f=document.getElementById('saveflash');f.textContent=UI[lang].save;f.classList.add('show');clearTimeout(window._ft);window._ft=setTimeout(()=>f.classList.remove('show'),1200);}
@@ -247,6 +333,11 @@ function renderContact(){
    '<input class="inp" id="c-email" type="email" placeholder="'+u.youremail+' ('+u.optional+')" value="'+(state.email||'')+'">';
   document.getElementById('c-name').oninput=e=>{state.name=e.target.value;saveState();};
   document.getElementById('c-email').oninput=e=>{state.email=e.target.value;saveState();};
+  // Changing the email here switches forms: load that email's data (email is the key).
+  document.getElementById('c-email').onblur=e=>{
+    const ne=(e.target.value||'').trim().toLowerCase();
+    if(ne&&validEmail(ne)&&ne!==loadedEmail){applyEmail(ne);}
+  };
 }
 function renderMenu(){
   const m=document.getElementById('menu');m.innerHTML='';
@@ -406,33 +497,31 @@ function closePrivacy(){document.getElementById('privacy-modal').classList.remov
 function renderGate(){const p=PWD[lang];document.getElementById('g-ttl').textContent=p.title;document.getElementById('g-hint').textContent=p.hint;document.getElementById('g-btn').textContent=p.enter;}
 function checkGate(){
   const v=document.getElementById('g-inp').value.trim();
-  if(v===ACCESS_CODE){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';try{sessionStorage.setItem('tt_gate','1');}catch(e){}}
+  if(v===ACCESS_CODE){document.getElementById('gate').style.display='none';document.getElementById('email-gate').style.display='flex';renderEmailScreen();document.getElementById('e-inp').focus();try{sessionStorage.setItem('tt_gate','1');}catch(e){}}
   else{document.getElementById('g-err').textContent=PWD[lang].err;document.getElementById('g-inp').value='';}
 }
 
 const FAIL_MSG={pl:"Nie udało się załadować pytań. Odśwież stronę.",en:"Could not load the questions. Please refresh.",ru:"Не удалось загрузить вопросы. Обновите страницу."};
 
 const lb=document.getElementById('lbar');
-['pl','en','ru'].forEach(l=>{const b=document.createElement('button');b.className='lng'+(l==='pl'?' on':'');b.dataset.l=l;b.textContent=l.toUpperCase();b.onclick=()=>{lang=l;renderGate();if(DATA)renderLang();};lb.appendChild(b);});
+['pl','en','ru'].forEach(l=>{const b=document.createElement('button');b.className='lng'+(l==='pl'?' on':'');b.dataset.l=l;b.textContent=l.toUpperCase();b.onclick=()=>{lang=l;renderGate();renderEmailScreen();if(DATA&&loadedEmail)renderLang();};lb.appendChild(b);});
 
 document.getElementById('g-inp').addEventListener('keydown',e=>{if(e.key==='Enter')checkGate();});
+document.getElementById('e-inp').addEventListener('keydown',e=>{if(e.key==='Enter')submitEmail();});
 renderGate();
-try{if(sessionStorage.getItem('tt_gate')==='1'){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';}}catch(e){}
+// After the access-code gate (or a restored session) we show the EMAIL screen,
+// not the form — the form is keyed by email and only renders once one is entered.
+try{if(sessionStorage.getItem('tt_gate')==='1'){document.getElementById('gate').style.display='none';document.getElementById('email-gate').style.display='flex';renderEmailScreen();}}catch(e){}
 
-// Questions live in a versioned JSON file (Variant A). Load them, then render.
-fetch('/winery-setup/questions.json',{cache:'no-cache'})
+// Questions live in a versioned JSON file (Variant A). Load them in the
+// background; the form renders only after an email is entered (applyEmail).
+let questionsReady = fetch('/winery-setup/questions.json',{cache:'no-cache'})
   .then(r=>{if(!r.ok)throw new Error('http '+r.status);return r.json();})
   .then(d=>{
     DATA=d;SECTIONS=DATA.sections;UI=DATA.ui;
     SECTIONS.forEach(s=>s.qs.forEach(q=>{QV[q.id]=q.v||1;}));
-    computeBadges();
-    renderLang();
-    markSectionSeen(cur);
   })
-  .catch(err=>{
-    const intro=document.getElementById('u-intro');if(intro)intro.textContent=FAIL_MSG[lang]||FAIL_MSG.en;
-    const sec=document.getElementById('sections');if(sec)sec.innerHTML='<div style="padding:20px 0;color:#a08070;font-size:13px">'+(FAIL_MSG[lang]||FAIL_MSG.en)+'</div>';
-  });
+  .catch(err=>{ DATA=null; });
 </script>
 </body>
 </html>
