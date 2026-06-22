@@ -366,17 +366,24 @@ function buildSummary(){
   const lines=['STARA WINNA GÓRA — WINERY SETUP','TOKEN: '+state.token,'PARTNER: '+(state.name||'Małgorzata'),'EMAIL: '+(state.email||'—'),'LANG: '+lang.toUpperCase()];
   const p=countProgress();lines.push('PROGRESS: '+p.done+'/'+p.total+' ('+p.pct+'%)','');
   SECTIONS.forEach((s,i)=>{
-    lines.push('━━━ '+(i+1)+'. '+s.title[lang]+' ━━━');
+    // Build this section's answered questions first; only print the header
+    // (and the section) if at least one question has an answer or a file.
+    const secLines=[];
     s.qs.forEach(q=>{
       const a=state.ans[q.id];let av='—';
       if(q.type==='single'&&a!=null)av=q.opts[lang][a];
       else if(q.type==='multi'&&Array.isArray(a)&&a.length)av=a.map(x=>q.opts[lang][x]).join(', ');
       else if((q.type==='text'||q.type==='textarea'||q.type==='number')&&a!=null&&String(a).trim())av=String(a);
-      lines.push('Q: '+q.q[lang]);lines.push('A: '+av);
-      const fl=state.files[q.id]||[];
-      fl.filter(f=>f.status==='ok').forEach(f=>{lines.push('FILE: '+f.name+' → '+(f.signed_url||f.url));});
-      lines.push('');
+      const okFiles=(state.files[q.id]||[]).filter(f=>f.status==='ok');
+      // Skip unanswered questions with no uploaded files entirely.
+      if(av==='—'&&okFiles.length===0)return;
+      secLines.push('Q: '+q.q[lang]);secLines.push('A: '+av);
+      okFiles.forEach(f=>{secLines.push('FILE: '+f.name+' → '+(f.signed_url||f.url));});
+      secLines.push('');
     });
+    if(secLines.length===0)return; // whole section empty → no header
+    lines.push('━━━ '+(i+1)+'. '+s.title[lang]+' ━━━');
+    lines.push(...secLines);
   });
   return lines.join('\n');
 }
