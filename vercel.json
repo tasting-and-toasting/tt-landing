@@ -29,6 +29,10 @@
     {
       "source": "/for/:name",
       "destination": "/for"
+    },
+    {
+      "source": "/winery-setup/:token",
+      "destination": "/winery-setup"
     }
   ]
 }
