@@ -392,7 +392,7 @@ function renderQ(q){
   }
   if(UPLOAD_QS[q.id]){
     const uu=UPLOAD_UI[lang];
-    h+='<div class="upl"><label class="upl-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>'+UPLOAD_QS[q.id][lang]+'<input type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" multiple style="display:none" onchange="handleUpload(event,\''+q.id+'\')"></label><div class="upl-hint">'+uu.hint+'</div><div class="upl-list" id="files-'+q.id+'"></div></div>';
+    h+='<div class="upl"><label class="upl-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>'+UPLOAD_QS[q.id][lang]+'<input type="file" accept="application/pdf,image/jpeg,image/png,.pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="handleUpload(event,\''+q.id+'\')"></label><div class="upl-hint">'+uu.hint+'</div><div class="upl-list" id="files-'+q.id+'"></div></div>';
   }
   h+='</div>';
   return h;
@@ -438,7 +438,11 @@ async function handleUpload(ev,qid){
     state.files[qid].push(rec);renderFiles(qid);
     try{
       const fd=new FormData();
-      fd.append('file',file);fd.append('token',state.token);fd.append('question',qid);fd.append('original_name',file.name);
+      // Text fields MUST be appended BEFORE the file: the backend reads them
+      // from file.fields, which only contains parts that arrive before the file
+      // in the multipart stream. With the file first, a large upload streams
+      // before token/question are parsed -> backend sees them missing -> 400.
+      fd.append('token',state.token);fd.append('question',qid);fd.append('original_name',file.name);fd.append('file',file);
       const r=await fetch(UPLOAD_ENDPOINT,{method:'POST',body:fd});
       const j=await r.json();
       if(j.ok){rec.status='ok';rec.url=j.url;rec.signed_url=j.signed_url||null;}
