@@ -2,185 +2,1233 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tasting & Toasting · Stara Winna Góra · Winery Setup</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tasting &amp; Toasting · Winery Setup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#160609;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#f5efe3;min-height:100vh}
-.wrap{max-width:760px;margin:0 auto;padding:0 0 60px}
-.hdr{background:#2d0d15;border-bottom:1px solid rgba(201,169,110,.2);padding:18px 28px 16px;position:sticky;top:0;z-index:20}
-.htop{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.brand img{height:34px;display:block}
-.lang-bar{display:flex;gap:4px}
-.lng{background:none;border:1px solid rgba(201,169,110,.25);border-radius:4px;padding:4px 9px;font-size:11px;color:#a08070;cursor:pointer;font-family:inherit;transition:all .15s;font-weight:500}
-.lng:hover,.lng.on{background:rgba(201,169,110,.15);border-color:#c9a96e;color:#f5efe3}
-.hi{font-size:18px;font-weight:500;color:#f5efe3;margin-bottom:3px}
-.intro{font-size:12.5px;color:#a08070;line-height:1.55;max-width:620px}
-.prog-row{display:flex;align-items:center;gap:10px;margin-top:12px}
-.prog-track{flex:1;height:5px;background:rgba(201,169,110,.12);border-radius:3px;overflow:hidden}
-.prog-fill{height:100%;background:#c9a96e;width:0;transition:width .4s ease}
-.prog-pct{font-size:11px;color:#c9a96e;font-weight:500;min-width:90px;text-align:right}
-.body{padding:20px 28px 0}
-.menu{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
-.mitem{background:#2d0d15;border:1px solid rgba(201,169,110,.18);border-radius:7px;padding:7px 11px;font-size:11.5px;color:#a08070;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}
-.mitem:hover{border-color:rgba(201,169,110,.4);color:#f5efe3}
-.mitem.active{border-color:#c9a96e;color:#f5efe3;background:#3a1520}
-.mitem.done{color:#7fb89a}
-.mdot{width:7px;height:7px;border-radius:50%;background:rgba(201,169,110,.3)}
-.mitem.done .mdot{background:#5aa17e}
-.sec{display:none}
-.sec.active{display:block}
-.sec-hd{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.sec-ico{width:34px;height:34px;border-radius:8px;background:#3a1520;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.sec-ico svg{width:18px;height:18px;stroke:#c9a96e;fill:none;stroke-width:1.7}
-.sec-no{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#c9a96e;font-weight:600;margin-bottom:2px}
-.sec-ttl{font-size:17px;font-weight:500;color:#f5efe3;line-height:1.2}
-.sec-intro{font-size:12.5px;color:#a08070;line-height:1.6;margin:10px 0 22px;padding:12px 14px;background:rgba(201,169,110,.05);border-left:2px solid rgba(201,169,110,.3);border-radius:0 6px 6px 0}
-.qg{margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid rgba(201,169,110,.08)}
-.qg:last-of-type{border-bottom:none}
-.q-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:4px}
-.q-txt{font-size:14px;font-weight:500;color:#f5efe3;line-height:1.4;flex:1}
-.q-req{font-size:9px;letter-spacing:.5px;text-transform:uppercase;color:#a08070;background:rgba(201,169,110,.1);border-radius:4px;padding:2px 6px;white-space:nowrap}
-.q-req.ok{color:#7fb89a;background:rgba(90,161,126,.12)}
-.q-badge{font-size:9px;letter-spacing:.5px;text-transform:uppercase;border-radius:4px;padding:2px 6px;white-space:nowrap;font-weight:600}
-.q-badge.new{color:#1e0810;background:#c9a96e}
-.q-badge.upd{color:#e8d5a8;background:rgba(201,169,110,.28);border:1px solid rgba(201,169,110,.5)}
-.mitem .mnew{width:6px;height:6px;border-radius:50%;background:#c9a96e;box-shadow:0 0 0 2px rgba(201,169,110,.25)}
-.changed{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding:8px 12px;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.3);border-radius:7px;font-size:12px;color:#e8d5a8}
-.changed .x{cursor:pointer;color:#a08070;font-size:15px;line-height:1;padding:0 2px;border:none;background:none;font-family:inherit}
-.changed .x:hover{color:#f5efe3}
-.tip-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#c9a96e;cursor:pointer;margin-bottom:9px;user-select:none;border:none;background:none;font-family:inherit;padding:0}
-.tip-btn:hover{text-decoration:underline}
-.tip-box{display:none;font-size:12px;color:#c8b89a;line-height:1.6;background:rgba(201,169,110,.06);border-radius:6px;padding:10px 13px;margin-bottom:11px;border:1px solid rgba(201,169,110,.12)}
-.tip-box.open{display:block}
-.opts{display:flex;flex-wrap:wrap;gap:6px}
-.opt{background:#2d0d15;border:1px solid rgba(201,169,110,.22);border-radius:20px;padding:7px 13px;font-size:12px;color:#c9a96e;cursor:pointer;transition:all .15s;user-select:none}
-.opt:hover{border-color:#c9a96e;color:#f5efe3}
-.opt.on{background:rgba(201,169,110,.18);border-color:#c9a96e;color:#f5efe3}
-.inp{width:100%;background:#2d0d15;border:1px solid rgba(201,169,110,.22);border-radius:6px;padding:10px 12px;font-size:13px;color:#f5efe3;font-family:inherit;resize:vertical;outline:none;transition:border-color .15s}
-.inp:focus{border-color:rgba(201,169,110,.55)}
-.inp::placeholder{color:#5a3a2a}
-.upl{margin-top:12px;padding:11px 13px;background:rgba(90,161,126,.05);border:1px dashed rgba(201,169,110,.3);border-radius:7px}
-.upl-btn{display:inline-flex;align-items:center;gap:7px;background:rgba(201,169,110,.12);border:1px solid rgba(201,169,110,.35);border-radius:6px;padding:8px 14px;font-size:12px;color:#c9a96e;cursor:pointer;font-family:inherit;transition:all .15s}
-.upl-btn:hover{background:rgba(201,169,110,.22);color:#f5efe3}
-.upl-hint{font-size:10.5px;color:#7a5a48;margin-top:7px;line-height:1.4}
-.upl-list{margin-top:9px;display:flex;flex-direction:column;gap:5px}
-.upl-file{display:flex;align-items:center;gap:7px;font-size:11.5px;padding:5px 9px;background:#2d0d15;border-radius:5px;border:1px solid rgba(201,169,110,.15)}
-.upl-file.ok{border-color:rgba(90,161,126,.4)}
-.upl-file.err{border-color:rgba(184,80,66,.5)}
-.upl-file .nm{flex:1;color:#c8b89a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.upl-file .st{font-size:10px;color:#7fb89a}
-.upl-file.err .st{color:#d88}
-.upl-file .open{color:#c9a96e;text-decoration:none;font-size:10px}
-.ask{margin-top:14px}
-.ask-lbl{font-size:11px;color:#a08070;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.ask-row{display:flex;gap:8px}
-.ask-row .inp{flex:1}
-.ask-btn{background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.3);border-radius:6px;padding:0 16px;font-size:12px;color:#c9a96e;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s}
-.ask-btn:hover{background:rgba(201,169,110,.25);color:#f5efe3}
-.nav{display:flex;justify-content:space-between;gap:10px;margin:24px 0 8px}
-.btn{background:#c9a96e;border:none;border-radius:7px;padding:11px 22px;font-size:13.5px;font-weight:500;color:#1e0810;cursor:pointer;font-family:inherit;transition:opacity .15s}
-.btn:hover{opacity:.88}
-.btn-ghost{background:none;border:1px solid rgba(201,169,110,.3);color:#a08070}
-.btn-ghost:hover{color:#f5efe3;border-color:#c9a96e;opacity:1}
-.gen-bar{position:sticky;bottom:0;background:#2d0d15;border-top:1px solid rgba(201,169,110,.2);padding:14px 28px;margin-top:30px;display:flex;align-items:center;justify-content:space-between;gap:14px;z-index:15}
-.gen-info{font-size:11px;color:#a08070;line-height:1.4;flex:1}
-.gen-btn{background:#c9a96e;border:none;border-radius:7px;padding:11px 20px;font-size:13px;font-weight:500;color:#1e0810;cursor:pointer;font-family:inherit;white-space:nowrap;transition:opacity .15s}
-.gen-btn:hover{opacity:.88}
-.save-flash{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#3a1520;border:1px solid #c9a96e;border-radius:20px;padding:7px 16px;font-size:11px;color:#c9a96e;opacity:0;transition:opacity .3s;pointer-events:none;z-index:30}
+
+/* ========================================================================
+   TOKENS  (values taken verbatim from the spec — no new colours introduced)
+   ======================================================================== */
+:root{
+  --bg-deep:#160609;
+  --bg-card:#2d0d15;
+  --bg-card-2:#3a1520;
+  --bg-section:#1a0810;
+  --gold:#c9a96e;
+  --gold-light:#e8d5a8;
+  --cream:#f5efe3;
+  --muted:#a08070;
+  --muted-2:#7a5a48;
+  --muted-3:#5a3a2a;
+  --green:#7fb89a;
+  --green-solid:#5aa17e;
+  --green-bg:rgba(90,161,126,.05);
+  --g05:rgba(201,169,110,.05);
+  --g06:rgba(201,169,110,.06);
+  --g08:rgba(201,169,110,.08);
+  --g12:rgba(201,169,110,.12);
+  --g18:rgba(201,169,110,.18);
+  --g22:rgba(201,169,110,.22);
+  --g30:rgba(201,169,110,.30);
+  --g35:rgba(201,169,110,.35);
+  --g40:rgba(201,169,110,.40);
+  --g55:rgba(201,169,110,.55);
+  --line:rgba(201,169,110,.08);
+  --line-2:rgba(201,169,110,.20);
+  --err:#dd8888;
+  --err-line:rgba(184,80,66,.5);
+  --ink:#1e0810;
+
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg-deep);
+  color:var(--cream);
+  font-family:var(--sans);
+  font-size:13px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{display:block;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input,textarea{font-family:inherit;}
+a{color:var(--gold);text-decoration:none;}
+a:hover{color:var(--gold-light);}
+::selection{background:var(--g30);color:var(--cream);}
+
+.serif{font-family:var(--serif);}
+.kicker{
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;
+}
+
+/* ========================================================================
+   GATE SCREENS  (#gate · #email-gate) — .gate toggled by JS
+   ======================================================================== */
+.gate{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:56px 24px;
+  position:relative;
+  background:
+    radial-gradient(120% 90% at 50% -10%,rgba(201,169,110,.06),transparent 60%),
+    var(--bg-deep);
+}
+.gate-lang{
+  position:absolute;top:22px;right:22px;
+  display:flex;gap:6px;
+}
+.gate-inner{
+  width:100%;max-width:340px;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+}
+#email-gate .gate-inner{max-width:400px;}
+.gate-logo{height:42px;width:auto;margin-bottom:26px;opacity:.96;}
+.gate-title{
+  font-family:var(--serif);
+  font-size:27px;font-weight:500;line-height:1.15;
+  color:var(--cream);margin:0 0 12px;
+  letter-spacing:.005em;
+}
+.gate-hint{
+  font-size:12.5px;line-height:1.55;color:var(--muted);
+  margin:0 0 22px;max-width:320px;
+}
+.gate-err{
+  font-size:11px;color:var(--err);min-height:16px;
+  margin:0 0 12px;line-height:1.4;
+}
+/* password input */
+.gate-inp{
+  width:100%;
+  background:var(--bg-card);
+  border:1px solid var(--g30);
+  border-radius:8px;
+  padding:14px;
+  font-size:22px;
+  color:var(--cream);
+  text-align:center;
+  letter-spacing:8px;
+  outline:none;
+  transition:border-color .15s ease,box-shadow .15s ease;
+  margin-bottom:16px;
+}
+.gate-inp::placeholder{color:var(--muted-3);letter-spacing:4px;}
+.gate-inp:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--g08);}
+/* contact fields */
+.gate-fields{width:100%;display:flex;flex-direction:column;gap:8px;margin-bottom:6px;}
+.gate-email{
+  width:100%;
+  background:var(--bg-card);
+  border:1px solid var(--g30);
+  border-radius:8px;
+  padding:13px 14px;
+  font-size:15px;
+  color:var(--cream);
+  text-align:left;
+  letter-spacing:normal;
+  outline:none;
+  transition:border-color .15s ease,box-shadow .15s ease;
+}
+.gate-email::placeholder{color:var(--muted-3);}
+.gate-email:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--g08);}
+/* primary CTA */
+.gate-btn{
+  width:100%;
+  background:var(--gold);
+  color:var(--ink);
+  border-radius:8px;
+  padding:13px;
+  font-size:14px;font-weight:600;
+  letter-spacing:.02em;
+  transition:opacity .15s ease,transform .15s ease;
+}
+.gate-btn:hover{opacity:.9;}
+.gate-btn:active{transform:translateY(1px);}
+#email-gate .gate-err{margin-top:10px;}
+#email-gate .gate-btn{margin-top:12px;}
+
+/* ========================================================================
+   LANG SWITCHER  (.lng · #lbar)
+   ======================================================================== */
+.lng{
+  font-size:11px;font-weight:500;letter-spacing:.08em;
+  color:var(--muted);
+  background:transparent;
+  border:1px solid var(--g18);
+  border-radius:4px;
+  padding:5px 9px;
+  transition:all .15s ease;
+}
+.lng:hover{color:var(--cream);border-color:var(--g40);}
+.lng.on{color:var(--ink);background:var(--gold);border-color:var(--gold);font-weight:600;}
+
+/* ========================================================================
+   APP SHELL  (#app)
+   ======================================================================== */
+#app{max-width:760px;margin:0 auto;}
+
+/* ---- Sticky header ---- */
+.hdr{
+  position:sticky;top:0;z-index:20;
+  background:rgba(45,13,21,.86);
+  -webkit-backdrop-filter:blur(20px);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line-2);
+  padding:18px 28px 16px;
+}
+.hdr-top{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;margin-bottom:16px;
+}
+.hdr-logo{height:34px;width:auto;}
+#lbar{display:flex;gap:6px;}
+.hdr-hi{
+  font-family:var(--serif);
+  font-size:22px;font-weight:500;line-height:1.1;
+  color:var(--cream);margin:0 0 6px;letter-spacing:.005em;
+}
+.hdr-intro{
+  font-size:11.5px;line-height:1.55;color:var(--muted);
+  margin:0;max-width:620px;
+}
+/* changed banner */
+.banner-changed{
+  margin:16px 0 0;
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--g08);
+  border:1px solid var(--g30);
+  border-radius:7px;
+  padding:10px 12px;
+  font-size:11.5px;line-height:1.5;color:var(--gold-light);
+}
+.banner-changed .bc-x{
+  margin-left:auto;flex:none;
+  width:20px;height:20px;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);transition:all .15s ease;
+}
+.banner-changed .bc-x:hover{color:var(--cream);background:var(--g12);}
+.banner-changed strong{color:var(--gold);font-weight:600;}
+/* completion banner */
+.banner-complete{
+  margin:16px 0 0;
+  display:flex;align-items:center;gap:10px;
+  background:var(--green-bg);
+  border:1px solid rgba(90,161,126,.4);
+  border-radius:7px;
+  padding:11px 13px;
+  font-size:12px;line-height:1.5;color:var(--green);
+}
+/* progress */
+.progress-row{
+  display:flex;align-items:center;gap:12px;
+  margin-top:16px;
+}
+.progress-track{
+  flex:1;height:5px;border-radius:3px;
+  background:var(--g12);overflow:hidden;
+}
+.progress-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  transition:width .4s ease;
+}
+.progress-pct{
+  font-size:10.5px;font-weight:500;letter-spacing:.06em;
+  color:var(--gold);white-space:nowrap;
+}
+
+/* ---- Body ---- */
+.body{padding:28px;}
+
+/* section menu */
+#menu{
+  display:flex;flex-wrap:wrap;gap:6px;
+  margin-bottom:24px;
+}
+.mitem{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--bg-card);
+  border:1px solid var(--g18);
+  border-radius:7px;
+  padding:7px 11px;
+  font-size:11px;
+  color:var(--muted);
+  position:relative;
+  transition:all .15s ease;
+}
+.mitem .dot{
+  width:7px;height:7px;border-radius:50%;flex:none;
+  background:var(--g30);transition:background .15s ease;
+}
+.mitem:hover{border-color:var(--g40);color:var(--cream);}
+.mitem.active{border-color:var(--gold);color:var(--cream);background:var(--bg-card-2);}
+.mitem.active .dot{background:var(--gold);}
+.mitem.done{color:var(--green);}
+.mitem.done .dot{background:var(--green-solid);}
+.mitem .newdot{
+  position:absolute;top:-3px;right:-3px;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 0 2px var(--bg-deep);
+}
+
+/* ---- Section view (.sec) ---- */
+.sec{margin-bottom:8px;}
+.sec-head{display:flex;align-items:flex-start;gap:13px;margin-bottom:14px;}
+.sec-icon{
+  width:34px;height:34px;flex:none;
+  border-radius:9px;
+  background:var(--bg-card-2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);
+}
+.sec-icon svg{width:18px;height:18px;}
+.sec-kicker{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:3px;
+}
+.sec-title{
+  font-family:var(--serif);
+  font-size:23px;font-weight:500;line-height:1.1;
+  color:var(--cream);margin:0;letter-spacing:.005em;
+}
+.sec-intro{
+  font-size:11.5px;line-height:1.6;color:var(--muted);
+  padding:12px 14px;
+  background:var(--g05);
+  border-left:2px solid var(--g30);
+  border-radius:0 6px 6px 0;
+  margin-bottom:24px;
+}
+
+/* ---- Question block (.qg) ---- */
+.qg{
+  margin-bottom:22px;padding-bottom:20px;
+  border-bottom:1px solid var(--line);
+}
+.qg:last-of-type{border-bottom:none;}
+.q-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;}
+.q-text{
+  font-size:14px;font-weight:500;line-height:1.4;color:var(--cream);
+  flex:1;
+}
+.q-text .q-opt{color:var(--muted-2);font-weight:400;}
+/* answered / unanswered badge */
+.q-req{
+  flex:none;
+  font-size:10px;letter-spacing:.06em;
+  padding:3px 8px;border-radius:20px;
+  color:var(--muted);background:var(--g08);border:1px solid var(--line-2);
+  white-space:nowrap;
+}
+.q-req.ok{color:var(--green);background:var(--green-bg);border-color:rgba(90,161,126,.35);}
+/* NEW / UPDATED badges */
+.q-tag{
+  display:inline-flex;align-items:center;
+  font-size:9.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 7px;border-radius:4px;margin-left:8px;vertical-align:middle;
+}
+.q-tag.new{background:var(--gold);color:var(--ink);}
+.q-tag.updated{background:transparent;color:var(--gold);border:1px solid var(--g40);}
+
+/* tip */
+.tip-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;color:var(--gold);
+  padding:4px 0;margin-bottom:10px;
+  transition:color .15s ease;
+}
+.tip-btn:hover{color:var(--gold-light);}
+.tip-btn svg{width:12px;height:12px;transition:transform .2s ease;}
+.tip-btn.open svg{transform:rotate(180deg);}
+.tip-box{
+  display:none;
+  font-size:11.5px;line-height:1.6;color:#c8b89a;
+  background:var(--g06);
+  border:1px solid var(--g12);
+  border-radius:6px;
+  padding:10px 13px;margin-bottom:12px;
+}
+.tip-box.open{display:block;}
+
+/* option chips (.opt) */
+.opts{display:flex;flex-wrap:wrap;gap:8px;}
+.opt{
+  background:var(--bg-card);
+  border:1px solid var(--g22);
+  border-radius:20px;
+  padding:7px 13px;
+  font-size:12.5px;
+  color:var(--gold);
+  transition:all .15s ease;
+}
+.opt:hover{border-color:var(--gold);color:var(--cream);}
+.opt.on{background:var(--g18);border-color:var(--gold);color:var(--cream);}
+
+/* text / textarea (.inp) */
+.inp{
+  width:100%;
+  background:var(--bg-card);
+  border:1px solid var(--g22);
+  border-radius:6px;
+  padding:10px 12px;
+  font-size:12.5px;
+  color:var(--cream);
+  outline:none;
+  transition:border-color .15s ease;
+}
+.inp::placeholder{color:var(--muted-3);}
+.inp:focus{border-color:var(--g55);}
+textarea.inp{resize:vertical;min-height:88px;line-height:1.55;}
+
+/* file upload zone */
+.upl{
+  padding:11px 13px;
+  background:var(--green-bg);
+  border:1px dashed var(--g30);
+  border-radius:7px;
+}
+.upl-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--g12);
+  border:1px solid var(--g35);
+  border-radius:6px;
+  padding:8px 14px;
+  font-size:12.5px;color:var(--gold);
+  transition:all .15s ease;
+}
+.upl-btn:hover{background:var(--g22);color:var(--cream);}
+.upl-btn svg{width:14px;height:14px;}
+.upl-hint{font-size:10.5px;color:var(--muted-2);margin-top:7px;line-height:1.4;}
+.upl-list{display:flex;flex-direction:column;gap:6px;margin-top:9px;}
+.file-row{
+  display:flex;align-items:center;gap:7px;
+  font-size:11px;
+  padding:5px 9px;
+  background:var(--bg-card);
+  border:1px solid var(--g18);
+  border-radius:5px;
+  color:var(--muted);
+}
+.file-row svg{width:13px;height:13px;flex:none;}
+.file-row .fname{color:var(--cream);}
+.file-row .fstat{margin-left:auto;font-size:10px;letter-spacing:.04em;}
+.file-row.ok{border-color:rgba(90,161,126,.4);}
+.file-row.ok .fstat{color:var(--green);}
+.file-row.ok svg{color:var(--green);}
+.file-row.err{border-color:var(--err-line);}
+.file-row.err .fstat{color:var(--err);}
+.file-row .fopen{margin-left:8px;font-size:10.5px;color:var(--gold);}
+
+/* ask-a-question row */
+.ask{
+  display:flex;flex-direction:column;gap:7px;
+  margin-top:8px;
+}
+.ask-label{font-size:10.5px;color:var(--muted);letter-spacing:.02em;}
+.ask-row{display:flex;gap:8px;}
+.ask-row .inp{flex:1;}
+.ask-btn{
+  background:var(--g12);
+  border:1px solid var(--g30);
+  border-radius:6px;
+  padding:0 16px;
+  font-size:12.5px;color:var(--gold);
+  display:inline-flex;align-items:center;gap:6px;
+  transition:all .15s ease;
+}
+.ask-btn:hover{background:var(--g22);color:var(--cream);}
+.ask-btn svg{width:13px;height:13px;}
+
+/* prev / next nav */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin:26px 0 8px;
+}
+.btn-primary{
+  background:var(--gold);color:var(--ink);
+  border-radius:7px;padding:11px 22px;
+  font-size:12.5px;font-weight:600;letter-spacing:.02em;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:opacity .15s ease,transform .15s ease;
+}
+.btn-primary:hover{opacity:.9;}
+.btn-primary:active{transform:translateY(1px);}
+.btn-ghost{
+  background:transparent;
+  border:1px solid var(--g30);
+  border-radius:7px;padding:11px 22px;
+  font-size:12.5px;color:var(--muted);
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .15s ease;
+}
+.btn-ghost:hover{color:var(--cream);border-color:var(--gold);}
+.btn-primary svg,.btn-ghost svg{width:14px;height:14px;}
+
+/* contact row */
+.contact-wrap{
+  margin-top:6px;padding-top:22px;
+  border-top:1px solid var(--line);
+}
+.contact-kicker{
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:14px;
+}
+#contact{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+#contact .inp.full{grid-column:1 / -1;}
+.field label{
+  display:block;font-size:10.5px;color:var(--muted);
+  margin-bottom:5px;letter-spacing:.02em;
+}
+.field{display:flex;flex-direction:column;}
+.field.full{grid-column:1 / -1;}
+
+/* footer */
+.footer{
+  padding:26px 28px 32px;
+  border-top:1px solid var(--g12);
+  text-align:center;
+}
+.footer a{font-size:12.5px;}
+.footer .copy{font-size:10.5px;color:#6a4a38;margin-top:8px;}
+
+/* ========================================================================
+   STICKY SUBMIT BAR
+   ======================================================================== */
+.submitbar{
+  position:sticky;bottom:0;z-index:15;
+  background:rgba(45,13,21,.94);
+  -webkit-backdrop-filter:blur(20px);
+  backdrop-filter:blur(20px);
+  border-top:1px solid var(--line-2);
+  padding:14px 28px;
+  display:flex;align-items:center;gap:16px;
+}
+#geninfo{
+  font-size:10.5px;line-height:1.4;color:var(--muted);flex:1;
+}
+#geninfo strong{color:var(--gold-light);font-weight:600;}
+#genbtn{
+  flex:none;
+  background:var(--gold);color:var(--ink);
+  border-radius:7px;padding:11px 20px;
+  font-size:12.5px;font-weight:600;letter-spacing:.02em;
+  transition:opacity .15s ease,transform .15s ease;
+}
+#genbtn:hover{opacity:.9;}
+#genbtn:active{transform:translateY(1px);}
+
+/* ========================================================================
+   PRIVACY MODAL
+   ======================================================================== */
+#privacy-modal{
+  display:none;
+  position:fixed;inset:0;z-index:60;
+  background:rgba(0,0,0,.6);
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);
+  align-items:center;justify-content:center;
+  padding:24px;
+}
+#privacy-modal.open{display:flex;}
+.pm-card{
+  width:100%;max-width:480px;max-height:80vh;overflow-y:auto;
+  background:var(--bg-card);
+  border:1px solid var(--g30);
+  border-radius:12px;
+  padding:24px;
+}
+#pm-ttl{
+  font-family:var(--serif);
+  font-size:22px;font-weight:500;color:var(--gold);
+  margin:0 0 14px;
+}
+#pm-body{
+  font-size:11.5px;line-height:1.7;color:#c8b89a;
+  white-space:pre-line;margin:0 0 20px;
+}
+.pm-close{
+  border:1px solid var(--g30);
+  border-radius:6px;padding:9px 18px;
+  font-size:12.5px;color:var(--muted);
+  transition:all .15s ease;
+}
+.pm-close:hover{color:var(--cream);border-color:var(--gold);}
+
+/* ========================================================================
+   NOTIFICATIONS
+   ======================================================================== */
+#saveflash{
+  position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(8px);
+  z-index:70;
+  background:var(--bg-card-2);
+  border:1px solid var(--gold);
+  border-radius:20px;
+  padding:7px 16px;
+  font-size:10.5px;color:var(--gold);letter-spacing:.04em;
+  display:inline-flex;align-items:center;gap:7px;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;
+}
+#saveflash svg{width:12px;height:12px;}
+#saveflash.show{opacity:1;transform:translateX(-50%) translateY(0);}
+#toast{
+  position:fixed;top:76px;left:50%;transform:translateX(-50%) translateY(-8px);
+  z-index:70;
+  background:var(--bg-card-2);
+  border:1px solid var(--gold);
+  border-radius:10px;
+  padding:14px 22px;
+  font-size:12.5px;color:var(--cream);line-height:1.4;
+  max-width:min(90vw,420px);
+  box-shadow:0 12px 40px rgba(0,0,0,.45);
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ========================================================================
+   RESPONSIVE  (≤700px)
+   ======================================================================== */
+@media (max-width:700px){
+  .hdr{padding:14px 16px 12px;}
+  .body{padding:16px;}
+  .submitbar{padding:12px 16px;flex-direction:column;align-items:stretch;}
+  #genbtn{width:100%;padding:13px;}
+  .footer{padding:22px 16px 28px;}
+  #contact{grid-template-columns:1fr;}
+  .nav{flex-direction:column-reverse;}
+  .btn-primary,.btn-ghost{width:100%;justify-content:center;padding:13px;}
+  .ask-row{flex-direction:column;}
+  .ask-btn{padding:11px;justify-content:center;}
+  .sec-title{font-size:21px;}
+  .hdr-hi{font-size:20px;}
+  .gate-inner{max-width:100%;}
+}
+
+/* ── Save flash & toast (preserved from original) ── */
+.save-flash{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#3a1520;border:1px solid #c9a96e;border-radius:20px;padding:7px 16px;font-size:12px;color:#c9a96e;opacity:0;transition:opacity .3s;pointer-events:none;z-index:30}
 .save-flash.show{opacity:1}
-.contact-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
-.contact-row .inp{height:42px}
-.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:#3a1520;border:1px solid #c9a96e;border-radius:10px;padding:14px 22px;font-size:13px;color:#f5efe3;opacity:0;transition:opacity .3s;pointer-events:none;z-index:40;max-width:90%;text-align:center}
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:#3a1520;border:1px solid #c9a96e;border-radius:10px;padding:14px 22px;font-size:14px;color:#f5efe3;opacity:0;transition:opacity .3s;pointer-events:none;z-index:40;max-width:90%;text-align:center}
 .toast.show{opacity:1}
-.footer{padding:24px 28px;text-align:center;border-top:1px solid rgba(201,169,110,.12);margin-top:30px}
-.footer a{color:#c9a96e;font-size:12px;text-decoration:none;cursor:pointer}
-.footer a:hover{text-decoration:underline}
-.footer .cp{font-size:10.5px;color:#6a4a38;margin-top:8px}
-.gate{position:fixed;inset:0;background:#160609;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px}
-.gate-card{max-width:340px;width:100%;text-align:center}
-.gate img{height:42px;margin-bottom:24px}
-.gate-ttl{font-size:16px;font-weight:500;color:#f5efe3;margin-bottom:6px}
-.gate-hint{font-size:12px;color:#a08070;margin-bottom:20px;line-height:1.5}
-.gate-inp{width:100%;background:#2d0d15;border:1px solid rgba(201,169,110,.3);border-radius:8px;padding:14px;font-size:22px;color:#f5efe3;text-align:center;letter-spacing:8px;font-family:inherit;outline:none;margin-bottom:12px}
-.gate-inp:focus{border-color:#c9a96e}
-.gate-err{font-size:12px;color:#d88;margin-bottom:12px;min-height:16px}
-.gate-btn{width:100%;background:#c9a96e;border:none;border-radius:8px;padding:13px;font-size:14px;font-weight:500;color:#1e0810;cursor:pointer;font-family:inherit}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90;display:none;align-items:center;justify-content:center;padding:24px}
-.modal.open{display:flex}
-.modal-card{background:#2d0d15;border:1px solid rgba(201,169,110,.3);border-radius:12px;max-width:480px;width:100%;padding:24px;max-height:80vh;overflow-y:auto}
-.modal-ttl{font-size:16px;font-weight:500;color:#c9a96e;margin-bottom:14px}
-.modal-body{font-size:12.5px;color:#c8b89a;line-height:1.7;white-space:pre-line}
-.modal-close{margin-top:18px;background:none;border:1px solid rgba(201,169,110,.3);border-radius:6px;padding:9px 18px;font-size:12px;color:#a08070;cursor:pointer;font-family:inherit}
-.modal-close:hover{color:#f5efe3;border-color:#c9a96e}
-@media(max-width:520px){.contact-row{grid-template-columns:1fr}.gen-bar{flex-direction:column;align-items:stretch}.gen-btn{width:100%}}
-.gate-email{letter-spacing:normal;font-size:15px;text-align:left;padding:13px 14px}
 </style>
 </head>
 <body>
-<div class="gate" id="gate">
-  <div class="gate-card">
-    <img src="/assets/logo_nav.png" alt="Tasting & Toasting">
-    <div class="gate-ttl" id="g-ttl"></div>
-    <div class="gate-hint" id="g-hint"></div>
-    <input class="gate-inp" id="g-inp" type="text" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off">
-    <div class="gate-err" id="g-err"></div>
-    <button class="gate-btn" id="g-btn" onclick="checkGate()"></button>
+<!-- ============================================================ SCREEN 1 · PASSWORD GATE -->
+<div id="gate" class="gate">
+  <div class="gate-lang">
+    <button class="lng" type="button">PL</button>
+    <button class="lng on" type="button">EN</button>
+    <button class="lng" type="button">RU</button>
+  </div>
+  <div class="gate-inner">
+    <img class="gate-logo" src="assets/logo_nav.png" alt="Tasting &amp; Toasting">
+    <h1 id="g-ttl" class="gate-title">Welcome to your setup</h1>
+    <p id="g-hint" class="gate-hint">Enter the 4-digit code from your invitation to open your winery questionnaire.</p>
+    <div id="g-err" class="gate-err"></div>
+    <input id="g-inp" class="gate-inp" type="text" inputmode="numeric" maxlength="4" placeholder="• • • •" autocomplete="off">
+    <button id="g-btn" class="gate-btn" type="button">Unlock</button>
   </div>
 </div>
-<div class="gate" id="email-gate" style="display:none">
-  <div class="gate-card" style="max-width:400px">
-    <img src="/assets/logo_nav.png" alt="Tasting & Toasting">
-    <div class="gate-ttl" id="e-ttl"></div>
-    <div class="gate-hint" id="e-hint"></div>
-    <input class="gate-inp gate-email" id="e-winery" type="text" placeholder="" autocomplete="organization" style="margin-bottom:8px">
-    <input class="gate-inp gate-email" id="e-name" type="text" placeholder="" autocomplete="name" style="margin-bottom:8px">
-    <input class="gate-inp gate-email" id="e-phone" type="tel" placeholder="" autocomplete="tel" style="margin-bottom:8px">
-    <input class="gate-inp gate-email" id="e-domain" type="text" placeholder="" autocomplete="url" style="margin-bottom:8px">
-    <input class="gate-inp gate-email" id="e-inp" type="email" inputmode="email" placeholder="email@example.com" autocomplete="email">
-    <div class="gate-err" id="e-err"></div>
-    <button class="gate-btn" id="e-btn" onclick="submitEmail()"></button>
+
+<!-- ============================================================ SCREEN 2 · CONTACT GATE -->
+<div id="email-gate" style="display:none" class="gate">
+  <div class="gate-lang">
+    <button class="lng" type="button">PL</button>
+    <button class="lng on" type="button">EN</button>
+    <button class="lng" type="button">RU</button>
+  </div>
+  <div class="gate-inner">
+    <img class="gate-logo" src="assets/logo_nav.png" alt="Tasting &amp; Toasting">
+    <h1 id="e-ttl" class="gate-title">Tell us who you are</h1>
+    <p id="e-hint" class="gate-hint">A few details so we can save your progress and stay in touch about your listing.</p>
+    <div class="gate-fields">
+      <input id="e-winery" class="gate-email" type="text" placeholder="Winery name *" autocomplete="organization">
+      <input id="e-name" class="gate-email" type="text" placeholder="Your name *" autocomplete="name">
+      <input id="e-phone" class="gate-email" type="tel" placeholder="Phone *" autocomplete="tel">
+      <input id="e-domain" class="gate-email" type="text" placeholder="Website / domain (optional)" autocomplete="url">
+      <input id="e-inp" class="gate-email" type="email" placeholder="Email *" autocomplete="email">
+    </div>
+    <div id="e-err" class="gate-err"></div>
+    <button id="e-btn" class="gate-btn" type="button">Start questionnaire</button>
   </div>
 </div>
-<div class="wrap" id="app" style="display:none">
-<div class="hdr">
-  <div class="htop">
-    <div class="brand"><img src="/assets/logo_nav.png" alt="Tasting & Toasting"></div>
-    <div class="lang-bar" id="lbar"></div>
+
+<!-- ============================================================ SCREEN 3 · MAIN FORM -->
+<div id="app" style="display:none">
+
+  <!-- Sticky header -->
+  <header class="hdr">
+    <div class="hdr-top">
+      <img class="hdr-logo" src="assets/logo_nav.png" alt="Tasting &amp; Toasting">
+      <div id="lbar">
+        <button class="lng" type="button">PL</button>
+        <button class="lng on" type="button">EN</button>
+        <button class="lng" type="button">RU</button>
+      </div>
+    </div>
+    <h2 id="u-hi" class="hdr-hi">Stara Winna Góra</h2>
+    <p id="u-intro" class="hdr-intro">Everything you share here builds your listing on Tasting &amp; Toasting — visitors read it before they book. Answer at your own pace; every change saves automatically.</p>
+
+    <!-- Changed banner (conditional — JS shows/hides/sets content) -->
+    <div id="changed" class="banner-changed">
+      <span><strong>3 questions</strong> were updated since your last visit. They're marked <span class="q-tag updated" style="margin-left:0;">Updated</span> in the sections below.</span>
+      <button class="bc-x" type="button" aria-label="Dismiss">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <!-- Completion banner (conditional at 100% — hidden until then) -->
+    <div id="complete-banner" class="banner-complete" style="display:none;">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      <span>All sections complete — you're ready to submit your listing.</span>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-row">
+      <div class="progress-track"><div id="pf" class="progress-fill" style="width:45%;"></div></div>
+      <span id="ppct" class="progress-pct">45%</span>
+    </div>
+  </header>
+
+  <div class="body">
+
+    <!-- Section navigation (JS renders — demo items below) -->
+    <nav id="menu">
+      <div class="mitem done"><span class="dot"></span>About the winery</div>
+      <div class="mitem active"><span class="dot"></span>Production &amp; portfolio</div>
+      <div class="mitem"><span class="dot"></span>Estate &amp; cellar</div>
+      <div class="mitem"><span class="dot"></span>Tasting experiences<span class="newdot"></span></div>
+      <div class="mitem"><span class="dot"></span>Food &amp; pairings</div>
+      <div class="mitem"><span class="dot"></span>Logistics &amp; access</div>
+      <div class="mitem"><span class="dot"></span>Availability</div>
+      <div class="mitem"><span class="dot"></span>Pricing</div>
+      <div class="mitem"><span class="dot"></span>Media &amp; assets</div>
+      <div class="mitem"><span class="dot"></span>Story &amp; highlights</div>
+      <div class="mitem"><span class="dot"></span>Contact &amp; practicalities</div>
+    </nav>
+
+    <!-- Sections (JS renders — one active demo section below) -->
+    <div id="sections">
+      <section class="sec active" data-sec="production">
+
+        <div class="sec-head">
+          <div class="sec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8M9 2v3.5a5 5 0 0 1-.8 2.7L7 10.2A6 6 0 0 0 6 13.5V20a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-6.5a6 6 0 0 0-1-3.3l-1.2-2A5 5 0 0 1 15 5.5V2"/><path d="M6.2 12.4h11.6"/></svg>
+          </div>
+          <div>
+            <div class="sec-kicker">Section 2 of 11</div>
+            <h3 class="sec-title">Production &amp; portfolio</h3>
+          </div>
+        </div>
+
+        <p class="sec-intro">Tell visitors what you make and at what scale. This shapes how your estate is categorised and which tasting audiences we match you with.</p>
+
+        <!-- Q1 · multi-choice (answered) -->
+        <div class="qg" data-qid="wine-styles">
+          <div class="q-head">
+            <div class="q-text">Which wine styles do you produce?<span class="q-opt"> — select all that apply</span></div>
+            <div class="q-req ok">Answered</div>
+          </div>
+          <div class="opts">
+            <button class="opt on" type="button">Still red</button>
+            <button class="opt on" type="button">Still white</button>
+            <button class="opt on" type="button">Rosé</button>
+            <button class="opt" type="button">Sparkling</button>
+            <button class="opt" type="button">Orange / skin-contact</button>
+            <button class="opt" type="button">Dessert / sweet</button>
+            <button class="opt" type="button">Fortified</button>
+          </div>
+        </div>
+
+        <!-- Q2 · single-choice + tip (answered) -->
+        <div class="qg" data-qid="annual-volume">
+          <div class="q-head">
+            <div class="q-text">Approximate annual production<span class="q-tag new">New</span></div>
+            <div class="q-req ok">Answered</div>
+          </div>
+          <button class="tip-btn open" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            Why we ask
+          </button>
+          <div class="tip-box open">Production volume helps us set expectations for group bookings and bottle availability. An estimate is fine — you can refine it later.</div>
+          <div class="opts">
+            <button class="opt" type="button">Under 5,000 bottles</button>
+            <button class="opt on" type="button">5,000 – 20,000</button>
+            <button class="opt" type="button">20,000 – 50,000</button>
+            <button class="opt" type="button">Over 50,000</button>
+          </div>
+        </div>
+
+        <!-- Q3 · text input (answered) -->
+        <div class="qg" data-qid="signature-grapes">
+          <div class="q-head">
+            <div class="q-text">Signature grape varieties</div>
+            <div class="q-req ok">Answered</div>
+          </div>
+          <input class="inp" data-qid="signature-grapes" type="text" value="Riesling, Solaris, Rondo, Regent" placeholder="e.g. Riesling, Pinot Noir…">
+        </div>
+
+        <!-- Q4 · textarea + tip (unanswered) -->
+        <div class="qg" data-qid="winemaking-approach">
+          <div class="q-head">
+            <div class="q-text">Describe your winemaking approach<span class="q-tag updated">Updated</span></div>
+            <div class="q-req">Not yet</div>
+          </div>
+          <button class="tip-btn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            Tip
+          </button>
+          <div class="tip-box">Two or three sentences guides work best — mention anything distinctive (spontaneous fermentation, amphora ageing, minimal intervention) that guests would find interesting.</div>
+          <textarea class="inp" data-qid="winemaking-approach" placeholder="Share what makes your cellar's approach distinctive…"></textarea>
+        </div>
+
+        <!-- Q5 · file upload (answered, mixed states) -->
+        <div class="qg" data-qid="portfolio-file">
+          <div class="q-head">
+            <div class="q-text">Upload your current wine list or portfolio<span class="q-opt"> — optional</span></div>
+            <div class="q-req ok">Answered</div>
+          </div>
+          <div class="upl">
+            <label class="upl-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+              Choose file
+              <input type="file" accept=".pdf,.jpg,.jpeg,.png" hidden>
+            </label>
+            <div class="upl-hint">PDF, JPG or PNG · up to 15 MB · no video or ZIP files</div>
+            <div class="upl-list" id="files-portfolio-file">
+              <div class="file-row ok">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="fname">wine-list-2026.pdf</span>
+                <span class="fstat">Uploaded</span>
+                <a class="fopen" href="#">Open</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ask a question row -->
+        <div class="ask">
+          <div class="ask-label">Question about this section? Ask our team.</div>
+          <div class="ask-row">
+            <input id="ask-production" class="inp" type="text" placeholder="Type your question…">
+            <button class="ask-btn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              Send
+            </button>
+          </div>
+        </div>
+
+        <!-- Prev / Next -->
+        <div class="nav">
+          <button class="btn-ghost" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            Back
+          </button>
+          <button class="btn-primary" type="button">
+            Next section
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- Contact row (JS renders — demo fields) -->
+    <div class="contact-wrap">
+      <div class="contact-kicker">Your details</div>
+      <div id="contact">
+        <div class="field">
+          <label>Winery name</label>
+          <input class="inp" type="text" value="Stara Winna Góra">
+        </div>
+        <div class="field">
+          <label>Contact name</label>
+          <input class="inp" type="text" value="Marek Wiśniewski">
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          <input class="inp" type="tel" value="+48 601 234 567">
+        </div>
+        <div class="field">
+          <label>Website / domain</label>
+          <input class="inp" type="text" value="starawinnagora.pl">
+        </div>
+        <div class="field full">
+          <label>Email</label>
+          <input class="inp full" type="email" value="marek@starawinnagora.pl">
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <a href="#" id="open-privacy">Privacy &amp; data use</a>
+      <div class="copy">© 2026 Tasting &amp; Toasting · tastingandtoasting.com/winery-setup</div>
+    </div>
+
   </div>
-  <div class="hi" id="u-hi"></div>
-  <div class="intro" id="u-intro"></div>
-  <div class="changed" id="changed" style="display:none"></div>
-  <div class="prog-row">
-    <div class="prog-track"><div class="prog-fill" id="pf"></div></div>
-    <div class="prog-pct" id="ppct"></div>
+
+  <!-- Sticky submit bar -->
+  <div class="submitbar">
+    <div id="geninfo">Your progress saves automatically. <strong>Submit when you're ready</strong> — you can keep editing until we review your listing.</div>
+    <button id="genbtn" type="button">Submit listing</button>
   </div>
-<div id="complete-banner" style="display:none;margin-top:10px;padding:10px 14px;background:rgba(90,161,126,.12);border:1px solid rgba(90,161,126,.4);border-radius:7px;font-size:12.5px;color:#7fb89a;line-height:1.5"></div>
+
 </div>
-<div class="body">
-  <div class="menu" id="menu"></div>
-  <div id="sections"></div>
-  <div class="contact-row" id="contact"></div>
+
+<!-- ============================================================ PRIVACY MODAL -->
+<div id="privacy-modal">
+  <div class="pm-card">
+    <h3 id="pm-ttl">Privacy &amp; data use</h3>
+    <div id="pm-body">The details you share here are used only to build and manage your listing on Tasting &amp; Toasting.
+
+We never sell your data. Uploaded files are stored securely and visible only to our listings team.
+
+You can request removal of your winery's data at any time by contacting your account manager.</div>
+    <button class="pm-close" type="button">Close</button>
+  </div>
 </div>
-<div class="gen-bar">
-  <div class="gen-info" id="geninfo"></div>
-  <button class="gen-btn" id="genbtn" onclick="sendAll()"></button>
+
+<!-- ============================================================ NOTIFICATIONS -->
+<div id="saveflash">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+  Saved
 </div>
-<div class="footer">
-  <a id="privacy-link" onclick="openPrivacy()"></a>
-  <div class="cp">Tasting &amp; Toasting Inc. · Delaware #7494277 · tastingandtoasting.com</div>
-</div>
-</div>
+<div id="toast">Your listing has been submitted — thank you.</div>
+
+<template id="__bundler_thumbnail" data-bg-color="#160609">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#160609"/>
+    <g transform="translate(600 380)" fill="none" stroke="#c9a96e" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M-70 -150h140M-50 -150v55a90 90 0 0 1-14 48l-22 34a108 108 0 0 0-18 59v118a36 36 0 0 0 36 36h136a36 36 0 0 0 36-36v-118a108 108 0 0 0-18-59l-22-34a90 90 0 0 1-14-48v-55"/>
+      <path d="M-96 20h192"/>
+    </g>
+    <text x="600" y="660" text-anchor="middle" fill="#f5efe3" font-family="Georgia, serif" font-size="60">Tasting &amp; Toasting</text>
+    <text x="600" y="710" text-anchor="middle" fill="#a08070" font-family="sans-serif" font-size="26" letter-spacing="8">WINERY SETUP</text>
+  </svg>
+</template>
 <div class="save-flash" id="saveflash"></div>
 <div class="toast" id="toast"></div>
-<div class="modal" id="privacy-modal">
-  <div class="modal-card">
-    <div class="modal-ttl" id="pm-ttl"></div>
-    <div class="modal-body" id="pm-body"></div>
-    <button class="modal-close" onclick="closePrivacy()">×</button>
-  </div>
-</div>
 <script>
+
+    
+document.addEventListener('DOMContentLoaded', async function() {
+  const loading = document.getElementById('__bundler_loading');
+  function setStatus(msg) { if (loading) loading.textContent = msg; }
+
+  const FONT_MIME = /^(font[/]|application[/](x-)?font-|application[/]vnd\.ms-fontobject)/i;
+  const MIME_TOKEN = /^[\w.+-]+[/][\w.+-]+$/;
+  function toBase64(bytes) {
+    let bin = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) {
+      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    }
+    return btoa(bin);
+  }
+
+  // Error sink persists across replaceWith since it's on window, not the DOM.
+  window.addEventListener('error', function(e) {
+    var p = document.body || document.documentElement;
+    var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
+    d.id = '__bundler_err';
+    d.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;font:12px/1.4 ui-monospace,monospace;background:#2a1215;color:#ff8a80;padding:10px 14px;border-radius:8px;border:1px solid #5c2b2e;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow:auto';
+    d.textContent = (d.textContent ? d.textContent + String.fromCharCode(10) : '') +
+      '[bundle] ' + (e.message || e.type) +
+      (e.filename ? ' (' + e.filename.slice(0, 60) + ':' + e.lineno + ')' : '');
+  }, true);
+
+  try {
+    const manifestEl = document.querySelector('script[type="__bundler/manifest"]');
+    const templateEl = document.querySelector('script[type="__bundler/template"]');
+    if (!manifestEl || !templateEl) {
+      setStatus('Error: missing bundle data');
+      console.error('[bundler] Missing script tags — manifestEl:', !!manifestEl, 'templateEl:', !!templateEl);
+      return;
+    }
+
+    const manifest = JSON.parse(manifestEl.textContent);
+    let template = JSON.parse(templateEl.textContent);
+
+    const uuids = Object.keys(manifest);
+    setStatus('Unpacking ' + uuids.length + ' assets...');
+
+    const blobUrls = {};
+    await Promise.all(uuids.map(async (uuid) => {
+      const entry = manifest[uuid];
+      try {
+        const binaryStr = atob(entry.data);
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+
+        let finalBytes = bytes;
+        if (entry.compressed) {
+          if (typeof DecompressionStream !== 'undefined') {
+            const ds = new DecompressionStream('gzip');
+            const writer = ds.writable.getWriter();
+            const reader = ds.readable.getReader();
+            writer.write(bytes);
+            writer.close();
+            const chunks = [];
+            let totalLen = 0;
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              chunks.push(value);
+              totalLen += value.length;
+            }
+            finalBytes = new Uint8Array(totalLen);
+            let offset = 0;
+            for (const chunk of chunks) { finalBytes.set(chunk, offset); offset += chunk.length; }
+          } else {
+            console.warn('DecompressionStream not available, asset ' + uuid + ' may not render');
+          }
+        }
+
+        if (FONT_MIME.test(entry.mime) && MIME_TOKEN.test(entry.mime)) {
+          // Strict artifact hosts allow font-src data: but not blob:.
+          blobUrls[uuid] = 'data:' + entry.mime + ';base64,' +
+            (entry.compressed ? toBase64(finalBytes) : entry.data);
+        } else {
+          blobUrls[uuid] = URL.createObjectURL(new Blob([finalBytes], { type: entry.mime }));
+        }
+      } catch (err) {
+        console.error('Failed to decode asset ' + uuid + ':', err);
+        blobUrls[uuid] = URL.createObjectURL(new Blob([], { type: entry.mime }));
+      }
+    }));
+
+    const extResEl = document.querySelector('script[type="__bundler/ext_resources"]');
+    const extResources = extResEl ? JSON.parse(extResEl.textContent) : [];
+    const resourceMap = {};
+    for (const entry of extResources) {
+      if (blobUrls[entry.uuid]) resourceMap[entry.id] = blobUrls[entry.uuid];
+    }
+
+    setStatus('Rendering...');
+    for (const uuid of uuids) template = template.split(uuid).join(blobUrls[uuid]);
+
+    // Strip integrity + crossorigin — blob URLs from a file:// document inherit
+    // a null origin, so crossorigin forces a CORS fetch that SRI then rejects.
+    // The manifest bytes are ours; SRI protects against CDN compromise, not this.
+    template = template.replace(/\s+integrity="[^"]*"/gi, '').replace(/\s+crossorigin="[^"]*"/gi, '');
+
+    const resourceScript = '<script>window.__resources = ' +
+      JSON.stringify(resourceMap).split('</' + 'script>').join('<\\/' + 'script>') +
+      ';</' + 'script>';
+    // Inject after <head> so the DOCTYPE stays first; prepending the script
+    // would push the parser into quirks mode. DOMParser always emits a <head>
+    // (synthesizing one if the source HTML omitted it) but may carry
+    // attributes through, so match the full opening tag. slice() rather than
+    // replace() keeps us clear of $-pattern substitution in resourceScript.
+    const headOpen = template.match(/<head[^>]*>/i);
+    if (headOpen) {
+      const i = headOpen.index + headOpen[0].length;
+      template = template.slice(0, i) + resourceScript + template.slice(i);
+    }
+
+    // Parse the template and swap the root element. Scripts inserted via
+    // DOMParser/replaceWith are inert per spec — re-create each with
+    // createElement so they execute, awaiting onload for src scripts to
+    // preserve ordering (React before ReactDOM before Babel before text/babel).
+    const doc = new DOMParser().parseFromString(template, 'text/html');
+    document.documentElement.replaceWith(doc.documentElement);
+    const dead = Array.from(document.scripts);
+    for (const old of dead) {
+      const s = document.createElement('script');
+      for (const a of old.attributes) s.setAttribute(a.name, a.value);
+      s.textContent = old.textContent;
+      // text/babel scripts with a src: fetch and inline. transformScriptTags
+      // does XHR against the src, but blob:null/ from a file:// origin is
+      // silently dropped. Inlining makes it a plain inline babel script,
+      // which transformScriptTags handles unconditionally.
+      if ((s.type === 'text/babel' || s.type === 'text/jsx') && s.src) {
+        const r = await fetch(s.src);
+        s.textContent = await r.text();
+        s.removeAttribute('src');
+      }
+      const p = s.src ? new Promise(function(r) { s.onload = s.onerror = r; }) : null;
+      old.replaceWith(s);
+      if (p) await p;
+    }
+    // Babel standalone auto-transforms type=text/babel on DOMContentLoaded,
+    // which fired before we swapped the document. Trigger manually if present.
+    if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
+      window.Babel.transformScriptTags();
+    }
+  } catch (err) {
+    setStatus('Error unpacking: ' + err.message);
+    console.error('Bundle unpack error:', err);
+  }
+});
+
+  
+</script>
+<script>
+
+    
+document.addEventListener('DOMContentLoaded', async function() {
+  const loading = document.getElementById('__bundler_loading');
+  function setStatus(msg) { if (loading) loading.textContent = msg; }
+
+  const FONT_MIME = /^(font[/]|application[/](x-)?font-|application[/]vnd\.ms-fontobject)/i;
+  const MIME_TOKEN = /^[\w.+-]+[/][\w.+-]+$/;
+  function toBase64(bytes) {
+    let bin = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) {
+      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    }
+    return btoa(bin);
+  }
+
+  // Error sink persists across replaceWith since it's on window, not the DOM.
+  window.addEventListener('error', function(e) {
+    var p = document.body || document.documentElement;
+    var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
+    d.id = '__bundler_err';
+    d.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;font:12px/1.4 ui-monospace,monospace;background:#2a1215;color:#ff8a80;padding:10px 14px;border-radius:8px;border:1px solid #5c2b2e;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow:auto';
+    d.textContent = (d.textContent ? d.textContent + String.fromCharCode(10) : '') +
+      '[bundle] ' + (e.message || e.type) +
+      (e.filename ? ' (' + e.filename.slice(0, 60) + ':' + e.lineno + ')' : '');
+  }, true);
+
+  try {
+    const manifestEl = document.querySelector('script[type="__bundler/manifest"]');
+    const templateEl = document.querySelector('script[type="__bundler/template"]');
+    if (!manifestEl || !templateEl) {
+      setStatus('Error: missing bundle data');
+      console.error('[bundler] Missing script tags — manifestEl:', !!manifestEl, 'templateEl:', !!templateEl);
+      return;
+    }
+
+    const manifest = JSON.parse(manifestEl.textContent);
+    let template = JSON.parse(templateEl.textContent);
+
+    const uuids = Object.keys(manifest);
+    setStatus('Unpacking ' + uuids.length + ' assets...');
+
+    const blobUrls = {};
+    await Promise.all(uuids.map(async (uuid) => {
+      const entry = manifest[uuid];
+      try {
+        const binaryStr = atob(entry.data);
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+
+        let finalBytes = bytes;
+        if (entry.compressed) {
+          if (typeof DecompressionStream !== 'undefined') {
+            const ds = new DecompressionStream('gzip');
+            const writer = ds.writable.getWriter();
+            const reader = ds.readable.getReader();
+            writer.write(bytes);
+            writer.close();
+            const chunks = [];
+            let totalLen = 0;
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              chunks.push(value);
+              totalLen += value.length;
+            }
+            finalBytes = new Uint8Array(totalLen);
+            let offset = 0;
+            for (const chunk of chunks) { finalBytes.set(chunk, offset); offset += chunk.length; }
+          } else {
+            console.warn('DecompressionStream not available, asset ' + uuid + ' may not render');
+          }
+        }
+
+        if (FONT_MIME.test(entry.mime) && MIME_TOKEN.test(entry.mime)) {
+          // Strict artifact hosts allow font-src data: but not blob:.
+          blobUrls[uuid] = 'data:' + entry.mime + ';base64,' +
+            (entry.compressed ? toBase64(finalBytes) : entry.data);
+        } else {
+          blobUrls[uuid] = URL.createObjectURL(new Blob([finalBytes], { type: entry.mime }));
+        }
+      } catch (err) {
+        console.error('Failed to decode asset ' + uuid + ':', err);
+        blobUrls[uuid] = URL.createObjectURL(new Blob([], { type: entry.mime }));
+      }
+    }));
+
+    const extResEl = document.querySelector('script[type="__bundler/ext_resources"]');
+    const extResources = extResEl ? JSON.parse(extResEl.textContent) : [];
+    const resourceMap = {};
+    for (const entry of extResources) {
+      if (blobUrls[entry.uuid]) resourceMap[entry.id] = blobUrls[entry.uuid];
+    }
+
+    setStatus('Rendering...');
+    for (const uuid of uuids) template = template.split(uuid).join(blobUrls[uuid]);
+
+    // Strip integrity + crossorigin — blob URLs from a file:// document inherit
+    // a null origin, so crossorigin forces a CORS fetch that SRI then rejects.
+    // The manifest bytes are ours; SRI protects against CDN compromise, not this.
+    template = template.replace(/\s+integrity="[^"]*"/gi, '').replace(/\s+crossorigin="[^"]*"/gi, '');
+
+    const resourceScript = '<script>window.__resources = ' +
+      JSON.stringify(resourceMap).split('</' + 'script>').join('<\\/' + 'script>') +
+      ';</' + 'script>';
+    // Inject after <head> so the DOCTYPE stays first; prepending the script
+    // would push the parser into quirks mode. DOMParser always emits a <head>
+    // (synthesizing one if the source HTML omitted it) but may carry
+    // attributes through, so match the full opening tag. slice() rather than
+    // replace() keeps us clear of $-pattern substitution in resourceScript.
+    const headOpen = template.match(/<head[^>]*>/i);
+    if (headOpen) {
+      const i = headOpen.index + headOpen[0].length;
+      template = template.slice(0, i) + resourceScript + template.slice(i);
+    }
+
+    // Parse the template and swap the root element. Scripts inserted via
+    // DOMParser/replaceWith are inert per spec — re-create each with
+    // createElement so they execute, awaiting onload for src scripts to
+    // preserve ordering (React before ReactDOM before Babel before text/babel).
+    const doc = new DOMParser().parseFromString(template, 'text/html');
+    document.documentElement.replaceWith(doc.documentElement);
+    const dead = Array.from(document.scripts);
+    for (const old of dead) {
+      const s = document.createElement('script');
+      for (const a of old.attributes) s.setAttribute(a.name, a.value);
+      s.textContent = old.textContent;
+      // text/babel scripts with a src: fetch and inline. transformScriptTags
+      // does XHR against the src, but blob:null/ from a file:// origin is
+      // silently dropped. Inlining makes it a plain inline babel script,
+      // which transformScriptTags handles unconditionally.
+      if ((s.type === 'text/babel' || s.type === 'text/jsx') && s.src) {
+        const r = await fetch(s.src);
+        s.textContent = await r.text();
+        s.removeAttribute('src');
+      }
+      const p = s.src ? new Promise(function(r) { s.onload = s.onerror = r; }) : null;
+      old.replaceWith(s);
+      if (p) await p;
+    }
+    // Babel standalone auto-transforms type=text/babel on DOMContentLoaded,
+    // which fired before we swapped the document. Trigger manually if present.
+    if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
+      window.Babel.transformScriptTags();
+    }
+  } catch (err) {
+    setStatus('Error unpacking: ' + err.message);
+    console.error('Bundle unpack error:', err);
+  }
+});
+
+  
+</script>
+<script>
+
 let DATA = null;
 const UPLOAD_QS ={"stages": {"pl": "Wgraj zdjęcia / dokumenty etapów", "en": "Upload stage photos / documents", "ru": "Загрузите фото / документы этапов"}, "required_docs": {"pl": "Wgraj przykłady dokumentów (analizy, certyfikaty)", "en": "Upload document samples (analyses, certificates)", "ru": "Загрузите образцы документов (анализы, сертификаты)"}, "qr_place": {"pl": "Wgraj zdjęcia etykiet / butelek", "en": "Upload label / bottle photos", "ru": "Загрузите фото этикеток / бутылок"}, "printer_qr": {"pl": "Wgraj próbki etykiet od drukarni", "en": "Upload label samples from the printer", "ru": "Загрузите образцы этикеток от типографии"}, "human_only": {"pl": "Wgraj przykład takiego dokumentu", "en": "Upload an example of such a document", "ru": "Загрузите пример такого документа"}, "collection_name": {"pl": "Wgraj zdjęcia archiwum / kolekcji", "en": "Upload archive / collection photos", "ru": "Загрузите фото архива / коллекции"}, "wines_special": {"pl": "Wgraj zdjęcia win kolekcjonerskich", "en": "Upload collector wine photos", "ru": "Загрузите фото коллекционных вин"}, "services": {"pl": "Wgraj zdjęcia / menu / cennik", "en": "Upload photos / menu / price list", "ru": "Загрузите фото / меню / прайс"}};
 const UPLOAD_UI = {"pl": {"btn": "Dodaj plik", "files": "Pliki", "uploading": "Wysyłanie...", "done": "Wgrano", "err": "Błąd wysyłania", "hint": "PDF, JPG lub PNG, do 15 MB. Możesz dodać kilka."}, "en": {"btn": "Add file", "files": "Files", "uploading": "Uploading...", "done": "Uploaded", "err": "Upload failed", "hint": "PDF, JPG or PNG, up to 15 MB. You can add several."}, "ru": {"btn": "Добавить файл", "files": "Файлы", "uploading": "Загрузка...", "done": "Загружено", "err": "Ошибка загрузки", "hint": "PDF, JPG или PNG, до 15 МБ. Можно несколько."}};
@@ -576,6 +1624,7 @@ let questionsReady = fetch('/winery-setup/questions.json',{cache:'no-cache'})
     SECTIONS.forEach(s=>s.qs.forEach(q=>{QV[q.id]=q.v||1;}));
   })
   .catch(err=>{ DATA=null; });
+
 </script>
 </body>
 </html>
