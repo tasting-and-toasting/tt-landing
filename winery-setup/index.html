@@ -1055,7 +1055,18 @@ function checkGate(){
 const FAIL_MSG={pl:"Nie udało się załadować pytań. Odśwież stronę.",en:"Could not load the questions. Please refresh.",ru:"Не удалось загрузить вопросы. Обновите страницу."};
 
 const lb=document.getElementById('lbar');
-['pl','en','ru'].forEach(l=>{const b=document.createElement('button');b.className='lng'+(l==='pl'?' on':'');b.dataset.l=l;b.textContent=l.toUpperCase();b.onclick=()=>{lang=l;renderGate();renderEmailScreen();if(DATA&&loadedEmail)renderLang();};lb.appendChild(b);});
+['pl','en','ru'].forEach(l=>{
+  ['lbar','glbar','elbar'].forEach(function(bid){
+    const container=document.getElementById(bid);if(!container)return;
+    const b=document.createElement('button');
+    b.className='lng'+(l==='pl'?' on':'');
+    b.dataset.l=l;b.textContent=l.toUpperCase();
+    b.onclick=()=>{lang=l;
+      document.querySelectorAll('.lng').forEach(x=>x.classList.toggle('on',x.dataset.l===l));
+      renderGate();renderEmailScreen();if(DATA&&loadedEmail)renderLang();};
+    container.appendChild(b);
+  });
+});
 
 document.getElementById('g-inp').addEventListener('keydown',e=>{if(e.key==='Enter')checkGate();});
 document.getElementById('e-inp').addEventListener('keydown',e=>{if(e.key==='Enter')submitEmail();});
