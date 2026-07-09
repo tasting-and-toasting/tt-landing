@@ -129,10 +129,14 @@ body{background:#160609;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',
   </div>
 </div>
 <div class="gate" id="email-gate" style="display:none">
-  <div class="gate-card">
+  <div class="gate-card" style="max-width:400px">
     <img src="/assets/logo_nav.png" alt="Tasting & Toasting">
     <div class="gate-ttl" id="e-ttl"></div>
     <div class="gate-hint" id="e-hint"></div>
+    <input class="gate-inp gate-email" id="e-winery" type="text" placeholder="" autocomplete="organization" style="margin-bottom:8px">
+    <input class="gate-inp gate-email" id="e-name" type="text" placeholder="" autocomplete="name" style="margin-bottom:8px">
+    <input class="gate-inp gate-email" id="e-phone" type="tel" placeholder="" autocomplete="tel" style="margin-bottom:8px">
+    <input class="gate-inp gate-email" id="e-domain" type="text" placeholder="" autocomplete="url" style="margin-bottom:8px">
     <input class="gate-inp gate-email" id="e-inp" type="email" inputmode="email" placeholder="email@example.com" autocomplete="email">
     <div class="gate-err" id="e-err"></div>
     <button class="gate-btn" id="e-btn" onclick="submitEmail()"></button>
@@ -151,6 +155,7 @@ body{background:#160609;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',
     <div class="prog-track"><div class="prog-fill" id="pf"></div></div>
     <div class="prog-pct" id="ppct"></div>
   </div>
+<div id="complete-banner" style="display:none;margin-top:10px;padding:10px 14px;background:rgba(90,161,126,.12);border:1px solid rgba(90,161,126,.4);border-radius:7px;font-size:12.5px;color:#7fb89a;line-height:1.5"></div>
 </div>
 <div class="body">
   <div class="menu" id="menu"></div>
@@ -186,6 +191,16 @@ const API_BASE = "https://tt-stack-prod.onrender.com";
 const UPLOAD_ENDPOINT = API_BASE+"/api/winery-setup/upload";
 const SAVE_ENDPOINT = API_BASE+"/api/winery-setup/save";
 const LOAD_ENDPOINT = API_BASE+"/api/winery-setup/load";
+const INTRO={
+  en:"This questionnaire was prepared for {winery}. Answer in any order — skip questions and come back later. Everything saves automatically. You can submit at any time, even partially.\n\nTo return: open the same link, enter your password and email. You will see your form exactly as you left it.\n\nFiles: PDF, JPG and PNG only · max 15 MB per file · no video or ZIP files.\n\nAt 100% you will see a summary of all your answers.",
+  pl:"Ten kwestionariusz został przygotowany dla {winery}. Odpowiadaj w dowolnej kolejności — pomijaj pytania i wracaj do nich. Wszystko zapisuje się automatycznie. Możesz przesłać odpowiedzi w dowolnym momencie, nawet niekompletne.\n\nAby wrócić: otwórz ten sam link, wpisz hasło i email. Zobaczysz formularz w takim stanie, w jakim go zostawiłeś/zostawiłaś.\n\nPliki: tylko PDF, JPG i PNG · maks. 15 MB na plik · bez wideo i ZIP.\n\nPrzy 100% zobaczysz podsumowanie wszystkich odpowiedzi.",
+  ru:"Этот опросник подготовлен для {winery}. Отвечайте в любом порядке — пропускайте вопросы и возвращайтесь к ним. Всё сохраняется автоматически. Можно отправить ответы в любой момент, даже неполные.\n\nЧтобы вернуться: откройте ту же ссылку, введите пароль и email. Вы увидите форму в том состоянии, в котором её оставили.\n\nФайлы: только PDF, JPG и PNG · макс. 15 МБ на файл · видео и ZIP не принимаются.\n\nПри 100% вы увидите сводку всех своих ответов."
+};
+const CONTACT_GATE={
+  en:{title:"Contact details",hint:"Fill in to save your answers",winery:"Winery name *",name:"Your name *",phone:"Phone number *",domain:"Website / domain (optional)",email:"Email *",btn:"Continue",err_req:"Please fill in the required fields",err_email:"Enter a valid email address"},
+  pl:{title:"Dane kontaktowe",hint:"Wypełnij, aby zapisać swoje odpowiedzi",winery:"Nazwa winnicy *",name:"Imię i nazwisko *",phone:"Numer telefonu *",domain:"Strona / domena (opcjonalnie)",email:"Email *",btn:"Kontynuuj",err_req:"Proszę wypełnić wymagane pola",err_email:"Wprowadź poprawny adres email"},
+  ru:{title:"Контактные данные",hint:"Заполните, чтобы сохранить ответы",winery:"Название винодельни *",name:"Имя и фамилия *",phone:"Номер телефона *",domain:"Сайт / домен (опционально)",email:"Email *",btn:"Продолжить",err_req:"Заполните обязательные поля",err_email:"Введите корректный адрес email"}
+};
 const EMAILSCR = {
   pl:{title:"Wprowadź swój email",hint:"Twoje odpowiedzi zapiszą się pod tym adresem i będą dostępne z każdego urządzenia",btn:"Kontynuuj",err:"Wprowadź poprawny adres email",offline:"Brak połączenia z serwerem — używam zapisanej kopii."},
   en:{title:"Enter your email",hint:"Your answers save under this address and are available from any device",btn:"Continue",err:"Enter a valid email address",offline:"No server connection — using your saved copy."},
@@ -205,7 +220,7 @@ let state=loadState();
 if(!state.token)state.token='swg-'+Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4);
 if(!state.files)state.files={};
 
-function loadState(){try{return JSON.parse(localStorage.getItem(KEY))||{ans:{},name:'',email:'',files:{}};}catch(e){return {ans:{},email:'',name:'',files:{}};}}
+function loadState(){try{return JSON.parse(localStorage.getItem(KEY))||{ans:{},name:'',email:'',phone:'',domain:'',winery:'',files:{}};}catch(e){return {ans:{},email:'',name:'',phone:'',domain:'',winery:'',files:{}};}}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
 // localStorage stays as a fast offline cache; the server (keyed by email) is the
 // source of truth. Every saveState writes the cache and debounce-syncs the server.
@@ -258,17 +273,32 @@ function renderFail(){
   const sec=document.getElementById('sections');if(sec)sec.innerHTML='<div style="padding:20px 0;color:#a08070;font-size:13px">'+(FAIL_MSG[lang]||FAIL_MSG.en)+'</div>';
 }
 function renderEmailScreen(){
-  const e=EMAILSCR[lang]||EMAILSCR.en;
+  const e=CONTACT_GATE[lang]||CONTACT_GATE.en;
   document.getElementById('e-ttl').textContent=e.title;
   document.getElementById('e-hint').textContent=e.hint;
   document.getElementById('e-btn').textContent=e.btn;
+  document.getElementById('e-winery').placeholder=e.winery;
+  document.getElementById('e-name').placeholder=e.name;
+  document.getElementById('e-phone').placeholder=e.phone;
+  document.getElementById('e-domain').placeholder=e.domain;
+  document.getElementById('e-inp').placeholder=e.email;
+  if(state.winery)document.getElementById('e-winery').value=state.winery;
+  if(state.name)document.getElementById('e-name').value=state.name;
+  if(state.phone)document.getElementById('e-phone').value=state.phone;
+  if(state.domain)document.getElementById('e-domain').value=state.domain;
   const inp=document.getElementById('e-inp');if(inp&&!inp.value&&state.email)inp.value=state.email;
 }
 function submitEmail(){
+  const winery=(document.getElementById('e-winery').value||'').trim();
+  const name=(document.getElementById('e-name').value||'').trim();
+  const phone=(document.getElementById('e-phone').value||'').trim();
+  const domain=(document.getElementById('e-domain').value||'').trim();
   const email=(document.getElementById('e-inp').value||'').trim().toLowerCase();
-  const e=EMAILSCR[lang]||EMAILSCR.en;
-  if(!validEmail(email)){document.getElementById('e-err').textContent=e.err;return;}
+  const e=CONTACT_GATE[lang]||CONTACT_GATE.en;
+  if(!winery||!name||!phone||!email){document.getElementById('e-err').textContent=e.err_req;return;}
+  if(!validEmail(email)){document.getElementById('e-err').textContent=e.err_email;return;}
   document.getElementById('e-err').textContent='';
+  state.winery=winery;state.name=name;state.phone=phone;state.domain=domain;persist();
   document.getElementById('email-gate').style.display='none';
   document.getElementById('app').style.display='block';
   applyEmail(email);
@@ -310,8 +340,8 @@ function countProgress(){let total=0,done=0;SECTIONS.forEach(s=>s.qs.forEach(q=>
 function renderLang(){
   document.querySelectorAll('.lng').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
   const u=UI[lang];
-  document.getElementById('u-hi').textContent=u.hi;
-  document.getElementById('u-intro').textContent=u.intro;
+  document.getElementById('u-hi').textContent=(u.hi||'').replace('{winery}',state.winery||'');
+  document.getElementById('u-intro').textContent=(INTRO[lang]||INTRO.en).replace('{winery}',state.winery||u.intro_winery_fallback||'');
   document.getElementById('genbtn').textContent=u.gen;
   document.getElementById('geninfo').textContent=u.genhint;
   document.getElementById('privacy-link').textContent=PRIVACY[lang].link;
@@ -328,12 +358,18 @@ function renderChanged(){
 }
 function renderContact(){
   const u=UI[lang];
+  const cg=CONTACT_GATE[lang]||CONTACT_GATE.en;
   document.getElementById('contact').innerHTML=
-   '<input class="inp" id="c-name" placeholder="'+u.yourname+'" value="'+(state.name||'Małgorzata')+'">'+
-   '<input class="inp" id="c-email" type="email" placeholder="'+u.youremail+' ('+u.optional+')" value="'+(state.email||'')+'">';
+   '<input class="inp" id="c-winery" placeholder="'+cg.winery.replace(' *','')+'" value="'+(state.winery||'')+'">'+
+   '<input class="inp" id="c-name" placeholder="'+cg.name.replace(' *','')+'" value="'+(state.name||'')+'">'+
+   '<input class="inp" id="c-phone" type="tel" placeholder="'+cg.phone.replace(' *','')+'" value="'+(state.phone||'')+'">'+
+   '<input class="inp" id="c-domain" placeholder="'+cg.domain+'" value="'+(state.domain||'')+'">'+
+   '<input class="inp" id="c-email" type="email" placeholder="'+u.youremail+'" value="'+(state.email||'')+'" style="grid-column:1/-1">';
+  document.getElementById('c-winery').oninput=e=>{state.winery=e.target.value;saveState();document.getElementById('u-hi').textContent=(UI[lang].hi||'').replace('{winery}',state.winery||'');};
   document.getElementById('c-name').oninput=e=>{state.name=e.target.value;saveState();};
+  document.getElementById('c-phone').oninput=e=>{state.phone=e.target.value;saveState();};
+  document.getElementById('c-domain').oninput=e=>{state.domain=e.target.value;saveState();};
   document.getElementById('c-email').oninput=e=>{state.email=e.target.value;saveState();};
-  // Changing the email here switches forms: load that email's data (email is the key).
   document.getElementById('c-email').onblur=e=>{
     const ne=(e.target.value||'').trim().toLowerCase();
     if(ne&&validEmail(ne)&&ne!==loadedEmail){applyEmail(ne);}
@@ -350,7 +386,20 @@ function renderMenu(){
     m.appendChild(d);
   });
 }
-function renderProgress(){const p=countProgress();document.getElementById('pf').style.width=p.pct+'%';document.getElementById('ppct').textContent=UI[lang].progress+' '+p.pct+'%';}
+function renderProgress(){
+  const p=countProgress();
+  document.getElementById('pf').style.width=p.pct+'%';
+  document.getElementById('ppct').textContent=(UI[lang].progress||'Progress')+' '+p.pct+'%';
+  const cb=document.getElementById('complete-banner');
+  if(!cb)return;
+  if(p.pct===100){
+    const CM={en:'Your form is 100% complete. You can still edit and resubmit.',pl:'Formularz jest w 100% wypełniony. Możesz edytować i wysłać ponownie.',ru:'Форма заполнена на 100%. Вы можете редактировать и отправить повторно.'};
+    cb.textContent=CM[lang]||CM.en;
+    cb.style.display='block';
+  }else{
+    cb.style.display='none';
+  }
+}
 function renderSections(){
   const wrap=document.getElementById('sections');wrap.innerHTML='';
   SECTIONS.forEach((s,i)=>{
@@ -458,7 +507,7 @@ function iconSvg(name){
 }
 
 function buildSummary(){
-  const lines=['STARA WINNA GÓRA — WINERY SETUP','TOKEN: '+state.token,'PARTNER: '+(state.name||'Małgorzata'),'EMAIL: '+(state.email||'—'),'LANG: '+lang.toUpperCase()];
+  const lines=['WINERY: '+(state.winery||'—'),'PARTNER: '+(state.name||'—'),'PHONE: '+(state.phone||'—'),'DOMAIN: '+(state.domain||'—'),'EMAIL: '+(state.email||'—'),'TOKEN: '+state.token,'LANG: '+lang.toUpperCase()];
   const p=countProgress();lines.push('PROGRESS: '+p.done+'/'+p.total+' ('+p.pct+'%)','');
   SECTIONS.forEach((s,i)=>{
     // Build this section's answered questions first; only print the header
@@ -484,14 +533,15 @@ function buildSummary(){
 }
 async function sendAll(){
   const summary=buildSummary();const p=countProgress();
-  const payload={type:'winery_setup',winery:'Stara Winna Góra',token:state.token,name:state.name||'Małgorzata',email:state.email||'',lang:lang,progress:p.pct+'%',answers:state.ans,files:state.files,summary:summary,url:location.href,ts:new Date().toISOString()};
+  const wasSubmitted=!!(state.submitted);state.submitted=true;persist();
+  const payload={type:'winery_setup',winery:state.winery||'',token:state.token,name:state.name||'',phone:state.phone||'',domain:state.domain||'',email:state.email||'',lang:lang,progress:p.pct+'%',updated:wasSubmitted,answers:state.ans,files:state.files,summary:summary,url:location.href,ts:new Date().toISOString()};
   try{await fetch('https://tt-stack-prod.onrender.com/api/partner-interest',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch(e){}
-  try{await fetch('https://formspree.io/f/xgobjyre',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Winery setup: Stara Winna Góra ('+p.pct+'%)',name:payload.name,email:payload.email,summary:summary})});}catch(e){}
+  try{await fetch('https://formspree.io/f/xgobjyre',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Winery setup: '+(state.winery||'Winery')+' ('+p.pct+'%)'+(payload.updated?' [UPDATED]':''),name:payload.name,email:payload.email,summary:summary})});}catch(e){}
   toast(UI[lang].sent+' '+UI[lang].sentb);
 }
 async function sendAsk(secId,secTitle){
   const inp=document.getElementById('ask-'+secId);const txt=inp.value.trim();if(!txt)return;
-  try{await fetch('https://formspree.io/f/xgobjyre',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Question from Małgorzata — '+secTitle,name:state.name||'Małgorzata',email:state.email||'',question:txt,section:secTitle})});}catch(e){}
+  try{await fetch('https://formspree.io/f/xgobjyre',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Question from '+(state.name||state.winery||'Winery')+' — '+secTitle,name:state.name||'',email:state.email||'',question:txt,section:secTitle})});}catch(e){}
   inp.value='';toast(UI[lang].asksend+' ✓');
 }
 
