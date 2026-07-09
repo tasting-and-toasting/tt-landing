@@ -2,11 +2,9 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Tasting &amp; Toasting · Winery Setup</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasting & Toasting · Stara Winna Góra · Winery Setup</title>
 <style>
-
 /* ========================================================================
    TOKENS  (values taken verbatim from the spec — no new colours introduced)
    ======================================================================== */
@@ -614,621 +612,72 @@ textarea.inp{resize:vertical;min-height:88px;line-height:1.55;}
   .hdr-hi{font-size:20px;}
   .gate-inner{max-width:100%;}
 }
-
-/* ── Save flash & toast (preserved from original) ── */
-.save-flash{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#3a1520;border:1px solid #c9a96e;border-radius:20px;padding:7px 16px;font-size:12px;color:#c9a96e;opacity:0;transition:opacity .3s;pointer-events:none;z-index:30}
-.save-flash.show{opacity:1}
-.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:#3a1520;border:1px solid #c9a96e;border-radius:10px;padding:14px 22px;font-size:14px;color:#f5efe3;opacity:0;transition:opacity .3s;pointer-events:none;z-index:40;max-width:90%;text-align:center}
-.toast.show{opacity:1}
 </style>
 </head>
 <body>
-<!-- ============================================================ SCREEN 1 · PASSWORD GATE -->
-<div id="gate" class="gate">
-  <div class="gate-lang">
-    <button class="lng" type="button">PL</button>
-    <button class="lng on" type="button">EN</button>
-    <button class="lng" type="button">RU</button>
-  </div>
-  <div class="gate-inner">
-    <img class="gate-logo" src="assets/logo_nav.png" alt="Tasting &amp; Toasting">
-    <h1 id="g-ttl" class="gate-title">Welcome to your setup</h1>
-    <p id="g-hint" class="gate-hint">Enter the 4-digit code from your invitation to open your winery questionnaire.</p>
-    <div id="g-err" class="gate-err"></div>
-    <input id="g-inp" class="gate-inp" type="text" inputmode="numeric" maxlength="4" placeholder="• • • •" autocomplete="off">
-    <button id="g-btn" class="gate-btn" type="button">Unlock</button>
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <img src="/assets/logo_nav.png" alt="Tasting & Toasting">
+    <div class="gate-ttl" id="g-ttl"></div>
+    <div class="gate-hint" id="g-hint"></div>
+    <input class="gate-inp" id="g-inp" type="text" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off">
+    <div class="gate-err" id="g-err"></div>
+    <button class="gate-btn" id="g-btn" onclick="checkGate()"></button>
   </div>
 </div>
-
-<!-- ============================================================ SCREEN 2 · CONTACT GATE -->
-<div id="email-gate" style="display:none" class="gate">
-  <div class="gate-lang">
-    <button class="lng" type="button">PL</button>
-    <button class="lng on" type="button">EN</button>
-    <button class="lng" type="button">RU</button>
-  </div>
-  <div class="gate-inner">
-    <img class="gate-logo" src="assets/logo_nav.png" alt="Tasting &amp; Toasting">
-    <h1 id="e-ttl" class="gate-title">Tell us who you are</h1>
-    <p id="e-hint" class="gate-hint">A few details so we can save your progress and stay in touch about your listing.</p>
-    <div class="gate-fields">
-      <input id="e-winery" class="gate-email" type="text" placeholder="Winery name *" autocomplete="organization">
-      <input id="e-name" class="gate-email" type="text" placeholder="Your name *" autocomplete="name">
-      <input id="e-phone" class="gate-email" type="tel" placeholder="Phone *" autocomplete="tel">
-      <input id="e-domain" class="gate-email" type="text" placeholder="Website / domain (optional)" autocomplete="url">
-      <input id="e-inp" class="gate-email" type="email" placeholder="Email *" autocomplete="email">
-    </div>
-    <div id="e-err" class="gate-err"></div>
-    <button id="e-btn" class="gate-btn" type="button">Start questionnaire</button>
+<div class="gate" id="email-gate" style="display:none">
+  <div class="gate-card" style="max-width:400px">
+    <img src="/assets/logo_nav.png" alt="Tasting & Toasting">
+    <div class="gate-ttl" id="e-ttl"></div>
+    <div class="gate-hint" id="e-hint"></div>
+    <input class="gate-inp gate-email" id="e-winery" type="text" placeholder="" autocomplete="organization" style="margin-bottom:8px">
+    <input class="gate-inp gate-email" id="e-name" type="text" placeholder="" autocomplete="name" style="margin-bottom:8px">
+    <input class="gate-inp gate-email" id="e-phone" type="tel" placeholder="" autocomplete="tel" style="margin-bottom:8px">
+    <input class="gate-inp gate-email" id="e-domain" type="text" placeholder="" autocomplete="url" style="margin-bottom:8px">
+    <input class="gate-inp gate-email" id="e-inp" type="email" inputmode="email" placeholder="email@example.com" autocomplete="email">
+    <div class="gate-err" id="e-err"></div>
+    <button class="gate-btn" id="e-btn" onclick="submitEmail()"></button>
   </div>
 </div>
-
-<!-- ============================================================ SCREEN 3 · MAIN FORM -->
-<div id="app" style="display:none">
-
-  <!-- Sticky header -->
-  <header class="hdr">
-    <div class="hdr-top">
-      <img class="hdr-logo" src="assets/logo_nav.png" alt="Tasting &amp; Toasting">
-      <div id="lbar">
-        <button class="lng" type="button">PL</button>
-        <button class="lng on" type="button">EN</button>
-        <button class="lng" type="button">RU</button>
-      </div>
-    </div>
-    <h2 id="u-hi" class="hdr-hi">Stara Winna Góra</h2>
-    <p id="u-intro" class="hdr-intro">Everything you share here builds your listing on Tasting &amp; Toasting — visitors read it before they book. Answer at your own pace; every change saves automatically.</p>
-
-    <!-- Changed banner (conditional — JS shows/hides/sets content) -->
-    <div id="changed" class="banner-changed">
-      <span><strong>3 questions</strong> were updated since your last visit. They're marked <span class="q-tag updated" style="margin-left:0;">Updated</span> in the sections below.</span>
-      <button class="bc-x" type="button" aria-label="Dismiss">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-    </div>
-
-    <!-- Completion banner (conditional at 100% — hidden until then) -->
-    <div id="complete-banner" class="banner-complete" style="display:none;">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-      <span>All sections complete — you're ready to submit your listing.</span>
-    </div>
-
-    <!-- Progress -->
-    <div class="progress-row">
-      <div class="progress-track"><div id="pf" class="progress-fill" style="width:45%;"></div></div>
-      <span id="ppct" class="progress-pct">45%</span>
-    </div>
-  </header>
-
-  <div class="body">
-
-    <!-- Section navigation (JS renders — demo items below) -->
-    <nav id="menu">
-      <div class="mitem done"><span class="dot"></span>About the winery</div>
-      <div class="mitem active"><span class="dot"></span>Production &amp; portfolio</div>
-      <div class="mitem"><span class="dot"></span>Estate &amp; cellar</div>
-      <div class="mitem"><span class="dot"></span>Tasting experiences<span class="newdot"></span></div>
-      <div class="mitem"><span class="dot"></span>Food &amp; pairings</div>
-      <div class="mitem"><span class="dot"></span>Logistics &amp; access</div>
-      <div class="mitem"><span class="dot"></span>Availability</div>
-      <div class="mitem"><span class="dot"></span>Pricing</div>
-      <div class="mitem"><span class="dot"></span>Media &amp; assets</div>
-      <div class="mitem"><span class="dot"></span>Story &amp; highlights</div>
-      <div class="mitem"><span class="dot"></span>Contact &amp; practicalities</div>
-    </nav>
-
-    <!-- Sections (JS renders — one active demo section below) -->
-    <div id="sections">
-      <section class="sec active" data-sec="production">
-
-        <div class="sec-head">
-          <div class="sec-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8M9 2v3.5a5 5 0 0 1-.8 2.7L7 10.2A6 6 0 0 0 6 13.5V20a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-6.5a6 6 0 0 0-1-3.3l-1.2-2A5 5 0 0 1 15 5.5V2"/><path d="M6.2 12.4h11.6"/></svg>
-          </div>
-          <div>
-            <div class="sec-kicker">Section 2 of 11</div>
-            <h3 class="sec-title">Production &amp; portfolio</h3>
-          </div>
-        </div>
-
-        <p class="sec-intro">Tell visitors what you make and at what scale. This shapes how your estate is categorised and which tasting audiences we match you with.</p>
-
-        <!-- Q1 · multi-choice (answered) -->
-        <div class="qg" data-qid="wine-styles">
-          <div class="q-head">
-            <div class="q-text">Which wine styles do you produce?<span class="q-opt"> — select all that apply</span></div>
-            <div class="q-req ok">Answered</div>
-          </div>
-          <div class="opts">
-            <button class="opt on" type="button">Still red</button>
-            <button class="opt on" type="button">Still white</button>
-            <button class="opt on" type="button">Rosé</button>
-            <button class="opt" type="button">Sparkling</button>
-            <button class="opt" type="button">Orange / skin-contact</button>
-            <button class="opt" type="button">Dessert / sweet</button>
-            <button class="opt" type="button">Fortified</button>
-          </div>
-        </div>
-
-        <!-- Q2 · single-choice + tip (answered) -->
-        <div class="qg" data-qid="annual-volume">
-          <div class="q-head">
-            <div class="q-text">Approximate annual production<span class="q-tag new">New</span></div>
-            <div class="q-req ok">Answered</div>
-          </div>
-          <button class="tip-btn open" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            Why we ask
-          </button>
-          <div class="tip-box open">Production volume helps us set expectations for group bookings and bottle availability. An estimate is fine — you can refine it later.</div>
-          <div class="opts">
-            <button class="opt" type="button">Under 5,000 bottles</button>
-            <button class="opt on" type="button">5,000 – 20,000</button>
-            <button class="opt" type="button">20,000 – 50,000</button>
-            <button class="opt" type="button">Over 50,000</button>
-          </div>
-        </div>
-
-        <!-- Q3 · text input (answered) -->
-        <div class="qg" data-qid="signature-grapes">
-          <div class="q-head">
-            <div class="q-text">Signature grape varieties</div>
-            <div class="q-req ok">Answered</div>
-          </div>
-          <input class="inp" data-qid="signature-grapes" type="text" value="Riesling, Solaris, Rondo, Regent" placeholder="e.g. Riesling, Pinot Noir…">
-        </div>
-
-        <!-- Q4 · textarea + tip (unanswered) -->
-        <div class="qg" data-qid="winemaking-approach">
-          <div class="q-head">
-            <div class="q-text">Describe your winemaking approach<span class="q-tag updated">Updated</span></div>
-            <div class="q-req">Not yet</div>
-          </div>
-          <button class="tip-btn" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            Tip
-          </button>
-          <div class="tip-box">Two or three sentences guides work best — mention anything distinctive (spontaneous fermentation, amphora ageing, minimal intervention) that guests would find interesting.</div>
-          <textarea class="inp" data-qid="winemaking-approach" placeholder="Share what makes your cellar's approach distinctive…"></textarea>
-        </div>
-
-        <!-- Q5 · file upload (answered, mixed states) -->
-        <div class="qg" data-qid="portfolio-file">
-          <div class="q-head">
-            <div class="q-text">Upload your current wine list or portfolio<span class="q-opt"> — optional</span></div>
-            <div class="q-req ok">Answered</div>
-          </div>
-          <div class="upl">
-            <label class="upl-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
-              Choose file
-              <input type="file" accept=".pdf,.jpg,.jpeg,.png" hidden>
-            </label>
-            <div class="upl-hint">PDF, JPG or PNG · up to 15 MB · no video or ZIP files</div>
-            <div class="upl-list" id="files-portfolio-file">
-              <div class="file-row ok">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-                <span class="fname">wine-list-2026.pdf</span>
-                <span class="fstat">Uploaded</span>
-                <a class="fopen" href="#">Open</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ask a question row -->
-        <div class="ask">
-          <div class="ask-label">Question about this section? Ask our team.</div>
-          <div class="ask-row">
-            <input id="ask-production" class="inp" type="text" placeholder="Type your question…">
-            <button class="ask-btn" type="button">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-              Send
-            </button>
-          </div>
-        </div>
-
-        <!-- Prev / Next -->
-        <div class="nav">
-          <button class="btn-ghost" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            Back
-          </button>
-          <button class="btn-primary" type="button">
-            Next section
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
-        </div>
-
-      </section>
-    </div>
-
-    <!-- Contact row (JS renders — demo fields) -->
-    <div class="contact-wrap">
-      <div class="contact-kicker">Your details</div>
-      <div id="contact">
-        <div class="field">
-          <label>Winery name</label>
-          <input class="inp" type="text" value="Stara Winna Góra">
-        </div>
-        <div class="field">
-          <label>Contact name</label>
-          <input class="inp" type="text" value="Marek Wiśniewski">
-        </div>
-        <div class="field">
-          <label>Phone</label>
-          <input class="inp" type="tel" value="+48 601 234 567">
-        </div>
-        <div class="field">
-          <label>Website / domain</label>
-          <input class="inp" type="text" value="starawinnagora.pl">
-        </div>
-        <div class="field full">
-          <label>Email</label>
-          <input class="inp full" type="email" value="marek@starawinnagora.pl">
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-      <a href="#" id="open-privacy">Privacy &amp; data use</a>
-      <div class="copy">© 2026 Tasting &amp; Toasting · tastingandtoasting.com/winery-setup</div>
-    </div>
-
+<div class="wrap" id="app" style="display:none">
+<div class="hdr">
+  <div class="htop">
+    <div class="brand"><img src="/assets/logo_nav.png" alt="Tasting & Toasting"></div>
+    <div class="lang-bar" id="lbar"></div>
   </div>
-
-  <!-- Sticky submit bar -->
-  <div class="submitbar">
-    <div id="geninfo">Your progress saves automatically. <strong>Submit when you're ready</strong> — you can keep editing until we review your listing.</div>
-    <button id="genbtn" type="button">Submit listing</button>
+  <div class="hi" id="u-hi"></div>
+  <div class="intro" id="u-intro"></div>
+  <div class="changed" id="changed" style="display:none"></div>
+  <div class="prog-row">
+    <div class="prog-track"><div class="prog-fill" id="pf"></div></div>
+    <div class="prog-pct" id="ppct"></div>
   </div>
-
+<div id="complete-banner" style="display:none;margin-top:10px;padding:10px 14px;background:rgba(90,161,126,.12);border:1px solid rgba(90,161,126,.4);border-radius:7px;font-size:12.5px;color:#7fb89a;line-height:1.5"></div>
 </div>
-
-<!-- ============================================================ PRIVACY MODAL -->
-<div id="privacy-modal">
-  <div class="pm-card">
-    <h3 id="pm-ttl">Privacy &amp; data use</h3>
-    <div id="pm-body">The details you share here are used only to build and manage your listing on Tasting &amp; Toasting.
-
-We never sell your data. Uploaded files are stored securely and visible only to our listings team.
-
-You can request removal of your winery's data at any time by contacting your account manager.</div>
-    <button class="pm-close" type="button">Close</button>
-  </div>
+<div class="body">
+  <div class="menu" id="menu"></div>
+  <div id="sections"></div>
+  <div class="contact-row" id="contact"></div>
 </div>
-
-<!-- ============================================================ NOTIFICATIONS -->
-<div id="saveflash">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-  Saved
+<div class="gen-bar">
+  <div class="gen-info" id="geninfo"></div>
+  <button class="gen-btn" id="genbtn" onclick="sendAll()"></button>
 </div>
-<div id="toast">Your listing has been submitted — thank you.</div>
-
-<template id="__bundler_thumbnail" data-bg-color="#160609">
-  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-    <rect width="1200" height="800" fill="#160609"/>
-    <g transform="translate(600 380)" fill="none" stroke="#c9a96e" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M-70 -150h140M-50 -150v55a90 90 0 0 1-14 48l-22 34a108 108 0 0 0-18 59v118a36 36 0 0 0 36 36h136a36 36 0 0 0 36-36v-118a108 108 0 0 0-18-59l-22-34a90 90 0 0 1-14-48v-55"/>
-      <path d="M-96 20h192"/>
-    </g>
-    <text x="600" y="660" text-anchor="middle" fill="#f5efe3" font-family="Georgia, serif" font-size="60">Tasting &amp; Toasting</text>
-    <text x="600" y="710" text-anchor="middle" fill="#a08070" font-family="sans-serif" font-size="26" letter-spacing="8">WINERY SETUP</text>
-  </svg>
-</template>
+<div class="footer">
+  <a id="privacy-link" onclick="openPrivacy()"></a>
+  <div class="cp">Tasting &amp; Toasting Inc. · Delaware #7494277 · tastingandtoasting.com</div>
+</div>
+</div>
 <div class="save-flash" id="saveflash"></div>
 <div class="toast" id="toast"></div>
+<div class="modal" id="privacy-modal">
+  <div class="modal-card">
+    <div class="modal-ttl" id="pm-ttl"></div>
+    <div class="modal-body" id="pm-body"></div>
+    <button class="modal-close" onclick="closePrivacy()">×</button>
+  </div>
+</div>
 <script>
-
-    
-document.addEventListener('DOMContentLoaded', async function() {
-  const loading = document.getElementById('__bundler_loading');
-  function setStatus(msg) { if (loading) loading.textContent = msg; }
-
-  const FONT_MIME = /^(font[/]|application[/](x-)?font-|application[/]vnd\.ms-fontobject)/i;
-  const MIME_TOKEN = /^[\w.+-]+[/][\w.+-]+$/;
-  function toBase64(bytes) {
-    let bin = '';
-    for (let i = 0; i < bytes.length; i += 0x8000) {
-      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
-    }
-    return btoa(bin);
-  }
-
-  // Error sink persists across replaceWith since it's on window, not the DOM.
-  window.addEventListener('error', function(e) {
-    var p = document.body || document.documentElement;
-    var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
-    d.id = '__bundler_err';
-    d.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;font:12px/1.4 ui-monospace,monospace;background:#2a1215;color:#ff8a80;padding:10px 14px;border-radius:8px;border:1px solid #5c2b2e;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow:auto';
-    d.textContent = (d.textContent ? d.textContent + String.fromCharCode(10) : '') +
-      '[bundle] ' + (e.message || e.type) +
-      (e.filename ? ' (' + e.filename.slice(0, 60) + ':' + e.lineno + ')' : '');
-  }, true);
-
-  try {
-    const manifestEl = document.querySelector('script[type="__bundler/manifest"]');
-    const templateEl = document.querySelector('script[type="__bundler/template"]');
-    if (!manifestEl || !templateEl) {
-      setStatus('Error: missing bundle data');
-      console.error('[bundler] Missing script tags — manifestEl:', !!manifestEl, 'templateEl:', !!templateEl);
-      return;
-    }
-
-    const manifest = JSON.parse(manifestEl.textContent);
-    let template = JSON.parse(templateEl.textContent);
-
-    const uuids = Object.keys(manifest);
-    setStatus('Unpacking ' + uuids.length + ' assets...');
-
-    const blobUrls = {};
-    await Promise.all(uuids.map(async (uuid) => {
-      const entry = manifest[uuid];
-      try {
-        const binaryStr = atob(entry.data);
-        const bytes = new Uint8Array(binaryStr.length);
-        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
-
-        let finalBytes = bytes;
-        if (entry.compressed) {
-          if (typeof DecompressionStream !== 'undefined') {
-            const ds = new DecompressionStream('gzip');
-            const writer = ds.writable.getWriter();
-            const reader = ds.readable.getReader();
-            writer.write(bytes);
-            writer.close();
-            const chunks = [];
-            let totalLen = 0;
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
-              chunks.push(value);
-              totalLen += value.length;
-            }
-            finalBytes = new Uint8Array(totalLen);
-            let offset = 0;
-            for (const chunk of chunks) { finalBytes.set(chunk, offset); offset += chunk.length; }
-          } else {
-            console.warn('DecompressionStream not available, asset ' + uuid + ' may not render');
-          }
-        }
-
-        if (FONT_MIME.test(entry.mime) && MIME_TOKEN.test(entry.mime)) {
-          // Strict artifact hosts allow font-src data: but not blob:.
-          blobUrls[uuid] = 'data:' + entry.mime + ';base64,' +
-            (entry.compressed ? toBase64(finalBytes) : entry.data);
-        } else {
-          blobUrls[uuid] = URL.createObjectURL(new Blob([finalBytes], { type: entry.mime }));
-        }
-      } catch (err) {
-        console.error('Failed to decode asset ' + uuid + ':', err);
-        blobUrls[uuid] = URL.createObjectURL(new Blob([], { type: entry.mime }));
-      }
-    }));
-
-    const extResEl = document.querySelector('script[type="__bundler/ext_resources"]');
-    const extResources = extResEl ? JSON.parse(extResEl.textContent) : [];
-    const resourceMap = {};
-    for (const entry of extResources) {
-      if (blobUrls[entry.uuid]) resourceMap[entry.id] = blobUrls[entry.uuid];
-    }
-
-    setStatus('Rendering...');
-    for (const uuid of uuids) template = template.split(uuid).join(blobUrls[uuid]);
-
-    // Strip integrity + crossorigin — blob URLs from a file:// document inherit
-    // a null origin, so crossorigin forces a CORS fetch that SRI then rejects.
-    // The manifest bytes are ours; SRI protects against CDN compromise, not this.
-    template = template.replace(/\s+integrity="[^"]*"/gi, '').replace(/\s+crossorigin="[^"]*"/gi, '');
-
-    const resourceScript = '<script>window.__resources = ' +
-      JSON.stringify(resourceMap).split('</' + 'script>').join('<\\/' + 'script>') +
-      ';</' + 'script>';
-    // Inject after <head> so the DOCTYPE stays first; prepending the script
-    // would push the parser into quirks mode. DOMParser always emits a <head>
-    // (synthesizing one if the source HTML omitted it) but may carry
-    // attributes through, so match the full opening tag. slice() rather than
-    // replace() keeps us clear of $-pattern substitution in resourceScript.
-    const headOpen = template.match(/<head[^>]*>/i);
-    if (headOpen) {
-      const i = headOpen.index + headOpen[0].length;
-      template = template.slice(0, i) + resourceScript + template.slice(i);
-    }
-
-    // Parse the template and swap the root element. Scripts inserted via
-    // DOMParser/replaceWith are inert per spec — re-create each with
-    // createElement so they execute, awaiting onload for src scripts to
-    // preserve ordering (React before ReactDOM before Babel before text/babel).
-    const doc = new DOMParser().parseFromString(template, 'text/html');
-    document.documentElement.replaceWith(doc.documentElement);
-    const dead = Array.from(document.scripts);
-    for (const old of dead) {
-      const s = document.createElement('script');
-      for (const a of old.attributes) s.setAttribute(a.name, a.value);
-      s.textContent = old.textContent;
-      // text/babel scripts with a src: fetch and inline. transformScriptTags
-      // does XHR against the src, but blob:null/ from a file:// origin is
-      // silently dropped. Inlining makes it a plain inline babel script,
-      // which transformScriptTags handles unconditionally.
-      if ((s.type === 'text/babel' || s.type === 'text/jsx') && s.src) {
-        const r = await fetch(s.src);
-        s.textContent = await r.text();
-        s.removeAttribute('src');
-      }
-      const p = s.src ? new Promise(function(r) { s.onload = s.onerror = r; }) : null;
-      old.replaceWith(s);
-      if (p) await p;
-    }
-    // Babel standalone auto-transforms type=text/babel on DOMContentLoaded,
-    // which fired before we swapped the document. Trigger manually if present.
-    if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
-      window.Babel.transformScriptTags();
-    }
-  } catch (err) {
-    setStatus('Error unpacking: ' + err.message);
-    console.error('Bundle unpack error:', err);
-  }
-});
-
-  
-</script>
-<script>
-
-    
-document.addEventListener('DOMContentLoaded', async function() {
-  const loading = document.getElementById('__bundler_loading');
-  function setStatus(msg) { if (loading) loading.textContent = msg; }
-
-  const FONT_MIME = /^(font[/]|application[/](x-)?font-|application[/]vnd\.ms-fontobject)/i;
-  const MIME_TOKEN = /^[\w.+-]+[/][\w.+-]+$/;
-  function toBase64(bytes) {
-    let bin = '';
-    for (let i = 0; i < bytes.length; i += 0x8000) {
-      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
-    }
-    return btoa(bin);
-  }
-
-  // Error sink persists across replaceWith since it's on window, not the DOM.
-  window.addEventListener('error', function(e) {
-    var p = document.body || document.documentElement;
-    var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
-    d.id = '__bundler_err';
-    d.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;font:12px/1.4 ui-monospace,monospace;background:#2a1215;color:#ff8a80;padding:10px 14px;border-radius:8px;border:1px solid #5c2b2e;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow:auto';
-    d.textContent = (d.textContent ? d.textContent + String.fromCharCode(10) : '') +
-      '[bundle] ' + (e.message || e.type) +
-      (e.filename ? ' (' + e.filename.slice(0, 60) + ':' + e.lineno + ')' : '');
-  }, true);
-
-  try {
-    const manifestEl = document.querySelector('script[type="__bundler/manifest"]');
-    const templateEl = document.querySelector('script[type="__bundler/template"]');
-    if (!manifestEl || !templateEl) {
-      setStatus('Error: missing bundle data');
-      console.error('[bundler] Missing script tags — manifestEl:', !!manifestEl, 'templateEl:', !!templateEl);
-      return;
-    }
-
-    const manifest = JSON.parse(manifestEl.textContent);
-    let template = JSON.parse(templateEl.textContent);
-
-    const uuids = Object.keys(manifest);
-    setStatus('Unpacking ' + uuids.length + ' assets...');
-
-    const blobUrls = {};
-    await Promise.all(uuids.map(async (uuid) => {
-      const entry = manifest[uuid];
-      try {
-        const binaryStr = atob(entry.data);
-        const bytes = new Uint8Array(binaryStr.length);
-        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
-
-        let finalBytes = bytes;
-        if (entry.compressed) {
-          if (typeof DecompressionStream !== 'undefined') {
-            const ds = new DecompressionStream('gzip');
-            const writer = ds.writable.getWriter();
-            const reader = ds.readable.getReader();
-            writer.write(bytes);
-            writer.close();
-            const chunks = [];
-            let totalLen = 0;
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
-              chunks.push(value);
-              totalLen += value.length;
-            }
-            finalBytes = new Uint8Array(totalLen);
-            let offset = 0;
-            for (const chunk of chunks) { finalBytes.set(chunk, offset); offset += chunk.length; }
-          } else {
-            console.warn('DecompressionStream not available, asset ' + uuid + ' may not render');
-          }
-        }
-
-        if (FONT_MIME.test(entry.mime) && MIME_TOKEN.test(entry.mime)) {
-          // Strict artifact hosts allow font-src data: but not blob:.
-          blobUrls[uuid] = 'data:' + entry.mime + ';base64,' +
-            (entry.compressed ? toBase64(finalBytes) : entry.data);
-        } else {
-          blobUrls[uuid] = URL.createObjectURL(new Blob([finalBytes], { type: entry.mime }));
-        }
-      } catch (err) {
-        console.error('Failed to decode asset ' + uuid + ':', err);
-        blobUrls[uuid] = URL.createObjectURL(new Blob([], { type: entry.mime }));
-      }
-    }));
-
-    const extResEl = document.querySelector('script[type="__bundler/ext_resources"]');
-    const extResources = extResEl ? JSON.parse(extResEl.textContent) : [];
-    const resourceMap = {};
-    for (const entry of extResources) {
-      if (blobUrls[entry.uuid]) resourceMap[entry.id] = blobUrls[entry.uuid];
-    }
-
-    setStatus('Rendering...');
-    for (const uuid of uuids) template = template.split(uuid).join(blobUrls[uuid]);
-
-    // Strip integrity + crossorigin — blob URLs from a file:// document inherit
-    // a null origin, so crossorigin forces a CORS fetch that SRI then rejects.
-    // The manifest bytes are ours; SRI protects against CDN compromise, not this.
-    template = template.replace(/\s+integrity="[^"]*"/gi, '').replace(/\s+crossorigin="[^"]*"/gi, '');
-
-    const resourceScript = '<script>window.__resources = ' +
-      JSON.stringify(resourceMap).split('</' + 'script>').join('<\\/' + 'script>') +
-      ';</' + 'script>';
-    // Inject after <head> so the DOCTYPE stays first; prepending the script
-    // would push the parser into quirks mode. DOMParser always emits a <head>
-    // (synthesizing one if the source HTML omitted it) but may carry
-    // attributes through, so match the full opening tag. slice() rather than
-    // replace() keeps us clear of $-pattern substitution in resourceScript.
-    const headOpen = template.match(/<head[^>]*>/i);
-    if (headOpen) {
-      const i = headOpen.index + headOpen[0].length;
-      template = template.slice(0, i) + resourceScript + template.slice(i);
-    }
-
-    // Parse the template and swap the root element. Scripts inserted via
-    // DOMParser/replaceWith are inert per spec — re-create each with
-    // createElement so they execute, awaiting onload for src scripts to
-    // preserve ordering (React before ReactDOM before Babel before text/babel).
-    const doc = new DOMParser().parseFromString(template, 'text/html');
-    document.documentElement.replaceWith(doc.documentElement);
-    const dead = Array.from(document.scripts);
-    for (const old of dead) {
-      const s = document.createElement('script');
-      for (const a of old.attributes) s.setAttribute(a.name, a.value);
-      s.textContent = old.textContent;
-      // text/babel scripts with a src: fetch and inline. transformScriptTags
-      // does XHR against the src, but blob:null/ from a file:// origin is
-      // silently dropped. Inlining makes it a plain inline babel script,
-      // which transformScriptTags handles unconditionally.
-      if ((s.type === 'text/babel' || s.type === 'text/jsx') && s.src) {
-        const r = await fetch(s.src);
-        s.textContent = await r.text();
-        s.removeAttribute('src');
-      }
-      const p = s.src ? new Promise(function(r) { s.onload = s.onerror = r; }) : null;
-      old.replaceWith(s);
-      if (p) await p;
-    }
-    // Babel standalone auto-transforms type=text/babel on DOMContentLoaded,
-    // which fired before we swapped the document. Trigger manually if present.
-    if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
-      window.Babel.transformScriptTags();
-    }
-  } catch (err) {
-    setStatus('Error unpacking: ' + err.message);
-    console.error('Bundle unpack error:', err);
-  }
-});
-
-  
-</script>
-<script>
-
 let DATA = null;
 const UPLOAD_QS ={"stages": {"pl": "Wgraj zdjęcia / dokumenty etapów", "en": "Upload stage photos / documents", "ru": "Загрузите фото / документы этапов"}, "required_docs": {"pl": "Wgraj przykłady dokumentów (analizy, certyfikaty)", "en": "Upload document samples (analyses, certificates)", "ru": "Загрузите образцы документов (анализы, сертификаты)"}, "qr_place": {"pl": "Wgraj zdjęcia etykiet / butelek", "en": "Upload label / bottle photos", "ru": "Загрузите фото этикеток / бутылок"}, "printer_qr": {"pl": "Wgraj próbki etykiet od drukarni", "en": "Upload label samples from the printer", "ru": "Загрузите образцы этикеток от типографии"}, "human_only": {"pl": "Wgraj przykład takiego dokumentu", "en": "Upload an example of such a document", "ru": "Загрузите пример такого документа"}, "collection_name": {"pl": "Wgraj zdjęcia archiwum / kolekcji", "en": "Upload archive / collection photos", "ru": "Загрузите фото архива / коллекции"}, "wines_special": {"pl": "Wgraj zdjęcia win kolekcjonerskich", "en": "Upload collector wine photos", "ru": "Загрузите фото коллекционных вин"}, "services": {"pl": "Wgraj zdjęcia / menu / cennik", "en": "Upload photos / menu / price list", "ru": "Загрузите фото / меню / прайс"}};
 const UPLOAD_UI = {"pl": {"btn": "Dodaj plik", "files": "Pliki", "uploading": "Wysyłanie...", "done": "Wgrano", "err": "Błąd wysyłania", "hint": "PDF, JPG lub PNG, do 15 MB. Możesz dodać kilka."}, "en": {"btn": "Add file", "files": "Files", "uploading": "Uploading...", "done": "Uploaded", "err": "Upload failed", "hint": "PDF, JPG or PNG, up to 15 MB. You can add several."}, "ru": {"btn": "Добавить файл", "files": "Файлы", "uploading": "Загрузка...", "done": "Загружено", "err": "Ошибка загрузки", "hint": "PDF, JPG или PNG, до 15 МБ. Можно несколько."}};
@@ -1624,7 +1073,6 @@ let questionsReady = fetch('/winery-setup/questions.json',{cache:'no-cache'})
     SECTIONS.forEach(s=>s.qs.forEach(q=>{QV[q.id]=q.v||1;}));
   })
   .catch(err=>{ DATA=null; });
-
 </script>
 </body>
 </html>
