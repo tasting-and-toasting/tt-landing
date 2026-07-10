@@ -6,185 +6,362 @@
 <title>Bottle Passport · Tasting &amp; Toasting CAP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="src/i18n/cap-i18n.js"></script>
 <style>
 :root{
-  --void:#120c0a; --void-2:#171010; --panel:#1c1413; --panel-2:#221917;
-  --wine:#6b2737; --cream:#f4eee6; --cream-soft:#cbbfb0;
-  --gold:#c9a96e; --gold-soft:#e0c486; --green:#86a878; --coral:#c66a7c;
-  --line:#2c2522; --ink-dim:#8a807a;
-  --serif:"Playfair Display", Georgia, serif;
-  --body:"Spectral", Georgia, serif;
-  --mono:"Spline Sans Mono", ui-monospace, monospace;
+  --void:#0B0406; --cream:#F5F0E8; --gold:#C5A572; --gold-soft:#E0C48E;
+  --gold-dim:#8B7548; --line:rgba(197,165,114,0.14); --line-soft:rgba(197,165,114,0.12);
+  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+  --green:#7FB069; --err:#C8654F;
 }
-*{box-sizing:border-box; margin:0; padding:0;}
-body{ background:var(--void); color:var(--cream); font-family:var(--body); font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
-.mono{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--ink-dim); }
-.langbar{ position:fixed; top:12px; right:14px; z-index:60; }
-html[dir="rtl"] .langbar{ right:auto; left:14px; }
-.lang-switcher-flags{ display:flex; flex-wrap:wrap; gap:5px; align-items:center; justify-content:flex-end; max-width:210px; padding:6px 8px; background:rgba(18,12,10,.72); border:1px solid var(--line); border-radius:8px; backdrop-filter:blur(8px); }
-.lang-flag-link{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:17px; border-radius:3px; overflow:hidden; border:1px solid var(--line); opacity:.78; transition:opacity .2s ease, border-color .2s ease, box-shadow .2s ease; }
-.lang-flag-link:hover{ opacity:1; }
-.lang-flag-link.is-current-lang{ opacity:1; border-color:var(--gold); box-shadow:0 0 0 1px rgba(201,169,97,.35); }
-.lang-flag-link svg{ width:100%; height:100%; display:block; }
-html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
-html[dir="rtl"] body{ text-align:right; }
-.wrap{ max-width:680px; margin:0 auto; padding:0 24px; }
-
-/* ---- FIRST SCREEN: emotional ---- */
-.cover{ min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
-  padding:60px 24px; position:relative; background:radial-gradient(120% 70% at 50% 0%, #2a1118 0%, var(--void) 60%); }
-.seal{ width:78px; height:78px; border-radius:50%; border:1.5px solid #3a4a34; display:flex; align-items:center; justify-content:center; margin-bottom:26px; background:#141a1230; }
-.seal svg{ width:34px; height:34px; color:var(--green); }
-.cover .verified{ font-family:var(--serif); font-weight:800; font-size:clamp(38px,8.5vw,68px); line-height:1.02; }
-.cover .verified em{ color:var(--gold-soft); font-style:italic; font-weight:500; }
-.cover .wine{ margin-top:26px; font-family:var(--serif); font-size:clamp(26px,5vw,40px); color:var(--cream); }
-.cover .yr{ color:var(--gold-soft); }
-.cover .edition{ margin-top:16px; font-family:var(--mono); font-size:11px; letter-spacing:.22em; color:var(--gold-soft); }
-.cover .winery{ margin-top:8px; font-family:var(--serif); font-style:italic; font-size:18px; color:var(--cream-soft); }
-.scrollcue{ position:absolute; bottom:26px; left:50%; transform:translateX(-50%); color:var(--ink-dim); }
-.scrollcue svg{ width:24px; height:24px; animation:bob 1.8s ease-in-out infinite; }
-@keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
-
-/* ---- DETAIL ---- */
-.quoteband{ padding:64px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--void-2); text-align:center; }
-.quoteband .kick{ font-family:var(--mono); font-size:9px; letter-spacing:.22em; color:var(--gold); text-transform:uppercase; margin-bottom:22px; }
-.quoteband .q{ font-family:var(--serif); font-style:italic; font-weight:500; color:var(--gold-soft); font-size:clamp(22px,4vw,32px); line-height:1.4; }
-.quoteband .a{ display:block; margin-top:20px; font-family:var(--mono); font-size:9px; letter-spacing:.18em; color:var(--ink-dim); }
-section{ padding:52px 0; border-bottom:1px solid var(--line); }
-.sec-h{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; margin-bottom:26px; }
-.sec-h .l{ display:flex; align-items:baseline; gap:14px; }
-.sec-h .idx{ font-family:var(--serif); font-style:italic; color:var(--gold); font-size:18px; }
-h2{ font-family:var(--serif); font-weight:700; font-size:clamp(22px,3.4vw,30px); }
-.badge{ display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:8.5px; letter-spacing:.14em; border-radius:40px; padding:5px 11px; white-space:nowrap; }
-.badge svg{ width:12px; height:12px; }
-.badge.claimed,.badge.review{ color:var(--gold-soft); border:1px solid #4a3a22; background:#1c1610; }
-.badge.verified{ color:var(--green); border:1px solid #3a4a34; background:#141a12; }
-.badge.unverified{ color:var(--coral); border:1px solid #4a2630; background:#1c1014; }
-/* timeline */
-.tl{ position:relative; padding-left:30px; }
-html[dir="rtl"] .tl{ padding-left:0; padding-right:30px; }
-.tl::before{ content:""; position:absolute; left:6px; top:6px; bottom:6px; width:1.5px; background:linear-gradient(var(--wine),var(--gold)); }
-html[dir="rtl"] .tl::before{ left:auto; right:6px; }
-.tl .e{ position:relative; padding:0 0 30px; }
-.tl .e:last-child{ padding-bottom:0; }
-.tl .e .dot{ position:absolute; left:-30px; top:3px; width:13px; height:13px; border-radius:50%; background:var(--gold); border:2px solid var(--void); box-shadow:0 0 0 1px var(--gold); }
-html[dir="rtl"] .tl .e .dot{ left:auto; right:-30px; }
-.tl .e .ev{ font-family:var(--mono); font-size:9px; letter-spacing:.18em; color:var(--gold-soft); text-transform:uppercase; }
-.tl .e .dt{ font-family:var(--mono); font-size:9px; letter-spacing:.12em; color:var(--ink-dim); margin-left:8px; }
-.tl .e .d{ margin-top:7px; font-family:var(--serif); font-size:18px; color:var(--cream); line-height:1.4; }
-.dna p{ color:var(--cream-soft); font-size:17px; }
-.dna .fam{ margin-top:10px; font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; color:var(--gold-soft); }
-.winegrid{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
-.chip{ font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; color:var(--gold-soft); border:1px solid #4a3a22; background:#1c1610; border-radius:30px; padding:7px 13px; }
-.winedesc{ color:var(--cream-soft); font-size:16.5px; }
-.cta{ display:flex; flex-direction:column; gap:12px; padding:46px 0 60px; }
-.btn{ display:inline-flex; align-items:center; justify-content:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; text-decoration:none; border-radius:11px; padding:16px 22px; cursor:pointer; border:none; width:100%; transition:.2s; }
-.btn svg{ width:16px; height:16px; }
-.btn-gold{ color:#1a1206; background:linear-gradient(90deg,var(--gold),var(--gold-soft)); font-weight:600; }
-.btn-gold:hover{ filter:brightness(1.07); }
-.btn-ghost{ color:var(--cream-soft); border:1px solid var(--line); background:var(--void-2); }
-.btn-ghost:hover{ border-color:#4a3a22; color:var(--cream); }
-footer{ padding:30px 0 50px; text-align:center; }
-.state{ min-height:100vh; display:flex; align-items:center; justify-content:center; color:var(--ink-dim); font-family:var(--mono); font-size:11px; letter-spacing:.18em; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:radial-gradient(ellipse at 26% -4%,rgba(74,14,20,0.44),transparent 56%),linear-gradient(180deg,#12060A,var(--void));color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;}
+a{color:var(--gold);text-decoration:none;}
+a:hover{color:var(--gold-soft);}
+.stage{max-width:720px;margin:0 auto;padding:0 24px;}
+@keyframes bp-pulse{0%,100%{opacity:0.4;}50%{opacity:0.85;}}
+@keyframes bp-fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.brandbar{height:58px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:14px;position:sticky;top:0;background:rgba(11,4,6,0.72);backdrop-filter:blur(10px);z-index:50;flex-wrap:wrap;}
+.brandbar-left{display:flex;align-items:center;gap:11px;}
+.brandmark{width:23px;height:23px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:12px;flex:0 0 auto;}
+.brandname{font-family:var(--serif);font-size:15px;color:var(--cream);}
+.ctx{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,240,232,0.4);}
+.lang-switcher-flags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end;max-width:340px;}
+.lang-flag-link{display:inline-flex;align-items:center;justify-content:center;width:30px;height:20px;border-radius:3px;overflow:hidden;border:1px solid var(--line);opacity:.78;transition:opacity .2s,border-color .2s,box-shadow .2s;}
+.lang-flag-link:hover{opacity:1;}
+.lang-flag-link.is-current-lang{opacity:1;border-color:var(--gold);box-shadow:0 0 0 1px rgba(197,165,114,0.35);}
+.lang-flag-link svg{width:100%;height:100%;display:block;}
+html[dir="rtl"] .lang-switcher-flags{flex-direction:row-reverse;}
+html[dir="rtl"] .brandbar{flex-direction:row-reverse;}
+html[dir="rtl"] body{text-align:right;}
+html[dir="rtl"] .bp-row:hover{padding-right:10px!important;padding-left:4px!important;}
+.skel-pulse{animation:bp-pulse 1.4s ease-in-out infinite;}
+.fade-in{animation:bp-fade 0.45s ease both;}
+.state-screen{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 0;animation:bp-fade 0.4s ease both;}
+.state-icon{width:64px;height:64px;margin:0 auto 24px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.state-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;}
+.state-title{font-family:var(--serif);font-weight:500;font-size:31px;margin:0 0 14px;color:var(--cream);letter-spacing:-0.01em;}
+.state-body{font-size:14px;line-height:1.6;color:rgba(245,240,232,0.6);margin:0 0 30px;max-width:420px;}
+.bp-btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 26px;border-radius:3px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:filter .15s,border-color .15s,color .15s;font-family:var(--sans);}
+.bp-btn-gold{border:none;background:linear-gradient(180deg,var(--gold),#a98a55);color:#1A0B08;font-weight:600;}
+.bp-btn-gold:hover{filter:brightness(1.06);}
+.bp-btn-ghost{border:1px solid rgba(197,165,114,0.4);color:var(--gold);background:transparent;}
+.bp-btn-ghost:hover{border-color:rgba(197,165,114,0.7);color:var(--gold-soft);}
+.passport{padding:48px 0 96px;}
+.hero-grid{display:flex;gap:36px;align-items:flex-start;margin-bottom:20px;}
+.bottle-col{flex:0 0 auto;width:120px;display:flex;flex-direction:column;align-items:center;}
+.bottle-svg{width:118px;height:auto;}
+.edition-kick{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-dim);margin-top:16px;margin-bottom:5px;text-align:center;}
+.edition-val{font-family:var(--serif);font-size:19px;color:var(--cream);text-align:center;}
+.edition-of{color:rgba(245,240,232,0.45);font-size:14px;}
+.identity{flex:1;padding-top:6px;min-width:0;}
+.id-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
+.id-title{font-family:var(--serif);font-weight:500;font-size:clamp(28px,6vw,40px);line-height:1.05;margin:0 0 6px;color:var(--cream);letter-spacing:-0.015em;}
+.id-year{color:var(--gold);}
+.id-by{font-size:15px;color:rgba(245,240,232,0.7);margin-bottom:24px;}
+.trust-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.own-badge{display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border:1px solid rgba(197,165,114,0.55);border-radius:100px;background:rgba(197,165,114,0.08);}
+.own-icon{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6b1620,#3a0a10);border:1px solid rgba(197,165,114,0.7);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:10px;}
+.own-label{font-size:12px;letter-spacing:0.06em;color:var(--cream);font-weight:600;}
+.vs-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border:1px solid rgba(197,165,114,0.28);border-radius:100px;}
+.vs-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;}
+.vs-text{font-size:12px;color:rgba(245,240,232,0.8);white-space:nowrap;}
+.vs-text strong{color:var(--cream);font-weight:600;}
+.scan-meta-slot{display:none;}
+.sec-label{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:14px;}
+.sec-label-high{color:var(--gold);letter-spacing:0.24em;}
+.sec-label-med{color:var(--gold-dim);}
+.block{margin-top:36px;padding-top:32px;border-top:1px solid var(--line-soft);}
+.dna-tags{display:flex;gap:10px;flex-wrap:wrap;}
+.dna-tag{padding:8px 15px;border:1px solid rgba(197,165,114,0.35);border-radius:3px;font-size:13.5px;color:var(--cream);font-family:var(--serif);}
+.tl-wrap{position:relative;padding-left:26px;}
+html[dir="rtl"] .tl-wrap{padding-left:0;padding-right:26px;}
+.tl-line{position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:rgba(197,165,114,0.25);}
+html[dir="rtl"] .tl-line{left:auto;right:5px;}
+.tl-item{position:relative;margin-bottom:22px;}
+.tl-dot{position:absolute;left:-26px;top:3px;width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px rgba(197,165,114,0.15);}
+html[dir="rtl"] .tl-dot{left:auto;right:-26px;}
+.tl-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.tl-title{font-family:var(--serif);font-size:16px;color:var(--cream);}
+.tl-when{font-size:11px;color:rgba(245,240,232,0.45);}
+.tl-desc{font-size:12.5px;line-height:1.5;color:rgba(245,240,232,0.58);margin:4px 0 0;}
+.tl-empty{border:1px dashed rgba(197,165,114,0.25);border-radius:3px;padding:26px 20px;text-align:center;}
+.tl-empty-title{font-size:13px;color:rgba(245,240,232,0.6);}
+.tl-empty-sub{font-size:11.5px;color:rgba(245,240,232,0.38);margin-top:5px;}
+.facts-grid{display:flex;flex-wrap:wrap;border-top:1px solid rgba(197,165,114,0.1);border-bottom:1px solid rgba(197,165,114,0.1);}
+.fact-cell{flex:1 1 120px;padding:14px 16px;border-right:1px solid rgba(197,165,114,0.08);}
+.fact-k{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;}
+.fact-v{font-family:var(--serif);font-size:15px;color:var(--cream);}
+.walk-list{border-top:1px solid var(--line-soft);}
+.bp-row{display:flex;align-items:center;justify-content:space-between;padding:15px 4px;border-bottom:1px solid rgba(197,165,114,0.1);color:inherit;transition:background .15s,padding-left .15s;}
+.bp-row:hover{background:rgba(197,165,114,0.06);padding-left:10px!important;}
+.walk-name{font-family:var(--serif);font-size:17px;color:var(--cream);}
+.walk-sub{font-size:11.5px;color:rgba(245,240,232,0.5);margin-top:2px;}
+.walk-chev{color:var(--gold);font-size:16px;}
+html[dir="rtl"] .walk-chev{transform:scaleX(-1);}
+.desc-text{max-width:600px;font-size:13.5px;line-height:1.7;color:rgba(245,240,232,0.55);margin:0 0 20px;}
+@media(max-width:640px){.hero-grid{flex-direction:column;align-items:center;text-align:center;}.identity{width:100%;}.trust-row{justify-content:center;}}
 </style>
 </head>
 <body>
-<div class="langbar"><nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
-        <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="ru" href="?lang=ru" title="Русский" aria-label="Русский"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#fff" d="M0 0h3v0.667H0z"/><path fill="#0039a6" d="M0 0.667h3v0.666H0z"/><path fill="#d52b1e" d="M0 1.333h3V2H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="es" href="?lang=es" title="Español" aria-label="Español"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#c60b1e" d="M0 0h3v2H0z"/><path fill="#ffc400" d="M0 0.45h3v1.1H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="uk" href="?lang=uk" title="Українська" aria-label="Українська"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#005BBB" d="M0 0h3v1H0z"/><path fill="#FFD500" d="M0 1h3v1H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="it" href="?lang=it" title="Italiano" aria-label="Italiano"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#009246" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ce2b37" d="M2 0h1v2H2z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="de" href="?lang=de" title="Deutsch" aria-label="Deutsch"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#000" d="M0 0h3v.67H0z"/><path fill="#D00" d="M0 .67h3v.66H0z"/><path fill="#FFCE00" d="M0 1.33h3v.67H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="he" href="?lang=he" title="עברית" aria-label="עברית"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4" aria-hidden="true"><path fill="#fff" d="M0 0h6v4H0z"/><path fill="#0038b8" d="M0 .55h6v0.42H0zm0 2.48h6v0.42H0z"/><g fill="#0038b8" transform="translate(3 2.02)"><polygon points="0,-0.55 0.48,0.28 -0.48,0.28"/><polygon points="0,0.55 -0.48,-0.28 0.48,-0.28"/></g></svg></a>
-        <a class="lang-flag-link" data-lang-link="pt" href="?lang=pt" title="Português" aria-label="Português (Portugal)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#006600" d="M0 0h1.2v2H0z"/><path fill="#ff0000" d="M1.2 0h1.8v2H1.2z"/><circle cx=".75" cy="1" fill="#ffd900" stroke="#ffd900" stroke-width=".015" r=".22"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="ka" href="?lang=ka" title="ქართული" aria-label="ქართული"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="white"/><rect x="12.5" width="5" height="20" fill="#FF0000"/><rect y="7.5" width="30" height="5" fill="#FF0000"/><rect x="1" y="1" width="2" height="6" fill="#FF0000"/><rect y="3" width="4" height="2" fill="#FF0000"/><rect x="24" y="1" width="2" height="6" fill="#FF0000"/><rect x="23" y="3" width="4" height="2" fill="#FF0000"/><rect x="1" y="13" width="2" height="6" fill="#FF0000"/><rect y="15" width="4" height="2" fill="#FF0000"/><rect x="24" y="13" width="2" height="6" fill="#FF0000"/><rect x="23" y="15" width="4" height="2" fill="#FF0000"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="ro" href="?lang=ro" title="Română (Moldova)" aria-label="Română (Moldova)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#003DA5"/><rect x="10" width="10" height="20" fill="#FFD100"/><rect x="20" width="10" height="20" fill="#CC0000"/><text x="15" y="13" text-anchor="middle" font-size="9" fill="#003DA5" font-family="serif, Georgia">✦</text></svg></a>
-        <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#dc143c"/></svg></a>
-  </div></nav></div>
-<main id="app"><div class="state">…</div></main>
+<header class="brandbar">
+  <div class="brandbar-left">
+    <div class="brandmark" aria-hidden="true">T</div>
+    <span class="brandname">Tasting &amp; Toasting</span>
+  </div>
+  <span class="ctx" id="ctx-label" data-i18n="bp_ctx_loading">Bottle passport</span>
+  <nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
+    <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="ru" href="?lang=ru" title="Русский" aria-label="Русский"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#fff" d="M0 0h3v0.667H0z"/><path fill="#0039a6" d="M0 0.667h3v0.666H0z"/><path fill="#d52b1e" d="M0 1.333h3V2H0z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="es" href="?lang=es" title="Español" aria-label="Español"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#c60b1e" d="M0 0h3v2H0z"/><path fill="#ffc400" d="M0 0.45h3v1.1H0z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="uk" href="?lang=uk" title="Українська" aria-label="Українська"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#005BBB" d="M0 0h3v1H0z"/><path fill="#FFD500" d="M0 1h3v1H0z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="it" href="?lang=it" title="Italiano" aria-label="Italiano"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#009246" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ce2b37" d="M2 0h1v2H2z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="de" href="?lang=de" title="Deutsch" aria-label="Deutsch"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#000" d="M0 0h3v.67H0z"/><path fill="#D00" d="M0 .67h3v.66H0z"/><path fill="#FFCE00" d="M0 1.33h3v.67H0z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="he" href="?lang=he" title="עברית" aria-label="עברית"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4" aria-hidden="true"><path fill="#fff" d="M0 0h6v4H0z"/><path fill="#0038b8" d="M0 .55h6v0.42H0zm0 2.48h6v0.42H0z"/><g fill="#0038b8" transform="translate(3 2.02)"><polygon points="0,-0.55 0.48,0.28 -0.48,0.28"/><polygon points="0,0.55 -0.48,-0.28 0.48,-0.28"/></g></svg></a>
+    <a class="lang-flag-link" data-lang-link="pt" href="?lang=pt" title="Português" aria-label="Português (Portugal)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#006600" d="M0 0h1.2v2H0z"/><path fill="#ff0000" d="M1.2 0h1.8v2H1.2z"/><circle cx=".75" cy="1" fill="#ffd900" stroke="#ffd900" stroke-width=".015" r=".22"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="ka" href="?lang=ka" title="ქართული" aria-label="ქართული"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="white"/><rect x="12.5" width="5" height="20" fill="#FF0000"/><rect y="7.5" width="30" height="5" fill="#FF0000"/><rect x="1" y="1" width="2" height="6" fill="#FF0000"/><rect y="3" width="4" height="2" fill="#FF0000"/><rect x="24" y="1" width="2" height="6" fill="#FF0000"/><rect x="23" y="3" width="4" height="2" fill="#FF0000"/><rect x="1" y="13" width="2" height="6" fill="#FF0000"/><rect y="15" width="4" height="2" fill="#FF0000"/><rect x="24" y="13" width="2" height="6" fill="#FF0000"/><rect x="23" y="15" width="4" height="2" fill="#FF0000"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="ro" href="?lang=ro" title="Română (Moldova)" aria-label="Română (Moldova)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#003DA5"/><rect x="10" width="10" height="20" fill="#FFD100"/><rect x="20" width="10" height="20" fill="#CC0000"/><text x="15" y="13" text-anchor="middle" font-size="9" fill="#003DA5" font-family="serif, Georgia">✦</text></svg></a>
+    <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#dc143c"/></svg></a>
+  </div></nav>
+</header>
+
+<main id="app" class="stage"></main>
+
 <script>
-const ICO_CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l4 4L19 7"/></svg>';
-const ICO_SHIELD='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/></svg>';
-const ICO_SEAL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9" stroke-width="1.6"/></svg>';
-const ICO_DOWN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 9l6 6 6-6"/></svg>';
-const ICO_ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-const ICO_CAL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>';
-const ICO_SHARE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>';
-
-const qs=new URLSearchParams(location.search);
-const token=(qs.get('token')||'').trim();
-const lang=CAP.lang, t=CAP.t;
+const qs = new URLSearchParams(location.search);
+const token = (qs.get('token') || '').trim();
+const lang = CAP.lang;
 const lp = lang === 'en' ? '' : ('&lang=' + lang);
-const API=qs.get('api')||(/^(localhost|127\.|0\.0)/.test(location.hostname)?'http://localhost:8088/api/cap':'https://tt-stack-prod.onrender.com/api/cap');
-const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function badge(s){const m={verified:['verified','b_verified',ICO_SHIELD],certified:['verified','b_verified',ICO_SHIELD],rejected:['unverified','b_unverified',ICO_SHIELD],claimed:['claimed','b_claimed',ICO_CHECK],documents_submitted:['review','b_review',ICO_CHECK],under_review:['review','b_review',ICO_CHECK]};const[c,k,i]=m[s]||m.claimed;return `<span class="badge ${c}">${i}${t(k)}</span>`;}
+const t = CAP.t;
+const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-async function load(){
-  if(!token){document.getElementById('app').innerHTML=`<div class="state">${t('nf_bottle')}</div>`;return;}
-  let d;
-  try{const r=await fetch(`${API}/scan/${encodeURIComponent(token)}`);if(!r.ok)throw 0;d=await r.json();}
-  catch(e){document.getElementById('app').innerHTML=`<div class="state">${t('nf_bottle')}</div>`;return;}
-  const w=d.winery, dna=d.dna||{}, wine=d.wine, v=d.vintage, b=d.bottle, tl=d.timeline||[];
-  const edition=t('bottle_of').replace('{n}',esc(b.bottle_number)).replace('{t}',esc(b.total_in_series));
-  const tlHtml=tl.map(e=>`<div class="e"><div class="dot"></div>
-    <span class="ev">${t('ev_'+e.event_type)}</span>${e.occurred_at?`<span class="dt">${esc(String(e.occurred_at).slice(0,10))}</span>`:''}
-    <div class="d">${esc(e.description)}</div></div>`).join('');
-  const tags=[]; if(wine.color) tags.push(t('color_'+wine.color)); if(wine.sweetness) tags.push(t('sweet_'+wine.sweetness));
-  (wine.grape_varieties||[]).forEach(g=>tags.push(g)); if(wine.appellation) tags.push(wine.appellation);
-  const dnaSummary=[dna.land_story,dna.philosophy,dna.founding_story].filter(Boolean).slice(0,3).join(' ');
-
-  document.getElementById('app').innerHTML=`
-  <section class="cover">
-    <div class="seal">${ICO_SEAL}</div>
-    <div class="verified">${t('verified_h')}</div>
-    <div class="wine">${esc(wine.name)} <span class="yr">${esc(v.vintage_year)}</span></div>
-    <div class="edition">${edition}</div>
-    <div class="winery">${esc(w.name)}</div>
-    <a class="scrollcue" href="#story" aria-label="scroll">${ICO_DOWN}</a>
-  </section>
-
-  ${dna.signature_quote?`<div class="quoteband" id="story"><div class="wrap">
-    <div class="kick">${t('founder_words')}</div>
-    <div class="q">“${esc(dna.signature_quote)}”</div><span class="a">— ${esc(dna.family||w.name)}</span></div></div>`:`<span id="story"></span>`}
-
-  ${tl.length?`<section><div class="wrap">
-    <div class="sec-h"><div class="l"><span class="idx">01</span><h2>${t('biography')}</h2></div>${badge(d.verification_status)}</div>
-    <div class="tl">${tlHtml}</div></div></section>`:''}
-
-  <section><div class="wrap">
-    <div class="sec-h"><div class="l"><span class="idx">02</span><h2>${t('winery_section')}</h2></div>${badge(w.verification_status)}</div>
-    <div class="dna">
-      ${dnaSummary?`<p>${esc(dnaSummary)}</p>`:''}
-      ${dna.family?`<div class="fam">${esc(dna.family)}${dna.is_first_registered_in_country?` · ${t('first_registered')}`:''}</div>`:''}
-    </div>
-  </div></section>
-
-  <section><div class="wrap">
-    <div class="sec-h"><div class="l"><span class="idx">03</span><h2>${t('verified_facts')}</h2></div>${badge(wine.verification_status)}</div>
-    <div class="winegrid">${tags.map(x=>`<span class="chip">${esc(x)}</span>`).join('')}</div>
-    ${wine.description?`<p class="winedesc">${esc(wine.description)}</p>`:''}
-  </div></section>
-
-  <div class="wrap"><div class="cta">
-    <a class="btn btn-gold" href="winery-passport.html?slug=${encodeURIComponent(w.slug)}${lp}">${ICO_ARROW}${t('view_winery')}</a>
-    <a class="btn btn-ghost" href="${w.website_url?esc(w.website_url):'#'}" target="_blank" rel="noopener">${ICO_CAL}${t('book_tasting')}</a>
-    <button class="btn btn-ghost" id="shareBtn">${ICO_SHARE}<span id="shareLbl">${t('share')}</span></button>
-  </div></div>
-  <footer class="mono">TASTING &amp; TOASTING · CAP · ${esc(w.name)}</footer>`;
-
-  const sb=document.getElementById('shareBtn');
-  if(sb) sb.addEventListener('click',async()=>{
-    const url=location.href;
-    try{ if(navigator.share){ await navigator.share({title:`${wine.name} ${v.vintage_year}`,url}); }
-      else { await navigator.clipboard.writeText(url); document.getElementById('shareLbl').textContent=t('copied'); } }
-    catch(e){}
-  });
+function statusMeta(status) {
+  const map = {
+    verified:     { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
+    certified:    { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
+    under_review: { key: 'vs_under_review', dot: '#C5A572', halo: 'rgba(197,165,114,0.2)' },
+    documents_submitted: { key: 'vs_submitted', dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
+    claimed:      { key: 'vs_claimed',      dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
+    rejected:     { key: 'vs_rejected',     dot: 'rgba(245,240,232,0.3)', halo: 'rgba(245,240,232,0.1)' }
+  };
+  return map[status] || map.under_review;
 }
+
+function dnaTags(dna) {
+  if (!dna) return [];
+  return ['family', 'land_story', 'philosophy', 'founding_story', 'signature_quote']
+    .map(k => dna[k]).filter(v => v && String(v).trim());
+}
+
+function splitLabel(name) {
+  const words = String(name || '').trim().split(/\s+/).filter(Boolean);
+  if (words.length <= 1) return [words[0] || '', ''];
+  const mid = Math.ceil(words.length / 2);
+  return [words.slice(0, mid).join(' '), words.slice(mid).join(' ')];
+}
+
+function wineFacts(wine) {
+  const facts = [];
+  if (wine.color) facts.push([t('fact_color'), t('color_' + wine.color)]);
+  if (wine.sweetness) facts.push([t('fact_sweetness'), t('sweet_' + wine.sweetness)]);
+  if ((wine.grape_varieties || []).length) facts.push([t('fact_grapes'), wine.grape_varieties.join(', ')]);
+  if (wine.appellation) facts.push([t('fact_appellation'), wine.appellation]);
+  if (wine.style) facts.push([t('fact_style'), wine.style]);
+  return facts;
+}
+
+function bottleSvg(fill, stroke, l1, l2, year) {
+  return `<svg class="bottle-svg" viewBox="0 0 120 360" role="img" aria-label="Wine bottle">
+    <path d="M44.4,0 L75.6,0 C75.6,31.5 78,53.55 78,63 C78,92.16 116.4,92.16 116.4,127.8 L116.4,342 C116.4,349.2 112.8,356.4 112.8,354 Q112.8,360 106.8,360 L13.2,360 Q7.2,360 7.2,354 C7.2,356.4 3.6,349.2 3.6,342 L3.6,127.8 C3.6,92.16 42,92.16 42,63 C42,53.55 44.4,31.5 44.4,0 Z" fill="${fill}" stroke="${stroke}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path>
+    <path d="M43.65,19.8 L76.35,19.8" fill="none" stroke="${stroke}" stroke-width="1.6" stroke-linecap="round"></path>
+    <rect x="24" y="186.9" width="72" height="96" fill="rgba(15,5,7,0.7)" stroke="${stroke}" stroke-width="1.12"></rect>
+    <text x="60" y="224" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="14" fill="#C5A572">${esc(l1)}</text>
+    <text x="60" y="244" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="14" fill="#C5A572">${esc(l2)}</text>
+    <text x="60" y="270" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" letter-spacing="2" fill="rgba(245,240,232,0.7)">${esc(year)}</text>
+  </svg>`;
+}
+
+function renderLoading() {
+  document.getElementById('ctx-label').textContent = t('bp_ctx_loading');
+  document.getElementById('app').innerHTML = `
+    <div class="fade-in" style="padding:52px 0 80px;">
+      <div style="display:flex;gap:28px;margin-bottom:32px;">
+        <div class="skel-pulse" style="width:120px;height:300px;background:rgba(197,165,114,0.06);border-radius:6px 6px 12px 12px;flex:0 0 auto;"></div>
+        <div style="flex:1;padding-top:12px;">
+          <div class="skel-pulse" style="height:11px;width:32%;background:rgba(197,165,114,0.14);border-radius:2px;margin-bottom:14px;"></div>
+          <div class="skel-pulse" style="height:34px;width:82%;background:rgba(245,240,232,0.07);border-radius:3px;margin-bottom:12px;"></div>
+          <div class="skel-pulse" style="height:16px;width:50%;background:rgba(245,240,232,0.05);border-radius:3px;margin-bottom:26px;"></div>
+          <div style="display:flex;gap:10px;">
+            <div class="skel-pulse" style="height:36px;width:150px;background:rgba(197,165,114,0.08);border-radius:100px;"></div>
+            <div class="skel-pulse" style="height:36px;width:180px;background:rgba(197,165,114,0.08);border-radius:100px;"></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="height:56px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
+        <div style="height:56px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
+      </div>
+    </div>`;
+}
+
+function renderNotFound() {
+  document.getElementById('ctx-label').textContent = t('bp_ctx_loading');
+  document.getElementById('app').innerHTML = `
+    <div class="state-screen">
+      <div class="state-icon" style="border:1px solid rgba(197,165,114,0.35);"><span style="color:rgba(197,165,114,0.75);font-size:27px;font-family:var(--serif);">?</span></div>
+      <div class="state-kick">${t('bp_nf_kick')}</div>
+      <h1 class="state-title">${t('bp_nf_title')}</h1>
+      <p class="state-body">${t('bp_nf_body')}</p>
+      <a class="bp-btn bp-btn-ghost" href="https://tastingandtoasting.com">${t('wp_explore')}</a>
+    </div>`;
+}
+
+function renderError() {
+  document.getElementById('ctx-label').textContent = t('bp_ctx_loading');
+  document.getElementById('app').innerHTML = `
+    <div class="state-screen">
+      <div class="state-icon" style="border:1px solid rgba(200,101,79,0.5);"><span style="color:var(--err);font-size:24px;">↻</span></div>
+      <div class="state-kick">${t('bp_err_kick')}</div>
+      <h1 class="state-title">${t('bp_err_title')}</h1>
+      <p class="state-body">${t('bp_err_body')}</p>
+      <button type="button" class="bp-btn bp-btn-gold" id="retry-btn">${t('bp_retry')}</button>
+    </div>`;
+  document.getElementById('retry-btn').addEventListener('click', () => load());
+}
+
+function renderPassport(d) {
+  document.getElementById('ctx-label').textContent = t('bp_ctx_ready');
+  const w = d.winery, dna = d.dna || {}, wine = d.wine, v = d.vintage, b = d.bottle, tl = d.timeline || [];
+  const ownershipConfirmed = !!(d.ownership_confirmed ?? w.ownership_confirmed);
+  const ownershipBadge = d.ownership_badge ?? w.ownership_badge ?? null;
+  const provisional = !ownershipConfirmed;
+  const sm = statusMeta(w.verification_status);
+  const [l1, l2] = splitLabel(wine.name);
+  const fill = provisional ? 'none' : 'rgba(74,14,20,0.35)';
+  const stroke = provisional ? 'rgba(197,165,114,0.55)' : '#C5A572';
+  const tags = dnaTags(dna);
+  const facts = wineFacts(wine);
+  const desc = (wine.description || '').trim();
+  let siteLabel = '';
+  try { siteLabel = w.website_url ? w.website_url.replace(/^https?:\/\//, '').replace(/\/$/, '') : ''; } catch (e) {}
+
+  const ownHtml = ownershipConfirmed ? `
+    <div class="own-badge">
+      <span class="own-icon" aria-hidden="true">✓</span>
+      <span class="own-label">${esc(ownershipBadge || t('wp_verified_winery'))}</span>
+    </div>` : '';
+
+  const vsHtml = `
+    <div class="vs-pill">
+      <span class="vs-dot" style="background:${sm.dot};box-shadow:0 0 0 3px ${sm.halo};"></span>
+      <span class="vs-text">${t('wp_vs_prefix')} <strong>${t(sm.key)}</strong></span>
+    </div>`;
+
+  const editionHtml = (b.bottle_number != null && b.total_in_series != null) ? `
+    <div class="edition-kick">${t('bp_edition')}</div>
+    <div class="edition-val">No. ${esc(b.bottle_number)} <span class="edition-of">/ ${esc(b.total_in_series)}</span></div>` : '';
+
+  const dnaHtml = tags.length ? `
+    <div class="block">
+      <div class="sec-label sec-label-high">${t('bp_dna_label')}</div>
+      <div class="dna-tags">${tags.map(tag => `<span class="dna-tag">${esc(tag)}</span>`).join('')}</div>
+    </div>` : '';
+
+  const tlInner = tl.length ? `
+    <div class="tl-wrap"><div class="tl-line" aria-hidden="true"></div>
+      ${tl.map(e => {
+        const when = e.occurred_at ? esc(String(e.occurred_at).slice(0, 10)) : '';
+        return `<div class="tl-item"><span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-head"><span class="tl-title">${t('ev_' + e.event_type)}</span>${when ? `<span class="tl-when">${when}</span>` : ''}</div>
+          ${e.description ? `<p class="tl-desc">${esc(e.description)}</p>` : ''}
+        </div>`;
+      }).join('')}
+    </div>` : `
+    <div class="tl-empty">
+      <div class="tl-empty-title">${t('bp_timeline_empty')}</div>
+      <div class="tl-empty-sub">${t('bp_timeline_empty_sub')}</div>
+    </div>`;
+
+  const factsHtml = facts.length ? `
+    <div class="block">
+      <div class="sec-label sec-label-med">${t('bp_facts_label')}</div>
+      <div class="facts-grid">${facts.map(([k, v]) => `
+        <div class="fact-cell"><div class="fact-k">${esc(k)}</div><div class="fact-v">${esc(v)}</div></div>`).join('')}
+      </div>
+    </div>` : '';
+
+  const walkHtml = `
+    <div class="block">
+      <div class="sec-label sec-label-med">${t('bp_walk_label')}</div>
+      <div class="walk-list">
+        <a class="bp-row" href="vintage-passport.html?vintageId=${encodeURIComponent(v.id)}${lp}">
+          <div><div class="walk-name">${esc(String(v.vintage_year))}</div><div class="walk-sub">${t('bp_vintage_sub')}</div></div>
+          <span class="walk-chev" aria-hidden="true">›</span>
+        </a>
+        <a class="bp-row" href="wine-passport.html?wineId=${encodeURIComponent(wine.id)}&winerySlug=${encodeURIComponent(w.slug)}${lp}">
+          <div><div class="walk-name">${esc(wine.name)}</div><div class="walk-sub">${t('bp_wine_sub')}</div></div>
+          <span class="walk-chev" aria-hidden="true">›</span>
+        </a>
+        <a class="bp-row" href="winery-passport.html?slug=${encodeURIComponent(w.slug)}${lp}">
+          <div><div class="walk-name">${esc(w.name)}</div><div class="walk-sub">${t('bp_winery_sub')}</div></div>
+          <span class="walk-chev" aria-hidden="true">›</span>
+        </a>
+      </div>
+    </div>`;
+
+  const descHtml = desc ? `
+    <div class="block">
+      <p class="desc-text">${esc(desc)}</p>
+      ${w.website_url ? `<a class="bp-btn bp-btn-ghost" href="${esc(w.website_url)}" target="_blank" rel="noopener">${t('bp_visit_website').replace('{site}', esc(siteLabel || w.website_url))} ↗</a>` : ''}
+    </div>` : '';
+
+  document.getElementById('app').innerHTML = `
+    <article class="passport fade-in">
+      <div class="hero-grid">
+        <div class="bottle-col">
+          ${bottleSvg(fill, stroke, l1, l2, v.vintage_year)}
+          ${editionHtml}
+        </div>
+        <div class="identity">
+          <div class="id-kick">${t('bp_kick')}</div>
+          <h1 class="id-title">${esc(wine.name)} <span class="id-year">${esc(v.vintage_year)}</span></h1>
+          <div class="id-by">${t('bp_by')} <span style="color:var(--cream);">${esc(w.name)}</span></div>
+          <div class="trust-row">${ownHtml}${vsHtml}</div>
+          <div class="scan-meta-slot" aria-hidden="true"></div>
+        </div>
+      </div>
+      ${dnaHtml}
+      <div class="block">
+        <div class="sec-label sec-label-med">${t('bp_timeline_label')}</div>
+        ${tlInner}
+      </div>
+      ${factsHtml}
+      ${walkHtml}
+      ${descHtml}
+    </article>`;
+}
+
+async function load() {
+  if (!token) { renderNotFound(); return; }
+  renderLoading();
+  let d;
+  try {
+    const r = await fetch(`${API}/scan/${encodeURIComponent(token)}`);
+    if (r.status === 404 || r.status === 400) { renderNotFound(); return; }
+    if (!r.ok) { renderError(); return; }
+    d = await r.json();
+  } catch (e) {
+    renderError();
+    return;
+  }
+  renderPassport(d);
+}
+
 CAP.wireSwitcher();
+CAP.applyStatic();
 load();
 </script>
 </body>
