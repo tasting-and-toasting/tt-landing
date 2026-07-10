@@ -125,7 +125,7 @@ const ICO_GLOBE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 const ICO_CAL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>';
 
 const qs = new URLSearchParams(location.search);
-const slug = qs.get('slug') || 'stara-winna-gora';
+const slug = (qs.get('slug') || '').trim();
 const lang = CAP.lang;
 const lp = lang === 'en' ? '' : ('&lang=' + lang);
 const t = CAP.t;
@@ -141,6 +141,7 @@ function badge(status){
 }
 
 async function load(){
+  if(!slug){document.getElementById('app').innerHTML=`<div class="state">${t('nf_slug_missing')}</div>`;return;}
   let data;
   try{
     const r = await fetch(`${API}/wineries/${encodeURIComponent(slug)}`);
@@ -155,7 +156,7 @@ async function load(){
     <div class="nm">${t('svc_'+s.service_type)}</div>${s.details?`<div class="dt">${esc(s.details)}</div>`:''}</div>`).join('');
   const wineHtml = wines.map(wi=>{
     const meta=[wi.style, (wi.grape_varieties||[]).join(', ')].filter(Boolean).join(' · ');
-    return `<a class="wine" href="wine-passport.html?wineId=${encodeURIComponent(wi.id)}${lp}">
+    return `<a class="wine" href="wine-passport.html?wineId=${encodeURIComponent(wi.id)}&winerySlug=${encodeURIComponent(slug)}${lp}">
       <div><div class="nm">${esc(wi.name)}</div><div class="meta">${esc(meta)}</div></div>
       <div class="arrow">${ICO_ARROW}</div></a>`; }).join('');
 

@@ -563,7 +563,15 @@ const tw = k => (W[k] != null ? W[k] : (WZ.en[k] != null ? WZ.en[k] : k));
 const lp = lang === "en" ? "" : ("&lang=" + lang);
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
 
-const API = (new URLSearchParams(location.search)).get("api")
+/* Demo-only wizard: require ?demo=1 on production hosts (localhost always allowed). */
+const pageQs = new URLSearchParams(location.search);
+const isCapDemoOnboarding = pageQs.get("demo") === "1" || /^(localhost|127\.|0\.0)/.test(location.hostname);
+if (!isCapDemoOnboarding) {
+  document.body.innerHTML = '<main style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 24px;font-family:monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8a807a;text-align:center">CAP demo onboarding only. Open with ?demo=1 on production.</main>';
+  throw new Error("cap-onboarding: demo gate");
+}
+
+const API = pageQs.get("api")
   || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? "http://localhost:8088/api/cap" : "https://tt-stack-prod.onrender.com/api/cap");
 
 /* ---- static i18n apply ---- */
@@ -751,8 +759,12 @@ async function generateBottles(){
 
 /* ---- preview cards (step 7) ---- */
 function buildPreview(){
-  const slug = store.winerySlug || "stara-winna-gora";
+  const slug = store.winerySlug;
   const token = store.token || "";
+  if (!slug || !token) {
+    document.getElementById("pvGrid").innerHTML = `<p class="notice show warn">${esc(tw("err_required"))}</p>`;
+    return;
+  }
   const cards = [
     { ic:ICO_PASS, t:"pv_w", d:"pv_wd", href:`winery-passport.html?slug=${encodeURIComponent(slug)}${lp}` },
     { ic:ICO_SCAN, t:"pv_b", d:"pv_bd", href:`bottle-scan.html?token=${encodeURIComponent(token)}${lp}` },

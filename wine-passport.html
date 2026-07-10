@@ -90,7 +90,8 @@ const ICO_ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 const ICO_BACK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg>';
 
 const qs=new URLSearchParams(location.search);
-const wineId=qs.get('wineId');
+const wineId=(qs.get('wineId')||'').trim();
+const winerySlug=(qs.get('winerySlug')||qs.get('slug')||'').trim();
 const lang=CAP.lang, t=CAP.t;
 const lp = lang === 'en' ? '' : ('&lang=' + lang);
 const API=qs.get('api')||(/^(localhost|127\.|0\.0)/.test(location.hostname)?'http://localhost:8088/api/cap':'https://tt-stack-prod.onrender.com/api/cap');
@@ -105,12 +106,14 @@ async function load(){
   const w=data.wine, vs=data.vintages||[];
   const tags=[]; if(w.color) tags.push(t('color_'+w.color)); if(w.sweetness) tags.push(t('sweet_'+w.sweetness)); if(w.appellation) tags.push(w.appellation);
   (w.grape_varieties||[]).forEach(g=>tags.push(g));
-  const vHtml=vs.map(v=>`<a class="vintage" href="vintage-passport.html?vintageId=${encodeURIComponent(v.id)}${lp}">
+  const wineryQs=winerySlug?`&winerySlug=${encodeURIComponent(winerySlug)}`:'';
+  const vHtml=vs.map(v=>`<a class="vintage" href="vintage-passport.html?vintageId=${encodeURIComponent(v.id)}${wineryQs}${lp}">
     <div><div class="yr">${esc(v.vintage_year)}</div><div class="meta">${v.bottles_produced?esc(v.bottles_produced)+' '+t('bottles'):''}${v.abv?'&nbsp;·&nbsp;'+esc(v.abv)+'% ABV':''}</div></div>
     <div class="arrow">${ICO_ARROW}</div></a>`).join('');
 
+  const backRow=winerySlug?`<div class="wrap"><a class="back" href="winery-passport.html?slug=${encodeURIComponent(winerySlug)}${lp}">${ICO_BACK}${t('back_winery')}</a></div>`:'';
   document.getElementById('app').innerHTML=`
-  <div class="wrap"><a class="back" href="winery-passport.html?slug=stara-winna-gora${lp}">${ICO_BACK}${t('back_winery')}</a></div>
+  ${backRow}
   <header class="hero"><div class="wrap">
     <div class="kick mono">${t('nav_wine')}</div>
     <h1>${esc(w.name)}</h1>

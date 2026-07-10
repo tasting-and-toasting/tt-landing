@@ -21,7 +21,7 @@
       color_red:"Red", color_white:"White", color_rose:"Rosé", color_orange:"Orange", color_sparkling:"Sparkling",
       sweet_dry:"Dry", sweet_semi_dry:"Semi-dry", sweet_semi_sweet:"Semi-sweet", sweet_sweet:"Sweet",
       nav_winery:"WINERY PASSPORT", nav_wine:"WINE PASSPORT", nav_vintage:"VINTAGE PASSPORT",
-      loading:"Loading…", nf_winery:"Winery not found.", nf_wine:"Wine not found.", nf_vintage:"Vintage not found.", nf_bottle:"This bottle could not be verified.",
+      loading:"Loading…", nf_winery:"Winery not found.", nf_wine:"Wine not found.", nf_vintage:"Vintage not found.", nf_bottle:"This bottle could not be verified.", nf_slug_missing:"No winery specified.", nf_token_missing:"No bottle token specified.",
       founded:"Founded", dna_title:"Winery DNA", family:"The family", land:"The land", philosophy:"Philosophy", story:"Origin",
       services_title:"Experiences", wines_title:"Wines", contact_title:"Visit & contact", book:"Book a tasting", website:"Visit website",
       email:"Email", phone:"Phone", location:"Location", first_registered:"First registered vineyard in Poland",

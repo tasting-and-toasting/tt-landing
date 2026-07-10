@@ -116,7 +116,7 @@ const ICO_CAL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 const ICO_SHARE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>';
 
 const qs=new URLSearchParams(location.search);
-const token=qs.get('token');
+const token=(qs.get('token')||'').trim();
 const lang=CAP.lang, t=CAP.t;
 const lp = lang === 'en' ? '' : ('&lang=' + lang);
 const API=qs.get('api')||(/^(localhost|127\.|0\.0)/.test(location.hostname)?'http://localhost:8088/api/cap':'https://tt-stack-prod.onrender.com/api/cap');

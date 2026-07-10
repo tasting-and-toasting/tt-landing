@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAP QR Sticker · Regent 2021 · Stara Winna Góra</title>
+<title>CAP QR Sticker · Tasting &amp; Toasting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,18 +18,16 @@
 }
 *{box-sizing:border-box; margin:0; padding:0;}
 body{ background:var(--void); min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:40px 20px; font-family:var(--mono); }
+.state{ color:#8a807a; font-size:11px; letter-spacing:.18em; text-transform:uppercase; text-align:center; padding:40px 20px; }
 .toolbar{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:center; }
 .toolbar button{ font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#1a1206; background:linear-gradient(90deg,#c9a96e,#e0c486); border:none; border-radius:8px; padding:11px 18px; cursor:pointer; }
 .toolbar span{ font-size:9.5px; letter-spacing:.14em; color:#8a807a; }
-/* flag switcher (copied from index.html), hidden when printing */
 .lang-switcher-flags{ display:flex; flex-wrap:wrap; gap:5px; align-items:center; justify-content:center; max-width:300px; }
 .lang-flag-link{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:17px; border-radius:3px; overflow:hidden; border:1px solid #3a322a; opacity:.78; transition:opacity .2s ease, border-color .2s ease, box-shadow .2s ease; }
 .lang-flag-link:hover{ opacity:1; }
 .lang-flag-link.is-current-lang{ opacity:1; border-color:var(--gold-soft); box-shadow:0 0 0 1px rgba(201,169,97,.35); }
 .lang-flag-link svg{ width:100%; height:100%; display:block; }
 html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
-
-/* ---- sticker ---- */
 .sticker{ width:340px; background:var(--card); color:var(--ink); border-radius:16px; padding:30px 28px 26px; text-align:center;
   box-shadow:0 18px 50px rgba(0,0,0,.5); position:relative; }
 .sticker::after{ content:""; position:absolute; inset:9px; border:1px solid var(--line); border-radius:10px; pointer-events:none; }
@@ -44,7 +42,6 @@ html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
 .url{ font-family:var(--mono); font-size:9.5px; letter-spacing:.04em; color:var(--dim); word-break:break-all; }
 .tagline{ font-family:var(--serif); font-style:italic; font-size:15px; color:#3a3022; margin-top:14px; }
 .brand{ font-family:var(--mono); font-size:8px; letter-spacing:.2em; text-transform:uppercase; color:#a89977; margin-top:16px; }
-
 @media print{
   body{ background:#fff; padding:0; gap:0; }
   .toolbar, .lang-switcher{ display:none; }
@@ -53,6 +50,7 @@ html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
 </style>
 </head>
 <body>
+<div id="root">
 <div class="toolbar">
   <button onclick="window.print()" id="printBtn">Print sticker</button>
   <nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
@@ -74,29 +72,55 @@ html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
 <div class="sticker">
   <div class="cap-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span id="t_verified" data-i18n="cap_verified">CAP Verified</span></div>
   <div class="rule"></div>
-  <div class="wine" id="wine">Regent 2021</div>
-  <div class="winery" id="winery">Stara Winna Góra</div>
-  <div class="edition" id="edition">BOTTLE 1 / 1200</div>
+  <div class="wine" id="wine">—</div>
+  <div class="winery" id="winery">—</div>
+  <div class="edition" id="edition">—</div>
   <div class="qrbox"><div id="qr"></div></div>
   <div class="url" id="url"></div>
   <div class="tagline" id="tagline" data-i18n="scan_story">Scan to discover the story</div>
   <div class="brand">Tasting &amp; Toasting · CAP</div>
 </div>
+</div>
 
 <script>
 const qs=new URLSearchParams(location.search);
 const t=CAP.t;
-const token=qs.get('token')||'faf6bd0a-cb26-450e-82ff-2d7161495428';
-// Printed pretty URL (per CAP spec). For a live demo, ?target= overrides what the QR encodes.
-const prettyUrl=`tastingandtoasting.com/cap/b/${token}`;
-const qrTarget=qs.get('target')||`https://${prettyUrl}`;
+const isDemo=qs.get('demo')==='1'||/^(localhost|127\.|0\.0)/.test(location.hostname);
+const DEMO_TOKEN='faf6bd0a-cb26-450e-82ff-2d7161495428';
+const rawToken=(qs.get('token')||'').trim();
+const token=rawToken||(isDemo?DEMO_TOKEN:null);
+const API=qs.get('api')||(/^(localhost|127\.|0\.0)/.test(location.hostname)?'http://localhost:8088/api/cap':'https://tt-stack-prod.onrender.com/api/cap');
 
-CAP.wireSwitcher();
-CAP.applyStatic();
-document.getElementById('edition').textContent=(t('bottle_word')+' 1 / 1200').toUpperCase();
-document.getElementById('url').textContent=prettyUrl;
-new QRCode(document.getElementById('qr'),{ text:qrTarget, width:168, height:168,
-  colorDark:"#120c0a", colorLight:"#ffffff", correctLevel:QRCode.CorrectLevel.M });
+function fail(msg){
+  document.getElementById('root').innerHTML=`<div class="state">${msg}</div>`;
+}
+
+async function load(){
+  if(!token){ fail(t('nf_token_missing')); return; }
+  let d;
+  try{
+    const r=await fetch(`${API}/scan/${encodeURIComponent(token)}`);
+    if(!r.ok) throw 0;
+    d=await r.json();
+  }catch(e){
+    fail(t('nf_bottle'));
+    return;
+  }
+  const wine=d.wine, vintage=d.vintage, winery=d.winery, bottle=d.bottle;
+  document.getElementById('wine').textContent=`${wine.name} ${vintage.vintage_year}`;
+  document.getElementById('winery').textContent=winery.name;
+  const total=bottle.total_in_series||'—';
+  document.getElementById('edition').textContent=(t('bottle_word')+' '+bottle.bottle_number+' / '+total).toUpperCase();
+  const prettyUrl=`tastingandtoasting.com/cap/b/${token}`;
+  const qrTarget=qs.get('target')||`https://${prettyUrl}`;
+  document.getElementById('url').textContent=prettyUrl;
+  document.title=`CAP QR Sticker · ${wine.name} ${vintage.vintage_year}`;
+  CAP.wireSwitcher();
+  CAP.applyStatic();
+  new QRCode(document.getElementById('qr'),{ text:qrTarget, width:168, height:168,
+    colorDark:"#120c0a", colorLight:"#ffffff", correctLevel:QRCode.CorrectLevel.M });
+}
+load();
 </script>
 </body>
 </html>
