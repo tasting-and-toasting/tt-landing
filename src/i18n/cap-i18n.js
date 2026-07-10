@@ -32,7 +32,19 @@
       verified_h:"Verified &amp; <em>Traceable</em>", bottle_of:"Bottle {n} of {t}", founder_words:"Founder's words", biography:"Bottle Biography",
       winery_section:"The winery", verified_facts:"Verified Facts", view_winery:"View winery", book_tasting:"Book a tasting", share:"Share this bottle", copied:"Link copied",
       ev_harvest:"Harvest", ev_fermentation:"Fermentation", ev_ageing:"Ageing", ev_bottling:"Bottling", ev_release:"Release",
-      cap_verified:"CAP Verified", scan_story:"Scan to discover the story", bottle_word:"Bottle"
+      cap_verified:"CAP Verified", scan_story:"Scan to discover the story", bottle_word:"Bottle",
+      wp_ctx_loading:"Winery passport", wp_ctx_ready:"Passport · scanned from a bottle",
+      wp_kick:"Winery", wp_verified_winery:"Verified Winery", wp_vs_prefix:"Verification status:",
+      wp_dna_label:"Character · DNA", wp_services_label:"Services offered",
+      wp_wines_label:"Wines · walk the chain →", wp_wines_one:"1 wine", wp_wines_many:"{n} wines",
+      wp_wines_empty:"No wines listed yet", wp_wines_empty_sub:"This winery hasn't added wines to its passport.",
+      wp_nf_kick:"Passport not found", wp_nf_title:"This winery couldn't be found.",
+      wp_nf_body:"The link may be mistyped, or this winery is no longer listed on Tasting & Toasting.",
+      wp_err_kick:"Something went wrong", wp_err_title:"We couldn't load this passport.",
+      wp_err_body:"A problem on our end, not with the winery. Your place is safe. Please try again.",
+      wp_retry:"Try again", wp_explore:"Explore Tasting & Toasting",
+      vs_verified:"Verified", vs_under_review:"Under review", vs_submitted:"Submitted",
+      vs_claimed:"Claimed", vs_rejected:"Not verified"
     },
     fr: {
       b_claimed:"Déclaré par le producteur", b_review:"En cours de vérification", b_verified:"Vérifié", b_unverified:"Non vérifié",

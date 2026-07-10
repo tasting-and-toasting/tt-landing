@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; background:#0B0406; }
+  *{ box-sizing:border-box; }
+  a{ color:#C5A572; text-decoration:none; }
+  a:hover{ color:#E0C48E; }
+  @keyframes wp-pulse{ 0%,100%{ opacity:0.4; } 50%{ opacity:0.85; } }
+  @keyframes wp-fade{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+  .wp-wine-row{ transition:background 0.15s ease, padding-left 0.15s ease; }
+  .wp-wine-row:hover{ background:rgba(197,165,114,0.06); padding-left:10px !important; }
+  .wp-btn{ transition:background 0.15s ease, border-color 0.15s ease, color 0.15s ease; cursor:pointer; }
+  .wp-btn-gold:hover{ filter:brightness(1.06); }
+  .wp-btn-ghost:hover{ border-color:rgba(197,165,114,0.7); color:#E0C48E; }
+</style>
+</helmet>
+
+<div style="min-height:100vh; background:radial-gradient(ellipse at 26% -4%, rgba(74,14,20,0.42), transparent 56%), linear-gradient(180deg,#12060A,#0B0406); font-family:'Inter',system-ui,sans-serif; color:#F5F0E8;">
+
+  <!-- public brand bar -->
+  <div style="height:58px; border-bottom:1px solid rgba(197,165,114,0.14); display:flex; align-items:center; justify-content:space-between; padding:0 24px; position:sticky; top:0; background:rgba(11,4,6,0.72); backdrop-filter:blur(10px); z-index:5;">
+    <div style="display:flex; align-items:center; gap:11px;">
+      <div style="width:23px; height:23px; border:1px solid #C5A572; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#C5A572; font-family:'Fraunces',serif; font-size:12px;">T</div>
+      <span style="font-family:'Fraunces',serif; font-size:15px; color:#F5F0E8;">Tasting &amp; Toasting</span>
+    </div>
+    <span style="font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:rgba(245,240,232,0.4);">{{ contextLabel }}</span>
+  </div>
+
+  <!-- STAGE -->
+  <div style="max-width:720px; margin:0 auto; padding:0 24px;">
+
+    <!-- ============ LOADING ============ -->
+    <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:56px 0 80px;">
+        <div style="display:flex; align-items:center; gap:18px; margin-bottom:28px;">
+          <div style="width:60px; height:60px; border-radius:50%; background:rgba(197,165,114,0.1); animation:wp-pulse 1.4s ease-in-out infinite; flex:0 0 auto;"></div>
+          <div style="flex:1;"><div style="height:11px; width:38%; background:rgba(197,165,114,0.14); border-radius:2px; margin-bottom:12px; animation:wp-pulse 1.4s ease-in-out infinite;"></div><div style="height:30px; width:72%; background:rgba(245,240,232,0.07); border-radius:3px; animation:wp-pulse 1.4s ease-in-out infinite;"></div></div>
+        </div>
+        <div style="display:flex; gap:10px; margin-bottom:40px;"><div style="height:38px; width:150px; background:rgba(197,165,114,0.08); border-radius:100px; animation:wp-pulse 1.4s ease-in-out infinite;"></div><div style="height:38px; width:180px; background:rgba(197,165,114,0.08); border-radius:100px; animation:wp-pulse 1.4s ease-in-out infinite;"></div></div>
+        <div style="height:10px; width:120px; background:rgba(197,165,114,0.12); border-radius:2px; margin-bottom:18px; animation:wp-pulse 1.4s ease-in-out infinite;"></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:44px;"><div style="height:36px; width:130px; background:rgba(197,165,114,0.06); border:1px solid rgba(197,165,114,0.1); border-radius:3px;"></div><div style="height:36px; width:110px; background:rgba(197,165,114,0.06); border:1px solid rgba(197,165,114,0.1); border-radius:3px;"></div><div style="height:36px; width:150px; background:rgba(197,165,114,0.06); border:1px solid rgba(197,165,114,0.1); border-radius:3px;"></div></div>
+        <div style="display:flex; flex-direction:column; gap:14px;"><div style="height:60px; background:rgba(245,240,232,0.04); border:1px solid rgba(197,165,114,0.08); border-radius:3px;"></div><div style="height:60px; background:rgba(245,240,232,0.04); border:1px solid rgba(197,165,114,0.08); border-radius:3px;"></div></div>
+      </div>
+    </sc-if>
+
+    <!-- ============ NOT FOUND ============ -->
+    <sc-if value="{{ isNotFound }}" hint-placeholder-val="{{ false }}">
+      <div style="min-height:80vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:60px 0; animation:wp-fade 0.4s ease both;">
+        <div style="width:64px; height:64px; margin:0 auto 24px; border-radius:50%; border:1px solid rgba(197,165,114,0.35); display:flex; align-items:center; justify-content:center;"><span style="color:rgba(197,165,114,0.75); font-size:27px; font-family:'Fraunces',serif;">?</span></div>
+        <div style="font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:#8B7548; margin-bottom:14px;">Passport not found</div>
+        <h1 style="font-family:'Fraunces',serif; font-weight:500; font-size:32px; margin:0 0 14px; color:#F5F0E8; letter-spacing:-0.01em;">This winery couldn't be found.</h1>
+        <p style="font-size:14px; line-height:1.6; color:rgba(245,240,232,0.6); margin:0 0 30px; max-width:400px;">The link may be mistyped, or this winery is no longer listed on Tasting &amp; Toasting.</p>
+        <a href="#" class="wp-btn wp-btn-ghost" style="display:inline-flex; align-items:center; height:46px; padding:0 26px; border:1px solid rgba(197,165,114,0.4); border-radius:3px; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:#C5A572;">Explore Tasting &amp; Toasting</a>
+      </div>
+    </sc-if>
+
+    <!-- ============ ERROR ============ -->
+    <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
+      <div style="min-height:80vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:60px 0; animation:wp-fade 0.4s ease both;">
+        <div style="width:64px; height:64px; margin:0 auto 24px; border-radius:50%; border:1px solid rgba(200,101,79,0.5); display:flex; align-items:center; justify-content:center;"><span style="color:#C8654F; font-size:24px;">↻</span></div>
+        <div style="font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:#8B7548; margin-bottom:14px;">Something went wrong</div>
+        <h1 style="font-family:'Fraunces',serif; font-weight:500; font-size:32px; margin:0 0 14px; color:#F5F0E8; letter-spacing:-0.01em;">We couldn't load this passport.</h1>
+        <p style="font-size:14px; line-height:1.6; color:rgba(245,240,232,0.6); margin:0 0 30px; max-width:400px;">A problem on our end, not with the winery. Your place is safe — please try again.</p>
+        <button class="wp-btn wp-btn-gold" onClick="{{ onRetry }}" style="border:none; height:46px; padding:0 30px; background:linear-gradient(180deg,#C5A572,#a98a55); border-radius:3px; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:#1A0B08; font-weight:600; font-family:'Inter',sans-serif;">Try again</button>
+      </div>
+    </sc-if>
+
+    <!-- ============ PASSPORT ============ -->
+    <sc-if value="{{ showPassport }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:52px 0 90px; animation:wp-fade 0.45s ease both;">
+
+        <!-- HERO -->
+        <div style="display:flex; align-items:center; gap:18px; margin-bottom:26px;">
+          <div style="width:60px; height:60px; border-radius:50%; background:{{ crestBg }}; border:1px solid {{ crestBorder }}; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px -6px rgba(0,0,0,0.7); flex:0 0 auto;">
+            <span style="font-family:'Fraunces',serif; font-style:italic; color:{{ crestGlyphColor }}; font-size:22px;">{{ initial }}</span>
+          </div>
+          <div>
+            <div style="font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:#8B7548; margin-bottom:6px;">Winery</div>
+            <h1 style="font-family:'Fraunces',serif; font-weight:500; font-size:46px; line-height:1; margin:0; color:#F5F0E8; letter-spacing:-0.015em;">{{ name }}</h1>
+          </div>
+        </div>
+
+        <!-- TRUST CUES -->
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:38px;">
+          <sc-if value="{{ verifiedOwnership }}" hint-placeholder-val="{{ true }}">
+            <div style="display:inline-flex; align-items:center; gap:9px; padding:9px 15px; border:1px solid rgba(197,165,114,0.55); border-radius:100px; background:rgba(197,165,114,0.08);">
+              <span style="width:18px; height:18px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #6b1620, #3a0a10); border:1px solid rgba(197,165,114,0.7); display:flex; align-items:center; justify-content:center; color:#C5A572; font-size:10px;">✓</span>
+              <span style="font-size:12px; letter-spacing:0.06em; color:#F5F0E8; font-weight:600;">Verified Winery</span>
+            </div>
+          </sc-if>
+          <div style="display:inline-flex; align-items:center; gap:8px; padding:9px 15px; border:1px solid rgba(197,165,114,0.28); border-radius:100px;">
+            <span style="width:7px; height:7px; border-radius:50%; background:{{ statusDot }}; box-shadow:0 0 0 3px {{ statusDotHalo }};"></span>
+            <span style="font-size:12px; color:rgba(245,240,232,0.8); white-space:nowrap;">Verification status: <span style="color:#F5F0E8;">{{ statusLabel }}</span></span>
+          </div>
+        </div>
+
+        <!-- DNA -->
+        <sc-if value="{{ hasDna }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-bottom:44px;">
+            <div style="font-size:10px; letter-spacing:0.24em; text-transform:uppercase; color:#C5A572; margin-bottom:14px;">Character · DNA</div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <sc-for list="{{ dna }}" as="trait" hint-placeholder-count="4">
+                <span style="padding:8px 15px; border:1px solid rgba(197,165,114,0.35); border-radius:3px; font-size:13.5px; color:#F5F0E8; font-family:'Fraunces',serif;">{{ trait }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- SERVICES -->
+        <sc-if value="{{ hasServices }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-bottom:44px; padding-top:32px; border-top:1px solid rgba(197,165,114,0.12);">
+            <div style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:#8B7548; margin-bottom:14px;">Services offered</div>
+            <div style="display:flex; gap:9px; flex-wrap:wrap;">
+              <sc-for list="{{ services }}" as="svc" hint-placeholder-count="3">
+                <span style="padding:7px 13px; border:1px solid rgba(197,165,114,0.2); border-radius:100px; font-size:12.5px; color:rgba(245,240,232,0.82);">{{ svc }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- WINES -->
+        <sc-if value="{{ showWinesBlock }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-bottom:44px; padding-top:32px; border-top:1px solid rgba(197,165,114,0.12);">
+            <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px;">
+              <div style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:#8B7548;">Wines · walk the chain →</div>
+              <span style="font-size:11px; color:rgba(245,240,232,0.45);">{{ wineCountLabel }}</span>
+            </div>
+            <!-- populated -->
+            <sc-if value="{{ hasWines }}" hint-placeholder-val="{{ true }}">
+              <div style="border-top:1px solid rgba(197,165,114,0.12);">
+                <sc-for list="{{ wines }}" as="wine" hint-placeholder-count="3">
+                  <a href="{{ wine.href }}" class="wp-wine-row" style="display:flex; align-items:center; justify-content:space-between; padding:16px 4px; border-bottom:1px solid rgba(197,165,114,0.1); color:inherit;">
+                    <div style="display:flex; align-items:center; gap:16px;">
+                      <span style="width:30px; height:44px; border:1px solid rgba(197,165,114,0.3); border-radius:2px 2px 5px 5px; background:linear-gradient(180deg,rgba(74,14,20,0.6),rgba(58,10,16,0.9)); flex:0 0 auto;"></span>
+                      <div>
+                        <div style="font-family:'Fraunces',serif; font-size:18px; color:#F5F0E8;">{{ wine.name }}</div>
+                        <div style="font-size:11.5px; color:rgba(245,240,232,0.5); margin-top:2px;">{{ wine.meta }}</div>
+                      </div>
+                    </div>
+                    <span style="color:#C5A572; font-size:16px;">›</span>
+                  </a>
+                </sc-for>
+              </div>
+            </sc-if>
+            <!-- empty -->
+            <sc-if value="{{ winesEmpty }}" hint-placeholder-val="{{ false }}">
+              <div style="border:1px dashed rgba(197,165,114,0.25); border-radius:3px; padding:30px 20px; text-align:center;">
+                <div style="width:30px; height:44px; margin:0 auto 14px; border:1px dashed rgba(197,165,114,0.35); border-radius:2px 2px 5px 5px;"></div>
+                <div style="font-size:13px; color:rgba(245,240,232,0.6);">No wines listed yet</div>
+                <div style="font-size:11.5px; color:rgba(245,240,232,0.38); margin-top:5px;">This winery hasn't added wines to its passport.</div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <!-- DESCRIPTION + IMAGERY (quiet) -->
+        <sc-if value="{{ hasDescription }}" hint-placeholder-val="{{ false }}">
+          <div style="padding-top:30px; border-top:1px solid rgba(197,165,114,0.12);">
+            <p style="max-width:600px; font-size:13.5px; line-height:1.7; color:rgba(245,240,232,0.55); margin:0;">{{ description }}</p>
+          </div>
+        </sc-if>
+
+      </div>
+    </sc-if>
+  </div>
+
+  <!-- REVIEWER STATE SWITCHER -->
+  <div style="position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:50; display:flex; align-items:center; gap:4px; padding:7px 8px; background:rgba(11,4,6,0.88); backdrop-filter:blur(12px); border:1px solid rgba(197,165,114,0.28); border-radius:100px; box-shadow:0 16px 40px -16px rgba(0,0,0,0.9);">
+    <span style="font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:#8B7548; padding:0 8px 0 6px;">State</span>
+    <sc-for list="{{ stateButtons }}" as="b" hint-placeholder-count="6">
+      <button class="wp-btn" onClick="{{ b.onClick }}" style="border:none; font-family:'Inter',sans-serif; font-size:11px; padding:6px 12px; border-radius:100px; cursor:pointer; background:{{ b.bg }}; color:{{ b.color }};">{{ b.label }}</button>
+    </sc-for>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:760,&quot;height&quot;:900},&quot;initialState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;verified&quot;,&quot;provisional&quot;,&quot;partial&quot;,&quot;empty&quot;,&quot;notfound&quot;,&quot;error&quot;],&quot;default&quot;:&quot;verified&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    // slug from URL for realism; falls back to a demo slug
+    let slug = null;
+    try { slug = new URLSearchParams(location.search).get('slug'); } catch(e){}
+    this.state = {
+      phase: 'loading',      // loading | ready | notfound | error
+      variant: props.initialState || 'verified', // which winery fixture when ready
+      slug: slug || 'vinebound-estate'
+    };
+  }
+
+  componentDidMount(){
+    // simulate the slug resolve; honest skeleton first, no blank flash
+    this._t = setTimeout(() => {
+      const v = this.state.variant;
+      if (v === 'notfound') this.setState({ phase:'notfound' });
+      else if (v === 'error') this.setState({ phase:'error' });
+      else this.setState({ phase:'ready' });
+    }, 900);
+  }
+  componentWillUnmount(){ clearTimeout(this._t); }
+
+  // pick fixture (real-shaped CAP data) for the chosen variant
+  fixture(){
+    const base = {
+      name:'Vinebound Estate', initial:'V', ownership_confirmed:true, verification_status:'verified',
+      dna:['Old-vine Syrah','Dry-farmed','Estate-bottled','Northern-Rhône lineage','Native ferment'],
+      services:['Cellar-door tastings','Vineyard tours','Wine club','Private events'],
+      wines:[
+        {name:'Côte Sauvage', meta:'Syrah · 3 vintages', wineId:'w-cote-sauvage'},
+        {name:'Les Galets', meta:'Grenache blend · 5 vintages', wineId:'w-les-galets'},
+        {name:'Blanc de Coteau', meta:'Viognier · 2 vintages', wineId:'w-blanc-de-coteau'},
+        {name:'Réserve Ancienne', meta:'Syrah · 1 vintage', wineId:'w-reserve-ancienne'}
+      ],
+      description:'A small family estate working steep granite slopes, farming without irrigation and bottling only what the vineyard gives each year.'
+    };
+    const v = this.state.variant;
+    if (v === 'provisional') return { ...base, name:'Roussanne Farm', initial:'R', ownership_confirmed:false, verification_status:'under_review',
+      dna:['Granite terroir','Estate-bottled'], services:['Cellar-door tastings'], description:'' };
+    if (v === 'partial') return { name:'Coteau Nord', initial:'C', ownership_confirmed:true, verification_status:'verified',
+      dna:['Granite terroir','Estate-bottled'], services:[], wines:null, description:'' };
+    if (v === 'empty') return { ...base, name:'Maison Aube', initial:'M', wines:[], description:'' };
+    return base; // verified / full
+  }
+
+  statusMeta(s){
+    switch(s){
+      case 'verified':     return { label:'Verified', dot:'#7FB069', halo:'rgba(127,176,105,0.2)' };
+      case 'under_review': return { label:'Under review', dot:'#C5A572', halo:'rgba(197,165,114,0.2)' };
+      case 'submitted':    return { label:'Submitted', dot:'rgba(245,240,232,0.4)', halo:'rgba(245,240,232,0.12)' };
+      case 'claimed':      return { label:'Claimed', dot:'rgba(245,240,232,0.4)', halo:'rgba(245,240,232,0.12)' };
+      case 'rejected':     return { label:'Not verified', dot:'rgba(245,240,232,0.3)', halo:'rgba(245,240,232,0.1)' };
+      default:             return { label:'In review', dot:'#C5A572', halo:'rgba(197,165,114,0.2)' };
+    }
+  }
+
+  setVariant(v){
+    const phase = (v === 'notfound' || v === 'error') ? v : 'ready';
+    this.setState({ variant:v, phase });
+  }
+  retry(){
+    this.setState({ phase:'loading' });
+    clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ phase:'ready', variant:'verified' }), 900);
+  }
+
+  renderVals(){
+    const st = this.state;
+    const f = this.fixture();
+    const sm = this.statusMeta(f.verification_status);
+    const provisional = !f.ownership_confirmed;
+
+    const variants = [
+      ['verified','Verified'], ['provisional','Provisional'], ['partial','Partial'],
+      ['empty','Empty'], ['loading','Loading'], ['notfound','Not found'], ['error','Error']
+    ];
+    const stateButtons = variants.map(([key,label]) => {
+      const active = (key === 'loading') ? (st.phase==='loading')
+        : (key === 'notfound') ? (st.phase==='notfound')
+        : (key === 'error') ? (st.phase==='error')
+        : (st.phase==='ready' && st.variant===key);
+      return {
+        label,
+        bg: active ? '#C5A572' : 'transparent',
+        color: active ? '#1A0B08' : 'rgba(245,240,232,0.6)',
+        onClick: () => key==='loading' ? (this.setState({phase:'loading',variant:'verified'}), clearTimeout(this._t), this._t=setTimeout(()=>this.setState({phase:'ready'}),900)) : this.setVariant(key)
+      };
+    });
+
+    const wines = Array.isArray(f.wines) ? f.wines.map(w => ({
+      name:w.name, meta:w.meta, href:'/wine-passport?wineId='+w.wineId
+    })) : [];
+
+    return {
+      contextLabel: st.phase==='ready' ? 'Passport · scanned from a bottle' : 'Winery passport',
+      isLoading: st.phase==='loading',
+      isNotFound: st.phase==='notfound',
+      isError: st.phase==='error',
+      showPassport: st.phase==='ready',
+      onRetry: () => this.retry(),
+
+      // hero
+      name: f.name,
+      initial: f.initial,
+      crestBg: provisional ? 'rgba(74,14,20,0.35)' : 'radial-gradient(circle at 35% 30%, #6b1620, #3a0a10)',
+      crestBorder: provisional ? 'rgba(197,165,114,0.3)' : 'rgba(197,165,114,0.55)',
+      crestGlyphColor: provisional ? 'rgba(197,165,114,0.7)' : '#C5A572',
+
+      // trust
+      verifiedOwnership: f.ownership_confirmed,
+      statusLabel: sm.label, statusDot: sm.dot, statusDotHalo: sm.halo,
+
+      // dna
+      hasDna: Array.isArray(f.dna) && f.dna.length>0,
+      dna: f.dna || [],
+
+      // services
+      hasServices: Array.isArray(f.services) && f.services.length>0,
+      services: f.services || [],
+
+      // wines — block shown when relationship exists (array present, incl. empty); absent (null) hides block
+      showWinesBlock: Array.isArray(f.wines),
+      hasWines: Array.isArray(f.wines) && f.wines.length>0,
+      winesEmpty: Array.isArray(f.wines) && f.wines.length===0,
+      wines,
+      wineCountLabel: wines.length + (wines.length===1?' wine':' wines'),
+
+      // description
+      hasDescription: !!(f.description && f.description.trim()),
+      description: f.description || '',
+
+      stateButtons
+    };
+  }
+}
+</script>
+</body>
+</html>
