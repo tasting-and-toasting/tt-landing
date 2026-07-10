@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; background:#0B0406; }
+  *{ box-sizing:border-box; }
+  a{ color:#C5A572; text-decoration:none; }
+  a:hover{ color:#E0C48E; }
+  @keyframes wn-pulse{ 0%,100%{ opacity:0.4; } 50%{ opacity:0.85; } }
+  @keyframes wn-fade{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+  .wn-row{ transition:background 0.15s ease, padding-left 0.15s ease; }
+  .wn-row:hover{ background:rgba(197,165,114,0.06); padding-left:10px !important; }
+  .wn-btn{ transition:filter 0.15s ease, border-color 0.15s ease, color 0.15s ease; cursor:pointer; }
+  .wn-btn-gold:hover{ filter:brightness(1.06); }
+  .wn-btn-ghost:hover{ border-color:rgba(197,165,114,0.7); color:#E0C48E; }
+</style>
+</helmet>
+
+<div style="min-height:100vh; background:radial-gradient(ellipse at 26% -4%, rgba(74,14,20,0.42), transparent 56%), linear-gradient(180deg,#12060A,#0B0406); font-family:'Inter',system-ui,sans-serif; color:#F5F0E8;">
+
+  <!-- brand bar -->
+  <div style="height:58px; border-bottom:1px solid rgba(197,165,114,0.14); display:flex; align-items:center; justify-content:space-between; padding:0 24px; position:sticky; top:0; background:rgba(11,4,6,0.72); backdrop-filter:blur(10px); z-index:5;">
+    <div style="display:flex; align-items:center; gap:11px;">
+      <div style="width:23px; height:23px; border:1px solid #C5A572; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#C5A572; font-family:'Fraunces',serif; font-size:12px;">T</div>
+      <span style="font-family:'Fraunces',serif; font-size:15px; color:#F5F0E8;">Tasting &amp; Toasting</span>
+    </div>
+    <span style="font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:rgba(245,240,232,0.4);">{{ contextLabel }}</span>
+  </div>
+
+  <div style="max-width:720px; margin:0 auto; padding:0 24px;">
+
+    <!-- ============ LOADING ============ -->
+    <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:52px 0 80px;">
+        <div style="height:11px; width:26%; background:rgba(197,165,114,0.14); border-radius:2px; margin-bottom:16px; animation:wn-pulse 1.4s ease-in-out infinite;"></div>
+        <div style="height:44px; width:66%; background:rgba(245,240,232,0.07); border-radius:3px; margin-bottom:18px; animation:wn-pulse 1.4s ease-in-out infinite;"></div>
+        <div style="height:36px; width:170px; background:rgba(197,165,114,0.08); border-radius:100px; margin-bottom:36px; animation:wn-pulse 1.4s ease-in-out infinite;"></div>
+        <div style="display:flex; gap:10px; margin-bottom:36px;"><div style="flex:1; height:52px; background:rgba(245,240,232,0.04); border:1px solid rgba(197,165,114,0.08); border-radius:3px;"></div><div style="flex:1; height:52px; background:rgba(245,240,232,0.04); border:1px solid rgba(197,165,114,0.08); border-radius:3px;"></div><div style="flex:1; height:52px; background:rgba(245,240,232,0.04); border:1px solid rgba(197,165,114,0.08); border-radius:3px;"></div></div>
+        <div style="display:flex; flex-direction:column; gap:14px;"><div style="height:52px; background:rgba(245,240,232,0.04); border:1px solid rgba(197,165,114,0.08); border-radius:3px;"></div><div style="height:52px; background:rgba(245,240,232,0.04); border:1px solid rgba(197,165,114,0.08); border-radius:3px;"></div></div>
+      </div>
+    </sc-if>
+
+    <!-- ============ NOT FOUND ============ -->
+    <sc-if value="{{ isNotFound }}" hint-placeholder-val="{{ false }}">
+      <div style="min-height:80vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:60px 0; animation:wn-fade 0.4s ease both;">
+        <div style="width:64px; height:64px; margin:0 auto 24px; border-radius:50%; border:1px solid rgba(197,165,114,0.35); display:flex; align-items:center; justify-content:center;"><span style="color:rgba(197,165,114,0.75); font-size:27px; font-family:'Fraunces',serif;">?</span></div>
+        <div style="font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:#8B7548; margin-bottom:14px;">Wine not found</div>
+        <h1 style="font-family:'Fraunces',serif; font-weight:500; font-size:31px; margin:0 0 14px; color:#F5F0E8; letter-spacing:-0.01em;">This wine couldn't be found.</h1>
+        <p style="font-size:14px; line-height:1.6; color:rgba(245,240,232,0.6); margin:0 0 30px; max-width:420px;">The link may be mistyped, or this wine is no longer listed on Tasting &amp; Toasting.</p>
+        <a href="#" class="wn-btn wn-btn-ghost" style="display:inline-flex; align-items:center; height:46px; padding:0 26px; border:1px solid rgba(197,165,114,0.4); border-radius:3px; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:#C5A572;">Explore Tasting &amp; Toasting</a>
+      </div>
+    </sc-if>
+
+    <!-- ============ ERROR ============ -->
+    <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
+      <div style="min-height:80vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:60px 0; animation:wn-fade 0.4s ease both;">
+        <div style="width:64px; height:64px; margin:0 auto 24px; border-radius:50%; border:1px solid rgba(200,101,79,0.5); display:flex; align-items:center; justify-content:center;"><span style="color:#C8654F; font-size:24px;">↻</span></div>
+        <div style="font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:#8B7548; margin-bottom:14px;">Something went wrong</div>
+        <h1 style="font-family:'Fraunces',serif; font-weight:500; font-size:31px; margin:0 0 14px; color:#F5F0E8; letter-spacing:-0.01em;">We couldn't load this wine.</h1>
+        <p style="font-size:14px; line-height:1.6; color:rgba(245,240,232,0.6); margin:0 0 30px; max-width:420px;">A problem on our end, not with the wine. Please try again.</p>
+        <button class="wn-btn wn-btn-gold" onClick="{{ onRetry }}" style="border:none; height:46px; padding:0 30px; background:linear-gradient(180deg,#C5A572,#a98a55); border-radius:3px; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:#1A0B08; font-weight:600; font-family:'Inter',sans-serif;">Try again</button>
+      </div>
+    </sc-if>
+
+    <!-- ============ PASSPORT ============ -->
+    <sc-if value="{{ showPassport }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:32px 0 96px; animation:wn-fade 0.45s ease both;">
+
+        <!-- up-link (DECISION A: only when winerySlug present) -->
+        <sc-if value="{{ hasUpLink }}" hint-placeholder-val="{{ true }}">
+          <a href="{{ wineryHref }}" style="display:inline-flex; align-items:center; gap:8px; font-size:11.5px; color:rgba(197,165,114,0.85); margin-bottom:18px;">‹ <span style="color:rgba(245,240,232,0.65);">{{ wineryName }}</span></a>
+        </sc-if>
+
+        <!-- HERO -->
+        <div style="{{ heroTopStyle }}">
+          <div style="font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:#8B7548; margin-bottom:10px;">Wine</div>
+          <h1 style="font-family:'Fraunces',serif; font-weight:500; font-size:46px; line-height:1.02; margin:0 0 20px; color:#F5F0E8; letter-spacing:-0.015em;">{{ wineName }}</h1>
+          <div style="display:inline-flex; align-items:center; gap:8px; padding:9px 15px; border:1px solid rgba(197,165,114,0.28); border-radius:100px;">
+            <span style="width:7px; height:7px; border-radius:50%; background:{{ statusDot }}; box-shadow:0 0 0 3px {{ statusHalo }};"></span>
+            <span style="font-size:12px; color:rgba(245,240,232,0.8); white-space:nowrap;">Verification status: <span style="color:#F5F0E8;">{{ statusLabel }}</span></span>
+          </div>
+        </div>
+
+        <!-- PRODUCT-IDENTITY TAGS -->
+        <sc-if value="{{ hasFacts }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:36px; padding-top:32px; border-top:1px solid rgba(197,165,114,0.12);">
+            <div style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:#8B7548; margin-bottom:16px;">Product identity</div>
+            <div style="display:flex; flex-wrap:wrap; border-top:1px solid rgba(197,165,114,0.1); border-bottom:1px solid rgba(197,165,114,0.1);">
+              <sc-for list="{{ facts }}" as="fact" hint-placeholder-count="5">
+                <div style="flex:1 1 130px; padding:14px 16px; border-right:1px solid rgba(197,165,114,0.08);"><div style="font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:#8B7548; margin-bottom:6px;">{{ fact.k }}</div><div style="font-family:'Fraunces',serif; font-size:16px; color:#F5F0E8;">{{ fact.v }}</div></div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- VINTAGES (down-nav) -->
+        <div style="margin-top:36px; padding-top:32px; border-top:1px solid rgba(197,165,114,0.12);">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px;">
+            <div style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:#8B7548;">Vintages · walk down →</div>
+            <span style="font-size:11px; color:rgba(245,240,232,0.45);">{{ vintageCountLabel }}</span>
+          </div>
+          <sc-if value="{{ hasVintages }}" hint-placeholder-val="{{ true }}">
+            <div style="border-top:1px solid rgba(197,165,114,0.12);">
+              <sc-for list="{{ vintages }}" as="v" hint-placeholder-count="3">
+                <a href="{{ v.href }}" class="wn-row" style="display:flex; align-items:center; justify-content:space-between; padding:16px 4px; border-bottom:1px solid rgba(197,165,114,0.1); color:inherit;">
+                  <div style="display:flex; align-items:baseline; gap:16px;">
+                    <span style="font-family:'Fraunces',serif; font-size:24px; color:#F5F0E8;">{{ v.year }}</span>
+                    <span style="font-size:11.5px; color:rgba(245,240,232,0.5);">{{ v.meta }}</span>
+                  </div>
+                  <span style="color:#C5A572; font-size:16px;">›</span>
+                </a>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ vintagesEmpty }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px dashed rgba(197,165,114,0.25); border-radius:3px; padding:26px 20px; text-align:center;">
+              <div style="font-size:13px; color:rgba(245,240,232,0.6);">No vintages listed yet</div>
+              <div style="font-size:11.5px; color:rgba(245,240,232,0.38); margin-top:5px;">This wine doesn't have vintages on its passport yet.</div>
+            </div>
+          </sc-if>
+        </div>
+
+        <!-- QUIET: description + story -->
+        <sc-if value="{{ hasQuiet }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:36px; padding-top:32px; border-top:1px solid rgba(197,165,114,0.12);">
+            <sc-if value="{{ hasDescription }}" hint-placeholder-val="{{ false }}">
+              <p style="max-width:600px; font-size:13.5px; line-height:1.7; color:rgba(245,240,232,0.58); margin:0 0 22px;">{{ description }}</p>
+            </sc-if>
+            <sc-if value="{{ hasStory }}" hint-placeholder-val="{{ false }}">
+              <div style="max-width:600px; border-left:2px solid rgba(197,165,114,0.25); padding-left:18px;">
+                <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#8B7548; margin-bottom:8px;">The story</div>
+                <p style="font-size:14px; line-height:1.7; color:rgba(245,240,232,0.6); font-style:italic; font-family:'Fraunces',serif; margin:0;">{{ story }}</p>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+      </div>
+    </sc-if>
+  </div>
+
+  <!-- REVIEWER STATE SWITCHER -->
+  <div style="position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:50; display:flex; align-items:center; gap:4px; padding:7px 8px; background:rgba(11,4,6,0.88); backdrop-filter:blur(12px); border:1px solid rgba(197,165,114,0.28); border-radius:100px; box-shadow:0 16px 40px -16px rgba(0,0,0,0.9);">
+    <span style="font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:#8B7548; padding:0 8px 0 6px;">State</span>
+    <sc-for list="{{ stateButtons }}" as="b" hint-placeholder-count="5">
+      <button class="wn-btn" onClick="{{ b.onClick }}" style="border:none; font-family:'Inter',sans-serif; font-size:11px; padding:6px 12px; border-radius:100px; cursor:pointer; background:{{ b.bg }}; color:{{ b.color }};">{{ b.label }}</button>
+    </sc-for>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:760,&quot;height&quot;:900},&quot;initialState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;verified&quot;,&quot;nouplink&quot;,&quot;empty&quot;,&quot;notfound&quot;,&quot;error&quot;],&quot;default&quot;:&quot;verified&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    let wineId = null, winerySlug = null;
+    try {
+      const p = new URLSearchParams(location.search);
+      wineId = p.get('wineId'); winerySlug = p.get('winerySlug');
+    } catch(e){}
+    this.state = {
+      phase: 'loading',        // loading | ready | notfound | error
+      variant: props.initialState || 'verified', // verified | nouplink | empty
+      wineId: wineId || 'w-cote-sauvage',
+      winerySlug: winerySlug   // DECISION A: only present if carried in
+    };
+  }
+  componentDidMount(){
+    this._t = setTimeout(() => {
+      const v = this.state.variant;
+      if (v === 'notfound') this.setState({ phase:'notfound' });
+      else if (v === 'error') this.setState({ phase:'error' });
+      else this.setState({ phase:'ready' });
+    }, 900);
+  }
+  componentWillUnmount(){ clearTimeout(this._t); }
+
+  // real-shaped wine GET payload (NO ownership field — honest single axis)
+  fixture(){
+    const base = {
+      name:'Côte Sauvage', verification_status:'verified',
+      color:'Red', sweetness:'Dry', grape_varieties:'Syrah', appellation:'N. Rhône', style:'Full-bodied',
+      description:'A raw, savoury expression of old-vine Syrah from a single granite slope — dark-fruited, peppery and structured for the cellar.',
+      story_text:'Côte Sauvage began as the parcel no one wanted — too steep, too poor. We kept the old vines and let them speak.',
+      vintages:[
+        { id:'v-2019', vintage_year:'2019', bottles_produced:500, abv:'13.5' },
+        { id:'v-2018', vintage_year:'2018', bottles_produced:420, abv:'14' },
+        { id:'v-2017', vintage_year:'2017', bottles_produced:380, abv:'13.5' }
+      ]
+    };
+    const v = this.state.variant;
+    // 'nouplink' → same wine but no winerySlug param carried (up-link omitted)
+    if (v === 'empty') return { ...base, vintages:[], story_text:'' };
+    return base;
+  }
+
+  // winerySlug availability: the 'nouplink' demo variant forces it absent
+  slugForRender(){
+    if (this.state.variant === 'nouplink') return null;
+    return this.state.winerySlug || 'vinebound-estate';
+  }
+
+  statusMeta(s){
+    switch(s){
+      case 'verified':     return { label:'Verified', dot:'#7FB069', halo:'rgba(127,176,105,0.2)' };
+      case 'under_review': return { label:'Under review', dot:'#C5A572', halo:'rgba(197,165,114,0.2)' };
+      case 'submitted':    return { label:'Submitted', dot:'rgba(245,240,232,0.4)', halo:'rgba(245,240,232,0.12)' };
+      case 'claimed':      return { label:'Claimed', dot:'rgba(245,240,232,0.4)', halo:'rgba(245,240,232,0.12)' };
+      case 'rejected':     return { label:'Not verified', dot:'rgba(245,240,232,0.3)', halo:'rgba(245,240,232,0.1)' };
+      default:             return { label:'In review', dot:'#C5A572', halo:'rgba(197,165,114,0.2)' };
+    }
+  }
+
+  setVariant(v){
+    const phase = (v === 'notfound' || v === 'error') ? v : 'ready';
+    this.setState({ variant:v, phase });
+  }
+  retry(){
+    this.setState({ variant:'verified', phase:'loading' });
+    clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ phase:'ready' }), 900);
+  }
+
+  renderVals(){
+    const st = this.state;
+    const f = this.fixture();
+    const sm = this.statusMeta(f.verification_status);
+    const slug = this.slugForRender();
+
+    const buttons = [
+      ['verified','Verified'], ['nouplink','No up-link'], ['empty','Empty vintages'],
+      ['notfound','Not found'], ['error','Error']
+    ];
+    const stateButtons = buttons.map(([key,label]) => {
+      const active = (key==='notfound') ? st.phase==='notfound'
+        : (key==='error') ? st.phase==='error'
+        : (st.phase==='ready' && st.variant===key);
+      return {
+        label,
+        bg: active ? '#C5A572' : 'transparent',
+        color: active ? '#1A0B08' : 'rgba(245,240,232,0.6)',
+        onClick: () => this.setVariant(key)
+      };
+    });
+
+    // product-identity tags — render only non-null cells
+    const factDefs = [['Color',f.color],['Sweetness',f.sweetness],['Grapes',f.grape_varieties],['Appellation',f.appellation],['Style',f.style]];
+    const facts = factDefs.filter(([k,v]) => v != null && v !== '').map(([k,v]) => ({ k, v }));
+
+    const vintages = (f.vintages||[]).map(v => {
+      const bits = [];
+      if (v.bottles_produced) bits.push(v.bottles_produced + ' bottles');
+      if (v.abv) bits.push(v.abv + '% abv');
+      let href = '/vintage-passport?vintageId=' + v.id;
+      if (slug) href += '&winerySlug=' + slug; // carry forward
+      return { year:v.vintage_year, meta:bits.join(' · '), href };
+    });
+
+    const hasUpLink = !!slug;
+    const hasDescription = !!(f.description && f.description.trim());
+    const hasStory = !!(f.story_text && f.story_text.trim());
+
+    return {
+      contextLabel: st.phase==='ready' ? 'Wine passport' : 'Wine passport',
+      isLoading: st.phase==='loading',
+      isNotFound: st.phase==='notfound',
+      isError: st.phase==='error',
+      showPassport: st.phase==='ready',
+      onRetry: () => this.retry(),
+
+      hasUpLink,
+      wineryName: 'Vinebound Estate',
+      wineryHref: slug ? ('/winery-passport?slug=' + slug) : '#',
+      heroTopStyle: hasUpLink ? '' : 'padding-top:20px;',
+
+      wineName: f.name,
+      statusLabel: sm.label, statusDot: sm.dot, statusHalo: sm.halo,
+
+      hasFacts: facts.length>0,
+      facts,
+
+      hasVintages: Array.isArray(f.vintages) && f.vintages.length>0,
+      vintagesEmpty: Array.isArray(f.vintages) && f.vintages.length===0,
+      vintages,
+      vintageCountLabel: vintages.length + (vintages.length===1?' vintage':' vintages'),
+
+      hasQuiet: hasDescription || hasStory,
+      hasDescription, description: f.description || '',
+      hasStory, story: f.story_text || '',
+
+      stateButtons
+    };
+  }
+}
+</script>
+</body>
+</html>

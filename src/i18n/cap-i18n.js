@@ -60,7 +60,18 @@
       bp_err_body:"A problem on our end, not with your bottle. Please try again.",
       bp_retry:"Try again", bp_visit_website:"Visit {site}",
       fact_color:"Color", fact_sweetness:"Sweetness", fact_grapes:"Grapes",
-      fact_appellation:"Appellation", fact_style:"Style"
+      fact_appellation:"Appellation", fact_style:"Style",
+      wn_ctx_loading:"Wine passport", wn_ctx_ready:"Wine passport",
+      wn_kick:"Wine", wn_facts_label:"Product identity",
+      wn_vintages_label:"Vintages · walk down →", wn_vintages_one:"1 vintage", wn_vintages_many:"{n} vintages",
+      wn_vintages_empty:"No vintages listed yet",
+      wn_vintages_empty_sub:"This wine doesn't have vintages on its passport yet.",
+      wn_story_label:"The story",
+      wn_nf_kick:"Wine not found", wn_nf_title:"This wine couldn't be found.",
+      wn_nf_body:"The link may be mistyped, or this wine is no longer listed on Tasting & Toasting.",
+      wn_err_kick:"Something went wrong", wn_err_title:"We couldn't load this wine.",
+      wn_err_body:"A problem on our end, not with the wine. Please try again.",
+      wn_retry:"Try again"
     },
     fr: {
       b_claimed:"Déclaré par le producteur", b_review:"En cours de vérification", b_verified:"Vérifié", b_unverified:"Non vérifié",
