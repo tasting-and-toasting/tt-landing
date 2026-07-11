@@ -71,7 +71,18 @@
       wn_nf_body:"The link may be mistyped, or this wine is no longer listed on Tasting & Toasting.",
       wn_err_kick:"Something went wrong", wn_err_title:"We couldn't load this wine.",
       wn_err_body:"A problem on our end, not with the wine. Please try again.",
-      wn_retry:"Try again"
+      wn_retry:"Try again",
+      vt_ctx_loading:"Vintage passport", vt_ctx_ready:"Vintage passport",
+      vt_kick:"Vintage", vt_of:"of",
+      vt_facts_label:"This harvest", vt_blend_label:"Blend · this year",
+      vt_wine_context_label:"Wine",
+      vt_tasting_label:"Tasting notes", vt_production_label:"Production notes",
+      vt_fact_released:"Released",
+      vt_nf_kick:"Vintage not found", vt_nf_title:"This vintage couldn't be found.",
+      vt_nf_body:"The link may be mistyped, or this vintage is no longer listed on Tasting & Toasting.",
+      vt_err_kick:"Something went wrong", vt_err_title:"We couldn't load this vintage.",
+      vt_err_body:"A problem on our end, not with the vintage. Please try again.",
+      vt_retry:"Try again"
     },
     fr: {
       b_claimed:"Déclaré par le producteur", b_review:"En cours de vérification", b_verified:"Vérifié", b_unverified:"Non vérifié",

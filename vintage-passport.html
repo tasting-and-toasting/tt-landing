@@ -6,123 +6,310 @@
 <title>Vintage Passport · Tasting &amp; Toasting CAP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="src/i18n/cap-i18n.js"></script>
 <style>
 :root{
-  --void:#0c0b0d; --void-2:#121013; --panel:#171318; --panel-2:#1d181e;
-  --wine:#6b2737; --cream:#f4eee6; --cream-soft:#cbbfb0;
-  --gold:#cba24f; --gold-soft:#e0c486; --green:#86a878; --coral:#c66a7c;
-  --line:#2c252e; --ink-dim:#86807f;
-  --serif:"Playfair Display", Georgia, serif;
-  --body:"Spectral", Georgia, serif;
-  --mono:"Spline Sans Mono", ui-monospace, monospace;
+  --void:#0B0406; --cream:#F5F0E8; --gold:#C5A572; --gold-soft:#E0C48E;
+  --gold-dim:#8B7548; --line:rgba(197,165,114,0.14); --line-soft:rgba(197,165,114,0.12);
+  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+  --green:#7FB069; --err:#C8654F;
 }
-*{box-sizing:border-box; margin:0; padding:0;}
-body{ background:var(--void); color:var(--cream); font-family:var(--body); font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
-.mono{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--ink-dim); }
-.wrap{ max-width:960px; margin:0 auto; padding:0 28px; }
-.navbar{ border-bottom:1px solid var(--line); background:rgba(12,11,13,.9); position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); }
-.navbar .wrap{ display:flex; align-items:center; justify-content:space-between; min-height:58px; gap:14px; padding-top:9px; padding-bottom:9px; flex-wrap:wrap; }
-.nb-brand{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--cream); }
-.nb-brand b{ color:var(--gold-soft); font-weight:600; }
-.lang-switcher-flags{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; justify-content:flex-end; max-width:340px; }
-.lang-flag-link{ display:inline-flex; align-items:center; justify-content:center; width:30px; height:20px; border-radius:3px; overflow:hidden; border:1px solid var(--line); opacity:.78; transition:opacity .2s ease, border-color .2s ease, box-shadow .2s ease; }
-.lang-flag-link:hover{ opacity:1; }
-.lang-flag-link.is-current-lang{ opacity:1; border-color:var(--gold); box-shadow:0 0 0 1px rgba(201,169,97,.35); }
-.lang-flag-link svg{ width:100%; height:100%; display:block; }
-html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
-html[dir="rtl"] .navbar .wrap{ flex-direction:row-reverse; }
-html[dir="rtl"] body{ text-align:right; }
-.back{ display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; color:var(--ink-dim); text-decoration:none; margin:30px 0 0; }
-.back svg{ width:14px; height:14px; } .back:hover{ color:var(--gold-soft); }
-html[dir="rtl"] .back svg{ transform:scaleX(-1); }
-.hero{ padding:24px 0 44px; border-bottom:1px solid var(--line); background:radial-gradient(120% 80% at 80% -10%, #25141c 0%, var(--void) 55%); }
-.hero .kick{ margin-bottom:14px; }
-.hero .yr{ font-family:var(--serif); font-weight:800; font-size:clamp(58px,12vw,128px); line-height:.92; color:var(--gold-soft); letter-spacing:-1px; }
-.hero .wine{ margin-top:8px; font-family:var(--serif); font-size:clamp(24px,3.4vw,34px); color:var(--cream); }
-.badge{ display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; border-radius:40px; padding:6px 13px; margin-top:22px; }
-.badge svg{ width:13px; height:13px; }
-.badge.claimed,.badge.review{ color:var(--gold-soft); border:1px solid #4a3a22; background:#1c1610; }
-.badge.verified{ color:var(--green); border:1px solid #3a4a34; background:#141a12; }
-.badge.unverified{ color:var(--coral); border:1px solid #4a2630; background:#1c1014; }
-section{ padding:46px 0; border-bottom:1px solid var(--line); }
-.sec-h{ display:flex; align-items:baseline; gap:14px; margin-bottom:22px; }
-.sec-h .idx{ font-family:var(--serif); font-style:italic; color:var(--gold); font-size:19px; }
-h2{ font-family:var(--serif); font-weight:700; font-size:clamp(22px,3vw,30px); }
-.stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.stat{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px; }
-.stat .n{ font-family:var(--serif); font-size:34px; color:var(--cream); line-height:1; }
-.stat .l{ margin-top:10px; }
-.prose{ color:var(--cream-soft); font-size:17px; max-width:640px; }
-.note{ margin-top:16px; font-family:var(--serif); font-style:italic; color:var(--cream); font-size:18px; max-width:640px; }
-footer{ padding:34px 0; text-align:center; }
-.state{ padding:120px 28px; text-align:center; color:var(--ink-dim); font-family:var(--mono); font-size:11px; letter-spacing:.18em; }
-@media(max-width:640px){ .stats{ grid-template-columns:1fr 1fr; } }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:radial-gradient(ellipse at 26% -4%,rgba(74,14,20,0.42),transparent 56%),linear-gradient(180deg,#12060A,var(--void));color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;}
+a{color:var(--gold);text-decoration:none;}
+a:hover{color:var(--gold-soft);}
+.stage{max-width:720px;margin:0 auto;padding:0 24px;}
+@keyframes vt-pulse{0%,100%{opacity:0.4;}50%{opacity:0.85;}}
+@keyframes vt-fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.brandbar{height:58px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:14px;position:sticky;top:0;background:rgba(11,4,6,0.72);backdrop-filter:blur(10px);z-index:50;flex-wrap:wrap;}
+.brandbar-left{display:flex;align-items:center;gap:11px;}
+.brandmark{width:23px;height:23px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:12px;flex:0 0 auto;}
+.brandname{font-family:var(--serif);font-size:15px;color:var(--cream);}
+.ctx{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,240,232,0.4);}
+.lang-switcher-flags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end;max-width:340px;}
+.lang-flag-link{display:inline-flex;align-items:center;justify-content:center;width:30px;height:20px;border-radius:3px;overflow:hidden;border:1px solid var(--line);opacity:.78;transition:opacity .2s,border-color .2s,box-shadow .2s;}
+.lang-flag-link:hover{opacity:1;}
+.lang-flag-link.is-current-lang{opacity:1;border-color:var(--gold);box-shadow:0 0 0 1px rgba(197,165,114,0.35);}
+.lang-flag-link svg{width:100%;height:100%;display:block;}
+html[dir="rtl"] .lang-switcher-flags{flex-direction:row-reverse;}
+html[dir="rtl"] .brandbar{flex-direction:row-reverse;}
+html[dir="rtl"] body{text-align:right;}
+html[dir="rtl"] .up-link svg{transform:scaleX(-1);}
+.skel-pulse{animation:vt-pulse 1.4s ease-in-out infinite;}
+.fade-in{animation:vt-fade 0.45s ease both;}
+.state-screen{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 0;animation:vt-fade 0.4s ease both;}
+.state-icon{width:64px;height:64px;margin:0 auto 24px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.state-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;}
+.state-title{font-family:var(--serif);font-weight:500;font-size:31px;margin:0 0 14px;color:var(--cream);letter-spacing:-0.01em;}
+.state-body{font-size:14px;line-height:1.6;color:rgba(245,240,232,0.6);margin:0 0 30px;max-width:420px;}
+.vt-btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 26px;border-radius:3px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:filter .15s,border-color .15s,color .15s;font-family:var(--sans);}
+.vt-btn-gold{border:none;background:linear-gradient(180deg,var(--gold),#a98a55);color:#1A0B08;font-weight:600;}
+.vt-btn-gold:hover{filter:brightness(1.06);}
+.vt-btn-ghost{border:1px solid rgba(197,165,114,0.4);color:var(--gold);background:transparent;}
+.vt-btn-ghost:hover{border-color:rgba(197,165,114,0.7);color:var(--gold-soft);}
+.passport{padding:28px 0 96px;}
+.up-link{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;color:rgba(197,165,114,0.85);margin-bottom:22px;}
+.up-link span{color:rgba(245,240,232,0.65);transition:color .15s;}
+.up-link:hover span{color:var(--gold-soft);}
+.hero-row{display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;}
+.hero-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;}
+.hero-year{font-family:var(--serif);font-weight:500;font-size:clamp(72px,18vw,104px);line-height:0.9;color:var(--cream);letter-spacing:-0.02em;}
+.hero-side{padding-bottom:12px;}
+.hero-of{font-size:13px;color:rgba(245,240,232,0.6);margin-bottom:12px;}
+.hero-wine{font-family:var(--serif);font-size:22px;color:var(--cream);}
+.vs-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border:1px solid rgba(197,165,114,0.28);border-radius:100px;}
+.vs-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;}
+.vs-text{font-size:12px;color:rgba(245,240,232,0.8);white-space:nowrap;}
+.vs-text strong{color:var(--cream);font-weight:600;}
+.block{margin-top:36px;padding-top:32px;border-top:1px solid var(--line-soft);}
+.block-first{margin-top:44px;}
+.sec-label{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;}
+.facts-grid{display:flex;flex-wrap:wrap;border-top:1px solid rgba(197,165,114,0.1);border-bottom:1px solid rgba(197,165,114,0.1);}
+.fact-cell{flex:1 1 140px;padding:16px;border-right:1px solid rgba(197,165,114,0.08);}
+.fact-k{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;}
+.fact-v{font-family:var(--serif);font-size:18px;color:var(--cream);}
+.blend-list{display:flex;flex-direction:column;gap:12px;}
+.blend-row{}
+.blend-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:5px;}
+.blend-name{font-family:var(--serif);font-size:15px;color:var(--cream);}
+.blend-pct{font-size:12px;color:rgba(245,240,232,0.55);}
+.blend-bar{height:5px;background:rgba(197,165,114,0.12);border-radius:100px;overflow:hidden;}
+.blend-fill{height:100%;background:linear-gradient(90deg,#8B7548,#C5A572);border-radius:100px;}
+.chips{display:flex;gap:9px;flex-wrap:wrap;}
+.chip{padding:7px 14px;border:1px solid rgba(197,165,114,0.25);border-radius:100px;font-size:12.5px;color:rgba(245,240,232,0.82);}
+.notes-block{display:flex;flex-direction:column;gap:28px;}
+.note-kick{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
+.tasting-text{max-width:600px;font-size:14px;line-height:1.7;color:rgba(245,240,232,0.62);font-style:italic;font-family:var(--serif);margin:0;}
+.production-text{max-width:600px;font-size:13.5px;line-height:1.7;color:rgba(245,240,232,0.55);margin:0;}
+@media(max-width:600px){.brandbar{padding:9px 16px;}.stage{padding:0 16px;}.hero-row{flex-direction:column;align-items:flex-start;gap:16px;}}
 </style>
 </head>
 <body>
-<nav class="navbar"><div class="wrap">
-  <div class="nb-brand">TASTING &amp; TOASTING · <b data-i18n="nav_vintage">VINTAGE PASSPORT</b></div>
+<header class="brandbar">
+  <div class="brandbar-left">
+    <div class="brandmark" aria-hidden="true">T</div>
+    <span class="brandname">Tasting &amp; Toasting</span>
+  </div>
+  <span class="ctx" id="ctx-label" data-i18n="vt_ctx_loading">Vintage passport</span>
   <nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
-        <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="ru" href="?lang=ru" title="Русский" aria-label="Русский"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#fff" d="M0 0h3v0.667H0z"/><path fill="#0039a6" d="M0 0.667h3v0.666H0z"/><path fill="#d52b1e" d="M0 1.333h3V2H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="es" href="?lang=es" title="Español" aria-label="Español"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#c60b1e" d="M0 0h3v2H0z"/><path fill="#ffc400" d="M0 0.45h3v1.1H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="uk" href="?lang=uk" title="Українська" aria-label="Українська"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#005BBB" d="M0 0h3v1H0z"/><path fill="#FFD500" d="M0 1h3v1H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="it" href="?lang=it" title="Italiano" aria-label="Italiano"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#009246" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ce2b37" d="M2 0h1v2H2z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="de" href="?lang=de" title="Deutsch" aria-label="Deutsch"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#000" d="M0 0h3v.67H0z"/><path fill="#D00" d="M0 .67h3v.66H0z"/><path fill="#FFCE00" d="M0 1.33h3v.67H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="he" href="?lang=he" title="עברית" aria-label="עברית"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4" aria-hidden="true"><path fill="#fff" d="M0 0h6v4H0z"/><path fill="#0038b8" d="M0 .55h6v0.42H0zm0 2.48h6v0.42H0z"/><g fill="#0038b8" transform="translate(3 2.02)"><polygon points="0,-0.55 0.48,0.28 -0.48,0.28"/><polygon points="0,0.55 -0.48,-0.28 0.48,-0.28"/></g></svg></a>
-        <a class="lang-flag-link" data-lang-link="pt" href="?lang=pt" title="Português" aria-label="Português (Portugal)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#006600" d="M0 0h1.2v2H0z"/><path fill="#ff0000" d="M1.2 0h1.8v2H1.2z"/><circle cx=".75" cy="1" fill="#ffd900" stroke="#ffd900" stroke-width=".015" r=".22"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="ka" href="?lang=ka" title="ქართული" aria-label="ქართული"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="white"/><rect x="12.5" width="5" height="20" fill="#FF0000"/><rect y="7.5" width="30" height="5" fill="#FF0000"/><rect x="1" y="1" width="2" height="6" fill="#FF0000"/><rect y="3" width="4" height="2" fill="#FF0000"/><rect x="24" y="1" width="2" height="6" fill="#FF0000"/><rect x="23" y="3" width="4" height="2" fill="#FF0000"/><rect x="1" y="13" width="2" height="6" fill="#FF0000"/><rect y="15" width="4" height="2" fill="#FF0000"/><rect x="24" y="13" width="2" height="6" fill="#FF0000"/><rect x="23" y="15" width="4" height="2" fill="#FF0000"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="ro" href="?lang=ro" title="Română (Moldova)" aria-label="Română (Moldova)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#003DA5"/><rect x="10" width="10" height="20" fill="#FFD100"/><rect x="20" width="10" height="20" fill="#CC0000"/><text x="15" y="13" text-anchor="middle" font-size="9" fill="#003DA5" font-family="serif, Georgia">✦</text></svg></a>
-        <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#dc143c"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="ru" href="?lang=ru" title="Русский" aria-label="Русский"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#fff" d="M0 0h3v0.667H0z"/><path fill="#0039a6" d="M0 0.667h3v0.666H0z"/><path fill="#d52b1e" d="M0 1.333h3V2H0z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="es" href="?lang=es" title="Español" aria-label="Español"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#c60b1e" d="M0 0h3v2H0z"/><path fill="#ffc400" d="M0 0.45h3v1.1H0z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="uk" href="?lang=uk" title="Українська" aria-label="Українська"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#005BBB" d="M0 0h3v1H0z"/><path fill="#FFD500" d="M0 1h3v1H0z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="it" href="?lang=it" title="Italiano" aria-label="Italiano"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#009246" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ce2b37" d="M2 0h1v2H2z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="de" href="?lang=de" title="Deutsch" aria-label="Deutsch"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#000" d="M0 0h3v.67H0z"/><path fill="#D00" d="M0 .67h3v.66H0z"/><path fill="#FFCE00" d="M0 1.33h3v.67H0z"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="he" href="?lang=he" title="עברית" aria-label="עברית"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4" aria-hidden="true"><path fill="#fff" d="M0 0h6v4H0z"/><path fill="#0038b8" d="M0 .55h6v0.42H0zm0 2.48h6v0.42H0z"/><g fill="#0038b8" transform="translate(3 2.02)"><polygon points="0,-0.55 0.48,0.28 -0.48,0.28"/><polygon points="0,0.55 -0.48,-0.28 0.48,-0.28"/></g></svg></a>
+    <a class="lang-flag-link" data-lang-link="pt" href="?lang=pt" title="Português" aria-label="Português (Portugal)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#006600" d="M0 0h1.2v2H0z"/><path fill="#ff0000" d="M1.2 0h1.8v2H1.2z"/><circle cx=".75" cy="1" fill="#ffd900" stroke="#ffd900" stroke-width=".015" r=".22"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="ka" href="?lang=ka" title="ქართული" aria-label="ქართული"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="white"/><rect x="12.5" width="5" height="20" fill="#FF0000"/><rect y="7.5" width="30" height="5" fill="#FF0000"/><rect x="1" y="1" width="2" height="6" fill="#FF0000"/><rect y="3" width="4" height="2" fill="#FF0000"/><rect x="24" y="1" width="2" height="6" fill="#FF0000"/><rect x="23" y="3" width="4" height="2" fill="#FF0000"/><rect x="1" y="13" width="2" height="6" fill="#FF0000"/><rect y="15" width="4" height="2" fill="#FF0000"/><rect x="24" y="13" width="2" height="6" fill="#FF0000"/><rect x="23" y="15" width="4" height="2" fill="#FF0000"/></svg></a>
+    <a class="lang-flag-link" data-lang-link="ro" href="?lang=ro" title="Română (Moldova)" aria-label="Română (Moldova)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#003DA5"/><rect x="10" width="10" height="20" fill="#FFD100"/><rect x="20" width="10" height="20" fill="#CC0000"/><text x="15" y="13" text-anchor="middle" font-size="9" fill="#003DA5" font-family="serif, Georgia">✦</text></svg></a>
+    <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#dc143c"/></svg></a>
   </div></nav>
-</div></nav>
-<main id="app"><div class="state">…</div></main>
+</header>
+
+<main id="app" class="stage"></main>
+
 <script>
-const ICO_CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l4 4L19 7"/></svg>';
-const ICO_SHIELD='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/></svg>';
-const ICO_BACK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg>';
-const qs=new URLSearchParams(location.search);
-const vintageId=(qs.get('vintageId')||'').trim();
-const lang=CAP.lang, t=CAP.t;
+const qs = new URLSearchParams(location.search);
+const vintageId = (qs.get('vintageId') || '').trim();
+const winerySlug = (qs.get('winerySlug') || qs.get('slug') || '').trim();
+const lang = CAP.lang;
 const lp = lang === 'en' ? '' : ('&lang=' + lang);
-const API=qs.get('api')||(/^(localhost|127\.|0\.0)/.test(location.hostname)?'http://localhost:8088/api/cap':'https://tt-stack-prod.onrender.com/api/cap');
-const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function badge(s){const m={verified:['verified','b_verified',ICO_SHIELD],certified:['verified','b_verified',ICO_SHIELD],rejected:['unverified','b_unverified',ICO_SHIELD],claimed:['claimed','b_claimed',ICO_CHECK],documents_submitted:['review','b_review',ICO_CHECK],under_review:['review','b_review',ICO_CHECK]};const[c,k,i]=m[s]||m.claimed;return `<span class="badge ${c}">${i}${t(k)}</span>`;}
+const t = CAP.t;
+const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-async function load(){
-  if(!vintageId){document.getElementById('app').innerHTML=`<div class="state">${t('nf_vintage')}</div>`;return;}
-  let data;
-  try{const r=await fetch(`${API}/vintages/${encodeURIComponent(vintageId)}`);if(!r.ok)throw 0;data=await r.json();}
-  catch(e){document.getElementById('app').innerHTML=`<div class="state">${t('nf_vintage')}</div>`;return;}
-  const v=data.vintage;
-  const stats=[];
-  stats.push(`<div class="stat"><div class="n">${esc(v.vintage_year)}</div><div class="l mono">${t('year')}</div></div>`);
-  if(v.bottles_produced) stats.push(`<div class="stat"><div class="n">${esc(v.bottles_produced)}</div><div class="l mono">${t('total_bottles')}</div></div>`);
-  if(v.abv) stats.push(`<div class="stat"><div class="n">${esc(v.abv)}%</div><div class="l mono">${t('abv')}</div></div>`);
-  stats.push(`<div class="stat"><div class="n" style="font-size:22px">${t('ageing_val')}</div><div class="l mono">${t('ageing')}</div></div>`);
-
-  document.getElementById('app').innerHTML=`
-  <div class="wrap"><a class="back" href="wine-passport.html?wineId=${encodeURIComponent(v.wine_id)}${lp}">${ICO_BACK}${t('back_wine')}</a></div>
-  <header class="hero"><div class="wrap">
-    <div class="kick mono">${t('nav_vintage')}</div>
-    <div class="yr">${esc(v.vintage_year)}</div>
-    <div class="wine">${esc(v.wine_name||'')}</div>
-    ${badge(v.verification_status)}
-  </div></header>
-  <section><div class="wrap">
-    <div class="sec-h"><span class="idx">01</span><h2>${t('overview_vintage')}</h2></div>
-    <div class="stats">${stats.join('')}</div>
-  </div></section>
-  ${(v.production_notes||v.tasting_notes)?`<section><div class="wrap">
-    <div class="sec-h"><span class="idx">02</span><h2>${t('production')}</h2></div>
-    ${v.production_notes?`<p class="prose">${esc(v.production_notes)}</p>`:''}
-    ${v.tasting_notes?`<p class="note">${esc(v.tasting_notes)}</p>`:''}
-  </div></section>`:''}
-  <footer class="mono">TASTING &amp; TOASTING · CAP</footer>`;
+function statusMeta(status) {
+  const map = {
+    verified:     { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
+    certified:    { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
+    under_review: { key: 'vs_under_review', dot: '#C5A572', halo: 'rgba(197,165,114,0.2)' },
+    documents_submitted: { key: 'vs_submitted', dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
+    claimed:      { key: 'vs_claimed',      dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
+    rejected:     { key: 'vs_rejected',     dot: 'rgba(245,240,232,0.3)', halo: 'rgba(245,240,232,0.1)' }
+  };
+  return map[status] || map.under_review;
 }
+
+function wineryQs() {
+  return winerySlug ? ('&winerySlug=' + encodeURIComponent(winerySlug)) : '';
+}
+
+function formatReleaseDate(d) {
+  if (!d) return '';
+  const raw = String(d).trim();
+  if (!raw) return '';
+  try {
+    const dt = new Date(raw.length === 10 ? raw + 'T00:00:00' : raw);
+    if (isNaN(dt.getTime())) return raw;
+    const loc = ({ en: 'en-GB', fr: 'fr-FR', de: 'de-DE', es: 'es-ES', it: 'it-IT', pt: 'pt-PT', pl: 'pl-PL', ru: 'ru-RU', uk: 'uk-UA', he: 'he-IL', ka: 'ka-GE', ro: 'ro-RO' })[lang] || 'en-GB';
+    return dt.toLocaleDateString(loc, { month: 'short', year: 'numeric' });
+  } catch (e) {
+    return raw;
+  }
+}
+
+function parseBlend(gc) {
+  if (!gc) return [];
+  let entries = [];
+  if (Array.isArray(gc)) {
+    entries = gc.map(g => [g && g.name, Number(g && g.pct)]).filter(([n, p]) => n && !isNaN(p) && p > 0);
+  } else if (typeof gc === 'object') {
+    entries = Object.entries(gc).map(([name, pct]) => [name, Number(pct)]).filter(([, p]) => !isNaN(p) && p > 0);
+  }
+  return entries.map(([name, pct]) => ({ name, pct, pctLabel: pct + '%', pctWidth: pct + '%' }));
+}
+
+function vintageFacts(v) {
+  const facts = [];
+  if (v.bottles_produced != null) facts.push([t('total_bottles'), String(v.bottles_produced)]);
+  if (v.abv != null && v.abv !== '') facts.push([t('abv'), esc(v.abv) + '%']);
+  const released = formatReleaseDate(v.release_date);
+  if (released) facts.push([t('vt_fact_released'), released]);
+  return facts;
+}
+
+function wineContextChips(v) {
+  const chips = [];
+  if (v.color) chips.push(t('color_' + v.color));
+  if (v.sweetness) chips.push(t('sweet_' + v.sweetness));
+  const grapes = v.grape_varieties || [];
+  if (grapes.length) chips.push(grapes.join(', '));
+  return chips;
+}
+
+function renderLoading() {
+  document.getElementById('ctx-label').textContent = t('vt_ctx_loading');
+  document.getElementById('app').innerHTML = `
+    <div class="fade-in" style="padding:44px 0 80px;">
+      <div class="skel-pulse" style="height:11px;width:24%;background:rgba(197,165,114,0.14);border-radius:2px;margin-bottom:20px;"></div>
+      <div class="skel-pulse" style="height:96px;width:44%;background:rgba(245,240,232,0.07);border-radius:4px;margin-bottom:14px;"></div>
+      <div class="skel-pulse" style="height:16px;width:38%;background:rgba(245,240,232,0.05);border-radius:3px;margin-bottom:22px;"></div>
+      <div class="skel-pulse" style="height:36px;width:170px;background:rgba(197,165,114,0.08);border-radius:100px;margin-bottom:38px;"></div>
+      <div style="display:flex;gap:10px;">
+        <div style="flex:1;height:64px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
+        <div style="flex:1;height:64px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
+        <div style="flex:1;height:64px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
+      </div>
+    </div>`;
+}
+
+function renderNotFound() {
+  document.getElementById('ctx-label').textContent = t('vt_ctx_loading');
+  document.getElementById('app').innerHTML = `
+    <div class="state-screen">
+      <div class="state-icon" style="border:1px solid rgba(197,165,114,0.35);"><span style="color:rgba(197,165,114,0.75);font-size:27px;font-family:var(--serif);">?</span></div>
+      <div class="state-kick">${t('vt_nf_kick')}</div>
+      <h1 class="state-title">${t('vt_nf_title')}</h1>
+      <p class="state-body">${t('vt_nf_body')}</p>
+      <a class="vt-btn vt-btn-ghost" href="https://tastingandtoasting.com">${t('wp_explore')}</a>
+    </div>`;
+}
+
+function renderError() {
+  document.getElementById('ctx-label').textContent = t('vt_ctx_loading');
+  document.getElementById('app').innerHTML = `
+    <div class="state-screen">
+      <div class="state-icon" style="border:1px solid rgba(200,101,79,0.5);"><span style="color:var(--err);font-size:24px;">↻</span></div>
+      <div class="state-kick">${t('vt_err_kick')}</div>
+      <h1 class="state-title">${t('vt_err_title')}</h1>
+      <p class="state-body">${t('vt_err_body')}</p>
+      <button type="button" class="vt-btn vt-btn-gold" id="retry-btn">${t('vt_retry')}</button>
+    </div>`;
+  document.getElementById('retry-btn').addEventListener('click', () => load());
+}
+
+function renderPassport(v) {
+  document.getElementById('ctx-label').textContent = t('vt_ctx_ready');
+  const sm = statusMeta(v.verification_status);
+  const facts = vintageFacts(v);
+  const blend = parseBlend(v.grape_composition);
+  const chips = wineContextChips(v);
+  const tasting = (v.tasting_notes || '').trim();
+  const production = (v.production_notes || '').trim();
+
+  const wineHref = `wine-passport.html?wineId=${encodeURIComponent(v.wine_id)}${wineryQs()}${lp}`;
+
+  const vsHtml = `
+    <div class="vs-pill">
+      <span class="vs-dot" style="background:${sm.dot};box-shadow:0 0 0 3px ${sm.halo};"></span>
+      <span class="vs-text">${t('wp_vs_prefix')} <strong>${t(sm.key)}</strong></span>
+    </div>`;
+
+  const factsHtml = facts.length ? `
+    <div class="block block-first">
+      <div class="sec-label">${t('vt_facts_label')}</div>
+      <div class="facts-grid">${facts.map(([k, val]) => `
+        <div class="fact-cell"><div class="fact-k">${esc(k)}</div><div class="fact-v">${val}</div></div>`).join('')}
+      </div>
+    </div>` : '';
+
+  const blendHtml = blend.length ? `
+    <div class="block">
+      <div class="sec-label">${t('vt_blend_label')}</div>
+      <div class="blend-list">${blend.map(g => `
+        <div class="blend-row">
+          <div class="blend-head">
+            <span class="blend-name">${esc(g.name)}</span>
+            <span class="blend-pct">${esc(g.pctLabel)}</span>
+          </div>
+          <div class="blend-bar"><div class="blend-fill" style="width:${esc(g.pctWidth)};"></div></div>
+        </div>`).join('')}
+      </div>
+    </div>` : '';
+
+  const contextHtml = chips.length ? `
+    <div class="block">
+      <div class="sec-label">${t('vt_wine_context_label')}</div>
+      <div class="chips">${chips.map(c => `<span class="chip">${esc(c)}</span>`).join('')}</div>
+    </div>` : '';
+
+  const notesHtml = (tasting || production) ? `
+    <div class="block">
+      <div class="notes-block">
+        ${tasting ? `<div><div class="note-kick">${t('vt_tasting_label')}</div><p class="tasting-text">${esc(tasting)}</p></div>` : ''}
+        ${production ? `<div><div class="note-kick">${t('vt_production_label')}</div><p class="production-text">${esc(production)}</p></div>` : ''}
+      </div>
+    </div>` : '';
+
+  document.getElementById('app').innerHTML = `
+    <article class="passport fade-in">
+      <a class="up-link" href="${wineHref}">‹ <span>${esc(v.wine_name || '')}</span></a>
+      <div class="hero-row">
+        <div>
+          <div class="hero-kick">${t('vt_kick')}</div>
+          <div class="hero-year">${esc(v.vintage_year)}</div>
+        </div>
+        <div class="hero-side">
+          <div class="hero-of">${t('vt_of')} <span class="hero-wine">${esc(v.wine_name || '')}</span></div>
+          ${vsHtml}
+        </div>
+      </div>
+      ${factsHtml}
+      ${blendHtml}
+      ${contextHtml}
+      ${notesHtml}
+    </article>`;
+}
+
+async function load() {
+  if (!vintageId) { renderNotFound(); return; }
+  renderLoading();
+  let data;
+  try {
+    const r = await fetch(`${API}/vintages/${encodeURIComponent(vintageId)}`);
+    if (r.status === 404 || r.status === 400) { renderNotFound(); return; }
+    if (!r.ok) { renderError(); return; }
+    data = await r.json();
+  } catch (e) {
+    renderError();
+    return;
+  }
+  if (!data || !data.vintage) { renderNotFound(); return; }
+  renderPassport(data.vintage);
+}
+
 CAP.wireSwitcher();
 CAP.applyStatic();
 load();
