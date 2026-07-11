@@ -151,6 +151,13 @@ function wineCountLabel(n) {
   return n === 1 ? t('wp_wines_one') : t('wp_wines_many').replace('{n}', String(n));
 }
 
+function serviceLabel(s) {
+  const custom = (s.details || '').trim();
+  if (custom) return custom;
+  const type = (s.service_type || '').trim();
+  return type ? (t('svc_' + type) || type) : '';
+}
+
 function renderLoading() {
   document.getElementById('ctx-label').textContent = t('wp_ctx_loading');
   document.getElementById('app').innerHTML = `
@@ -232,10 +239,11 @@ function renderPassport(w, dna, services, wines, winesOk, ownershipConfirmed, ow
       <div class="dna-tags">${tags.map(tag => `<span class="dna-tag">${esc(tag)}</span>`).join('')}</div>
     </div>` : '';
 
-  const svcHtml = services.length ? `
+  const svcLabels = services.map(serviceLabel).filter(Boolean);
+  const svcHtml = svcLabels.length ? `
     <div class="block block-divider">
       <div class="sec-label sec-label-med">${t('wp_services_label')}</div>
-      <div class="svc-tags">${services.map(s => `<span class="svc-tag">${esc(t('svc_' + s.service_type) || s.service_type)}</span>`).join('')}</div>
+      <div class="svc-tags">${svcLabels.map(label => `<span class="svc-tag">${esc(label)}</span>`).join('')}</div>
     </div>` : '';
 
   let winesHtml = '';
