@@ -5,6 +5,7 @@ These registries are the canonical planning and implementation foundation for th
 ## Files
 
 - `locales.json` defines the canonical public locale registry.
+- `pages.json` defines the implemented website page registry.
 - `products.json` defines product truth, public status, CTA status, evidence level, pricing state, and safe versus unsafe public claims.
 - `routes.json` defines current and proposed public route policy, including access, indexability, locale strategy, product mapping, and data/prototype-commerce risk.
 
@@ -87,3 +88,15 @@ Current policy intent:
 - Restricted or internal candidates include access flows, partner forms, winery setup, private previews, and design templates.
 
 Future pages must consume these registries before publishing marketing copy, product cards, CTAs, locale switchers, SEO metadata, or route access policy.
+
+## Page Policy
+
+`pages.json` records implemented HTML pages only. It does not create routes, change clean URL behavior, add SEO tags, or modify page content.
+
+Each page entry records a stable page ID, primary route, source HTML file, current title, primary product, product IDs, public/private boolean, localization boolean, indexability boolean, and any existing route aliases from deployment rewrites.
+
+Page indexability is policy metadata, not an SEO implementation. Browser runtime JavaScript, CAP runtime JavaScript, HTML files, deployment rewrites, and SEO files are not generated from the page registry in this foundation step.
+
+Validate page registry changes with:
+
+`python3 tools/validate-page-registry.py`
