@@ -1,0 +1,435 @@
+{
+  "schemaVersion": "1.0.0",
+  "titleSourceVocabulary": [
+    "html-title",
+    "filename-derived"
+  ],
+  "pages": [
+    {
+      "id": "home",
+      "route": "/",
+      "source": "index.html",
+      "title": "Tasting & Toasting , Wine experiences in Spain",
+      "product": "wine-lovers",
+      "productIds": [
+        "wine-lovers",
+        "cap-passport",
+        "partners",
+        "technology"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": true,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Current public landing page; indexable policy remains subject to owner-approved landing rewrite."
+    },
+    {
+      "id": "prototype",
+      "route": "/prototype",
+      "source": "prototype.html",
+      "title": "Tasting & Toasting , Prototype",
+      "product": "wine-lovers",
+      "productIds": [
+        "wine-lovers",
+        "marketplace",
+        "premium",
+        "taste-profile"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Consumer membership and marketplace prototype; should remain public-noindex."
+    },
+    {
+      "id": "game-flow",
+      "route": "/game-flow",
+      "source": "game-flow.html",
+      "title": "Tasting & Toasting , Game Flow Prototype",
+      "product": "blind-tasting",
+      "productIds": [
+        "blind-tasting",
+        "toasts"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Blind tasting game prototype; no SEO behavior changed."
+    },
+    {
+      "id": "operations",
+      "route": "/operations",
+      "source": "operations.html",
+      "title": "Tasting & Toasting , Operations Prototype",
+      "product": "experience-host",
+      "productIds": [
+        "experience-host",
+        "sommelier-passport",
+        "sommelier-workspace",
+        "marketplace"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Operational prototype with booking and checkout-like UI; should remain public-noindex."
+    },
+    {
+      "id": "wave1",
+      "route": "/wave1",
+      "source": "wave1.html",
+      "title": "Tasting & Toasting , Wave 1 Player MVP",
+      "product": "wine-lovers",
+      "productIds": [
+        "wine-lovers",
+        "tasting-notes",
+        "marketplace",
+        "blind-tasting"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Mobile player MVP prototype with catalog, cart, and tasting screens."
+    },
+    {
+      "id": "legal",
+      "route": "/legal",
+      "source": "legal.html",
+      "title": "LEGAL NOTICE , Tasting & Toasting",
+      "product": "none",
+      "productIds": [],
+      "public": true,
+      "localized": false,
+      "indexable": true,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Public legal page; indexable candidate after legal owner approval."
+    },
+    {
+      "id": "privacy",
+      "route": "/privacy",
+      "source": "privacy.html",
+      "title": "PRIVACY POLICY , Tasting & Toasting",
+      "product": "none",
+      "productIds": [],
+      "public": true,
+      "localized": false,
+      "indexable": true,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Public privacy page; indexable candidate after legal owner approval."
+    },
+    {
+      "id": "terms",
+      "route": "/terms",
+      "source": "terms.html",
+      "title": "TERMS OF SERVICE , Tasting & Toasting",
+      "product": "none",
+      "productIds": [],
+      "public": true,
+      "localized": false,
+      "indexable": true,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Public terms page; indexable candidate after legal owner approval."
+    },
+    {
+      "id": "access",
+      "route": "/access",
+      "source": "access.html",
+      "title": "Confidential Access · Tasting & Toasting CAP",
+      "product": "partners",
+      "productIds": [
+        "partners"
+      ],
+      "public": false,
+      "localized": true,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Confidential access gate with noindex metadata; not a public page."
+    },
+    {
+      "id": "cap-demo",
+      "route": "/cap-demo",
+      "source": "cap-demo.html",
+      "title": "Tasting & Toasting CAP — winery console + passport",
+      "product": "cap-passport",
+      "productIds": [
+        "cap-passport"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "CAP demo gateway; public-noindex until approved as a public product page."
+    },
+    {
+      "id": "cap-onboarding",
+      "route": "/cap-onboarding",
+      "source": "cap-onboarding.html",
+      "title": "Winery Onboarding · Tasting & Toasting CAP",
+      "product": "for-wineries",
+      "productIds": [
+        "for-wineries",
+        "winery-onboarding",
+        "cap-passport"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "CAP onboarding demo; public-noindex until onboarding claims and data use are reviewed."
+    },
+    {
+      "id": "cap-qr-sticker",
+      "route": "/cap-qr-sticker",
+      "source": "cap-qr-sticker.html",
+      "title": "CAP QR Sticker · Tasting & Toasting",
+      "product": "eu-qr",
+      "productIds": [
+        "eu-qr",
+        "bottle-identity",
+        "cap-passport"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "QR sticker preview utility; not an SEO claim for EU compliance."
+    },
+    {
+      "id": "bottle-scan",
+      "route": "/bottle-scan",
+      "source": "bottle-scan.html",
+      "title": "Bottle Passport · Tasting & Toasting CAP",
+      "product": "cap-passport",
+      "productIds": [
+        "cap-passport",
+        "bottle-identity",
+        "scanner"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": true,
+      "routeAliases": [
+        "/cap/b/:token"
+      ],
+      "titleSource": "html-title",
+      "notes": "API-backed bottle passport page; aliases include the tokenized CAP route."
+    },
+    {
+      "id": "winery-passport",
+      "route": "/winery-passport",
+      "source": "winery-passport.html",
+      "title": "Winery Passport · Tasting & Toasting CAP",
+      "product": "cap-passport",
+      "productIds": [
+        "cap-passport",
+        "for-wineries"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": true,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "API-backed winery passport page; index only approved public passport URLs."
+    },
+    {
+      "id": "wine-passport",
+      "route": "/wine-passport",
+      "source": "wine-passport.html",
+      "title": "Wine Passport · Tasting & Toasting CAP",
+      "product": "cap-passport",
+      "productIds": [
+        "cap-passport"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": true,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "API-backed wine passport page; index only approved public passport URLs."
+    },
+    {
+      "id": "vintage-passport",
+      "route": "/vintage-passport",
+      "source": "vintage-passport.html",
+      "title": "Vintage Passport · Tasting & Toasting CAP",
+      "product": "cap-passport",
+      "productIds": [
+        "cap-passport"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": true,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "API-backed vintage passport page; index only approved public passport URLs."
+    },
+    {
+      "id": "producer",
+      "route": "/producer",
+      "source": "producer.html",
+      "title": "Producer · Lueria Winery · Tasting & Toasting",
+      "product": "for-wineries",
+      "productIds": [
+        "for-wineries"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Producer demo page; public-noindex until merged into approved winery product route."
+    },
+    {
+      "id": "tastings",
+      "route": "/tastings",
+      "source": "tastings.html",
+      "title": "Find a tasting · Tasting & Toasting",
+      "product": "experience-host",
+      "productIds": [
+        "experience-host",
+        "marketplace"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Tastings demo page; not active event inventory."
+    },
+    {
+      "id": "for",
+      "route": "/for",
+      "source": "for/index.html",
+      "title": "Tasting & Toasting · CAP Partner",
+      "product": "partners",
+      "productIds": [
+        "partners",
+        "wine-trade"
+      ],
+      "public": false,
+      "localized": false,
+      "indexable": false,
+      "routeAliases": [
+        "/for/:name"
+      ],
+      "titleSource": "html-title",
+      "notes": "Restricted partner feedback form with live submissions."
+    },
+    {
+      "id": "winery-setup",
+      "route": "/winery-setup",
+      "source": "winery-setup/index.html",
+      "title": "Tasting & Toasting · Stara Winna Góra · Winery Setup",
+      "product": "winery-onboarding",
+      "productIds": [
+        "winery-onboarding",
+        "for-wineries",
+        "cap-passport"
+      ],
+      "public": false,
+      "localized": false,
+      "indexable": false,
+      "routeAliases": [
+        "/winery-setup/:token"
+      ],
+      "titleSource": "html-title",
+      "notes": "Access-code-gated winery setup workflow with partner data collection."
+    },
+    {
+      "id": "tamada-preview-xk7m9q2026",
+      "route": "/tamada-preview-xk7m9q2026",
+      "source": "tamada-preview-xk7m9q2026.html",
+      "title": "TAMADA — Tasting & Toasting",
+      "product": "toasts",
+      "productIds": [
+        "toasts"
+      ],
+      "public": false,
+      "localized": false,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Private preview page; should not be public-indexed."
+    },
+    {
+      "id": "design-bottle-passport-canonical",
+      "route": "/_design/Bottle_Passport_Canonical",
+      "source": "_design/Bottle_Passport_Canonical.html",
+      "title": "Bottle Passport Canonical Design",
+      "product": "bottle-identity",
+      "productIds": [
+        "bottle-identity",
+        "cap-passport"
+      ],
+      "public": false,
+      "localized": false,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "filename-derived",
+      "notes": "Design reference template with no HTML title element."
+    },
+    {
+      "id": "design-wine-passport-canonical",
+      "route": "/_design/Wine_Passport_Canonical",
+      "source": "_design/Wine_Passport_Canonical.html",
+      "title": "Wine Passport Canonical Design",
+      "product": "cap-passport",
+      "productIds": [
+        "cap-passport"
+      ],
+      "public": false,
+      "localized": false,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "filename-derived",
+      "notes": "Design reference template with no HTML title element."
+    },
+    {
+      "id": "design-vintage-passport-canonical",
+      "route": "/_design/Vintage_Passport_Canonical",
+      "source": "_design/Vintage_Passport_Canonical.html",
+      "title": "Vintage Passport Canonical Design",
+      "product": "cap-passport",
+      "productIds": [
+        "cap-passport"
+      ],
+      "public": false,
+      "localized": false,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "filename-derived",
+      "notes": "Design reference template with no HTML title element."
+    },
+    {
+      "id": "design-winery-passport-canonical",
+      "route": "/_design/Winery_Passport_Canonical",
+      "source": "_design/Winery_Passport_Canonical.html",
+      "title": "Winery Passport Canonical Design",
+      "product": "for-wineries",
+      "productIds": [
+        "for-wineries",
+        "cap-passport"
+      ],
+      "public": false,
+      "localized": false,
+      "indexable": false,
+      "routeAliases": [],
+      "titleSource": "filename-derived",
+      "notes": "Design reference template with no HTML title element."
+    }
+  ]
+}
