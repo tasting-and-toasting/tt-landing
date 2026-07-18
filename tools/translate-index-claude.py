@@ -16,34 +16,23 @@ import tempfile
 import time
 from pathlib import Path
 
+from locale_registry import chunk_locale_codes, get_non_default_locale_codes
+
 ROOT = Path(__file__).resolve().parents[1]
 
 API_KEY = os.environ.get("ANTHROPIC_API_KEY", "").strip()
 RULES = """Informal pronouns. Tasting & Toasting never translated as a phrase.
 Preserve ALL HTML tags and HTML attributes (<span>, <strong>, class=\"em\") exactly — translate only plain text nodes.
 Preserve numbers like 01, 02 inside strings. Spanish legal context may stay formal where needed for notices.
-HE=Hebrew RTL. KA=Georgian script. RO=Moldovan Romanian.
+HE=Hebrew RTL. KA=Georgian script. RO=Moldovan Romanian. PL=Polish.
 Return clean JSON only. Same keys as EN, translate values only."""
 
 MODEL = "claude-haiku-4-5-20251001"
 
-ALL_LANG_CODES: tuple[str, ...] = (
-    "fr",
-    "ru",
-    "es",
-    "uk",
-    "it",
-    "de",
-    "he",
-    "pt",
-    "ka",
-    "ro",
-)
-
-LANG_SETS: tuple[tuple[str, ...], ...] = (
-    ("fr", "ru", "es", "uk", "it"),
-    ("de", "he", "pt", "ka", "ro"),
-)
+TOOL_LOCALE_MODE = "non-default"
+ALL_LANG_CODES = get_non_default_locale_codes()
+TOOL_TARGET_LOCALES = ALL_LANG_CODES
+LANG_SETS = chunk_locale_codes(ALL_LANG_CODES, 5)
 
 CHUNK_KEYS = 21
 MAX_HTTP_RETRIES = 5

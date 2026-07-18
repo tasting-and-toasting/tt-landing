@@ -22,7 +22,7 @@ Hebrew (`he`) is the only RTL locale. All other canonical locales are LTR.
 
 Runtime support and complete page translation are different facts. The shared runtime and CAP runtime can expose a locale while standalone pages, legacy scripts, legal pages, partner forms, and prototypes may still have partial or inconsistent language coverage.
 
-Translation scripts should eventually consume `locales.json` directly instead of keeping hard-coded locale lists.
+Python translation tooling consumes `locales.json` through `tools/locale_registry.py` for canonical locale order, non-default translation targets, default locale, editorial master locale, and RTL locale checks. This does not mean browser runtime scripts, CAP runtime scripts, standalone pages, or translation payload content are all automatically generated from the registry.
 
 ## Product Policy
 

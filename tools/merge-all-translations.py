@@ -12,6 +12,8 @@ import json
 import re
 from pathlib import Path
 
+from locale_registry import get_canonical_locale_codes
+
 try:
     import json_repair as _json_repair
 except ImportError:
@@ -21,7 +23,9 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT_PATH = ROOT / "src" / "i18n" / "tt141-features.json"
 SRC_EN = ROOT / "src" / "i18n" / "all-pages-en.json"
 
-LANGS = ["en", "fr", "ru", "es", "uk", "it", "de", "he", "pt", "ka", "ro"]
+TOOL_LOCALE_MODE = "canonical"
+TOOL_TARGET_LOCALES = get_canonical_locale_codes()
+LANGS = TOOL_TARGET_LOCALES
 
 # Each section exposes doc_title under a unique key used by matching HTML pages.
 SECTION_DOC_TITLE_KEY: dict[str, str] = {
@@ -99,6 +103,10 @@ def ingest_translation_file(
             continue
         blob = data[lang]
         if not isinstance(blob, dict):
+            print(
+                f"MISSING locale data: {abs_path.relative_to(ROOT)} "
+                f"{lang} is not an object"
+            )
             continue
         base.setdefault(lang, {})
         dt = blob.get("doc_title")
@@ -122,6 +130,10 @@ def main() -> None:
                 print(f"MISSING: {rel}")
                 continue
             try:
+                data = load_json_any(abs_path)
+                for lang in LANGS:
+                    if lang != "en" and lang not in data:
+                        print(f"MISSING locale data: {rel} lacks {lang}")
                 ingest_translation_file(
                     base,
                     section,
