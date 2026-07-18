@@ -100,3 +100,7 @@ Page indexability is policy metadata, not an SEO implementation. Browser runtime
 Validate page registry changes with:
 
 `python3 tools/validate-page-registry.py`
+
+Validate route and page coverage with:
+
+`python3 tools/audit-route-coverage.py`
