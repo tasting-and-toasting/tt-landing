@@ -23,6 +23,8 @@ import tempfile
 import time
 from pathlib import Path
 
+from locale_registry import validate_locale_subset
+
 try:
     import json_repair as _json_repair
 except ImportError:
@@ -30,6 +32,19 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC_EN_PATH = ROOT / "src" / "i18n" / "all-pages-en.json"
+
+TOOL_LOCALE_MODE = "specialized"
+TOOL_SPECIALIZATION_REASON = (
+    "Historical proto/gameflow batch generator for the eight locales missing "
+    "from earlier ChatGPT exports; it intentionally does not generate fr, ru, "
+    "or pl output."
+)
+SPECIALIZED_LOCALES = ("es", "uk", "it", "de", "he", "pt", "ka", "ro")
+ALL_LANGS_8 = validate_locale_subset(
+    SPECIALIZED_LOCALES,
+    label="translate-proto-gameflow-8langs.py specialized locales",
+)
+TOOL_TARGET_LOCALES = ALL_LANGS_8
 
 RULES = """Informal pronouns. Tasting & Toasting never translated.
 HE=Hebrew RTL. KA=Georgian script. RO=Moldovan Romanian.
@@ -43,14 +58,14 @@ LANG_SETS: tuple[tuple[str, ...], ...] = (
     ("es", "uk", "it", "de"),
     ("he", "pt", "ka", "ro"),
 )
+for _lang_set in LANG_SETS:
+    validate_locale_subset(_lang_set, label="translate-proto-gameflow-8langs.py language set")
 
 # ~22 keys × 4 langs per request — similar to wave1 chunking.
 CHUNK_KEYS = 22
 
 MAX_HTTP_RETRIES = 5
 RETRY_SLEEP_BASE_S = 12
-
-ALL_LANGS_8 = ("es", "uk", "it", "de", "he", "pt", "ka", "ro")
 
 
 def load_api_key() -> str:
@@ -83,10 +98,14 @@ def extract_json_object(text: str) -> dict:
         return dict(r) if isinstance(r, dict) else {}
 
 
-API_KEY = load_api_key()
+API_KEY = ""
 
 
 def call_claude(prompt: str, max_tokens: int = 8192) -> str:
+    global API_KEY
+    if not API_KEY:
+        API_KEY = load_api_key()
+
     payload = json.dumps(
         {
             "model": MODEL,
@@ -271,6 +290,9 @@ Inner object keys MUST match the English keys exactly."""
 
 def main() -> None:
     import sys
+
+    global API_KEY
+    API_KEY = load_api_key()
 
     resume = "--resume" in sys.argv
     gf_only = "--gameflow-only" in sys.argv

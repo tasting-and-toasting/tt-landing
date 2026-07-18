@@ -13,6 +13,8 @@ import tempfile
 import time
 from pathlib import Path
 
+from locale_registry import validate_locale_subset
+
 ROOT = Path(__file__).resolve().parents[1]
 
 API_KEY = os.environ.get("ANTHROPIC_API_KEY", "").strip()
@@ -25,17 +27,14 @@ MODEL = "claude-haiku-4-5-20251001"
 # Nested JSON stays smaller when we slice source keys — avoids curl 52 on huge completions.
 CHUNK_KEYS = 21
 
-LANG_SETS_FOR_WAVE1: tuple[tuple[str, ...], ...] = (
-    ("fr", "ru", "es", "uk", "it"),
-    ("de", "he", "pt", "ka", "ro"),
+TOOL_LOCALE_MODE = "specialized"
+TOOL_SPECIALIZATION_REASON = (
+    "Historical wave1/ops generator for pre-existing batch files. Wave1 covers "
+    "the original ten non-English locales, while ops-missing7 intentionally "
+    "fills only the seven locales absent from the existing ops ChatGPT export."
 )
 
-LANG_SETS_FOR_OPS: tuple[tuple[str, ...], ...] = (
-    ("uk", "it", "de", "he"),
-    ("pt", "ka", "ro"),
-)
-
-ALL_WAVE1_LANG_CODES: tuple[str, ...] = (
+WAVE1_SPECIALIZED_LOCALES = (
     "fr",
     "ru",
     "es",
@@ -47,6 +46,34 @@ ALL_WAVE1_LANG_CODES: tuple[str, ...] = (
     "ka",
     "ro",
 )
+OPS_SPECIALIZED_LOCALES = ("uk", "it", "de", "he", "pt", "ka", "ro")
+ALL_WAVE1_LANG_CODES = validate_locale_subset(
+    WAVE1_SPECIALIZED_LOCALES,
+    label="translate-via-claude.py wave1 specialized locales",
+)
+ALL_OPS_LANG_CODES = validate_locale_subset(
+    OPS_SPECIALIZED_LOCALES,
+    label="translate-via-claude.py ops specialized locales",
+)
+TOOL_TARGET_LOCALES = ALL_WAVE1_LANG_CODES
+TOOL_TARGET_GROUPS = {
+    "wave1": ALL_WAVE1_LANG_CODES,
+    "ops": ALL_OPS_LANG_CODES,
+}
+
+LANG_SETS_FOR_WAVE1: tuple[tuple[str, ...], ...] = (
+    ("fr", "ru", "es", "uk", "it"),
+    ("de", "he", "pt", "ka", "ro"),
+)
+for _lang_set in LANG_SETS_FOR_WAVE1:
+    validate_locale_subset(_lang_set, label="translate-via-claude.py wave1 language set")
+
+LANG_SETS_FOR_OPS: tuple[tuple[str, ...], ...] = (
+    ("uk", "it", "de", "he"),
+    ("pt", "ka", "ro"),
+)
+for _lang_set in LANG_SETS_FOR_OPS:
+    validate_locale_subset(_lang_set, label="translate-via-claude.py ops language set")
 
 MAX_HTTP_RETRIES = 5
 RETRY_SLEEP_BASE_S = 12
