@@ -53,7 +53,7 @@ class PageRegistryTest(unittest.TestCase):
     def test_required_foundation_page_facts(self) -> None:
         home = self.page_by_route("/")
         self.assertEqual(home["id"], "home")
-        self.assertEqual(home["title"], "Tasting & Toasting , Wine experiences in Spain")
+        self.assertEqual(home["title"], "Tasting & Toasting | Wine Discovery And Bottle Passport Context")
         self.assertEqual(home["product"], "wine-lovers")
         self.assertTrue(home["public"])
         self.assertTrue(home["localized"])
