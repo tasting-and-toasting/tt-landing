@@ -3,811 +3,1253 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tasting & Toasting , Wine experiences in Spain</title>
-<meta name="description" content="Tasting & Toasting is a wine experience company entering the European market , tastings, toasts, gatherings. Currently in pre-launch.">
+<title>Tasting &amp; Toasting | Wine Discovery And Bottle Passport Context</title>
+<meta name="description" content="Tasting &amp; Toasting is preparing a public wine discovery and Passport platform for wine lovers, wineries, and people reading recorded bottle information.">
+<link rel="canonical" href="https://tastingandtoasting.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tasting &amp; Toasting | Wine Discovery And Bottle Passport Context">
+<meta property="og:description" content="Tasting &amp; Toasting is preparing a public wine discovery and Passport platform for wine lovers, wineries, and people reading recorded bottle information.">
+<meta property="og:url" content="https://tastingandtoasting.com/">
+<meta property="og:site_name" content="Tasting &amp; Toasting">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tasting &amp; Toasting | Wine Discovery And Bottle Passport Context">
+<meta name="twitter:description" content="Tasting &amp; Toasting is preparing a public wine discovery and Passport platform for wine lovers, wineries, and people reading recorded bottle information.">
 <link rel="icon" type="image/png" href="assets/favicon-64.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&amp;family=JetBrains+Mono:wght@300;400;500&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0F0B0A;
-  --bg-2: #1A1413;
-  --bg-3: #241B19;
-  --ink: #F4EDE4;
-  --ink-2: #C7B8A8;
-  --ink-3: #8A7A6B;
-  --wine: #6B1E2C;
-  --wine-2: #8B2838;
-  --wine-bright: #B83246;
-  --gold: #C9A961;
-  --gold-bright: #E8C77A;
-  --green: #4A6B3D;
-  --line: rgba(244,237,228,0.08);
-  --line-2: rgba(244,237,228,0.15);
+  --bg: #0f0b0a;
+  --surface: #181211;
+  --surface-strong: #211917;
+  --surface-soft: #261f1a;
+  --ink: #f7efe6;
+  --ink-muted: #c8baaa;
+  --ink-dim: #938575;
+  --wine: #7b2130;
+  --wine-bright: #b83246;
+  --gold: #d2b46f;
+  --gold-soft: rgba(210, 180, 111, 0.14);
+  --green: #5d7a4f;
+  --line: rgba(247, 239, 230, 0.11);
+  --line-strong: rgba(247, 239, 230, 0.2);
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+  --max: 1180px;
+  --header: 76px;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
-body { overflow-x: hidden; min-height: 100vh; }
-a { color: inherit; text-decoration: none; }
-.serif { font-family: 'Fraunces', serif; }
-.mono { font-family: 'JetBrains Mono', monospace; }
+* {
+  box-sizing: border-box;
+}
 
-/* Subtle grain overlay across the whole page */
+html {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  scroll-padding-top: calc(var(--header) + 24px);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(123, 33, 48, 0.18), transparent 34rem),
+    linear-gradient(180deg, var(--bg) 0%, #120d0c 44%, #0f0b0a 100%);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.serif {
+  font-family: "Fraunces", Georgia, serif;
+}
+
+.mono {
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  transform: translateY(-140%);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  background: var(--gold);
+  color: #120c0a;
+  padding: 12px 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 .page-grain {
-  position: fixed; inset: 0; pointer-events: none; z-index: 1;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' /></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.4'/></svg>");
-  opacity: 0.04;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.35'/></svg>");
+  opacity: 0.035;
   mix-blend-mode: overlay;
 }
 
-/* Top bar */
-.topbar {
+.site-header {
   position: fixed;
-  top: 0; left: 0; right: 0;
-  background: rgba(15,11,10,0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--line);
+  top: 0;
+  right: 0;
+  left: 0;
   z-index: 100;
-  padding: 14px 32px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(15, 11, 10, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 20px;
+  width: min(100%, var(--max));
+  min-height: var(--header);
+  margin: 0 auto;
+  padding: 0 28px;
 }
-.topbar-brand {
-  font-family: 'Fraunces', serif;
-  font-size: 16px;
-  letter-spacing: 0.02em;
-}
-.topbar-brand .amp { color: var(--wine-bright); font-style: italic; font-weight: 400; }
-.topbar-links { display: flex; gap: 24px; align-items: center; }
-.topbar-links a {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  transition: color 0.2s ease;
-}
-.topbar-links a:hover { color: var(--ink); }
-.topbar-status {
-  display: flex; align-items: center; gap: 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--gold);
-}
-.topbar-status::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: var(--gold);
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-}
-.topbar-trail {
-  display: flex;
+
+.brand {
+  display: inline-flex;
   align-items: center;
-  gap: 18px;
-}
-.topbar-cta {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold);
-  border: 1px solid var(--gold);
-  padding: 6px 14px;
-  border-radius: 4px;
+  min-height: 44px;
   text-decoration: none;
-  white-space: nowrap;
-  transition: background 0.2s ease, color 0.2s ease;
 }
-.topbar-cta:hover {
-  background: var(--gold);
-  color: #120c0a;
+
+.brand img {
+  display: block;
+  width: 193px;
+  height: 30px;
 }
-.tt-ios-invite {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: var(--ink-3);
-  margin-top: 18px;
-  max-width: 560px;
-  line-height: 1.6;
-}
-.tt-ios-invite a {
-  color: var(--gold);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(201, 169, 97, 0.35);
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-.tt-ios-invite a:hover {
-  color: var(--ink);
-  border-bottom-color: var(--gold);
-}
-.lang-switcher-flags {
+
+.nav-shell {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
   align-items: center;
   justify-content: flex-end;
-  max-width: 340px;
+  gap: 20px;
+  min-width: 0;
 }
-.lang-flag-link {
+
+.primary-nav,
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.primary-nav a,
+.language-switcher a,
+.mobile-panel a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--ink-muted);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.primary-nav a {
+  padding: 0 10px;
+}
+
+.primary-nav a:hover,
+.language-switcher a:hover,
+.mobile-panel a:hover {
+  color: var(--ink);
+}
+
+.language-switcher {
+  position: relative;
+  justify-content: flex-end;
+}
+
+.language-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 20px;
-  border-radius: 3px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  opacity: 0.78;
-  transition: opacity 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.lang-flag-link:hover { opacity: 1; }
-.lang-flag-link.is-current-lang {
-  opacity: 1;
-  border-color: var(--gold);
-  box-shadow: 0 0 0 1px rgba(201, 169, 97, 0.35);
-}
-.lang-flag-link svg { width: 100%; height: 100%; display: block; }
-/* HE (rtl): mirror key flex rows */
-html[dir="rtl"] .topbar { flex-direction: row-reverse; }
-html[dir="rtl"] .topbar-links { flex-direction: row-reverse; }
-html[dir="rtl"] .topbar-trail { flex-direction: row-reverse; }
-html[dir="rtl"] .lang-switcher-flags { flex-direction: row-reverse; }
-html[dir="rtl"] .hero-meta { flex-direction: row-reverse; }
-html[dir="rtl"] .hero-actions { flex-direction: row-reverse; }
-html[dir="rtl"] .banner-inner { flex-direction: row-reverse; }
-html[dir="rtl"] .tt141-feature-row { direction: rtl; }
-@keyframes pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* HERO */
-.hero {
-  position: relative;
-  padding: 140px 32px 96px;
-  max-width: 1200px;
-  margin: 0 auto;
-  z-index: 2;
+.language-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  width: 174px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: rgba(15, 11, 10, 0.98);
+  padding: 8px;
+  box-shadow: var(--shadow);
 }
-.hero-meta {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--ink-3);
-  margin-bottom: 32px;
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
+
+.language-panel[hidden] {
+  display: none;
 }
-.hero-meta .dot { color: var(--wine-bright); }
-.hero-headline {
-  font-family: 'Fraunces', serif;
-  font-weight: 300;
-  font-size: clamp(48px, 8vw, 96px);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  margin-bottom: 32px;
-  max-width: 1000px;
+
+.language-switcher a {
+  min-width: 44px;
+  justify-content: center;
+  border: 1px solid transparent;
+  padding: 0 6px;
+  font-size: 10px;
 }
-.hero-headline .em {
-  font-style: italic;
-  font-weight: 400;
+
+.language-switcher a[aria-current="true"],
+.language-switcher a.is-current-lang {
+  border-color: var(--gold);
   color: var(--gold);
 }
-.hero-headline .amp {
-  color: var(--wine-bright);
-  font-style: italic;
-  font-weight: 400;
-}
-.hero-sub {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(16px, 1.5vw, 19px);
-  line-height: 1.6;
-  color: var(--ink-2);
-  max-width: 640px;
-  margin-bottom: 48px;
-}
-.hero-actions {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.hero-btn {
+
+.status-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 24px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  min-height: 32px;
+  border: 1px solid rgba(210, 180, 111, 0.3);
   border-radius: 999px;
-  transition: all 0.25s ease;
-  cursor: pointer;
-  border: 1px solid;
-}
-.hero-btn-primary {
-  background: var(--wine);
-  color: var(--ink);
-  border-color: var(--wine);
-}
-.hero-btn-primary:hover {
-  background: var(--wine-bright);
-  border-color: var(--wine-bright);
-  transform: translateY(-1px);
-}
-.hero-btn-ghost {
-  background: transparent;
-  color: var(--ink-2);
-  border-color: var(--line-2);
-}
-.hero-btn-ghost:hover {
-  color: var(--ink);
-  border-color: var(--ink-3);
-}
-
-/* Pre-launch banner */
-.banner {
-  max-width: 1200px;
-  margin: 0 auto 80px;
-  padding: 0 32px;
-  position: relative;
-  z-index: 2;
-}
-.banner-inner {
-  background: rgba(201, 169, 97, 0.08);
-  border: 1px solid rgba(201, 169, 97, 0.2);
-  border-radius: 12px;
-  padding: 22px 28px;
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-.banner-icon {
-  font-size: 22px;
-  flex-shrink: 0;
-}
-.banner-text { color: var(--ink-2); font-size: 14px; line-height: 1.6; }
-.banner-text strong { color: var(--gold); font-weight: 500; }
-
-/* PROTOTYPES SECTION */
-.section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 72px 32px;
-  position: relative;
-  z-index: 2;
-}
-.section-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--ink-3);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.section-label::before {
-  content: '';
-  width: 24px;
-  height: 1px;
-  background: var(--wine-bright);
-}
-.section-title {
-  font-family: 'Fraunces', serif;
-  font-weight: 400;
-  font-size: clamp(32px, 4.5vw, 48px);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  margin-bottom: 16px;
-}
-.section-title .em { font-style: italic; color: var(--gold); }
-.section-intro {
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--ink-2);
-  max-width: 620px;
-  margin-bottom: 48px;
-}
-
-/* Prototype cards */
-.proto-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-.proto-card {
-  background: var(--bg-2);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 32px 32px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  transition: all 0.25s ease;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-.proto-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--wine-bright), transparent);
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-.proto-card:hover {
-  border-color: var(--line-2);
-  background: var(--bg-3);
-  transform: translateY(-2px);
-}
-.proto-card:hover::before { opacity: 1; }
-
-.proto-card-meta {
-  font-family: 'JetBrains Mono', monospace;
+  padding: 0 12px;
+  color: var(--gold);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 10px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--ink-3);
+  white-space: nowrap;
 }
-.proto-card-meta .num { color: var(--gold); }
-.proto-card h3 {
-  font-family: 'Fraunces', serif;
-  font-weight: 400;
-  font-size: 26px;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+
+.status-pill::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.menu-button {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: transparent;
   color: var(--ink);
+  cursor: pointer;
 }
-.proto-card h3 .em { font-style: italic; color: var(--gold); }
-.proto-card p {
+
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menu-icon {
+  position: relative;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.menu-icon::before {
+  top: -6px;
+}
+
+.menu-icon::after {
+  top: 6px;
+}
+
+.menu-button[aria-expanded="true"] .menu-icon {
+  transform: rotate(45deg);
+}
+
+.menu-button[aria-expanded="true"] .menu-icon::before {
+  transform: translateY(6px) rotate(90deg);
+}
+
+.menu-button[aria-expanded="true"] .menu-icon::after {
+  opacity: 0;
+}
+
+.mobile-panel {
+  display: none;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.section,
+.hero {
+  width: min(100%, var(--max));
+  margin: 0 auto;
+  padding: 86px 28px;
+  scroll-margin-top: calc(var(--header) + 24px);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.58fr);
+  gap: 56px;
+  align-items: end;
+  min-height: 720px;
+  padding-top: 150px;
+  padding-bottom: 82px;
+}
+
+.kicker,
+.eyebrow,
+.section-label {
+  margin: 0 0 14px;
+  color: var(--gold);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.section-title,
+.cta-title {
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.hero h1 {
+  max-width: 870px;
+  font-size: clamp(48px, 7vw, 86px);
+  line-height: 1.02;
+}
+
+.hero-body {
+  max-width: 700px;
+  margin: 28px 0 0;
+  color: var(--ink-muted);
+  font-size: 19px;
+  line-height: 1.65;
+}
+
+.why {
+  max-width: 690px;
+  margin: 18px 0 0;
+  color: var(--ink);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.button,
+.text-link,
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border-radius: 6px;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.button {
+  border: 1px solid var(--line-strong);
+  padding: 0 18px;
+}
+
+.text-link {
+  min-width: 44px;
+}
+
+.button.primary {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #120c0a;
+  font-weight: 700;
+}
+
+.button.secondary {
+  color: var(--ink);
+  background: rgba(247, 239, 230, 0.04);
+}
+
+.text-link,
+.card-link {
+  color: var(--gold);
+}
+
+.text-link {
+  justify-content: flex-start;
+}
+
+.hero-status {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(24, 18, 17, 0.74);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.hero-status h2 {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.hero-status p {
+  margin: 0;
+  color: var(--ink-muted);
   font-size: 14px;
   line-height: 1.65;
-  color: var(--ink-2);
-}
-.proto-card-screens {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 4px;
-}
-.proto-card-screens .chip {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  padding: 4px 10px;
-  background: rgba(244,237,228,0.04);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--ink-3);
-}
-.proto-card-cta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--ink-2);
-  transition: color 0.25s ease, gap 0.25s ease;
-}
-.proto-card:hover .proto-card-cta {
-  color: var(--gold);
-  gap: 14px;
 }
 
-/* About section */
-.about {
-  background: var(--bg-2);
+.band {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  margin-top: 48px;
+  background: rgba(24, 18, 17, 0.64);
 }
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
-}
-.about-text p {
-  font-size: 16px;
-  line-height: 1.8;
-  color: var(--ink-2);
-  margin-bottom: 18px;
-}
-.about-text p:first-of-type {
-  font-size: 19px;
-  color: var(--ink);
-  font-family: 'Fraunces', serif;
-  font-weight: 300;
-  line-height: 1.55;
-}
-.about-card {
-  background: var(--bg-3);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 28px;
-}
-.about-card h4 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--gold);
-  margin-bottom: 18px;
-}
-.about-card dl {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  gap: 12px 18px;
-  font-size: 13px;
-}
-.about-card dt {
-  font-family: 'JetBrains Mono', monospace;
-  text-transform: uppercase;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: var(--ink-3);
-}
-.about-card dd { color: var(--ink-2); }
 
-/* Footer (same as injected into prototypes , kept inline for index since no inject) */
-.tt-footer {
-  background: var(--bg-2);
-  border-top: 1px solid var(--line);
-  padding: 56px 32px 40px;
-  margin-top: 0;
-  font-family: 'Inter', sans-serif;
-  color: var(--ink-3);
-  position: relative;
-  z-index: 2;
-}
-.tt-footer-inner {
-  max-width: 1200px;
+.band-inner {
+  width: min(100%, var(--max));
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 48px;
-}
-.tt-footer-brand {
-  font-family: 'Fraunces', serif;
-  font-size: 22px;
-  color: var(--ink);
-  margin-bottom: 14px;
-  letter-spacing: 0.01em;
-}
-.tt-footer-brand .amp { color: var(--wine-bright); font-style: italic; font-weight: 400; }
-.tt-footer-tagline { font-size: 13px; line-height: 1.6; color: var(--ink-3); max-width: 320px; }
-.tt-footer-col h4 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--ink-3);
-  margin-bottom: 16px;
-}
-.tt-footer-col ul { list-style: none; }
-.tt-footer-col li { margin-bottom: 10px; }
-.tt-footer-col a {
-  color: var(--ink-2);
-  font-size: 13px;
-  transition: color 0.2s ease;
-}
-.tt-footer-col a:hover { color: var(--gold); }
-.tt-footer-bottom {
-  max-width: 1200px;
-  margin: 48px auto 0;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--ink-3);
+  padding: 68px 28px;
 }
 
-/* TT-141: app feature rows (Sommelier, Commerce, Voice) */
-.tt141-feature-row {
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  gap: 28px;
-  align-items: start;
+.section-title,
+.cta-title {
+  max-width: 760px;
+  font-size: clamp(32px, 4.4vw, 52px);
+  line-height: 1.08;
+}
+
+.section-intro {
   max-width: 720px;
+  margin: 18px 0 0;
+  color: var(--ink-muted);
+  font-size: 17px;
+  line-height: 1.7;
 }
-.tt141-feature-icon svg { display: block; }
-.tt141-intro-tight {
-  margin-bottom: 14px !important;
-  max-width: 640px;
+
+.grid {
+  display: grid;
+  gap: 18px;
+  margin-top: 36px;
 }
-.tt141-body {
-  font-size: 16px;
+
+.path-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.three-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.two-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card,
+.panel,
+.notice {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(24, 18, 17, 0.82);
+}
+
+.card {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.card h3,
+.panel h3,
+.notice h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.18;
+}
+
+.card p,
+.panel p,
+.notice p,
+.card li,
+.panel li,
+.notice li {
+  color: var(--ink-muted);
+  font-size: 15px;
   line-height: 1.65;
-  color: var(--ink-2);
-  max-width: 620px;
-  white-space: pre-line;
 }
-.tt141-chip {
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  background: rgba(244,237,228,0.04);
+
+.card p,
+.panel p,
+.notice p {
+  margin: 14px 0 0;
+}
+
+.card-link {
+  justify-content: flex-start;
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+.route-note,
+.chip {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  color: var(--ink-3);
+  padding: 0 10px;
+  color: var(--ink-dim);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.route-note {
+  margin-top: 18px;
+}
+
+.platform-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.58fr);
+  gap: 44px;
+  align-items: start;
+}
+
+.connector-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.connector-list li,
+.status-list li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.connector-list li::before,
+.status-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.75em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.feature-section {
+  display: grid;
+  grid-template-columns: 0.55fr 1fr;
+  gap: 46px;
+  align-items: start;
+}
+
+.feature-section .section-intro {
+  margin-bottom: 26px;
+}
+
+.feature-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature-list li {
+  border-left: 2px solid rgba(210, 180, 111, 0.42);
+  padding-left: 16px;
+}
+
+.feature-list strong,
+.status-list strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.notice {
+  padding: 28px;
+}
+
+.status-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.status-list li {
+  min-height: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px 20px 20px 38px;
+  background: rgba(15, 11, 10, 0.34);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.62fr);
+  gap: 44px;
+  margin-top: 28px;
+}
+
+.about-copy p {
+  max-width: 700px;
+  margin: 0 0 18px;
+  color: var(--ink-muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 13px 18px;
+}
+
+.facts dt {
+  color: var(--ink-dim);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.facts dd {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.facts a {
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.final-cta {
+  padding: 78px 28px;
+  text-align: center;
+}
+
+.final-cta .cta-title,
+.final-cta .section-intro,
+.final-cta .cta-row {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.final-cta .cta-row {
+  justify-content: center;
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--line);
+  background: #120d0c;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr 1fr 1fr;
+  gap: 42px;
+  width: min(100%, var(--max));
+  margin: 0 auto;
+  padding: 56px 28px 34px;
+}
+
+.footer-logo {
+  display: block;
+  width: 142px;
+  height: 22px;
   margin-bottom: 14px;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .topbar { padding: 12px 20px; }
-  .topbar-links { display: none; }
-  .hero { padding: 120px 20px 64px; }
-  .banner { padding: 0 20px; margin-bottom: 56px; }
-  .section { padding: 56px 20px; }
-  .proto-grid { grid-template-columns: 1fr; }
-  .about-grid { grid-template-columns: 1fr; gap: 32px; }
-  .tt-footer-inner { grid-template-columns: 1fr 1fr; }
-  .tt-footer-bottom { flex-direction: column; }
-  .tt141-feature-row { grid-template-columns: 48px 1fr; gap: 20px; }
-}
-@media (max-width: 600px) {
-  .tt-footer-inner { grid-template-columns: 1fr; gap: 32px; }
-  .tt-footer { padding: 40px 20px 32px; }
+.footer p {
+  max-width: 330px;
+  margin: 0;
+  color: var(--ink-dim);
+  font-size: 13px;
+  line-height: 1.65;
 }
 
-/* ── Lang dropdown — mobile ≤900px (BARREL patch) ── */
-.lang-dropdown { position: relative; display: none; }
-.lang-dd-btn {
-  display: flex; align-items: center; gap: 6px;
-  background: none; border: 1px solid var(--line-2);
-  border-radius: 4px; padding: 5px 10px; cursor: pointer;
-  color: var(--ink-2); line-height: 1;
+.footer h2 {
+  margin: 0 0 15px;
+  color: var(--ink-dim);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
-.lang-dd-btn .dd-flag {
-  width: 26px; height: 17px; border-radius: 2px;
-  overflow: hidden; flex-shrink: 0; display: block;
+
+.footer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.lang-dd-btn .dd-flag svg { width: 100%; height: 100%; display: block; }
-.lang-dd-btn .dd-chev {
-  font-size: 9px; color: var(--ink-3);
-  transition: transform .2s ease; display: inline-block;
-  margin-left: 2px;
+
+.footer li {
+  margin-bottom: 10px;
 }
-.lang-dd-btn[aria-expanded="true"] .dd-chev { transform: rotate(180deg); }
-.lang-dd-panel {
-  position: absolute; top: calc(100% + 8px); right: 0;
-  background: var(--bg-2); border: 1px solid var(--line-2);
-  border-radius: 10px; padding: 10px;
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
-  z-index: 300; box-shadow: 0 12px 36px rgba(0,0,0,0.6);
-  min-width: 168px;
+
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  color: var(--ink-muted);
+  font-size: 13px;
+  text-decoration: none;
 }
-.lang-dd-panel.is-hidden { display: none !important; }
-.lang-dd-panel .lang-flag-link { width: 34px; height: 23px; border-radius: 3px; }
-@media (max-width: 900px) {
-  .lang-switcher-flags { display: none !important; }
-  .lang-dropdown { display: block; }
+
+.footer a:hover {
+  color: var(--gold);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: min(100%, var(--max));
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+  padding: 24px 28px 38px;
+  color: var(--ink-dim);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .button:hover,
+  .card:hover {
+    border-color: var(--line-strong);
+  }
+}
+
+@media (max-width: 1024px) {
+  .header-inner {
+    padding: 0 22px;
+  }
+
+  .nav-shell {
+    gap: 12px;
+  }
+
+  .language-switcher {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 132px;
+  }
+
+  .hero-status {
+    max-width: 640px;
+  }
+
+  .path-grid,
+  .status-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .platform-layout,
+  .feature-section,
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  :root {
+    --header: 70px;
+  }
+
+  .primary-nav,
+  .status-pill {
+    display: none;
+  }
+
+  .menu-button {
+    display: inline-flex;
+  }
+
+  .mobile-panel {
+    position: fixed;
+    inset: var(--header) 0 auto 0;
+    z-index: 99;
+    display: block;
+    max-height: calc(100vh - var(--header));
+    overflow-y: auto;
+    border-bottom: 1px solid var(--line);
+    background: rgba(15, 11, 10, 0.98);
+    padding: 18px 22px 28px;
+    transform: translateY(-120%);
+    visibility: hidden;
+    transition: transform 0.2s ease, visibility 0.2s ease;
+  }
+
+  .mobile-panel.is-open {
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .mobile-panel nav,
+  .mobile-panel .mobile-lang {
+    display: grid;
+    gap: 6px;
+  }
+
+  .mobile-panel a {
+    border: 1px solid var(--line);
+    padding: 0 12px;
+  }
+
+  .mobile-lang {
+    margin-top: 18px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .hero,
+  .section,
+  .band-inner,
+  .final-cta {
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  .hero {
+    padding-top: 122px;
+    padding-bottom: 64px;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+  }
+
+  .hero-body {
+    font-size: 17px;
+  }
+
+  .why {
+    font-size: 20px;
+  }
+
+  .path-grid,
+  .three-grid,
+  .two-grid,
+  .status-list {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner,
+  .footer-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 440px) {
+  .brand img {
+    width: 164px;
+    height: auto;
+  }
+
+  .header-inner {
+    gap: 12px;
+    padding: 0 16px;
+  }
+
+  .hero,
+  .section,
+  .band-inner,
+  .final-cta,
+  .footer-inner,
+  .footer-bottom {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .hero h1 {
+    font-size: 39px;
+  }
+
+  .cta-row,
+  .button {
+    width: 100%;
+  }
+
+  .button {
+    justify-content: center;
+  }
+
+  .card,
+  .notice,
+  .hero-status {
+    padding: 20px;
+  }
+
+  .facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 </style>
 </head>
 <body>
-<div class="page-grain"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="page-grain" aria-hidden="true"></div>
 
-<header class="topbar">
-  <div class="topbar-brand"><img src="assets/logo_nav.png" srcset="assets/logo_nav.png 2x" alt="Tasting &amp; Toasting" width="193" height="30" style="display:block;height:30px;width:auto;"></div>
-  <div class="topbar-links">
-    <a href="#prototypes" data-i18n="nav_game">Game</a>
-    <a href="#voice" data-i18n="nav_toasts">Toasts</a>
-    <a href="#sommelier" data-i18n="nav_sommelier">Sommelier</a>
-    <a href="legal.html">Legal</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Tasting &amp; Toasting home">
+      <img src="assets/logo_nav.png" srcset="assets/logo_nav.png 2x" width="193" height="30" alt="Tasting &amp; Toasting">
+    </a>
+    <div class="nav-shell">
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="#wine-lovers">Wine Lovers</a>
+        <a href="#for-wineries">For Wineries</a>
+        <a href="#passport">Passport</a>
+        <a href="#about">About</a>
+      </nav>
+      <nav class="language-switcher tt-lang-switcher" aria-label="Language">
+        <button class="language-button" type="button" aria-label="Select language" aria-expanded="false" aria-controls="language-panel">EN</button>
+        <div class="language-panel" id="language-panel" hidden>
+          <a data-lang-link="en" href="?lang=en" aria-label="English">EN</a>
+          <a data-lang-link="fr" href="?lang=fr" aria-label="Francais">FR</a>
+          <a data-lang-link="ru" href="?lang=ru" aria-label="Russian">RU</a>
+          <a data-lang-link="es" href="?lang=es" aria-label="Spanish">ES</a>
+          <a data-lang-link="uk" href="?lang=uk" aria-label="Ukrainian">UK</a>
+          <a data-lang-link="it" href="?lang=it" aria-label="Italian">IT</a>
+          <a data-lang-link="de" href="?lang=de" aria-label="German">DE</a>
+          <a data-lang-link="he" href="?lang=he" aria-label="Hebrew">HE</a>
+          <a data-lang-link="pt" href="?lang=pt" aria-label="Portuguese">PT</a>
+          <a data-lang-link="ka" href="?lang=ka" aria-label="Georgian">KA</a>
+          <a data-lang-link="ro" href="?lang=ro" aria-label="Romanian">RO</a>
+          <a data-lang-link="pl" href="?lang=pl" aria-label="Polish">PL</a>
+        </div>
+      </nav>
+      <span class="status-pill" aria-label="Current status">Pre-launch</span>
+      <button class="menu-button" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+    </div>
   </div>
-  <div class="topbar-trail">
-    <a href="https://web.tastingandtoasting.com" class="topbar-cta" data-i18n="cta_play_now">Play now</a>
-    <nav class="lang-switcher tt-lang-switcher" aria-label="Language">
-      <div class="lang-dropdown">
-        <button class="lang-dd-btn" id="lang-dd-btn"
-                aria-expanded="false" aria-haspopup="true"
-                aria-label="Select language">
-          <span class="dd-flag" id="lang-dd-flag"></span>
-          <span class="dd-chev">&#9660;</span>
-        </button>
-        <div class="lang-dd-panel is-hidden" id="lang-dd-panel"></div>
-      </div>
-      <div class="lang-switcher-flags">
-        <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="ru" href="?lang=ru" title="Русский" aria-label="Русский"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#fff" d="M0 0h3v0.667H0z"/><path fill="#0039a6" d="M0 0.667h3v0.666H0z"/><path fill="#d52b1e" d="M0 1.333h3V2H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="es" href="?lang=es" title="Español" aria-label="Español"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#c60b1e" d="M0 0h3v2H0z"/><path fill="#ffc400" d="M0 0.45h3v1.1H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="uk" href="?lang=uk" title="Українська" aria-label="Українська"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#005BBB" d="M0 0h3v1H0z"/><path fill="#FFD500" d="M0 1h3v1H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="it" href="?lang=it" title="Italiano" aria-label="Italiano"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#009246" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ce2b37" d="M2 0h1v2H2z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="de" href="?lang=de" title="Deutsch" aria-label="Deutsch"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#000" d="M0 0h3v.67H0z"/><path fill="#D00" d="M0 .67h3v.66H0z"/><path fill="#FFCE00" d="M0 1.33h3v.67H0z"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="he" href="?lang=he" title="עברית" aria-label="עברית"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4" aria-hidden="true"><path fill="#fff" d="M0 0h6v4H0z"/><path fill="#0038b8" d="M0 .55h6v0.42H0zm0 2.48h6v0.42H0z"/><g fill="#0038b8" transform="translate(3 2.02)"><polygon points="0,-0.55 0.48,0.28 -0.48,0.28"/><polygon points="0,0.55 -0.48,-0.28 0.48,-0.28"/></g></svg></a>
-        <a class="lang-flag-link" data-lang-link="pt" href="?lang=pt" title="Português" aria-label="Português (Portugal)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#006600" d="M0 0h1.2v2H0z"/><path fill="#ff0000" d="M1.2 0h1.8v2H1.2z"/><circle cx=".75" cy="1" fill="#ffd900" stroke="#ffd900" stroke-width=".015" r=".22"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="ka" href="?lang=ka" title="ქართული" aria-label="ქართული"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="white"/><rect x="12.5" width="5" height="20" fill="#FF0000"/><rect y="7.5" width="30" height="5" fill="#FF0000"/><rect x="1" y="1" width="2" height="6" fill="#FF0000"/><rect y="3" width="4" height="2" fill="#FF0000"/><rect x="24" y="1" width="2" height="6" fill="#FF0000"/><rect x="23" y="3" width="4" height="2" fill="#FF0000"/><rect x="1" y="13" width="2" height="6" fill="#FF0000"/><rect y="15" width="4" height="2" fill="#FF0000"/><rect x="24" y="13" width="2" height="6" fill="#FF0000"/><rect x="23" y="15" width="4" height="2" fill="#FF0000"/></svg></a>
-        <a class="lang-flag-link" data-lang-link="ro" href="?lang=ro" title="Română (Moldova)" aria-label="Română (Moldova)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#003DA5"/><rect x="10" width="10" height="20" fill="#FFD100"/><rect x="20" width="10" height="20" fill="#CC0000"/><text x="15" y="13" text-anchor="middle" font-size="9" fill="#003DA5" font-family="serif, Georgia">✦</text></svg></a>
-        <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#fff"/><rect y="10" width="30" height="10" fill="#DC143C"/></svg></a>
-      </div>
+  <div class="mobile-panel" id="mobile-menu">
+    <nav aria-label="Mobile primary navigation">
+      <a href="#wine-lovers">Wine Lovers</a>
+      <a href="#for-wineries">For Wineries</a>
+      <a href="#passport">Passport</a>
+      <a href="#about">About</a>
     </nav>
-    <div class="topbar-status">Pre-launch</div>
+    <nav class="mobile-lang" aria-label="Mobile language navigation">
+      <a data-lang-link="en" href="?lang=en" aria-label="English">EN</a>
+      <a data-lang-link="fr" href="?lang=fr" aria-label="Francais">FR</a>
+      <a data-lang-link="ru" href="?lang=ru" aria-label="Russian">RU</a>
+      <a data-lang-link="es" href="?lang=es" aria-label="Spanish">ES</a>
+      <a data-lang-link="uk" href="?lang=uk" aria-label="Ukrainian">UK</a>
+      <a data-lang-link="it" href="?lang=it" aria-label="Italian">IT</a>
+      <a data-lang-link="de" href="?lang=de" aria-label="German">DE</a>
+      <a data-lang-link="he" href="?lang=he" aria-label="Hebrew">HE</a>
+      <a data-lang-link="pt" href="?lang=pt" aria-label="Portuguese">PT</a>
+      <a data-lang-link="ka" href="?lang=ka" aria-label="Georgian">KA</a>
+      <a data-lang-link="ro" href="?lang=ro" aria-label="Romanian">RO</a>
+      <a data-lang-link="pl" href="?lang=pl" aria-label="Polish">PL</a>
+    </nav>
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-meta">
-    <span>Madrid · Valencia</span>
-    <span class="dot">·</span>
-    <span>Pre-launch · v0.1</span>
-    <span class="dot">·</span>
-    <span>Delaware Corp · 7494277</span>
-  </div>
-  <h1 class="hero-headline" data-i18n-html="hero_headline">
-    A wine company<br>
-    <span class="em">tastes its way</span><br>
-    into Europe.
-  </h1>
-  <p class="hero-sub" data-i18n-html="hero_sub">
-    Tasting <span class="serif" style="font-style:italic; color: var(--wine-bright);">&amp;</span> Toasting is being built as a multi-functional wine experience company , tastings, toasts, gatherings. Below are the prototypes that show where we&rsquo;re going.
-  </p>
-  <div class="hero-actions">
-    <a href="#prototypes" class="hero-btn hero-btn-primary" data-i18n-html="cta_start">Explore prototypes <span>↓</span></a>
-    <a href="#about" class="hero-btn hero-btn-ghost" data-i18n-html="cta_scan">About the company</a>
-  </div>
-<div class="tt-join-cta" style="
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:16px;
-">
-  <a href="https://web.tastingandtoasting.com"
-     class="tt-btn-primary"
-     data-i18n="cta_play_now"
-     style="
-       background:#c9a96e;
-       color:#120c0a;
-       padding:12px 24px;
-       border-radius:6px;
-       font-size:13px;
-       letter-spacing:2px;
-       text-decoration:none;
-       font-weight:600;
-     ">Play now</a>
-
-</div>
-<div class="tt-ios-invite" data-i18n-html="cta_ios_invite_html">
-  iOS app · Invitation only. Request access &rarr; <a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a>
-</div>
-</section>
-
-<section class="tt-video-section" style="max-width:1200px;margin:0 auto 64px;padding:0 32px;position:relative;z-index:2;">
-  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:#8A7A6B;margin-bottom:20px;display:flex;align-items:center;gap:12px;"><span style="width:24px;height:1px;background:#B83246;display:inline-block;"></span>Minsk · June 2026</div>
-  <div style="position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(244,237,228,0.08);background:#1A1413;">
-    <video controls preload="metadata" style="width:100%;display:block;max-height:600px;object-fit:cover;" poster="">
-      <source src="https://tt-photos-prod.s3.eu-south-2.amazonaws.com/video/minsk-event-2026.mp4" type="video/mp4">
-    </video>
-  </div>
-  <p style="margin-top:14px;font-size:13px;color:#8A7A6B;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;">The blind tasting game · live session</p>
-</section>
-<div class="banner">
-  <div class="banner-inner">
-    <div class="banner-icon">⚖️</div>
-    <div class="banner-text" data-i18n-html="index_proto_banner_legal_notice">
-      <strong>Pre-launch notice.</strong> The Tasting &amp; Toasting platform is in technical development and pre-licensing phase. No commercial wine sales, event ticketing, or paid services are offered through this website until all required Spanish licenses (alcohol distribution, sanitary registration, excise duty, and others) are obtained and the operating subsidiary <em>Tasting And Toasting SL</em> is fully registered and operational. Information presented here is for illustrative and informational purposes only.
+<main id="main">
+  <section class="hero" id="hero" aria-labelledby="hero-title">
+    <div>
+      <p class="kicker">Tasting &amp; Toasting</p>
+      <h1 id="hero-title">Wine discovery and bottle context, brought into one public platform.</h1>
+      <p class="hero-body">Tasting &amp; Toasting helps people find the right wine path: learn as a wine lover, prepare public Passport records as a winery, or understand the information connected to a bottle.</p>
+      <p class="why">Wine is easier to enjoy when the story, producer, vintage, and recorded bottle information are close at hand.</p>
+      <div class="cta-row" aria-label="Homepage actions">
+        <a class="button primary" href="#choose-path">Choose your path</a>
+        <a class="button secondary" href="#passport">Learn how Passport works</a>
+      </div>
     </div>
-  </div>
-</div>
+    <aside class="hero-status" aria-labelledby="hero-status-title">
+      <p class="eyebrow">Current status</p>
+      <h2 id="hero-status-title">Pre-launch notice.</h2>
+      <p>During pre-launch, the public website provides information, waitlist or inquiry routes, contact channels, and legal support pages. It does not offer commercial wine sales, event ticketing, purchases, payments, live subscriptions, or final pricing.</p>
+    </aside>
+  </section>
 
-<section class="section" id="prototypes">
-  <div class="section-label" data-i18n="index_proto_section_kicker">The work, in motion</div>
-  <h2 class="section-title" data-i18n-html="index_proto_heading_html">Four <span class="em">prototypes</span>, one direction.</h2>
-  <p class="section-intro" data-i18n="index_proto_intro">
-    These are working visual prototypes , not the live product. Each one explores a different surface of what we're building. Click any to step inside and walk through the screens.
-  </p>
-
-  <div class="proto-grid">
-
-    <a class="proto-card" href="prototype.html">
-      <div class="proto-card-meta" data-i18n-html="index_proto_card1_meta"><span class="num">01</span> · Member &amp; subscription</div>
-      <h3 data-i18n-html="index_proto_card1_title_html">The <span class="em">brand</span> face.</h3>
-      <p data-i18n="index_proto_card1_body">Subscription tiers, member dashboard, producer view, event booking. The cinematic prototype showing how someone enters the world of Tasting &amp; Toasting and what their first months look like.</p>
-      <div class="proto-card-screens">
-        <span class="chip" data-i18n="index_proto_card1_chip_1">Landing</span>
-        <span class="chip" data-i18n="index_proto_card1_chip_2">Subscription</span>
-        <span class="chip" data-i18n="index_proto_card1_chip_3">Dashboard</span>
-        <span class="chip" data-i18n="index_proto_card1_chip_4">CAP scan</span>
-        <span class="chip" data-i18n="index_proto_card1_chip_5">Producer</span>
-        <span class="chip" data-i18n="index_proto_card1_chip_6">Event</span>
+  <section class="band" id="choose-path" aria-labelledby="choose-path-title">
+    <div class="band-inner">
+      <p class="section-label">Choose your path</p>
+      <h2 class="section-title" id="choose-path-title">Start with your role</h2>
+      <p class="section-intro">Choose the page that matches what you need today.</p>
+      <div class="grid path-grid" role="list">
+        <article class="card" role="listitem">
+          <span class="chip">Wine lovers</span>
+          <h3>For wine lovers</h3>
+          <p>Taste, learn, and remember more about the wines you enjoy.</p>
+          <a class="card-link" href="#wine-lovers">For wine lovers</a>
+          <span class="route-note">Future route: /wine-lovers</span>
+        </article>
+        <article class="card" role="listitem">
+          <span class="chip">Wineries</span>
+          <h3>For wineries</h3>
+          <p>Prepare public wine, vintage, bottle, and winery information for reviewed Passport records.</p>
+          <a class="card-link" href="#for-wineries">For wineries</a>
+          <span class="route-note">Future route: /for-wineries</span>
+        </article>
+        <article class="card" role="listitem">
+          <span class="chip">Passport</span>
+          <h3>Passport</h3>
+          <p>See how recorded bottle information can be shown and explained.</p>
+          <a class="card-link" href="#passport">Passport</a>
+          <span class="route-note">Future route: /passport</span>
+        </article>
+        <article class="card" role="listitem">
+          <span class="chip">Company and legal</span>
+          <h3>Company and legal</h3>
+          <p>Review public status, contact details, legal notice, privacy, and terms.</p>
+          <a class="card-link" href="#about">Review company details</a>
+          <span class="route-note">Partners route pending</span>
+        </article>
       </div>
-      <div class="proto-card-cta" data-i18n-html="index_proto_card_cta_html">Open prototype <span>→</span></div>
-    </a>
+    </div>
+  </section>
 
-    <a class="proto-card" href="game-flow.html">
-      <div class="proto-card-meta" data-i18n-html="index_proto_card2_meta"><span class="num">02</span> · Game flow</div>
-      <h3 data-i18n-html="index_proto_card2_title_html">The <span class="em">tasting</span> game.</h3>
-      <p data-i18n="index_proto_card2_body">A blind tasting party game played across phones. Setup, wine reveals, scoring, and the moment everyone learns who guessed right. The core experience that gives the brand its name.</p>
-      <div class="proto-card-screens">
-        <span class="chip" data-i18n="index_proto_card2_chip_1">Setup</span>
-        <span class="chip" data-i18n="index_proto_card2_chip_2">Wines</span>
-        <span class="chip" data-i18n="index_proto_card2_chip_3">Round</span>
-        <span class="chip" data-i18n="index_proto_card2_chip_4">Scoresheet</span>
-        <span class="chip" data-i18n="index_proto_card2_chip_5">Reveal</span>
-        <span class="chip" data-i18n="index_proto_card2_chip_6">After</span>
+  <section class="section" id="platform" aria-labelledby="platform-title">
+    <div class="platform-layout">
+      <div>
+        <p class="section-label">What Tasting &amp; Toasting connects</p>
+        <h2 class="section-title" id="platform-title">Wine stories need a place to travel.</h2>
+        <p class="section-intro">A wine can begin with a producer, continue through a bottle, and end up at a dinner table, tasting, cellar, or gift. Tasting &amp; Toasting is being prepared to connect those moments with clearer discovery tools and public Passport records.</p>
+        <p class="section-intro">For wine lovers, that means more context while tasting. For wineries, it means a practical way to prepare reviewed public information. For Passport readers, it means a clearer view of what has been recorded for a bottle or related wine record.</p>
       </div>
-      <div class="proto-card-cta" data-i18n-html="index_proto_card_cta_html">Open prototype <span>→</span></div>
-    </a>
-
-    <a class="proto-card" href="operations.html">
-      <div class="proto-card-meta" data-i18n="index_proto_card3_meta"><span class="num">03</span> · Operations</div>
-      <h3 data-i18n-html="index_proto_card3_title_html">The <span class="em">company</span>, working.</h3>
-      <p data-i18n="index_proto_card3_body">Sign up, event scheduling, sommelier engagement, checkout, the tasting center calendar. The infrastructure side , what keeps the experience running in the background.</p>
-      <div class="proto-card-screens">
-        <span class="chip" data-i18n="index_proto_card3_chip_1">Sign up</span>
-        <span class="chip" data-i18n="index_proto_card3_chip_2">Events</span>
-        <span class="chip" data-i18n="index_proto_card3_chip_3">Sommelier</span>
-        <span class="chip" data-i18n="index_proto_card3_chip_4">Checkout</span>
-        <span class="chip" data-i18n="index_proto_card3_chip_5">Tasting Center</span>
-        <span class="chip" data-i18n="index_proto_card3_chip_6">Calendar</span>
+      <div class="notice">
+        <h3>Connected paths</h3>
+        <ul class="connector-list">
+          <li><strong>For wine lovers:</strong> more context while tasting.</li>
+          <li><strong>For wineries:</strong> reviewed public information prepared with care.</li>
+          <li><strong>Passport:</strong> recorded bottle context where valid public records exist.</li>
+        </ul>
       </div>
-      <div class="proto-card-cta" data-i18n-html="index_proto_card_cta_html">Open prototype <span>→</span></div>
-    </a>
+    </div>
+  </section>
 
-    <a class="proto-card" href="wave1.html">
-      <div class="proto-card-meta" data-i18n-html="index_proto_card4_meta"><span class="num">04</span> · Wave 1 player</div>
-      <h3 data-i18n-html="index_proto_card4_title_html">The <span class="em">first</span> release.</h3>
-      <p data-i18n="index_proto_card4_body">A focused MVP slice of the player experience: auth, home, joining a game, browsing the catalog, ordering a kit. Closer to what the first real users will hold in their hand.</p>
-      <div class="proto-card-screens">
-        <span class="chip" data-i18n="index_proto_card4_chip_1">Auth</span>
-        <span class="chip" data-i18n="index_proto_card4_chip_2">Home</span>
-        <span class="chip" data-i18n="index_proto_card4_chip_3">Join</span>
-        <span class="chip" data-i18n="index_proto_card4_chip_4">Event</span>
-        <span class="chip" data-i18n="index_proto_card4_chip_5">Home game</span>
-        <span class="chip" data-i18n="index_proto_card4_chip_6">Catalog</span>
-        <span class="chip" data-i18n="index_proto_card4_chip_7">Cart</span>
+  <section class="section" id="wine-lovers" aria-labelledby="wine-lovers-title">
+    <div class="feature-section">
+      <div>
+        <p class="section-label">Audience path</p>
+        <h2 class="section-title" id="wine-lovers-title">For wine lovers</h2>
       </div>
-      <div class="proto-card-cta" data-i18n-html="index_proto_card_cta_html">Open prototype <span>→</span></div>
-    </a>
+      <div>
+        <p class="section-intro">Taste, learn, and remember more about the wines you enjoy.</p>
+        <ul class="feature-list">
+          <li><strong>Find context:</strong> Learn what makes a wine worth noticing.</li>
+          <li><strong>Build taste memory:</strong> Connect what you drink with what you actually enjoy.</li>
+          <li><strong>Keep the moment:</strong> Save the story around the bottle, not just the name on the label.</li>
+        </ul>
+        <div class="cta-row">
+          <a class="button secondary" href="#choose-path">Back to all paths</a>
+          <a class="text-link" href="#passport">Learn how Passport works</a>
+        </div>
+        <span class="route-note">Dedicated /wine-lovers page is not implemented in this scope.</span>
+      </div>
+    </div>
+  </section>
 
-  </div>
-</section>
+  <section class="band" id="for-wineries" aria-labelledby="for-wineries-title">
+    <div class="band-inner">
+      <div class="feature-section">
+        <div>
+          <p class="section-label">Audience path</p>
+          <h2 class="section-title" id="for-wineries-title">For wineries</h2>
+        </div>
+        <div>
+          <p class="section-intro">Prepare public wine, vintage, bottle, and winery information for reviewed Passport records.</p>
+          <ul class="feature-list">
+            <li><strong>For the bottle:</strong> Help readers find recorded bottle-level context.</li>
+            <li><strong>For the wine:</strong> Connect a bottle to wine and vintage information where valid records exist.</li>
+            <li><strong>For the winery:</strong> Present producer information in a structured public record.</li>
+          </ul>
+          <div class="cta-row">
+            <a class="button secondary" href="#choose-path">Back to all paths</a>
+            <a class="text-link" href="#passport">Learn how Passport works</a>
+          </div>
+          <span class="route-note">Dedicated /for-wineries page is not implemented in this scope.</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="about" id="about">
-  <div class="section">
-    <div class="section-label">The company</div>
-    <h2 class="section-title">Who we <span class="em">are</span>.</h2>
+  <section class="section" id="passport" aria-labelledby="passport-title">
+    <div class="feature-section">
+      <div>
+        <p class="section-label">Passport trust overview</p>
+        <h2 class="section-title" id="passport-title">Passport shows recorded context.</h2>
+      </div>
+      <div>
+        <p class="section-intro">Passport pages can show public data where valid records exist, including recorded provenance, traceability, verification status, and bottle, winery, wine, or vintage information.</p>
+        <div class="notice">
+          <h3>Claim boundary</h3>
+          <p>Passport context can support a more informed reading of a bottle. It should not be presented as absolute proof of authenticity, certification, anti-counterfeit protection, or legal compliance.</p>
+        </div>
+        <div class="cta-row">
+          <a class="button secondary" href="#choose-path">Choose your path</a>
+          <a class="text-link" href="#for-wineries">For wineries</a>
+        </div>
+        <span class="route-note">Dedicated /passport page is not implemented in this scope.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="trust-proof" aria-labelledby="trust-proof-title">
+    <div class="band-inner">
+      <p class="section-label">Trust and credibility</p>
+      <h2 class="section-title" id="trust-proof-title">Available now, in preparation, and planned direction.</h2>
+      <ul class="status-list">
+        <li><strong>Available now:</strong> Public website, contact channels, legal support pages, and public Passport page types where valid records exist.</li>
+        <li><strong>In preparation:</strong> Consumer wine discovery, winery Passport preparation, and reviewed public page routes for /wine-lovers, /for-wineries, and /passport.</li>
+        <li><strong>Planned direction:</strong> Broader consumer experiences, tasting concepts, profile tools, QR label concepts, and e-label support, subject to review.</li>
+      </ul>
+      <div class="notice" style="margin-top:18px;">
+        <h3>What this page is ready to show</h3>
+        <p>Use proof only where the underlying material has been approved for public marketing. Suitable proof may include public legal links, approved brand assets, approved screenshots of Passport records, and a concise visual explanation of how a bottle, vintage, wine, and winery record relate.</p>
+        <p>During pre-launch, the public website provides information, waitlist or inquiry routes, contact channels, and legal support pages. It does not offer commercial wine sales, event ticketing, purchases, payments, live subscriptions, or final pricing.</p>
+        <div class="cta-row">
+          <a class="text-link" href="/legal">Legal notice</a>
+          <a class="text-link" href="/privacy">Privacy</a>
+          <a class="text-link" href="/terms">Terms</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-title">
+    <p class="section-label">About</p>
+    <h2 class="section-title" id="about-title">Who we are.</h2>
     <div class="about-grid">
-      <div class="about-text">
-        <p>Tasting &amp; Toasting is being built to be a wine experience company , entering the European market through Spain.</p>
-        <p>We position ourselves as multi-functional. Wine education, curated kits, hosted tastings, event organization, sommelier engagement , these are the directions. Today, we&rsquo;re in pre-launch and pre-licensing. No commercial wine activity yet.</p>
-        <p>The prototypes you see here are the design and product work we&rsquo;ve done while the legal and operational foundation is being prepared. They&rsquo;re a window into where we&rsquo;re headed, not a live storefront.</p>
-        <p>If you&rsquo;d like to be in touch , about wine, design, partnership, regulation, or just curiosity , write to us.</p>
+      <div class="about-copy">
+        <p>Tasting &amp; Toasting is preparing a public wine discovery and Passport platform for wine lovers, wineries, and people reading recorded bottle information.</p>
+        <p>The company is in pre-launch. The public homepage provides information, contact channels, and legal support. It does not offer commercial wine sales, event ticketing, purchases, payments, live subscriptions, or final pricing.</p>
+        <p>For general questions about the public website, Passport context, partnership, regulation, or curiosity, email Tasting &amp; Toasting.</p>
+        <a class="button secondary" href="mailto:hello@tastingandtoasting.com">Email Tasting &amp; Toasting</a>
       </div>
-      <div class="about-card">
-        <h4>Company facts</h4>
-        <dl>
+      <aside class="notice" aria-labelledby="company-facts-title">
+        <h3 id="company-facts-title">Company facts</h3>
+        <dl class="facts">
           <dt>Parent</dt>
           <dd>Tasting And Toasting Inc.</dd>
           <dt>Form</dt>
@@ -817,160 +1259,156 @@ html[dir="rtl"] .tt141-feature-row { direction: rtl; }
           <dt>Incorporated</dt>
           <dd>02 June 2023</dd>
           <dt>Spanish entity</dt>
-          <dd>Tasting And Toasting SL <em>(in registration)</em></dd>
+          <dd>Tasting And Toasting SL (in registration)</dd>
           <dt>Operating base</dt>
           <dd>Valencia, Spain</dd>
           <dt>Status</dt>
-          <dd style="color: var(--gold);">Pre-launch · Pre-licensing</dd>
+          <dd>Pre-launch, pre-licensing</dd>
           <dt>Contact</dt>
-          <dd><a href="mailto:hello@tastingandtoasting.com" style="color: var(--ink-2); text-decoration: underline;">hello@tastingandtoasting.com</a></dd>
+          <dd><a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></dd>
         </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band" id="final-cta" aria-labelledby="final-cta-title">
+    <div class="final-cta">
+      <p class="section-label">Next step</p>
+      <h2 class="cta-title" id="final-cta-title">Choose your path</h2>
+      <p class="section-intro">Start with the role that matches what you need today, or review the Passport explanation for recorded bottle context.</p>
+      <div class="cta-row">
+        <a class="button primary" href="#choose-path">Choose your path</a>
+        <a class="button secondary" href="#passport">Learn how Passport works</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
-<section class="section tt141-feature" id="sommelier">
-  <div class="tt141-feature-row">
-    <div class="tt141-feature-icon" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="M12 11c3.5 0 6-2.5 6-5.5V4H6v1.5C6 8.5 8.5 11 12 11Z"/></svg>
-    </div>
+<footer class="footer" id="footer">
+  <div class="footer-inner">
     <div>
-      <h2 class="section-title" data-i18n="sommelier_title">Your AI Sommelier</h2>
-      <p class="section-intro tt141-intro-tight" data-i18n="sommelier_subtitle">Wine expertise in your pocket</p>
-      <p class="tt141-body" data-i18n="sommelier_body">Ask anything about wine. Get instant recommendations based on your taste, budget, and occasion. Available in the app with a single long press.</p>
+      <img class="footer-logo" src="assets/logo_footer.png" srcset="assets/logo_footer.png 2x" width="142" height="22" loading="lazy" alt="Tasting &amp; Toasting">
+      <h2>Keep public paths simple.</h2>
+      <p>Tasting &amp; Toasting is preparing a public wine discovery and Passport platform.</p>
     </div>
-  </div>
-</section>
-
-<section class="section tt141-feature" id="commerce">
-  <div class="tt141-feature-row">
-    <div class="tt141-feature-icon" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-    </div>
-    <div>
-      <h2 class="section-title" data-i18n="commerce_title">Buy Wine You Love</h2>
-      <p class="section-intro tt141-intro-tight" data-i18n="commerce_subtitle">From game to glass</p>
-      <p class="tt141-body" data-i18n="commerce_body">Discover wines during a tasting, then order them directly through the app. Partner wineries ship to your door. Test mode active now, live orders coming soon.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section tt141-feature" id="voice">
-  <div class="tt141-feature-row">
-    <div class="tt141-feature-icon" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4"/><path d="M8 23h8"/></svg>
-    </div>
-    <div>
-      <h2 class="section-title" data-i18n="voice_title">Tasting by Voice</h2>
-      <p class="section-intro tt141-intro-tight" data-i18n="voice_subtitle">Coming soon</p>
-      <span class="tt141-chip" data-i18n="voice_badge" role="status">Coming soon</span>
-      <p class="tt141-body" data-i18n="voice_body">Host a tasting through Alexa, Siri, or Google. Lead a toast, guide guests, and let the app do the rest. Hands free, glass full.</p>
-    </div>
-  </div>
-</section>
-
-<footer class="tt-footer">
-  <div class="tt-footer-inner">
-    <div class="tt-footer-col">
-      <div class="tt-footer-brand"><img src="assets/logo_footer.png" srcset="assets/logo_footer.png 2x" alt="Tasting &amp; Toasting" width="142" height="22" style="display:block;height:22px;width:auto;margin-bottom:14px;"></div>
-      <p class="tt-footer-tagline" data-i18n="footer_tagline">A wine experience company entering the European market. Tastings, toasts, gatherings.</p>
-    </div>
-    <div class="tt-footer-col">
-      <h4>Prototypes</h4>
+    <nav aria-labelledby="footer-public-paths">
+      <h2 id="footer-public-paths">Public paths</h2>
       <ul>
-        <li><a href="prototype.html">Member &amp; subscription</a></li>
-        <li><a href="game-flow.html">Game flow</a></li>
-        <li><a href="operations.html">Operations</a></li>
-        <li><a href="wave1.html">Wave 1 player</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="#wine-lovers">Wine Lovers</a></li>
+        <li><a href="#for-wineries">For Wineries</a></li>
+        <li><a href="#passport">Passport</a></li>
+        <li><a href="#about">About</a></li>
       </ul>
-    </div>
-    <div class="tt-footer-col">
-      <h4>Legal</h4>
+    </nav>
+    <nav aria-labelledby="footer-legal">
+      <h2 id="footer-legal">Legal</h2>
       <ul>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <li><a href="legal.html">Legal Notice &amp; Cookies</a></li>
+        <li><a href="/legal">Legal Notice</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms of Service</a></li>
       </ul>
-    </div>
-    <div class="tt-footer-col">
-      <h4>Contact</h4>
+    </nav>
+    <nav aria-labelledby="footer-contact">
+      <h2 id="footer-contact">Contact</h2>
       <ul>
         <li><a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></li>
         <li><a href="mailto:privacy@tastingandtoasting.com">privacy@tastingandtoasting.com</a></li>
         <li><a href="mailto:legal@tastingandtoasting.com">legal@tastingandtoasting.com</a></li>
       </ul>
-    </div>
+    </nav>
   </div>
-  <div class="tt-footer-bottom">
-    <span>© 2026 Tasting And Toasting Inc. · Delaware Corp · Filing No. 7494277</span>
-    <div class="legal-jurisdictions">
-      <span>Operating subsidiary: Tasting And Toasting SL (Spain)</span>
-    </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Tasting And Toasting Inc. Delaware Corp. Filing No. 7494277.</span>
+    <span>Operating subsidiary: Tasting And Toasting SL (Spain).</span>
   </div>
 </footer>
 
 <script src="src/i18n/apply-tt141.js" defer></script>
 <script>
-  // Smooth scroll for in-page anchors
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href').slice(1);
-      const target = document.getElementById(id);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-</script>
-<script>
-/* BARREL — lang dropdown mobile */
 (function () {
-  var btn   = document.getElementById('lang-dd-btn');
-  var panel = document.getElementById('lang-dd-panel');
-  var ddFlag = document.getElementById('lang-dd-flag');
-  if (!btn || !panel || !ddFlag) return;
+  var menuButton = document.querySelector(".menu-button");
+  var mobileMenu = document.getElementById("mobile-menu");
+  var languageButton = document.querySelector(".language-button");
+  var languagePanel = document.getElementById("language-panel");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* Clone all flag links into the dropdown panel */
-  var srcFlags = document.querySelectorAll('.lang-switcher-flags .lang-flag-link');
-  srcFlags.forEach(function (a) { panel.appendChild(a.cloneNode(true)); });
-
-  /* Show the current language flag in the button */
-  function syncFlag() {
-    var cur = document.querySelector('.lang-switcher-flags .is-current-lang')
-           || document.querySelector('.lang-switcher-flags .lang-flag-link');
-    if (cur) {
-      var svg = cur.querySelector('svg');
-      if (svg) ddFlag.innerHTML = svg.outerHTML;
-    }
+  function closeMenu(restoreFocus) {
+    if (!menuButton || !mobileMenu) return;
+    menuButton.setAttribute("aria-expanded", "false");
+    menuButton.setAttribute("aria-label", "Open menu");
+    mobileMenu.classList.remove("is-open");
+    document.body.classList.remove("menu-open");
+    if (restoreFocus) menuButton.focus();
   }
-  syncFlag();
 
-  /* Watch for i18n script updating is-current-lang */
-  var srcRow = document.querySelector('.lang-switcher-flags');
-  if (srcRow) {
-    new MutationObserver(syncFlag).observe(srcRow, {
-      subtree: true, attributes: true, attributeFilter: ['class']
+  function openMenu() {
+    if (!menuButton || !mobileMenu) return;
+    menuButton.setAttribute("aria-expanded", "true");
+    menuButton.setAttribute("aria-label", "Close menu");
+    mobileMenu.classList.add("is-open");
+    document.body.classList.add("menu-open");
+  }
+
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener("click", function () {
+      var open = menuButton.getAttribute("aria-expanded") === "true";
+      if (open) closeMenu(false);
+      else openMenu();
+    });
+
+    mobileMenu.addEventListener("click", function (event) {
+      if (event.target && event.target.matches("a")) closeMenu(false);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeMenu(true);
     });
   }
 
-  /* Toggle open / close */
-  btn.addEventListener('click', function (e) {
-    e.stopPropagation();
-    var open = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!open));
-    panel.classList.toggle('is-hidden', open);
-  });
+  function closeLanguagePanel(restoreFocus) {
+    if (!languageButton || !languagePanel) return;
+    languageButton.setAttribute("aria-expanded", "false");
+    languagePanel.hidden = true;
+    if (restoreFocus) languageButton.focus();
+  }
 
-  /* Close on outside click */
-  document.addEventListener('click', function () {
-    btn.setAttribute('aria-expanded', 'false');
-    panel.classList.add('is-hidden');
-  });
+  if (languageButton && languagePanel) {
+    languageButton.addEventListener("click", function (event) {
+      event.stopPropagation();
+      var open = languageButton.getAttribute("aria-expanded") === "true";
+      languageButton.setAttribute("aria-expanded", String(!open));
+      languagePanel.hidden = open;
+    });
 
-  /* Prevent panel click from closing */
-  panel.addEventListener('click', function (e) { e.stopPropagation(); });
+    languagePanel.addEventListener("click", function (event) {
+      event.stopPropagation();
+      if (event.target && event.target.matches("a")) closeLanguagePanel(false);
+    });
+
+    document.addEventListener("click", function () {
+      closeLanguagePanel(false);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeLanguagePanel(true);
+    });
+
+    new MutationObserver(function () {
+      var current = languagePanel.querySelector("[aria-current='true'], .is-current-lang");
+      if (current) languageButton.textContent = current.textContent.trim() || "EN";
+    }).observe(languagePanel, { subtree: true, attributes: true, attributeFilter: ["class", "aria-current"] });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener("click", function (event) {
+      var id = anchor.getAttribute("href").slice(1);
+      var target = document.getElementById(id);
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      if (history.pushState) history.pushState(null, "", "#" + id);
+    });
+  });
 }());
 </script>
 </body>
