@@ -402,17 +402,17 @@
     },
     {
       "path": "/wine-lovers",
-      "source": "future-proposed",
-      "routeType": "future-product-page",
-      "currentState": "not yet implemented",
+      "source": "wine-lovers.html",
+      "routeType": "current-public-product-page",
+      "currentState": "implemented public Wine Lovers page with safe pre-launch fallbacks",
       "recommendedAccess": "public-indexable",
       "recommendedIndexability": "index after approved implementation",
-      "localeStrategy": "consume-locales-json",
-      "productIds": ["wine-lovers", "blind-tasting", "tasting-notes", "toasts"],
+      "localeStrategy": "shared-runtime-query-param",
+      "productIds": ["wine-lovers", "blind-tasting", "tasting-notes", "taste-profile", "toasts", "wine-library", "cap-passport"],
       "containsPrototypeCommerce": false,
       "containsPersonalOrPartnerData": false,
       "requiresOwnerReview": true,
-      "notes": "Future approved product page."
+      "notes": "Uses mailto consumer-access fallback, same-page Passport context, existing legal routes, and no live commerce, booking, subscription, scanner, or account claims."
     },
     {
       "path": "/for-wineries",

@@ -47,8 +47,8 @@ class RouteCoverageTest(unittest.TestCase):
     def test_current_route_coverage_passes_without_broken_orphans(self) -> None:
         result = self.run_audit()
         self.assertFalse(result.failed)
-        self.assertEqual(result.html_count, 25)
-        self.assertEqual(result.page_count, 25)
+        self.assertEqual(result.html_count, 26)
+        self.assertEqual(result.page_count, 26)
         self.assertEqual(result.route_policy_count, 42)
         self.assertEqual(result.rewrite_count, 4)
         self.assertEqual(result.orphan_pages, [])
@@ -57,9 +57,26 @@ class RouteCoverageTest(unittest.TestCase):
         self.assertEqual(result.duplicate_routes, [])
         self.assertEqual(result.conflicting_routes, [])
         self.assertEqual(len(result.intentional_internal_pages), 8)
-        self.assertEqual(len(result.unknown_requires_review), 14)
+        self.assertEqual(len(result.unknown_requires_review), 13)
         self.assertEqual(result.trailing_slash_findings, [])
         self.assertEqual(result.file_extension_findings, [])
+
+    def test_wine_lovers_route_is_current_public_page(self) -> None:
+        page = next(page for page in self.pages["pages"] if page["route"] == "/wine-lovers")
+        route = next(route for route in self.routes["routes"] if route["path"] == "/wine-lovers")
+
+        self.assertEqual(page["source"], "wine-lovers.html")
+        self.assertEqual(route["source"], "wine-lovers.html")
+        self.assertEqual(route["routeType"], "current-public-product-page")
+        self.assertEqual(
+            route["currentState"],
+            "implemented public Wine Lovers page with safe pre-launch fallbacks",
+        )
+        self.assertEqual(route["recommendedAccess"], "public-indexable")
+        self.assertEqual(route["localeStrategy"], "shared-runtime-query-param")
+        self.assertNotEqual(route["source"], "future-proposed")
+        self.assertNotEqual(route["routeType"], "future-product-page")
+        self.assertNotIn("not yet implemented", route["currentState"])
 
     def test_physical_html_missing_from_page_registry_is_orphan_page(self) -> None:
         pages = copy.deepcopy(self.pages)
