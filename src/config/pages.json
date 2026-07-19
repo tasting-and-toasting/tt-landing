@@ -25,6 +25,28 @@
       "notes": "Current public landing page; indexable policy remains subject to owner-approved landing rewrite."
     },
     {
+      "id": "wine-lovers",
+      "route": "/wine-lovers",
+      "source": "wine-lovers.html",
+      "title": "Wine Lovers | Learn, Taste, And Remember Wine | Tasting & Toasting",
+      "product": "wine-lovers",
+      "productIds": [
+        "wine-lovers",
+        "blind-tasting",
+        "tasting-notes",
+        "taste-profile",
+        "toasts",
+        "wine-library",
+        "cap-passport"
+      ],
+      "public": true,
+      "localized": true,
+      "indexable": true,
+      "routeAliases": [],
+      "titleSource": "html-title",
+      "notes": "Implemented public Wine Lovers page with pre-launch consumer discovery copy, mailto fallback, and same-page Passport context."
+    },
+    {
       "id": "prototype",
       "route": "/prototype",
       "source": "prototype.html",

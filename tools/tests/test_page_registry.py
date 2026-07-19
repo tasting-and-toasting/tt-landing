@@ -47,7 +47,7 @@ class PageRegistryTest(unittest.TestCase):
 
     def test_all_html_sources_are_registered(self) -> None:
         sources = self.validate(self.pages)
-        self.assertEqual(len(self.pages["pages"]), 25)
+        self.assertEqual(len(self.pages["pages"]), 26)
         self.assertEqual(set(sources), self.validator.html_sources())
 
     def test_required_foundation_page_facts(self) -> None:
@@ -66,6 +66,33 @@ class PageRegistryTest(unittest.TestCase):
 
         bottle_scan = self.page_by_route("/bottle-scan")
         self.assertIn("/cap/b/:token", bottle_scan["routeAliases"])
+
+    def test_wine_lovers_page_is_registered_as_public_implementation(self) -> None:
+        wine_lovers = self.page_by_route("/wine-lovers")
+        self.assertEqual(wine_lovers["id"], "wine-lovers")
+        self.assertEqual(wine_lovers["source"], "wine-lovers.html")
+        self.assertEqual(
+            wine_lovers["title"],
+            "Wine Lovers | Learn, Taste, And Remember Wine | Tasting & Toasting",
+        )
+        self.assertEqual(wine_lovers["product"], "wine-lovers")
+        self.assertEqual(
+            wine_lovers["productIds"],
+            [
+                "wine-lovers",
+                "blind-tasting",
+                "tasting-notes",
+                "taste-profile",
+                "toasts",
+                "wine-library",
+                "cap-passport",
+            ],
+        )
+        self.assertTrue(wine_lovers["public"])
+        self.assertTrue(wine_lovers["localized"])
+        self.assertTrue(wine_lovers["indexable"])
+        self.assertEqual(wine_lovers["routeAliases"], [])
+        self.assertEqual(wine_lovers["titleSource"], "html-title")
 
     def test_design_pages_use_filename_derived_titles(self) -> None:
         design_pages = [
