@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join · Tasting &amp; Toasting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,500&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b0d; --panel:#171318; --wine:#6b2737; --gold:#cba24f; --gold-soft:#e0c486;
+  --green:#86a878; --coral:#c66a7c; --cream:#f4eee6; --cream-soft:#cbbfb0;
+  --line:#2c252e; --line-2:#231d27; --ink-dim:#86807f;
+  --serif:"Playfair Display", Georgia, serif;
+  --body:"Spectral", Georgia, serif;
+  --mono:"Spline Sans Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ background:radial-gradient(130% 90% at 50% -10%, #1c1019 0%, var(--void) 55%); min-height:100vh;
+  color:var(--cream); font-family:var(--body); font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased;
+  display:flex; align-items:center; justify-content:center; padding:38px 16px; }
+.card{ width:560px; max-width:100%; background:linear-gradient(180deg,#171318,#0f0d11);
+  border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 50px 110px -40px #000; }
+.top{ display:flex; justify-content:space-between; align-items:center; padding:14px 22px; border-bottom:1px solid var(--line-2); }
+.brand{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; }
+.brand b{ color:var(--gold-soft); }
+.lang{ display:flex; gap:9px; }
+.lang button{ background:none; border:none; cursor:pointer; font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; color:var(--ink-dim); padding:2px 1px; transition:.2s; }
+.lang button.on{ color:var(--gold-soft); border-bottom:1px solid var(--gold); }
+.head{ padding:26px 30px 4px; }
+.k{ font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:9.5px; color:var(--ink-dim); margin-bottom:13px; }
+h1{ font-family:var(--serif); font-weight:700; font-size:30px; line-height:1.12; }
+h1 em{ color:var(--gold-soft); font-style:italic; }
+.sub{ color:var(--cream-soft); font-size:14.5px; margin-top:10px; }
+.form{ padding:20px 30px 8px; }
+.row{ display:flex; gap:12px; }
+.fld{ flex:1; margin-bottom:13px; }
+.fld label{ display:block; font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); margin-bottom:5px; }
+input,select,textarea{ width:100%; background:var(--void); border:1px solid var(--line); border-radius:8px;
+  color:var(--cream); font-family:var(--body); font-size:15px; padding:11px 12px; outline:none; transition:.2s; }
+input:focus,select:focus,textarea:focus{ border-color:var(--gold); }
+textarea{ min-height:96px; resize:vertical; }
+.optin{ display:flex; gap:9px; align-items:flex-start; font-family:var(--body); font-size:13px; line-height:1.5; letter-spacing:0; text-transform:none; color:var(--cream-soft); margin:6px 0 14px; cursor:pointer; }
+.optin input{ width:16px; height:16px; flex:0 0 auto; margin-top:2px; accent-color:var(--green); }
+button.send{ width:100%; background:var(--wine); color:var(--cream); border:1px solid #7d3143; border-radius:9px;
+  font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; padding:14px; cursor:pointer; transition:.2s; }
+button.send:hover:not(:disabled){ background:#7d3143; }
+button.send:disabled{ opacity:.4; cursor:not-allowed; }
+.state{ display:none; padding:4px 0 2px; }
+.state.show{ display:block; }
+.state .t{ font-family:var(--serif); font-size:17px; margin-bottom:6px; }
+.state .b{ font-size:13px; line-height:1.55; color:var(--cream-soft); }
+.state a{ color:var(--gold-soft); }
+.ok .t{ color:var(--green); }
+.warn .t{ color:var(--gold-soft); }
+.bad .t{ color:var(--coral); }
+.foot{ padding:16px 30px 22px; border-top:1px solid var(--line-2); margin-top:14px; }
+.foot p{ font-family:var(--mono); font-size:8.5px; letter-spacing:.11em; color:var(--ink-dim); line-height:1.8; }
+@media (max-width:520px){ .row{ flex-direction:column; gap:0; } h1{ font-size:25px; } .head,.form,.foot{ padding-left:20px; padding-right:20px; } }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top">
+    <div class="brand">TASTING &amp; <b>TOASTING</b></div>
+    <div class="lang">
+      <button data-lang="en">EN</button><button data-lang="ru">RU</button><button data-lang="es">ES</button><button data-lang="de">DE</button><button data-lang="it">IT</button>
+    </div>
+  </div>
+
+  <div class="head">
+    <div class="k" data-i18n="kicker">Membership</div>
+    <h1 data-i18n="h1">Join <em>Tasting &amp; Toasting</em></h1>
+    <p class="sub" data-i18n="sub">Tell us who you are and what you would like to do with us. A person reads every application.</p>
+  </div>
+
+  <div class="form">
+    <div class="row">
+      <div class="fld"><label data-i18n="l_name">Full name *</label><input type="text" id="fName" autocomplete="name" data-ph="ph_name" placeholder="Your name"></div>
+      <div class="fld"><label data-i18n="l_email">E-mail *</label><input type="email" id="fEmail" autocomplete="email" placeholder="you@example.com"></div>
+    </div>
+    <div class="row">
+      <div class="fld"><label data-i18n="l_org">Organization / role</label><input type="text" id="fOrg" data-ph="ph_org" placeholder="winery, restaurant, sommelier…"></div>
+      <div class="fld"><label data-i18n="l_place">City / country</label><input type="text" id="fPlace" data-ph="ph_place" placeholder="Minsk, Belarus"></div>
+    </div>
+    <div class="fld">
+      <label data-i18n="l_kind">What interests you</label>
+      <select id="fKind">
+        <option value="winery" data-i18n="k_winery">Winery — put my wines into the platform</option>
+        <option value="venue" data-i18n="k_venue">Restaurant or venue — host tasting evenings</option>
+        <option value="host" data-i18n="k_host">Sommelier or host — run the evenings</option>
+        <option value="distribution" data-i18n="k_dist">Distribution — sell with the passport</option>
+        <option value="invest" data-i18n="k_invest">Investment or partnership</option>
+        <option value="other" data-i18n="k_other">Something else</option>
+      </select>
+    </div>
+    <div class="fld"><label data-i18n="l_msg">A few words *</label><textarea id="fMsg" data-ph="ph_msg" placeholder="What you do, and what you would like from us."></textarea></div>
+
+    <label class="optin"><input type="checkbox" id="fOk"><span data-i18n="consent">I agree that Tasting &amp; Toasting may contact me about this application.</span></label>
+
+    <button class="send" id="sendBtn" disabled data-i18n="btn">Send the application</button>
+
+    <div class="state ok" id="stOk"><div class="t" data-i18n="ok_t">Application sent</div><div class="b" data-i18n="ok_b">It is in the mailbox. A person will read it and answer you.</div></div>
+    <div class="state warn" id="stMail"><div class="t" data-i18n="mail_t">Your letter is ready — send it</div><div class="b" data-i18n="mail_b">We opened a letter in your mail app with everything you filled in. Press send there and the application reaches us. Nothing has been sent from this page yet.</div></div>
+    <div class="state bad" id="stBad"><div class="t" data-i18n="bad_t">The application did not go through</div><div class="b" data-i18n="bad_b">Nothing was delivered. Your words are still in the fields above. Try again, or write straight to <a href="mailto:info@tastingandtoasting.com">info@tastingandtoasting.com</a>.</div></div>
+  </div>
+
+  <div class="foot"><p data-i18n="foot">TASTING AND TOASTING INC. · DELAWARE · INFO@TASTINGANDTOASTING.COM</p></div>
+</div>
+
+<script>
+(function(){
+  // Приёмник заявок. Пусто — значит серверной отправки нет, и страница
+  // НЕ говорит «отправлено»: она собирает письмо и отдаёт его почтовому
+  // приложению человека. Появится настоящий адрес приёмника (форма,
+  // настроенная на info@tastingandtoasting.com) — вписать сюда, и только
+  // тогда появится состояние «отправлено», и только при ответе «принято».
+  var SUBMIT_ENDPOINT = '';
+  var MAILBOX = 'info@tastingandtoasting.com';
+
+  var I18N = {
+    en:{ kicker:'Membership', h1:'Join <em>Tasting &amp; Toasting</em>',
+      sub:'Tell us who you are and what you would like to do with us. A person reads every application.',
+      l_name:'Full name *', l_email:'E-mail *', l_org:'Organization / role', l_place:'City / country',
+      l_kind:'What interests you', l_msg:'A few words *',
+      ph_name:'Your name', ph_org:'winery, restaurant, sommelier…', ph_place:'Minsk, Belarus',
+      ph_msg:'What you do, and what you would like from us.',
+      k_winery:'Winery — put my wines into the platform', k_venue:'Restaurant or venue — host tasting evenings',
+      k_host:'Sommelier or host — run the evenings', k_dist:'Distribution — sell with the passport',
+      k_invest:'Investment or partnership', k_other:'Something else',
+      consent:'I agree that Tasting &amp; Toasting may contact me about this application.',
+      btn:'Send the application', btn_wait:'Sending…',
+      ok_t:'Application sent', ok_b:'It is in the mailbox. A person will read it and answer you.',
+      mail_t:'Your letter is ready — send it',
+      mail_b:'We opened a letter in your mail app with everything you filled in. Press send there and the application reaches us. Nothing has been sent from this page yet.',
+      bad_t:'The application did not go through',
+      bad_b:'Nothing was delivered. Your words are still in the fields above. Try again, or write straight to <a href="mailto:'+MAILBOX+'">'+MAILBOX+'</a>.',
+      foot:'TASTING AND TOASTING INC. · DELAWARE · INFO@TASTINGANDTOASTING.COM' },
+    ru:{ kicker:'Вступление', h1:'Вступить в <em>Tasting &amp; Toasting</em>',
+      sub:'Расскажите, кто вы и что хотели бы делать вместе с нами. Каждую заявку читает человек.',
+      l_name:'Имя и фамилия *', l_email:'E-mail *', l_org:'Организация / роль', l_place:'Город / страна',
+      l_kind:'Что вам интересно', l_msg:'Несколько слов *',
+      ph_name:'Ваше имя', ph_org:'винодельня, ресторан, сомелье…', ph_place:'Минск, Беларусь',
+      ph_msg:'Чем вы занимаетесь и что хотели бы от нас.',
+      k_winery:'Винодельня — поставить свои вина на платформу', k_venue:'Ресторан или площадка — проводить у себя вечера',
+      k_host:'Сомелье или ведущий — вести вечера', k_dist:'Дистрибуция — продавать вино с паспортом',
+      k_invest:'Инвестиции или партнёрство', k_other:'Что-то другое',
+      consent:'Я согласен, что Tasting &amp; Toasting свяжется со мной по этой заявке.',
+      btn:'Отправить заявку', btn_wait:'Отправляем…',
+      ok_t:'Заявка отправлена', ok_b:'Она в почте. Её прочитает человек и ответит вам.',
+      mail_t:'Письмо готово — отправьте его',
+      mail_b:'Мы открыли в вашей почте письмо со всем, что вы заполнили. Нажмите в нём «отправить», и заявка дойдёт до нас. С этой страницы пока ничего не ушло.',
+      bad_t:'Заявка не ушла',
+      bad_b:'Ничего не доставлено. Ваши слова остались в полях выше. Попробуйте ещё раз или напишите прямо на <a href="mailto:'+MAILBOX+'">'+MAILBOX+'</a>.',
+      foot:'TASTING AND TOASTING INC. · DELAWARE · INFO@TASTINGANDTOASTING.COM' },
+    es:{ kicker:'Adhesión', h1:'Únete a <em>Tasting &amp; Toasting</em>',
+      sub:'Cuéntenos quién es y qué le gustaría hacer con nosotros. Una persona lee cada solicitud.',
+      l_name:'Nombre completo *', l_email:'E-mail *', l_org:'Organización / rol', l_place:'Ciudad / país',
+      l_kind:'Qué le interesa', l_msg:'Unas palabras *',
+      ph_name:'Su nombre', ph_org:'bodega, restaurante, sumiller…', ph_place:'Minsk, Bielorrusia',
+      ph_msg:'A qué se dedica y qué le gustaría de nosotros.',
+      k_winery:'Bodega — llevar mis vinos a la plataforma', k_venue:'Restaurante o local — acoger las catas',
+      k_host:'Sumiller o anfitrión — dirigir las veladas', k_dist:'Distribución — vender con el pasaporte',
+      k_invest:'Inversión o alianza', k_other:'Otra cosa',
+      consent:'Acepto que Tasting &amp; Toasting me contacte sobre esta solicitud.',
+      btn:'Enviar la solicitud', btn_wait:'Enviando…',
+      ok_t:'Solicitud enviada', ok_b:'Está en el buzón. Una persona la leerá y le responderá.',
+      mail_t:'Su carta está lista — envíela',
+      mail_b:'Hemos abierto una carta en su aplicación de correo con todo lo que ha rellenado. Pulse enviar allí y la solicitud nos llegará. Desde esta página aún no se ha enviado nada.',
+      bad_t:'La solicitud no se ha enviado',
+      bad_b:'No se ha entregado nada. Sus palabras siguen en los campos de arriba. Inténtelo de nuevo o escriba directamente a <a href="mailto:'+MAILBOX+'">'+MAILBOX+'</a>.',
+      foot:'TASTING AND TOASTING INC. · DELAWARE · INFO@TASTINGANDTOASTING.COM' },
+    de:{ kicker:'Beitritt', h1:'Werden Sie Teil von <em>Tasting &amp; Toasting</em>',
+      sub:'Sagen Sie uns, wer Sie sind und was Sie mit uns tun möchten. Jede Anfrage liest ein Mensch.',
+      l_name:'Vor- und Nachname *', l_email:'E-Mail *', l_org:'Organisation / Rolle', l_place:'Stadt / Land',
+      l_kind:'Was Sie interessiert', l_msg:'Ein paar Worte *',
+      ph_name:'Ihr Name', ph_org:'Weingut, Restaurant, Sommelier…', ph_place:'Minsk, Belarus',
+      ph_msg:'Was Sie tun und was Sie von uns möchten.',
+      k_winery:'Weingut — meine Weine auf die Plattform bringen', k_venue:'Restaurant oder Location — Abende bei uns',
+      k_host:'Sommelier oder Gastgeber — die Abende führen', k_dist:'Vertrieb — mit dem Pass verkaufen',
+      k_invest:'Investition oder Partnerschaft', k_other:'Etwas anderes',
+      consent:'Ich bin einverstanden, dass Tasting &amp; Toasting mich zu dieser Anfrage kontaktiert.',
+      btn:'Anfrage senden', btn_wait:'Wird gesendet…',
+      ok_t:'Anfrage gesendet', ok_b:'Sie liegt im Postfach. Ein Mensch liest sie und antwortet Ihnen.',
+      mail_t:'Ihr Brief ist fertig — senden Sie ihn',
+      mail_b:'Wir haben in Ihrem Mailprogramm einen Brief mit allem geöffnet, was Sie ausgefüllt haben. Drücken Sie dort auf Senden, dann erreicht uns die Anfrage. Von dieser Seite wurde noch nichts gesendet.',
+      bad_t:'Die Anfrage ist nicht durchgekommen',
+      bad_b:'Es wurde nichts zugestellt. Ihre Worte stehen weiterhin in den Feldern oben. Versuchen Sie es erneut oder schreiben Sie direkt an <a href="mailto:'+MAILBOX+'">'+MAILBOX+'</a>.',
+      foot:'TASTING AND TOASTING INC. · DELAWARE · INFO@TASTINGANDTOASTING.COM' },
+    it:{ kicker:'Adesione', h1:'Entra in <em>Tasting &amp; Toasting</em>',
+      sub:'Raccontaci chi sei e cosa vorresti fare con noi. Ogni richiesta la legge una persona.',
+      l_name:'Nome e cognome *', l_email:'E-mail *', l_org:'Organizzazione / ruolo', l_place:'Città / paese',
+      l_kind:'Cosa ti interessa', l_msg:'Due parole *',
+      ph_name:'Il tuo nome', ph_org:'cantina, ristorante, sommelier…', ph_place:'Minsk, Bielorussia',
+      ph_msg:'Di cosa ti occupi e cosa vorresti da noi.',
+      k_winery:'Cantina — portare i miei vini sulla piattaforma', k_venue:'Ristorante o locale — ospitare le serate',
+      k_host:'Sommelier o conduttore — condurre le serate', k_dist:'Distribuzione — vendere con il passaporto',
+      k_invest:'Investimento o partnership', k_other:'Altro',
+      consent:'Acconsento che Tasting &amp; Toasting mi contatti riguardo a questa richiesta.',
+      btn:'Invia la richiesta', btn_wait:'Invio…',
+      ok_t:'Richiesta inviata', ok_b:'È nella casella di posta. Una persona la leggerà e ti risponderà.',
+      mail_t:'La tua lettera è pronta — inviala',
+      mail_b:'Abbiamo aperto nella tua app di posta una lettera con tutto quello che hai compilato. Premi invia lì e la richiesta arriva a noi. Da questa pagina non è ancora partito nulla.',
+      bad_t:'La richiesta non è partita',
+      bad_b:'Non è stato consegnato nulla. Le tue parole sono ancora nei campi qui sopra. Riprova, oppure scrivi direttamente a <a href="mailto:'+MAILBOX+'">'+MAILBOX+'</a>.',
+      foot:'TASTING AND TOASTING INC. · DELAWARE · INFO@TASTINGANDTOASTING.COM' }
+  };
+
+  var lang = (new URLSearchParams(location.search).get('lang')||'').toLowerCase();
+  if(!I18N[lang]) lang = (navigator.language||'en').slice(0,2).toLowerCase();
+  if(!I18N[lang]) lang = 'en';
+
+  var els = [].slice.call(document.querySelectorAll('[data-i18n]'));
+  var phs = [].slice.call(document.querySelectorAll('[data-ph]'));
+  var langBtns = [].slice.call(document.querySelectorAll('.lang button'));
+  var name=document.getElementById('fName'), email=document.getElementById('fEmail'),
+      org=document.getElementById('fOrg'), place=document.getElementById('fPlace'),
+      kind=document.getElementById('fKind'), msg=document.getElementById('fMsg'),
+      ok=document.getElementById('fOk'), btn=document.getElementById('sendBtn'),
+      stOk=document.getElementById('stOk'), stMail=document.getElementById('stMail'), stBad=document.getElementById('stBad');
+
+  function apply(l){
+    var d=I18N[l]; if(!d) return;
+    document.documentElement.lang=l;
+    els.forEach(function(el){ var k=el.getAttribute('data-i18n'); if(d[k]!=null) el.innerHTML=d[k]; });
+    phs.forEach(function(el){ var k=el.getAttribute('data-ph'); if(d[k]!=null) el.setAttribute('placeholder',d[k]); });
+    langBtns.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang')===l); });
+    lang=l; validate();
+  }
+  langBtns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); }); });
+
+  function emailOk(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v); }
+  function validate(){
+    var good = name.value.trim().length>1 && emailOk(email.value.trim()) && msg.value.trim().length>2 && ok.checked;
+    btn.disabled = !good; return good;
+  }
+  [name,email,org,place,msg].forEach(function(el){ el.addEventListener('input', validate); });
+  ok.addEventListener('change', validate);
+  kind.addEventListener('change', validate);
+
+  function hideStates(){ [stOk,stMail,stBad].forEach(function(s){ s.classList.remove('show'); }); }
+
+  function letter(){
+    var kindText = kind.options[kind.selectedIndex].textContent.trim();
+    return [
+      'Name: '+name.value.trim(),
+      'E-mail: '+email.value.trim(),
+      'Organization / role: '+(org.value.trim()||'—'),
+      'City / country: '+(place.value.trim()||'—'),
+      'Interest: '+kindText,
+      '',
+      msg.value.trim(),
+      '',
+      '— sent from tastingandtoasting.com/apply ('+lang+')'
+    ].join('\n');
+  }
+
+  btn.addEventListener('click', async function(){
+    if(!validate()) return;
+    hideStates();
+
+    if(!SUBMIT_ENDPOINT){
+      // Серверной отправки нет. Не врём: письмо отдаётся почте человека,
+      // и ему прямо сказано, что с этой страницы ничего не ушло.
+      stMail.classList.add('show');
+      location.href='mailto:'+MAILBOX
+        +'?subject='+encodeURIComponent('Application: '+name.value.trim())
+        +'&body='+encodeURIComponent(letter());
+      return;
+    }
+
+    var was=btn.textContent; btn.disabled=true; btn.textContent=I18N[lang].btn_wait;
+    var delivered=false;
+    try{
+      var r=await fetch(SUBMIT_ENDPOINT,{ method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({ _subject:'Application: '+name.value.trim(),
+          name:name.value.trim(), email:email.value.trim(), message:letter() }) });
+      delivered = r.ok;
+      if(!r.ok) console.warn('приёмник отклонил заявку, код', r.status);
+    }catch(e){ console.warn('заявка не доставлена:', e); }
+    btn.disabled=false; btn.textContent=was;
+    // «Отправлено» показывается ТОЛЬКО при фактической доставке.
+    if(delivered){ stOk.classList.add('show'); btn.disabled=true; }
+    else { stBad.classList.add('show'); }
+  });
+
+  apply(lang);
+})();
+</script>
+</body>
+</html>
