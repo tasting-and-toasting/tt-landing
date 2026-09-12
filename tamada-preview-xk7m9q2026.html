@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>TAMADA — Tasting &amp; Toasting</title>
 <style>
@@ -544,15 +545,15 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
     <div style="font-size:18px;color:var(--text);font-family:Georgia,serif;font-style:italic;margin-bottom:20px">Детали вечера</div>
     <div class="field">
       <div class="label">Название события</div>
-      <input class="input" id="ev-name" placeholder="День рождения Анны" value="День рождения Анны">
+      <input class="input" id="ev-name" placeholder="День рождения Анны" value="День рождения Анны" disabled>
     </div>
     <div class="field">
       <div class="label">Дата и время</div>
-      <input class="input" type="datetime-local" id="ev-date" value="2026-06-14T20:00">
+      <input class="input" type="datetime-local" id="ev-date" value="2026-06-14T20:00" disabled>
     </div>
     <div class="field">
       <div class="label">Место</div>
-      <input class="input" id="ev-place" placeholder="Ресторан, адрес..." value="Ресторан Zaranda, Madrid">
+      <input class="input" id="ev-place" placeholder="Ресторан, адрес..." value="Ресторан Zaranda, Madrid" disabled>
     </div>
     <div class="field">
       <div class="label">Повод</div>
@@ -892,7 +893,7 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
     <div class="card" style="margin:0 16px 16px">
       <div class="sset">
         <div class="sset-info"><div class="sset-label">Звуковые сигналы</div><div class="sset-sub">Чаймы при переходе к тосту</div></div>
-        <label class="toggle"><input type="checkbox" id="tog-chime" checked onchange="onToggleChime(this)"><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        <label class="toggle"><input type="checkbox" id="tog-chime" checked onchange="onToggleChime(this)" disabled><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
       </div>
       <div class="sset">
         <div class="sset-info"><div class="sset-label">Тест звука</div><div class="sset-sub">Проверить чайм прямо сейчас</div></div>
@@ -900,7 +901,7 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
       </div>
       <div class="sset">
         <div class="sset-info"><div class="sset-label">Вибрация</div><div class="sset-sub">Тактильный сигнал (если доступно)</div></div>
-        <label class="toggle"><input type="checkbox" id="tog-vib" checked><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        <label class="toggle"><input type="checkbox" id="tog-vib" checked disabled><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
       </div>
     </div>
 
@@ -908,11 +909,11 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
     <div class="card" style="margin:0 16px 16px">
       <div class="sset">
         <div class="sset-info"><div class="sset-label">Отображать таймер обратного отсчёта</div></div>
-        <label class="toggle"><input type="checkbox" id="tog-timer" checked><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        <label class="toggle"><input type="checkbox" id="tog-timer" checked disabled><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
       </div>
       <div class="sset">
         <div class="sset-info"><div class="sset-label">Предупреждение за 2 минуты</div><div class="sset-sub">Подсветка перед сменой момента</div></div>
-        <label class="toggle"><input type="checkbox" id="tog-warn" checked><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        <label class="toggle"><input type="checkbox" id="tog-warn" checked disabled><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
       </div>
     </div>
 
@@ -920,11 +921,11 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
     <div class="card" style="margin:0 16px 16px">
       <div class="sset">
         <div class="sset-info"><div class="sset-label">История видна гостям</div><div class="sset-sub">Гости могут просматривать фото и тосты</div></div>
-        <label class="toggle"><input type="checkbox" id="tog-priv" checked><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        <label class="toggle"><input type="checkbox" id="tog-priv" checked disabled><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
       </div>
       <div class="sset">
         <div class="sset-info"><div class="sset-label">Геолокация в истории</div><div class="sset-sub">Место проведения в сохранённой истории</div></div>
-        <label class="toggle"><input type="checkbox" id="tog-geo"><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        <label class="toggle"><input type="checkbox" id="tog-geo" disabled><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
       </div>
     </div>
   </div>
@@ -1329,16 +1330,16 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
   <div class="modal-title">Редактировать этап</div>
   <div class="form-group">
     <label class="form-label">Название</label>
-    <input class="form-input" id="seg-name-inp" type="text" value="Приветственный бокал">
+    <input class="form-input" id="seg-name-inp" type="text" value="Приветственный бокал" disabled>
   </div>
   <div class="form-row">
     <div class="form-group" style="flex:1">
       <label class="form-label">Начало</label>
-      <input class="form-input" id="seg-time-inp" type="text" value="19:30">
+      <input class="form-input" id="seg-time-inp" type="text" value="19:30" disabled>
     </div>
     <div class="form-group" style="flex:1">
       <label class="form-label">Длительность</label>
-      <input class="form-input" id="seg-dur-inp" type="text" value="15 мин">
+      <input class="form-input" id="seg-dur-inp" type="text" value="15 мин" disabled>
     </div>
   </div>
   <div class="form-group">
@@ -1363,16 +1364,16 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
   <div class="modal-title">Новый этап</div>
   <div class="form-group">
     <label class="form-label">Название</label>
-    <input class="form-input" id="newseg-name" type="text" placeholder="Например, Игристое на закате">
+    <input class="form-input" id="newseg-name" type="text" placeholder="Например, Игристое на закате" disabled>
   </div>
   <div class="form-row">
     <div class="form-group" style="flex:1">
       <label class="form-label">Начало</label>
-      <input class="form-input" id="newseg-time" type="text" placeholder="20:00">
+      <input class="form-input" id="newseg-time" type="text" placeholder="20:00" disabled>
     </div>
     <div class="form-group" style="flex:1">
       <label class="form-label">Длительность</label>
-      <input class="form-input" id="newseg-dur" type="text" placeholder="20 мин">
+      <input class="form-input" id="newseg-dur" type="text" placeholder="20 мин" disabled>
     </div>
   </div>
   <div class="form-group">
@@ -1395,7 +1396,7 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
 <div class="modal modal-sheet modal-tall" id="m-toast-lib">
   <div class="sheet-handle"></div>
   <div class="modal-title">Библиотека тостов</div>
-  <input class="form-input" id="toast-search" type="text" placeholder="Поиск..." oninput="filterToasts(this.value)" style="margin-bottom:12px">
+  <input class="form-input" id="toast-search" type="text" placeholder="Поиск..." oninput="filterToasts(this.value)" style="margin-bottom:12px" disabled>
   <div class="toast-lib-list" id="toast-lib-items">
     <div class="toast-lib-item" onclick="addToast('За дружбу, которая проверена временем')">
       <div class="toast-lib-text">За дружбу, которая проверена временем и осталась крепкой как хорошее вино.</div>
@@ -1467,11 +1468,11 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
   <div class="modal-title">Добавить гостя</div>
   <div class="form-group">
     <label class="form-label">Имя</label>
-    <input class="form-input" id="guest-name-inp" type="text" placeholder="Имя гостя">
+    <input class="form-input" id="guest-name-inp" type="text" placeholder="Имя гостя" disabled>
   </div>
   <div class="form-group">
     <label class="form-label">Телефон (необязательно)</label>
-    <input class="form-input" id="guest-phone-inp" type="tel" placeholder="+7 ...">
+    <input class="form-input" id="guest-phone-inp" type="tel" placeholder="+7 ..." disabled>
   </div>
   <div class="form-group">
     <label class="form-label">Роль</label>
@@ -1493,11 +1494,11 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
   <div class="modal-title">Добавить в список</div>
   <div class="form-group">
     <label class="form-label">Позиция</label>
-    <input class="form-input" id="shop-item-inp" type="text" placeholder="Например, Prosecco DOC">
+    <input class="form-input" id="shop-item-inp" type="text" placeholder="Например, Prosecco DOC" disabled>
   </div>
   <div class="form-group">
     <label class="form-label">Количество</label>
-    <input class="form-input" id="shop-qty-inp" type="text" placeholder="2 бутылки">
+    <input class="form-input" id="shop-qty-inp" type="text" placeholder="2 бутылки" disabled>
   </div>
   <div class="modal-actions">
     <button class="btn-ghost" onclick="closeModal('m-add-shop')">Отмена</button>
@@ -1534,7 +1535,7 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
   <div class="sheet-handle"></div>
   <div class="modal-title">Своё время</div>
   <div class="form-group" style="text-align:center">
-    <input class="form-input" id="custom-time-inp" type="number" min="1" max="120" value="20" style="font-size:32px;text-align:center;font-family:Georgia,serif;color:var(--gold)">
+    <input class="form-input" id="custom-time-inp" type="number" min="1" max="120" value="20" style="font-size:32px;text-align:center;font-family:Georgia,serif;color:var(--gold)" disabled>
     <div style="color:var(--sec);font-size:13px;margin-top:6px">минут</div>
   </div>
   <div class="modal-actions">
@@ -1599,7 +1600,7 @@ textarea.input{resize:none;min-height:90px;line-height:1.5}
 <div class="modal modal-sheet" id="m-note">
   <div class="sheet-handle"></div>
   <div class="modal-title">Заметка</div>
-  <textarea class="form-input note-textarea" id="note-text" placeholder="Запишите впечатление, наблюдение, идею..."></textarea>
+  <textarea class="form-input note-textarea" id="note-text" placeholder="Запишите впечатление, наблюдение, идею..." disabled></textarea>
   <div class="modal-actions">
     <button class="btn-ghost" onclick="closeModal('m-note')">Отмена</button>
     <button class="btn-primary" onclick="showToast('Заметка сохранена');closeModal('m-note')">Сохранить</button>

@@ -738,7 +738,8 @@
     "index_proto_card4_title_html": "The <span class=\"em\">first</span> release.",
     "index_proto_heading_html": "Four <span class=\"em\">prototypes</span>, one direction.",
     "index_proto_intro": "These are working visual prototypes , not the live product. Each one explores a different surface of what we're building. Click any to step inside and walk through the screens.",
-    "index_proto_section_kicker": "The work, in motion"
+    "index_proto_section_kicker": "The work, in motion",
+    "tasting_notes_local": "This note lives only in this tab. Close it and the note is gone — nothing is saved anywhere."
   },
   "fr": {
     "sommelier_title": "Ton sommelier IA",
@@ -1479,7 +1480,8 @@
     "index_proto_card4_title_html": "La <span class=\"em\">première</span> sortie.",
     "index_proto_heading_html": "Quatre <span class=\"em\">prototypes</span>, une direction.",
     "index_proto_intro": "Ce sont des prototypes visuels fonctionnels, pas le produit en direct. Chacun explore une surface différente de ce que nous construisons. Clique sur n'importe lequel pour entrer et parcourir les écrans.",
-    "index_proto_section_kicker": "Le travail, en mouvement"
+    "index_proto_section_kicker": "Le travail, en mouvement",
+    "tasting_notes_local": "Cette note n'existe que dans cet onglet. Fermez-le et elle disparaît — rien n'est enregistré nulle part."
   },
   "ru": {
     "sommelier_title": "Твой ИИ-сомелье",
@@ -2220,7 +2222,8 @@
     "index_proto_card4_title_html": "<span class=\"em\">Первый</span> релиз.",
     "index_proto_heading_html": "Четыре <span class=\"em\">прототипа</span>, одно направление.",
     "index_proto_intro": "Это рабочие визуальные прототипы, а не живой продукт. Каждый исследует разную сторону того, что мы строим. Нажми на любой, чтобы войти и пройтись по экранам.",
-    "index_proto_section_kicker": "Работа в движении"
+    "index_proto_section_kicker": "Работа в движении",
+    "tasting_notes_local": "Эта заметка живёт только в этой вкладке. Закроете её — заметка исчезнет: она нигде не сохраняется."
   },
   "es": {
     "sommelier_title": "Tu sommelier con IA",
@@ -2961,7 +2964,8 @@
     "index_proto_card4_title_html": "El <span class=\"em\">primer</span> lanzamiento.",
     "index_proto_heading_html": "Cuatro <span class=\"em\">prototipos</span>, una dirección.",
     "index_proto_intro": "Estos son prototipos visuales funcionales, no el producto en directo. Cada uno explora una superficie diferente de lo que estamos construyendo. Haz clic en cualquiera para entrar y recorrer las pantallas.",
-    "index_proto_section_kicker": "El trabajo, en movimiento"
+    "index_proto_section_kicker": "El trabajo, en movimiento",
+    "tasting_notes_local": "Esta nota existe solo en esta pestaña. Si la cierra, la nota desaparece: no se guarda en ningún sitio."
   },
   "uk": {
     "sommelier_title": "Твій ІІ-сомельє",
@@ -3702,7 +3706,8 @@
     "index_proto_card4_title_html": "<span class=\"em\">Перший</span> релиз.",
     "index_proto_heading_html": "Чотири <span class=\"em\">прототипи</span>, один напрямок.",
     "index_proto_intro": "Це робочі візуальні прототипи, а не живий продукт. Кожен досліджує іншу поверхню того, що ми будуємо. Натисни на будь-який, щоб увійти та пройтися екранами.",
-    "index_proto_section_kicker": "Робота в русі"
+    "index_proto_section_kicker": "Робота в русі",
+    "tasting_notes_local": "Ця нотатка живе лише в цій вкладці. Закриєте її — нотатка зникне: вона ніде не зберігається."
   },
   "it": {
     "sommelier_title": "Il tuo sommelier IA",
@@ -4443,7 +4448,8 @@
     "index_proto_card4_title_html": "Il <span class=\"em\">primo</span> rilascio.",
     "index_proto_heading_html": "Quattro <span class=\"em\">prototipi</span>, una direzione.",
     "index_proto_intro": "Questi sono prototipi visivi funzionanti, non il prodotto dal vivo. Ognuno esplora una superficie diversa di quello che stiamo costruendo. Fai clic su uno qualsiasi per entrare e camminare attraverso gli schermi.",
-    "index_proto_section_kicker": "Il lavoro, in movimento"
+    "index_proto_section_kicker": "Il lavoro, in movimento",
+    "tasting_notes_local": "Questa nota esiste solo in questa scheda. Se la chiudi, la nota sparisce: non viene salvata da nessuna parte."
   },
   "de": {
     "sommelier_title": "Dein KI-Sommelier",
@@ -5184,7 +5190,8 @@
     "index_proto_card4_title_html": "Die <span class=\"em\">erste</span> Veröffentlichung.",
     "index_proto_heading_html": "Vier <span class=\"em\">Prototypen</span>, eine Richtung.",
     "index_proto_intro": "Das sind funktionierende visuelle Prototypen, nicht das Live-Produkt. Jeder erkundet eine andere Oberfläche von dem, was wir bauen. Klick auf einen und schaue dir die Bildschirme an.",
-    "index_proto_section_kicker": "Die Arbeit, in Bewegung"
+    "index_proto_section_kicker": "Die Arbeit, in Bewegung",
+    "tasting_notes_local": "Diese Notiz existiert nur in diesem Tab. Schließen Sie ihn, ist die Notiz weg — sie wird nirgendwo gespeichert."
   },
   "he": {
     "sommelier_title": "הסומלייה החכמה שלך",
@@ -5925,7 +5932,8 @@
     "index_proto_card4_title_html": "ה<span class=\"em\">הוצאה</span> הראשונה.",
     "index_proto_heading_html": "ארבעה <span class=\"em\">פרוטוטיפים</span>, כיוון אחד.",
     "index_proto_intro": "אלו פרוטוטיפים ויזואליים עובדים, לא המוצר החי. כל אחד חוקר משטח אחר של מה שאנחנו בונים. לחץ על כל אחד ותלך דרך המסכנים.",
-    "index_proto_section_kicker": "העבודה, בתנועה"
+    "index_proto_section_kicker": "העבודה, בתנועה",
+    "tasting_notes_local": "ההערה הזו קיימת רק בלשונית הזו. סגירת הלשונית מוחקת אותה — היא לא נשמרת בשום מקום."
   },
   "pt": {
     "sommelier_title": "O teu sommelier de IA",
@@ -6666,7 +6674,8 @@
     "index_proto_card4_title_html": "O <span class=\"em\">primeiro</span> lançamento.",
     "index_proto_heading_html": "Quatro <span class=\"em\">protótipos</span>, uma direção.",
     "index_proto_intro": "Estes são protótipos visuais funcionais, não o produto ao vivo. Cada um explora uma superfície diferente do que estamos construindo. Clique em qualquer um para entrar e caminhe pela telas.",
-    "index_proto_section_kicker": "O trabalho, em movimento"
+    "index_proto_section_kicker": "O trabalho, em movimento",
+    "tasting_notes_local": "Esta nota existe apenas neste separador. Se o fechar, a nota desaparece — não é guardada em lado nenhum."
   },
   "ka": {
     "sommelier_title": "შენი AI სომელიე",
@@ -7407,7 +7416,8 @@
     "index_proto_card4_title_html": "<span class=\"em\">პირველი</span> გამოშვება.",
     "index_proto_heading_html": "ოთხი <span class=\"em\">პროტოტიპი</span>, ერთი მიმართულება.",
     "index_proto_intro": "ეს კიდეგ მუშაობის ვიზუალური პროტოტიპებია, არა ცოცხალი პროდუქტი. თითოეული იკვლევს იმის სხვადსხვა მხარეს, რას ვაშენებთ. დააწკაპუნე რომელიმე იმაზე და გაიარე ეკრანების მეშვეობით.",
-    "index_proto_section_kicker": "სამუშაო, მოძრაობაში"
+    "index_proto_section_kicker": "სამუშაო, მოძრაობაში",
+    "tasting_notes_local": "ეს ჩანაწერი მხოლოდ ამ ჩანართში არსებობს. დახურავთ და ჩანაწერი გაქრება — ის არსად ინახება."
   },
   "ro": {
     "sommelier_title": "Somelierul tău AI",
@@ -8148,7 +8158,8 @@
     "index_proto_card4_title_html": "<span class=\"em\">Prima</span> lansare.",
     "index_proto_heading_html": "Patru <span class=\"em\">prototipuri</span>, o direcție.",
     "index_proto_intro": "Acestea sunt prototipuri vizuale funcționale, nu produsul în direct. Fiecare explorează o suprafață diferită a ceea ce construim. Dă clic pe oricare și parcurge ecranele.",
-    "index_proto_section_kicker": "Munca, în mișcare"
+    "index_proto_section_kicker": "Munca, în mișcare",
+    "tasting_notes_local": "Această notiță există doar în această filă. Dacă o închideți, notița dispare — nu se salvează nicăieri."
   },
   "pl": {
     "sommelier_title": "Twój Sommelier AI",
@@ -8889,6 +8900,7 @@
     "index_proto_card4_title_html": "<span class=\"em\">Pierwsze</span> wydanie.",
     "index_proto_heading_html": "Cztery <span class=\"em\">prototypy</span>, jeden kierunek.",
     "index_proto_intro": "To są działające prototypy wizualne , nie produkt live. Każdy z nich bada inną powierzchnię tego, co budujemy. Kliknij dowolny, aby wejść do środka i przejść przez ekrany.",
-    "index_proto_section_kicker": "Praca, w ruchu"
+    "index_proto_section_kicker": "Praca, w ruchu",
+    "tasting_notes_local": "Ta notatka istnieje tylko w tej karcie. Po jej zamknięciu notatka znika — nigdzie nie jest zapisywana."
   }
 }
