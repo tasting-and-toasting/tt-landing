@@ -1028,18 +1028,42 @@ function buildSummary(){
   });
   return lines.join('\n');
 }
+// Сообщение об успехе показывается ТОЛЬКО при фактической доставке.
+// Тексты неудачи держим здесь, чтобы не трогать чужой questions.json.
+const SEND_ERR={
+  pl:{t:'Nie wysłano.',b:'Nic nie zostało dostarczone — Twoje odpowiedzi zostały na tej stronie. Spróbuj ponownie albo napisz na info@tastingandtoasting.com'},
+  en:{t:'Not sent.',b:'Nothing was delivered — your answers are still on this page. Try again or write to info@tastingandtoasting.com'},
+  ru:{t:'Не отправлено.',b:'Ничего не доставлено — ваши ответы остались на этой странице. Попробуйте ещё раз или напишите на info@tastingandtoasting.com'}
+};
+function sendErr(){ return SEND_ERR[lang]||SEND_ERR.en; }
+
 async function sendAll(){
   const summary=buildSummary();const p=countProgress();
-  const wasSubmitted=!!(state.submitted);state.submitted=true;persist();
+  const wasSubmitted=!!(state.submitted);
   const payload={type:'winery_setup',winery:state.winery||'',token:state.token,name:state.name||'',phone:state.phone||'',domain:state.domain||'',email:state.email||'',lang:lang,progress:p.pct+'%',updated:wasSubmitted,answers:state.ans,files:state.files,summary:summary,url:location.href,ts:new Date().toISOString()};
-  try{await fetch('https://tt-stack-prod.onrender.com/api/partner-interest',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch(e){}
-  try{await fetch('https://formspree.io/f/xgobjyre',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Winery setup: '+(state.winery||'Winery')+' ('+p.pct+'%)'+(payload.updated?' [UPDATED]':''),name:payload.name,email:payload.email,summary:summary})});}catch(e){}
-  toast(UI[lang].sent+' '+UI[lang].sentb);
+  // Наш сервер — вспомогательный сток, его неудача не решает, дошло письмо или нет.
+  try{ const rs=await fetch('https://tt-stack-prod.onrender.com/api/partner-interest',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); if(!rs.ok) console.warn('partner-interest код',rs.status); }
+  catch(e){ console.warn('partner-interest не принял:',e); }
+  // Канал доставки.
+  let delivered=false;
+  try{
+    const r=await fetch('https://formspree.io/f/xgobjyre',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Winery setup: '+(state.winery||'Winery')+' ('+p.pct+'%)'+(payload.updated?' [UPDATED]':''),name:payload.name,email:payload.email,summary:summary})});
+    delivered=r.ok;
+    if(!r.ok) console.warn('доставка отклонена, код',r.status);
+  }catch(e){ console.warn('доставка не состоялась:',e); }
+  if(delivered){ state.submitted=true; persist(); toast(UI[lang].sent+' '+UI[lang].sentb); }
+  else { const e=sendErr(); toast(e.t+' '+e.b); }
 }
 async function sendAsk(secId,secTitle){
   const inp=document.getElementById('ask-'+secId);const txt=inp.value.trim();if(!txt)return;
-  try{await fetch('https://formspree.io/f/xgobjyre',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Question from '+(state.name||state.winery||'Winery')+' — '+secTitle,name:state.name||'',email:state.email||'',question:txt,section:secTitle})});}catch(e){}
-  inp.value='';toast(UI[lang].asksend+' ✓');
+  let delivered=false;
+  try{
+    const r=await fetch('https://formspree.io/f/xgobjyre',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Question from '+(state.name||state.winery||'Winery')+' — '+secTitle,name:state.name||'',email:state.email||'',question:txt,section:secTitle})});
+    delivered=r.ok;
+    if(!r.ok) console.warn('вопрос не доставлен, код',r.status);
+  }catch(e){ console.warn('вопрос не доставлен:',e); }
+  if(delivered){ inp.value=''; toast(UI[lang].asksend+' ✓'); }
+  else { const e=sendErr(); toast(e.t+' '+e.b); }
 }
 
 function openPrivacy(){document.getElementById('pm-ttl').textContent=PRIVACY[lang].title;document.getElementById('pm-body').textContent=PRIVACY[lang].body;document.getElementById('privacy-modal').classList.add('open');}
