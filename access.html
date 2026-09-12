@@ -67,7 +67,8 @@ body{ background:radial-gradient(130% 90% at 50% -10%, #1c1019 0%, var(--void) 5
 .recorded{ display:none; text-align:center; padding:8px 0 4px; }
 .recorded.show{ display:block; }
 .recorded .ok{ font-family:var(--serif); color:var(--green); font-size:16px; }
-.recorded .ts{ font-family:var(--mono); font-size:9px; letter-spacing:.08em; color:var(--ink-dim); margin-top:4px; }
+@media (max-width:520px){ .row{ flex-direction:column; gap:0; } }
+.recorded .ts{ font-size:12px; line-height:1.5; color:var(--ink-dim); margin-top:6px; max-width:34em; margin-left:auto; margin-right:auto; }
 .gate-foot{ padding:14px 30px 24px; }
 .caveat{ background:#16131a; border:1px solid var(--line-2); border-left:3px solid var(--coral); border-radius:0 8px 8px 0; padding:10px 13px; }
 .caveat .t{ font-family:var(--mono); font-size:8.5px; letter-spacing:.13em; color:var(--coral); }
@@ -134,8 +135,8 @@ body{ background:radial-gradient(130% 90% at 50% -10%, #1c1019 0%, var(--void) 5
 
     <button class="enter" id="enterBtn" disabled data-i18n="enter">Enter the demo →</button>
     <div class="recorded" id="recorded">
-      <div class="ok" data-i18n="rec_ok">✓ Consent recorded</div>
-      <div class="ts" id="recTs"></div>
+      <div class="ok" data-i18n="rec_ok">You accepted the agreement</div>
+      <div class="ts" id="recTs" data-i18n="rec_note">This acceptance is not sent anywhere and is not stored on our side — it stays in your browser. If you need it on record, e-mail <a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a></div>
     </div>
   </div>
 
@@ -170,9 +171,9 @@ body{ background:radial-gradient(130% 90% at 50% -10%, #1c1019 0%, var(--void) 5
       l_name:`Full name *`, ph_name:`Your name`, l_org:`Organization / role`, ph_org:`e.g. winery, investor`, l_email:`E-mail *`,
       chk:`I have read and <b>accept</b> the Confidentiality Agreement above.`,
       l_agree:`Confirmation — type the word “agreed” *`,
-      hint:`Opt-in confirmation: exactly the word <b>agreed</b> · recorded with a timestamp.`,
-      enter:`Enter the demo →`, opening:`Opening the demo…`, rec_ok:`✓ Consent recorded`,
-      cav_t:`Technical note`, cav_p:`This is a contractual click-through gate (records consent), not technical protection. For real access restriction, enable <b>Vercel Deployment / Password Protection</b> on this page — the gate is the agreement, the Vercel password is the lock.`,
+      hint:`Opt-in confirmation: exactly the word <b>agreed</b>.`,
+      enter:`Enter the demo →`, opening:`Opening the demo…`, rec_ok:`You accepted the agreement`, rec_note:`This acceptance is not sent anywhere and is not stored on our side — it stays in your browser. If you need it on record, e-mail <a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a>`,
+      cav_t:`Technical note`, cav_p:`This is a contractual click-through gate, not technical protection, and it does not record anything on our side. For real access restriction, enable <b>Vercel Deployment / Password Protection</b> on this page — the gate is the agreement, the Vercel password is the lock.`,
       legal:`NDA — TEMPLATE, REQUIRES REVIEW BY A LAWYER · NOT LEGAL ADVICE<br>© 2026 TASTING AND TOASTING INC. · DELAWARE · NOINDEX`
     },
     ru:{
@@ -194,9 +195,9 @@ body{ background:radial-gradient(130% 90% at 50% -10%, #1c1019 0%, var(--void) 5
       l_name:`Имя и фамилия *`, ph_name:`Ваше имя`, l_org:`Организация / роль`, ph_org:`напр. винодельня, инвестор`, l_email:`E-mail *`,
       chk:`Я прочитал(а) и <b>принимаю</b> Соглашение о конфиденциальности выше.`,
       l_agree:`Подтверждение — напечатайте слово «agreed» *`,
-      hint:`Opt-in подтверждение: ровно слово <b>agreed</b> · фиксируется с отметкой времени.`,
-      enter:`Войти в демо →`, opening:`Открываю демо…`, rec_ok:`✓ Согласие зафиксировано`,
-      cav_t:`Техническое примечание`, cav_p:`Это контрактный click-through-гейт (фиксирует согласие), а не техническая защита. Для реального ограничения доступа включите <b>Vercel Deployment / Password Protection</b> на этой странице — гейт = соглашение, пароль Vercel = замок.`,
+      hint:`Opt-in подтверждение: ровно слово <b>agreed</b>.`,
+      enter:`Войти в демо →`, opening:`Открываю демо…`, rec_ok:`Вы приняли соглашение`, rec_note:`Это принятие никуда не отправляется и у нас не сохраняется — оно остаётся в вашем браузере. Нужна запись — напишите на <a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a>`,
+      cav_t:`Техническое примечание`, cav_p:`Это контрактный click-through-гейт, а не техническая защита, и он ничего не сохраняет на нашей стороне. Для реального ограничения доступа включите <b>Vercel Deployment / Password Protection</b> на этой странице — гейт = соглашение, пароль Vercel = замок.`,
       legal:`NDA — ШАБЛОН, ТРЕБУЕТ ПРОВЕРКИ ЮРИСТОМ · НЕ ЯВЛЯЕТСЯ ЮРИДИЧЕСКОЙ КОНСУЛЬТАЦИЕЙ<br>© 2026 TASTING AND TOASTING INC. · DELAWARE · NOINDEX`
     },
     es:{
@@ -218,9 +219,9 @@ body{ background:radial-gradient(130% 90% at 50% -10%, #1c1019 0%, var(--void) 5
       l_name:`Nombre y apellidos *`, ph_name:`Tu nombre`, l_org:`Organización / rol`, ph_org:`p. ej. bodega, inversor`, l_email:`Correo electrónico *`,
       chk:`He leído y <b>acepto</b> el Acuerdo de Confidencialidad anterior.`,
       l_agree:`Confirmación — escribe la palabra «agreed» *`,
-      hint:`Confirmación opt-in: exactamente la palabra <b>agreed</b> · registrada con marca de tiempo.`,
-      enter:`Entrar a la demo →`, opening:`Abriendo la demo…`, rec_ok:`✓ Consentimiento registrado`,
-      cav_t:`Nota técnica`, cav_p:`Esto es una barrera contractual de aceptación (registra el consentimiento), no una protección técnica. Para una restricción de acceso real, activa <b>Vercel Deployment / Password Protection</b> en esta página: la barrera es el acuerdo, la contraseña de Vercel es el candado.`,
+      hint:`Confirmación opt-in: exactamente la palabra <b>agreed</b>.`,
+      enter:`Entrar a la demo →`, opening:`Abriendo la demo…`, rec_ok:`Ha aceptado el acuerdo`, rec_note:`Esta aceptación no se envía a ningún sitio ni se guarda por nuestra parte: permanece en su navegador. Si necesita constancia, escriba a <a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a>`,
+      cav_t:`Nota técnica`, cav_p:`Esto es una barrera contractual de aceptación, no una protección técnica, y no guarda nada por nuestra parte. Para una restricción de acceso real, activa <b>Vercel Deployment / Password Protection</b> en esta página: la barrera es el acuerdo, la contraseña de Vercel es el candado.`,
       legal:`NDA — PLANTILLA, REQUIERE REVISIÓN DE UN ABOGADO · NO ES ASESORAMIENTO LEGAL<br>© 2026 TASTING AND TOASTING INC. · DELAWARE · NOINDEX`
     },
     de:{
@@ -242,9 +243,9 @@ body{ background:radial-gradient(130% 90% at 50% -10%, #1c1019 0%, var(--void) 5
       l_name:`Vor- und Nachname *`, ph_name:`Dein Name`, l_org:`Organisation / Rolle`, ph_org:`z. B. Weingut, Investor`, l_email:`E-Mail *`,
       chk:`Ich habe die obige Vertraulichkeitsvereinbarung gelesen und <b>akzeptiere</b> sie.`,
       l_agree:`Bestätigung — tippe das Wort „agreed“ *`,
-      hint:`Opt-in-Bestätigung: genau das Wort <b>agreed</b> · mit Zeitstempel erfasst.`,
-      enter:`Zur Demo →`, opening:`Demo wird geöffnet…`, rec_ok:`✓ Zustimmung erfasst`,
-      cav_t:`Technischer Hinweis`, cav_p:`Dies ist eine vertragliche Click-through-Schranke (erfasst die Zustimmung), kein technischer Schutz. Für echte Zugangsbeschränkung aktiviere <b>Vercel Deployment / Password Protection</b> auf dieser Seite — die Schranke ist die Vereinbarung, das Vercel-Passwort ist das Schloss.`,
+      hint:`Opt-in-Bestätigung: genau das Wort <b>agreed</b>.`,
+      enter:`Zur Demo →`, opening:`Demo wird geöffnet…`, rec_ok:`Sie haben die Vereinbarung akzeptiert`, rec_note:`Diese Annahme wird nirgendwohin gesendet und bei uns nicht gespeichert — sie bleibt in Ihrem Browser. Wenn Sie einen Nachweis brauchen, schreiben Sie an <a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a>`,
+      cav_t:`Technischer Hinweis`, cav_p:`Dies ist eine vertragliche Click-through-Schranke, kein technischer Schutz, und sie speichert bei uns nichts. Für echte Zugangsbeschränkung aktiviere <b>Vercel Deployment / Password Protection</b> auf dieser Seite — die Schranke ist die Vereinbarung, das Vercel-Passwort ist das Schloss.`,
       legal:`NDA — VORLAGE, MUSS VON EINEM ANWALT GEPRÜFT WERDEN · KEINE RECHTSBERATUNG<br>© 2026 TASTING AND TOASTING INC. · DELAWARE · NOINDEX`
     },
     it:{
@@ -266,9 +267,9 @@ body{ background:radial-gradient(130% 90% at 50% -10%, #1c1019 0%, var(--void) 5
       l_name:`Nome e cognome *`, ph_name:`Il tuo nome`, l_org:`Organizzazione / ruolo`, ph_org:`es. cantina, investitore`, l_email:`E-mail *`,
       chk:`Ho letto e <b>accetto</b> l’Accordo di Riservatezza qui sopra.`,
       l_agree:`Conferma — digita la parola «agreed» *`,
-      hint:`Conferma opt-in: esattamente la parola <b>agreed</b> · registrata con marca temporale.`,
-      enter:`Entra nella demo →`, opening:`Apertura della demo…`, rec_ok:`✓ Consenso registrato`,
-      cav_t:`Nota tecnica`, cav_p:`Questa è una barriera contrattuale click-through (registra il consenso), non una protezione tecnica. Per una vera restrizione d’accesso, attiva <b>Vercel Deployment / Password Protection</b> su questa pagina: la barriera è l’accordo, la password di Vercel è il lucchetto.`,
+      hint:`Conferma opt-in: esattamente la parola <b>agreed</b>.`,
+      enter:`Entra nella demo →`, opening:`Apertura della demo…`, rec_ok:`Hai accettato l'accordo`, rec_note:`Questa accettazione non viene inviata da nessuna parte e non viene conservata da noi: resta nel tuo browser. Se ti serve una prova, scrivi a <a href="mailto:hello@tastingandtoasting.com">hello@tastingandtoasting.com</a>`,
+      cav_t:`Nota tecnica`, cav_p:`Questa è una barriera contrattuale click-through, non una protezione tecnica, e non conserva nulla dalla nostra parte. Per una vera restrizione d’accesso, attiva <b>Vercel Deployment / Password Protection</b> su questa pagina: la barriera è l’accordo, la password di Vercel è il lucchetto.`,
       legal:`NDA — MODELLO, RICHIEDE REVISIONE DI UN AVVOCATO · NON È CONSULENZA LEGALE<br>© 2026 TASTING AND TOASTING INC. · DELAWARE · NOINDEX`
     }
   };
@@ -313,12 +314,11 @@ body{ background:radial-gradient(130% 90% at 50% -10%, #1c1019 0%, var(--void) 5
 
   btn.addEventListener('click', function(){
     if(!validate()) return;
-    var record={ name:name.value.trim(), org:org.value.trim(), email:email.value.trim(),
-      confirmation:'agreed', lang:lang, accepted_at:new Date().toISOString(), doc:'CAP NDA v1' };
-    // === ОПЦИОНАЛЬНО: запись согласия на сервер (контрактный след) ===
-    // fetch('https://YOUR-ENDPOINT',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(record)});
+    // Приёмника для этой страницы НЕТ. Пока его нет, данные никуда не уходят
+    // и человеку это говорится прямо (rec_note). Появится приёмник — отправка
+    // добавляется сюда, и только тогда текст можно менять на «зафиксировано».
     rec.classList.add('show');
-    recTs.textContent=record.name+' · '+new Date().toLocaleString()+' · "agreed"';
+    recTs.innerHTML=I18N[lang].rec_note;
     btn.disabled=true; btn.textContent=I18N[lang].opening;
     setTimeout(function(){ window.location.href=DEMO_URL+'?lang='+lang+'#nda=ok-'+Date.now(); }, 900);
   });
