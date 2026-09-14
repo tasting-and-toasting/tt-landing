@@ -15,6 +15,13 @@
       "headers": [
         { "key": "Content-Type", "value": "application/json" }
       ]
+    },
+    {
+      "source": "/.well-known/assetlinks.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Cache-Control", "value": "public, max-age=300" }
+      ]
     }
   ],
   "rewrites": [
@@ -23,12 +30,20 @@
       "destination": "/apple-app-site-association"
     },
     {
+      "source": "/.well-known/assetlinks.json",
+      "destination": "/assetlinks.json"
+    },
+    {
       "source": "/cap/b/:token",
       "destination": "/bottle-scan?token=:token"
     },
     {
       "source": "/for/:name",
       "destination": "/for"
+    },
+    {
+      "source": "/join/:code",
+      "destination": "/join?code=:code"
     },
     {
       "source": "/winery-setup/:token",

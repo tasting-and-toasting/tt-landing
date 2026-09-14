@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the tasting · Tasting &amp; Toasting</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Enter a Tasting &amp; Toasting game with the six-character code from your host.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0B0406; --cream:#F5F0E8; --gold:#C5A572; --gold-soft:#E0C48E;
+  --gold-dim:#8B7548; --line:rgba(197,165,114,0.14); --line-soft:rgba(197,165,114,0.12);
+  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+  --green:#7FB069; --err:#C8654F;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:radial-gradient(ellipse at 26% -4%,rgba(74,14,20,0.44),transparent 56%),linear-gradient(180deg,#12060A,var(--void));color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;}
+a{color:var(--gold);text-decoration:none;}
+a:hover{color:var(--gold-soft);}
+@keyframes j-fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.brandbar{height:58px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:14px;background:rgba(11,4,6,0.72);backdrop-filter:blur(10px);flex:0 0 auto;}
+.brandbar-left{display:flex;align-items:center;gap:11px;}
+.brandmark{width:23px;height:23px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:12px;flex:0 0 auto;}
+.brandname{font-family:var(--serif);font-size:15px;color:var(--cream);}
+.ctx{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,240,232,0.4);}
+.stage{flex:1 1 auto;width:100%;max-width:520px;margin:0 auto;padding:clamp(36px,9vw,72px) 24px 64px;}
+.screen{animation:j-fade 0.4s ease both;text-align:center;}
+.kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;}
+.title{font-family:var(--serif);font-weight:500;font-size:clamp(26px,7vw,34px);line-height:1.12;margin:0 0 14px;letter-spacing:-0.015em;}
+.body-text{font-size:14px;line-height:1.65;color:rgba(245,240,232,0.6);margin:0 auto 30px;max-width:400px;}
+.code-plate{border:1px solid rgba(197,165,114,0.4);border-radius:4px;background:rgba(197,165,114,0.06);padding:22px 18px 20px;margin:0 0 28px;}
+.code-plate-k{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
+.code-plate-v{font-family:var(--serif);font-size:clamp(34px,11vw,46px);line-height:1;color:var(--gold-soft);letter-spacing:0.14em;word-break:break-all;}
+.pass-note{font-size:11px;letter-spacing:0.05em;color:rgba(127,176,105,0.85);margin-top:12px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:50px;padding:0 26px;border-radius:3px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:filter .15s,border-color .15s,color .15s;font-family:var(--sans);border:none;}
+.btn-gold{background:linear-gradient(180deg,var(--gold),#a98a55);color:#1A0B08;font-weight:600;}
+.btn-gold:hover{filter:brightness(1.06);}
+.btn-ghost{border:1px solid rgba(197,165,114,0.4);color:var(--gold);background:transparent;}
+.btn-ghost:hover{border-color:rgba(197,165,114,0.7);color:var(--gold-soft);}
+.hint{font-size:12px;line-height:1.6;color:rgba(245,240,232,0.45);margin-top:14px;}
+.block{margin-top:34px;padding-top:28px;border-top:1px solid var(--line-soft);text-align:left;}
+.sec-label{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;}
+.step-list{list-style:none;counter-reset:s;}
+.step-list li{counter-increment:s;position:relative;padding-left:30px;margin-bottom:12px;font-size:13px;line-height:1.6;color:rgba(245,240,232,0.62);}
+.step-list li::before{content:counter(s);position:absolute;left:0;top:1px;width:19px;height:19px;border:1px solid rgba(197,165,114,0.4);border-radius:50%;color:var(--gold);font-size:10px;display:flex;align-items:center;justify-content:center;}
+.step-list strong{color:var(--cream);font-weight:600;}
+.field{text-align:left;margin-bottom:18px;}
+.field label{display:block;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:9px;}
+.field input{width:100%;height:58px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.3);border-radius:3px;color:var(--cream);font-family:var(--serif);font-size:26px;letter-spacing:0.22em;text-align:center;text-transform:uppercase;padding:0 12px;}
+.field input:focus{outline:none;border-color:var(--gold);background:rgba(245,240,232,0.06);}
+.field input::placeholder{color:rgba(245,240,232,0.2);letter-spacing:0.22em;}
+.err{font-size:12.5px;color:var(--err);margin-top:10px;min-height:19px;}
+.footnote{font-size:11.5px;line-height:1.6;color:rgba(245,240,232,0.34);margin-top:34px;padding-top:22px;border-top:1px solid var(--line-soft);text-align:center;}
+.stores{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;}
+.stores .btn{width:auto;flex:1 1 150px;min-height:46px;}
+</style>
+</head>
+<body>
+<header class="brandbar">
+  <div class="brandbar-left">
+    <div class="brandmark" aria-hidden="true">T</div>
+    <span class="brandname">Tasting &amp; Toasting</span>
+  </div>
+  <span class="ctx">Guest entry</span>
+</header>
+
+<main class="stage" id="stage" aria-live="polite">
+  <noscript>
+    <div class="screen">
+      <p class="kick">Guest entry</p>
+      <h1 class="title">Your code is in this page&rsquo;s address</h1>
+      <p class="body-text">The six characters after <code>/join/</code> in the address bar are your game code. Open the Tasting &amp; Toasting app, go to Join, and type them in.</p>
+    </div>
+  </noscript>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ------------------------------------------------------------------ *
+   * GUEST-ENTRY-FIX-01 — the browser end of a join link.
+   *
+   * A guest scans the QR drawn by the host's game lobby. The QR encodes
+   * https://tastingandtoasting.com/join/<CODE> (tt-mobile:
+   * lib/games/joinLink.ts). On an iPhone with the app installed, the
+   * Apple App Site Association file intercepts that address and the app
+   * opens before this page is ever fetched. Everybody else lands here:
+   * Android (until the app ships an https intent filter for /join/*),
+   * iPhone without the app, and every desktop browser.
+   *
+   * This page therefore has exactly one job — hand the guest onward with
+   * the code intact, and never pretend to more than it knows.
+   *
+   * NOTHING HERE TALKS TO A SERVER, DELIBERATELY. There is no endpoint
+   * that resolves a join code without a token, and that is by design:
+   * an unauthenticated "is ABC234 a real game?" is a join-code oracle,
+   * and six characters is a small enough space to grind. See the note at
+   * the top of tt-mobile lib/games/joinLink.ts. So this page cannot show
+   * the host's name, the venue, or whether the code is live — it can only
+   * check the SHAPE of the code and pass it on. Saying anything more
+   * would be a guess dressed as a fact.
+   * ------------------------------------------------------------------ */
+
+  /* Mirrors tt-mobile normalizeJoinCode(): six of A-Z0-9, deliberately
+     the more permissive of client and server so a code the server would
+     accept is never swallowed here. */
+  var CODE_SHAPE = /^[A-Z0-9]{6}$/;
+
+  /* Mirrors tt-mobile normalizePassCode(): Crockford base32, 12..64. */
+  var PASS_SHAPE = /^[0-9ABCDEFGHJKMNPQRSTVWXYZ]{12,64}$/;
+
+  /* The app's custom scheme, from tt-mobile app.config.ts:
+       scheme: 'tastingandtoasting'
+     and the Android intent filter host 'join'. This form works on both
+     platforms TODAY, with no app release and no server file:
+       tastingandtoasting://join/ABC234
+     It is the one handoff this page can promise. */
+  var APP_SCHEME = 'tastingandtoasting';
+
+  /* ---------------------------------------------------------------- *
+   * OWNER-SUPPLIED: public store listings.
+   *
+   * Left empty on purpose. No App Store or Play Store URL for this app
+   * exists anywhere in our repositories, and inventing one would send a
+   * guest at a live event to a 404 or, worse, to somebody else's app.
+   * When the listings are public, put the two URLs here — nothing else
+   * on the page needs to change; the buttons appear on their own and the
+   * "ask your host" fallback disappears.
+   * ---------------------------------------------------------------- */
+  var STORE_URL = {
+    ios: '',
+    android: ''
+  };
+
+  var stage = document.getElementById('stage');
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function normalizeCode(raw) {
+    if (!raw) return null;
+    var cleaned = String(raw).trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+    return CODE_SHAPE.test(cleaned) ? cleaned : null;
+  }
+
+  function normalizePass(raw) {
+    if (!raw) return null;
+    var cleaned = String(raw).trim().toUpperCase().replace(/[^0-9A-Z]/g, '');
+    return PASS_SHAPE.test(cleaned) ? cleaned : null;
+  }
+
+  /* The code arrives one of two ways and both are read, so the page is
+     correct whether or not the rewrite in vercel.json fired:
+       ?code=ABC234        the rewrite /join/:code -> /join?code=:code
+       /join/ABC234        the raw path, if it was served directly */
+  function readCode() {
+    var params = new URLSearchParams(window.location.search);
+    var fromQuery = normalizeCode(params.get('code'));
+    if (fromQuery) return fromQuery;
+    var segments = window.location.pathname.split('/').filter(Boolean);
+    var joinAt = -1;
+    for (var i = 0; i < segments.length; i++) {
+      if (segments[i].toLowerCase() === 'join') joinAt = i;
+    }
+    if (joinAt === -1) return null;
+    return normalizeCode(segments[joinAt + 1]);
+  }
+
+  /* A prepaid pass rides along on a join link as ?pass=<code>
+     (tt-mobile PASS_PARAM). It is not ours to interpret — only to carry
+     through to the app unchanged, or to drop if it is malformed. */
+  function readPass() {
+    return normalizePass(new URLSearchParams(window.location.search).get('pass'));
+  }
+
+  function appLink(code, pass) {
+    var url = APP_SCHEME + '://join/' + encodeURIComponent(code);
+    return pass ? url + '?pass=' + encodeURIComponent(pass) : url;
+  }
+
+  function storeBlock() {
+    var haveIos = !!STORE_URL.ios;
+    var haveAndroid = !!STORE_URL.android;
+
+    if (!haveIos && !haveAndroid) {
+      /* Honest fallback. "Ask your host" is a real action a guest can take
+         in the room; a dead store button is not. */
+      return '' +
+        '<div class="block">' +
+          '<p class="sec-label">No app on this phone?</p>' +
+          '<p class="hint" style="margin-top:0">The app is what seats you at the tasting. Ask your host for the install link &mdash; then enter the six characters above on the Join screen.</p>' +
+        '</div>';
+    }
+
+    var buttons = '';
+    if (haveIos) {
+      buttons += '<a class="btn btn-ghost" href="' + esc(STORE_URL.ios) + '">App Store</a>';
+    }
+    if (haveAndroid) {
+      buttons += '<a class="btn btn-ghost" href="' + esc(STORE_URL.android) + '">Google Play</a>';
+    }
+    return '' +
+      '<div class="block">' +
+        '<p class="sec-label">No app on this phone?</p>' +
+        '<div class="stores">' + buttons + '</div>' +
+        '<p class="hint">Install it, then enter the six characters above on the Join screen.</p>' +
+      '</div>';
+  }
+
+  /* ---- Screen: we have a code ---- */
+  function renderCode(code, pass) {
+    stage.innerHTML = '' +
+      '<div class="screen">' +
+        '<p class="kick">Guest entry</p>' +
+        '<h1 class="title">You&rsquo;re at the right door</h1>' +
+        '<p class="body-text">This is the code for tonight&rsquo;s tasting. Open the app to take your seat.</p>' +
+        '<div class="code-plate">' +
+          '<p class="code-plate-k">Your game code</p>' +
+          '<p class="code-plate-v">' + esc(code) + '</p>' +
+          (pass ? '<p class="pass-note">A prepaid seat is attached to this link.</p>' : '') +
+        '</div>' +
+        '<a class="btn btn-gold" id="open-app" href="' + esc(appLink(code, pass)) + '">Open in the app</a>' +
+        '<p class="hint">If the app is installed on this phone, that button opens it on your seat. If nothing happens, it is not installed yet.</p>' +
+        storeBlock() +
+        '<div class="block">' +
+          '<p class="sec-label">Entering it by hand</p>' +
+          '<ol class="step-list">' +
+            '<li>Open <strong>Tasting &amp; Toasting</strong>.</li>' +
+            '<li>Go to <strong>Join</strong>.</li>' +
+            '<li>Type <strong>' + esc(code) + '</strong>.</li>' +
+          '</ol>' +
+        '</div>' +
+        '<p class="footnote">Wrong code? <a href="/join">Enter a different one</a> &middot; <a href="/">tastingandtoasting.com</a></p>' +
+      '</div>';
+  }
+
+  /* ---- Screen: no code, or a code we cannot read ---- */
+  function renderEntry(badInput) {
+    stage.innerHTML = '' +
+      '<div class="screen">' +
+        '<p class="kick">Guest entry</p>' +
+        '<h1 class="title">' + (badInput ? 'That code doesn&rsquo;t look right' : 'Enter your game code') + '</h1>' +
+        '<p class="body-text">' + (badInput
+          ? 'A game code is exactly six characters &mdash; letters and digits. Check it against the host&rsquo;s screen and try again.'
+          : 'Your host&rsquo;s screen shows six characters. Type them in, or scan the QR code next to them.') +
+        '</p>' +
+        '<form id="code-form" novalidate>' +
+          '<div class="field">' +
+            '<label for="code-input">Game code</label>' +
+            '<input id="code-input" name="code" type="text" inputmode="latin" autocomplete="off"' +
+              ' autocapitalize="characters" spellcheck="false" maxlength="6" placeholder="ABC234"' +
+              ' aria-describedby="code-err"' + (badInput ? ' value="' + esc(badInput) + '"' : '') + '>' +
+          '</div>' +
+          '<button class="btn btn-gold" type="submit">Continue</button>' +
+          '<p class="err" id="code-err" role="alert"></p>' +
+        '</form>' +
+        '<p class="footnote">Already have the app open? Its own scanner reads the host&rsquo;s QR code directly. &middot; <a href="/">tastingandtoasting.com</a></p>' +
+      '</div>';
+
+    var form = document.getElementById('code-form');
+    var input = document.getElementById('code-input');
+    var err = document.getElementById('code-err');
+
+    /* Clean as they type so what is on screen is what will be sent. */
+    input.addEventListener('input', function () {
+      var caretAtEnd = input.selectionStart === input.value.length;
+      var cleaned = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+      if (cleaned !== input.value) {
+        input.value = cleaned;
+        if (caretAtEnd) input.setSelectionRange(cleaned.length, cleaned.length);
+      }
+      err.textContent = '';
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var code = normalizeCode(input.value);
+      if (!code) {
+        err.textContent = input.value
+          ? 'Six characters, letters and digits. You have ' + input.value.length + '.'
+          : 'Type the six characters from your host\u2019s screen.';
+        input.focus();
+        return;
+      }
+      /* Navigate rather than re-render, so the address bar ends up holding
+         a real, shareable join link the app also understands. */
+      window.location.assign('/join/' + code);
+    });
+
+    input.focus();
+  }
+
+  var code = readCode();
+  if (code) {
+    renderCode(code, readPass());
+  } else {
+    /* Distinguish "no code at all" from "a code we could not read": the
+       second gets it echoed back so the guest can see the typo. */
+    var params = new URLSearchParams(window.location.search);
+    var segments = window.location.pathname.split('/').filter(Boolean);
+    var raw = params.get('code') || (segments[0] === 'join' ? segments[1] : '') || '';
+    renderEntry(raw ? raw.slice(0, 32) : null);
+  }
+})();
+</script>
+</body>
+</html>
