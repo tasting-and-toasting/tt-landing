@@ -9,6 +9,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- GUEST-ENTRY-I18N-01 — the site's own language model, not a second one.
+     The path is ROOT-ABSOLUTE on purpose. This page is served at /join/ and at
+     /join/<CODE>; a relative src would resolve to /join/src/i18n/... and 404,
+     after which the script falls into its no-translations branch and silently
+     draws a flag switcher that changes nothing. Same reason the dictionary
+     fetch inside the script is now root-absolute. -->
+<script src="/src/i18n/apply-tt141.js" defer></script>
 <style>
 :root{
   --void:#0B0406; --cream:#F5F0E8; --gold:#C5A572; --gold-soft:#E0C48E;
@@ -23,6 +30,7 @@ a:hover{color:var(--gold-soft);}
 @keyframes j-fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
 .brandbar{height:58px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:14px;background:rgba(11,4,6,0.72);backdrop-filter:blur(10px);flex:0 0 auto;}
 .brandbar-left{display:flex;align-items:center;gap:11px;}
+.brandbar-right{display:flex;align-items:center;gap:14px;}
 .brandmark{width:23px;height:23px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:12px;flex:0 0 auto;}
 .brandname{font-family:var(--serif);font-size:15px;color:var(--cream);}
 .ctx{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,240,232,0.4);}
@@ -33,7 +41,12 @@ a:hover{color:var(--gold-soft);}
 .body-text{font-size:14px;line-height:1.65;color:rgba(245,240,232,0.6);margin:0 auto 30px;max-width:400px;}
 .code-plate{border:1px solid rgba(197,165,114,0.4);border-radius:4px;background:rgba(197,165,114,0.06);padding:22px 18px 20px;margin:0 0 28px;}
 .code-plate-k{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
-.code-plate-v{font-family:var(--serif);font-size:clamp(34px,11vw,46px);line-height:1;color:var(--gold-soft);letter-spacing:0.14em;word-break:break-all;}
+/* GUEST-ENTRY-I18N-01 — the code itself is latin letters and digits and must
+   read left-to-right even when the page is right-to-left (Hebrew). `dir` is
+   set in the markup; `unicode-bidi:isolate` keeps the plate out of the
+   surrounding paragraph's bidi run so a neighbouring RTL word cannot drag it. */
+.code-plate-v{font-family:var(--serif);font-size:clamp(34px,11vw,46px);line-height:1;color:var(--gold-soft);letter-spacing:0.14em;word-break:break-all;unicode-bidi:isolate;}
+.code-inline{unicode-bidi:isolate;}
 .pass-note{font-size:11px;letter-spacing:0.05em;color:rgba(127,176,105,0.85);margin-top:12px;}
 .btn{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:50px;padding:0 26px;border-radius:3px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:filter .15s,border-color .15s,color .15s;font-family:var(--sans);border:none;}
 .btn-gold{background:linear-gradient(180deg,var(--gold),#a98a55);color:#1A0B08;font-weight:600;}
@@ -47,7 +60,13 @@ a:hover{color:var(--gold-soft);}
 .step-list li{counter-increment:s;position:relative;padding-left:30px;margin-bottom:12px;font-size:13px;line-height:1.6;color:rgba(245,240,232,0.62);}
 .step-list li::before{content:counter(s);position:absolute;left:0;top:1px;width:19px;height:19px;border:1px solid rgba(197,165,114,0.4);border-radius:50%;color:var(--gold);font-size:10px;display:flex;align-items:center;justify-content:center;}
 .step-list strong{color:var(--cream);font-weight:600;}
+/* The numbered list is a sequence of instructions, not prose: in a
+   right-to-left page the counter and the padding have to swap sides. */
+[dir="rtl"] .step-list li{padding-left:0;padding-right:30px;}
+[dir="rtl"] .step-list li::before{left:auto;right:0;}
+[dir="rtl"] .block{text-align:right;}
 .field{text-align:left;margin-bottom:18px;}
+[dir="rtl"] .field{text-align:right;}
 .field label{display:block;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:9px;}
 .field input{width:100%;height:58px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.3);border-radius:3px;color:var(--cream);font-family:var(--serif);font-size:26px;letter-spacing:0.22em;text-align:center;text-transform:uppercase;padding:0 12px;}
 .field input:focus{outline:none;border-color:var(--gold);background:rgba(245,240,232,0.06);}
@@ -64,19 +83,23 @@ a:hover{color:var(--gold-soft);}
     <div class="brandmark" aria-hidden="true">T</div>
     <span class="brandname">Tasting &amp; Toasting</span>
   </div>
-  <span class="ctx">Guest entry</span>
+  <!-- GUEST-ENTRY-I18N-01 — a real <nav> so the shared script docks the flag
+       switcher inside the bar (it looks for nav first and otherwise pins the
+       switcher to the corner of the viewport). -->
+  <nav class="brandbar-right">
+    <span class="ctx" data-i18n="join_kick">Guest entry</span>
+  </nav>
 </header>
 
 <main class="stage" id="stage" aria-live="polite">
   <noscript>
     <div class="screen">
-      <p class="kick">Guest entry</p>
-      <h1 class="title">Your code is in this page&rsquo;s address</h1>
-      <p class="body-text">The six characters after <code>/join/</code> in the address bar are your game code. Open the Tasting &amp; Toasting app, go to Join, and type them in.</p>
+      <p class="kick" data-i18n="join_kick">Guest entry</p>
+      <h1 class="title" data-i18n="join_noscript_title">Your code is in this page&rsquo;s address</h1>
+      <p class="body-text" data-i18n-html="join_noscript_body">The six characters after <code>/join/</code> in the address bar are your game code. Open the Tasting &amp; Toasting app, go to Join, and type them in.</p>
     </div>
   </noscript>
 </main>
-
 <script>
 (function () {
   'use strict';
@@ -103,6 +126,27 @@ a:hover{color:var(--gold-soft);}
    * the host's name, the venue, or whether the code is live — it can only
    * check the SHAPE of the code and pass it on. Saying anything more
    * would be a guess dressed as a fact.
+   * ------------------------------------------------------------------ *
+   * GUEST-ENTRY-I18N-01 — HOW LANGUAGE WORKS ON THIS PAGE.
+   *
+   * The site's own model and no second one: src/i18n/apply-tt141.js picks
+   * the language (?lang= -> saved choice -> browser -> en), sets lang and
+   * dir on the document, draws the flag switcher, and substitutes every
+   * [data-i18n*] node from src/i18n/tt141-features.json.
+   *
+   * ORDER, AND WHY IT WORKS. This inline script sits at the end of <body>
+   * and runs while the document is still parsing; the shared script is
+   * `defer`, so it runs afterwards, and its dictionary arrives later
+   * still. By then the screen below is already in the DOM, so the
+   * substitution walks the rendered markup. That is why the templates
+   * carry attributes rather than pre-translated strings.
+   *
+   * THE ONE EXCEPTION. The two validation messages are built in JS at
+   * submit time, long after substitution has run, and one of them
+   * interpolates a count — an attribute cannot reach either. Those read
+   * the table directly through window.TT_I18N, which the shared script
+   * publishes, and fall back to the English wording when a key is absent.
+   * No key anywhere is required: a missing one leaves the authored text.
    * ------------------------------------------------------------------ */
 
   /* Mirrors tt-mobile normalizeJoinCode(): six of A-Z0-9, deliberately
@@ -142,6 +186,16 @@ a:hover{color:var(--gold-soft);}
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
+  }
+
+  /* The dictionary, for the two strings an attribute cannot reach. Safe
+     before the shared script has published anything: the English
+     wording passed in is used until then, and if the dictionary never
+     loads it is used forever. */
+  function t(key, english) {
+    var api = window.TT_I18N;
+    if (!api || typeof api.t !== 'function') return english;
+    return api.t(key, english);
   }
 
   function normalizeCode(raw) {
@@ -194,8 +248,8 @@ a:hover{color:var(--gold-soft);}
          in the room; a dead store button is not. */
       return '' +
         '<div class="block">' +
-          '<p class="sec-label">No app on this phone?</p>' +
-          '<p class="hint" style="margin-top:0">The app is what seats you at the tasting. Ask your host for the install link &mdash; then enter the six characters above on the Join screen.</p>' +
+          '<p class="sec-label" data-i18n="join_no_app_label">No app on this phone?</p>' +
+          '<p class="hint" style="margin-top:0" data-i18n="join_no_app_hint">The app is what seats you at the tasting. Ask your host for the install link &mdash; then enter the six characters above on the Join screen.</p>' +
         '</div>';
     }
 
@@ -208,9 +262,9 @@ a:hover{color:var(--gold-soft);}
     }
     return '' +
       '<div class="block">' +
-        '<p class="sec-label">No app on this phone?</p>' +
+        '<p class="sec-label" data-i18n="join_no_app_label">No app on this phone?</p>' +
         '<div class="stores">' + buttons + '</div>' +
-        '<p class="hint">Install it, then enter the six characters above on the Join screen.</p>' +
+        '<p class="hint" data-i18n="join_store_hint">Install it, then enter the six characters above on the Join screen.</p>' +
       '</div>';
   }
 
@@ -218,26 +272,28 @@ a:hover{color:var(--gold-soft);}
   function renderCode(code, pass) {
     stage.innerHTML = '' +
       '<div class="screen">' +
-        '<p class="kick">Guest entry</p>' +
-        '<h1 class="title">You&rsquo;re at the right door</h1>' +
-        '<p class="body-text">This is the code for tonight&rsquo;s tasting. Open the app to take your seat.</p>' +
+        '<p class="kick" data-i18n="join_kick">Guest entry</p>' +
+        '<h1 class="title" data-i18n="join_title_ok">You&rsquo;re at the right door</h1>' +
+        '<p class="body-text" data-i18n="join_body_ok">This is the code for tonight&rsquo;s tasting. Open the app to take your seat.</p>' +
         '<div class="code-plate">' +
-          '<p class="code-plate-k">Your game code</p>' +
-          '<p class="code-plate-v">' + esc(code) + '</p>' +
-          (pass ? '<p class="pass-note">A prepaid seat is attached to this link.</p>' : '') +
+          '<p class="code-plate-k" data-i18n="join_code_label">Your game code</p>' +
+          '<p class="code-plate-v" dir="ltr">' + esc(code) + '</p>' +
+          (pass ? '<p class="pass-note" data-i18n="join_pass_note">A prepaid seat is attached to this link.</p>' : '') +
         '</div>' +
-        '<a class="btn btn-gold" id="open-app" href="' + esc(appLink(code, pass)) + '">Open in the app</a>' +
-        '<p class="hint">If the app is installed on this phone, that button opens it on your seat. If nothing happens, it is not installed yet.</p>' +
+        '<a class="btn btn-gold" id="open-app" data-i18n="join_open_app" href="' + esc(appLink(code, pass)) + '">Open in the app</a>' +
+        '<p class="hint" data-i18n="join_hint_open">If the app is installed on this phone, that button opens it on your seat. If nothing happens, it is not installed yet.</p>' +
         storeBlock() +
         '<div class="block">' +
-          '<p class="sec-label">Entering it by hand</p>' +
+          '<p class="sec-label" data-i18n="join_byhand_label">Entering it by hand</p>' +
           '<ol class="step-list">' +
-            '<li>Open <strong>Tasting &amp; Toasting</strong>.</li>' +
-            '<li>Go to <strong>Join</strong>.</li>' +
-            '<li>Type <strong>' + esc(code) + '</strong>.</li>' +
+            '<li data-i18n-html="join_step_open">Open <strong>Tasting &amp; Toasting</strong>.</li>' +
+            '<li data-i18n-html="join_step_join">Go to <strong>Join</strong>.</li>' +
+            /* The code must survive translation, so the sentence and the
+               code are separate nodes: the key sits on the words only. */
+            '<li><span data-i18n="join_step_type">Type</span> <strong class="code-inline" dir="ltr">' + esc(code) + '</strong>.</li>' +
           '</ol>' +
         '</div>' +
-        '<p class="footnote">Wrong code? <a href="/join">Enter a different one</a> &middot; <a href="/">tastingandtoasting.com</a></p>' +
+        '<p class="footnote"><span data-i18n="join_footnote_wrong">Wrong code?</span> <a href="/join" data-i18n="join_footnote_wrong_link">Enter a different one</a> &middot; <a href="/" dir="ltr">tastingandtoasting.com</a></p>' +
       '</div>';
   }
 
@@ -245,23 +301,24 @@ a:hover{color:var(--gold-soft);}
   function renderEntry(badInput) {
     stage.innerHTML = '' +
       '<div class="screen">' +
-        '<p class="kick">Guest entry</p>' +
-        '<h1 class="title">' + (badInput ? 'That code doesn&rsquo;t look right' : 'Enter your game code') + '</h1>' +
-        '<p class="body-text">' + (badInput
-          ? 'A game code is exactly six characters &mdash; letters and digits. Check it against the host&rsquo;s screen and try again.'
-          : 'Your host&rsquo;s screen shows six characters. Type them in, or scan the QR code next to them.') +
-        '</p>' +
+        '<p class="kick" data-i18n="join_kick">Guest entry</p>' +
+        (badInput
+          ? '<h1 class="title" data-i18n="join_title_bad">That code doesn&rsquo;t look right</h1>'
+          : '<h1 class="title" data-i18n="join_title_ask">Enter your game code</h1>') +
+        (badInput
+          ? '<p class="body-text" data-i18n="join_body_bad">A game code is exactly six characters &mdash; letters and digits. Check it against the host&rsquo;s screen and try again.</p>'
+          : '<p class="body-text" data-i18n="join_body_ask">Your host&rsquo;s screen shows six characters. Type them in, or scan the QR code next to them.</p>') +
         '<form id="code-form" novalidate>' +
           '<div class="field">' +
-            '<label for="code-input">Game code</label>' +
-            '<input id="code-input" name="code" type="text" inputmode="latin" autocomplete="off"' +
+            '<label for="code-input" data-i18n="join_field_label">Game code</label>' +
+            '<input id="code-input" name="code" type="text" inputmode="latin" autocomplete="off" dir="ltr"' +
               ' autocapitalize="characters" spellcheck="false" maxlength="6" placeholder="ABC234"' +
               ' aria-describedby="code-err"' + (badInput ? ' value="' + esc(badInput) + '"' : '') + '>' +
           '</div>' +
-          '<button class="btn btn-gold" type="submit">Continue</button>' +
+          '<button class="btn btn-gold" type="submit" data-i18n="join_submit">Continue</button>' +
           '<p class="err" id="code-err" role="alert"></p>' +
         '</form>' +
-        '<p class="footnote">Already have the app open? Its own scanner reads the host&rsquo;s QR code directly. &middot; <a href="/">tastingandtoasting.com</a></p>' +
+        '<p class="footnote"><span data-i18n="join_footnote_scanner">Already have the app open? Its own scanner reads the host&rsquo;s QR code directly.</span> &middot; <a href="/" dir="ltr">tastingandtoasting.com</a></p>' +
       '</div>';
 
     var form = document.getElementById('code-form');
@@ -283,14 +340,20 @@ a:hover{color:var(--gold-soft);}
       event.preventDefault();
       var code = normalizeCode(input.value);
       if (!code) {
+        /* Built here, after substitution has already run — hence t().
+           {n} rather than string concatenation, because the number does
+           not sit at the end of the sentence in every language. */
         err.textContent = input.value
-          ? 'Six characters, letters and digits. You have ' + input.value.length + '.'
-          : 'Type the six characters from your host\u2019s screen.';
+          ? t('join_err_count', 'Six characters, letters and digits. You have {n}.')
+              .replace('{n}', String(input.value.length))
+          : t('join_err_empty', 'Type the six characters from your host’s screen.');
         input.focus();
         return;
       }
       /* Navigate rather than re-render, so the address bar ends up holding
-         a real, shareable join link the app also understands. */
+         a real, shareable join link the app also understands — and so the
+         screen that comes back is translated by the shared script on load
+         instead of being redrawn in English after substitution has run. */
       window.location.assign('/join/' + code);
     });
 
