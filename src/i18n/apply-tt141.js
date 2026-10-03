@@ -211,6 +211,29 @@
     injectLangSelector(lang);
   }
 
+  /**
+   * GUEST-ENTRY-I18N-01 — the table, for strings an attribute cannot reach.
+   *
+   * Attribute substitution only touches nodes that exist when it runs. A page
+   * that builds a string later (a validation message, anything with a number
+   * interpolated into it) has no node to tag, so it reads the table directly:
+   *
+   *     window.TT_I18N.t("some_key", "the English wording")
+   *
+   * The fallback is returned whenever the key, the table or this script is
+   * missing, which keeps the authored wording as the floor everywhere.
+   */
+  function publish(lang, T) {
+    var table = T || {};
+    window.TT_I18N = {
+      lang: lang,
+      t: function (key, fallback) {
+        var value = table[key];
+        return value == null ? (fallback == null ? "" : fallback) : value;
+      },
+    };
+  }
+
   function apply(data) {
     var lang = pickLang();
     preparePage(lang);
@@ -244,15 +267,24 @@
       if ("value" in el) el.value = T[key];
     });
     applySwitcherState(lang);
+    publish(lang, T);
   }
 
   function applyWithoutTranslations() {
     var lang = pickLang();
     preparePage(lang);
     applySwitcherState(lang);
+    publish(lang, {});
   }
 
-  fetch("src/i18n/tt141-features.json")
+  /* GUEST-ENTRY-I18N-01 — ROOT-ABSOLUTE, not relative.
+     A relative path is resolved against the DOCUMENT url, not against
+     this file, so every page served from a subdirectory (/join/, and
+     /join/<CODE>) asked for /join/src/i18n/... and got a 404, after
+     which the catch below silently drew a language switcher that
+     changed nothing. For pages at the root the resolved path is
+     identical to before, so nothing there changes. */
+  fetch("/src/i18n/tt141-features.json")
     .then(function (r) {
       return r.json();
     })
