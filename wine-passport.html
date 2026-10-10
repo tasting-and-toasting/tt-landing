@@ -44,6 +44,8 @@ html[dir="rtl"] .up-link svg{transform:scaleX(-1);}
 .state-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;}
 .state-title{font-family:var(--serif);font-weight:500;font-size:31px;margin:0 0 14px;color:var(--cream);letter-spacing:-0.01em;}
 .state-body{font-size:14px;line-height:1.6;color:rgba(245,240,232,0.6);margin:0 0 30px;max-width:420px;}
+.state-lead{margin-bottom:14px;}
+.state-note{font-size:12.5px;line-height:1.65;color:rgba(245,240,232,0.42);margin-bottom:0;max-width:440px;}
 .wn-btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 26px;border-radius:3px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:filter .15s,border-color .15s,color .15s;font-family:var(--sans);}
 .wn-btn-gold{border:none;background:linear-gradient(180deg,var(--gold),#a98a55);color:#1A0B08;font-weight:600;}
 .wn-btn-gold:hover{filter:brightness(1.06);}
@@ -201,6 +203,18 @@ function renderError() {
   document.getElementById('retry-btn').addEventListener('click', () => load());
 }
 
+function renderUnavailable() {
+  document.getElementById('ctx-label').textContent = t('wn_ctx_loading');
+  document.getElementById('app').innerHTML = `
+    <div class="state-screen">
+      <div class="state-icon" style="border:1px solid rgba(197,165,114,0.35);background:rgba(197,165,114,0.05);"><span style="color:var(--gold-soft);font-family:var(--serif);font-size:26px;line-height:1;letter-spacing:0.06em;">…</span></div>
+      <div class="state-kick">${t('wn_un_kick')}</div>
+      <h1 class="state-title">${t('wn_un_title')}</h1>
+      <p class="state-body state-lead">${t('wn_un_body')}</p>
+      <p class="state-body state-note">${t('wn_un_note')}</p>
+    </div>`;
+}
+
 function renderPassport(w, vs) {
   document.getElementById('ctx-label').textContent = t('wn_ctx_ready');
   const sm = statusMeta(w.verification_status);
@@ -278,6 +292,8 @@ async function load() {
     renderError();
     return;
   }
+  if (data && data.availability === 'temporarily_unavailable') { renderUnavailable(); return; }
+  if (!data || !data.wine) { renderNotFound(); return; }
   renderPassport(data.wine, data.vintages || []);
 }
 

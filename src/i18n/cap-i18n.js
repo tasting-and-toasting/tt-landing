@@ -82,7 +82,10 @@
       vt_nf_body:"The link may be mistyped, or this vintage is no longer listed on Tasting & Toasting.",
       vt_err_kick:"Something went wrong", vt_err_title:"We couldn't load this vintage.",
       vt_err_body:"A problem on our end, not with the vintage. Please try again.",
-      vt_retry:"Try again"
+      vt_retry:"Try again",
+      wn_un_kick:"Passport update in progress", wn_un_title:"Information about this wine is being updated.",
+      wn_un_body:"Please try opening the passport later.",
+      wn_un_note:"We are refining some details to give you the most accurate information. The passport will be available again once the update is complete."
     },
     fr: {
       b_claimed:"Déclaré par le producteur", b_review:"En cours de vérification", b_verified:"Vérifié", b_unverified:"Non vérifié",
@@ -100,7 +103,10 @@
       verified_h:"Vérifié et <em>traçable</em>", bottle_of:"Bouteille {n} sur {t}", founder_words:"Les mots du fondateur", biography:"Biographie de la bouteille",
       winery_section:"Le domaine", verified_facts:"Faits vérifiés", view_winery:"Voir le domaine", book_tasting:"Réserver une dégustation", share:"Partager cette bouteille", copied:"Lien copié",
       ev_harvest:"Vendange", ev_fermentation:"Fermentation", ev_ageing:"Élevage", ev_bottling:"Mise en bouteille", ev_release:"Commercialisation",
-      cap_verified:"CAP vérifié", scan_story:"Scannez pour découvrir l'histoire", bottle_word:"Bouteille"
+      cap_verified:"CAP vérifié", scan_story:"Scannez pour découvrir l'histoire", bottle_word:"Bouteille",
+      wn_un_kick:"Mise à jour du passeport en cours", wn_un_title:"Les informations sur ce vin sont en cours de mise à jour.",
+      wn_un_body:"Veuillez réessayer d'ouvrir le passeport plus tard.",
+      wn_un_note:"Nous précisons certaines informations afin de vous présenter les données les plus exactes. Le passeport sera de nouveau accessible dès la fin de la mise à jour."
     },
     ru: {
       b_claimed:"Заявлено производителем", b_review:"На проверке", b_verified:"Подтверждено", b_unverified:"Не подтверждено",
@@ -118,7 +124,10 @@
       verified_h:"Подтверждено и <em>прослеживаемо</em>", bottle_of:"Бутылка {n} из {t}", founder_words:"Слова основателя", biography:"Биография бутылки",
       winery_section:"Винодельня", verified_facts:"Подтверждённые факты", view_winery:"Открыть винодельню", book_tasting:"Забронировать дегустацию", share:"Поделиться бутылкой", copied:"Ссылка скопирована",
       ev_harvest:"Сбор урожая", ev_fermentation:"Ферментация", ev_ageing:"Выдержка", ev_bottling:"Розлив", ev_release:"Выпуск",
-      cap_verified:"CAP подтверждён", scan_story:"Отсканируйте, чтобы узнать историю", bottle_word:"Бутылка"
+      cap_verified:"CAP подтверждён", scan_story:"Отсканируйте, чтобы узнать историю", bottle_word:"Бутылка",
+      wn_un_kick:"Паспорт обновляется", wn_un_title:"Информация об этом вине временно обновляется.",
+      wn_un_body:"Пожалуйста, попробуйте открыть паспорт позже.",
+      wn_un_note:"Мы уточняем некоторые сведения, чтобы предоставить вам наиболее актуальную информацию. Паспорт снова станет доступен после завершения обновления."
     },
     es: {
       b_claimed:"Declarado por el productor", b_review:"En revisión", b_verified:"Verificado", b_unverified:"Sin verificar",
@@ -136,7 +145,10 @@
       verified_h:"Verificado y <em>trazable</em>", bottle_of:"Botella {n} de {t}", founder_words:"Palabras del fundador", biography:"Biografía de la botella",
       winery_section:"La bodega", verified_facts:"Datos verificados", view_winery:"Ver la bodega", book_tasting:"Reservar una cata", share:"Compartir esta botella", copied:"Enlace copiado",
       ev_harvest:"Vendimia", ev_fermentation:"Fermentación", ev_ageing:"Crianza", ev_bottling:"Embotellado", ev_release:"Salida al mercado",
-      cap_verified:"CAP verificado", scan_story:"Escanea para descubrir la historia", bottle_word:"Botella"
+      cap_verified:"CAP verificado", scan_story:"Escanea para descubrir la historia", bottle_word:"Botella",
+      wn_un_kick:"Actualización del pasaporte en curso", wn_un_title:"La información sobre este vino se está actualizando.",
+      wn_un_body:"Por favor, intente abrir el pasaporte más tarde.",
+      wn_un_note:"Estamos precisando algunos datos para ofrecerle la información más actualizada. El pasaporte volverá a estar disponible cuando finalice la actualización."
     },
     uk: {
       b_claimed:"Заявлено виробником", b_review:"На перевірці", b_verified:"Підтверджено", b_unverified:"Не підтверджено",
@@ -154,7 +166,10 @@
       verified_h:"Підтверджено та <em>простежувано</em>", bottle_of:"Пляшка {n} з {t}", founder_words:"Слова засновника", biography:"Біографія пляшки",
       winery_section:"Виноробня", verified_facts:"Підтверджені факти", view_winery:"Відкрити виноробню", book_tasting:"Забронювати дегустацію", share:"Поділитися пляшкою", copied:"Посилання скопійовано",
       ev_harvest:"Збір врожаю", ev_fermentation:"Бродіння", ev_ageing:"Витримка", ev_bottling:"Розлив", ev_release:"Випуск",
-      cap_verified:"CAP підтверджено", scan_story:"Скануйте, щоб дізнатися історію", bottle_word:"Пляшка"
+      cap_verified:"CAP підтверджено", scan_story:"Скануйте, щоб дізнатися історію", bottle_word:"Пляшка",
+      wn_un_kick:"Паспорт оновлюється", wn_un_title:"Інформація про це вино тимчасово оновлюється.",
+      wn_un_body:"Будь ласка, спробуйте відкрити паспорт пізніше.",
+      wn_un_note:"Ми уточнюємо деякі відомості, щоб надати вам найактуальнішу інформацію. Паспорт знову стане доступним після завершення оновлення."
     },
     it: {
       b_claimed:"Dichiarato dal produttore", b_review:"In verifica", b_verified:"Verificato", b_unverified:"Non verificato",
@@ -172,7 +187,10 @@
       verified_h:"Verificato e <em>tracciabile</em>", bottle_of:"Bottiglia {n} di {t}", founder_words:"Le parole del fondatore", biography:"Biografia della bottiglia",
       winery_section:"La cantina", verified_facts:"Fatti verificati", view_winery:"Vedi la cantina", book_tasting:"Prenota una degustazione", share:"Condividi questa bottiglia", copied:"Link copiato",
       ev_harvest:"Vendemmia", ev_fermentation:"Fermentazione", ev_ageing:"Affinamento", ev_bottling:"Imbottigliamento", ev_release:"Immissione sul mercato",
-      cap_verified:"CAP verificato", scan_story:"Scansiona per scoprire la storia", bottle_word:"Bottiglia"
+      cap_verified:"CAP verificato", scan_story:"Scansiona per scoprire la storia", bottle_word:"Bottiglia",
+      wn_un_kick:"Aggiornamento del passaporto in corso", wn_un_title:"Le informazioni su questo vino sono in aggiornamento.",
+      wn_un_body:"Per favore, prova ad aprire il passaporto più tardi.",
+      wn_un_note:"Stiamo precisando alcuni dettagli per offrirti le informazioni più aggiornate. Il passaporto sarà di nuovo disponibile al termine dell'aggiornamento."
     },
     de: {
       b_claimed:"Vom Erzeuger angegeben", b_review:"In Prüfung", b_verified:"Verifiziert", b_unverified:"Nicht verifiziert",
@@ -190,7 +208,10 @@
       verified_h:"Verifiziert &amp; <em>rückverfolgbar</em>", bottle_of:"Flasche {n} von {t}", founder_words:"Worte des Gründers", biography:"Biografie der Flasche",
       winery_section:"Das Weingut", verified_facts:"Verifizierte Fakten", view_winery:"Weingut ansehen", book_tasting:"Verkostung buchen", share:"Diese Flasche teilen", copied:"Link kopiert",
       ev_harvest:"Lese", ev_fermentation:"Gärung", ev_ageing:"Reifung", ev_bottling:"Abfüllung", ev_release:"Markteinführung",
-      cap_verified:"CAP verifiziert", scan_story:"Scannen, um die Geschichte zu entdecken", bottle_word:"Flasche"
+      cap_verified:"CAP verifiziert", scan_story:"Scannen, um die Geschichte zu entdecken", bottle_word:"Flasche",
+      wn_un_kick:"Pass wird aktualisiert", wn_un_title:"Die Informationen zu diesem Wein werden gerade aktualisiert.",
+      wn_un_body:"Bitte versuchen Sie später, den Pass zu öffnen.",
+      wn_un_note:"Wir präzisieren einige Angaben, um Ihnen die aktuellsten Informationen zu bieten. Der Pass ist nach Abschluss der Aktualisierung wieder verfügbar."
     },
     he: {
       b_claimed:"הוצהר על ידי היצרן", b_review:"בבדיקה", b_verified:"מאומת", b_unverified:"לא מאומת",
@@ -208,7 +229,10 @@
       verified_h:"מאומת <em>וניתן למעקב</em>", bottle_of:"בקבוק {n} מתוך {t}", founder_words:"דברי המייסד", biography:"הביוגרפיה של הבקבוק",
       winery_section:"היקב", verified_facts:"עובדות מאומתות", view_winery:"צפייה ביקב", book_tasting:"הזמנת טעימה", share:"שיתוף הבקבוק", copied:"הקישור הועתק",
       ev_harvest:"בציר", ev_fermentation:"תסיסה", ev_ageing:"התיישנות", ev_bottling:"מילוי בבקבוקים", ev_release:"שחרור לשוק",
-      cap_verified:"CAP מאומת", scan_story:"סרקו כדי לגלות את הסיפור", bottle_word:"בקבוק"
+      cap_verified:"CAP מאומת", scan_story:"סרקו כדי לגלות את הסיפור", bottle_word:"בקבוק",
+      wn_un_kick:"הדרכון בעדכון", wn_un_title:"המידע על היין הזה מתעדכן כרגע.",
+      wn_un_body:"אנא נסו לפתוח את הדרכון מאוחר יותר.",
+      wn_un_note:"אנו מדייקים כמה פרטים כדי להציג לכם את המידע המעודכן ביותר. הדרכון יהיה זמין שוב בתום העדכון."
     },
     pt: {
       b_claimed:"Declarado pelo produtor", b_review:"Em verificação", b_verified:"Verificado", b_unverified:"Não verificado",
@@ -226,7 +250,10 @@
       verified_h:"Verificado e <em>rastreável</em>", bottle_of:"Garrafa {n} de {t}", founder_words:"As palavras do fundador", biography:"Biografia da garrafa",
       winery_section:"A quinta", verified_facts:"Factos verificados", view_winery:"Ver a quinta", book_tasting:"Reservar uma prova", share:"Partilhar esta garrafa", copied:"Ligação copiada",
       ev_harvest:"Vindima", ev_fermentation:"Fermentação", ev_ageing:"Estágio", ev_bottling:"Engarrafamento", ev_release:"Lançamento",
-      cap_verified:"CAP verificado", scan_story:"Digitalize para descobrir a história", bottle_word:"Garrafa"
+      cap_verified:"CAP verificado", scan_story:"Digitalize para descobrir a história", bottle_word:"Garrafa",
+      wn_un_kick:"Atualização do passaporte em curso", wn_un_title:"As informações sobre este vinho estão a ser atualizadas.",
+      wn_un_body:"Por favor, tente abrir o passaporte mais tarde.",
+      wn_un_note:"Estamos a precisar alguns dados para lhe apresentar a informação mais atual. O passaporte ficará novamente disponível após a conclusão da atualização."
     },
     ka: {
       b_claimed:"მწარმოებლის მიერ მითითებული", b_review:"შემოწმების პროცესში", b_verified:"დადასტურებული", b_unverified:"დაუდასტურებელი",
@@ -244,7 +271,10 @@
       verified_h:"დადასტურებული და <em>თვალყურდევნებადი</em>", bottle_of:"ბოთლი {n} / {t}", founder_words:"დამფუძნებლის სიტყვები", biography:"ბოთლის ბიოგრაფია",
       winery_section:"მარანი", verified_facts:"დადასტურებული ფაქტები", view_winery:"მარნის ნახვა", book_tasting:"დააჯავშნე დეგუსტაცია", share:"ბოთლის გაზიარება", copied:"ბმული დაკოპირდა",
       ev_harvest:"რთველი", ev_fermentation:"დუღილი", ev_ageing:"დავარგება", ev_bottling:"ჩამოსხმა", ev_release:"გამოშვება",
-      cap_verified:"CAP დადასტურებული", scan_story:"დაასკანერე ისტორიის აღმოსაჩენად", bottle_word:"ბოთლი"
+      cap_verified:"CAP დადასტურებული", scan_story:"დაასკანერე ისტორიის აღმოსაჩენად", bottle_word:"ბოთლი",
+      wn_un_kick:"პასპორტი განახლდება", wn_un_title:"ამ ღვინის შესახებ ინფორმაცია დროებით განახლდება.",
+      wn_un_body:"გთხოვთ, სცადოთ პასპორტის გახსნა მოგვიანებით.",
+      wn_un_note:"ჩვენ ვაზუსტებთ ზოგიერთ დეტალს, რომ მოგაწოდოთ ყველაზე ზუსტი ინფორმაცია. პასპორტი ხელახლა ხელმისაწვდომი გახდება განახლების დასრულების შემდეგ."
     },
     ro: {
       b_claimed:"Declarat de producător", b_review:"În verificare", b_verified:"Verificat", b_unverified:"Neverificat",
@@ -262,7 +292,10 @@
       verified_h:"Verificat și <em>trasabil</em>", bottle_of:"Sticla {n} din {t}", founder_words:"Cuvintele fondatorului", biography:"Biografia sticlei",
       winery_section:"Crama", verified_facts:"Fapte verificate", view_winery:"Vezi crama", book_tasting:"Rezervă o degustare", share:"Distribuie această sticlă", copied:"Link copiat",
       ev_harvest:"Cules", ev_fermentation:"Fermentare", ev_ageing:"Învechire", ev_bottling:"Îmbuteliere", ev_release:"Lansare",
-      cap_verified:"CAP verificat", scan_story:"Scanează pentru a descoperi povestea", bottle_word:"Sticlă"
+      cap_verified:"CAP verificat", scan_story:"Scanează pentru a descoperi povestea", bottle_word:"Sticlă",
+      wn_un_kick:"Pașaportul se actualizează", wn_un_title:"Informațiile despre acest vin sunt în curs de actualizare.",
+      wn_un_body:"Vă rugăm să încercați să deschideți pașaportul mai târziu.",
+      wn_un_note:"Precizăm unele detalii pentru a vă oferi cele mai actuale informații. Pașaportul va fi din nou disponibil după finalizarea actualizării."
     },
     pl: {
       b_claimed:"Deklarowane przez producenta", b_review:"W weryfikacji", b_verified:"Zweryfikowane", b_unverified:"Niezweryfikowane",
@@ -280,7 +313,10 @@
       verified_h:"Zweryfikowane i <em>identyfikowalne</em>", bottle_of:"Butelka {n} z {t}", founder_words:"Słowa założyciela", biography:"Historia butelki",
       winery_section:"Winnica", verified_facts:"Zweryfikowane fakty", view_winery:"Zobacz winnicę", book_tasting:"Zarezerwuj degustację", share:"Udostępnij", copied:"Skopiowano link",
       ev_harvest:"Zbiory", ev_fermentation:"Fermentacja", ev_ageing:"Dojrzewanie", ev_bottling:"Butelkowanie", ev_release:"Wprowadzenie na rynek",
-      cap_verified:"CAP ZWERYFIKOWANO", scan_story:"Zeskanuj, aby poznać historię", bottle_word:"Butelka"
+      cap_verified:"CAP ZWERYFIKOWANO", scan_story:"Zeskanuj, aby poznać historię", bottle_word:"Butelka",
+      wn_un_kick:"Paszport jest aktualizowany", wn_un_title:"Informacje o tym winie są właśnie aktualizowane.",
+      wn_un_body:"Prosimy spróbować otworzyć paszport później.",
+      wn_un_note:"Uzupełniamy niektóre dane, aby przedstawić Państwu najbardziej aktualne informacje. Paszport będzie znów dostępny po zakończeniu aktualizacji."
     }
   };
 
