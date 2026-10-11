@@ -6,85 +6,163 @@
 <title>Wine Passport · Tasting &amp; Toasting CAP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="src/i18n/cap-i18n.js"></script>
 <style>
+/* =============================================================================
+ * WINE PASSPORT — P2 of the CAP passport canon.
+ *
+ * Visual system: the approved public bottle passport (tt-mobile app/v2/cap/bottle.tsx,
+ * itself a re-expression of docs/design/canon/passport/BottleScan.dc.html).
+ * Structure: docs/design/canon/passport/WinePassport.dc.html.
+ *
+ * FOUR TYPEFACES, EACH WITH ONE JOB — the canon's rule, not a preference:
+ *   Fraunces              structure (names, years, section titles that are titles)
+ *   JetBrains Mono        metadata (eyebrows, breadcrumbs, counts, dates)
+ *   Cormorant Garamond    the human voice ONLY (the wine's story)
+ *   Inter                 running text
+ * The passport is ALWAYS DARK and does not follow any theme: a guest who scans a
+ * QR has never opened the app, and a light default would hand them a washed-out
+ * document.
+ * ===========================================================================*/
 :root{
-  --void:#0B0406; --cream:#F5F0E8; --gold:#C5A572; --gold-soft:#E0C48E;
-  --gold-dim:#8B7548; --line:rgba(197,165,114,0.14); --line-soft:rgba(197,165,114,0.12);
-  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
-  --green:#7FB069; --err:#C8654F;
+  --bg:#1A0B08;          /* walnut ground — the approved passport's background */
+  --deep:#0F0507;        /* the hero plate's darkest point */
+  --plate:#2B1810;       /* plate glow */
+  --cream:#F5F0E8;
+  --gold:#C5A572;
+  --gold-soft:#E0C48E;
+  --gold-dim:#8B7548;    /* eyebrows */
+  --line:rgba(197,165,114,0.16);
+  --line-soft:rgba(197,165,114,0.12);
+  --serif:"Fraunces",Georgia,serif;
+  --voice:"Cormorant Garamond",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"Inter",system-ui,-apple-system,sans-serif;
+  --pad:20px;            /* 20 / 32 / 48 by viewport, as the approved passport */
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:radial-gradient(ellipse at 26% -4%,rgba(74,14,20,0.42),transparent 56%),linear-gradient(180deg,#12060A,var(--void));color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;}
-a{color:var(--gold);text-decoration:none;}
-a:hover{color:var(--gold-soft);}
-.stage{max-width:720px;margin:0 auto;padding:0 24px;}
-@keyframes wn-pulse{0%,100%{opacity:0.4;}50%{opacity:0.85;}}
-@keyframes wn-fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
-.brandbar{height:58px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:14px;position:sticky;top:0;background:rgba(11,4,6,0.72);backdrop-filter:blur(10px);z-index:50;flex-wrap:wrap;}
-.brandbar-left{display:flex;align-items:center;gap:11px;}
-.brandmark{width:23px;height:23px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:12px;flex:0 0 auto;}
-.brandname{font-family:var(--serif);font-size:15px;color:var(--cream);}
-.ctx{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,240,232,0.4);}
-.lang-switcher-flags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end;max-width:340px;}
-.lang-flag-link{display:inline-flex;align-items:center;justify-content:center;width:30px;height:20px;border-radius:3px;overflow:hidden;border:1px solid var(--line);opacity:.78;transition:opacity .2s,border-color .2s,box-shadow .2s;}
-.lang-flag-link:hover{opacity:1;}
-.lang-flag-link.is-current-lang{opacity:1;border-color:var(--gold);box-shadow:0 0 0 1px rgba(197,165,114,0.35);}
-.lang-flag-link svg{width:100%;height:100%;display:block;}
-html[dir="rtl"] .lang-switcher-flags{flex-direction:row-reverse;}
-html[dir="rtl"] .brandbar{flex-direction:row-reverse;}
-html[dir="rtl"] body{text-align:right;}
-html[dir="rtl"] .wn-row:hover{padding-right:10px!important;padding-left:4px!important;}
-html[dir="rtl"] .up-link svg{transform:scaleX(-1);}
-.skel-pulse{animation:wn-pulse 1.4s ease-in-out infinite;}
-.fade-in{animation:wn-fade 0.45s ease both;}
-.state-screen{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 0;animation:wn-fade 0.4s ease both;}
-.state-icon{width:64px;height:64px;margin:0 auto 24px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-.state-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;}
-.state-title{font-family:var(--serif);font-weight:500;font-size:31px;margin:0 0 14px;color:var(--cream);letter-spacing:-0.01em;}
-.state-body{font-size:14px;line-height:1.6;color:rgba(245,240,232,0.6);margin:0 0 30px;max-width:420px;}
-.state-lead{margin-bottom:14px;}
-.state-note{font-size:12.5px;line-height:1.65;color:rgba(245,240,232,0.42);margin-bottom:0;max-width:440px;}
-.wn-btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 26px;border-radius:3px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:filter .15s,border-color .15s,color .15s;font-family:var(--sans);}
-.wn-btn-gold{border:none;background:linear-gradient(180deg,var(--gold),#a98a55);color:#1A0B08;font-weight:600;}
-.wn-btn-gold:hover{filter:brightness(1.06);}
-.wn-btn-ghost{border:1px solid rgba(197,165,114,0.4);color:var(--gold);background:transparent;}
-.wn-btn-ghost:hover{border-color:rgba(197,165,114,0.7);color:var(--gold-soft);}
-.passport{padding:32px 0 96px;}
-.up-link{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;color:rgba(197,165,114,0.85);margin-bottom:18px;}
-.up-link span{color:rgba(245,240,232,0.65);}
-.hero-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
-.hero-name{font-family:var(--serif);font-weight:500;font-size:clamp(34px,8vw,46px);line-height:1.02;margin:0 0 20px;color:var(--cream);letter-spacing:-0.015em;}
-.vs-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border:1px solid rgba(197,165,114,0.28);border-radius:100px;}
-.vs-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;}
-.vs-text{font-size:12px;color:rgba(245,240,232,0.8);white-space:nowrap;}
-.vs-text strong{color:var(--cream);font-weight:600;}
-.block{margin-top:36px;padding-top:32px;border-top:1px solid var(--line-soft);}
-.sec-label{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;}
-.facts-grid{display:flex;flex-wrap:wrap;border-top:1px solid rgba(197,165,114,0.1);border-bottom:1px solid rgba(197,165,114,0.1);}
-.fact-cell{flex:1 1 130px;padding:14px 16px;border-right:1px solid rgba(197,165,114,0.08);}
-.fact-k{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;}
-.fact-v{font-family:var(--serif);font-size:16px;color:var(--cream);}
-.vintages-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;}
-.vintages-count{font-size:11px;color:rgba(245,240,232,0.45);}
-.vintages-list{border-top:1px solid var(--line-soft);}
-.wn-row{display:flex;align-items:center;justify-content:space-between;padding:16px 4px;border-bottom:1px solid rgba(197,165,114,0.1);color:inherit;transition:background .15s,padding-left .15s;}
-.wn-row:hover{background:rgba(197,165,114,0.06);padding-left:10px!important;}
-.v-year{font-family:var(--serif);font-size:24px;color:var(--cream);}
-.v-meta{font-size:11.5px;color:rgba(245,240,232,0.5);}
-.v-row-inner{display:flex;align-items:baseline;gap:16px;}
-.v-chev{color:var(--gold);font-size:16px;}
-html[dir="rtl"] .v-chev{transform:scaleX(-1);}
-.v-empty{border:1px dashed rgba(197,165,114,0.25);border-radius:3px;padding:26px 20px;text-align:center;}
-.v-empty-title{font-size:13px;color:rgba(245,240,232,0.6);}
-.v-empty-sub{font-size:11.5px;color:rgba(245,240,232,0.38);margin-top:5px;}
-.desc-text{max-width:600px;font-size:13.5px;line-height:1.7;color:rgba(245,240,232,0.58);margin:0 0 22px;}
-.story-block{max-width:600px;border-left:2px solid rgba(197,165,114,0.25);padding-left:18px;}
-html[dir="rtl"] .story-block{border-left:none;border-right:2px solid rgba(197,165,114,0.25);padding-left:0;padding-right:18px;}
-.story-kick{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px;}
-.story-text{font-size:14px;line-height:1.7;color:rgba(245,240,232,0.6);font-style:italic;font-family:var(--serif);margin:0;}
-@media(max-width:600px){.brandbar{padding:9px 16px;}.stage{padding:0 16px;}}
+@media(min-width:600px){:root{--pad:32px}}
+@media(min-width:900px){:root{--pad:48px}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.6;
+     -webkit-font-smoothing:antialiased;min-height:100vh;}
+a{color:var(--gold);text-decoration:none}
+a:hover{color:var(--gold-soft)}
+img{max-width:100%}
+
+/* ---- header: wordmark left, breadcrumb chain right, languages below ------ */
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  padding:14px var(--pad);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;
+  background:rgba(26,11,8,0.86);backdrop-filter:blur(10px);}
+.brandbar-left{display:flex;align-items:center;gap:10px;min-width:0}
+.brandmark{width:26px;height:26px;border:1px solid rgba(197,165,114,0.45);border-radius:2px;display:flex;
+  align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:13px;color:var(--gold);}
+.brandname{font-family:var(--serif);font-weight:600;font-size:14px;letter-spacing:0.02em;color:var(--gold);white-space:nowrap}
+.crumbs{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;
+  font-family:var(--mono);font-size:11px;letter-spacing:0.02em;color:rgba(245,240,232,0.5);}
+.crumbs a{color:rgba(245,240,232,0.5)}
+.crumbs a:hover{color:var(--gold-soft)}
+.crumb-sep{color:rgba(197,165,114,0.4)}
+.crumb-current{color:var(--gold)}
+.ctx{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,240,232,0.38)}
+.lang-switcher-flags{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.lang-flag-link{width:20px;height:13px;display:block;opacity:0.45;border-radius:1px;overflow:hidden;line-height:0;
+  transition:opacity .15s,box-shadow .15s}
+.lang-flag-link svg{width:100%;height:100%;display:block}
+.lang-flag-link:hover{opacity:0.9}
+.lang-flag-link.is-current-lang{opacity:1;box-shadow:0 0 0 1px var(--gold)}
+
+/* ---- bands: full-width sections divided by a gold hairline --------------- */
+.band{padding:40px var(--pad);border-bottom:1px solid var(--line-soft)}
+.band:last-child{border-bottom:0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--gold-dim);margin:0 0 20px}
+.eyebrow-strong{color:var(--gold)}
+.eyebrow-muted{color:rgba(245,240,232,0.35)}
+
+/* ---- hero: plate + identity, two columns on a wide screen --------------- */
+.hero{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--line)}
+@media(min-width:820px){.hero{grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr)}}
+.plate{background:radial-gradient(ellipse at center,rgba(43,24,16,0.92),var(--deep) 74%);
+  padding:40px var(--pad);display:flex;align-items:center;justify-content:center;min-height:260px}
+.plate img{height:clamp(190px,42vw,330px);width:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,0.5))}
+.identity{padding:36px var(--pad);display:flex;flex-direction:column;gap:14px;justify-content:center}
+.wine-name{font-family:var(--serif);font-weight:500;font-size:clamp(30px,7vw,44px);line-height:1.05;margin:0;
+  letter-spacing:-0.012em;color:var(--cream)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;
+  border:1px solid rgba(197,165,114,0.3);border-radius:2px;color:rgba(245,240,232,0.72)}
+.appellation{font-size:13px;color:rgba(245,240,232,0.55)}
+.grapes{display:flex;gap:10px;flex-wrap:wrap}
+.grape{font-size:11.5px;color:var(--gold)}
+.desc{font-size:15px;line-height:1.62;color:rgba(245,240,232,0.75);margin:6px 0 0;max-width:62ch}
+.story{font-family:var(--voice);font-style:italic;font-size:clamp(19px,3.4vw,22px);line-height:1.5;color:var(--gold);
+  margin:10px 0 0;padding-left:18px;border-left:2px solid rgba(197,165,114,0.4)}
+html[dir="rtl"] .story{padding-left:0;padding-right:18px;border-left:0;border-right:2px solid rgba(197,165,114,0.4)}
+.byline{margin-top:8px;font-size:13px;color:rgba(245,240,232,0.55)}
+.byline a{color:rgba(245,240,232,0.72)}
+
+/* ---- producer band ------------------------------------------------------ */
+.producer-name{font-family:var(--serif);font-weight:500;font-size:clamp(22px,4.4vw,28px);margin:0 0 8px;color:var(--cream)}
+.producer-place{font-family:var(--mono);font-size:11.5px;color:rgba(245,240,232,0.5);margin-bottom:12px}
+.producer-tagline{font-family:var(--voice);font-style:italic;font-size:18px;color:var(--gold);margin:0 0 12px}
+.producer-text{font-size:14px;line-height:1.7;color:rgba(245,240,232,0.62);max-width:68ch;margin:0 0 16px}
+.pa-line{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gold-dim);border:1px solid rgba(197,165,114,0.28);border-radius:2px;padding:5px 10px}
+.site-link{display:block;margin-top:14px;font-family:var(--mono);font-size:11.5px}
+
+/* ---- DNA band: burgundy wash, as the approved passport ------------------ */
+.dna{background:linear-gradient(180deg,#2E0509,var(--bg) 78%)}
+.dna-quote{font-family:var(--voice);font-style:italic;font-size:clamp(20px,4vw,26px);line-height:1.45;color:var(--gold);
+  margin:0 0 24px;max-width:46ch}
+.dna-grid{display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:720px){.dna-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}}
+.dna-k{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px}
+.dna-v{font-size:13.5px;line-height:1.65;color:rgba(245,240,232,0.68)}
+
+/* ---- facts -------------------------------------------------------------- */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px}
+.fact-k{font-family:var(--mono);font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px}
+.fact-v{font-family:var(--mono);font-size:14px;line-height:1.45;color:var(--cream)}
+
+/* ---- vintages: cards, as the canon ------------------------------------- */
+.vintages{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.vintage{display:block;border:1px solid rgba(197,165,114,0.22);border-radius:2px;padding:20px 22px;transition:border-color .15s,background .15s}
+.vintage:hover{border-color:rgba(197,165,114,0.5);background:rgba(197,165,114,0.05)}
+.v-year{font-family:var(--serif);font-size:26px;color:var(--cream);margin-bottom:6px;line-height:1}
+.v-meta{font-family:var(--mono);font-size:11px;color:rgba(245,240,232,0.45);margin-top:3px}
+.v-empty{border:1px dashed rgba(197,165,114,0.28);border-radius:2px;padding:24px}
+.v-empty-t{font-family:var(--serif);font-size:19px;margin-bottom:6px}
+.v-empty-s{font-size:13px;color:rgba(245,240,232,0.5)}
+
+/* ---- demo block (canon: "Coming soon") --------------------------------- */
+.demo{position:relative;border:1px dashed rgba(197,165,114,0.3);border-radius:2px;padding:26px 28px;max-width:460px}
+.demo-badge{position:absolute;top:12px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:0.16em;
+  text-transform:uppercase;color:rgba(197,165,114,0.5)}
+html[dir="rtl"] .demo-badge{right:auto;left:14px}
+.demo-t{font-family:var(--serif);font-size:20px;margin-bottom:6px}
+.demo-b{font-size:13px;color:rgba(245,240,232,0.55);margin-bottom:16px}
+.demo-cta{display:inline-flex;padding:9px 16px;border:1px solid rgba(197,165,114,0.35);border-radius:2px;
+  font-family:var(--mono);font-size:12px;color:rgba(197,165,114,0.75)}
+
+/* ---- states ------------------------------------------------------------- */
+.state{min-height:58vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:64px var(--pad);gap:14px}
+.state-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.state-kick{font-family:var(--mono);font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(197,165,114,0.6)}
+.state-title{font-family:var(--serif);font-weight:500;font-size:clamp(24px,5vw,31px);line-height:1.28;margin:0;max-width:22ch}
+.state-body{font-size:14px;line-height:1.65;color:rgba(245,240,232,0.6);margin:0;max-width:44ch}
+.state-note{font-size:12.5px;line-height:1.65;color:rgba(245,240,232,0.42);margin:0;max-width:46ch}
+.btn{font:inherit;font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;
+  padding:10px 20px;border-radius:2px;border:1px solid rgba(197,165,114,0.4);background:transparent;color:var(--gold);cursor:pointer}
+.btn:hover{border-color:var(--gold);color:var(--gold-soft)}
+
+/* ---- footer ------------------------------------------------------------- */
+.foot{padding:20px var(--pad);border-top:1px solid var(--line-soft);font-family:var(--mono);font-size:10px;
+  letter-spacing:0.08em;color:rgba(245,240,232,0.3)}
+.fade-in{animation:fade .35s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -93,6 +171,7 @@ html[dir="rtl"] .story-block{border-left:none;border-right:2px solid rgba(197,16
     <div class="brandmark" aria-hidden="true">T</div>
     <span class="brandname">Tasting &amp; Toasting</span>
   </div>
+  <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
   <span class="ctx" id="ctx-label" data-i18n="wn_ctx_loading">Wine passport</span>
   <nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
     <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
@@ -110,173 +189,233 @@ html[dir="rtl"] .story-block{border-left:none;border-right:2px solid rgba(197,16
   </div></nav>
 </header>
 
-<main id="app" class="stage"></main>
+<main id="app"></main>
+
+<footer class="foot" id="foot"></footer>
 
 <script>
+/* -----------------------------------------------------------------------------
+ * The request contract is UNCHANGED: same endpoint, same parameters, same
+ * permanent link (wine-passport.html?wineId=…&winerySlug=…). The producer band
+ * reads the EXISTING public winery endpoint and is optional — if it fails, the
+ * passport still renders in full.
+ * --------------------------------------------------------------------------*/
 const qs = new URLSearchParams(location.search);
 const wineId = (qs.get('wineId') || '').trim();
-const winerySlug = (qs.get('winerySlug') || qs.get('slug') || '').trim();
+let winerySlug = (qs.get('winerySlug') || qs.get('slug') || '').trim();
 const lang = CAP.lang;
 const lp = lang === 'en' ? '' : ('&lang=' + lang);
 const t = CAP.t;
 const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nz = v => { const s = (v == null ? '' : String(v)).trim(); return s ? s : null; };
+const wineryQs = () => winerySlug ? ('&winerySlug=' + encodeURIComponent(winerySlug)) : '';
 
-function statusMeta(status) {
-  const map = {
-    verified:     { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
-    certified:    { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
-    under_review: { key: 'vs_under_review', dot: '#C5A572', halo: 'rgba(197,165,114,0.2)' },
-    documents_submitted: { key: 'vs_submitted', dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
-    claimed:      { key: 'vs_claimed',      dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
-    rejected:     { key: 'vs_rejected',     dot: 'rgba(245,240,232,0.3)', halo: 'rgba(245,240,232,0.1)' }
-  };
-  return map[status] || map.under_review;
+/* The canon's bottle silhouette, inline so the plate never waits on a request. */
+const BOTTLE_SVG = `<svg viewBox="0 0 120 360" role="img" aria-hidden="true"
+  style="height:clamp(190px,42vw,330px);width:auto;opacity:0.85;">
+  <!-- The canon's own Bordeaux silhouette, inlined verbatim from
+       docs/design/canon/passport/assets/bottle-bordeaux-lg-transparent.svg
+       (tt-mobile). Inlined rather than linked so the plate never waits on a
+       request and the page stays one file. -->
+  <path d="M43.2,0 L76.8,0 C76.8,39.6 78,67.32 78,79.2 C78,96.21 116.4,96.21 116.4,117 L116.4,345.6 C116.4,351.36 114,355.68 114,352.8 Q114,360 106.8,360 L13.2,360 Q6,360 6,352.8 C6,355.68 3.6,351.36 3.6,345.6 L3.6,117 C3.6,96.21 42,96.21 42,79.2 C42,67.32 43.2,39.6 43.2,0 Z"
+        fill="none" stroke="#C5A572" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path>
+  <path d="M42.74,30.6 L77.26,30.6" fill="none" stroke="#C5A572" stroke-width="1.6" stroke-linecap="round"></path>
+  <rect x="24" y="183.3" width="72" height="96" fill="none" stroke="#C5A572" stroke-width="1.12" stroke-dasharray="4 2.4"></rect>
+</svg>`;
+
+function setCrumbs(parts) {
+  document.getElementById('crumbs').innerHTML = parts.map((p, i) =>
+    (i ? '<span class="crumb-sep">/</span>' : '') +
+    (p.href ? `<a href="${p.href}">${esc(p.label)}</a>`
+            : `<span class="${p.current ? 'crumb-current' : ''}">${esc(p.label)}</span>`)
+  ).join('');
 }
 
-function wineFacts(w) {
-  const facts = [];
-  if (w.color) facts.push([t('fact_color'), t('color_' + w.color)]);
-  if (w.sweetness) facts.push([t('fact_sweetness'), t('sweet_' + w.sweetness)]);
-  if ((w.grape_varieties || []).length) facts.push([t('fact_grapes'), w.grape_varieties.join(', ')]);
-  if (w.appellation) facts.push([t('fact_appellation'), w.appellation]);
-  if (w.style) facts.push([t('fact_style'), w.style]);
-  return facts;
+function enumLabel(prefix, raw) {
+  const s = nz(raw); if (!s) return null;
+  const key = prefix + '_' + s.toLowerCase();
+  const out = t(key);
+  return out === key ? s : out;
 }
 
-function vintageCountLabel(n) {
-  return n === 1 ? t('wn_vintages_one') : t('wn_vintages_many').replace('{n}', String(n));
+
+
+/* A date the way the approved passport prints one: month and year in the
+   guest's language, never a raw database string. */
+function fmtDate(raw) {
+  const s = nz(raw); if (!s) return null;
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s);
+  if (!m) return s;
+  try {
+    const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+    return new Intl.DateTimeFormat(lang === 'ka' ? 'ka-GE' : lang, { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(d);
+  } catch (e) { return `${m[2]}.${m[1]}`; }
 }
 
 function vintageMeta(v) {
   const bits = [];
-  if (v.bottles_produced != null) bits.push(v.bottles_produced + ' ' + t('bottles'));
-  if (v.abv != null) bits.push(v.abv + '% ABV');
-  return bits.join(' · ');
+  if (v.bottles_produced != null && String(v.bottles_produced).trim() !== '') {
+    bits.push(`${v.bottles_produced} ${t('bottles')}`);
+  }
+  const rel = fmtDate(v.release_date);
+  if (rel) bits.push(`${t('wn_released')} ${rel}`);
+  const abv = nz(v.abv);
+  if (!bits.length && abv) bits.push(`${abv}% ABV`);
+  return bits;
 }
 
-function wineryQs() {
-  return winerySlug ? ('&winerySlug=' + encodeURIComponent(winerySlug)) : '';
+/* ---------- states -------------------------------------------------------- */
+function stateScreen({ kick, title, body, note, button, icon }) {
+  document.getElementById('app').innerHTML = `
+    <div class="state fade-in">
+      ${icon || ''}
+      <div class="state-kick">${kick}</div>
+      <h1 class="state-title">${title}</h1>
+      ${body ? `<p class="state-body">${body}</p>` : ''}
+      ${note ? `<p class="state-note">${note}</p>` : ''}
+      ${button || ''}
+    </div>`;
 }
+const dimIcon = `<div class="state-icon" style="border:1px solid rgba(197,165,114,0.35);background:rgba(197,165,114,0.05);">
+  <span style="color:var(--gold-soft);font-family:var(--serif);font-size:26px;line-height:1;">…</span></div>`;
 
 function renderLoading() {
-  document.getElementById('ctx-label').textContent = t('wn_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="fade-in" style="padding:52px 0 80px;">
-      <div class="skel-pulse" style="height:11px;width:26%;background:rgba(197,165,114,0.14);border-radius:2px;margin-bottom:16px;"></div>
-      <div class="skel-pulse" style="height:44px;width:66%;background:rgba(245,240,232,0.07);border-radius:3px;margin-bottom:18px;"></div>
-      <div class="skel-pulse" style="height:36px;width:170px;background:rgba(197,165,114,0.08);border-radius:100px;margin-bottom:36px;"></div>
-      <div style="display:flex;gap:10px;margin-bottom:36px;">
-        <div style="flex:1;height:52px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-        <div style="flex:1;height:52px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-        <div style="flex:1;height:52px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:14px;">
-        <div style="height:52px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-        <div style="height:52px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-      </div>
-    </div>`;
+  document.getElementById('app').innerHTML =
+    `<div class="state"><div class="state-kick">${t('loading')}</div></div>`;
 }
-
 function renderNotFound() {
   document.getElementById('ctx-label').textContent = t('wn_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="state-screen">
-      <div class="state-icon" style="border:1px solid rgba(197,165,114,0.35);"><span style="color:rgba(197,165,114,0.75);font-size:27px;font-family:var(--serif);">?</span></div>
-      <div class="state-kick">${t('wn_nf_kick')}</div>
-      <h1 class="state-title">${t('wn_nf_title')}</h1>
-      <p class="state-body">${t('wn_nf_body')}</p>
-      <a class="wn-btn wn-btn-ghost" href="https://tastingandtoasting.com">${t('wp_explore')}</a>
-    </div>`;
+  stateScreen({ kick: t('wn_nf_kick'), title: t('wn_nf_title'), body: t('wn_nf_body') });
 }
-
 function renderError() {
-  document.getElementById('ctx-label').textContent = t('wn_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="state-screen">
-      <div class="state-icon" style="border:1px solid rgba(200,101,79,0.5);"><span style="color:var(--err);font-size:24px;">↻</span></div>
-      <div class="state-kick">${t('wn_err_kick')}</div>
-      <h1 class="state-title">${t('wn_err_title')}</h1>
-      <p class="state-body">${t('wn_err_body')}</p>
-      <button type="button" class="wn-btn wn-btn-gold" id="retry-btn">${t('wn_retry')}</button>
-    </div>`;
+  stateScreen({ kick: t('wn_err_kick'), title: t('wn_err_title'), body: t('wn_err_body'),
+    button: `<button class="btn" id="retry-btn">${t('wn_retry')}</button>` });
   document.getElementById('retry-btn').addEventListener('click', () => load());
 }
-
+/* The owner's screen: the passport exists, its address is permanent, the content
+   is being updated. Never JSON, never an error, never "not found". */
 function renderUnavailable() {
   document.getElementById('ctx-label').textContent = t('wn_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="state-screen">
-      <div class="state-icon" style="border:1px solid rgba(197,165,114,0.35);background:rgba(197,165,114,0.05);"><span style="color:var(--gold-soft);font-family:var(--serif);font-size:26px;line-height:1;letter-spacing:0.06em;">…</span></div>
-      <div class="state-kick">${t('wn_un_kick')}</div>
-      <h1 class="state-title">${t('wn_un_title')}</h1>
-      <p class="state-body state-lead">${t('wn_un_body')}</p>
-      <p class="state-body state-note">${t('wn_un_note')}</p>
-    </div>`;
+  stateScreen({ icon: dimIcon, kick: t('wn_un_kick'), title: t('wn_un_title'),
+    body: t('wn_un_body'), note: t('wn_un_note') });
 }
 
+/* ---------- the passport -------------------------------------------------- */
 function renderPassport(w, vs) {
   document.getElementById('ctx-label').textContent = t('wn_ctx_ready');
-  const sm = statusMeta(w.verification_status);
-  const facts = wineFacts(w);
-  const desc = (w.description || '').trim();
-  const story = (w.story_text || '').trim();
+  winerySlug = winerySlug || nz(w.winery_slug) || '';
+  const wineryName = nz(w.winery_name);
+  const wineryHref = winerySlug ? `winery-passport.html?slug=${encodeURIComponent(winerySlug)}${lp}` : null;
 
-  const upHtml = winerySlug ? `
-    <a class="up-link" href="winery-passport.html?slug=${encodeURIComponent(winerySlug)}${lp}">‹ <span>${t('back_winery')}</span></a>` : '';
+  setCrumbs([
+    ...(wineryName ? [{ label: wineryName, href: wineryHref }] : []),
+    { label: w.name, current: true },
+  ]);
 
-  const vsHtml = `
-    <div class="vs-pill">
-      <span class="vs-dot" style="background:${sm.dot};box-shadow:0 0 0 3px ${sm.halo};"></span>
-      <span class="vs-text">${t('wp_vs_prefix')} <strong>${t(sm.key)}</strong></span>
-    </div>`;
-
-  const factsHtml = facts.length ? `
-    <div class="block">
-      <div class="sec-label">${t('wn_facts_label')}</div>
-      <div class="facts-grid">${facts.map(([k, v]) => `
-        <div class="fact-cell"><div class="fact-k">${esc(k)}</div><div class="fact-v">${esc(v)}</div></div>`).join('')}
-      </div>
-    </div>` : '';
+  const chips = [enumLabel('color', w.color), enumLabel('sweet', w.sweetness), nz(w.style)].filter(Boolean);
+  const grapes = (w.grape_varieties || []).map(nz).filter(Boolean);
+  const desc = nz(w.description);
+  const story = nz(w.story_text);
+  const hero = nz(w.hero_image_url);
 
   const vintagesInner = vs.length ? `
-    <div class="vintages-list">${vs.map(v => {
+    <div class="vintages">${vs.map(v => {
       const meta = vintageMeta(v);
-      return `<a class="wn-row" href="vintage-passport.html?vintageId=${encodeURIComponent(v.id)}${wineryQs()}${lp}">
-        <div class="v-row-inner">
-          <span class="v-year">${esc(v.vintage_year)}</span>
-          ${meta ? `<span class="v-meta">${esc(meta)}</span>` : ''}
-        </div>
-        <span class="v-chev" aria-hidden="true">›</span>
+      return `<a class="vintage" href="vintage-passport.html?vintageId=${encodeURIComponent(v.id)}${wineryQs()}${lp}">
+        <div class="v-year">${esc(v.vintage_year)}</div>
+        ${meta.map(m => `<div class="v-meta">${esc(m)}</div>`).join('')}
       </a>`;
     }).join('')}</div>` : `
     <div class="v-empty">
-      <div class="v-empty-title">${t('wn_vintages_empty')}</div>
-      <div class="v-empty-sub">${t('wn_vintages_empty_sub')}</div>
+      <div class="v-empty-t">${t('wn_vintages_empty')}</div>
+      <div class="v-empty-s">${t('wn_vintages_empty_sub')}</div>
     </div>`;
 
-  const quietHtml = (desc || story) ? `
-    <div class="block">
-      ${desc ? `<p class="desc-text">${esc(desc)}</p>` : ''}
-      ${story ? `<div class="story-block"><div class="story-kick">${t('wn_story_label')}</div><p class="story-text">${esc(story)}</p></div>` : ''}
-    </div>` : '';
-
   document.getElementById('app').innerHTML = `
-    <article class="passport fade-in" style="${winerySlug ? '' : 'padding-top:20px;'}">
-      ${upHtml}
-      <div class="hero-kick">${t('wn_kick')}</div>
-      <h1 class="hero-name">${esc(w.name)}</h1>
-      ${vsHtml}
-      ${factsHtml}
-      <div class="block">
-        <div class="vintages-head">
-          <div class="sec-label" style="margin:0;">${t('wn_vintages_label')}</div>
-          <span class="vintages-count">${vintageCountLabel(vs.length)}</span>
+    <article class="fade-in">
+      <section class="hero">
+        <div class="plate">${hero ? `<img src="${esc(hero)}" alt="${esc(w.name)}">` : BOTTLE_SVG}</div>
+        <div class="identity">
+          <div class="eyebrow eyebrow-strong" style="margin:0">${t('wn_kick')}</div>
+          <h1 class="wine-name">${esc(w.name)}</h1>
+          ${chips.length ? `<div class="chips">${chips.map(c => `<span class="chip">${esc(c)}</span>`).join('')}</div>` : ''}
+          ${nz(w.appellation) ? `<div class="appellation">${esc(w.appellation)}</div>` : ''}
+          ${grapes.length ? `<div class="grapes">${grapes.map(g => `<span class="grape">${esc(g)}</span>`).join('')}</div>` : ''}
+          ${desc ? `<p class="desc">${esc(desc)}</p>` : ''}
+          ${story ? `<blockquote class="story">${esc(story)}</blockquote>` : ''}
+          ${wineryName ? `<div class="byline">${t('wn_by')} ${wineryHref ? `<a href="${wineryHref}">${esc(wineryName)} →</a>` : esc(wineryName)}</div>` : ''}
         </div>
+      </section>
+
+
+
+      <section class="band" id="producer-band" hidden></section>
+      <section class="band dna" id="dna-band" hidden></section>
+
+      <section class="band">
+        <div class="eyebrow">${t('wn_vintages_label')}</div>
         ${vintagesInner}
-      </div>
-      ${quietHtml}
+      </section>
+
+      <section class="band">
+        <div class="eyebrow eyebrow-muted">${t('wn_coming_label')}</div>
+        <div class="demo">
+          <div class="demo-badge">${t('wn_demo_badge')}</div>
+          <div class="demo-t">${t('wn_buy_title')}</div>
+          <div class="demo-b">${t('wn_buy_body')}</div>
+          <div class="demo-cta">${t('wn_shop_cta')}</div>
+        </div>
+      </section>
     </article>`;
+
+  document.getElementById('foot').textContent = 'CAP · Tasting & Toasting';
+  if (winerySlug) void loadProducer(winerySlug);
+}
+
+/* The producer, read from the EXISTING public winery endpoint. Optional by
+   design: a failure here must never cost the guest the wine's passport. */
+async function loadProducer(slug) {
+  let data;
+  try {
+    const r = await fetch(`${API}/wineries/${encodeURIComponent(slug)}`);
+    if (!r.ok) return;
+    data = await r.json();
+  } catch (e) { return; }
+  const wy = data && data.winery; if (!wy) return;
+
+  const place = [nz(wy.locality), nz(wy.region)].filter(Boolean).join(', ');
+  const placeLine = [place, nz(wy.country)].filter(Boolean).join(' · ');
+  const founded = (wy.founded_year != null && String(wy.founded_year).trim() !== '')
+    ? `${t('founded')} ${wy.founded_year}` : null;
+  const band = document.getElementById('producer-band');
+  band.innerHTML = `
+    <div class="eyebrow">${t('wn_producer_label')}</div>
+    <div class="producer-name">${esc(wy.name)}</div>
+    ${placeLine || founded ? `<div class="producer-place">${esc([placeLine, founded].filter(Boolean).join(' · '))}</div>` : ''}
+    ${nz(wy.tagline) ? `<p class="producer-tagline">${esc(wy.tagline)}</p>` : ''}
+    ${nz(wy.description) ? `<p class="producer-text">${esc(wy.description)}</p>` : ''}
+    <span class="pa-line">${t('pa_label')}</span>
+    ${nz(wy.website_url) ? `<a class="site-link" href="${esc(wy.website_url)}" target="_blank" rel="noopener">${esc(wy.website_url)}</a>` : ''}`;
+  band.hidden = false;
+
+  const dna = data.dna;
+  if (!dna) return;
+  const cells = [
+    [t('family'), nz(dna.family_story)],
+    [t('land'), nz(dna.land_story)],
+    [t('philosophy'), nz(dna.philosophy)],
+    [t('story'), nz(dna.founding_story)],
+  ].filter(([, v]) => !!v);
+  const quote = nz(dna.signature_quote);
+  if (!cells.length && !quote) return;
+  const dnaBand = document.getElementById('dna-band');
+  dnaBand.innerHTML = `
+    <div class="eyebrow">${t('dna_title')}</div>
+    ${quote ? `<blockquote class="dna-quote">${esc(quote)}</blockquote>` : ''}
+    ${cells.length ? `<div class="dna-grid">${cells.map(([k, v]) => `
+      <div><div class="dna-k">${esc(k)}</div><div class="dna-v">${esc(v)}</div></div>`).join('')}</div>` : ''}`;
+  dnaBand.hidden = false;
 }
 
 async function load() {
@@ -288,10 +427,7 @@ async function load() {
     if (r.status === 404 || r.status === 400) { renderNotFound(); return; }
     if (!r.ok) { renderError(); return; }
     data = await r.json();
-  } catch (e) {
-    renderError();
-    return;
-  }
+  } catch (e) { renderError(); return; }
   if (data && data.availability === 'temporarily_unavailable') { renderUnavailable(); return; }
   if (!data || !data.wine) { renderNotFound(); return; }
   renderPassport(data.wine, data.vintages || []);

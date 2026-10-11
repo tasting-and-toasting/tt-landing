@@ -85,7 +85,9 @@
       vt_retry:"Try again",
       wn_un_kick:"Passport update in progress", wn_un_title:"Information about this wine is being updated.",
       wn_un_body:"Please try opening the passport later.",
-      wn_un_note:"We are refining some details to give you the most accurate information. The passport will be available again once the update is complete."
+      wn_un_note:"We are refining some details to give you the most accurate information. The passport will be available again once the update is complete.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"Producer-asserted", wn_producer_label:"Producer", wn_by:"by", wn_coming_label:"Coming soon", wn_demo_badge:"Demo", wn_buy_title:"Buy this wine", wn_buy_body:"Placeholder for direct purchase — not wired to a store yet.", wn_shop_cta:"Shop →", wn_released:"Released"
     },
     fr: {
       b_claimed:"Déclaré par le producteur", b_review:"En cours de vérification", b_verified:"Vérifié", b_unverified:"Non vérifié",
@@ -106,7 +108,9 @@
       cap_verified:"CAP vérifié", scan_story:"Scannez pour découvrir l'histoire", bottle_word:"Bouteille",
       wn_un_kick:"Mise à jour du passeport en cours", wn_un_title:"Les informations sur ce vin sont en cours de mise à jour.",
       wn_un_body:"Veuillez réessayer d'ouvrir le passeport plus tard.",
-      wn_un_note:"Nous précisons certaines informations afin de vous présenter les données les plus exactes. Le passeport sera de nouveau accessible dès la fin de la mise à jour."
+      wn_un_note:"Nous précisons certaines informations afin de vous présenter les données les plus exactes. Le passeport sera de nouveau accessible dès la fin de la mise à jour.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"Déclaré par le producteur", wn_producer_label:"Producteur", wn_by:"par", wn_coming_label:"Bientôt", wn_demo_badge:"Démo", wn_buy_title:"Acheter ce vin", wn_buy_body:"Emplacement pour l'achat direct — la boutique n'est pas encore connectée.", wn_shop_cta:"Boutique →", wn_released:"Sortie", wn_ctx_loading:"Passeport du vin", wn_ctx_ready:"Passeport du vin", wn_kick:"Vin", wn_facts_label:"À propos du vin", wn_vintages_label:"Millésimes · descendez →", wn_vintages_empty:"Aucun millésime pour l'instant", wn_vintages_empty_sub:"Ce vin n'a pas encore de millésimes sur son passeport.", wn_nf_kick:"Vin introuvable", wn_nf_title:"Ce vin n'a pas pu être trouvé.", wn_nf_body:"Le lien est peut-être erroné, ou ce vin n'est plus référencé sur Tasting & Toasting.", wn_err_kick:"Une erreur est survenue", wn_err_title:"Impossible de charger ce vin.", wn_err_body:"Le problème vient de chez nous, pas du vin. Veuillez réessayer.", wn_retry:"Réessayer", fact_appellation:"Appellation", fact_style:"Style", fact_released:"Sortie"
     },
     ru: {
       b_claimed:"Заявлено производителем", b_review:"На проверке", b_verified:"Подтверждено", b_unverified:"Не подтверждено",
@@ -127,7 +131,9 @@
       cap_verified:"CAP подтверждён", scan_story:"Отсканируйте, чтобы узнать историю", bottle_word:"Бутылка",
       wn_un_kick:"Паспорт обновляется", wn_un_title:"Информация об этом вине временно обновляется.",
       wn_un_body:"Пожалуйста, попробуйте открыть паспорт позже.",
-      wn_un_note:"Мы уточняем некоторые сведения, чтобы предоставить вам наиболее актуальную информацию. Паспорт снова станет доступен после завершения обновления."
+      wn_un_note:"Мы уточняем некоторые сведения, чтобы предоставить вам наиболее актуальную информацию. Паспорт снова станет доступен после завершения обновления.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"Заявлено производителем", wn_producer_label:"Производитель", wn_by:"от", wn_coming_label:"Скоро", wn_demo_badge:"Демо", wn_buy_title:"Купить это вино", wn_buy_body:"Место для прямой покупки — магазин пока не подключён.", wn_shop_cta:"В магазин →", wn_released:"Выпуск", wn_ctx_loading:"Паспорт вина", wn_ctx_ready:"Паспорт вина", wn_kick:"Вино", wn_facts_label:"О вине", wn_vintages_label:"Урожаи · пройдите вниз →", wn_vintages_empty:"Урожаи пока не указаны", wn_vintages_empty_sub:"У этого вина пока нет урожаев в паспорте.", wn_nf_kick:"Вино не найдено", wn_nf_title:"Это вино не удалось найти.", wn_nf_body:"Возможно, в ссылке опечатка, или это вино больше не представлено в Tasting & Toasting.", wn_err_kick:"Что-то пошло не так", wn_err_title:"Не удалось загрузить это вино.", wn_err_body:"Это сбой на нашей стороне, а не с вином. Пожалуйста, попробуйте ещё раз.", wn_retry:"Попробовать снова", fact_appellation:"Апелласьон", fact_style:"Стиль", fact_released:"Выпуск"
     },
     es: {
       b_claimed:"Declarado por el productor", b_review:"En revisión", b_verified:"Verificado", b_unverified:"Sin verificar",
@@ -148,7 +154,9 @@
       cap_verified:"CAP verificado", scan_story:"Escanea para descubrir la historia", bottle_word:"Botella",
       wn_un_kick:"Actualización del pasaporte en curso", wn_un_title:"La información sobre este vino se está actualizando.",
       wn_un_body:"Por favor, intente abrir el pasaporte más tarde.",
-      wn_un_note:"Estamos precisando algunos datos para ofrecerle la información más actualizada. El pasaporte volverá a estar disponible cuando finalice la actualización."
+      wn_un_note:"Estamos precisando algunos datos para ofrecerle la información más actualizada. El pasaporte volverá a estar disponible cuando finalice la actualización.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"Declarado por el productor", wn_producer_label:"Productor", wn_by:"por", wn_coming_label:"Próximamente", wn_demo_badge:"Demo", wn_buy_title:"Comprar este vino", wn_buy_body:"Espacio para la compra directa: la tienda aún no está conectada.", wn_shop_cta:"Tienda →", wn_released:"Lanzamiento", wn_ctx_loading:"Pasaporte del vino", wn_ctx_ready:"Pasaporte del vino", wn_kick:"Vino", wn_facts_label:"Sobre el vino", wn_vintages_label:"Añadas · baje →", wn_vintages_empty:"Todavía no hay añadas", wn_vintages_empty_sub:"Este vino aún no tiene añadas en su pasaporte.", wn_nf_kick:"Vino no encontrado", wn_nf_title:"No se pudo encontrar este vino.", wn_nf_body:"Puede que el enlace esté mal escrito o que el vino ya no figure en Tasting & Toasting.", wn_err_kick:"Algo salió mal", wn_err_title:"No pudimos cargar este vino.", wn_err_body:"Es un problema nuestro, no del vino. Inténtelo de nuevo.", wn_retry:"Intentar de nuevo", fact_appellation:"Denominación", fact_style:"Estilo", fact_released:"Lanzamiento"
     },
     uk: {
       b_claimed:"Заявлено виробником", b_review:"На перевірці", b_verified:"Підтверджено", b_unverified:"Не підтверджено",
@@ -169,7 +177,9 @@
       cap_verified:"CAP підтверджено", scan_story:"Скануйте, щоб дізнатися історію", bottle_word:"Пляшка",
       wn_un_kick:"Паспорт оновлюється", wn_un_title:"Інформація про це вино тимчасово оновлюється.",
       wn_un_body:"Будь ласка, спробуйте відкрити паспорт пізніше.",
-      wn_un_note:"Ми уточнюємо деякі відомості, щоб надати вам найактуальнішу інформацію. Паспорт знову стане доступним після завершення оновлення."
+      wn_un_note:"Ми уточнюємо деякі відомості, щоб надати вам найактуальнішу інформацію. Паспорт знову стане доступним після завершення оновлення.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"Заявлено виробником", wn_producer_label:"Виробник", wn_by:"від", wn_coming_label:"Незабаром", wn_demo_badge:"Демо", wn_buy_title:"Купити це вино", wn_buy_body:"Місце для прямої купівлі — магазин ще не підключено.", wn_shop_cta:"До магазину →", wn_released:"Випуск", wn_ctx_loading:"Паспорт вина", wn_ctx_ready:"Паспорт вина", wn_kick:"Вино", wn_facts_label:"Про вино", wn_vintages_label:"Врожаї · прогортайте вниз →", wn_vintages_empty:"Врожаї ще не вказані", wn_vintages_empty_sub:"У цього вина ще немає врожаїв у паспорті.", wn_nf_kick:"Вино не знайдено", wn_nf_title:"Це вино не вдалося знайти.", wn_nf_body:"Можливо, у посиланні помилка, або це вино більше не представлене в Tasting & Toasting.", wn_err_kick:"Щось пішло не так", wn_err_title:"Не вдалося завантажити це вино.", wn_err_body:"Це збій на нашому боці, а не з вином. Будь ласка, спробуйте ще раз.", wn_retry:"Спробувати ще раз", fact_appellation:"Апеласьйон", fact_style:"Стиль", fact_released:"Випуск"
     },
     it: {
       b_claimed:"Dichiarato dal produttore", b_review:"In verifica", b_verified:"Verificato", b_unverified:"Non verificato",
@@ -190,7 +200,9 @@
       cap_verified:"CAP verificato", scan_story:"Scansiona per scoprire la storia", bottle_word:"Bottiglia",
       wn_un_kick:"Aggiornamento del passaporto in corso", wn_un_title:"Le informazioni su questo vino sono in aggiornamento.",
       wn_un_body:"Per favore, prova ad aprire il passaporto più tardi.",
-      wn_un_note:"Stiamo precisando alcuni dettagli per offrirti le informazioni più aggiornate. Il passaporto sarà di nuovo disponibile al termine dell'aggiornamento."
+      wn_un_note:"Stiamo precisando alcuni dettagli per offrirti le informazioni più aggiornate. Il passaporto sarà di nuovo disponibile al termine dell'aggiornamento.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"Dichiarato dal produttore", wn_producer_label:"Produttore", wn_by:"di", wn_coming_label:"Prossimamente", wn_demo_badge:"Demo", wn_buy_title:"Acquista questo vino", wn_buy_body:"Spazio per l'acquisto diretto: il negozio non è ancora collegato.", wn_shop_cta:"Negozio →", wn_released:"Uscita", wn_ctx_loading:"Passaporto del vino", wn_ctx_ready:"Passaporto del vino", wn_kick:"Vino", wn_facts_label:"Sul vino", wn_vintages_label:"Annate · scendi →", wn_vintages_empty:"Nessuna annata indicata", wn_vintages_empty_sub:"Questo vino non ha ancora annate nel suo passaporto.", wn_nf_kick:"Vino non trovato", wn_nf_title:"Non è stato possibile trovare questo vino.", wn_nf_body:"Il link potrebbe essere errato, oppure il vino non è più presente su Tasting & Toasting.", wn_err_kick:"Qualcosa è andato storto", wn_err_title:"Non siamo riusciti a caricare questo vino.", wn_err_body:"È un problema nostro, non del vino. Riprova.", wn_retry:"Riprova", fact_appellation:"Denominazione", fact_style:"Stile", fact_released:"Uscita"
     },
     de: {
       b_claimed:"Vom Erzeuger angegeben", b_review:"In Prüfung", b_verified:"Verifiziert", b_unverified:"Nicht verifiziert",
@@ -211,7 +223,9 @@
       cap_verified:"CAP verifiziert", scan_story:"Scannen, um die Geschichte zu entdecken", bottle_word:"Flasche",
       wn_un_kick:"Pass wird aktualisiert", wn_un_title:"Die Informationen zu diesem Wein werden gerade aktualisiert.",
       wn_un_body:"Bitte versuchen Sie später, den Pass zu öffnen.",
-      wn_un_note:"Wir präzisieren einige Angaben, um Ihnen die aktuellsten Informationen zu bieten. Der Pass ist nach Abschluss der Aktualisierung wieder verfügbar."
+      wn_un_note:"Wir präzisieren einige Angaben, um Ihnen die aktuellsten Informationen zu bieten. Der Pass ist nach Abschluss der Aktualisierung wieder verfügbar.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"Vom Erzeuger angegeben", wn_producer_label:"Erzeuger", wn_by:"von", wn_coming_label:"Demnächst", wn_demo_badge:"Demo", wn_buy_title:"Diesen Wein kaufen", wn_buy_body:"Platzhalter für den Direktkauf — der Shop ist noch nicht angebunden.", wn_shop_cta:"Shop →", wn_released:"Freigabe", wn_ctx_loading:"Weinpass", wn_ctx_ready:"Weinpass", wn_kick:"Wein", wn_facts_label:"Über den Wein", wn_vintages_label:"Jahrgänge · nach unten →", wn_vintages_empty:"Noch keine Jahrgänge", wn_vintages_empty_sub:"Für diesen Wein sind noch keine Jahrgänge im Pass eingetragen.", wn_nf_kick:"Wein nicht gefunden", wn_nf_title:"Dieser Wein konnte nicht gefunden werden.", wn_nf_body:"Der Link ist womöglich fehlerhaft, oder der Wein ist bei Tasting & Toasting nicht mehr gelistet.", wn_err_kick:"Etwas ist schiefgelaufen", wn_err_title:"Wir konnten diesen Wein nicht laden.", wn_err_body:"Das Problem liegt bei uns, nicht am Wein. Bitte versuchen Sie es erneut.", wn_retry:"Erneut versuchen", fact_appellation:"Appellation", fact_style:"Stil", fact_released:"Freigabe"
     },
     he: {
       b_claimed:"הוצהר על ידי היצרן", b_review:"בבדיקה", b_verified:"מאומת", b_unverified:"לא מאומת",
@@ -232,7 +246,9 @@
       cap_verified:"CAP מאומת", scan_story:"סרקו כדי לגלות את הסיפור", bottle_word:"בקבוק",
       wn_un_kick:"הדרכון בעדכון", wn_un_title:"המידע על היין הזה מתעדכן כרגע.",
       wn_un_body:"אנא נסו לפתוח את הדרכון מאוחר יותר.",
-      wn_un_note:"אנו מדייקים כמה פרטים כדי להציג לכם את המידע המעודכן ביותר. הדרכון יהיה זמין שוב בתום העדכון."
+      wn_un_note:"אנו מדייקים כמה פרטים כדי להציג לכם את המידע המעודכן ביותר. הדרכון יהיה זמין שוב בתום העדכון.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"נמסר על ידי היצרן", wn_producer_label:"יצרן", wn_by:"מאת", wn_coming_label:"בקרוב", wn_demo_badge:"דמו", wn_buy_title:"לרכוש יין זה", wn_buy_body:"מקום לרכישה ישירה — החנות עדיין אינה מחוברת.", wn_shop_cta:"לחנות →", wn_released:"שוחרר", wn_ctx_loading:"דרכון היין", wn_ctx_ready:"דרכון היין", wn_kick:"יין", wn_facts_label:"על היין", wn_vintages_label:"בצירים · גללו למטה →", wn_vintages_empty:"אין עדיין בצירים", wn_vintages_empty_sub:"ליין זה אין עדיין בצירים בדרכון.", wn_nf_kick:"היין לא נמצא", wn_nf_title:"לא הצלחנו למצוא יין זה.", wn_nf_body:"ייתכן שהקישור שגוי, או שהיין אינו מופיע עוד ב-Tasting & Toasting.", wn_err_kick:"משהו השתבש", wn_err_title:"לא הצלחנו לטעון יין זה.", wn_err_body:"התקלה אצלנו, לא ביין. נסו שוב.", wn_retry:"נסו שוב", fact_appellation:"אפלסיון", fact_style:"סגנון", fact_released:"שוחרר"
     },
     pt: {
       b_claimed:"Declarado pelo produtor", b_review:"Em verificação", b_verified:"Verificado", b_unverified:"Não verificado",
@@ -253,7 +269,9 @@
       cap_verified:"CAP verificado", scan_story:"Digitalize para descobrir a história", bottle_word:"Garrafa",
       wn_un_kick:"Atualização do passaporte em curso", wn_un_title:"As informações sobre este vinho estão a ser atualizadas.",
       wn_un_body:"Por favor, tente abrir o passaporte mais tarde.",
-      wn_un_note:"Estamos a precisar alguns dados para lhe apresentar a informação mais atual. O passaporte ficará novamente disponível após a conclusão da atualização."
+      wn_un_note:"Estamos a precisar alguns dados para lhe apresentar a informação mais atual. O passaporte ficará novamente disponível após a conclusão da atualização.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"Declarado pelo produtor", wn_producer_label:"Produtor", wn_by:"por", wn_coming_label:"Em breve", wn_demo_badge:"Demo", wn_buy_title:"Comprar este vinho", wn_buy_body:"Espaço para a compra direta — a loja ainda não está ligada.", wn_shop_cta:"Loja →", wn_released:"Lançamento", wn_ctx_loading:"Passaporte do vinho", wn_ctx_ready:"Passaporte do vinho", wn_kick:"Vinho", wn_facts_label:"Sobre o vinho", wn_vintages_label:"Colheitas · desça →", wn_vintages_empty:"Ainda sem colheitas", wn_vintages_empty_sub:"Este vinho ainda não tem colheitas no passaporte.", wn_nf_kick:"Vinho não encontrado", wn_nf_title:"Não foi possível encontrar este vinho.", wn_nf_body:"A ligação pode estar errada, ou o vinho já não consta na Tasting & Toasting.", wn_err_kick:"Algo correu mal", wn_err_title:"Não conseguimos carregar este vinho.", wn_err_body:"O problema é nosso, não do vinho. Tente novamente.", wn_retry:"Tentar novamente", fact_appellation:"Denominação", fact_style:"Estilo", fact_released:"Lançamento"
     },
     ka: {
       b_claimed:"მწარმოებლის მიერ მითითებული", b_review:"შემოწმების პროცესში", b_verified:"დადასტურებული", b_unverified:"დაუდასტურებელი",
@@ -274,7 +292,9 @@
       cap_verified:"CAP დადასტურებული", scan_story:"დაასკანერე ისტორიის აღმოსაჩენად", bottle_word:"ბოთლი",
       wn_un_kick:"პასპორტი განახლდება", wn_un_title:"ამ ღვინის შესახებ ინფორმაცია დროებით განახლდება.",
       wn_un_body:"გთხოვთ, სცადოთ პასპორტის გახსნა მოგვიანებით.",
-      wn_un_note:"ჩვენ ვაზუსტებთ ზოგიერთ დეტალს, რომ მოგაწოდოთ ყველაზე ზუსტი ინფორმაცია. პასპორტი ხელახლა ხელმისაწვდომი გახდება განახლების დასრულების შემდეგ."
+      wn_un_note:"ჩვენ ვაზუსტებთ ზოგიერთ დეტალს, რომ მოგაწოდოთ ყველაზე ზუსტი ინფორმაცია. პასპორტი ხელახლა ხელმისაწვდომი გახდება განახლების დასრულების შემდეგ.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"მითითებულია მწარმოებლის მიერ", wn_producer_label:"მწარმოებელი", wn_by:"მწარმოებელი:", wn_coming_label:"მალე", wn_demo_badge:"დემო", wn_buy_title:"ამ ღვინის შეძენა", wn_buy_body:"ადგილი პირდაპირი შესყიდვისთვის — მაღაზია ჯერ არ არის დაკავშირებული.", wn_shop_cta:"მაღაზია →", wn_released:"გამოშვება", wn_ctx_loading:"ღვინის პასპორტი", wn_ctx_ready:"ღვინის პასპორტი", wn_kick:"ღვინო", wn_facts_label:"ღვინის შესახებ", wn_vintages_label:"მოსავლები · ჩამოდით →", wn_vintages_empty:"მოსავლები ჯერ არ არის მითითებული", wn_vintages_empty_sub:"ამ ღვინის პასპორტში ჯერ არ არის მოსავლები.", wn_nf_kick:"ღვინო ვერ მოიძებნა", wn_nf_title:"ამ ღვინის პოვნა ვერ მოხერხდა.", wn_nf_body:"შესაძლოა ბმული არასწორია, ან ღვინო აღარ არის Tasting & Toasting-ზე.", wn_err_kick:"რაღაც ვერ გამოვიდა", wn_err_title:"ამ ღვინის ჩატვირთვა ვერ მოხერხდა.", wn_err_body:"ხარვეზი ჩვენს მხარესაა, არა ღვინოში. გთხოვთ, სცადოთ კვლავ.", wn_retry:"ხელახლა ცდა", fact_appellation:"აპელასიონი", fact_style:"სტილი", fact_released:"გამოშვება"
     },
     ro: {
       b_claimed:"Declarat de producător", b_review:"În verificare", b_verified:"Verificat", b_unverified:"Neverificat",
@@ -295,7 +315,9 @@
       cap_verified:"CAP verificat", scan_story:"Scanează pentru a descoperi povestea", bottle_word:"Sticlă",
       wn_un_kick:"Pașaportul se actualizează", wn_un_title:"Informațiile despre acest vin sunt în curs de actualizare.",
       wn_un_body:"Vă rugăm să încercați să deschideți pașaportul mai târziu.",
-      wn_un_note:"Precizăm unele detalii pentru a vă oferi cele mai actuale informații. Pașaportul va fi din nou disponibil după finalizarea actualizării."
+      wn_un_note:"Precizăm unele detalii pentru a vă oferi cele mai actuale informații. Pașaportul va fi din nou disponibil după finalizarea actualizării.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"Declarat de producător", wn_producer_label:"Producător", wn_by:"de", wn_coming_label:"În curând", wn_demo_badge:"Demo", wn_buy_title:"Cumpără acest vin", wn_buy_body:"Spațiu pentru achiziția directă — magazinul nu este încă conectat.", wn_shop_cta:"Magazin →", wn_released:"Lansare", wn_ctx_loading:"Pașaportul vinului", wn_ctx_ready:"Pașaportul vinului", wn_kick:"Vin", wn_facts_label:"Despre vin", wn_vintages_label:"Recolte · coborâți →", wn_vintages_empty:"Încă nu sunt recolte", wn_vintages_empty_sub:"Acest vin nu are încă recolte în pașaport.", wn_nf_kick:"Vinul nu a fost găsit", wn_nf_title:"Nu am putut găsi acest vin.", wn_nf_body:"Linkul poate fi greșit sau vinul nu mai este listat pe Tasting & Toasting.", wn_err_kick:"Ceva nu a mers bine", wn_err_title:"Nu am putut încărca acest vin.", wn_err_body:"Problema este la noi, nu la vin. Încercați din nou.", wn_retry:"Încercați din nou", fact_appellation:"Denumire de origine", fact_style:"Stil", fact_released:"Lansare"
     },
     pl: {
       b_claimed:"Deklarowane przez producenta", b_review:"W weryfikacji", b_verified:"Zweryfikowane", b_unverified:"Niezweryfikowane",
@@ -316,7 +338,9 @@
       cap_verified:"CAP ZWERYFIKOWANO", scan_story:"Zeskanuj, aby poznać historię", bottle_word:"Butelka",
       wn_un_kick:"Paszport jest aktualizowany", wn_un_title:"Informacje o tym winie są właśnie aktualizowane.",
       wn_un_body:"Prosimy spróbować otworzyć paszport później.",
-      wn_un_note:"Uzupełniamy niektóre dane, aby przedstawić Państwu najbardziej aktualne informacje. Paszport będzie znów dostępny po zakończeniu aktualizacji."
+      wn_un_note:"Uzupełniamy niektóre dane, aby przedstawić Państwu najbardziej aktualne informacje. Paszport będzie znów dostępny po zakończeniu aktualizacji.",
+      /* WINE-PASSPORT-CANON-01 */
+      pa_label:"Zadeklarowane przez producenta", wn_producer_label:"Producent", wn_by:"od", wn_coming_label:"Wkrótce", wn_demo_badge:"Demo", wn_buy_title:"Kup to wino", wn_buy_body:"Miejsce na zakup bezpośredni — sklep nie jest jeszcze podłączony.", wn_shop_cta:"Sklep →", wn_released:"Premiera", wn_ctx_loading:"Paszport wina", wn_ctx_ready:"Paszport wina", wn_kick:"Wino", wn_facts_label:"O winie", wn_vintages_label:"Roczniki · przewiń w dół →", wn_vintages_empty:"Brak roczników", wn_vintages_empty_sub:"To wino nie ma jeszcze roczników w paszporcie.", wn_nf_kick:"Nie znaleziono wina", wn_nf_title:"Nie udało się znaleźć tego wina.", wn_nf_body:"Link może być błędny albo wino nie jest już dostępne w Tasting & Toasting.", wn_err_kick:"Coś poszło nie tak", wn_err_title:"Nie udało się wczytać tego wina.", wn_err_body:"Problem jest po naszej stronie, nie po stronie wina. Spróbuj ponownie.", wn_retry:"Spróbuj ponownie", fact_appellation:"Apelacja", fact_style:"Styl", fact_released:"Premiera"
     }
   };
 
