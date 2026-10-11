@@ -84,9 +84,22 @@ img{max-width:100%}
 /* ---- hero: plate + identity, two columns on a wide screen --------------- */
 .hero{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--line)}
 @media(min-width:820px){.hero{grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr)}}
+/* THE PHOTO LEADS, THE SILHOUETTE DOES NOT.
+   A real bottle photograph is the strongest thing this passport owns, so it gets
+   the room. When the producer has not supplied one, the drawn silhouette is a
+   PLACEHOLDER and is deliberately held small: an empty outline filling the first
+   screen reads as a missing image, not as a premium document. */
 .plate{background:radial-gradient(ellipse at center,rgba(43,24,16,0.92),var(--deep) 74%);
-  padding:40px var(--pad);display:flex;align-items:center;justify-content:center;min-height:260px}
-.plate img{height:clamp(190px,42vw,330px);width:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,0.5))}
+  display:flex;align-items:center;justify-content:center}
+.plate.has-photo{padding:36px var(--pad);min-height:240px}
+.plate.no-photo{padding:22px var(--pad);min-height:0}
+.plate.has-photo img{max-height:min(420px,52vh);width:auto;max-width:100%;object-fit:contain;
+  filter:drop-shadow(0 18px 40px rgba(0,0,0,0.55))}
+.plate.no-photo svg{height:clamp(104px,22vw,168px);width:auto;opacity:0.7}
+@media(min-width:820px){
+  .plate.no-photo{padding:36px var(--pad)}
+  .plate.no-photo svg{height:clamp(150px,18vw,230px)}
+}
 .identity{padding:36px var(--pad);display:flex;flex-direction:column;gap:14px;justify-content:center}
 .wine-name{font-family:var(--serif);font-weight:500;font-size:clamp(30px,7vw,44px);line-height:1.05;margin:0;
   letter-spacing:-0.012em;color:var(--cream)}
@@ -207,13 +220,14 @@ const lang = CAP.lang;
 const lp = lang === 'en' ? '' : ('&lang=' + lang);
 const t = CAP.t;
 const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
+let heroStory = null;
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const nz = v => { const s = (v == null ? '' : String(v)).trim(); return s ? s : null; };
 const wineryQs = () => winerySlug ? ('&winerySlug=' + encodeURIComponent(winerySlug)) : '';
 
 /* The canon's bottle silhouette, inline so the plate never waits on a request. */
 const BOTTLE_SVG = `<svg viewBox="0 0 120 360" role="img" aria-hidden="true"
-  style="height:clamp(190px,42vw,330px);width:auto;opacity:0.85;">
+  style="width:auto;">
   <!-- The canon's own Bordeaux silhouette, inlined verbatim from
        docs/design/canon/passport/assets/bottle-bordeaux-lg-transparent.svg
        (tt-mobile). Inlined rather than linked so the plate never waits on a
@@ -260,8 +274,10 @@ function vintageMeta(v) {
   }
   const rel = fmtDate(v.release_date);
   if (rel) bits.push(`${t('wn_released')} ${rel}`);
+  // "ABV" is an English abbreviation; the dictionary has the word in all twelve
+  // languages, so the fallback line is localized too.
   const abv = nz(v.abv);
-  if (!bits.length && abv) bits.push(`${abv}% ABV`);
+  if (!bits.length && abv) bits.push(`${t('abv')} ${abv}%`);
   return bits;
 }
 
@@ -317,6 +333,12 @@ function renderPassport(w, vs) {
   const grapes = (w.grape_varieties || []).map(nz).filter(Boolean);
   const desc = nz(w.description);
   const story = nz(w.story_text);
+  // ONE QUOTE, ONE PLACE. The wine's story and the winery's signature quote are
+  // different fields that sometimes carry the SAME sentence. Printing it twice
+  // makes the document look careless, so the hero keeps it only until the
+  // producer band proves it is the winery's line — then the hero drops it and the
+  // DNA band keeps it, which is where a maker's words belong.
+  heroStory = story;
   const hero = nz(w.hero_image_url);
 
   const vintagesInner = vs.length ? `
@@ -335,7 +357,7 @@ function renderPassport(w, vs) {
   document.getElementById('app').innerHTML = `
     <article class="fade-in">
       <section class="hero">
-        <div class="plate">${hero ? `<img src="${esc(hero)}" alt="${esc(w.name)}">` : BOTTLE_SVG}</div>
+        <div class="plate ${hero ? 'has-photo' : 'no-photo'}">${hero ? `<img src="${esc(hero)}" alt="${esc(w.name)}">` : BOTTLE_SVG}</div>
         <div class="identity">
           <div class="eyebrow eyebrow-strong" style="margin:0">${t('wn_kick')}</div>
           <h1 class="wine-name">${esc(w.name)}</h1>
@@ -409,6 +431,16 @@ async function loadProducer(slug) {
   ].filter(([, v]) => !!v);
   const quote = nz(dna.signature_quote);
   if (!cells.length && !quote) return;
+  // The comparison ignores case, quotation marks and spacing: the same sentence
+  // typed twice is still the same sentence.
+  const same = (a, b) => {
+    const norm = v => String(v || '').toLowerCase().replace(/[«»"'“”„]/g, '').replace(/\s+/g, ' ').trim();
+    return !!a && norm(a) === norm(b);
+  };
+  if (quote && same(heroStory, quote)) {
+    const heroQuote = document.querySelector('.identity .story');
+    if (heroQuote) heroQuote.remove();
+  }
   const dnaBand = document.getElementById('dna-band');
   dnaBand.innerHTML = `
     <div class="eyebrow">${t('dna_title')}</div>
