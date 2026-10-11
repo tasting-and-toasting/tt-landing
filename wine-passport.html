@@ -50,6 +50,12 @@ const wineId = (qs.get('wineId') || '').trim();
 let winerySlug = (qs.get('winerySlug') || qs.get('slug') || '').trim();
 const lang = CAP.lang;
 const lp = lang === 'en' ? '' : ('&lang=' + lang);
+// A link inside the family carries the SAME environment it was opened in: the
+// language, and — when the page was opened against an explicit API — that too.
+// In production nobody passes ?api=, so this adds nothing to a guest's link; in
+// a test environment it is what keeps a walk across the four passports on the
+// same backend instead of silently falling back to production.
+const ap = qs.get('api') ? ('&api=' + encodeURIComponent(qs.get('api'))) : '';
 const t = CAP.t;
 const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
 let heroStory = null;
@@ -154,7 +160,7 @@ function renderPassport(w, vs) {
   document.getElementById('ctx-label').textContent = t('wn_ctx_ready');
   winerySlug = winerySlug || nz(w.winery_slug) || '';
   const wineryName = nz(w.winery_name);
-  const wineryHref = winerySlug ? `winery-passport.html?slug=${encodeURIComponent(winerySlug)}${lp}` : null;
+  const wineryHref = winerySlug ? `winery-passport.html?slug=${encodeURIComponent(winerySlug)}${lp}${ap}` : null;
 
   setCrumbs([
     ...(wineryName ? [{ label: wineryName, href: wineryHref }] : []),
@@ -176,7 +182,7 @@ function renderPassport(w, vs) {
   const vintagesInner = vs.length ? `
     <div class="vintages">${vs.map(v => {
       const meta = vintageMeta(v);
-      return `<a class="vintage" href="vintage-passport.html?vintageId=${encodeURIComponent(v.id)}${wineryQs()}${lp}">
+      return `<a class="vintage" href="vintage-passport.html?vintageId=${encodeURIComponent(v.id)}${wineryQs()}${lp}${ap}">
         <div class="v-year">${esc(v.vintage_year)}</div>
         ${meta.map(m => `<div class="v-meta">${esc(m)}</div>`).join('')}
       </a>`;
