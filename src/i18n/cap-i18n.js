@@ -479,5 +479,15 @@
     });
   }
 
-  window.CAP = { lang: lang, t: t, wireSwitcher: wireSwitcher, applyStatic: applyStatic, ALLOWED: ALLOWED };
+  // ONE definition of the dim badge the "passport being updated" screen carries,
+  // for all four public passports (CAP-PASSPORT-AVAILABILITY-CONTROL-03, owner's
+  // requirement "не создавать параллельных реализаций"). The classes it uses
+  // live in src/cap/passport-canon.css, the single stylesheet of the family; the
+  // inline colours are the canon's own tokens, kept here only because this one
+  // badge is the single element of the family that is dimmed on purpose.
+  var dimIcon =
+    '<div class="state-icon" style="border:1px solid rgba(197,165,114,0.35);background:rgba(197,165,114,0.05);">' +
+    '<span style="color:var(--gold-soft);font-family:var(--serif);font-size:26px;line-height:1;">\u2026</span></div>';
+
+  window.CAP = { lang: lang, t: t, wireSwitcher: wireSwitcher, applyStatic: applyStatic, ALLOWED: ALLOWED, dimIcon: dimIcon };
 })();

@@ -171,13 +171,15 @@ function parseBlend(gc) {
 }
 
 /* ---------- states -------------------------------------------------------- */
-function stateScreen({ kick, title, body, actions }) {
+function stateScreen({ icon, kick, title, body, note, actions }) {
   document.getElementById('ctx-label').textContent = t('vt_ctx_loading');
   document.getElementById('app').innerHTML = `
     <div class="state fade-in">
+      ${icon || ''}
       <div class="state-kick">${kick}</div>
       <h1 class="state-title">${title}</h1>
       ${body ? `<p class="state-body">${body}</p>` : ''}
+      ${note ? `<p class="state-note">${note}</p>` : ''}
       ${actions || ''}
     </div>`;
   document.getElementById('foot').textContent = 'CAP · Tasting & Toasting';
@@ -275,6 +277,15 @@ function renderPassport(v) {
   document.getElementById('foot').textContent = 'CAP · Tasting & Toasting';
 }
 
+/* The parent wine is temporarily closed for an update
+   (CAP-PASSPORT-AVAILABILITY-CONTROL-03). A vintage carries its wine's name, so
+   this door closes with the wine — but it says so in the wine passport's own
+   words instead of claiming the vintage does not exist. */
+function renderUnavailable() {
+  stateScreen({ icon: CAP.dimIcon, kick: t('wn_un_kick'), title: t('wn_un_title'),
+    body: t('wn_un_body'), note: t('wn_un_note') });
+}
+
 async function load() {
   if (!vintageId) { renderNotFound(); return; }
   renderLoading();
@@ -285,6 +296,7 @@ async function load() {
     if (!r.ok) { renderError(); return; }
     data = await r.json();
   } catch (e) { renderError(); return; }
+  if (data && data.availability === 'temporarily_unavailable') { renderUnavailable(); return; }
   if (!data || !data.vintage) { renderNotFound(); return; }
   renderPassport(data.vintage);
 }

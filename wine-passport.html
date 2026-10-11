@@ -131,8 +131,9 @@ function stateScreen({ kick, title, body, note, button, icon }) {
       ${button || ''}
     </div>`;
 }
-const dimIcon = `<div class="state-icon" style="border:1px solid rgba(197,165,114,0.35);background:rgba(197,165,114,0.05);">
-  <span style="color:var(--gold-soft);font-family:var(--serif);font-size:26px;line-height:1;">…</span></div>`;
+/* The badge now comes from the one definition in src/i18n/cap-i18n.js, shared by
+   all four passports. Same markup, same classes — the screen is unchanged. */
+const dimIcon = CAP.dimIcon;
 
 function renderLoading() {
   document.getElementById('app').innerHTML =

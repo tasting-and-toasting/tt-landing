@@ -210,14 +210,16 @@ function vintageFacts(v) {
 }
 
 /* ---------- states -------------------------------------------------------- */
-function stateScreen({ mark, kick, title, body, actions }) {
+function stateScreen({ mark, icon, kick, title, body, note, actions }) {
   document.getElementById('ctx-label').textContent = t('bp_ctx_loading');
   document.getElementById('app').innerHTML = `
     <div class="state fade-in">
       ${mark || ''}
+      ${icon || ''}
       <div class="state-kick">${kick}</div>
       <h1 class="state-title">${title}</h1>
       ${body ? `<p class="state-body">${body}</p>` : ''}
+      ${note ? `<p class="state-note">${note}</p>` : ''}
       ${actions || ''}
     </div>`;
   document.getElementById('foot').textContent = 'CAP · Tasting & Toasting';
@@ -245,6 +247,17 @@ function renderError() {
 function renderRevoked() {
   stateScreen({ mark: `<div class="void-mark">${BOTTLE_SVG}</div>`,
     kick: t('bp_vd_kick'), title: t('bp_vd_title'), body: t('bp_vd_body') });
+}
+
+/* The wine behind this bottle is temporarily closed for an update
+   (CAP-PASSPORT-AVAILABILITY-CONTROL-03, owner's decision "CLOSE S3").
+   The code is real and the address is permanent, so this is NOT the not-found
+   screen, and the producer has taken nothing back, so it is NOT the revoked
+   screen either. Same badge, same four lines and the same twelve-language
+   wording the wine passport already shows — one dictionary, one stylesheet. */
+function renderUnavailable() {
+  stateScreen({ icon: CAP.dimIcon, kick: t('wn_un_kick'), title: t('wn_un_title'),
+    body: t('wn_un_body'), note: t('wn_un_note') });
 }
 
 /* ---------- the passport -------------------------------------------------- */
@@ -421,6 +434,12 @@ async function load() {
     if (!r.ok) { renderError(); return; }
     d = await r.json();
   } catch (e) { renderError(); return; }
+  /* The door answers 200 with `availability` and no document when the record is
+     real but must not be shown. Two values, kept apart on purpose: the wine is
+     being updated, or the producer withdrew this code. Read before the document
+     checks below, because in both cases there is no document to read. */
+  if (d && d.availability === 'temporarily_unavailable') { renderUnavailable(); return; }
+  if (d && d.availability === 'revoked') { renderRevoked(); return; }
   if (!d || !d.bottle || !d.wine) { renderNotFound(); return; }
   /* The ONE status gate. Every other live status ('minted' | 'claimed' |
      'active' | 'activated') is a real bottle and gets the full document. */
