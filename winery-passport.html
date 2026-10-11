@@ -6,89 +6,33 @@
 <title>Winery Passport · Tasting &amp; Toasting CAP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="src/i18n/cap-i18n.js"></script>
+<link rel="stylesheet" href="src/cap/passport-canon.css">
 <style>
-:root{
-  --void:#0B0406; --cream:#F5F0E8; --gold:#C5A572; --gold-soft:#E0C48E;
-  --gold-dim:#8B7548; --line:rgba(197,165,114,0.14); --line-soft:rgba(197,165,114,0.12);
-  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
-  --green:#7FB069; --err:#C8654F;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:radial-gradient(ellipse at 26% -4%,rgba(74,14,20,0.42),transparent 56%),linear-gradient(180deg,#12060A,var(--void));color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;}
-a{color:var(--gold);text-decoration:none;}
-a:hover{color:var(--gold-soft);}
-.stage{max-width:720px;margin:0 auto;padding:0 24px;}
-@keyframes wp-pulse{0%,100%{opacity:0.4;}50%{opacity:0.85;}}
-@keyframes wp-fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
-.brandbar{height:58px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:14px;position:sticky;top:0;background:rgba(11,4,6,0.72);backdrop-filter:blur(10px);z-index:50;flex-wrap:wrap;}
-.brandbar-left{display:flex;align-items:center;gap:11px;}
-.brandmark{width:23px;height:23px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:12px;flex:0 0 auto;}
-.brandname{font-family:var(--serif);font-size:15px;color:var(--cream);}
-.ctx{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,240,232,0.4);}
-.lang-switcher-flags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end;max-width:340px;}
-.lang-flag-link{display:inline-flex;align-items:center;justify-content:center;width:30px;height:20px;border-radius:3px;overflow:hidden;border:1px solid var(--line);opacity:.78;transition:opacity .2s,border-color .2s,box-shadow .2s;}
-.lang-flag-link:hover{opacity:1;}
-.lang-flag-link.is-current-lang{opacity:1;border-color:var(--gold);box-shadow:0 0 0 1px rgba(197,165,114,0.35);}
-.lang-flag-link svg{width:100%;height:100%;display:block;}
-html[dir="rtl"] .lang-switcher-flags{flex-direction:row-reverse;}
-html[dir="rtl"] .brandbar{flex-direction:row-reverse;}
-html[dir="rtl"] body{text-align:right;}
-html[dir="rtl"] .wp-wine-row:hover{padding-right:10px!important;padding-left:4px!important;}
-.skel-pulse{animation:wp-pulse 1.4s ease-in-out infinite;}
-.fade-in{animation:wp-fade 0.45s ease both;}
-.state-screen{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 0;animation:wp-fade 0.4s ease both;}
-.state-icon{width:64px;height:64px;margin:0 auto 24px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-.state-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;}
-.state-title{font-family:var(--serif);font-weight:500;font-size:32px;margin:0 0 14px;color:var(--cream);letter-spacing:-0.01em;}
-.state-body{font-size:14px;line-height:1.6;color:rgba(245,240,232,0.6);margin:0 0 30px;max-width:400px;}
-.wp-btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 26px;border-radius:3px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background .15s,border-color .15s,color .15s;font-family:var(--sans);}
-.wp-btn-gold{border:none;background:linear-gradient(180deg,var(--gold),#a98a55);color:#1A0B08;font-weight:600;}
-.wp-btn-gold:hover{filter:brightness(1.06);}
-.wp-btn-ghost{border:1px solid rgba(197,165,114,0.4);color:var(--gold);background:transparent;}
-.wp-btn-ghost:hover{border-color:rgba(197,165,114,0.7);color:var(--gold-soft);}
-.passport{padding:52px 0 90px;}
-.hero-row{display:flex;align-items:center;gap:18px;margin-bottom:26px;}
-.crest{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px -6px rgba(0,0,0,0.7);flex:0 0 auto;}
-.crest-glyph{font-family:var(--serif);font-style:italic;font-size:22px;}
-.hero-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;}
-.hero-name{font-family:var(--serif);font-weight:500;font-size:clamp(34px,8vw,46px);line-height:1;margin:0;color:var(--cream);letter-spacing:-0.015em;}
-.trust-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:38px;}
-.own-badge{display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border:1px solid rgba(197,165,114,0.55);border-radius:100px;background:rgba(197,165,114,0.08);}
-.own-icon{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6b1620,#3a0a10);border:1px solid rgba(197,165,114,0.7);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:10px;}
-.own-label{font-size:12px;letter-spacing:0.06em;color:var(--cream);font-weight:600;}
-.vs-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border:1px solid rgba(197,165,114,0.28);border-radius:100px;}
-.vs-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;}
-.vs-text{font-size:12px;color:rgba(245,240,232,0.8);white-space:nowrap;}
-.vs-text strong{color:var(--cream);font-weight:600;}
-.sec-label{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:14px;}
-.sec-label-high{color:var(--gold);letter-spacing:0.24em;}
-.sec-label-med{color:var(--gold-dim);}
-.block{margin-bottom:44px;}
-.block-divider{padding-top:32px;border-top:1px solid var(--line-soft);}
-.dna-tags{display:flex;gap:10px;flex-wrap:wrap;}
-.dna-tag{padding:8px 15px;border:1px solid rgba(197,165,114,0.35);border-radius:3px;font-size:13.5px;color:var(--cream);font-family:var(--serif);}
-.svc-tags{display:flex;gap:9px;flex-wrap:wrap;}
-.svc-tag{padding:7px 13px;border:1px solid rgba(197,165,114,0.2);border-radius:100px;font-size:12.5px;color:rgba(245,240,232,0.82);}
-.wines-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;}
-.wines-count{font-size:11px;color:rgba(245,240,232,0.45);}
-.wines-list{border-top:1px solid var(--line-soft);}
-.wp-wine-row{display:flex;align-items:center;justify-content:space-between;padding:16px 4px;border-bottom:1px solid rgba(197,165,114,0.1);color:inherit;transition:background .15s,padding-left .15s;}
-.wp-wine-row:hover{background:rgba(197,165,114,0.06);padding-left:10px!important;}
-.wine-bottle{width:30px;height:44px;border:1px solid rgba(197,165,114,0.3);border-radius:2px 2px 5px 5px;background:linear-gradient(180deg,rgba(74,14,20,0.6),rgba(58,10,16,0.9));flex:0 0 auto;}
-.wine-info{display:flex;align-items:center;gap:16px;}
-.wine-name{font-family:var(--serif);font-size:18px;color:var(--cream);}
-.wine-meta{font-size:11.5px;color:rgba(245,240,232,0.5);margin-top:2px;}
-.wine-chev{color:var(--gold);font-size:16px;}
-html[dir="rtl"] .wine-chev{transform:scaleX(-1);}
-.wines-empty{border:1px dashed rgba(197,165,114,0.25);border-radius:3px;padding:30px 20px;text-align:center;}
-.wines-empty-icon{width:30px;height:44px;margin:0 auto 14px;border:1px dashed rgba(197,165,114,0.35);border-radius:2px 2px 5px 5px;}
-.wines-empty-title{font-size:13px;color:rgba(245,240,232,0.6);}
-.wines-empty-sub{font-size:11.5px;color:rgba(245,240,232,0.38);margin-top:5px;}
-.desc-block{padding-top:30px;border-top:1px solid var(--line-soft);}
-.desc-text{max-width:600px;font-size:13.5px;line-height:1.7;color:rgba(245,240,232,0.55);margin:0;}
-@media(max-width:600px){.brandbar{padding:9px 16px;}.stage{padding:0 16px;}}
+/* -----------------------------------------------------------------------------
+ * Only what belongs to the WINERY and to no other passport. Everything shared
+ * lives in src/cap/passport-canon.css and is NOT re-declared here.
+ *
+ * The winery has no bottle of its own, so it has no hero plate: the canon gives
+ * it one full-width opening band with a double wash
+ * (docs/design/canon/passport/WineryPassport.dc.html) and the estate's name at
+ * display size. Nothing bottle-specific — no token, no copy number, no scan
+ * counter, no provenance — may ever appear here.
+ * --------------------------------------------------------------------------*/
+.wy-hero{padding:48px var(--pad);border-bottom:1px solid var(--line);
+  background:radial-gradient(ellipse at 20% 20%,rgba(197,165,114,0.08),transparent 55%),
+             radial-gradient(ellipse at 80% 90%,rgba(74,14,20,0.5),transparent 55%)}
+@media(min-width:600px){.wy-hero{padding:64px var(--pad) 56px}}
+.wy-name{font-family:var(--serif);font-weight:500;font-size:clamp(34px,8vw,56px);line-height:1.02;
+  margin:0 0 14px;letter-spacing:-0.015em;color:var(--cream)}
+
+/* A wine in the estate's range: the canon's card, photo leading when the
+   producer has supplied one (cap_wines.hero_image_url). */
+.wy-wine{display:flex;gap:16px;align-items:center}
+.wy-wine-img{height:90px;width:auto;flex:0 0 auto;object-fit:contain;
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,0.5))}
+.wy-wine-name{font-family:var(--serif);font-size:19px;line-height:1.2;color:var(--cream);margin-bottom:4px}
 </style>
 </head>
 <body>
@@ -97,6 +41,7 @@ html[dir="rtl"] .wine-chev{transform:scaleX(-1);}
     <div class="brandmark" aria-hidden="true">T</div>
     <span class="brandname">Tasting &amp; Toasting</span>
   </div>
+  <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
   <span class="ctx" id="ctx-label" data-i18n="wp_ctx_loading">Winery passport</span>
   <nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
     <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
@@ -114,190 +59,186 @@ html[dir="rtl"] .wine-chev{transform:scaleX(-1);}
   </div></nav>
 </header>
 
-<main id="app" class="stage"></main>
+<main id="app"></main>
+
+<footer class="foot" id="foot"></footer>
 
 <script>
+/* -----------------------------------------------------------------------------
+ * CAP-PASSPORT-FAMILY-CANON-01 — the winery passport in the approved design
+ * system. The REQUEST CONTRACT IS UNCHANGED: the same two endpoints
+ * (GET {API}/wineries/{slug} and GET {API}/wineries/{slug}/wines), the same
+ * single parameter (?slug=), the same permanent public link
+ * (winery-passport.html?slug=…). The wines call stays optional — a failure
+ * there must never cost the guest the estate's passport.
+ *
+ * Every value comes from a field the server really sends, verified in
+ * tt-stack api/src/routes/cap.ts (loadWineryBySlug, loadWineryDna,
+ * loadWineryServices, loadWineryWines). An empty field hides its row.
+ *
+ * ONE TRUST CLAIM: the localized "Producer-asserted" (pa_label).
+ * `verification_status`, `ownership_confirmed` and `ownership_badge` are NOT
+ * rendered — the canon's own rule (docs/design/canon/passport/README.md) and
+ * the behaviour of the approved passport (tt-mobile app/v2/cap/bottle.tsx).
+ * --------------------------------------------------------------------------*/
 const qs = new URLSearchParams(location.search);
 const slug = (qs.get('slug') || '').trim();
 const lang = CAP.lang;
-const lp = lang === 'en' ? '' : ('&lang=' + lang);
 const t = CAP.t;
 const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
+const lp = lang === 'en' ? '' : ('&lang=' + lang);
+const ap = qs.get('api') ? ('&api=' + encodeURIComponent(qs.get('api'))) : '';
+const keep = lp + ap;
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nz = v => { const s = (v == null ? '' : String(v)).trim(); return s ? s : null; };
 
-function statusMeta(status) {
-  const map = {
-    verified:     { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
-    certified:    { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
-    under_review: { key: 'vs_under_review', dot: '#C5A572', halo: 'rgba(197,165,114,0.2)' },
-    documents_submitted: { key: 'vs_submitted', dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
-    claimed:      { key: 'vs_claimed',      dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
-    rejected:     { key: 'vs_rejected',     dot: 'rgba(245,240,232,0.3)', halo: 'rgba(245,240,232,0.1)' }
-  };
-  return map[status] || map.under_review;
+function setCrumbs(parts) {
+  document.getElementById('crumbs').innerHTML = parts.map((p, i) =>
+    (i ? '<span class="crumb-sep">/</span>' : '') +
+    (p.href ? `<a href="${p.href}">${esc(p.label)}</a>`
+            : `<span class="${p.current ? 'crumb-current' : ''}">${esc(p.label)}</span>`)
+  ).join('');
 }
 
-function dnaTags(dna) {
-  if (!dna) return [];
-  const keys = ['family', 'land_story', 'philosophy', 'founding_story', 'signature_quote'];
-  return keys.map(k => dna[k]).filter(v => v && String(v).trim());
+/* A dictionary value, or the raw value when the enum is not one we publish. */
+function enumLabel(prefix, raw) {
+  const s = nz(raw); if (!s) return null;
+  const key = prefix + '_' + s.toLowerCase();
+  const out = t(key);
+  return out === key ? s : out;
 }
 
-function wineMeta(wi) {
-  return [wi.style, (wi.grape_varieties || []).join(', ')].filter(Boolean).join(' · ');
-}
-
-function wineCountLabel(n) {
-  return n === 1 ? t('wp_wines_one') : t('wp_wines_many').replace('{n}', String(n));
-}
-
+/* A service's own name wins, then the producer's free text, then the localized
+   type. A type we have no word for is dropped rather than printed raw. */
 function serviceLabel(s) {
-  const custom = (s.details || '').trim();
-  if (custom) return custom;
-  const type = (s.service_type || '').trim();
-  return type ? (t('svc_' + type) || type) : '';
+  const own = nz(s.name) || nz(s.details);
+  if (own) return own;
+  const type = nz(s.service_type);
+  if (!type) return null;
+  const out = t('svc_' + type);
+  return out === 'svc_' + type ? null : out;
 }
+
+/* ---------- states -------------------------------------------------------- */
+function stateScreen({ kick, title, body, actions }) {
+  document.getElementById('ctx-label').textContent = t('wp_ctx_loading');
+  document.getElementById('app').innerHTML = `
+    <div class="state fade-in">
+      <div class="state-kick">${kick}</div>
+      <h1 class="state-title">${title}</h1>
+      ${body ? `<p class="state-body">${body}</p>` : ''}
+      ${actions || ''}
+    </div>`;
+  document.getElementById('foot').textContent = 'CAP · Tasting & Toasting';
+}
+const exploreLink = `<a class="xlink" href="https://tastingandtoasting.com">${t('wp_explore')}</a>`;
 
 function renderLoading() {
   document.getElementById('ctx-label').textContent = t('wp_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="fade-in" style="padding:56px 0 80px;">
-      <div style="display:flex;align-items:center;gap:18px;margin-bottom:28px;">
-        <div class="skel-pulse" style="width:60px;height:60px;border-radius:50%;background:rgba(197,165,114,0.1);flex:0 0 auto;"></div>
-        <div style="flex:1;">
-          <div class="skel-pulse" style="height:11px;width:38%;background:rgba(197,165,114,0.14);border-radius:2px;margin-bottom:12px;"></div>
-          <div class="skel-pulse" style="height:30px;width:72%;background:rgba(245,240,232,0.07);border-radius:3px;"></div>
-        </div>
-      </div>
-      <div style="display:flex;gap:10px;margin-bottom:40px;">
-        <div class="skel-pulse" style="height:38px;width:150px;background:rgba(197,165,114,0.08);border-radius:100px;"></div>
-        <div class="skel-pulse" style="height:38px;width:180px;background:rgba(197,165,114,0.08);border-radius:100px;"></div>
-      </div>
-      <div class="skel-pulse" style="height:10px;width:120px;background:rgba(197,165,114,0.12);border-radius:2px;margin-bottom:18px;"></div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:44px;">
-        <div style="height:36px;width:130px;background:rgba(197,165,114,0.06);border:1px solid rgba(197,165,114,0.1);border-radius:3px;"></div>
-        <div style="height:36px;width:110px;background:rgba(197,165,114,0.06);border:1px solid rgba(197,165,114,0.1);border-radius:3px;"></div>
-        <div style="height:36px;width:150px;background:rgba(197,165,114,0.06);border:1px solid rgba(197,165,114,0.1);border-radius:3px;"></div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:14px;">
-        <div style="height:60px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-        <div style="height:60px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-      </div>
-    </div>`;
+  document.getElementById('app').innerHTML =
+    `<div class="state"><div class="state-kick">${t('loading')}</div></div>`;
 }
-
 function renderNotFound() {
-  document.getElementById('ctx-label').textContent = t('wp_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="state-screen">
-      <div class="state-icon" style="border:1px solid rgba(197,165,114,0.35);"><span style="color:rgba(197,165,114,0.75);font-size:27px;font-family:var(--serif);">?</span></div>
-      <div class="state-kick">${t('wp_nf_kick')}</div>
-      <h1 class="state-title">${t('wp_nf_title')}</h1>
-      <p class="state-body">${t('wp_nf_body')}</p>
-      <a class="wp-btn wp-btn-ghost" href="https://tastingandtoasting.com">${t('wp_explore')}</a>
-    </div>`;
+  stateScreen({ kick: t('wp_nf_kick'), title: t('wp_nf_title'), body: t('wp_nf_body'),
+    actions: `<div class="links">${exploreLink}</div>` });
 }
-
 function renderError() {
-  document.getElementById('ctx-label').textContent = t('wp_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="state-screen">
-      <div class="state-icon" style="border:1px solid rgba(200,101,79,0.5);"><span style="color:var(--err);font-size:24px;">↻</span></div>
-      <div class="state-kick">${t('wp_err_kick')}</div>
-      <h1 class="state-title">${t('wp_err_title')}</h1>
-      <p class="state-body">${t('wp_err_body')}</p>
-      <button type="button" class="wp-btn wp-btn-gold" id="retry-btn">${t('wp_retry')}</button>
-    </div>`;
+  stateScreen({ kick: t('wp_err_kick'), title: t('wp_err_title'), body: t('wp_err_body'),
+    actions: `<div class="links"><button class="btn" id="retry-btn">${t('wp_retry')}</button></div>` });
   document.getElementById('retry-btn').addEventListener('click', () => load());
 }
 
-function renderPassport(w, dna, services, wines, winesOk, ownershipConfirmed, ownershipBadge) {
+/* ---------- the passport -------------------------------------------------- */
+function renderPassport(w, dna, services, wines, winesOk) {
   document.getElementById('ctx-label').textContent = t('wp_ctx_ready');
-  const provisional = !ownershipConfirmed;
-  const initial = (w.name || '?').trim().charAt(0).toUpperCase() || '?';
-  const crestBg = provisional ? 'rgba(74,14,20,0.35)' : 'radial-gradient(circle at 35% 30%, #6b1620, #3a0a10)';
-  const crestBorder = provisional ? 'rgba(197,165,114,0.3)' : 'rgba(197,165,114,0.55)';
-  const crestColor = provisional ? 'rgba(197,165,114,0.7)' : '#C5A572';
-  const sm = statusMeta(w.verification_status);
-  const tags = dnaTags(dna);
+  setCrumbs([{ label: w.name, current: true }]);
 
-  const ownHtml = ownershipConfirmed ? `
-    <div class="own-badge">
-      <span class="own-icon" aria-hidden="true">✓</span>
-      <span class="own-label">${esc(ownershipBadge || t('wp_verified_winery'))}</span>
-    </div>` : '';
+  const place = [nz(w.locality), nz(w.region)].filter(Boolean).join(', ');
+  const placeLine = [place, nz(w.country)].filter(Boolean).join(' · ');
+  const founded = (w.founded_year != null && String(w.founded_year).trim() !== '')
+    ? `${t('founded')} ${w.founded_year}` : null;
+  const metaLine = [placeLine, founded].filter(Boolean).join(' · ');
 
-  const vsHtml = `
-    <div class="vs-pill">
-      <span class="vs-dot" style="background:${sm.dot};box-shadow:0 0 0 3px ${sm.halo};"></span>
-      <span class="vs-text">${t('wp_vs_prefix')} <strong>${t(sm.key)}</strong></span>
-    </div>`;
+  /* --- DNA band --- */
+  const cells = dna ? [
+    [t('family'), nz(dna.family)],
+    [t('land'), nz(dna.land_story)],
+    [t('philosophy'), nz(dna.philosophy)],
+    [t('story'), nz(dna.founding_story)],
+  ].filter(([, v]) => !!v) : [];
+  const dnaQuote = dna ? nz(dna.signature_quote) : null;
+  const dnaBand = (cells.length || dnaQuote) ? `
+    <section class="band dna">
+      <div class="eyebrow">${t('dna_title')}</div>
+      ${dnaQuote ? `<blockquote class="dna-quote">${esc(dnaQuote)}</blockquote>` : ''}
+      ${cells.length ? `<div class="dna-grid">${cells.map(([k, v]) => `
+        <div><div class="dna-k">${esc(k)}</div><div class="dna-v">${esc(v)}</div></div>`).join('')}</div>` : ''}
+    </section>` : '';
 
-  const dnaHtml = tags.length ? `
-    <div class="block">
-      <div class="sec-label sec-label-high">${t('wp_dna_label')}</div>
-      <div class="dna-tags">${tags.map(tag => `<span class="dna-tag">${esc(tag)}</span>`).join('')}</div>
-    </div>` : '';
-
-  const svcLabels = services.map(serviceLabel).filter(Boolean);
-  const svcHtml = svcLabels.length ? `
-    <div class="block block-divider">
-      <div class="sec-label sec-label-med">${t('wp_services_label')}</div>
-      <div class="svc-tags">${svcLabels.map(label => `<span class="svc-tag">${esc(label)}</span>`).join('')}</div>
-    </div>` : '';
-
-  let winesHtml = '';
+  /* --- the range: cards, as the canon --- */
+  let winesBand = '';
   if (winesOk) {
-    const winesInner = wines.length ? `
-      <div class="wines-list">${wines.map(wi => `
-        <a class="wp-wine-row" href="wine-passport.html?wineId=${encodeURIComponent(wi.id)}&winerySlug=${encodeURIComponent(slug)}${lp}">
-          <div class="wine-info">
-            <span class="wine-bottle" aria-hidden="true"></span>
+    const inner = wines.length ? `
+      <div class="vintages">${wines.map(wi => {
+        const meta = [enumLabel('color', wi.color), nz(wi.style)].filter(Boolean).join(' · ');
+        const img = nz(wi.hero_image_url);
+        return `<a class="vintage" href="wine-passport.html?wineId=${encodeURIComponent(wi.id)}&winerySlug=${encodeURIComponent(slug)}${keep}">
+          <div class="wy-wine">
+            ${img ? `<img class="wy-wine-img" src="${esc(img)}" alt="${esc(wi.name)}">` : ''}
             <div>
-              <div class="wine-name">${esc(wi.name)}</div>
-              ${wineMeta(wi) ? `<div class="wine-meta">${esc(wineMeta(wi))}</div>` : ''}
+              <div class="wy-wine-name">${esc(wi.name)}</div>
+              ${meta ? `<div class="v-meta">${esc(meta)}</div>` : ''}
             </div>
           </div>
-          <span class="wine-chev" aria-hidden="true">›</span>
-        </a>`).join('')}</div>` : `
-      <div class="wines-empty">
-        <div class="wines-empty-icon" aria-hidden="true"></div>
-        <div class="wines-empty-title">${t('wp_wines_empty')}</div>
-        <div class="wines-empty-sub">${t('wp_wines_empty_sub')}</div>
+        </a>`;
+      }).join('')}</div>` : `
+      <div class="v-empty">
+        <div class="v-empty-t">${t('wp_wines_empty')}</div>
+        <div class="v-empty-s">${t('wp_wines_empty_sub')}</div>
       </div>`;
-    winesHtml = `
-      <div class="block block-divider">
-        <div class="wines-head">
-          <div class="sec-label sec-label-med" style="margin:0;">${t('wp_wines_label')}</div>
-          <span class="wines-count">${wineCountLabel(wines.length)}</span>
-        </div>
-        ${winesInner}
-      </div>`;
+    winesBand = `
+      <section class="band">
+        <div class="eyebrow">${t('wines_title')}</div>
+        ${inner}
+      </section>`;
   }
 
-  const desc = (w.description || '').trim();
-  const descHtml = desc ? `
-    <div class="desc-block">
-      <p class="desc-text">${esc(desc)}</p>
-    </div>` : '';
+  /* --- services --- */
+  const svc = services.map(serviceLabel).filter(Boolean);
+  const svcBand = svc.length ? `
+    <section class="band">
+      <div class="eyebrow">${t('services_title')}</div>
+      <div class="chips">${svc.map(s => `<span class="chip">${esc(s)}</span>`).join('')}</div>
+    </section>` : '';
 
   document.getElementById('app').innerHTML = `
-    <article class="passport fade-in">
-      <div class="hero-row">
-        <div class="crest" style="background:${crestBg};border:1px solid ${crestBorder};">
-          <span class="crest-glyph" style="color:${crestColor};">${esc(initial)}</span>
+    <article class="fade-in">
+      <section class="wy-hero">
+        <div class="eyebrow eyebrow-strong">${t('winery_section')}</div>
+        <h1 class="wy-name">${esc(w.name)}</h1>
+        ${nz(w.tagline) ? `<p class="producer-tagline">${esc(w.tagline)}</p>` : ''}
+        ${metaLine ? `<div class="producer-place">${esc(metaLine)}</div>` : ''}
+        ${nz(w.description) ? `<p class="producer-text">${esc(w.description)}</p>` : ''}
+        <span class="pa-line">${t('pa_label')}</span>
+        ${nz(w.website_url) ? `<a class="site-link" href="${esc(w.website_url)}" target="_blank" rel="noopener">${esc(w.website_url)}</a>` : ''}
+      </section>
+
+      ${dnaBand}
+      ${winesBand}
+      ${svcBand}
+
+      <section class="band">
+        <div class="eyebrow eyebrow-muted">${t('wn_coming_label')}</div>
+        <div class="demo">
+          <div class="demo-badge">${t('wn_demo_badge')}</div>
+          <div class="demo-t">${t('wy_dash_title')}</div>
+          <div class="demo-b">${t('wy_dash_body')}</div>
+          <div class="demo-cta">${t('wy_dash_cta')}</div>
         </div>
-        <div>
-          <div class="hero-kick">${t('wp_kick')}</div>
-          <h1 class="hero-name">${esc(w.name)}</h1>
-        </div>
-      </div>
-      <div class="trust-row">${ownHtml}${vsHtml}</div>
-      ${dnaHtml}
-      ${svcHtml}
-      ${winesHtml}
-      ${descHtml}
+      </section>
     </article>`;
+
+  document.getElementById('foot').textContent = 'CAP · Tasting & Toasting';
 }
 
 async function load() {
@@ -309,28 +250,19 @@ async function load() {
     if (r.status === 404 || r.status === 400) { renderNotFound(); return; }
     if (!r.ok) { renderError(); return; }
     data = await r.json();
-  } catch (e) {
-    renderError();
-    return;
-  }
+  } catch (e) { renderError(); return; }
+  if (!data || !data.winery) { renderNotFound(); return; }
 
-  const w = data.winery;
-  const dna = data.dna || {};
-  const services = data.services || [];
-  const ownershipConfirmed = !!(data.ownership_confirmed ?? w.ownership_confirmed);
-  const ownershipBadge = data.ownership_badge ?? w.ownership_badge ?? null;
-
-  let wines = null;
+  /* The range is a second, optional read: if it fails the estate's passport
+     still renders in full, only without the wines band. */
+  let wines = [];
   let winesOk = false;
   try {
     const wr = await fetch(`${API}/wineries/${encodeURIComponent(slug)}/wines`);
-    if (wr.ok) {
-      wines = (await wr.json()).wines || [];
-      winesOk = true;
-    }
+    if (wr.ok) { wines = (await wr.json()).wines || []; winesOk = true; }
   } catch (e) {}
 
-  renderPassport(w, dna, services, wines || [], winesOk, ownershipConfirmed, ownershipBadge);
+  renderPassport(data.winery, data.dna || null, data.services || [], wines, winesOk);
 }
 
 CAP.wireSwitcher();
