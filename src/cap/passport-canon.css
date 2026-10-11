@@ -152,6 +152,21 @@ html[dir="rtl"] .demo-badge{right:auto;left:14px}
 .demo-cta{display:inline-flex;padding:9px 16px;border:1px solid rgba(197,165,114,0.35);border-radius:2px;
   font-family:var(--mono);font-size:12px;color:rgba(197,165,114,0.75)}
 
+/* ---- prose: the maker's running text and the maker's quote -------------- */
+/* Shared by the bottle and the vintage passport: the production note is text,
+   the tasting note is a voice, so they are two faces, not one. */
+.prose{font-size:14px;line-height:1.7;color:rgba(245,240,232,0.65);margin:28px 0 0;max-width:64ch}
+.prose-quote{font-family:var(--voice);font-style:italic;font-size:clamp(18px,3.2vw,20px);line-height:1.55;
+  color:var(--gold);margin:20px 0 0;max-width:56ch}
+
+/* ---- cross-links row: walk the chain between the four passports --------- */
+/* The approved passport's own link (tt-mobile app/v2/cap/bottle.tsx,
+   PassportLink): 12/22 padding, gold hairline, Inter 13. */
+.links{display:flex;gap:12px;flex-wrap:wrap}
+.xlink{display:inline-flex;align-items:center;padding:12px 22px;border:1px solid rgba(197,165,114,0.4);
+  border-radius:2px;font-size:13px;color:var(--gold);transition:border-color .15s,color .15s}
+.xlink:hover{border-color:var(--gold);color:var(--gold-soft)}
+
 /* ---- states ------------------------------------------------------------- */
 .state{min-height:58vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
   padding:64px var(--pad);gap:14px}
