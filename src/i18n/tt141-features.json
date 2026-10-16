@@ -765,7 +765,11 @@
     "join_field_label": "Game code",
     "join_submit": "Continue",
     "join_err_count": "Six characters, letters and digits. You have {n}.",
-    "join_err_empty": "Type the six characters from your host’s screen."
+    "join_err_empty": "Type the six characters from your host’s screen.",
+    "join_body_ok_v2": "This is the code for tonight’s tasting. You can take your seat from this phone, with or without the app.",
+    "join_play_web": "Play without installing",
+    "join_hint_web": "Opens the tasting in this phone’s browser. You sign up once, and the code above is kept for you, so you never type it again.",
+    "join_have_app_label": "Already have the app?"
   },
   "fr": {
     "sommelier_title": "Ton sommelier IA",
@@ -1533,7 +1537,11 @@
     "join_field_label": "Code de partie",
     "join_submit": "Continuer",
     "join_err_count": "Six caractères, lettres et chiffres. Vous en avez {n}.",
-    "join_err_empty": "Saisissez les six caractères affichés à l’écran du conférencier."
+    "join_err_empty": "Saisissez les six caractères affichés à l’écran du conférencier.",
+    "join_body_ok_v2": "C’est le code de la dégustation de ce soir. Vous pouvez prendre votre place depuis ce téléphone, avec ou sans l’application.",
+    "join_play_web": "Jouer sans rien installer",
+    "join_hint_web": "S’ouvre dans le navigateur de ce téléphone. Une inscription rapide suffit, et le code ci-dessus est conservé pour vous.",
+    "join_have_app_label": "Vous avez déjà l’application ?"
   },
   "ru": {
     "sommelier_title": "Твой ИИ-сомелье",
@@ -2301,7 +2309,11 @@
     "join_field_label": "Код игры",
     "join_submit": "Продолжить",
     "join_err_count": "Нужно шесть символов, буквы и цифры. У вас {n}.",
-    "join_err_empty": "Введите шесть символов с экрана лектора."
+    "join_err_empty": "Введите шесть символов с экрана лектора.",
+    "join_body_ok_v2": "Это код сегодняшней дегустации. Занять своё место можно прямо с этого телефона, с приложением или без него.",
+    "join_play_web": "Играть без установки",
+    "join_hint_web": "Откроется в браузере этого телефона. Понадобится быстрая регистрация, а код выше сохранится сам, вводить его заново не придётся.",
+    "join_have_app_label": "Приложение уже установлено?"
   },
   "es": {
     "sommelier_title": "Tu sommelier con IA",
@@ -3069,7 +3081,11 @@
     "join_field_label": "Código de partida",
     "join_submit": "Continuar",
     "join_err_count": "Seis caracteres, letras y números. Tienes {n}.",
-    "join_err_empty": "Escribe los seis caracteres de la pantalla del conferenciante."
+    "join_err_empty": "Escribe los seis caracteres de la pantalla del conferenciante.",
+    "join_body_ok_v2": "Este es el código de la cata de esta noche. Puedes ocupar tu sitio desde este teléfono, con o sin la aplicación.",
+    "join_play_web": "Jugar sin instalar nada",
+    "join_hint_web": "Se abre en el navegador de este teléfono. Basta con un registro rápido, y el código de arriba se guarda solo.",
+    "join_have_app_label": "¿Ya tienes la aplicación?"
   },
   "uk": {
     "sommelier_title": "Твій ІІ-сомельє",
@@ -3837,7 +3853,11 @@
     "join_field_label": "Код гри",
     "join_submit": "Продовжити",
     "join_err_count": "Потрібно шість символів, літери й цифри. У вас {n}.",
-    "join_err_empty": "Введіть шість символів з екрана лектора."
+    "join_err_empty": "Введіть шість символів з екрана лектора.",
+    "join_body_ok_v2": "Це код сьогоднішньої дегустації. Зайняти своє місце можна просто з цього телефона, із застосунком або без нього.",
+    "join_play_web": "Грати без встановлення",
+    "join_hint_web": "Відкриється у браузері цього телефона. Знадобиться швидка реєстрація, а код вище збережеться сам.",
+    "join_have_app_label": "Застосунок уже встановлено?"
   },
   "it": {
     "sommelier_title": "Il tuo sommelier IA",
@@ -4605,7 +4625,11 @@
     "join_field_label": "Codice di partita",
     "join_submit": "Continua",
     "join_err_count": "Sei caratteri, lettere e cifre. Tu ne hai {n}.",
-    "join_err_empty": "Digita i sei caratteri dallo schermo del relatore."
+    "join_err_empty": "Digita i sei caratteri dallo schermo del relatore.",
+    "join_body_ok_v2": "Questo è il codice della degustazione di stasera. Puoi prendere posto da questo telefono, con o senza l’app.",
+    "join_play_web": "Gioca senza installare nulla",
+    "join_hint_web": "Si apre nel browser di questo telefono. Basta una registrazione veloce e il codice qui sopra resta salvato.",
+    "join_have_app_label": "Hai già l’app?"
   },
   "de": {
     "sommelier_title": "Dein KI-Sommelier",
@@ -5373,7 +5397,11 @@
     "join_field_label": "Spielcode",
     "join_submit": "Weiter",
     "join_err_count": "Sechs Zeichen, Buchstaben und Ziffern. Sie haben {n}.",
-    "join_err_empty": "Tippen Sie die sechs Zeichen vom Bildschirm des Dozenten ein."
+    "join_err_empty": "Tippen Sie die sechs Zeichen vom Bildschirm des Dozenten ein.",
+    "join_body_ok_v2": "Das ist der Code für die heutige Verkostung. Sie können Ihren Platz direkt von diesem Telefon aus einnehmen, mit oder ohne App.",
+    "join_play_web": "Ohne Installation spielen",
+    "join_hint_web": "Öffnet sich im Browser dieses Telefons. Eine kurze Anmeldung genügt, der Code oben bleibt gespeichert.",
+    "join_have_app_label": "App schon installiert?"
   },
   "he": {
     "sommelier_title": "הסומלייה החכמה שלך",
@@ -6141,7 +6169,11 @@
     "join_field_label": "קוד משחק",
     "join_submit": "המשך",
     "join_err_count": "שישה תווים, אותיות וספרות. יש לך {n}.",
-    "join_err_empty": "הקלידו את שישה התווים מהמסך של המרצה."
+    "join_err_empty": "הקלידו את שישה התווים מהמסך של המרצה.",
+    "join_body_ok_v2": "זהו הקוד של הטעימה הערב. אפשר לתפוס את המקום ישירות מהטלפון הזה, עם האפליקציה או בלעדיה.",
+    "join_play_web": "לשחק בלי להתקין",
+    "join_hint_web": "נפתח בדפדפן של הטלפון הזה. נדרשת הרשמה קצרה, והקוד שלמעלה נשמר עבורכם.",
+    "join_have_app_label": "כבר יש לכם את האפליקציה?"
   },
   "pt": {
     "sommelier_title": "O teu sommelier de IA",
@@ -6909,7 +6941,11 @@
     "join_field_label": "Código de jogo",
     "join_submit": "Continuar",
     "join_err_count": "Seis caracteres, letras e dígitos. Tem {n}.",
-    "join_err_empty": "Escreva os seis caracteres do ecrã do palestrante."
+    "join_err_empty": "Escreva os seis caracteres do ecrã do palestrante.",
+    "join_body_ok_v2": "Este é o código da prova desta noite. Pode ocupar o seu lugar a partir deste telemóvel, com ou sem a aplicação.",
+    "join_play_web": "Jogar sem instalar nada",
+    "join_hint_web": "Abre no navegador deste telemóvel. Basta um registo rápido, e o código acima fica guardado.",
+    "join_have_app_label": "Já tem a aplicação?"
   },
   "ka": {
     "sommelier_title": "შენი AI სომელიე",
@@ -9159,6 +9195,10 @@
     "join_field_label": "Kod gry",
     "join_submit": "Dalej",
     "join_err_count": "Sześć znaków, litery i cyfry. Masz {n}.",
-    "join_err_empty": "Wpisz sześć znaków z ekranu wykładowcy."
+    "join_err_empty": "Wpisz sześć znaków z ekranu wykładowcy.",
+    "join_body_ok_v2": "To kod dzisiejszej degustacji. Możesz zająć miejsce prosto z tego telefonu, z aplikacją lub bez niej.",
+    "join_play_web": "Graj bez instalowania",
+    "join_hint_web": "Otworzy się w przeglądarce tego telefonu. Wystarczy szybka rejestracja, a kod powyżej zostanie zapamiętany.",
+    "join_have_app_label": "Masz już aplikację?"
   }
 }
