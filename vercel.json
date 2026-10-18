@@ -24,6 +24,20 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/wine-passport",
+      "has": [
+        {
+          "type": "query",
+          "key": "wineId",
+          "value": "(?<wineId>.*)"
+        }
+      ],
+      "destination": "https://web.tastingandtoasting.com/wine-passport?wineId=:wineId",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/.well-known/apple-app-site-association",
