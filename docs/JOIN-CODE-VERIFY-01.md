@@ -123,7 +123,7 @@
 
 ## 8. PR
 
-Ссылка: *(заполнить после `gh pr create`)*
+Ссылка: https://github.com/tasting-and-toasting/tt-landing/pull/23
 
 ---
 
