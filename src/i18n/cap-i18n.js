@@ -63,6 +63,7 @@
       fact_appellation:"Appellation", fact_style:"Style",
       wn_ctx_loading:"Wine passport", wn_ctx_ready:"Wine passport",
       wn_kick:"Wine", wn_facts_label:"Product identity",
+      wn_country:"Country", wn_address:"Address", wn_locality:"Locality",
       wn_vintages_label:"Vintages · walk down →", wn_vintages_one:"1 vintage", wn_vintages_many:"{n} vintages",
       wn_vintages_empty:"No vintages listed yet",
       wn_vintages_empty_sub:"This wine doesn't have vintages on its passport yet.",

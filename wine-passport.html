@@ -64,6 +64,11 @@ html[dir="rtl"] .up-link svg{transform:scaleX(-1);}
 .fact-cell{flex:1 1 130px;padding:14px 16px;border-right:1px solid rgba(197,165,114,0.08);}
 .fact-k{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;}
 .fact-v{font-family:var(--serif);font-size:16px;color:var(--cream);}
+.place-block{padding-top:0;}
+.place-list{border-bottom:1px solid rgba(197,165,114,0.1);}
+.place-row{padding:14px 0;min-width:0;max-width:100%;}
+.place-row + .place-row{border-top:1px solid rgba(197,165,114,0.08);}
+.place-v{overflow-wrap:anywhere;min-width:0;max-width:100%;}
 .vintages-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;}
 .vintages-count{font-size:11px;color:rgba(245,240,232,0.45);}
 .vintages-list{border-top:1px solid var(--line-soft);}
@@ -142,6 +147,22 @@ function wineFacts(w) {
   return facts;
 }
 
+function placeText(v) {
+  if (typeof v !== 'string') return '';
+  return v.trim();
+}
+
+function winePlace(w) {
+  const rows = [];
+  const country = placeText(w.winery_country);
+  const address = placeText(w.winery_address);
+  const locality = placeText(w.winery_locality);
+  if (country) rows.push([t('wn_country'), country]);
+  if (address) rows.push([t('wn_address'), address]);
+  if (locality) rows.push([t('wn_locality'), locality]);
+  return rows;
+}
+
 function vintageCountLabel(n) {
   return n === 1 ? t('wn_vintages_one') : t('wn_vintages_many').replace('{n}', String(n));
 }
@@ -205,6 +226,7 @@ function renderPassport(w, vs) {
   document.getElementById('ctx-label').textContent = t('wn_ctx_ready');
   const sm = statusMeta(w.verification_status);
   const facts = wineFacts(w);
+  const place = winePlace(w);
   const desc = (w.description || '').trim();
   const story = (w.story_text || '').trim();
 
@@ -216,6 +238,13 @@ function renderPassport(w, vs) {
       <span class="vs-dot" style="background:${sm.dot};box-shadow:0 0 0 3px ${sm.halo};"></span>
       <span class="vs-text">${t('wp_vs_prefix')} <strong>${t(sm.key)}</strong></span>
     </div>`;
+
+  const placeHtml = place.length ? `
+    <div class="block place-block">
+      <div class="place-list">${place.map(([k, v]) => `
+        <div class="place-row"><div class="fact-k">${esc(k)}</div><div class="fact-v place-v">${esc(v)}</div></div>`).join('')}
+      </div>
+    </div>` : '';
 
   const factsHtml = facts.length ? `
     <div class="block">
@@ -253,6 +282,7 @@ function renderPassport(w, vs) {
       <div class="hero-kick">${t('wn_kick')}</div>
       <h1 class="hero-name">${esc(w.name)}</h1>
       ${vsHtml}
+      ${placeHtml}
       ${factsHtml}
       <div class="block">
         <div class="vintages-head">
