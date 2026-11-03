@@ -3,95 +3,129 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vintage Passport · Tasting &amp; Toasting CAP</title>
+<title>Vintage Passport · CAP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="src/i18n/cap-i18n.js"></script>
 <style>
-:root{
-  --void:#0B0406; --cream:#F5F0E8; --gold:#C5A572; --gold-soft:#E0C48E;
-  --gold-dim:#8B7548; --line:rgba(197,165,114,0.14); --line-soft:rgba(197,165,114,0.12);
-  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
-  --green:#7FB069; --err:#C8654F;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:radial-gradient(ellipse at 26% -4%,rgba(74,14,20,0.42),transparent 56%),linear-gradient(180deg,#12060A,var(--void));color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;}
-a{color:var(--gold);text-decoration:none;}
-a:hover{color:var(--gold-soft);}
-.stage{max-width:720px;margin:0 auto;padding:0 24px;}
-@keyframes vt-pulse{0%,100%{opacity:0.4;}50%{opacity:0.85;}}
-@keyframes vt-fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
-.brandbar{height:58px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:14px;position:sticky;top:0;background:rgba(11,4,6,0.72);backdrop-filter:blur(10px);z-index:50;flex-wrap:wrap;}
-.brandbar-left{display:flex;align-items:center;gap:11px;}
-.brandmark{width:23px;height:23px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:12px;flex:0 0 auto;}
-.brandname{font-family:var(--serif);font-size:15px;color:var(--cream);}
-.ctx{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,240,232,0.4);}
-.lang-switcher-flags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end;max-width:340px;}
-.lang-flag-link{display:inline-flex;align-items:center;justify-content:center;width:30px;height:20px;border-radius:3px;overflow:hidden;border:1px solid var(--line);opacity:.78;transition:opacity .2s,border-color .2s,box-shadow .2s;}
+
+:root{--bg:#1A0B08;--cream:#F5F0E8;--gold:#C5A572;--dim:#8B7548;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#1A0B08;color:#F5F0E8;font-family:'Inter',system-ui,sans-serif;min-height:100vh;}
+body{overflow-x:auto;}
+img,svg{max-width:100%;}
+a{color:#C5A572;text-decoration:none;}
+a:hover{color:#F5F0E8;}
+button{font-family:inherit;}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;padding:16px clamp(16px,4vw,48px);border-bottom:1px solid rgba(197,165,114,0.16);flex-wrap:wrap;position:sticky;top:0;z-index:40;background:rgba(26,11,8,0.92);backdrop-filter:blur(10px);}
+.cap{font-family:'Fraunces',serif;font-weight:600;font-size:15px;letter-spacing:0.02em;color:#C5A572;flex:0 0 auto;}
+.crumb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;flex:1 1 180px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(245,240,232,0.5);}
+.crumb a{color:rgba(245,240,232,0.5);}
+.crumb a:hover{color:#F5F0E8;}
+.crumb .here{color:#C5A572;overflow-wrap:anywhere;}
+.sep{color:rgba(197,165,114,0.4);}
+.lang-switcher{flex:1 1 220px;display:flex;justify-content:flex-end;min-width:0;}
+.lang-switcher-flags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end;max-width:100%;}
+.lang-flag-link{display:inline-flex;align-items:center;justify-content:center;width:30px;height:20px;border-radius:3px;overflow:hidden;border:1px solid rgba(197,165,114,0.28);opacity:.78;}
 .lang-flag-link:hover{opacity:1;}
-.lang-flag-link.is-current-lang{opacity:1;border-color:var(--gold);box-shadow:0 0 0 1px rgba(197,165,114,0.35);}
+.lang-flag-link.is-current-lang{opacity:1;border-color:#C5A572;box-shadow:0 0 0 1px rgba(197,165,114,0.35);}
 .lang-flag-link svg{width:100%;height:100%;display:block;}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));border-bottom:1px solid rgba(197,165,114,0.16);}
+.plate{background:radial-gradient(ellipse at center, rgba(43,24,16,0.9), #0F0507 75%);padding:clamp(28px,6vw,56px) clamp(16px,4vw,48px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-width:0;}
+.copy{padding:clamp(28px,6vw,56px) clamp(16px,4vw,48px);display:flex;flex-direction:column;gap:14px;justify-content:center;min-width:0;}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#8B7548;}
+h1{font-family:'Fraunces',serif;font-weight:500;line-height:1.05;margin:0;overflow-wrap:anywhere;}
+.wine-name{font-size:clamp(32px,5vw,44px);}
+.year-name{font-size:clamp(42px,10vw,52px);line-height:1;}
+.wine-sub{font-size:15px;color:rgba(245,240,232,0.65);overflow-wrap:anywhere;}
+.chips{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{font-size:11px;letter-spacing:0.05em;text-transform:uppercase;padding:4px 10px;border:1px solid rgba(197,165,114,0.3);border-radius:2px;color:rgba(245,240,232,0.7);}
+.grapes{display:flex;gap:6px 10px;flex-wrap:wrap;}
+.grapes span{font-size:11px;color:#C5A572;}
+.appel{font-size:13px;color:rgba(245,240,232,0.55);overflow-wrap:anywhere;}
+.desc{font-size:15px;line-height:1.6;color:rgba(245,240,232,0.75);margin:6px 0 0;}
+.quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;line-height:1.5;color:#C5A572;margin:8px 0 0;padding-left:20px;border-left:2px solid rgba(197,165,114,0.4);}
+.tasting{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;line-height:1.55;color:#C5A572;margin:0;max-width:640px;}
+.notes{font-size:14px;line-height:1.6;color:rgba(245,240,232,0.65);margin:28px 0 0;max-width:640px;}
+.by{margin-top:10px;font-size:13px;color:rgba(245,240,232,0.55);overflow-wrap:anywhere;}
+.by:hover{color:#F5F0E8;}
+.vs{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(197,165,114,0.5);border-radius:2px;color:#C5A572;}
+.place{display:flex;flex-direction:column;gap:14px;margin-top:4px;}
+.place .k{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(245,240,232,0.4);margin-bottom:6px;}
+.place .v{font-family:'JetBrains Mono',monospace;font-size:14px;color:#F5F0E8;overflow-wrap:anywhere;display:flex;align-items:center;gap:8px;}
+.flag{display:inline-flex;width:16px;height:11px;border:1px solid rgba(197,165,114,0.35);overflow:hidden;flex:0 0 auto;}
+.flag svg{width:16px;height:11px;display:block;}
+.sec{padding:clamp(36px,6vw,64px) clamp(16px,4vw,48px);border-bottom:1px solid rgba(197,165,114,0.12);min-width:0;}
+.sec h2{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#8B7548;margin:0 0 28px;font-weight:400;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px;}
+.card{display:block;border:1px solid rgba(197,165,114,0.22);border-radius:2px;padding:22px 24px;min-width:0;}
+.card:hover{border-color:rgba(197,165,114,0.55);color:inherit;}
+.card .y{font-family:'Fraunces',serif;font-size:26px;color:#F5F0E8;margin-bottom:6px;}
+.card .m{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(245,240,232,0.45);overflow-wrap:anywhere;}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:24px;}
+.fact .k{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(245,240,232,0.4);margin-bottom:6px;}
+.fact .v{font-family:'JetBrains Mono',monospace;font-size:16px;color:#F5F0E8;overflow-wrap:anywhere;}
+.fact .v.small{font-size:14px;}
+.tasting-wrap{margin-top:24px;}
+.tasting-wrap .k{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(245,240,232,0.4);margin-bottom:8px;}
+.actions{padding:40px clamp(16px,4vw,48px);border-bottom:1px solid rgba(197,165,114,0.12);display:flex;gap:12px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border:1px solid rgba(197,165,114,0.4);border-radius:2px;font-size:13px;color:#C5A572;background:transparent;cursor:pointer;}
+.btn:hover{color:#F5F0E8;border-color:#C5A572;}
+.arrow{display:inline-block;}
+.state{min-height:64vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px;gap:18px;}
+.state h1{font-size:clamp(26px,5vw,32px);max-width:520px;line-height:1.3;}
+.state p{font-size:14px;color:rgba(245,240,232,0.55);max-width:440px;margin:0;}
+.state .kicker{color:rgba(197,165,114,0.6);}
+.empty{border:1px dashed rgba(197,165,114,0.3);border-radius:2px;padding:28px 32px;max-width:460px;}
+.empty .t{font-family:'Fraunces',serif;font-size:20px;margin-bottom:6px;}
+.empty .s{font-size:13px;color:rgba(245,240,232,0.55);}
+.photo-block{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;max-width:460px;}
+.frame{position:relative;width:min(100%,460px);height:340px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(197,165,114,0.16);border-radius:2px;background:rgba(197,165,114,0.03);padding:12px;cursor:zoom-in;color:inherit;}
+.frame img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;}
+.enlarge{position:absolute;right:10px;bottom:10px;padding:4px 10px;border:1px solid rgba(197,165,114,0.45);border-radius:2px;background:rgba(15,5,7,0.78);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#C5A572;opacity:0;transition:opacity .15s;}
+.frame:hover .enlarge,.frame:focus-visible .enlarge{opacity:1;}
+@media (hover:none){.enlarge{opacity:1;}}
+.credit,.photo-pos{font-family:'JetBrains Mono',monospace;font-size:11px;line-height:16px;color:rgba(245,240,232,0.62);text-align:center;overflow-wrap:anywhere;}
+.photo-pos{font-size:10px;color:rgba(245,240,232,0.4);}
+.thumbs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:100%;}
+.thumb{width:54px;height:54px;padding:4px;border:1px solid rgba(197,165,114,0.22);border-radius:2px;background:rgba(197,165,114,0.04);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.thumb.is-on{border-color:#C5A572;}
+.thumb img{max-width:100%;max-height:100%;object-fit:contain;}
+.sil{display:flex;align-items:center;justify-content:center;}
+.sil svg{height:100%;width:auto;display:block;}
+.sil-lg{height:340px;}
+.sil-md{height:280px;}
+.sil-anon{height:200px;opacity:0.8;}
+.skel{padding:52px clamp(16px,4vw,48px);}
+.bar{height:14px;border-radius:2px;background:rgba(197,165,114,0.14);animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:.85}}
+.lb{position:fixed;inset:0;z-index:80;background:rgba(15,5,7,0.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:64px 16px;}
+.lb[hidden]{display:none;}
+.lb img{max-width:min(100%,920px);max-height:calc(100vh - 160px);width:auto;height:auto;object-fit:contain;}
+.lb-x{position:absolute;top:16px;right:16px;width:44px;height:44px;border:1px solid rgba(197,165,114,0.45);background:transparent;color:#C5A572;font-size:22px;cursor:pointer;line-height:1;}
+.lb .credit{max-width:640px;}
+html[dir="rtl"] .top{flex-direction:row-reverse;}
+html[dir="rtl"] .crumb{flex-direction:row-reverse;}
+html[dir="rtl"] .lang-switcher{justify-content:flex-start;}
 html[dir="rtl"] .lang-switcher-flags{flex-direction:row-reverse;}
-html[dir="rtl"] .brandbar{flex-direction:row-reverse;}
-html[dir="rtl"] body{text-align:right;}
-html[dir="rtl"] .up-link svg{transform:scaleX(-1);}
-.skel-pulse{animation:vt-pulse 1.4s ease-in-out infinite;}
-.fade-in{animation:vt-fade 0.45s ease both;}
-.state-screen{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 0;animation:vt-fade 0.4s ease both;}
-.state-icon{width:64px;height:64px;margin:0 auto 24px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-.state-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;}
-.state-title{font-family:var(--serif);font-weight:500;font-size:31px;margin:0 0 14px;color:var(--cream);letter-spacing:-0.01em;}
-.state-body{font-size:14px;line-height:1.6;color:rgba(245,240,232,0.6);margin:0 0 30px;max-width:420px;}
-.vt-btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 26px;border-radius:3px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:filter .15s,border-color .15s,color .15s;font-family:var(--sans);}
-.vt-btn-gold{border:none;background:linear-gradient(180deg,var(--gold),#a98a55);color:#1A0B08;font-weight:600;}
-.vt-btn-gold:hover{filter:brightness(1.06);}
-.vt-btn-ghost{border:1px solid rgba(197,165,114,0.4);color:var(--gold);background:transparent;}
-.vt-btn-ghost:hover{border-color:rgba(197,165,114,0.7);color:var(--gold-soft);}
-.passport{padding:28px 0 96px;}
-.up-link{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;color:rgba(197,165,114,0.85);margin-bottom:22px;}
-.up-link span{color:rgba(245,240,232,0.65);transition:color .15s;}
-.up-link:hover span{color:var(--gold-soft);}
-.hero-row{display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;}
-.hero-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;}
-.hero-year{font-family:var(--serif);font-weight:500;font-size:clamp(72px,18vw,104px);line-height:0.9;color:var(--cream);letter-spacing:-0.02em;}
-.hero-side{padding-bottom:12px;}
-.hero-of{font-size:13px;color:rgba(245,240,232,0.6);margin-bottom:12px;}
-.hero-wine{font-family:var(--serif);font-size:22px;color:var(--cream);}
-.vs-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border:1px solid rgba(197,165,114,0.28);border-radius:100px;}
-.vs-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;}
-.vs-text{font-size:12px;color:rgba(245,240,232,0.8);white-space:nowrap;}
-.vs-text strong{color:var(--cream);font-weight:600;}
-.block{margin-top:36px;padding-top:32px;border-top:1px solid var(--line-soft);}
-.block-first{margin-top:44px;}
-.sec-label{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;}
-.facts-grid{display:flex;flex-wrap:wrap;border-top:1px solid rgba(197,165,114,0.1);border-bottom:1px solid rgba(197,165,114,0.1);}
-.fact-cell{flex:1 1 140px;padding:16px;border-right:1px solid rgba(197,165,114,0.08);}
-.fact-k{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;}
-.fact-v{font-family:var(--serif);font-size:18px;color:var(--cream);}
-.blend-list{display:flex;flex-direction:column;gap:12px;}
-.blend-row{}
-.blend-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:5px;}
-.blend-name{font-family:var(--serif);font-size:15px;color:var(--cream);}
-.blend-pct{font-size:12px;color:rgba(245,240,232,0.55);}
-.blend-bar{height:5px;background:rgba(197,165,114,0.12);border-radius:100px;overflow:hidden;}
-.blend-fill{height:100%;background:linear-gradient(90deg,#8B7548,#C5A572);border-radius:100px;}
-.chips{display:flex;gap:9px;flex-wrap:wrap;}
-.chip{padding:7px 14px;border:1px solid rgba(197,165,114,0.25);border-radius:100px;font-size:12.5px;color:rgba(245,240,232,0.82);}
-.notes-block{display:flex;flex-direction:column;gap:28px;}
-.note-kick{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
-.tasting-text{max-width:600px;font-size:14px;line-height:1.7;color:rgba(245,240,232,0.62);font-style:italic;font-family:var(--serif);margin:0;}
-.production-text{max-width:600px;font-size:13.5px;line-height:1.7;color:rgba(245,240,232,0.55);margin:0;}
-@media(max-width:600px){.brandbar{padding:9px 16px;}.stage{padding:0 16px;}.hero-row{flex-direction:column;align-items:flex-start;gap:16px;}}
+html[dir="rtl"] .quote{border-left:none;border-right:2px solid rgba(197,165,114,0.4);padding-left:0;padding-right:20px;}
+html[dir="rtl"] .arrow{transform:scaleX(-1);}
+html[dir="rtl"] .lb-x{right:auto;left:16px;}
+html[dir="rtl"] .enlarge{right:auto;left:10px;}
+@media (max-width:600px){
+  .frame{height:240px;}
+  .sil-lg{height:240px;}
+  .sil-md{height:210px;}
+  .quote{font-size:20px;}
+}
+
 </style>
 </head>
 <body>
-<header class="brandbar">
-  <div class="brandbar-left">
-    <div class="brandmark" aria-hidden="true">T</div>
-    <span class="brandname">Tasting &amp; Toasting</span>
-  </div>
-  <span class="ctx" id="ctx-label" data-i18n="vt_ctx_loading">Vintage passport</span>
+<header class="top">
+  <div class="cap">CAP</div>
+  <nav class="crumb" id="crumb" aria-label="CAP"></nav>
   <nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
     <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
     <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
@@ -107,212 +141,966 @@ html[dir="rtl"] .up-link svg{transform:scaleX(-1);}
     <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#dc143c"/></svg></a>
   </div></nav>
 </header>
-
-<main id="app" class="stage"></main>
-
+<main id="app"></main>
+<div class="lb" id="lb" hidden>
+  <button type="button" class="lb-x" id="lb-x" aria-label="Close">×</button>
+  <img alt="" data-photo="1">
+  <div class="credit"></div>
+</div>
 <script>
+
+const I18N = {
+  "en": {
+    "wine": "Wine",
+    "vintage": "Vintage",
+    "vintages": "Vintages",
+    "released": "released {date}",
+    "by": "by {name}",
+    "open_wine": "Open wine",
+    "visit_winery": "Visit winery",
+    "production": "Production",
+    "abv": "ABV",
+    "composition": "Composition",
+    "release": "Release date",
+    "ean": "EAN/UPC",
+    "tasting": "Tasting notes",
+    "nf": "Not found",
+    "nf_title": "We couldn't confirm this — this code isn't in our records.",
+    "nf_body": "Check the link and try again. If you believe this is an error, contact the producer directly.",
+    "draft": "Not yet published",
+    "draft_wine": "This wine hasn't been published by the producer yet.",
+    "draft_vintage": "This vintage hasn't been published by the producer yet.",
+    "draft_body": "Nothing is missing by mistake — the producer is still preparing it. This is different from an invalid or counterfeit code.",
+    "err": "Something went wrong",
+    "err_wine": "We couldn't load this wine.",
+    "err_vintage": "We couldn't load this vintage.",
+    "err_body": "A problem on our end. Please try again.",
+    "retry": "Try again",
+    "explore": "Explore Tasting & Toasting",
+    "empty_title": "No vintages listed yet",
+    "empty_sub": "This wine doesn't have vintages on its passport yet.",
+    "country": "Country",
+    "address": "Address",
+    "locality": "Locality",
+    "vs": "Verification status",
+    "vs_verified": "Verified",
+    "vs_review": "Under review",
+    "vs_submitted": "Submitted",
+    "vs_claimed": "Claimed",
+    "vs_rejected": "Not verified",
+    "enlarge": "Enlarge",
+    "photo_of": "Photo {i} of {n}",
+    "photo_alt": "Producer's photograph",
+    "close": "Close",
+    "credit": "© {name}, producer's website",
+    "source": "Source: {domain}"
+  },
+  "fr": {
+    "wine": "Vin",
+    "vintage": "Millésime",
+    "vintages": "Millésimes",
+    "released": "sorti le {date}",
+    "by": "par {name}",
+    "open_wine": "Ouvrir le vin",
+    "visit_winery": "Voir le domaine",
+    "production": "Élaboration",
+    "abv": "TAV",
+    "composition": "Assemblage",
+    "release": "Date de sortie",
+    "ean": "EAN/UPC",
+    "tasting": "Notes de dégustation",
+    "nf": "Introuvable",
+    "nf_title": "Nous n'avons pas pu confirmer ceci — ce code n'est pas dans nos registres.",
+    "nf_body": "Vérifiez le lien et réessayez. Si vous pensez qu'il s'agit d'une erreur, contactez le producteur directement.",
+    "draft": "Pas encore publié",
+    "draft_wine": "Le producteur n'a pas encore publié ce vin.",
+    "draft_vintage": "Le producteur n'a pas encore publié ce millésime.",
+    "draft_body": "Rien ne manque par erreur — le producteur le prépare encore. Ce n'est pas un code invalide ou contrefait.",
+    "err": "Un problème est survenu",
+    "err_wine": "Nous n'avons pas pu charger ce vin.",
+    "err_vintage": "Nous n'avons pas pu charger ce millésime.",
+    "err_body": "Un problème de notre côté. Veuillez réessayer.",
+    "retry": "Réessayer",
+    "explore": "Découvrir Tasting & Toasting",
+    "empty_title": "Aucun millésime indiqué",
+    "empty_sub": "Ce vin n'a pas encore de millésimes sur son passeport.",
+    "country": "Pays",
+    "address": "Adresse",
+    "locality": "Lieu",
+    "vs": "Statut de vérification",
+    "vs_verified": "Vérifié",
+    "vs_review": "En cours de vérification",
+    "vs_submitted": "Soumis",
+    "vs_claimed": "Déclaré",
+    "vs_rejected": "Non vérifié",
+    "enlarge": "Agrandir",
+    "photo_of": "Photo {i} sur {n}",
+    "photo_alt": "Photographie du producteur",
+    "close": "Fermer",
+    "credit": "© {name}, site du producteur",
+    "source": "Source : {domain}"
+  },
+  "ru": {
+    "wine": "Вино",
+    "vintage": "Урожай",
+    "vintages": "Урожаи",
+    "released": "выпуск {date}",
+    "by": "от {name}",
+    "open_wine": "Открыть вино",
+    "visit_winery": "Винодельня",
+    "production": "Производство",
+    "abv": "Крепость",
+    "composition": "Состав",
+    "release": "Дата выпуска",
+    "ean": "EAN/UPC",
+    "tasting": "Дегустационные заметки",
+    "nf": "Не найдено",
+    "nf_title": "Мы не смогли это подтвердить — этого кода нет в наших записях.",
+    "nf_body": "Проверьте ссылку и попробуйте снова. Если считаете, что это ошибка, свяжитесь с производителем напрямую.",
+    "draft": "Ещё не опубликовано",
+    "draft_wine": "Производитель ещё не опубликовал это вино.",
+    "draft_vintage": "Производитель ещё не опубликовал этот урожай.",
+    "draft_body": "Ничего не пропало по ошибке — производитель ещё готовит страницу. Это не недействительный и не поддельный код.",
+    "err": "Что-то пошло не так",
+    "err_wine": "Не удалось загрузить это вино.",
+    "err_vintage": "Не удалось загрузить этот урожай.",
+    "err_body": "Сбой на нашей стороне. Попробуйте ещё раз.",
+    "retry": "Повторить",
+    "explore": "Открыть Tasting & Toasting",
+    "empty_title": "Урожаи пока не указаны",
+    "empty_sub": "У этого вина на паспорте ещё нет урожаев.",
+    "country": "Страна",
+    "address": "Адрес",
+    "locality": "Местность",
+    "vs": "Статус проверки",
+    "vs_verified": "Подтверждено",
+    "vs_review": "На проверке",
+    "vs_submitted": "Подано",
+    "vs_claimed": "Заявлено",
+    "vs_rejected": "Не подтверждено",
+    "enlarge": "Увеличить",
+    "photo_of": "Фото {i} из {n}",
+    "photo_alt": "Фотография производителя",
+    "close": "Закрыть",
+    "credit": "© {name}, сайт производителя",
+    "source": "Источник: {domain}"
+  },
+  "es": {
+    "wine": "Vino",
+    "vintage": "Añada",
+    "vintages": "Añadas",
+    "released": "salida {date}",
+    "by": "por {name}",
+    "open_wine": "Abrir el vino",
+    "visit_winery": "Visitar la bodega",
+    "production": "Elaboración",
+    "abv": "Grado",
+    "composition": "Composición",
+    "release": "Fecha de salida",
+    "ean": "EAN/UPC",
+    "tasting": "Notas de cata",
+    "nf": "No encontrado",
+    "nf_title": "No pudimos confirmarlo: este código no está en nuestros registros.",
+    "nf_body": "Compruebe el enlace e inténtelo de nuevo. Si cree que es un error, contacte directamente con el productor.",
+    "draft": "Aún no publicado",
+    "draft_wine": "El productor aún no ha publicado este vino.",
+    "draft_vintage": "El productor aún no ha publicado esta añada.",
+    "draft_body": "No falta nada por error: el productor todavía lo está preparando. No es un código inválido ni falsificado.",
+    "err": "Algo ha fallado",
+    "err_wine": "No pudimos cargar este vino.",
+    "err_vintage": "No pudimos cargar esta añada.",
+    "err_body": "Un problema de nuestro lado. Inténtelo de nuevo.",
+    "retry": "Reintentar",
+    "explore": "Explorar Tasting & Toasting",
+    "empty_title": "Aún no hay añadas",
+    "empty_sub": "Este vino todavía no tiene añadas en su pasaporte.",
+    "country": "País",
+    "address": "Dirección",
+    "locality": "Localidad",
+    "vs": "Estado de verificación",
+    "vs_verified": "Verificado",
+    "vs_review": "En revisión",
+    "vs_submitted": "Enviado",
+    "vs_claimed": "Declarado",
+    "vs_rejected": "No verificado",
+    "enlarge": "Ampliar",
+    "photo_of": "Foto {i} de {n}",
+    "photo_alt": "Fotografía del productor",
+    "close": "Cerrar",
+    "credit": "© {name}, sitio del productor",
+    "source": "Fuente: {domain}"
+  },
+  "uk": {
+    "wine": "Вино",
+    "vintage": "Врожай",
+    "vintages": "Врожаї",
+    "released": "випуск {date}",
+    "by": "від {name}",
+    "open_wine": "Відкрити вино",
+    "visit_winery": "Виноробня",
+    "production": "Виробництво",
+    "abv": "Міцність",
+    "composition": "Склад",
+    "release": "Дата випуску",
+    "ean": "EAN/UPC",
+    "tasting": "Дегустаційні нотатки",
+    "nf": "Не знайдено",
+    "nf_title": "Ми не змогли це підтвердити — цього коду немає в наших записах.",
+    "nf_body": "Перевірте посилання і спробуйте знову. Якщо вважаєте, що це помилка, зверніться безпосередньо до виробника.",
+    "draft": "Ще не опубліковано",
+    "draft_wine": "Виробник ще не опублікував це вино.",
+    "draft_vintage": "Виробник ще не опублікував цей врожай.",
+    "draft_body": "Нічого не зникло через помилку — виробник ще готує сторінку. Це не недійсний і не підроблений код.",
+    "err": "Щось пішло не так",
+    "err_wine": "Не вдалося завантажити це вино.",
+    "err_vintage": "Не вдалося завантажити цей врожай.",
+    "err_body": "Збій на нашому боці. Спробуйте ще раз.",
+    "retry": "Повторити",
+    "explore": "Відкрити Tasting & Toasting",
+    "empty_title": "Врожаї ще не вказані",
+    "empty_sub": "У паспорта цього вина ще немає врожаїв.",
+    "country": "Країна",
+    "address": "Адреса",
+    "locality": "Місцевість",
+    "vs": "Статус перевірки",
+    "vs_verified": "Підтверджено",
+    "vs_review": "На перевірці",
+    "vs_submitted": "Подано",
+    "vs_claimed": "Заявлено",
+    "vs_rejected": "Не підтверджено",
+    "enlarge": "Збільшити",
+    "photo_of": "Фото {i} з {n}",
+    "photo_alt": "Фотографія виробника",
+    "close": "Закрити",
+    "credit": "© {name}, сайт виробника",
+    "source": "Джерело: {domain}"
+  },
+  "it": {
+    "wine": "Vino",
+    "vintage": "Annata",
+    "vintages": "Annate",
+    "released": "uscita {date}",
+    "by": "di {name}",
+    "open_wine": "Apri il vino",
+    "visit_winery": "Visita la cantina",
+    "production": "Produzione",
+    "abv": "Grado",
+    "composition": "Composizione",
+    "release": "Data di uscita",
+    "ean": "EAN/UPC",
+    "tasting": "Note di degustazione",
+    "nf": "Non trovato",
+    "nf_title": "Non siamo riusciti a confermarlo: questo codice non è nei nostri registri.",
+    "nf_body": "Controlla il link e riprova. Se credi che sia un errore, contatta direttamente il produttore.",
+    "draft": "Non ancora pubblicato",
+    "draft_wine": "Il produttore non ha ancora pubblicato questo vino.",
+    "draft_vintage": "Il produttore non ha ancora pubblicato questa annata.",
+    "draft_body": "Non manca nulla per errore: il produttore lo sta ancora preparando. Non è un codice non valido o contraffatto.",
+    "err": "Qualcosa è andato storto",
+    "err_wine": "Non siamo riusciti a caricare questo vino.",
+    "err_vintage": "Non siamo riusciti a caricare questa annata.",
+    "err_body": "Un problema dalla nostra parte. Riprova.",
+    "retry": "Riprova",
+    "explore": "Esplora Tasting & Toasting",
+    "empty_title": "Nessuna annata indicata",
+    "empty_sub": "Questo vino non ha ancora annate sul suo passaporto.",
+    "country": "Paese",
+    "address": "Indirizzo",
+    "locality": "Località",
+    "vs": "Stato di verifica",
+    "vs_verified": "Verificato",
+    "vs_review": "In revisione",
+    "vs_submitted": "Inviato",
+    "vs_claimed": "Dichiarato",
+    "vs_rejected": "Non verificato",
+    "enlarge": "Ingrandisci",
+    "photo_of": "Foto {i} di {n}",
+    "photo_alt": "Fotografia del produttore",
+    "close": "Chiudi",
+    "credit": "© {name}, sito del produttore",
+    "source": "Fonte: {domain}"
+  },
+  "de": {
+    "wine": "Wein",
+    "vintage": "Jahrgang",
+    "vintages": "Jahrgänge",
+    "released": "erschienen {date}",
+    "by": "von {name}",
+    "open_wine": "Wein öffnen",
+    "visit_winery": "Weingut besuchen",
+    "production": "Ausbau",
+    "abv": "Alkohol",
+    "composition": "Zusammensetzung",
+    "release": "Erscheinungsdatum",
+    "ean": "EAN/UPC",
+    "tasting": "Verkostungsnotiz",
+    "nf": "Nicht gefunden",
+    "nf_title": "Wir konnten das nicht bestätigen — dieser Code steht nicht in unseren Unterlagen.",
+    "nf_body": "Prüfen Sie den Link und versuchen Sie es erneut. Wenn Sie einen Fehler vermuten, wenden Sie sich direkt an den Erzeuger.",
+    "draft": "Noch nicht veröffentlicht",
+    "draft_wine": "Der Erzeuger hat diesen Wein noch nicht veröffentlicht.",
+    "draft_vintage": "Der Erzeuger hat diesen Jahrgang noch nicht veröffentlicht.",
+    "draft_body": "Es fehlt nichts aus Versehen — der Erzeuger bereitet es noch vor. Das ist kein ungültiger oder gefälschter Code.",
+    "err": "Etwas ist schiefgelaufen",
+    "err_wine": "Wir konnten diesen Wein nicht laden.",
+    "err_vintage": "Wir konnten diesen Jahrgang nicht laden.",
+    "err_body": "Ein Problem auf unserer Seite. Bitte erneut versuchen.",
+    "retry": "Erneut versuchen",
+    "explore": "Tasting & Toasting entdecken",
+    "empty_title": "Noch keine Jahrgänge",
+    "empty_sub": "Dieser Wein hat auf seinem Pass noch keine Jahrgänge.",
+    "country": "Land",
+    "address": "Adresse",
+    "locality": "Ort",
+    "vs": "Prüfstatus",
+    "vs_verified": "Geprüft",
+    "vs_review": "In Prüfung",
+    "vs_submitted": "Eingereicht",
+    "vs_claimed": "Beansprucht",
+    "vs_rejected": "Nicht geprüft",
+    "enlarge": "Vergrößern",
+    "photo_of": "Foto {i} von {n}",
+    "photo_alt": "Foto des Erzeugers",
+    "close": "Schließen",
+    "credit": "© {name}, Website des Erzeugers",
+    "source": "Quelle: {domain}"
+  },
+  "he": {
+    "wine": "יין",
+    "vintage": "בציר",
+    "vintages": "בצירים",
+    "released": "יצא {date}",
+    "by": "מאת {name}",
+    "open_wine": "פתיחת היין",
+    "visit_winery": "אל היקב",
+    "production": "ייצור",
+    "abv": "אלכוהול",
+    "composition": "הרכב",
+    "release": "תאריך יציאה",
+    "ean": "EAN/UPC",
+    "tasting": "רשמי טעימה",
+    "nf": "לא נמצא",
+    "nf_title": "לא הצלחנו לאשר זאת — הקוד הזה אינו ברשומות שלנו.",
+    "nf_body": "בדקו את הקישור ונסו שוב. אם זו טעות לדעתכם, פנו ישירות ליצרן.",
+    "draft": "עדיין לא פורסם",
+    "draft_wine": "היצרן עדיין לא פרסם את היין הזה.",
+    "draft_vintage": "היצרן עדיין לא פרסם את הבציר הזה.",
+    "draft_body": "דבר לא חסר בטעות — היצרן עדיין מכין אותו. זה אינו קוד לא תקין או מזויף.",
+    "err": "משהו השתבש",
+    "err_wine": "לא הצלחנו לטעון את היין הזה.",
+    "err_vintage": "לא הצלחנו לטעון את הבציר הזה.",
+    "err_body": "תקלה אצלנו. נסו שוב.",
+    "retry": "נסו שוב",
+    "explore": "אל Tasting & Toasting",
+    "empty_title": "עדיין אין בצירים",
+    "empty_sub": "ליין הזה עדיין אין בצירים בדרכון.",
+    "country": "מדינה",
+    "address": "כתובת",
+    "locality": "מקום",
+    "vs": "סטטוס אימות",
+    "vs_verified": "מאומת",
+    "vs_review": "בבדיקה",
+    "vs_submitted": "הוגש",
+    "vs_claimed": "הוצהר",
+    "vs_rejected": "לא מאומת",
+    "enlarge": "הגדלה",
+    "photo_of": "תמונה {i} מתוך {n}",
+    "photo_alt": "צילום של היצרן",
+    "close": "סגירה",
+    "credit": "© {name}, אתר היצרן",
+    "source": "מקור: {domain}"
+  },
+  "pt": {
+    "wine": "Vinho",
+    "vintage": "Colheita",
+    "vintages": "Colheitas",
+    "released": "lançado {date}",
+    "by": "por {name}",
+    "open_wine": "Abrir o vinho",
+    "visit_winery": "Visitar a quinta",
+    "production": "Produção",
+    "abv": "Teor",
+    "composition": "Composição",
+    "release": "Data de lançamento",
+    "ean": "EAN/UPC",
+    "tasting": "Notas de prova",
+    "nf": "Não encontrado",
+    "nf_title": "Não conseguimos confirmar isto — este código não está nos nossos registos.",
+    "nf_body": "Verifique a ligação e tente de novo. Se achar que é um erro, contacte o produtor diretamente.",
+    "draft": "Ainda não publicado",
+    "draft_wine": "O produtor ainda não publicou este vinho.",
+    "draft_vintage": "O produtor ainda não publicou esta colheita.",
+    "draft_body": "Nada falta por engano — o produtor ainda o está a preparar. Não é um código inválido nem falsificado.",
+    "err": "Algo correu mal",
+    "err_wine": "Não conseguimos carregar este vinho.",
+    "err_vintage": "Não conseguimos carregar esta colheita.",
+    "err_body": "Um problema do nosso lado. Tente novamente.",
+    "retry": "Tentar de novo",
+    "explore": "Explorar Tasting & Toasting",
+    "empty_title": "Ainda sem colheitas",
+    "empty_sub": "Este vinho ainda não tem colheitas no passaporte.",
+    "country": "País",
+    "address": "Morada",
+    "locality": "Localidade",
+    "vs": "Estado de verificação",
+    "vs_verified": "Verificado",
+    "vs_review": "Em revisão",
+    "vs_submitted": "Submetido",
+    "vs_claimed": "Declarado",
+    "vs_rejected": "Não verificado",
+    "enlarge": "Ampliar",
+    "photo_of": "Foto {i} de {n}",
+    "photo_alt": "Fotografia do produtor",
+    "close": "Fechar",
+    "credit": "© {name}, sítio do produtor",
+    "source": "Fonte: {domain}"
+  },
+  "ka": {
+    "wine": "ღვინო",
+    "vintage": "მოსავალი",
+    "vintages": "მოსავლები",
+    "released": "გამოშვება {date}",
+    "by": "ავტორი {name}",
+    "open_wine": "ღვინის გახსნა",
+    "visit_winery": "მარანი",
+    "production": "წარმოება",
+    "abv": "სიმაგრე",
+    "composition": "შემადგენლობა",
+    "release": "გამოშვების თარიღი",
+    "ean": "EAN/UPC",
+    "tasting": "დეგუსტაციის ჩანაწერი",
+    "nf": "ვერ მოიძებნა",
+    "nf_title": "ამას ვერ დავადასტურებთ — ეს კოდი ჩვენს ჩანაწერებში არ არის.",
+    "nf_body": "შეამოწმეთ ბმული და სცადეთ ხელახლა. თუ ეს შეცდომაა, დაუკავშირდით მწარმოებელს პირდაპირ.",
+    "draft": "ჯერ არ გამოქვეყნებულა",
+    "draft_wine": "მწარმოებელს ეს ღვინო ჯერ არ გამოუქვეყნებია.",
+    "draft_vintage": "მწარმოებელს ეს მოსავალი ჯერ არ გამოუქვეყნებია.",
+    "draft_body": "არაფერი დაკარგულა შეცდომით — მწარმოებელი ჯერ ამზადებს. ეს არ არის უვარგისი ან ყალბი კოდი.",
+    "err": "რაღაც არასწორად წავიდა",
+    "err_wine": "ამ ღვინის ჩატვირთვა ვერ მოხერხდა.",
+    "err_vintage": "ამ მოსავლის ჩატვირთვა ვერ მოხერხდა.",
+    "err_body": "შეცდომა ჩვენს მხარესაა. სცადეთ ხელახლა.",
+    "retry": "ხელახლა",
+    "explore": "Tasting & Toasting",
+    "empty_title": "მოსავლები ჯერ არ არის",
+    "empty_sub": "ამ ღვინის პასპორტზე მოსავლები ჯერ არაა.",
+    "country": "ქვეყანა",
+    "address": "მისამართი",
+    "locality": "ადგილი",
+    "vs": "შემოწმების სტატუსი",
+    "vs_verified": "დადასტურებული",
+    "vs_review": "შემოწმებაზე",
+    "vs_submitted": "გაგზავნილი",
+    "vs_claimed": "განაცხადებული",
+    "vs_rejected": "არ არის დადასტურებული",
+    "enlarge": "გადიდება",
+    "photo_of": "ფოტო {i} / {n}",
+    "photo_alt": "მწარმოებლის ფოტო",
+    "close": "დახურვა",
+    "credit": "© {name}, მწარმოებლის საიტი",
+    "source": "წყარო: {domain}"
+  },
+  "ro": {
+    "wine": "Vin",
+    "vintage": "Recoltă",
+    "vintages": "Recolte",
+    "released": "lansat {date}",
+    "by": "de {name}",
+    "open_wine": "Deschide vinul",
+    "visit_winery": "Vizitează crama",
+    "production": "Producție",
+    "abv": "Alcool",
+    "composition": "Compoziție",
+    "release": "Data lansării",
+    "ean": "EAN/UPC",
+    "tasting": "Note de degustare",
+    "nf": "Negăsit",
+    "nf_title": "Nu am putut confirma — acest cod nu este în evidențele noastre.",
+    "nf_body": "Verificați legătura și încercați din nou. Dacă credeți că este o eroare, contactați producătorul direct.",
+    "draft": "Încă nepublicat",
+    "draft_wine": "Producătorul nu a publicat încă acest vin.",
+    "draft_vintage": "Producătorul nu a publicat încă această recoltă.",
+    "draft_body": "Nu lipsește nimic din greșeală — producătorul încă îl pregătește. Nu este un cod invalid sau contrafăcut.",
+    "err": "Ceva nu a mers bine",
+    "err_wine": "Nu am putut încărca acest vin.",
+    "err_vintage": "Nu am putut încărca această recoltă.",
+    "err_body": "O problemă de partea noastră. Încercați din nou.",
+    "retry": "Încearcă din nou",
+    "explore": "Explorează Tasting & Toasting",
+    "empty_title": "Nicio recoltă încă",
+    "empty_sub": "Acest vin nu are încă recolte în pașaport.",
+    "country": "Țară",
+    "address": "Adresă",
+    "locality": "Localitate",
+    "vs": "Stare de verificare",
+    "vs_verified": "Verificat",
+    "vs_review": "În verificare",
+    "vs_submitted": "Trimis",
+    "vs_claimed": "Declarat",
+    "vs_rejected": "Neverificat",
+    "enlarge": "Mărește",
+    "photo_of": "Foto {i} din {n}",
+    "photo_alt": "Fotografia producătorului",
+    "close": "Închide",
+    "credit": "© {name}, site-ul producătorului",
+    "source": "Sursă: {domain}"
+  },
+  "pl": {
+    "wine": "Wino",
+    "vintage": "Rocznik",
+    "vintages": "Roczniki",
+    "released": "wydany {date}",
+    "by": "od {name}",
+    "open_wine": "Otwórz wino",
+    "visit_winery": "Odwiedź winnicę",
+    "production": "Produkcja",
+    "abv": "Alkohol",
+    "composition": "Skład",
+    "release": "Data wydania",
+    "ean": "EAN/UPC",
+    "tasting": "Notatki degustacyjne",
+    "nf": "Nie znaleziono",
+    "nf_title": "Nie udało się tego potwierdzić — tego kodu nie ma w naszych zapisach.",
+    "nf_body": "Sprawdź link i spróbuj ponownie. Jeśli uważasz, że to błąd, skontaktuj się bezpośrednio z producentem.",
+    "draft": "Jeszcze nieopublikowane",
+    "draft_wine": "Producent nie opublikował jeszcze tego wina.",
+    "draft_vintage": "Producent nie opublikował jeszcze tego rocznika.",
+    "draft_body": "Nic nie zginęło przez pomyłkę — producent nadal to przygotowuje. To nie jest nieważny ani fałszywy kod.",
+    "err": "Coś poszło nie tak",
+    "err_wine": "Nie udało się wczytać tego wina.",
+    "err_vintage": "Nie udało się wczytać tego rocznika.",
+    "err_body": "Problem po naszej stronie. Spróbuj ponownie.",
+    "retry": "Spróbuj ponownie",
+    "explore": "Otwórz Tasting & Toasting",
+    "empty_title": "Brak roczników",
+    "empty_sub": "To wino nie ma jeszcze roczników w paszporcie.",
+    "country": "Kraj",
+    "address": "Adres",
+    "locality": "Miejscowość",
+    "vs": "Status weryfikacji",
+    "vs_verified": "Zweryfikowane",
+    "vs_review": "W trakcie weryfikacji",
+    "vs_submitted": "Złożone",
+    "vs_claimed": "Zgłoszone",
+    "vs_rejected": "Niezweryfikowane",
+    "enlarge": "Powiększ",
+    "photo_of": "Zdjęcie {i} z {n}",
+    "photo_alt": "Zdjęcie producenta",
+    "close": "Zamknij",
+    "credit": "© {name}, strona producenta",
+    "source": "Źródło: {domain}"
+  }
+};
+const MONTHS = {"en": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], "fr": ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."], "ru": ["янв.", "февр.", "мар.", "апр.", "мая", "июн.", "июл.", "авг.", "сент.", "окт.", "нояб.", "дек."], "es": ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"], "uk": ["січ.", "лют.", "бер.", "квіт.", "трав.", "черв.", "лип.", "серп.", "вер.", "жовт.", "лист.", "груд."], "it": ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"], "de": ["Jan.", "Feb.", "März", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sep.", "Okt.", "Nov.", "Dez."], "he": ["ינו׳", "פבר׳", "מרץ", "אפר׳", "מאי", "יוני", "יולי", "אוג׳", "ספט׳", "אוק׳", "נוב׳", "דצמ׳"], "pt": ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"], "ka": ["იან", "თებ", "მარ", "აპრ", "მაი", "ივნ", "ივლ", "აგვ", "სექ", "ოქტ", "ნოე", "დეკ"], "ro": ["ian.", "feb.", "mar.", "apr.", "mai", "iun.", "iul.", "aug.", "sep.", "oct.", "nov.", "dec."], "pl": ["sty", "lut", "mar", "kwi", "maj", "cze", "lip", "sie", "wrz", "paź", "lis", "gru"]};
 const qs = new URLSearchParams(location.search);
-const vintageId = (qs.get('vintageId') || '').trim();
-const winerySlug = (qs.get('winerySlug') || qs.get('slug') || '').trim();
 const lang = CAP.lang;
-const lp = lang === 'en' ? '' : ('&lang=' + lang);
 const t = CAP.t;
 const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-function statusMeta(status) {
+function L(key) {
+  const pack = I18N[lang] || I18N.en;
+  if (pack[key] != null) return pack[key];
+  return I18N.en[key] != null ? I18N.en[key] : key;
+}
+function fill(s, map) {
+  return String(s).replace(/\{(\w+)\}/g, (_, k) => map[k] == null ? '' : String(map[k]));
+}
+function nonEmpty(v) {
+  if (v == null) return '';
+  const s = String(v).trim();
+  return s;
+}
+function href(page, params) {
+  const local = /\.html$/i.test(location.pathname);
+  const path = local ? (page + '.html') : ('/' + page);
+  const q = new URLSearchParams();
+  Object.keys(params || {}).forEach(k => {
+    const v = params[k];
+    if (v != null && String(v).trim() !== '') q.set(k, String(v));
+  });
+  if (lang && lang !== 'en') q.set('lang', lang);
+  const apiQs = qs.get('api');
+  if (apiQs) q.set('api', apiQs);
+  const s = q.toString();
+  return path + (s ? '?' + s : '');
+}
+const PHOTO_HOSTS = [
+  { host: 'bdxfamilies.fr', name: 'BDX Families' },
+  { host: 'bordeauxfamilies.fr', name: 'BDX Families' },
+  { host: 'pfaffenheim.com', name: 'Cave de Pfaffenheim' }
+];
+function photoHost(url) {
+  const m = /^https?:\/\/([^/?#]+)/i.exec(String(url || '').trim());
+  if (!m) return null;
+  const host = (m[1].split('@').pop() || '').split(':')[0].trim().toLowerCase().replace(/^www\./, '');
+  return host && host.indexOf('.') !== -1 ? host : null;
+}
+function photoCredit(url) {
+  const host = photoHost(url);
+  if (!host) return null;
+  const named = PHOTO_HOSTS.find(c => host === c.host || host.endsWith('.' + c.host));
+  return named ? { kind: 'producer', name: named.name } : { kind: 'domain', domain: host };
+}
+function creditText(c) {
+  if (!c) return '';
+  if (c.kind === 'producer') return fill(L('credit'), { name: c.name });
+  return fill(L('source'), { domain: c.domain });
+}
+function collectPhotos(urls) {
+  const out = [];
+  const seen = Object.create(null);
+  (urls || []).forEach(raw => {
+    const url = typeof raw === 'string' ? raw.trim() : '';
+    if (!url || seen[url] || deadPhotos[url]) return;
+    const credit = photoCredit(url);
+    if (!credit) return;
+    seen[url] = 1;
+    out.push({ url: url, credit: credit });
+  });
+  return out;
+}
+function hBands(colors) {
+  return '<svg viewBox="0 0 3 ' + colors.length + '" aria-hidden="true">' + colors.map((c,i) => '<rect y="' + i + '" width="3" height="1" fill="' + c + '"/>').join('') + '</svg>';
+}
+function vBands(colors) {
+  return '<svg viewBox="0 0 ' + colors.length + ' 2" aria-hidden="true">' + colors.map((c,i) => '<rect x="' + i + '" width="1" height="2" fill="' + c + '"/>').join('') + '</svg>';
+}
+const FLAG_V = {
+  italy:['#009246','#fff','#ce2b37'], france:['#0055a4','#fff','#ef4135'], belgium:['#000','#fdda24','#ef3340'],
+  ireland:['#169b62','#fff','#ff883e'], romania:['#002b7f','#fcd116','#ce1126'], mexico:['#006847','#fff','#ce1126'],
+  canada:['#d52b1e','#fff','#d52b1e']
+};
+const FLAG_H = {
+  germany:['#000','#D00','#FFCE00'], austria:['#ed2939','#fff','#ed2939'], luxembourg:['#E4193C','#FFFFFF','#00A1DE'],
+  netherlands:['#AE1C28','#FFF','#21468B'], russia:['#fff','#0039a6','#d52b1e'], hungary:['#ce2939','#fff','#477050'],
+  bulgaria:['#fff','#00966e','#d62612'], poland:['#fff','#dc143c'], ukraine:['#005BBB','#FFD500'],
+  argentina:['#74acdf','#fff','#74acdf']
+};
+const FLAG_SPECIAL = {
+  spain:'<svg viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="2" fill="#c60b1e"/><rect y="0.5" width="3" height="1" fill="#ffc400"/></svg>',
+  portugal:'<svg viewBox="0 0 3 2" aria-hidden="true"><rect width="1.2" height="2" fill="#006600"/><rect x="1.2" width="1.8" height="2" fill="#ff0000"/><circle cx="0.75" cy="1" r="0.28" fill="#ffd900"/></svg>',
+  switzerland:'<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#d52b1e"/><rect x="13" y="6" width="6" height="20" fill="#fff"/><rect x="6" y="13" width="20" height="6" fill="#fff"/></svg>',
+  japan:'<svg viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="2" fill="#fff"/><circle cx="1.5" cy="1" r="0.55" fill="#bc002d"/></svg>',
+  greece:'<svg viewBox="0 0 27 18" aria-hidden="true"><rect width="27" height="18" fill="#0d5eaf"/><g fill="#fff"><rect y="2" width="27" height="2"/><rect y="6" width="27" height="2"/><rect y="10" width="27" height="2"/><rect y="14" width="27" height="2"/></g><rect width="10" height="10" fill="#0d5eaf"/><rect y="4" width="10" height="2" fill="#fff"/><rect x="4" width="2" height="10" fill="#fff"/></svg>',
+  chile:'<svg viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="1" fill="#fff"/><rect y="1" width="3" height="1" fill="#d52b1e"/><rect width="1" height="1" fill="#0039a6"/><polygon points="0.5,0.22 0.58,0.46 0.84,0.46 0.63,0.6 0.71,0.84 0.5,0.7 0.29,0.84 0.37,0.6 0.16,0.46 0.42,0.46" fill="#fff"/></svg>',
+  brazil:'<svg viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#009c3b"/><polygon points="10,1.2 18.5,7 10,12.8 1.5,7" fill="#ffdf00"/><circle cx="10" cy="7" r="2.3" fill="#002776"/></svg>',
+  china:'<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#de2910"/><polygon points="6,2.2 6.7,4.3 8.9,4.3 7.1,5.6 7.8,7.7 6,6.4 4.2,7.7 4.9,5.6 3.1,4.3 5.3,4.3" fill="#ffde00"/></svg>',
+  turkey:'<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11.2" cy="10" r="4.2" fill="#fff"/><circle cx="12.6" cy="10" r="3.3" fill="#e30a17"/><polygon points="16.2,10 18.6,10.8 17.1,8.6 18.4,11.6 16,11" fill="#fff"/></svg>',
+  england:'<svg viewBox="0 0 30 18" aria-hidden="true"><rect width="30" height="18" fill="#fff"/><rect x="13" width="4" height="18" fill="#ce1124"/><rect y="7" width="30" height="4" fill="#ce1124"/></svg>',
+  uk:'<svg viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>',
+  us:'<svg viewBox="0 0 19 10" aria-hidden="true"><rect width="19" height="10" fill="#b22234"/><g fill="#fff"><rect y="1" width="19" height="1"/><rect y="3" width="19" height="1"/><rect y="5" width="19" height="1"/><rect y="7" width="19" height="1"/><rect y="9" width="19" height="1"/></g><rect width="8" height="5.4" fill="#3c3b6e"/></svg>',
+  georgia:'<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect x="12.5" width="5" height="20" fill="#FF0000"/><rect y="7.5" width="30" height="5" fill="#FF0000"/><rect x="1" y="1" width="2" height="6" fill="#FF0000"/><rect y="3" width="4" height="2" fill="#FF0000"/><rect x="24" y="1" width="2" height="6" fill="#FF0000"/><rect x="23" y="3" width="4" height="2" fill="#FF0000"/><rect x="1" y="13" width="2" height="6" fill="#FF0000"/><rect y="15" width="4" height="2" fill="#FF0000"/><rect x="24" y="13" width="2" height="6" fill="#FF0000"/><rect x="23" y="15" width="4" height="2" fill="#FF0000"/></svg>',
+  israel:'<svg viewBox="0 0 6 4" aria-hidden="true"><rect width="6" height="4" fill="#fff"/><rect y="0.45" width="6" height="0.42" fill="#0038b8"/><rect y="3.13" width="6" height="0.42" fill="#0038b8"/><g fill="none" stroke="#0038b8" stroke-width="0.12" transform="translate(3 2.05)"><polygon points="0,-0.7 0.6,0.38 -0.6,0.38"/><polygon points="0,0.7 -0.6,-0.38 0.6,-0.38"/></g></svg>',
+  moldova:'<svg viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#003DA5"/><rect x="1" width="1" height="2" fill="#FFD100"/><rect x="2" width="1" height="2" fill="#CC0000"/></svg>',
+  czechia:'<svg viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="1" fill="#fff"/><rect y="1" width="3" height="1" fill="#d7141a"/><polygon points="0,0 1.15,1 0,2" fill="#11457e"/></svg>',
+  lebanon:'<svg viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="2" fill="#fff"/><rect width="3" height="0.45" fill="#d0102a"/><rect y="1.55" width="3" height="0.45" fill="#d0102a"/><polygon points="1.5,0.6 1.7,1.15 1.5,1.05 1.3,1.15" fill="#007a3d"/></svg>'
+};
+const FLAG_ALIAS = {
+  italy:'italy', italia:'italy', it:'italy', 'италия':'italy',
+  france:'france', fr:'france', 'франция':'france',
+  spain:'spain', espana:'spain', es:'spain', 'испания':'spain',
+  portugal:'portugal', pt:'portugal', 'португалия':'portugal',
+  germany:'germany', deutschland:'germany', de:'germany', 'германия':'germany',
+  austria:'austria', osterreich:'austria', at:'austria', 'австрия':'austria',
+  luxembourg:'luxembourg', luxemburg:'luxembourg', lu:'luxembourg', 'люксембург':'luxembourg',
+  belgium:'belgium', be:'belgium', 'бельгия':'belgium',
+  netherlands:'netherlands', holland:'netherlands', nl:'netherlands', 'нидерланды':'netherlands',
+  ireland:'ireland', ie:'ireland', 'ирландия':'ireland',
+  poland:'poland', polska:'poland', pl:'poland', 'польша':'poland',
+  ukraine:'ukraine', ua:'ukraine', 'украина':'ukraine', 'україна':'ukraine',
+  russia:'russia', 'russian federation':'russia', ru:'russia', 'россия':'russia',
+  hungary:'hungary', hu:'hungary', 'венгрия':'hungary',
+  romania:'romania', ro:'romania', 'румыния':'romania',
+  moldova:'moldova', md:'moldova', 'молдова':'moldova', 'молдавия':'moldova',
+  georgia:'georgia', ge:'georgia', 'грузия':'georgia',
+  israel:'israel', il:'israel', 'израиль':'israel',
+  greece:'greece', gr:'greece', 'греция':'greece',
+  switzerland:'switzerland', schweiz:'switzerland', suisse:'switzerland', ch:'switzerland', 'швейцария':'switzerland',
+  spain2:'spain',
+  japan:'japan', jp:'japan', 'япония':'japan',
+  china:'china', cn:'china', 'китай':'china',
+  turkey:'turkey', turkiye:'turkey', tr:'turkey', 'турция':'turkey',
+  england:'england', 'англия':'england',
+  'united kingdom':'uk', uk:'uk', britain:'uk', 'great britain':'uk', 'великобритания':'uk',
+  'united states':'us', 'united states of america':'us', usa:'us', us:'us', america:'us', 'сша':'us',
+  argentina:'argentina', ar:'argentina', 'аргентина':'argentina',
+  chile:'chile', cl:'chile', 'чили':'chile',
+  canada:'canada', ca:'canada', 'канада':'canada',
+  brazil:'brazil', brasil:'brazil', br:'brazil', 'бразилия':'brazil',
+  mexico:'mexico', mx:'mexico', 'мексика':'mexico',
+  czechia:'czechia', 'czech republic':'czechia', czech:'czechia', cz:'czechia', 'чехия':'czechia',
+  lebanon:'lebanon', lb:'lebanon', 'ливан':'lebanon'
+};
+function normCountry(name) {
+  return String(name || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+function flagSvg(country) {
+  const key = FLAG_ALIAS[normCountry(country)];
+  if (!key) return '';
+  if (FLAG_SPECIAL[key]) return FLAG_SPECIAL[key];
+  if (FLAG_V[key]) return vBands(FLAG_V[key]);
+  if (FLAG_H[key]) return hBands(FLAG_H[key]);
+  return '';
+}
+function flagHtml(country) {
+  const svg = flagSvg(country);
+  return svg ? '<span class="flag">' + svg + '</span>' : '';
+}
+let deadPhotos = Object.create(null);
+let photoIndex = 0;
+let livePhotos = [];
+let saved = null;
+const SIL_LG = '<svg viewBox="0 0 120 360" aria-hidden="true"><path d="M43.2,0 L76.8,0 C76.8,39.6 78,67.32 78,79.2 C78,96.21 116.4,96.21 116.4,117 L116.4,345.6 C116.4,351.36 114,355.68 114,352.8 Q114,360 106.8,360 L13.2,360 Q6,360 6,352.8 C6,355.68 3.6,351.36 3.6,345.6 L3.6,117 C3.6,96.21 42,96.21 42,79.2 C42,67.32 43.2,39.6 43.2,0 Z" fill="none" stroke="#C5A572" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M42.74,30.6 L77.26,30.6" fill="none" stroke="#C5A572" stroke-width="1.6" stroke-linecap="round"/><rect x="24" y="183.3" width="72" height="96" fill="none" stroke="#C5A572" stroke-width="1.12" stroke-dasharray="4 2.4"/></svg>';
+const SIL_MD = '<svg viewBox="0 0 80 240" aria-hidden="true"><path d="M28.8,0 L51.2,0 C51.2,26.4 52,44.88 52,52.8 C52,64.14 77.6,64.14 77.6,78 L77.6,230.4 C77.6,234.24 76,237.12 76,235.2 Q76,240 71.2,240 L8.8,240 Q4,240 4,235.2 C4,237.12 2.4,234.24 2.4,230.4 L2.4,78 C2.4,64.14 28,64.14 28,52.8 C28,44.88 28.8,26.4 28.8,0 Z" fill="none" stroke="#C5A572" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M28.49,20.4 L51.51,20.4" fill="none" stroke="#C5A572" stroke-width="1.4" stroke-linecap="round"/><rect x="16" y="122.2" width="48" height="64" fill="none" stroke="#C5A572" stroke-width="0.98" stroke-dasharray="3.5 2.1"/></svg>';
+const SIL_ANON = '<svg viewBox="0 0 120 360" aria-hidden="true"><path d="M43.2,0 L76.8,0 C76.8,39.6 78,67.32 78,79.2 C78,96.21 116.4,96.21 116.4,117 L116.4,345.6 C116.4,351.36 114,355.68 114,352.8 Q114,360 106.8,360 L13.2,360 Q6,360 6,352.8 C6,355.68 3.6,351.36 3.6,345.6 L3.6,117 C3.6,96.21 42,96.21 42,79.2 C42,67.32 43.2,39.6 43.2,0 Z" fill="none" stroke="#C5A572" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M42.74,30.6 L77.26,30.6" fill="none" stroke="#C5A572" stroke-width="1.6" stroke-linecap="round"/><rect x="24" y="183.3" width="72" height="96" fill="#0F0507" stroke="#C5A572" stroke-width="1.12"/><text x="60" y="252" text-anchor="middle" font-family="Georgia, serif" font-size="52" font-style="italic" fill="#C5A572" fill-opacity="0.55">?</text></svg>';
+function photoBlock(urls, sil, silClass) {
+  livePhotos = collectPhotos(urls);
+  if (!livePhotos.length) return '<div class="sil ' + silClass + '">' + sil + '</div>';
+  if (photoIndex >= livePhotos.length) photoIndex = 0;
+  const p = livePhotos[photoIndex];
+  let thumbs = '';
+  if (livePhotos.length > 1) {
+    thumbs = '<div class="thumbs">' + livePhotos.map((ph, i) =>
+      '<button type="button" class="thumb' + (i === photoIndex ? ' is-on' : '') + '" data-photo-i="' + i + '"><img src="' + esc(ph.url) + '" alt="" data-photo="1"></button>'
+    ).join('') + '</div><div class="photo-pos">' + esc(fill(L('photo_of'), { i: photoIndex + 1, n: livePhotos.length })) + '</div>';
+  }
+  return '<div class="photo-block"><button type="button" class="frame" data-open-photo><img class="plate-img" src="' + esc(p.url) + '" alt="' + esc(L('photo_alt')) + '" data-photo="1"><span class="enlarge">' + esc(L('enlarge')) + '</span></button><div class="credit">' + esc(creditText(p.credit)) + '</div>' + thumbs + '</div>';
+}
+function openLb() {
+  if (!livePhotos.length) return;
+  const p = livePhotos[photoIndex] || livePhotos[0];
+  const lb = document.getElementById('lb');
+  const img = lb.querySelector('img');
+  img.src = p.url;
+  img.alt = L('photo_alt');
+  lb.querySelector('.credit').textContent = creditText(p.credit);
+  lb.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  const lb = document.getElementById('lb');
+  lb.hidden = true;
+  lb.querySelector('img').removeAttribute('src');
+  document.body.style.overflow = '';
+}
+function enumLabel(prefix, raw) {
+  const s = nonEmpty(raw);
+  if (!s) return '';
+  let norm = s.toLowerCase();
+  if (norm === 'rosé') norm = 'rose';
+  if (norm === 'semi-dry') norm = 'semi_dry';
+  if (norm === 'semi-sweet') norm = 'semi_sweet';
+  const key = prefix + '_' + norm;
+  const label = t(key);
+  return label === key ? s : label;
+}
+function statusView(code) {
   const map = {
-    verified:     { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
-    certified:    { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
-    under_review: { key: 'vs_under_review', dot: '#C5A572', halo: 'rgba(197,165,114,0.2)' },
-    documents_submitted: { key: 'vs_submitted', dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
-    claimed:      { key: 'vs_claimed',      dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
-    rejected:     { key: 'vs_rejected',     dot: 'rgba(245,240,232,0.3)', halo: 'rgba(245,240,232,0.1)' }
+    verified: 'vs_verified', certified: 'vs_verified', under_review: 'vs_review',
+    documents_submitted: 'vs_submitted', claimed: 'vs_claimed', rejected: 'vs_rejected'
   };
-  return map[status] || map.under_review;
+  const key = map[code];
+  if (!key) return '';
+  return L(key);
 }
-
-function wineryQs() {
-  return winerySlug ? ('&winerySlug=' + encodeURIComponent(winerySlug)) : '';
+function formatDate(raw) {
+  const s = nonEmpty(raw);
+  if (!s) return '';
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s);
+  if (!m) return s;
+  const months = MONTHS[lang] || MONTHS.en;
+  const mi = Number(m[2]) - 1;
+  if (mi < 0 || mi > 11) return s;
+  return Number(m[3]) + ' ' + months[mi] + ' ' + m[1];
 }
-
-function formatReleaseDate(d) {
-  if (!d) return '';
-  const raw = String(d).trim();
-  if (!raw) return '';
-  try {
-    const dt = new Date(raw.length === 10 ? raw + 'T00:00:00' : raw);
-    if (isNaN(dt.getTime())) return raw;
-    const loc = ({ en: 'en-GB', fr: 'fr-FR', de: 'de-DE', es: 'es-ES', it: 'it-IT', pt: 'pt-PT', pl: 'pl-PL', ru: 'ru-RU', uk: 'uk-UA', he: 'he-IL', ka: 'ka-GE', ro: 'ro-RO' })[lang] || 'en-GB';
-    return dt.toLocaleDateString(loc, { month: 'short', year: 'numeric' });
-  } catch (e) {
-    return raw;
-  }
+function abvPresent(v) {
+  if (!v || v.abv == null) return false;
+  if (typeof v.abv === 'string' && v.abv.trim() === '') return false;
+  return Number.isFinite(Number(v.abv));
 }
-
-function parseBlend(gc) {
-  if (!gc) return [];
-  let entries = [];
+function abvText(v) {
+  if (!abvPresent(v)) return '';
+  const raw = v.abv == null ? '' : String(v.abv).trim();
+  return raw + '%';
+}
+function compositionText(gc) {
+  if (gc == null) return '';
+  if (typeof gc === 'string') return gc.trim();
   if (Array.isArray(gc)) {
-    entries = gc.map(g => [g && g.name, Number(g && g.pct)]).filter(([n, p]) => n && !isNaN(p) && p > 0);
-  } else if (typeof gc === 'object') {
-    entries = Object.entries(gc).map(([name, pct]) => [name, Number(pct)]).filter(([, p]) => !isNaN(p) && p > 0);
+    const parts = [];
+    gc.forEach(item => {
+      if (typeof item === 'string' && item.trim()) parts.push(item.trim());
+      else if (item && typeof item === 'object') {
+        const name = nonEmpty(item.name || item.variety);
+        const pct = item.pct != null ? item.pct : item.percentage;
+        if (!name) return;
+        if (pct == null || String(pct).trim() === '') parts.push(name);
+        else {
+          const share = String(pct).trim();
+          parts.push(name + ' ' + (share.endsWith('%') ? share : share + '%'));
+        }
+      }
+    });
+    return parts.join(', ');
   }
-  return entries.map(([name, pct]) => ({ name, pct, pctLabel: pct + '%', pctWidth: pct + '%' }));
+  if (typeof gc === 'object') {
+    const parts = [];
+    Object.keys(gc).forEach(k => {
+      const val = gc[k];
+      if (!nonEmpty(k) || val == null || String(val).trim() === '') return;
+      const share = String(val).trim();
+      parts.push(k.trim() + ' ' + (share.endsWith('%') || !Number.isFinite(Number(share)) ? share : share + '%'));
+    });
+    return parts.join(', ');
+  }
+  return '';
 }
-
-function vintageFacts(v) {
-  const facts = [];
-  if (v.bottles_produced != null) facts.push([t('total_bottles'), String(v.bottles_produced)]);
-  if (v.abv != null && v.abv !== '') facts.push([t('abv'), esc(v.abv) + '%']);
-  const released = formatReleaseDate(v.release_date);
-  if (released) facts.push([t('vt_fact_released'), released]);
-  return facts;
+function setCrumb(parts) {
+  const el = document.getElementById('crumb');
+  const bits = [];
+  parts.forEach(p => {
+    if (!p || !p.text) return;
+    if (bits.length) bits.push('<span class="sep">/</span>');
+    if (p.href) bits.push('<a href="' + esc(p.href) + '">' + esc(p.text) + '</a>');
+    else bits.push('<span class="here">' + esc(p.text) + '</span>');
+  });
+  el.innerHTML = bits.join('');
 }
-
-function wineContextChips(v) {
-  const chips = [];
-  if (v.color) chips.push(t('color_' + v.color));
-  if (v.sweetness) chips.push(t('sweet_' + v.sweetness));
-  const grapes = v.grape_varieties || [];
-  if (grapes.length) chips.push(grapes.join(', '));
-  return chips;
+function renderState(kind, titleKey, bodyKey, extra) {
+  setCrumb([]);
+  document.getElementById('app').innerHTML =
+    '<div class="state" data-state="' + kind + '">' +
+    (extra || '') +
+    '<div class="kicker">' + esc(L(kind === 'error' ? 'err' : kind === 'draft' ? 'draft' : 'nf')) + '</div>' +
+    '<h1>' + esc(L(titleKey)) + '</h1>' +
+    '<p>' + esc(L(bodyKey)) + '</p>' +
+    (kind === 'error'
+      ? '<button type="button" class="btn" id="retry-btn">' + esc(L('retry')) + '</button>'
+      : '<a class="btn" href="https://tastingandtoasting.com">' + esc(L('explore')) + '<span class="arrow" aria-hidden="true">→</span></a>') +
+    '</div>';
 }
-
 function renderLoading() {
-  document.getElementById('ctx-label').textContent = t('vt_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="fade-in" style="padding:44px 0 80px;">
-      <div class="skel-pulse" style="height:11px;width:24%;background:rgba(197,165,114,0.14);border-radius:2px;margin-bottom:20px;"></div>
-      <div class="skel-pulse" style="height:96px;width:44%;background:rgba(245,240,232,0.07);border-radius:4px;margin-bottom:14px;"></div>
-      <div class="skel-pulse" style="height:16px;width:38%;background:rgba(245,240,232,0.05);border-radius:3px;margin-bottom:22px;"></div>
-      <div class="skel-pulse" style="height:36px;width:170px;background:rgba(197,165,114,0.08);border-radius:100px;margin-bottom:38px;"></div>
-      <div style="display:flex;gap:10px;">
-        <div style="flex:1;height:64px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-        <div style="flex:1;height:64px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-        <div style="flex:1;height:64px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-      </div>
-    </div>`;
+  setCrumb([]);
+  document.getElementById('app').innerHTML = '<div class="skel" data-state="loading"><div class="bar" style="width:28%;margin-bottom:18px"></div><div class="bar" style="width:52%;height:42px;background:rgba(245,240,232,0.07)"></div></div>';
 }
+document.getElementById('app').addEventListener('click', function (e) {
+  if (e.target.closest('[data-open-photo]')) { openLb(); return; }
+  const th = e.target.closest('[data-photo-i]');
+  if (th) { photoIndex = Number(th.getAttribute('data-photo-i')) || 0; if (saved) renderCurrent(); return; }
+  if (e.target.closest('#retry-btn')) load();
+});
+document.addEventListener('error', function (e) {
+  const img = e.target;
+  if (!img || img.tagName !== 'IMG' || !img.getAttribute('data-photo')) return;
+  const src = img.getAttribute('src');
+  if (!src || deadPhotos[src]) return;
+  deadPhotos[src] = 1;
+  photoIndex = 0;
+  closeLb();
+  if (saved) renderCurrent();
+}, true);
+document.getElementById('lb').addEventListener('click', function (e) {
+  if (e.target.id === 'lb' || e.target.closest('.lb-x')) closeLb();
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') closeLb();
+});
 
-function renderNotFound() {
-  document.getElementById('ctx-label').textContent = t('vt_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="state-screen">
-      <div class="state-icon" style="border:1px solid rgba(197,165,114,0.35);"><span style="color:rgba(197,165,114,0.75);font-size:27px;font-family:var(--serif);">?</span></div>
-      <div class="state-kick">${t('vt_nf_kick')}</div>
-      <h1 class="state-title">${t('vt_nf_title')}</h1>
-      <p class="state-body">${t('vt_nf_body')}</p>
-      <a class="vt-btn vt-btn-ghost" href="https://tastingandtoasting.com">${t('wp_explore')}</a>
-    </div>`;
+
+const vintageId = (qs.get('vintageId') || '').trim();
+const winerySlugQs = (qs.get('winerySlug') || qs.get('slug') || '').trim();
+function renderCurrent() { if (saved) renderPassport(saved.v); }
+function renderNotFound() { renderState('404', 'nf_title', 'nf_body', ''); }
+function renderError() { renderState('error', 'err_vintage', 'err_body', ''); }
+function renderDraft() {
+  renderState('draft', 'draft_vintage', 'draft_body', '<div class="sil sil-anon">' + SIL_ANON + '</div>');
 }
-
-function renderError() {
-  document.getElementById('ctx-label').textContent = t('vt_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="state-screen">
-      <div class="state-icon" style="border:1px solid rgba(200,101,79,0.5);"><span style="color:var(--err);font-size:24px;">↻</span></div>
-      <div class="state-kick">${t('vt_err_kick')}</div>
-      <h1 class="state-title">${t('vt_err_title')}</h1>
-      <p class="state-body">${t('vt_err_body')}</p>
-      <button type="button" class="vt-btn vt-btn-gold" id="retry-btn">${t('vt_retry')}</button>
-    </div>`;
-  document.getElementById('retry-btn').addEventListener('click', () => load());
-}
-
 function renderPassport(v) {
-  document.getElementById('ctx-label').textContent = t('vt_ctx_ready');
-  const sm = statusMeta(v.verification_status);
-  const facts = vintageFacts(v);
-  const blend = parseBlend(v.grape_composition);
-  const chips = wineContextChips(v);
-  const tasting = (v.tasting_notes || '').trim();
-  const production = (v.production_notes || '').trim();
-
-  const wineHref = `wine-passport.html?wineId=${encodeURIComponent(v.wine_id)}${wineryQs()}${lp}`;
-
-  const vsHtml = `
-    <div class="vs-pill">
-      <span class="vs-dot" style="background:${sm.dot};box-shadow:0 0 0 3px ${sm.halo};"></span>
-      <span class="vs-text">${t('wp_vs_prefix')} <strong>${t(sm.key)}</strong></span>
-    </div>`;
-
-  const factsHtml = facts.length ? `
-    <div class="block block-first">
-      <div class="sec-label">${t('vt_facts_label')}</div>
-      <div class="facts-grid">${facts.map(([k, val]) => `
-        <div class="fact-cell"><div class="fact-k">${esc(k)}</div><div class="fact-v">${val}</div></div>`).join('')}
-      </div>
-    </div>` : '';
-
-  const blendHtml = blend.length ? `
-    <div class="block">
-      <div class="sec-label">${t('vt_blend_label')}</div>
-      <div class="blend-list">${blend.map(g => `
-        <div class="blend-row">
-          <div class="blend-head">
-            <span class="blend-name">${esc(g.name)}</span>
-            <span class="blend-pct">${esc(g.pctLabel)}</span>
-          </div>
-          <div class="blend-bar"><div class="blend-fill" style="width:${esc(g.pctWidth)};"></div></div>
-        </div>`).join('')}
-      </div>
-    </div>` : '';
-
-  const contextHtml = chips.length ? `
-    <div class="block">
-      <div class="sec-label">${t('vt_wine_context_label')}</div>
-      <div class="chips">${chips.map(c => `<span class="chip">${esc(c)}</span>`).join('')}</div>
-    </div>` : '';
-
-  const notesHtml = (tasting || production) ? `
-    <div class="block">
-      <div class="notes-block">
-        ${tasting ? `<div><div class="note-kick">${t('vt_tasting_label')}</div><p class="tasting-text">${esc(tasting)}</p></div>` : ''}
-        ${production ? `<div><div class="note-kick">${t('vt_production_label')}</div><p class="production-text">${esc(production)}</p></div>` : ''}
-      </div>
-    </div>` : '';
-
-  document.getElementById('app').innerHTML = `
-    <article class="passport fade-in">
-      <a class="up-link" href="${wineHref}">‹ <span>${esc(v.wine_name || '')}</span></a>
-      <div class="hero-row">
-        <div>
-          <div class="hero-kick">${t('vt_kick')}</div>
-          <div class="hero-year">${esc(v.vintage_year)}</div>
-        </div>
-        <div class="hero-side">
-          <div class="hero-of">${t('vt_of')} <span class="hero-wine">${esc(v.wine_name || '')}</span></div>
-          ${vsHtml}
-        </div>
-      </div>
-      ${factsHtml}
-      ${blendHtml}
-      ${contextHtml}
-      ${notesHtml}
-    </article>`;
+  saved = { v: v };
+  const year = v.vintage_year;
+  const wineName = nonEmpty(v.wine_name);
+  const wineId = nonEmpty(v.wine_id);
+  const slug = nonEmpty(v.winery_slug) || winerySlugQs;
+  const wineryName = nonEmpty(v.winery_name);
+  document.title = (year != null ? year + ' · ' : '') + (wineName || L('vintage')) + ' · CAP';
+  const crumb = [];
+  if (wineryName) crumb.push({ text: wineryName, href: slug ? href('winery-passport', { slug: slug }) : '' });
+  if (wineName) crumb.push({ text: wineName, href: wineId ? href('wine-passport', { wineId: wineId, winerySlug: slug }) : '' });
+  if (year != null && String(year).trim() !== '') crumb.push({ text: String(year) });
+  setCrumb(crumb);
+  const chips = [];
+  const color = enumLabel('color', v.color);
+  const sweet = enumLabel('sweet', v.sweetness);
+  if (color) chips.push(color);
+  if (sweet) chips.push(sweet);
+  const grapes = (Array.isArray(v.grape_varieties) ? v.grape_varieties : []).map(nonEmpty).filter(Boolean);
+  const cells = [];
+  const abv = abvText(v);
+  if (abv) cells.push(['abv', L('abv'), abv, '']);
+  const comp = compositionText(v.grape_composition);
+  if (comp) cells.push(['composition', L('composition'), comp, 'small']);
+  if (v.bottles_produced != null && String(v.bottles_produced).trim() !== '') cells.push(['bottles', t('total_bottles'), String(v.bottles_produced), '']);
+  const rel = formatDate(v.release_date);
+  if (rel) cells.push(['release', L('release'), rel, '']);
+  const ean = nonEmpty(v.ean_upc);
+  if (ean) cells.push(['ean', L('ean'), ean, '']);
+  const prod = nonEmpty(v.production_notes);
+  const tasting = nonEmpty(v.tasting_notes);
+  const vsLabel = statusView(v.verification_status);
+  let production = '';
+  if (cells.length || prod || tasting) {
+    production = '<section class="sec"><h2>' + esc(L('production')) + '</h2>' +
+      (cells.length ? '<div class="facts">' + cells.map(c => '<div class="fact"><div class="k">' + esc(c[1]) + '</div><div class="v ' + c[3] + '" data-field="' + c[0] + '">' + esc(c[2]) + '</div></div>').join('') + '</div>' : '') +
+      (prod ? '<p class="notes">' + esc(prod) + '</p>' : '') +
+      (tasting ? '<div class="tasting-wrap"><div class="k">' + esc(L('tasting')) + '</div><blockquote class="tasting">“' + esc(tasting) + '”</blockquote></div>' : '') +
+      '</section>';
+  }
+  const actions = [];
+  if (wineId) actions.push('<a class="btn" href="' + esc(href('wine-passport', { wineId: wineId, winerySlug: slug })) + '">' + esc(L('open_wine')) + ' <span class="arrow" aria-hidden="true">→</span></a>');
+  if (slug) actions.push('<a class="btn" href="' + esc(href('winery-passport', { slug: slug })) + '">' + esc(L('visit_winery')) + ' <span class="arrow" aria-hidden="true">→</span></a>');
+  const country = nonEmpty(v.winery_country);
+  const countryRow = country ? '<div class="place"><div><div class="k">' + esc(L('country')) + '</div><div class="v">' + flagHtml(country) + '<span>' + esc(country) + '</span></div></div></div>' : '';
+  document.getElementById('app').innerHTML =
+    '<article data-state="ready">' +
+      '<div class="hero"><div class="plate">' + photoBlock([v.bottle_image_url, v.hero_image_url], SIL_MD, 'sil-md') + '</div>' +
+      '<div class="copy">' +
+        '<div class="kicker">' + esc(L('vintage')) + '</div>' +
+        (year != null && String(year).trim() !== '' ? '<h1 class="year-name">' + esc(year) + '</h1>' : '') +
+        (wineName ? '<div class="wine-sub">' + esc(wineName) + '</div>' : '') +
+        (chips.length ? '<div class="chips">' + chips.map(c => '<span class="chip">' + esc(c) + '</span>').join('') + '</div>' : '') +
+        (grapes.length ? '<div class="grapes">' + grapes.map(g => '<span>' + esc(g) + '</span>').join('') + '</div>' : '') +
+        (vsLabel ? '<div class="vs">' + esc(L('vs')) + ': ' + esc(vsLabel) + '</div>' : '') +
+        countryRow +
+      '</div></div>' +
+      production +
+      (actions.length ? '<div class="actions">' + actions.join('') + '</div>' : '') +
+    '</article>';
 }
-
 async function load() {
+  deadPhotos = Object.create(null);
+  photoIndex = 0;
+  closeLb();
+  saved = null;
   if (!vintageId) { renderNotFound(); return; }
   renderLoading();
   let data;
   try {
-    const r = await fetch(`${API}/vintages/${encodeURIComponent(vintageId)}`);
+    const r = await fetch(API + '/vintages/' + encodeURIComponent(vintageId));
     if (r.status === 404 || r.status === 400) { renderNotFound(); return; }
     if (!r.ok) { renderError(); return; }
     data = await r.json();
-  } catch (e) {
-    renderError();
-    return;
-  }
-  if (!data || !data.vintage) { renderNotFound(); return; }
-  renderPassport(data.vintage);
+  } catch (e) { renderError(); return; }
+  const v = data && data.vintage;
+  if (!v) { renderNotFound(); return; }
+  if (v.id && v.id !== vintageId) { renderNotFound(); return; }
+  if (v.status === 'draft') { renderDraft(); return; }
+  renderPassport(v);
 }
-
 CAP.wireSwitcher();
 CAP.applyStatic();
+document.getElementById('lb-x').setAttribute('aria-label', L('close'));
 load();
+
 </script>
 </body>
 </html>
