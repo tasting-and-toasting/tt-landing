@@ -2,102 +2,99 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Winery Passport · Tasting &amp; Toasting CAP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="src/i18n/cap-i18n.js"></script>
 <style>
-:root{
-  --void:#0B0406; --cream:#F5F0E8; --gold:#C5A572; --gold-soft:#E0C48E;
-  --gold-dim:#8B7548; --line:rgba(197,165,114,0.14); --line-soft:rgba(197,165,114,0.12);
-  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
-  --green:#7FB069; --err:#C8654F;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:radial-gradient(ellipse at 26% -4%,rgba(74,14,20,0.42),transparent 56%),linear-gradient(180deg,#12060A,var(--void));color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;}
-a{color:var(--gold);text-decoration:none;}
-a:hover{color:var(--gold-soft);}
-.stage{max-width:720px;margin:0 auto;padding:0 24px;}
-@keyframes wp-pulse{0%,100%{opacity:0.4;}50%{opacity:0.85;}}
-@keyframes wp-fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
-.brandbar{height:58px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:14px;position:sticky;top:0;background:rgba(11,4,6,0.72);backdrop-filter:blur(10px);z-index:50;flex-wrap:wrap;}
-.brandbar-left{display:flex;align-items:center;gap:11px;}
-.brandmark{width:23px;height:23px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:12px;flex:0 0 auto;}
-.brandname{font-family:var(--serif);font-size:15px;color:var(--cream);}
-.ctx{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,240,232,0.4);}
-.lang-switcher-flags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end;max-width:340px;}
-.lang-flag-link{display:inline-flex;align-items:center;justify-content:center;width:30px;height:20px;border-radius:3px;overflow:hidden;border:1px solid var(--line);opacity:.78;transition:opacity .2s,border-color .2s,box-shadow .2s;}
-.lang-flag-link:hover{opacity:1;}
-.lang-flag-link.is-current-lang{opacity:1;border-color:var(--gold);box-shadow:0 0 0 1px rgba(197,165,114,0.35);}
-.lang-flag-link svg{width:100%;height:100%;display:block;}
-html[dir="rtl"] .lang-switcher-flags{flex-direction:row-reverse;}
-html[dir="rtl"] .brandbar{flex-direction:row-reverse;}
-html[dir="rtl"] body{text-align:right;}
-html[dir="rtl"] .wp-wine-row:hover{padding-right:10px!important;padding-left:4px!important;}
-.skel-pulse{animation:wp-pulse 1.4s ease-in-out infinite;}
-.fade-in{animation:wp-fade 0.45s ease both;}
-.state-screen{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 0;animation:wp-fade 0.4s ease both;}
-.state-icon{width:64px;height:64px;margin:0 auto 24px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-.state-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;}
-.state-title{font-family:var(--serif);font-weight:500;font-size:32px;margin:0 0 14px;color:var(--cream);letter-spacing:-0.01em;}
-.state-body{font-size:14px;line-height:1.6;color:rgba(245,240,232,0.6);margin:0 0 30px;max-width:400px;}
-.wp-btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 26px;border-radius:3px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background .15s,border-color .15s,color .15s;font-family:var(--sans);}
-.wp-btn-gold{border:none;background:linear-gradient(180deg,var(--gold),#a98a55);color:#1A0B08;font-weight:600;}
-.wp-btn-gold:hover{filter:brightness(1.06);}
-.wp-btn-ghost{border:1px solid rgba(197,165,114,0.4);color:var(--gold);background:transparent;}
-.wp-btn-ghost:hover{border-color:rgba(197,165,114,0.7);color:var(--gold-soft);}
-.passport{padding:52px 0 90px;}
-.hero-row{display:flex;align-items:center;gap:18px;margin-bottom:26px;}
-.crest{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px -6px rgba(0,0,0,0.7);flex:0 0 auto;}
-.crest-glyph{font-family:var(--serif);font-style:italic;font-size:22px;}
-.hero-kick{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;}
-.hero-name{font-family:var(--serif);font-weight:500;font-size:clamp(34px,8vw,46px);line-height:1;margin:0;color:var(--cream);letter-spacing:-0.015em;}
-.trust-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:38px;}
-.own-badge{display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border:1px solid rgba(197,165,114,0.55);border-radius:100px;background:rgba(197,165,114,0.08);}
-.own-icon{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6b1620,#3a0a10);border:1px solid rgba(197,165,114,0.7);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:10px;}
-.own-label{font-size:12px;letter-spacing:0.06em;color:var(--cream);font-weight:600;}
-.vs-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border:1px solid rgba(197,165,114,0.28);border-radius:100px;}
-.vs-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;}
-.vs-text{font-size:12px;color:rgba(245,240,232,0.8);white-space:nowrap;}
-.vs-text strong{color:var(--cream);font-weight:600;}
-.sec-label{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:14px;}
-.sec-label-high{color:var(--gold);letter-spacing:0.24em;}
-.sec-label-med{color:var(--gold-dim);}
-.block{margin-bottom:44px;}
-.block-divider{padding-top:32px;border-top:1px solid var(--line-soft);}
-.dna-tags{display:flex;gap:10px;flex-wrap:wrap;}
-.dna-tag{padding:8px 15px;border:1px solid rgba(197,165,114,0.35);border-radius:3px;font-size:13.5px;color:var(--cream);font-family:var(--serif);}
-.svc-tags{display:flex;gap:9px;flex-wrap:wrap;}
-.svc-tag{padding:7px 13px;border:1px solid rgba(197,165,114,0.2);border-radius:100px;font-size:12.5px;color:rgba(245,240,232,0.82);}
-.wines-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;}
-.wines-count{font-size:11px;color:rgba(245,240,232,0.45);}
-.wines-list{border-top:1px solid var(--line-soft);}
-.wp-wine-row{display:flex;align-items:center;justify-content:space-between;padding:16px 4px;border-bottom:1px solid rgba(197,165,114,0.1);color:inherit;transition:background .15s,padding-left .15s;}
-.wp-wine-row:hover{background:rgba(197,165,114,0.06);padding-left:10px!important;}
-.wine-bottle{width:30px;height:44px;border:1px solid rgba(197,165,114,0.3);border-radius:2px 2px 5px 5px;background:linear-gradient(180deg,rgba(74,14,20,0.6),rgba(58,10,16,0.9));flex:0 0 auto;}
-.wine-info{display:flex;align-items:center;gap:16px;}
-.wine-name{font-family:var(--serif);font-size:18px;color:var(--cream);}
-.wine-meta{font-size:11.5px;color:rgba(245,240,232,0.5);margin-top:2px;}
-.wine-chev{color:var(--gold);font-size:16px;}
-html[dir="rtl"] .wine-chev{transform:scaleX(-1);}
-.wines-empty{border:1px dashed rgba(197,165,114,0.25);border-radius:3px;padding:30px 20px;text-align:center;}
-.wines-empty-icon{width:30px;height:44px;margin:0 auto 14px;border:1px dashed rgba(197,165,114,0.35);border-radius:2px 2px 5px 5px;}
-.wines-empty-title{font-size:13px;color:rgba(245,240,232,0.6);}
-.wines-empty-sub{font-size:11.5px;color:rgba(245,240,232,0.38);margin-top:5px;}
-.desc-block{padding-top:30px;border-top:1px solid var(--line-soft);}
-.desc-text{max-width:600px;font-size:13.5px;line-height:1.7;color:rgba(245,240,232,0.55);margin:0;}
-@media(max-width:600px){.brandbar{padding:9px 16px;}.stage{padding:0 16px;}}
+  *{box-sizing:border-box;}
+  html,body{margin:0;max-width:100%;}
+  body{background:#1A0B08;color:#F5F0E8;font-family:'Inter',system-ui,sans-serif;font-weight:400;line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;}
+  a{color:#C5A572;text-decoration:none;}
+  a:hover{color:#F5F0E8;}
+  img{max-width:100%;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;padding:20px 48px;border-bottom:1px solid rgba(197,165,114,0.16);flex-wrap:wrap;}
+  .brand{font-family:'Fraunces',serif;font-weight:600;font-size:15px;letter-spacing:0.02em;color:#C5A572;flex:0 0 auto;}
+  .crumb{font-family:'JetBrains Mono',monospace;font-size:11px;color:#C5A572;min-width:0;flex:1 1 160px;overflow-wrap:anywhere;}
+  .crumb a{color:#C5A572;}
+  .lang-switcher{flex:1 1 280px;max-width:100%;display:flex;justify-content:flex-end;}
+  .lang-switcher-flags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end;max-width:100%;}
+  .lang-flag-link{display:inline-flex;align-items:center;justify-content:center;width:28px;height:18px;border-radius:2px;overflow:hidden;border:1px solid rgba(197,165,114,0.35);opacity:.78;flex:0 0 auto;}
+  .lang-flag-link:hover{opacity:1;}
+  .lang-flag-link.is-current-lang{opacity:1;border-color:#C5A572;box-shadow:0 0 0 1px rgba(197,165,114,0.35);}
+  .lang-flag-link svg{width:100%;height:100%;display:block;}
+  .pad{padding:72px 48px;}
+  .hero{border-bottom:1px solid rgba(197,165,114,0.16);background:radial-gradient(ellipse at 20% 20%, rgba(197,165,114,0.08), transparent 55%), radial-gradient(ellipse at 80% 90%, rgba(74,14,20,0.5), transparent 55%);}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#8B7548;margin:0 0 16px;}
+  .hero-name{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(36px,5vw,56px);line-height:1.02;margin:0 0 14px;overflow-wrap:anywhere;}
+  .tagline{font-family:'Fraunces',serif;font-style:italic;font-size:20px;color:#C5A572;margin:0 0 20px;overflow-wrap:anywhere;}
+  .place{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:rgba(245,240,232,0.6);margin:0 0 6px;}
+  .place span{overflow-wrap:anywhere;min-width:0;}
+  .flag{width:16px;height:11px;display:block;flex:0 0 auto;margin-top:4px;border:1px solid rgba(197,165,114,0.35);}
+  .founded{font-size:12px;color:rgba(245,240,232,0.4);margin:0 0 20px;}
+  .desc{font-size:15px;line-height:1.6;color:rgba(245,240,232,0.75);max-width:640px;margin:0 0 20px;overflow-wrap:anywhere;}
+  .meta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  .badge{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(197,165,114,0.5);border-radius:2px;color:#C5A572;}
+  .website{font-size:13px;color:rgba(245,240,232,0.55);overflow-wrap:anywhere;}
+  .section{border-bottom:1px solid rgba(197,165,114,0.12);}
+  .dna{background:linear-gradient(180deg,#2E0509 0%,#1A0B08 100%);}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 28px;flex-wrap:wrap;}
+  .sec-head .kicker{margin:0;}
+  .count{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(245,240,232,0.45);}
+  .dna-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:36px;max-width:1100px;}
+  .dna-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(197,165,114,0.6);margin:0 0 10px;}
+  .dna-copy{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;line-height:1.5;overflow-wrap:anywhere;}
+  .wines-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px;}
+  .wine-card{position:relative;border:1px solid rgba(197,165,114,0.22);border-radius:2px;min-width:0;}
+  .wine-card:hover{border-color:rgba(197,165,114,0.55);}
+  .wine-card-link{display:flex;gap:16px;align-items:center;padding:20px;color:inherit;min-width:0;}
+  .wine-card-link:hover{color:#F5F0E8;}
+  .wine-visual{width:104px;flex:0 0 104px;min-width:0;}
+  .bottle{height:90px;width:auto;display:block;}
+  .producer-photo{height:90px;width:auto;max-width:104px;object-fit:contain;display:block;background:transparent;}
+  .credit{display:block;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:9px;line-height:1.35;color:rgba(245,240,232,0.62);overflow-wrap:anywhere;}
+  .wine-copy{min-width:0;flex:1;}
+  .wine-name{font-family:'Fraunces',serif;font-size:19px;margin:0 0 4px;overflow-wrap:anywhere;}
+  .wine-meta,.wine-grapes{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,240,232,0.45);overflow-wrap:anywhere;}
+  .wine-grapes{margin-top:4px;}
+  .zoom{position:absolute;top:8px;inset-inline-start:8px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#C5A572;background:rgba(26,11,8,0.86);border:1px solid rgba(197,165,114,0.45);padding:4px 8px;cursor:pointer;}
+  .zoom:hover{color:#F5F0E8;}
+  .svc-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .svc{font-size:12px;padding:8px 14px;border:1px solid rgba(197,165,114,0.3);border-radius:2px;color:rgba(245,240,232,0.7);overflow-wrap:anywhere;}
+  .wines-empty{border:1px dashed rgba(197,165,114,0.3);border-radius:2px;padding:28px 20px;text-align:center;}
+  .empty-title{font-size:14px;color:rgba(245,240,232,0.7);margin:0 0 6px;}
+  .empty-sub{font-size:13px;color:rgba(245,240,232,0.45);margin:0;}
+  .state{min-height:64vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px;gap:18px;}
+  .state-kick{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(197,165,114,0.6);}
+  .state-title{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(26px,4vw,32px);max-width:520px;line-height:1.3;margin:0;}
+  .state-body{font-size:14px;color:rgba(245,240,232,0.55);max-width:440px;margin:0;}
+  .draft-bottle{height:200px;width:auto;opacity:0.8;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 18px;border:1px solid rgba(197,165,114,0.45);border-radius:2px;background:transparent;color:#C5A572;font-family:'Inter',system-ui,sans-serif;font-size:13px;letter-spacing:0.04em;cursor:pointer;}
+  .btn:hover{color:#F5F0E8;}
+  .skel{height:22px;width:min(46%,280px);background:rgba(197,165,114,0.14);border-radius:2px;margin-bottom:14px;animation:wp-pulse 1.4s ease-in-out infinite;}
+  .skel.short{width:min(28%,160px);height:12px;}
+  @keyframes wp-pulse{0%,100%{opacity:.4}50%{opacity:.9}}
+  #lightbox[hidden]{display:none !important;}
+  #lightbox{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:24px;}
+  .lb-backdrop{position:absolute;inset:0;background:rgba(15,5,7,0.92);border:0;padding:0;cursor:pointer;}
+  .lb-figure{position:relative;z-index:1;margin:0;max-width:min(92vw,720px);display:flex;flex-direction:column;align-items:center;gap:14px;}
+  #lb-img{max-width:min(92vw,720px);max-height:72vh;object-fit:contain;display:block;}
+  #lb-credit{font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.4;color:rgba(245,240,232,0.62);text-align:center;margin:0;overflow-wrap:anywhere;}
+  #lb-close{position:absolute;top:16px;inset-inline-end:16px;z-index:2;}
+  @media (max-width:720px){
+    .topbar{padding:16px;}
+    .pad{padding:40px 16px;}
+    .dna-copy{font-size:20px;}
+    .state{padding:48px 16px;}
+  }
 </style>
 </head>
 <body>
-<header class="brandbar">
-  <div class="brandbar-left">
-    <div class="brandmark" aria-hidden="true">T</div>
-    <span class="brandname">Tasting &amp; Toasting</span>
-  </div>
-  <span class="ctx" id="ctx-label" data-i18n="wp_ctx_loading">Winery passport</span>
+<header class="topbar">
+  <div class="brand">CAP</div>
+  <div class="crumb" id="crumb"></div>
   <nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
     <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
     <a class="lang-flag-link" data-lang-link="fr" href="?lang=fr" title="Français" aria-label="Français"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" aria-hidden="true"><path fill="#0055a4" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#ef4135" d="M2 0h1v2H2z"/></svg></a>
@@ -113,226 +110,534 @@ html[dir="rtl"] .wine-chev{transform:scaleX(-1);}
     <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#dc143c"/></svg></a>
   </div></nav>
 </header>
-
-<main id="app" class="stage"></main>
-
+<main id="app"></main>
+<div id="lightbox" hidden>
+  <button type="button" class="lb-backdrop" id="lb-backdrop"></button>
+  <figure class="lb-figure">
+    <img id="lb-img" alt="">
+    <figcaption id="lb-credit"></figcaption>
+  </figure>
+  <button type="button" class="btn" id="lb-close"></button>
+</div>
 <script>
 const qs = new URLSearchParams(location.search);
 const slug = (qs.get('slug') || '').trim();
 const lang = CAP.lang;
-const lp = lang === 'en' ? '' : ('&lang=' + lang);
-const t = CAP.t;
 const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
-const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-function statusMeta(status) {
-  const map = {
-    verified:     { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
-    certified:    { key: 'vs_verified',     dot: '#7FB069', halo: 'rgba(127,176,105,0.2)' },
-    under_review: { key: 'vs_under_review', dot: '#C5A572', halo: 'rgba(197,165,114,0.2)' },
-    documents_submitted: { key: 'vs_submitted', dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
-    claimed:      { key: 'vs_claimed',      dot: 'rgba(245,240,232,0.4)', halo: 'rgba(245,240,232,0.12)' },
-    rejected:     { key: 'vs_rejected',     dot: 'rgba(245,240,232,0.3)', halo: 'rgba(245,240,232,0.1)' }
-  };
-  return map[status] || map.under_review;
+const UI = {
+  en:{kick:"Winery",dna:"DNA",services:"Services",ph_credit:"\u00a9 {name}, producer's website",ph_source:"Source: {domain}",nf_kick:"Not found",nf_title:"We couldn't confirm this \u2014 this code isn't in our records.",nf_body:"Check the link and try again. If you believe this is an error, contact the producer directly.",explore:"Explore Tasting & Toasting",err_kick:"Something went wrong",err_title:"We couldn't load this passport.",err_body:"A problem on our end, not with the winery. Your place is safe. Please try again.",retry:"Try again",draft_kick:"Not yet published",draft_title:"This winery profile hasn't been published yet.",draft_body:"Nothing is missing by mistake \u2014 the producer is still preparing it. This is different from an invalid or counterfeit code.",wines_empty:"No wines listed yet",wines_empty_sub:"This winery hasn't added wines to its passport.",wines_one:"1 wine",wines_many:"{n} wines",submitted:"Submitted",zoom:"Enlarge",close:"Close"},
+  fr:{kick:"Domaine",dna:"ADN",services:"Services",ph_credit:"\u00a9 {name}, site du producteur",ph_source:"Source : {domain}",nf_kick:"Introuvable",nf_title:"Nous n'avons pas pu confirmer ceci \u2014 ce code n'est pas dans nos archives.",nf_body:"V\u00e9rifiez le lien et r\u00e9essayez. Si vous pensez qu'il s'agit d'une erreur, contactez le producteur directement.",explore:"Explorer Tasting & Toasting",err_kick:"Un probl\u00e8me est survenu",err_title:"Nous n'avons pas pu charger ce passeport.",err_body:"Un probl\u00e8me de notre c\u00f4t\u00e9, pas du domaine. Votre place est en s\u00e9curit\u00e9. Veuillez r\u00e9essayer.",retry:"R\u00e9essayer",draft_kick:"Pas encore publi\u00e9",draft_title:"Le profil de ce domaine n'a pas encore \u00e9t\u00e9 publi\u00e9.",draft_body:"Rien ne manque par erreur \u2014 le producteur le pr\u00e9pare encore. Ce n'est pas la m\u00eame chose qu'un code invalide ou contrefait.",wines_empty:"Aucun vin pour l'instant",wines_empty_sub:"Ce domaine n'a pas encore ajout\u00e9 de vins \u00e0 son passeport.",wines_one:"1 vin",wines_many:"{n} vins",submitted:"D\u00e9pos\u00e9",zoom:"Agrandir",close:"Fermer"},
+  ru:{kick:"\u0412\u0438\u043d\u043e\u0434\u0435\u043b\u044c\u043d\u044f",dna:"\u0414\u041d\u041a",services:"\u0423\u0441\u043b\u0443\u0433\u0438",ph_credit:"\u00a9 {name}, \u0441\u0430\u0439\u0442 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044f",ph_source:"\u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a: {domain}",nf_kick:"\u041d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e",nf_title:"\u041c\u044b \u043d\u0435 \u0441\u043c\u043e\u0433\u043b\u0438 \u044d\u0442\u043e \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044c \u2014 \u0442\u0430\u043a\u043e\u0433\u043e \u043a\u043e\u0434\u0430 \u043d\u0435\u0442 \u0432 \u043d\u0430\u0448\u0438\u0445 \u0437\u0430\u043f\u0438\u0441\u044f\u0445.",nf_body:"\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u0441\u0441\u044b\u043b\u043a\u0443 \u0438 \u043f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0441\u043d\u043e\u0432\u0430. \u0415\u0441\u043b\u0438 \u0441\u0447\u0438\u0442\u0430\u0435\u0442\u0435, \u0447\u0442\u043e \u044d\u0442\u043e \u043e\u0448\u0438\u0431\u043a\u0430, \u0441\u0432\u044f\u0436\u0438\u0442\u0435\u0441\u044c \u0441 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u0435\u043c \u043d\u0430\u043f\u0440\u044f\u043c\u0443\u044e.",explore:"\u041e\u0442\u043a\u0440\u044b\u0442\u044c Tasting & Toasting",err_kick:"\u0427\u0442\u043e-\u0442\u043e \u043f\u043e\u0448\u043b\u043e \u043d\u0435 \u0442\u0430\u043a",err_title:"\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u044d\u0442\u043e\u0442 \u043f\u0430\u0441\u043f\u043e\u0440\u0442.",err_body:"\u0421\u0431\u043e\u0439 \u043d\u0430 \u043d\u0430\u0448\u0435\u0439 \u0441\u0442\u043e\u0440\u043e\u043d\u0435, \u043d\u0435 \u0443 \u0432\u0438\u043d\u043e\u0434\u0435\u043b\u044c\u043d\u0438. \u0412\u0430\u0448\u0435 \u043c\u0435\u0441\u0442\u043e \u0432 \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u0438. \u041f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0435\u0449\u0451 \u0440\u0430\u0437.",retry:"\u041f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u044c",draft_kick:"\u0415\u0449\u0451 \u043d\u0435 \u043e\u043f\u0443\u0431\u043b\u0438\u043a\u043e\u0432\u0430\u043d",draft_title:"\u041f\u0440\u043e\u0444\u0438\u043b\u044c \u044d\u0442\u043e\u0439 \u0432\u0438\u043d\u043e\u0434\u0435\u043b\u044c\u043d\u0438 \u0435\u0449\u0451 \u043d\u0435 \u043e\u043f\u0443\u0431\u043b\u0438\u043a\u043e\u0432\u0430\u043d.",draft_body:"\u041d\u0438\u0447\u0435\u0433\u043e \u043d\u0435 \u043f\u0440\u043e\u043f\u0430\u043b\u043e \u043f\u043e \u043e\u0448\u0438\u0431\u043a\u0435 \u2014 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c \u0435\u0449\u0451 \u0433\u043e\u0442\u043e\u0432\u0438\u0442 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0443. \u042d\u0442\u043e \u043d\u0435 \u0442\u043e \u0436\u0435 \u0441\u0430\u043c\u043e\u0435, \u0447\u0442\u043e \u043d\u0435\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0439 \u0438\u043b\u0438 \u043f\u043e\u0434\u0434\u0435\u043b\u044c\u043d\u044b\u0439 \u043a\u043e\u0434.",wines_empty:"\u0412\u0438\u043d \u043f\u043e\u043a\u0430 \u043d\u0435\u0442",wines_empty_sub:"\u0412\u0438\u043d\u043e\u0434\u0435\u043b\u044c\u043d\u044f \u0435\u0449\u0451 \u043d\u0435 \u0434\u043e\u0431\u0430\u0432\u0438\u043b\u0430 \u0432\u0438\u043d\u0430 \u0432 \u043f\u0430\u0441\u043f\u043e\u0440\u0442.",wines_one:"1 \u0432\u0438\u043d\u043e",wines_many:"{n} \u0432\u0438\u043d",submitted:"\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b \u043f\u043e\u0434\u0430\u043d\u044b",zoom:"\u0423\u0432\u0435\u043b\u0438\u0447\u0438\u0442\u044c",close:"\u0417\u0430\u043a\u0440\u044b\u0442\u044c"},
+  es:{kick:"Bodega",dna:"ADN",services:"Servicios",ph_credit:"\u00a9 {name}, sitio del productor",ph_source:"Fuente: {domain}",nf_kick:"No encontrado",nf_title:"No pudimos confirmar esto: este c\u00f3digo no est\u00e1 en nuestros registros.",nf_body:"Compruebe el enlace e int\u00e9ntelo de nuevo. Si cree que es un error, contacte directamente con el productor.",explore:"Explorar Tasting & Toasting",err_kick:"Algo ha fallado",err_title:"No pudimos cargar este pasaporte.",err_body:"Un problema nuestro, no de la bodega. Su lugar est\u00e1 a salvo. Int\u00e9ntelo de nuevo.",retry:"Reintentar",draft_kick:"A\u00fan no publicado",draft_title:"El perfil de esta bodega a\u00fan no se ha publicado.",draft_body:"No falta nada por error: el productor todav\u00eda lo est\u00e1 preparando. No es lo mismo que un c\u00f3digo inv\u00e1lido o falsificado.",wines_empty:"Todav\u00eda no hay vinos",wines_empty_sub:"Esta bodega a\u00fan no ha a\u00f1adido vinos a su pasaporte.",wines_one:"1 vino",wines_many:"{n} vinos",submitted:"Enviado",zoom:"Ampliar",close:"Cerrar"},
+  uk:{kick:"\u0412\u0438\u043d\u043e\u0440\u043e\u0431\u043d\u044f",dna:"\u0414\u041d\u041a",services:"\u041f\u043e\u0441\u043b\u0443\u0433\u0438",ph_credit:"\u00a9 {name}, \u0441\u0430\u0439\u0442 \u0432\u0438\u0440\u043e\u0431\u043d\u0438\u043a\u0430",ph_source:"\u0414\u0436\u0435\u0440\u0435\u043b\u043e: {domain}",nf_kick:"\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e",nf_title:"\u041c\u0438 \u043d\u0435 \u0437\u043c\u043e\u0433\u043b\u0438 \u0446\u0435 \u043f\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0438 \u2014 \u0442\u0430\u043a\u043e\u0433\u043e \u043a\u043e\u0434\u0443 \u043d\u0435\u043c\u0430\u0454 \u0432 \u043d\u0430\u0448\u0438\u0445 \u0437\u0430\u043f\u0438\u0441\u0430\u0445.",nf_body:"\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u0442\u0435 \u043f\u043e\u0441\u0438\u043b\u0430\u043d\u043d\u044f \u0456 \u0441\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0449\u0435 \u0440\u0430\u0437. \u042f\u043a\u0449\u043e \u0432\u0432\u0430\u0436\u0430\u0454\u0442\u0435, \u0449\u043e \u0446\u0435 \u043f\u043e\u043c\u0438\u043b\u043a\u0430, \u0437\u0432\u0435\u0440\u043d\u0456\u0442\u044c\u0441\u044f \u0431\u0435\u0437\u043f\u043e\u0441\u0435\u0440\u0435\u0434\u043d\u044c\u043e \u0434\u043e \u0432\u0438\u0440\u043e\u0431\u043d\u0438\u043a\u0430.",explore:"\u0412\u0456\u0434\u043a\u0440\u0438\u0442\u0438 Tasting & Toasting",err_kick:"\u0429\u043e\u0441\u044c \u043f\u0456\u0448\u043b\u043e \u043d\u0435 \u0442\u0430\u043a",err_title:"\u041d\u0435 \u0432\u0434\u0430\u043b\u043e\u0441\u044f \u0437\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0438\u0442\u0438 \u0446\u0435\u0439 \u043f\u0430\u0441\u043f\u043e\u0440\u0442.",err_body:"\u0417\u0431\u0456\u0439 \u043d\u0430 \u043d\u0430\u0448\u043e\u043c\u0443 \u0431\u043e\u0446\u0456, \u043d\u0435 \u0432 \u0432\u0438\u043d\u043e\u0440\u043e\u0431\u043d\u0456. \u0412\u0430\u0448\u0435 \u043c\u0456\u0441\u0446\u0435 \u0432 \u0431\u0435\u0437\u043f\u0435\u0446\u0456. \u0421\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0449\u0435 \u0440\u0430\u0437.",retry:"\u041f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u0438",draft_kick:"\u0429\u0435 \u043d\u0435 \u043e\u043f\u0443\u0431\u043b\u0456\u043a\u043e\u0432\u0430\u043d\u043e",draft_title:"\u041f\u0440\u043e\u0444\u0456\u043b\u044c \u0446\u0456\u0454\u0457 \u0432\u0438\u043d\u043e\u0440\u043e\u0431\u043d\u0456 \u0449\u0435 \u043d\u0435 \u043e\u043f\u0443\u0431\u043b\u0456\u043a\u043e\u0432\u0430\u043d\u043e.",draft_body:"\u041d\u0456\u0447\u043e\u0433\u043e \u043d\u0435 \u0437\u043d\u0438\u043a\u043b\u043e \u0447\u0435\u0440\u0435\u0437 \u043f\u043e\u043c\u0438\u043b\u043a\u0443 \u2014 \u0432\u0438\u0440\u043e\u0431\u043d\u0438\u043a \u0449\u0435 \u0433\u043e\u0442\u0443\u0454 \u0441\u0442\u043e\u0440\u0456\u043d\u043a\u0443. \u0426\u0435 \u043d\u0435 \u0442\u0435 \u0441\u0430\u043c\u0435, \u0449\u043e \u043d\u0435\u0434\u0456\u0439\u0441\u043d\u0438\u0439 \u0447\u0438 \u043f\u0456\u0434\u0440\u043e\u0431\u043b\u0435\u043d\u0438\u0439 \u043a\u043e\u0434.",wines_empty:"\u0412\u0438\u043d \u043f\u043e\u043a\u0438 \u043d\u0435\u043c\u0430\u0454",wines_empty_sub:"\u0412\u0438\u043d\u043e\u0440\u043e\u0431\u043d\u044f \u0449\u0435 \u043d\u0435 \u0434\u043e\u0434\u0430\u043b\u0430 \u0432\u0438\u043d\u0430 \u0434\u043e \u043f\u0430\u0441\u043f\u043e\u0440\u0442\u0430.",wines_one:"1 \u0432\u0438\u043d\u043e",wines_many:"{n} \u0432\u0438\u043d",submitted:"\u041f\u043e\u0434\u0430\u043d\u043e",zoom:"\u0417\u0431\u0456\u043b\u044c\u0448\u0438\u0442\u0438",close:"\u0417\u0430\u043a\u0440\u0438\u0442\u0438"},
+  it:{kick:"Cantina",dna:"DNA",services:"Servizi",ph_credit:"\u00a9 {name}, sito del produttore",ph_source:"Fonte: {domain}",nf_kick:"Non trovato",nf_title:"Non siamo riusciti a confermarlo: questo codice non \u00e8 nei nostri archivi.",nf_body:"Controlli il link e riprovi. Se ritiene che sia un errore, contatti direttamente il produttore.",explore:"Esplora Tasting & Toasting",err_kick:"Qualcosa \u00e8 andato storto",err_title:"Non siamo riusciti a caricare questo passaporto.",err_body:"Un problema nostro, non della cantina. Il suo posto \u00e8 al sicuro. Riprovi.",retry:"Riprova",draft_kick:"Non ancora pubblicato",draft_title:"Il profilo di questa cantina non \u00e8 ancora stato pubblicato.",draft_body:"Non manca nulla per errore: il produttore lo sta ancora preparando. Non \u00e8 la stessa cosa di un codice non valido o contraffatto.",wines_empty:"Nessun vino per ora",wines_empty_sub:"Questa cantina non ha ancora aggiunto vini al passaporto.",wines_one:"1 vino",wines_many:"{n} vini",submitted:"Inviato",zoom:"Ingrandisci",close:"Chiudi"},
+  de:{kick:"Weingut",dna:"DNA",services:"Leistungen",ph_credit:"\u00a9 {name}, Website des Erzeugers",ph_source:"Quelle: {domain}",nf_kick:"Nicht gefunden",nf_title:"Wir konnten das nicht best\u00e4tigen \u2014 dieser Code ist nicht in unseren Unterlagen.",nf_body:"Pr\u00fcfen Sie den Link und versuchen Sie es erneut. Wenn Sie einen Fehler vermuten, wenden Sie sich direkt an den Erzeuger.",explore:"Tasting & Toasting entdecken",err_kick:"Etwas ist schiefgelaufen",err_title:"Wir konnten diesen Pass nicht laden.",err_body:"Ein Problem bei uns, nicht beim Weingut. Ihr Platz ist sicher. Bitte versuchen Sie es erneut.",retry:"Erneut versuchen",draft_kick:"Noch nicht ver\u00f6ffentlicht",draft_title:"Das Profil dieses Weinguts ist noch nicht ver\u00f6ffentlicht.",draft_body:"Es fehlt nichts aus Versehen \u2014 der Erzeuger bereitet es noch vor. Das ist etwas anderes als ein ung\u00fcltiger oder gef\u00e4lschter Code.",wines_empty:"Noch keine Weine",wines_empty_sub:"Dieses Weingut hat noch keine Weine in den Pass eingetragen.",wines_one:"1 Wein",wines_many:"{n} Weine",submitted:"Eingereicht",zoom:"Vergr\u00f6\u00dfern",close:"Schlie\u00dfen"},
+  he:{kick:"\u05d9\u05e7\u05d1",dna:"DNA",services:"\u05e9\u05d9\u05e8\u05d5\u05ea\u05d9\u05dd",ph_credit:"\u00a9 {name}, \u05d0\u05ea\u05e8 \u05d4\u05d9\u05e6\u05e8\u05df",ph_source:"\u05de\u05e7\u05d5\u05e8: {domain}",nf_kick:"\u05dc\u05d0 \u05e0\u05de\u05e6\u05d0",nf_title:"\u05dc\u05d0 \u05d4\u05e6\u05dc\u05d7\u05e0\u05d5 \u05dc\u05d0\u05e9\u05e8 \u05d6\u05d0\u05ea \u2014 \u05d4\u05e7\u05d5\u05d3 \u05d4\u05d6\u05d4 \u05d0\u05d9\u05e0\u05d5 \u05d1\u05e8\u05e9\u05d5\u05de\u05d5\u05ea \u05e9\u05dc\u05e0\u05d5.",nf_body:"\u05d1\u05d3\u05e7\u05d5 \u05d0\u05ea \u05d4\u05e7\u05d9\u05e9\u05d5\u05e8 \u05d5\u05e0\u05e1\u05d5 \u05e9\u05d5\u05d1. \u05d0\u05dd \u05dc\u05d3\u05e2\u05ea\u05db\u05dd \u05d6\u05d5 \u05d8\u05e2\u05d5\u05ea, \u05e4\u05e0\u05d5 \u05d9\u05e9\u05d9\u05e8\u05d5\u05ea \u05d0\u05dc \u05d4\u05d9\u05e6\u05e8\u05df.",explore:"\u05dc-Tasting & Toasting",err_kick:"\u05de\u05e9\u05d4\u05d5 \u05d4\u05e9\u05ea\u05d1\u05e9",err_title:"\u05dc\u05d0 \u05d4\u05e6\u05dc\u05d7\u05e0\u05d5 \u05dc\u05d8\u05e2\u05d5\u05df \u05d0\u05ea \u05d4\u05d3\u05e8\u05db\u05d5\u05df.",err_body:"\u05ea\u05e7\u05dc\u05d4 \u05d0\u05e6\u05dc\u05e0\u05d5, \u05dc\u05d0 \u05d1\u05d9\u05e7\u05d1. \u05d4\u05de\u05e7\u05d5\u05dd \u05e9\u05dc\u05db\u05dd \u05e9\u05de\u05d5\u05e8. \u05e0\u05e1\u05d5 \u05e9\u05d5\u05d1.",retry:"\u05e0\u05e1\u05d5 \u05e9\u05d5\u05d1",draft_kick:"\u05e2\u05d3\u05d9\u05d9\u05df \u05dc\u05d0 \u05e4\u05d5\u05e8\u05e1\u05dd",draft_title:"\u05d4\u05e4\u05e8\u05d5\u05e4\u05d9\u05dc \u05e9\u05dc \u05d4\u05d9\u05e7\u05d1 \u05d4\u05d6\u05d4 \u05e2\u05d3\u05d9\u05d9\u05df \u05dc\u05d0 \u05e4\u05d5\u05e8\u05e1\u05dd.",draft_body:"\u05e9\u05d5\u05dd \u05d3\u05d1\u05e8 \u05dc\u05d0 \u05d7\u05e1\u05e8 \u05d1\u05d8\u05e2\u05d5\u05ea \u2014 \u05d4\u05d9\u05e6\u05e8\u05df \u05e2\u05d3\u05d9\u05d9\u05df \u05de\u05db\u05d9\u05df \u05d0\u05d5\u05ea\u05d5. \u05d6\u05d4 \u05e9\u05d5\u05e0\u05d4 \u05de\u05e7\u05d5\u05d3 \u05dc\u05d0 \u05ea\u05e7\u05d9\u05df \u05d0\u05d5 \u05de\u05d6\u05d5\u05d9\u05e3.",wines_empty:"\u05e2\u05d3\u05d9\u05d9\u05df \u05d0\u05d9\u05df \u05d9\u05d9\u05e0\u05d5\u05ea",wines_empty_sub:"\u05d4\u05d9\u05e7\u05d1 \u05e2\u05d3\u05d9\u05d9\u05df \u05dc\u05d0 \u05d4\u05d5\u05e1\u05d9\u05e3 \u05d9\u05d9\u05e0\u05d5\u05ea \u05dc\u05d3\u05e8\u05db\u05d5\u05df.",wines_one:"\u05d9\u05d9\u05df 1",wines_many:"{n} \u05d9\u05d9\u05e0\u05d5\u05ea",submitted:"\u05d4\u05d5\u05d2\u05e9",zoom:"\u05d4\u05d2\u05d3\u05dc\u05d4",close:"\u05e1\u05d2\u05d9\u05e8\u05d4"},
+  pt:{kick:"Quinta",dna:"ADN",services:"Servi\u00e7os",ph_credit:"\u00a9 {name}, site do produtor",ph_source:"Fonte: {domain}",nf_kick:"N\u00e3o encontrado",nf_title:"N\u00e3o conseguimos confirmar isto \u2014 este c\u00f3digo n\u00e3o est\u00e1 nos nossos registos.",nf_body:"Verifique a liga\u00e7\u00e3o e tente de novo. Se achar que \u00e9 um erro, contacte o produtor diretamente.",explore:"Explorar Tasting & Toasting",err_kick:"Algo correu mal",err_title:"N\u00e3o conseguimos carregar este passaporte.",err_body:"Um problema nosso, n\u00e3o da quinta. O seu lugar est\u00e1 seguro. Tente de novo.",retry:"Tentar de novo",draft_kick:"Ainda n\u00e3o publicado",draft_title:"O perfil desta quinta ainda n\u00e3o foi publicado.",draft_body:"Nada falta por engano \u2014 o produtor ainda o est\u00e1 a preparar. N\u00e3o \u00e9 o mesmo que um c\u00f3digo inv\u00e1lido ou falsificado.",wines_empty:"Ainda sem vinhos",wines_empty_sub:"Esta quinta ainda n\u00e3o adicionou vinhos ao passaporte.",wines_one:"1 vinho",wines_many:"{n} vinhos",submitted:"Enviado",zoom:"Ampliar",close:"Fechar"},
+  ka:{kick:"\u10db\u10d0\u10e0\u10d0\u10dc\u10d8",dna:"\u10d3\u10dc\u10db",services:"\u10e1\u10d4\u10e0\u10d5\u10d8\u10e1\u10d4\u10d1\u10d8",ph_credit:"\u00a9 {name}, \u10db\u10ec\u10d0\u10e0\u10db\u10dd\u10d4\u10d1\u10da\u10d8\u10e1 \u10e1\u10d0\u10d8\u10e2\u10d8",ph_source:"\u10ec\u10e7\u10d0\u10e0\u10dd: {domain}",nf_kick:"\u10d5\u10d4\u10e0 \u10db\u10dd\u10d8\u10eb\u10d4\u10d1\u10dc\u10d0",nf_title:"\u10d5\u10d4\u10e0 \u10d3\u10d0\u10d5\u10d0\u10d3\u10d0\u10e1\u10e2\u10e3\u10e0\u10d4\u10d7 \u2014 \u10d4\u10e1 \u10d9\u10dd\u10d3\u10d8 \u10e9\u10d5\u10d4\u10dc \u10e9\u10d0\u10dc\u10d0\u10ec\u10d4\u10e0\u10e8\u10d8 \u10d0\u10e0 \u10d0\u10e0\u10d8\u10e1.",nf_body:"\u10e8\u10d4\u10d0\u10db\u10dd\u10ec\u10db\u10d4\u10d7 \u10d1\u10db\u10e3\u10da\u10d8 \u10d3\u10d0 \u10d8\u10e1\u10d4\u10d5 \u10e1\u10ea\u10d0\u10d3\u10d4\u10d7. \u10d7\u10e3 \u10d2\u10d2\u10dd\u10dc\u10d8\u10d0\u10d7, \u10e0\u10dd\u10db \u10d4\u10e1 \u10e8\u10d4\u10ea\u10d3\u10dd\u10db\u10d0\u10d0, \u10d3\u10d0\u10e3\u10d9\u10d0\u10d5\u10e8\u10d8\u10e0\u10d3\u10d8\u10d7 \u10db\u10ec\u10d0\u10e0\u10db\u10dd\u10d4\u10d1\u10d4\u10da\u10e1.",explore:"Tasting & Toasting-\u10d8\u10e1 \u10d2\u10d0\u10ee\u10e1\u10dc\u10d0",err_kick:"\u10e0\u10d0\u10e6\u10d0\u10ea \u10e8\u10d4\u10ea\u10d3\u10dd\u10db\u10d0",err_title:"\u10d4\u10e1 \u10de\u10d0\u10e1\u10de\u10dd\u10e0\u10e2\u10d8\u10e1 \u10e9\u10d0\u10e2\u10d5\u10d8\u10e0\u10d7\u10d5\u10d0 \u10d5\u10d4\u10e0 \u10db\u10dd\u10ee\u10d4\u10e0\u10ee\u10d3\u10d0.",err_body:"\u10e8\u10d4\u10ea\u10d3\u10dd\u10db\u10d0 \u10e9\u10d5\u10d4\u10dc\u10e1 \u10db\u10ee\u10d0\u10e0\u10d4\u10d6\u10d4\u10d0, \u10d0\u10e0\u10d0 \u10db\u10d0\u10e0\u10dc\u10d8\u10e1\u10d0. \u10d7\u10e5\u10d5\u10d4\u10dc\u10d8 \u10d0\u10d3\u10d2\u10d8\u10da\u10d8 \u10d3\u10d0\u10ea\u10e3\u10da\u10d8\u10d0. \u10d8\u10e1\u10d4\u10d5 \u10e1\u10ea\u10d0\u10d3\u10d4\u10d7.",retry:"\u10d7\u10d0\u10d5\u10d8\u10d3\u10d0\u10dc \u10ea\u10d3\u10d0",draft_kick:"\u10ef\u10d4\u10e0 \u10d0\u10e0 \u10d2\u10d0\u10db\u10dd\u10e5\u10d5\u10d4\u10e7\u10dc\u10d4\u10d1\u10e3\u10da\u10d0",draft_title:"\u10d0\u10db \u10db\u10d0\u10e0\u10dc\u10d8\u10e1 \u10de\u10e0\u10dd\u10e4\u10d8\u10da\u10d8 \u10ef\u10d4\u10e0 \u10d0\u10e0 \u10d2\u10d0\u10db\u10dd\u10e5\u10d5\u10d4\u10e7\u10dc\u10d4\u10d1\u10e3\u10da\u10d0.",draft_body:"\u10d0\u10e0\u10d0\u10e4\u10d4\u10e0\u10d8 \u10d0\u10e0 \u10d3\u10d0\u10d9\u10d0\u10e0\u10d2\u10e3\u10da\u10d0 \u10e8\u10d4\u10ea\u10d3\u10dd\u10db\u10d8\u10d7 \u2014 \u10db\u10ec\u10d0\u10e0\u10db\u10dd\u10d4\u10d1\u10d4\u10da\u10d8 \u10ef\u10d4\u10e0 \u10d0\u10db\u10d6\u10d0\u10d3\u10d4\u10d1\u10e1 \u10db\u10d0\u10e1. \u10d4\u10e1 \u10d0\u10e0 \u10d0\u10e0\u10d8\u10e1 \u10d0\u10e0\u10d0\u10e1\u10ec\u10dd\u10e0\u10d8 \u10d0\u10dc \u10e7\u10d0\u10da\u10d1\u10d8 \u10d9\u10dd\u10d3\u10d8.",wines_empty:"\u10e6\u10d5\u10d8\u10dc\u10dd\u10d4\u10d1\u10d8 \u10ef\u10d4\u10e0 \u10d0\u10e0 \u10d0\u10e0\u10d8\u10e1",wines_empty_sub:"\u10db\u10d0\u10e0\u10d0\u10dc\u10e1 \u10ef\u10d4\u10e0 \u10d0\u10e0 \u10d3\u10d0\u10e3\u10db\u10d0\u10e2\u10d4\u10d1\u10d8\u10d0 \u10e6\u10d5\u10d8\u10dc\u10dd\u10d4\u10d1\u10d8 \u10de\u10d0\u10e1\u10de\u10dd\u10e0\u10e2\u10e8\u10d8.",wines_one:"1 \u10e6\u10d5\u10d8\u10dc\u10dd",wines_many:"{n} \u10e6\u10d5\u10d8\u10dc\u10dd",submitted:"\u10ec\u10d0\u10e0\u10d3\u10d2\u10d4\u10dc\u10d8\u10da\u10d8\u10d0",zoom:"\u10d2\u10d0\u10d3\u10d8\u10d3\u10d8\u10d4\u10d1\u10d0",close:"\u10d3\u10d0\u10ee\u10e3\u10e0\u10d5\u10d0"},
+  ro:{kick:"Cram\u0103",dna:"ADN",services:"Servicii",ph_credit:"\u00a9 {name}, site-ul produc\u0103torului",ph_source:"Surs\u0103: {domain}",nf_kick:"Neg\u0103sit",nf_title:"Nu am putut confirma asta \u2014 acest cod nu este \u00een eviden\u021bele noastre.",nf_body:"Verifica\u021bi linkul \u0219i \u00eencerca\u021bi din nou. Dac\u0103 crede\u021bi c\u0103 este o eroare, contacta\u021bi produc\u0103torul direct.",explore:"Exploreaz\u0103 Tasting & Toasting",err_kick:"Ceva nu a mers bine",err_title:"Nu am putut \u00eenc\u0103rca acest pa\u0219aport.",err_body:"O problem\u0103 la noi, nu la cram\u0103. Locul dumneavoastr\u0103 este \u00een siguran\u021b\u0103. \u00cencerca\u021bi din nou.",retry:"\u00cencearc\u0103 din nou",draft_kick:"\u00cenc\u0103 nepublicat",draft_title:"Profilul acestei crame nu a fost \u00eenc\u0103 publicat.",draft_body:"Nu lipse\u0219te nimic din gre\u0219eal\u0103 \u2014 produc\u0103torul \u00eel preg\u0103te\u0219te \u00eenc\u0103. Nu este acela\u0219i lucru cu un cod nevalid sau contraf\u0103cut.",wines_empty:"Niciun vin \u00eenc\u0103",wines_empty_sub:"Aceast\u0103 cram\u0103 nu a ad\u0103ugat \u00eenc\u0103 vinuri \u00een pa\u0219aport.",wines_one:"1 vin",wines_many:"{n} vinuri",submitted:"Depus",zoom:"M\u0103re\u0219te",close:"\u00cenchide"},
+  pl:{kick:"Winnica",dna:"DNA",services:"Us\u0142ugi",ph_credit:"\u00a9 {name}, strona producenta",ph_source:"\u0179r\u00f3d\u0142o: {domain}",nf_kick:"Nie znaleziono",nf_title:"Nie uda\u0142o si\u0119 tego potwierdzi\u0107 \u2014 tego kodu nie ma w naszych zapisach.",nf_body:"Sprawd\u017a link i spr\u00f3buj ponownie. Je\u015bli uwa\u017casz, \u017ce to b\u0142\u0105d, skontaktuj si\u0119 bezpo\u015brednio z producentem.",explore:"Otw\u00f3rz Tasting & Toasting",err_kick:"Co\u015b posz\u0142o nie tak",err_title:"Nie uda\u0142o si\u0119 wczyta\u0107 tego paszportu.",err_body:"Problem po naszej stronie, nie winnicy. Twoje miejsce jest bezpieczne. Spr\u00f3buj ponownie.",retry:"Spr\u00f3buj ponownie",draft_kick:"Jeszcze nieopublikowany",draft_title:"Profil tej winnicy nie zosta\u0142 jeszcze opublikowany.",draft_body:"Nic nie zgin\u0119\u0142o przez pomy\u0142k\u0119 \u2014 producent wci\u0105\u017c to przygotowuje. To nie to samo co niewa\u017cny lub podrobiony kod.",wines_empty:"Nie ma jeszcze win",wines_empty_sub:"Ta winnica nie doda\u0142a jeszcze win do paszportu.",wines_one:"1 wino",wines_many:"{n} win",submitted:"Z\u0142o\u017cone",zoom:"Powi\u0119ksz",close:"Zamknij"}
+};
+function L(key){
+  var pack = UI[lang] || UI.en;
+  if (pack[key] != null) return pack[key];
+  return UI.en[key] != null ? UI.en[key] : key;
+}
+function esc(s){return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function text(v){
+  if (v == null) return '';
+  if (typeof v === 'number') return isFinite(v) ? String(v) : '';
+  if (typeof v === 'string') return v.trim();
+  return '';
+}
+function pageHref(file, params){
+  var u = new URLSearchParams();
+  Object.keys(params).forEach(function(k){
+    if (params[k] != null && String(params[k]) !== '') u.set(k, String(params[k]));
+  });
+  if (lang !== 'en') u.set('lang', lang);
+  var api = qs.get('api');
+  if (api) u.set('api', api);
+  return file + '?' + u.toString();
+}
+function setCrumb(label, href){
+  var el = document.getElementById('crumb');
+  if (!label){ el.replaceChildren(); return; }
+  if (!href){ el.textContent = label; return; }
+  el.innerHTML = '<a href="' + esc(href) + '">' + esc(label) + '</a>';
+}
+function setTitle(name){
+  document.title = name ? (name + ' \u00b7 CAP') : 'Winery Passport \u00b7 Tasting & Toasting CAP';
 }
 
-function dnaTags(dna) {
-  if (!dna) return [];
-  const keys = ['family', 'land_story', 'philosophy', 'founding_story', 'signature_quote'];
-  return keys.map(k => dna[k]).filter(v => v && String(v).trim());
+var PHOTO_CREDITS = [
+  {host:'bdxfamilies.fr', name:'BDX Families'},
+  {host:'bordeauxfamilies.fr', name:'BDX Families'},
+  {host:'pfaffenheim.com', name:'Cave de Pfaffenheim'}
+];
+function photoHost(url){
+  var m = /^https?:\/\/([^/?#]+)/i.exec(text(url));
+  if (!m) return '';
+  var host = (m[1].split('@').pop() || '').split(':')[0].trim().toLowerCase();
+  var bare = host.replace(/^www\./, '');
+  return (bare && bare.indexOf('.') !== -1) ? bare : '';
 }
-
-function wineMeta(wi) {
-  return [wi.style, (wi.grape_varieties || []).join(', ')].filter(Boolean).join(' · ');
-}
-
-function wineCountLabel(n) {
-  return n === 1 ? t('wp_wines_one') : t('wp_wines_many').replace('{n}', String(n));
-}
-
-function serviceLabel(s) {
-  const custom = (s.details || '').trim();
-  if (custom) return custom;
-  const type = (s.service_type || '').trim();
-  return type ? (t('svc_' + type) || type) : '';
-}
-
-function renderLoading() {
-  document.getElementById('ctx-label').textContent = t('wp_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="fade-in" style="padding:56px 0 80px;">
-      <div style="display:flex;align-items:center;gap:18px;margin-bottom:28px;">
-        <div class="skel-pulse" style="width:60px;height:60px;border-radius:50%;background:rgba(197,165,114,0.1);flex:0 0 auto;"></div>
-        <div style="flex:1;">
-          <div class="skel-pulse" style="height:11px;width:38%;background:rgba(197,165,114,0.14);border-radius:2px;margin-bottom:12px;"></div>
-          <div class="skel-pulse" style="height:30px;width:72%;background:rgba(245,240,232,0.07);border-radius:3px;"></div>
-        </div>
-      </div>
-      <div style="display:flex;gap:10px;margin-bottom:40px;">
-        <div class="skel-pulse" style="height:38px;width:150px;background:rgba(197,165,114,0.08);border-radius:100px;"></div>
-        <div class="skel-pulse" style="height:38px;width:180px;background:rgba(197,165,114,0.08);border-radius:100px;"></div>
-      </div>
-      <div class="skel-pulse" style="height:10px;width:120px;background:rgba(197,165,114,0.12);border-radius:2px;margin-bottom:18px;"></div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:44px;">
-        <div style="height:36px;width:130px;background:rgba(197,165,114,0.06);border:1px solid rgba(197,165,114,0.1);border-radius:3px;"></div>
-        <div style="height:36px;width:110px;background:rgba(197,165,114,0.06);border:1px solid rgba(197,165,114,0.1);border-radius:3px;"></div>
-        <div style="height:36px;width:150px;background:rgba(197,165,114,0.06);border:1px solid rgba(197,165,114,0.1);border-radius:3px;"></div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:14px;">
-        <div style="height:60px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-        <div style="height:60px;background:rgba(245,240,232,0.04);border:1px solid rgba(197,165,114,0.08);border-radius:3px;"></div>
-      </div>
-    </div>`;
-}
-
-function renderNotFound() {
-  document.getElementById('ctx-label').textContent = t('wp_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="state-screen">
-      <div class="state-icon" style="border:1px solid rgba(197,165,114,0.35);"><span style="color:rgba(197,165,114,0.75);font-size:27px;font-family:var(--serif);">?</span></div>
-      <div class="state-kick">${t('wp_nf_kick')}</div>
-      <h1 class="state-title">${t('wp_nf_title')}</h1>
-      <p class="state-body">${t('wp_nf_body')}</p>
-      <a class="wp-btn wp-btn-ghost" href="https://tastingandtoasting.com">${t('wp_explore')}</a>
-    </div>`;
-}
-
-function renderError() {
-  document.getElementById('ctx-label').textContent = t('wp_ctx_loading');
-  document.getElementById('app').innerHTML = `
-    <div class="state-screen">
-      <div class="state-icon" style="border:1px solid rgba(200,101,79,0.5);"><span style="color:var(--err);font-size:24px;">↻</span></div>
-      <div class="state-kick">${t('wp_err_kick')}</div>
-      <h1 class="state-title">${t('wp_err_title')}</h1>
-      <p class="state-body">${t('wp_err_body')}</p>
-      <button type="button" class="wp-btn wp-btn-gold" id="retry-btn">${t('wp_retry')}</button>
-    </div>`;
-  document.getElementById('retry-btn').addEventListener('click', () => load());
-}
-
-function renderPassport(w, dna, services, wines, winesOk, ownershipConfirmed, ownershipBadge) {
-  document.getElementById('ctx-label').textContent = t('wp_ctx_ready');
-  const provisional = !ownershipConfirmed;
-  const initial = (w.name || '?').trim().charAt(0).toUpperCase() || '?';
-  const crestBg = provisional ? 'rgba(74,14,20,0.35)' : 'radial-gradient(circle at 35% 30%, #6b1620, #3a0a10)';
-  const crestBorder = provisional ? 'rgba(197,165,114,0.3)' : 'rgba(197,165,114,0.55)';
-  const crestColor = provisional ? 'rgba(197,165,114,0.7)' : '#C5A572';
-  const sm = statusMeta(w.verification_status);
-  const tags = dnaTags(dna);
-
-  const ownHtml = ownershipConfirmed ? `
-    <div class="own-badge">
-      <span class="own-icon" aria-hidden="true">✓</span>
-      <span class="own-label">${esc(ownershipBadge || t('wp_verified_winery'))}</span>
-    </div>` : '';
-
-  const vsHtml = `
-    <div class="vs-pill">
-      <span class="vs-dot" style="background:${sm.dot};box-shadow:0 0 0 3px ${sm.halo};"></span>
-      <span class="vs-text">${t('wp_vs_prefix')} <strong>${t(sm.key)}</strong></span>
-    </div>`;
-
-  const dnaHtml = tags.length ? `
-    <div class="block">
-      <div class="sec-label sec-label-high">${t('wp_dna_label')}</div>
-      <div class="dna-tags">${tags.map(tag => `<span class="dna-tag">${esc(tag)}</span>`).join('')}</div>
-    </div>` : '';
-
-  const svcLabels = services.map(serviceLabel).filter(Boolean);
-  const svcHtml = svcLabels.length ? `
-    <div class="block block-divider">
-      <div class="sec-label sec-label-med">${t('wp_services_label')}</div>
-      <div class="svc-tags">${svcLabels.map(label => `<span class="svc-tag">${esc(label)}</span>`).join('')}</div>
-    </div>` : '';
-
-  let winesHtml = '';
-  if (winesOk) {
-    const winesInner = wines.length ? `
-      <div class="wines-list">${wines.map(wi => `
-        <a class="wp-wine-row" href="wine-passport.html?wineId=${encodeURIComponent(wi.id)}&winerySlug=${encodeURIComponent(slug)}${lp}">
-          <div class="wine-info">
-            <span class="wine-bottle" aria-hidden="true"></span>
-            <div>
-              <div class="wine-name">${esc(wi.name)}</div>
-              ${wineMeta(wi) ? `<div class="wine-meta">${esc(wineMeta(wi))}</div>` : ''}
-            </div>
-          </div>
-          <span class="wine-chev" aria-hidden="true">›</span>
-        </a>`).join('')}</div>` : `
-      <div class="wines-empty">
-        <div class="wines-empty-icon" aria-hidden="true"></div>
-        <div class="wines-empty-title">${t('wp_wines_empty')}</div>
-        <div class="wines-empty-sub">${t('wp_wines_empty_sub')}</div>
-      </div>`;
-    winesHtml = `
-      <div class="block block-divider">
-        <div class="wines-head">
-          <div class="sec-label sec-label-med" style="margin:0;">${t('wp_wines_label')}</div>
-          <span class="wines-count">${wineCountLabel(wines.length)}</span>
-        </div>
-        ${winesInner}
-      </div>`;
+function photoCredit(url){
+  var host = photoHost(url);
+  if (!host) return null;
+  var named = null;
+  for (var i = 0; i < PHOTO_CREDITS.length; i++){
+    var c = PHOTO_CREDITS[i];
+    if (host === c.host || host.slice(-(c.host.length + 1)) === '.' + c.host){ named = c; break; }
   }
-
-  const desc = (w.description || '').trim();
-  const descHtml = desc ? `
-    <div class="desc-block">
-      <p class="desc-text">${esc(desc)}</p>
-    </div>` : '';
-
-  document.getElementById('app').innerHTML = `
-    <article class="passport fade-in">
-      <div class="hero-row">
-        <div class="crest" style="background:${crestBg};border:1px solid ${crestBorder};">
-          <span class="crest-glyph" style="color:${crestColor};">${esc(initial)}</span>
-        </div>
-        <div>
-          <div class="hero-kick">${t('wp_kick')}</div>
-          <h1 class="hero-name">${esc(w.name)}</h1>
-        </div>
-      </div>
-      <div class="trust-row">${ownHtml}${vsHtml}</div>
-      ${dnaHtml}
-      ${svcHtml}
-      ${winesHtml}
-      ${descHtml}
-    </article>`;
+  return named ? {kind:'producer', name:named.name} : {kind:'domain', domain:host};
+}
+function creditLine(credit){
+  if (!credit) return '';
+  if (credit.kind === 'producer') return L('ph_credit').replace('{name}', credit.name);
+  return L('ph_source').replace('{domain}', credit.domain);
 }
 
-async function load() {
-  if (!slug) { renderNotFound(); return; }
+var BOTTLES = {
+  bordeaux:{vb:'0 0 60 180', inner:'<path d="M21.6,0 L38.4,0 C38.4,19.8 39,33.66 39,39.6 C39,48.11 58.2,48.11 58.2,58.5 L58.2,172.8 C58.2,175.68 57,177.84 57,176.4 Q57,180 53.4,180 L6.6,180 Q3,180 3,176.4 C3,177.84 1.8,175.68 1.8,172.8 L1.8,58.5 C1.8,48.11 21,48.11 21,39.6 C21,33.66 21.6,19.8 21.6,0 Z" fill="none" stroke="#C5A572" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"></path><path d="M21.37,15.3 L38.63,15.3" fill="none" stroke="#C5A572" stroke-width="1.2" stroke-linecap="round"></path><rect x="12" y="91.65" width="36" height="48" fill="none" stroke="#C5A572" stroke-width="0.84" stroke-dasharray="3 1.8"></rect>'},
+  riesling:{vb:'0 0 80 240', inner:'<path d="M31.2,0 L48.8,0 C48.8,25.8 50.4,43.86 50.4,51.6 C50.4,92.52 69.6,92.52 69.6,126 L69.6,228 C69.6,232.8 68,238.08 68,236.8 Q68,240 64.8,240 L15.2,240 Q12,240 12,236.8 C12,238.08 10.4,232.8 10.4,228 L10.4,126 C10.4,92.52 29.6,92.52 29.6,51.6 C29.6,43.86 31.2,25.8 31.2,0 Z" fill="none" stroke="#C5A572" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"></path><path d="M30.87,10.8 L49.13,10.8" fill="none" stroke="#C5A572" stroke-width="1.4" stroke-linecap="round"></path><rect x="16" y="145" width="48" height="64" fill="none" stroke="#C5A572" stroke-width="0.98" stroke-dasharray="3.5 2.1"></rect>'},
+  champagne:{vb:'0 0 80 240', inner:'<path d="M28.8,0 L51.2,0 C51.2,31.2 52.8,53.04 52.8,62.4 C52.8,69.6 72.8,69.6 72.8,80.4 L72.8,228 C72.8,232.8 72,238.08 72,236.8 Q72,240 68.8,240 L11.2,240 Q8,240 8,236.8 C8,238.08 7.2,232.8 7.2,228 L7.2,80.4 C7.2,69.6 27.2,69.6 27.2,62.4 C27.2,53.04 28.8,31.2 28.8,0 Z" fill="none" stroke="#C5A572" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"></path><path d="M27.51,50.4 L52.49,50.4" fill="none" stroke="#C5A572" stroke-width="1.4" stroke-linecap="round"></path><rect x="16" y="122.2" width="48" height="64" fill="none" stroke="#C5A572" stroke-width="0.98" stroke-dasharray="3.5 2.1"></rect>'}
+};
+function bottleSvg(kind, cls){
+  var spec = BOTTLES[kind] || BOTTLES.bordeaux;
+  return '<svg class="' + (cls || 'bottle') + '" xmlns="http://www.w3.org/2000/svg" viewBox="' + spec.vb + '" aria-hidden="true">' + spec.inner + '</svg>';
+}
+function anonBottle(){
+  return '<svg class="draft-bottle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 360" aria-hidden="true"><path d="M43.2,0 L76.8,0 C76.8,39.6 78,67.32 78,79.2 C78,96.21 116.4,96.21 116.4,117 L116.4,345.6 C116.4,351.36 114,355.68 114,352.8 Q114,360 106.8,360 L13.2,360 Q6,360 6,352.8 C6,355.68 3.6,351.36 3.6,345.6 L3.6,117 C3.6,96.21 42,96.21 42,79.2 C42,67.32 43.2,39.6 43.2,0 Z" fill="none" stroke="#C5A572" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><path d="M42.74,30.6 L77.26,30.6" fill="none" stroke="#C5A572" stroke-width="1.6" stroke-linecap="round"></path><rect x="24" y="183.3" width="72" height="96" fill="#0F0507" stroke="#C5A572" stroke-width="1.12"></rect><text x="60" y="252" text-anchor="middle" font-family="Georgia, serif" font-size="52" font-style="italic" fill="#C5A572" fill-opacity="0.55">?</text></svg>';
+}
+function bottleKind(wine){
+  var color = text(wine.color).toLowerCase();
+  var style = text(wine.style).toLowerCase();
+  var name = text(wine.name).toLowerCase();
+  if (color === 'sparkling' || style === 'sparkling' || /cuv[e\u00e9]e|champagne|cr[e\u00e9]mant/.test(name)) return 'champagne';
+  if (color === 'white') return 'riesling';
+  return 'bordeaux';
+}
+
+var FLAG_ALIAS = {
+  italy:'it', italia:'it', it:'it',
+  france:'fr', fr:'fr',
+  spain:'es', espana:'es', es:'es',
+  portugal:'pt', pt:'pt',
+  germany:'de', deutschland:'de', de:'de',
+  luxembourg:'lu', luxemburg:'lu', lu:'lu',
+  netherlands:'nl', holland:'nl', nl:'nl',
+  belgium:'be', belgie:'be', belgique:'be', be:'be',
+  georgia:'ge', ge:'ge', sakartvelo:'ge',
+  moldova:'md', md:'md',
+  romania:'ro', ro:'ro',
+  ukraine:'ua', ua:'ua',
+  poland:'pl', polska:'pl', pl:'pl',
+  israel:'il', il:'il',
+  'united states':'us', usa:'us', us:'us', america:'us',
+  'united kingdom':'gb', uk:'gb', gb:'gb', 'great britain':'gb', england:'gb',
+  australia:'au', au:'au',
+  'new zealand':'nz', nz:'nz',
+  argentina:'ar', ar:'ar',
+  chile:'cl', cl:'cl',
+  'south africa':'za', za:'za',
+  austria:'at', osterreich:'at', at:'at',
+  greece:'gr', gr:'gr',
+  hungary:'hu', hu:'hu',
+  switzerland:'ch', suisse:'ch', schweiz:'ch', ch:'ch',
+  slovenia:'si', si:'si',
+  croatia:'hr', hr:'hr',
+  russia:'ru', ru:'ru',
+  canada:'ca', ca:'ca',
+  brazil:'br', brasil:'br', br:'br',
+  uruguay:'uy', uy:'uy',
+  lebanon:'lb', lb:'lb',
+  japan:'jp', jp:'jp',
+  china:'cn', cn:'cn',
+  czechia:'cz', 'czech republic':'cz', cz:'cz',
+  slovakia:'sk', sk:'sk',
+  serbia:'rs', rs:'rs',
+  'north macedonia':'mk', macedonia:'mk', mk:'mk',
+  turkey:'tr', turkiye:'tr', tr:'tr',
+  mexico:'mx', mx:'mx',
+  ireland:'ie', ie:'ie',
+  bulgaria:'bg', bg:'bg'
+};
+var STRIPES = {
+  it:['v',['#009246','#ffffff','#ce2b37']],
+  fr:['v',['#0055a4','#ffffff','#ef4135']],
+  lu:['h',['#ed2939','#ffffff','#00a1de']],
+  nl:['h',['#ae1c28','#ffffff','#21468b']],
+  de:['h',['#000000','#dd0000','#ffce00']],
+  ru:['h',['#ffffff','#0039a6','#d52b1e']],
+  ua:['h',['#005bbb','#ffd500']],
+  pl:['h',['#ffffff','#dc143c']],
+  at:['h',['#ed2939','#ffffff','#ed2939']],
+  hu:['h',['#ce2939','#ffffff','#477050']],
+  bg:['h',['#ffffff','#00966e','#d62612']],
+  be:['v',['#000000','#fdda24','#ef3340']],
+  ie:['v',['#169b62','#ffffff','#ff883e']],
+  ro:['v',['#002b7f','#fcd116','#ce1126']],
+  md:['v',['#003da5','#ffd100','#cc0000']],
+  mx:['v',['#006847','#ffffff','#ce1126']],
+  ar:['h',['#74acdf','#ffffff','#74acdf']],
+  si:['h',['#ffffff','#003da5','#ed1c24']],
+  hr:['h',['#ff0000','#ffffff','#171796']],
+  rs:['h',['#c6363c','#0c4076','#ffffff']],
+  sk:['h',['#ffffff','#0b4ea2','#ee1c25']],
+  lb:['h',['#ed1c24','#ffffff','#ed1c24'],[1,2,1]]
+};
+function countryIso(name){
+  var s = text(name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  return FLAG_ALIAS[s] || '';
+}
+function stripeFlag(dir, colors, weights){
+  var w = weights || colors.map(function(){return 1;});
+  var total = w.reduce(function(a,b){return a+b;},0);
+  var acc = 0, rects = '';
+  for (var i = 0; i < colors.length; i++){
+    var frac = w[i] / total;
+    if (dir === 'v') rects += '<rect x="' + (acc*16).toFixed(3) + '" y="0" width="' + (frac*16).toFixed(3) + '" height="11" fill="' + colors[i] + '"/>';
+    else rects += '<rect x="0" y="' + (acc*11).toFixed(3) + '" width="16" height="' + (frac*11).toFixed(3) + '" fill="' + colors[i] + '"/>';
+    acc += frac;
+  }
+  return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true">' + rects + '</svg>';
+}
+function jackSvg(x,y,w,h){
+  return '<svg x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" viewBox="0 0 60 30"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>';
+}
+function flagSvg(country){
+  var iso = countryIso(country);
+  if (!iso) return '';
+  if (iso === 'es') return stripeFlag('h', ['#c60b1e','#ffc400','#c60b1e'], [1,2,1]);
+  if (iso === 'pt') return stripeFlag('v', ['#006600','#ff0000'], [2,3]);
+  if (iso === 'ge') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect x="13" width="4" height="20" fill="#ff0000"/><rect y="8" width="30" height="4" fill="#ff0000"/><rect x="2" y="2" width="1.6" height="5" fill="#ff0000"/><rect x="0.3" y="3.7" width="5" height="1.6" fill="#ff0000"/><rect x="26.4" y="2" width="1.6" height="5" fill="#ff0000"/><rect x="24.7" y="3.7" width="5" height="1.6" fill="#ff0000"/><rect x="2" y="13" width="1.6" height="5" fill="#ff0000"/><rect x="0.3" y="14.7" width="5" height="1.6" fill="#ff0000"/><rect x="26.4" y="13" width="1.6" height="5" fill="#ff0000"/><rect x="24.7" y="14.7" width="5" height="1.6" fill="#ff0000"/></svg>';
+  if (iso === 'ch') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true"><rect width="16" height="11" fill="#d52b1e"/><rect x="7" y="2" width="2" height="7" fill="#fff"/><rect x="4.5" y="4.5" width="7" height="2" fill="#fff"/></svg>';
+  if (iso === 'gb') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>';
+  if (iso === 'us'){
+    var stripes = '', sh = 100/13;
+    for (var i = 0; i < 13; i++) stripes += '<rect y="'+(i*sh).toFixed(2)+'" width="190" height="'+(sh+0.4).toFixed(2)+'" fill="'+(i%2?'#fff':'#b22234')+'"/>';
+    return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 100" aria-hidden="true">'+stripes+'<rect width="76" height="'+(sh*7).toFixed(2)+'" fill="#3c3b6e"/></svg>';
+  }
+  if (iso === 'il') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true"><rect width="16" height="11" fill="#fff"/><rect y="1" width="16" height="1.5" fill="#0038b8"/><rect y="8.5" width="16" height="1.5" fill="#0038b8"/><polygon points="8,3.1 9.2,5.3 6.8,5.3" fill="none" stroke="#0038b8" stroke-width="0.35"/><polygon points="8,7.5 6.8,5.3 9.2,5.3" fill="none" stroke="#0038b8" stroke-width="0.35"/></svg>';
+  if (iso === 'jp') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true"><rect width="16" height="11" fill="#fff"/><circle cx="8" cy="5.5" r="3" fill="#bc002d"/></svg>';
+  if (iso === 'ca') return stripeFlag('v', ['#ff0000','#ffffff','#ff0000'], [1,2,1]);
+  if (iso === 'gr'){
+    var g = '', gh = 11/9;
+    for (var r = 0; r < 9; r++) g += '<rect y="'+(r*gh).toFixed(3)+'" width="16" height="'+(gh+0.08).toFixed(3)+'" fill="'+(r%2?'#fff':'#0d5eaf')+'"/>';
+    g += '<rect width="6.2" height="'+(gh*5).toFixed(3)+'" fill="#0d5eaf"/>';
+    g += '<rect x="2.5" width="1.2" height="'+(gh*5).toFixed(3)+'" fill="#fff"/>';
+    g += '<rect y="'+(gh*2).toFixed(3)+'" width="6.2" height="1.15" fill="#fff"/>';
+    return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true">'+g+'</svg>';
+  }
+  if (iso === 'cl') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true"><rect width="16" height="5.5" fill="#fff"/><rect y="5.5" width="16" height="5.5" fill="#d52b1e"/><rect width="5.5" height="5.5" fill="#0039a6"/><polygon points="2.75,1.3 3.1,2.35 4.2,2.35 3.3,3 3.65,4.05 2.75,3.4 1.85,4.05 2.2,3 1.3,2.35 2.4,2.35" fill="#fff"/></svg>';
+  if (iso === 'br') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true"><rect width="16" height="11" fill="#009c3b"/><polygon points="8,1.3 14.2,5.5 8,9.7 1.8,5.5" fill="#ffdf00"/><circle cx="8" cy="5.5" r="2.1" fill="#002776"/></svg>';
+  if (iso === 'za') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#de3831"/><rect y="10" width="30" height="10" fill="#002395"/><polygon points="0,0 13,0 18,10 13,20 0,20" fill="#fff"/><polygon points="0,2.2 10.2,2.2 14.6,10 10.2,17.8 0,17.8" fill="#ffb612"/><polygon points="0,4.2 7.6,4.2 11.2,10 7.6,15.8 0,15.8" fill="#007a4d"/><polygon points="0,0 9,10 0,20" fill="#000"/></svg>';
+  if (iso === 'au' || iso === 'nz'){
+    var stars = iso === 'au'
+      ? '<circle cx="15" cy="22" r="1.3" fill="#fff"/><circle cx="42" cy="8" r="1.1" fill="#fff"/><circle cx="48" cy="14" r="1.1" fill="#fff"/><circle cx="46" cy="22" r="1.1" fill="#fff"/><circle cx="40" cy="18" r="0.8" fill="#fff"/>'
+      : '<circle cx="48" cy="6" r="1.1" fill="#fff"/><circle cx="42" cy="12" r="1" fill="#fff"/><circle cx="46" cy="20" r="1.1" fill="#fff"/><circle cx="38" cy="22" r="1" fill="#fff"/>';
+    return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"/>'+jackSvg(0,0,30,15)+stars+'</svg>';
+  }
+  if (iso === 'uy'){
+    var u = '';
+    for (var k = 0; k < 9; k++) u += '<rect y="'+(k*11/9).toFixed(3)+'" width="16" height="'+(11/9+0.05).toFixed(3)+'" fill="'+(k%2?'#fff':'#0038a8')+'"/>';
+    u += '<rect width="7" height="6.1" fill="#fff"/><circle cx="3.5" cy="3" r="1.3" fill="#fcd116"/>';
+    return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true">'+u+'</svg>';
+  }
+  if (iso === 'cz') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true"><rect width="16" height="5.5" fill="#fff"/><rect y="5.5" width="16" height="5.5" fill="#d7141a"/><polygon points="0,0 7,5.5 0,11" fill="#11457e"/></svg>';
+  if (iso === 'cn') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true"><rect width="16" height="11" fill="#de2910"/><polygon points="3,1.4 3.4,2.5 4.5,2.5 3.6,3.2 3.9,4.3 3,3.6 2.1,4.3 2.4,3.2 1.5,2.5 2.6,2.5" fill="#ffde00"/></svg>';
+  if (iso === 'tr') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true"><rect width="16" height="11" fill="#e30a17"/><circle cx="6.3" cy="5.5" r="2.5" fill="#fff"/><circle cx="7.15" cy="5.5" r="2" fill="#e30a17"/><polygon points="9.3,5.5 10.5,5.1 9.7,6.15 9.7,4.85 10.5,5.9" fill="#fff"/></svg>';
+  if (iso === 'mk') return '<svg class="flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11" aria-hidden="true"><rect width="16" height="11" fill="#d20000"/><circle cx="8" cy="5.5" r="1.5" fill="#f8e92e"/></svg>';
+  var spec = STRIPES[iso];
+  if (!spec) return '';
+  return stripeFlag(spec[0], spec[1], spec[2]);
+}
+
+function colorLabel(c){
+  var raw = text(c);
+  if (!raw) return '';
+  var k = raw.toLowerCase();
+  if (k === 'ros\u00e9') k = 'rose';
+  var key = 'color_' + k;
+  var label = CAP.t(key);
+  return label === key ? raw : label;
+}
+function styleLabel(s){
+  var raw = text(s);
+  if (!raw) return '';
+  if (raw.toLowerCase() === 'sparkling') return CAP.t('color_sparkling');
+  return raw;
+}
+function wineCount(n){
+  if (lang === 'ru' || lang === 'uk'){
+    var n10 = n % 10, n100 = n % 100;
+    var word = (n10 === 1 && n100 !== 11) ? '\u0432\u0438\u043d\u043e' : (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) ? '\u0432\u0438\u043d\u0430' : '\u0432\u0438\u043d';
+    return n + ' ' + word;
+  }
+  if (lang === 'pl'){
+    if (n === 1) return '1 wino';
+    var a = n % 10, b = n % 100;
+    if (a >= 2 && a <= 4 && (b < 12 || b > 14)) return n + ' wina';
+    return n + ' win';
+  }
+  if (n === 1) return L('wines_one');
+  return L('wines_many').replace('{n}', String(n));
+}
+function assertedLabel(){
+  if (lang === 'en') return 'Producer-asserted';
+  return CAP.t('b_claimed');
+}
+function statusLabel(status){
+  if (status === 'verified' || status === 'certified') return CAP.t('b_verified');
+  if (status === 'under_review') return CAP.t('b_review');
+  if (status === 'documents_submitted') return L('submitted');
+  if (status === 'rejected') return CAP.t('b_unverified');
+  if (status) return CAP.t('b_review');
+  return '';
+}
+function serviceLabels(services){
+  if (!Array.isArray(services)) return [];
+  return services.map(function(s){
+    if (typeof s === 'string') return text(s);
+    if (!s || typeof s !== 'object') return '';
+    var custom = text(s.details);
+    if (custom) return custom;
+    var type = text(s.service_type);
+    if (!type) return '';
+    var key = 'svc_' + type;
+    var label = CAP.t(key);
+    return label === key ? type : label;
+  }).filter(Boolean);
+}
+function foundedLine(year){
+  var y = text(year);
+  if (!y) return '';
+  return '<div class="founded">' + esc(CAP.t('founded') + ' ' + y) + '</div>';
+}
+function placeLine(w){
+  var loc = text(w.locality), reg = text(w.region), country = text(w.country);
+  var left = [loc, reg].filter(Boolean).join(', ');
+  var parts = [left, country].filter(Boolean);
+  if (!parts.length) return '';
+  return '<div class="place">' + flagSvg(country) + '<span>' + esc(parts.join(' \u00b7 ')) + '</span></div>';
+}
+function safeHttp(url){
+  var u = text(url);
+  return /^https?:\/\//i.test(u) ? u : '';
+}
+function dnaBlock(dna){
+  dna = dna || {};
+  var cols = [
+    [CAP.t('family'), dna.family],
+    [CAP.t('land'), dna.land_story],
+    [CAP.t('philosophy'), dna.philosophy],
+    [CAP.t('story'), dna.founding_story],
+    [CAP.t('founder_words'), dna.signature_quote]
+  ].map(function(pair){ return {label:pair[0], value:text(pair[1])}; }).filter(function(col){ return col.value; });
+  if (!cols.length) return '';
+  return '<section class="section dna pad"><div class="kicker">' + esc(L('dna')) + '</div><div class="dna-grid">' +
+    cols.map(function(col){
+      return '<div><div class="dna-label">' + esc(col.label) + '</div><div class="dna-copy">' + esc(col.value) + '</div></div>';
+    }).join('') + '</div></section>';
+}
+function wineCards(wines, winerySlug){
+  return wines.map(function(wi){
+    var id = text(wi.id);
+    if (!id) return '';
+    var name = text(wi.name);
+    var color = colorLabel(wi.color);
+    var style = styleLabel(wi.style);
+    var meta = [color, style].filter(Boolean).join(' \u00b7 ');
+    var grapes = Array.isArray(wi.grape_varieties) ? wi.grape_varieties.map(text).filter(Boolean).join(', ') : '';
+    if (!name && !meta && !grapes) return '';
+    var kind = bottleKind(wi);
+    var href = pageHref('wine-passport.html', {wineId:id, winerySlug:winerySlug});
+    var url = text(wi.hero_image_url);
+    var credit = url ? photoCredit(url) : null;
+    var line = credit ? creditLine(credit) : '';
+    var visual, zoom = '';
+    if (url && line){
+      visual = '<span class="wine-visual" data-bottle="' + kind + '"><img class="producer-photo" src="' + esc(url) + '" alt="' + esc(name) + '"><span class="credit">' + esc(line) + '</span></span>';
+      zoom = '<button type="button" class="zoom" data-url="' + esc(url) + '" data-credit="' + esc(line) + '">' + esc(L('zoom')) + '</button>';
+    } else {
+      visual = '<span class="wine-visual">' + bottleSvg(kind) + '</span>';
+    }
+    return '<article class="wine-card">' + zoom +
+      '<a class="wine-card-link" href="' + esc(href) + '">' + visual +
+      '<span class="wine-copy">' +
+        (name ? '<div class="wine-name">' + esc(name) + '</div>' : '') +
+        (meta ? '<div class="wine-meta">' + esc(meta) + '</div>' : '') +
+        (grapes ? '<div class="wine-grapes">' + esc(grapes) + '</div>' : '') +
+      '</span></a></article>';
+  }).join('');
+}
+function winesBlock(wines, winesOk, winerySlug){
+  if (!winesOk) return '';
+  var cards = wineCards(wines, winerySlug);
+  var head = '<div class="sec-head"><div class="kicker">' + esc(CAP.t('wines_title')) + '</div><div class="count">' + esc(wineCount(wines.length)) + '</div></div>';
+  var body = cards
+    ? '<div class="wines-grid">' + cards + '</div>'
+    : '<div class="wines-empty"><p class="empty-title">' + esc(L('wines_empty')) + '</p><p class="empty-sub">' + esc(L('wines_empty_sub')) + '</p></div>';
+  return '<section class="section pad">' + head + body + '</section>';
+}
+function servicesBlock(services){
+  var labels = serviceLabels(services);
+  if (!labels.length) return '';
+  return '<section class="section pad"><div class="kicker">' + esc(L('services')) + '</div><div class="svc-row">' +
+    labels.map(function(label){ return '<span class="svc">' + esc(label) + '</span>'; }).join('') +
+    '</div></section>';
+}
+function chipsFor(w, ownershipConfirmed, ownershipBadge){
+  var chips = [];
+  var status = text(w.verification_status).toLowerCase();
+  if (status === 'claimed') chips.push(assertedLabel());
+  else {
+    var st = statusLabel(status);
+    if (st) chips.push(st);
+  }
+  if (ownershipConfirmed){
+    var extra = text(ownershipBadge) || CAP.t('b_verified');
+    if (extra && chips.indexOf(extra) === -1) chips.push(extra);
+  }
+  return chips;
+}
+function bindPhotos(){
+  document.querySelectorAll('img.producer-photo').forEach(function(img){
+    img.addEventListener('error', function(){
+      var card = img.closest('.wine-card');
+      var visual = card && card.querySelector('.wine-visual');
+      if (!visual || visual.getAttribute('data-fellback') === '1') return;
+      visual.setAttribute('data-fellback', '1');
+      visual.innerHTML = bottleSvg(visual.getAttribute('data-bottle'));
+      var zoom = card.querySelector('.zoom');
+      if (zoom) zoom.remove();
+    });
+  });
+  document.querySelectorAll('.zoom').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      openLb(btn.getAttribute('data-url'), btn.getAttribute('data-credit') || '');
+    });
+  });
+}
+function openLb(url, credit){
+  var box = document.getElementById('lightbox');
+  var img = document.getElementById('lb-img');
+  document.getElementById('lb-credit').textContent = credit || '';
+  img.alt = credit || L('zoom');
+  img.src = url;
+  box.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+function closeLb(){
+  var box = document.getElementById('lightbox');
+  if (box.hidden) return;
+  box.hidden = true;
+  document.getElementById('lb-img').removeAttribute('src');
+  document.body.style.overflow = '';
+}
+function renderLoading(){
+  setTitle('');
+  setCrumb(CAP.t('loading'));
+  document.getElementById('app').innerHTML = '<div class="pad" aria-busy="true"><div class="skel"></div><div class="skel short"></div><div class="skel"></div></div>';
+}
+function renderNotFound(){
+  setTitle('');
+  setCrumb('');
+  document.getElementById('app').innerHTML =
+    '<div class="state"><div class="state-kick">' + esc(L('nf_kick')) + '</div>' +
+    '<h1 class="state-title">' + esc(L('nf_title')) + '</h1>' +
+    '<p class="state-body">' + esc(L('nf_body')) + '</p>' +
+    '<a class="btn" href="https://tastingandtoasting.com">' + esc(L('explore')) + '</a></div>';
+}
+function renderError(){
+  setTitle('');
+  setCrumb('');
+  document.getElementById('app').innerHTML =
+    '<div class="state"><div class="state-kick">' + esc(L('err_kick')) + '</div>' +
+    '<h1 class="state-title">' + esc(L('err_title')) + '</h1>' +
+    '<p class="state-body">' + esc(L('err_body')) + '</p>' +
+    '<button type="button" class="btn" id="retry-btn">' + esc(L('retry')) + '</button></div>';
+  document.getElementById('retry-btn').addEventListener('click', function(){ load(); });
+}
+function renderDraft(){
+  setTitle('');
+  setCrumb('');
+  document.getElementById('app').innerHTML =
+    '<div class="state">' + anonBottle() +
+    '<div class="state-kick">' + esc(L('draft_kick')) + '</div>' +
+    '<h1 class="state-title">' + esc(L('draft_title')) + '</h1>' +
+    '<p class="state-body">' + esc(L('draft_body')) + '</p></div>';
+}
+function renderPassport(w, dna, services, wines, winesOk, ownershipConfirmed, ownershipBadge){
+  var name = text(w.name);
+  var winerySlug = text(w.slug) || slug;
+  setTitle(name);
+  setCrumb(name, pageHref('winery-passport.html', {slug: winerySlug}));
+  var tagline = text(w.tagline);
+  var description = text(w.description);
+  var website = safeHttp(w.website_url);
+  var chips = chipsFor(w, ownershipConfirmed, ownershipBadge);
+  var meta = '';
+  if (chips.length || website){
+    meta = '<div class="meta-row">' +
+      chips.map(function(c){ return '<span class="badge">' + esc(c) + '</span>'; }).join('') +
+      (website ? '<a class="website" href="' + esc(website) + '">' + esc(website) + '</a>' : '') +
+      '</div>';
+  }
+  var hero = '<section class="hero pad">' +
+    '<div class="kicker">' + esc(L('kick')) + '</div>' +
+    (name ? '<h1 class="hero-name">' + esc(name) + '</h1>' : '') +
+    (tagline ? '<div class="tagline">' + esc(tagline) + '</div>' : '') +
+    placeLine(w) +
+    foundedLine(w.founded_year) +
+    (description ? '<p class="desc">' + esc(description) + '</p>' : '') +
+    meta +
+    '</section>';
+  document.getElementById('app').innerHTML = hero + dnaBlock(dna) + winesBlock(wines || [], winesOk, winerySlug) + servicesBlock(services);
+  bindPhotos();
+}
+async function load(){
+  if (!slug){ renderNotFound(); return; }
   renderLoading();
-  let data;
+  var data;
   try {
-    const r = await fetch(`${API}/wineries/${encodeURIComponent(slug)}`);
-    if (r.status === 404 || r.status === 400) { renderNotFound(); return; }
-    if (!r.ok) { renderError(); return; }
+    var r = await fetch(API + '/wineries/' + encodeURIComponent(slug));
+    if (r.status === 404 || r.status === 400){ renderNotFound(); return; }
+    if (!r.ok){ renderError(); return; }
     data = await r.json();
   } catch (e) {
     renderError();
     return;
   }
-
-  const w = data.winery;
-  const dna = data.dna || {};
-  const services = data.services || [];
-  const ownershipConfirmed = !!(data.ownership_confirmed ?? w.ownership_confirmed);
-  const ownershipBadge = data.ownership_badge ?? w.ownership_badge ?? null;
-
-  let wines = null;
-  let winesOk = false;
+  var w = data && data.winery;
+  if (!w || typeof w !== 'object'){ renderError(); return; }
+  if (text(w.status).toLowerCase() === 'draft'){ renderDraft(); return; }
+  var dna = data.dna || {};
+  var services = data.services || [];
+  var ownershipConfirmed = !!(data.ownership_confirmed ?? w.ownership_confirmed);
+  var ownershipBadge = data.ownership_badge != null ? data.ownership_badge : (w.ownership_badge != null ? w.ownership_badge : null);
+  var wines = [];
+  var winesOk = false;
   try {
-    const wr = await fetch(`${API}/wineries/${encodeURIComponent(slug)}/wines`);
-    if (wr.ok) {
-      wines = (await wr.json()).wines || [];
+    var wr = await fetch(API + '/wineries/' + encodeURIComponent(slug) + '/wines');
+    if (wr.ok){
+      var body = await wr.json();
+      wines = (body && body.wines) || [];
       winesOk = true;
     }
-  } catch (e) {}
-
-  renderPassport(w, dna, services, wines || [], winesOk, ownershipConfirmed, ownershipBadge);
+  } catch (e2) {}
+  renderPassport(w, dna, services, wines, winesOk, ownershipConfirmed, ownershipBadge);
 }
-
+document.getElementById('lb-close').textContent = L('close');
+document.getElementById('lb-close').setAttribute('aria-label', L('close'));
+document.getElementById('lb-backdrop').setAttribute('aria-label', L('close'));
+document.getElementById('lb-close').addEventListener('click', closeLb);
+document.getElementById('lb-backdrop').addEventListener('click', closeLb);
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeLb(); });
 CAP.wireSwitcher();
 CAP.applyStatic();
 load();
