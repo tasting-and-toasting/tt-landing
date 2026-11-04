@@ -1,0 +1,105 @@
+{
+  "winery": {
+    "id": "90a16b07-cf6d-4649-8561-86ca9572282c",
+    "slug": "marchesi-antinori",
+    "name": "Marchesi Antinori",
+    "locality": "Tenuta Tignanello, Chianti Classico",
+    "region": "Tuscany",
+    "country": "Italy",
+    "founded_year": null,
+    "website_url": null,
+    "contact_email": null,
+    "contact_phone": null,
+    "tagline": null,
+    "description": null,
+    "verification_status": "claimed",
+    "ownership_confirmed": false,
+    "ownership_badge": null
+  },
+  "dna": {
+    "family": null,
+    "land_story": "The Tignanello vineyard: 77 hectares of limestone-rich soils with a southwestern exposure, 350-400 metres above sea level, between the valleys of the Greve and Pesa rivers.",
+    "philosophy": null,
+    "signature_quote": null,
+    "founding_story": null,
+    "founded_year": null,
+    "is_first_registered_in_country": false,
+    "accolades": [],
+    "verification_status": "claimed"
+  },
+  "wine": {
+    "id": "985e8c45-b370-49f2-814e-e8db1a6c2b77",
+    "slug": "tignanello-2020",
+    "name": "Tignanello",
+    "color": "red",
+    "sweetness": "dry",
+    "style": null,
+    "grape_varieties": [
+      "Sangiovese",
+      "Cabernet Sauvignon",
+      "Cabernet Franc"
+    ],
+    "appellation": "Toscana IGT",
+    "description": "The first Sangiovese to be aged in barriques, the first contemporary red wine blended with untraditional varieties (Cabernet), and one of the first red wines in Chianti Classico made without white grapes.",
+    "story_text": "First produced in 1970 from a single vineyard parcel as \"Chianti Classico Riserva Vigneto Tignanello\"; in 1971 it became a Tuscan red table wine named Tignanello. Bottled only in favorable vintages.",
+    "hero_image_url": "https://caves.bordeauxfamilies.fr/wp-content/uploads/2025/06/sans-titre-1-5.png"
+  },
+  "vintage": {
+    "id": "70635a6d-3182-414c-97cb-96aaa8c9a9df",
+    "vintage_year": 2020,
+    "abv": 13.5,
+    "grape_composition": {},
+    "bottles_produced": 1200,
+    "release_date": null,
+    "production_notes": "Harvest from 20 September to 9 October. Aged 15 months in French and Hungarian oak barrels, then a further 12 months in bottle before release.",
+    "tasting_notes": "Intensely ruby red. Ripe cherries, strawberries and blackberries with violets, mallow blossoms and roses; roasted coffee and cocoa powder. Vibrant entry, layered mouthfeel, a fresh, lengthy finish of pepper, licorice and aromatic herbs.",
+    "status": "claimed",
+    "bottle_image_url": "https://www.bdxfamilies.fr/wp-content/uploads/2024/01/legende-louis-vallon-brut.png"
+  },
+  "bottle": {
+    "id": "f6f04e61-2a1e-4285-a827-cd486579bf70",
+    "qr_token": "4a4d9b81-b9f4-4a6f-87e8-49056e9393dc",
+    "bottle_number": 1,
+    "total_in_series": 1200,
+    "status": "minted",
+    "scan_count": 3
+  },
+  "timeline": [
+    {
+      "event_type": "harvest",
+      "description": "Hand-picked over five mornings, early to keep acidity.",
+      "occurred_at": "2021-09-18",
+      "event_order": 1
+    },
+    {
+      "event_type": "fermentation",
+      "description": "Native yeast, open-top oak vats, 21 days on skins.",
+      "occurred_at": "2021-10-09",
+      "event_order": 2
+    },
+    {
+      "event_type": "ageing",
+      "description": "14 months in French oak, 30% new barrels.",
+      "occurred_at": "2022-12-01",
+      "event_order": 3
+    },
+    {
+      "event_type": "bottling",
+      "description": "Bottled unfiltered at the estate.",
+      "occurred_at": "2023-08-02",
+      "event_order": 4
+    },
+    {
+      "event_type": "release",
+      "description": "Released to the cellar door and three regional accounts.",
+      "occurred_at": "2023-09-14",
+      "event_order": 5
+    }
+  ],
+  "first_scan": false,
+  "first_scan_at": "2026-11-03T22:12:03.875Z",
+  "first_scan_country": null,
+  "total_scans": 4,
+  "ownership_confirmed": false,
+  "ownership_badge": null
+}
