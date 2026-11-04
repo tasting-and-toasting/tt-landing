@@ -1015,6 +1015,33 @@ function renderError() { renderState('error', 'err_vintage', 'err_body', ''); }
 function renderDraft() {
   renderState('draft', 'draft_vintage', 'draft_body', '<div class="sil sil-anon">' + SIL_ANON + '</div>');
 }
+function mergeWineryFromWine(v, w) {
+  if (!v || !w) return false;
+  let changed = false;
+  if (!nonEmpty(v.winery_name) && nonEmpty(w.winery_name)) { v.winery_name = w.winery_name; changed = true; }
+  if (!nonEmpty(v.winery_slug) && nonEmpty(w.winery_slug)) { v.winery_slug = w.winery_slug; changed = true; }
+  return changed;
+}
+function needsWineryFetch(v) {
+  const wineId = nonEmpty(v.wine_id);
+  if (!wineId) return false;
+  const slug = nonEmpty(v.winery_slug) || winerySlugQs;
+  const wineryName = nonEmpty(v.winery_name);
+  return !wineryName || !slug;
+}
+function fetchWineryForCrumb(v) {
+  if (!needsWineryFetch(v)) return;
+  const wineId = nonEmpty(v.wine_id);
+  fetch(API + '/wines/' + encodeURIComponent(wineId))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .catch(function () { return null; })
+    .then(function (data) {
+      if (!saved || saved.v !== v) return;
+      const w = data && data.wine;
+      if (!mergeWineryFromWine(v, w)) return;
+      renderCurrent();
+    });
+}
 function renderPassport(v) {
   saved = { v: v };
   const year = v.vintage_year;
@@ -1095,6 +1122,7 @@ async function load() {
   if (v.id && v.id !== vintageId) { renderNotFound(); return; }
   if (v.status === 'draft') { renderDraft(); return; }
   renderPassport(v);
+  fetchWineryForCrumb(v);
 }
 CAP.wireSwitcher();
 CAP.applyStatic();
