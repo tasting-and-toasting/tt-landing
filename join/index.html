@@ -165,6 +165,14 @@ a:hover{color:var(--gold-soft);}
      It is the one handoff this page can promise. */
   var APP_SCHEME = 'tastingandtoasting';
 
+  /* The app's own web build, live at this address and serving the same
+     /join/<CODE> route as the phone app (tt-mobile app/join/[join_code].tsx,
+     exported for web). A visitor with no app installed lands on sign-up with
+     the code already parked under the key tt.pendingJoinCode.v1, so the six
+     characters are never typed twice. This is the one entrance on this page
+     that needs nothing installed. */
+  var WEB_APP_BASE = 'https://web.tastingandtoasting.com';
+
   /* ---------------------------------------------------------------- *
    * OWNER-SUPPLIED: public store listings.
    *
@@ -239,18 +247,22 @@ a:hover{color:var(--gold-soft);}
     return pass ? url + '?pass=' + encodeURIComponent(pass) : url;
   }
 
+  function webLink(code, pass) {
+    var url = WEB_APP_BASE + '/join/' + encodeURIComponent(code);
+    return pass ? url + '?pass=' + encodeURIComponent(pass) : url;
+  }
+
   function storeBlock() {
     var haveIos = !!STORE_URL.ios;
     var haveAndroid = !!STORE_URL.android;
 
     if (!haveIos && !haveAndroid) {
-      /* Honest fallback. "Ask your host" is a real action a guest can take
-         in the room; a dead store button is not. */
-      return '' +
-        '<div class="block">' +
-          '<p class="sec-label" data-i18n="join_no_app_label">No app on this phone?</p>' +
-          '<p class="hint" style="margin-top:0" data-i18n="join_no_app_hint">The app is what seats you at the tasting. Ask your host for the install link &mdash; then enter the six characters above on the Join screen.</p>' +
-        '</div>';
+      /* Nothing. Until the listings are public there is no store to send
+         anyone to, and the guest does not need one: the first button on this
+         page seats them without installing anything. Telling them to go and
+         ask for an install link would send them away from a door that is
+         already open. */
+      return '';
     }
 
     var buttons = '';
@@ -274,14 +286,19 @@ a:hover{color:var(--gold-soft);}
       '<div class="screen">' +
         '<p class="kick" data-i18n="join_kick">Guest entry</p>' +
         '<h1 class="title" data-i18n="join_title_ok">You&rsquo;re at the right door</h1>' +
-        '<p class="body-text" data-i18n="join_body_ok">This is the code for tonight&rsquo;s tasting. Open the app to take your seat.</p>' +
+        '<p class="body-text" data-i18n="join_body_ok_v2">This is the code for tonight&rsquo;s tasting. You can take your seat from this phone, with or without the app.</p>' +
         '<div class="code-plate">' +
           '<p class="code-plate-k" data-i18n="join_code_label">Your game code</p>' +
           '<p class="code-plate-v" dir="ltr">' + esc(code) + '</p>' +
           (pass ? '<p class="pass-note" data-i18n="join_pass_note">A prepaid seat is attached to this link.</p>' : '') +
         '</div>' +
-        '<a class="btn btn-gold" id="open-app" data-i18n="join_open_app" href="' + esc(appLink(code, pass)) + '">Open in the app</a>' +
-        '<p class="hint" data-i18n="join_hint_open">If the app is installed on this phone, that button opens it on your seat. If nothing happens, it is not installed yet.</p>' +
+        '<a class="btn btn-gold" id="play-web" data-i18n="join_play_web" href="' + esc(webLink(code, pass)) + '">Play without installing</a>' +
+        '<p class="hint" data-i18n="join_hint_web">Opens the tasting in this phone&rsquo;s browser. You sign up once, and the code above is kept for you, so you never type it again.</p>' +
+        '<div class="block">' +
+          '<p class="sec-label" data-i18n="join_have_app_label">Already have the app?</p>' +
+          '<a class="btn btn-ghost" id="open-app" data-i18n="join_open_app" href="' + esc(appLink(code, pass)) + '">Open in the app</a>' +
+          '<p class="hint" data-i18n="join_hint_open">If the app is installed on this phone, that button opens it on your seat. If nothing happens, it is not installed yet.</p>' +
+        '</div>' +
         storeBlock() +
         '<div class="block">' +
           '<p class="sec-label" data-i18n="join_byhand_label">Entering it by hand</p>' +
