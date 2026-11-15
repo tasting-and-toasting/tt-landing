@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="src/i18n/cap-i18n.js"></script>
+<script src="/src/i18n/cap-i18n.js"></script>
 <link rel="stylesheet" href="/src/passport/tt-head.css">
 <style>
   *{box-sizing:border-box}
@@ -161,7 +161,13 @@
 </div>
 <script>
 const qs = new URLSearchParams(location.search);
-const token = (qs.get('token') || '').trim();
+// Short sticker link /cap/b/<token> is a Vercel rewrite: the browser keeps the path, query stays empty.
+function pathToken(){
+  const m = location.pathname.match(/^\/cap\/b\/([^\/]+)\/?$/);
+  if (!m) return '';
+  try { return decodeURIComponent(m[1]); } catch (e) { return m[1]; }
+}
+const token = (qs.get('token') || pathToken()).trim();
 const lang = CAP.lang;
 const t = CAP.t;
 const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
@@ -422,7 +428,10 @@ const failedUrls = new Set();
 let photoIndex = 0;
 let lastData = null;
 
-function pageHref(path, params){
+// Absolute links: this page is also served at /cap/b/<token>, where relative ones break.
+function pageHref(file, params){
+  const local = /\.html$/i.test(location.pathname);
+  const path = '/' + (local ? file : file.replace(/\.html$/i, ''));
   const p = new URLSearchParams();
   Object.keys(params).forEach(k => { if (params[k] != null && String(params[k]) !== '') p.set(k, String(params[k])); });
   if (lang !== 'en') p.set('lang', lang);
