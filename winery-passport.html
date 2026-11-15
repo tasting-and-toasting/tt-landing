@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="src/i18n/cap-i18n.js"></script>
+<script src="/src/i18n/cap-i18n.js"></script>
 <link rel="stylesheet" href="/src/passport/tt-head.css">
 <style>
   *{box-sizing:border-box;}
@@ -157,6 +157,8 @@ function text(v){
   return '';
 }
 function pageHref(file, params){
+  var local = /\.html$/i.test(location.pathname);
+  var path = '/' + (local ? file : file.replace(/\.html$/i, ''));
   var u = new URLSearchParams();
   Object.keys(params).forEach(function(k){
     if (params[k] != null && String(params[k]) !== '') u.set(k, String(params[k]));
@@ -164,7 +166,7 @@ function pageHref(file, params){
   if (lang !== 'en') u.set('lang', lang);
   var api = qs.get('api');
   if (api) u.set('api', api);
-  return file + '?' + u.toString();
+  return path + '?' + u.toString();
 }
 function setCrumb(label, href){
   var el = document.getElementById('crumb');
