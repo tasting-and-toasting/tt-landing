@@ -1,0 +1,25 @@
+/* Shared passport header (Golden Master): back + Tasting & Toasting logo on the
+ * left, crumbs winery / wine / vintage on the right, 12-flag switcher after them.
+ * Used by wine-passport, vintage-passport, winery-passport, bottle-scan. */
+.tt-head{display:flex;align-items:center;gap:10px 24px;flex-wrap:wrap;padding:14px clamp(16px,4vw,48px);border-bottom:1px solid rgba(197,165,114,0.16);position:sticky;top:0;z-index:40;background:rgba(18,12,10,0.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
+.tt-brand{display:flex;align-items:center;gap:14px;flex:0 0 auto;min-width:0;}
+.tt-back{width:36px;height:36px;flex:0 0 36px;border:0;border-radius:18px;padding:0;background:rgba(201,169,110,0.12);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;}
+.tt-back:hover{background:rgba(201,169,110,0.22);}
+.tt-back svg{display:block;width:20px;height:20px;}
+.tt-logo{display:block;line-height:0;flex:0 0 auto;}
+.tt-logo img{display:block;width:155px;height:24px;max-width:none;}
+.tt-head .crumb,.tt-head .crumbs{flex:1 1 260px;min-width:0;display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:4px 8px;text-align:end;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(245,240,232,0.5);overflow-wrap:anywhere;}
+.tt-head .crumb a,.tt-head .crumbs a{color:rgba(245,240,232,0.55);}
+.tt-head .crumb a:hover,.tt-head .crumbs a:hover{color:#F5F0E8;}
+.tt-head .lang-switcher{flex:0 1 auto;display:flex;justify-content:flex-end;min-width:0;max-width:100%;}
+html[dir="rtl"] .tt-head,html[dir="rtl"] .tt-head .crumb,html[dir="rtl"] .tt-head .crumbs,html[dir="rtl"] .tt-head .lang-switcher-flags{flex-direction:row;}
+html[dir="rtl"] .tt-back svg{transform:scaleX(-1);}
+@media (max-width:1180px){
+  .tt-head .lang-switcher{flex:1 1 100%;}
+}
+@media (max-width:640px){
+  .tt-head{gap:10px 12px;padding-top:12px;padding-bottom:12px;}
+  .tt-head .crumb,.tt-head .crumbs{flex:1 1 100%;justify-content:flex-start;text-align:start;}
+  .tt-head .lang-switcher{justify-content:flex-start;}
+  .tt-head .lang-switcher-flags{justify-content:flex-start;}
+}

@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="src/i18n/cap-i18n.js"></script>
+<link rel="stylesheet" href="/src/passport/tt-head.css">
 <style>
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;max-width:100%}
@@ -130,8 +131,11 @@
 </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="brand">CAP</div>
+<header class="tt-head">
+  <div class="tt-brand">
+    <button type="button" class="tt-back" data-tt-back aria-label="Back"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="#C5A572" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <a class="tt-logo" href="/" aria-label="Tasting &amp; Toasting"><img src="/assets/tt-logo.svg" alt="Tasting &amp; Toasting" width="155" height="24"></a>
+  </div>
   <nav id="crumbs" class="crumbs" aria-label="Passport"></nav>
   <nav class="lang-switcher" aria-label="Language"><div class="lang-switcher-flags">
     <a class="lang-flag-link" data-lang-link="en" href="?lang=en" title="English" aria-label="English"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></a>
@@ -148,6 +152,7 @@
     <a class="lang-flag-link" data-lang-link="pl" href="?lang=pl" title="Polski" aria-label="Polski"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="5" fill="#fff"/><rect y="5" width="16" height="5" fill="#dc143c"/></svg></a>
   </div></nav>
 </header>
+<script src="/src/passport/tt-head.js"></script>
 <main id="app"></main>
 <div id="lightbox" class="lb" hidden>
   <button type="button" id="lb-close" class="lb-x" aria-label="Close">×</button>
