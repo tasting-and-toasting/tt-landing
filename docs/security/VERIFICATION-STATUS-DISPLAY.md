@@ -2,7 +2,9 @@
 
 Task: SECURITY B1 (`security/b1-passport-display-integrity`), 2026-11-16.
 Applies to: `bottle-scan.html` (`/cap/b/:token`), `wine-passport.html`, `vintage-passport.html`,
-`winery-passport.html`, `cap-qr-sticker.html`, `cap-onboarding.html`.
+`winery-passport.html`, `cap-qr-sticker.html`, `cap-onboarding.html`; the wording rules of section 3a
+also apply to the static demo pages `producer.html` and `cap-demo.html`.
+Owner decision D5 (OD-16, 2026-11-16) is recorded in section 3a.
 Single implementation: `src/passport/tt-trust.js` (`window.TT_TRUST`). Pages do not re-implement these rules.
 Regression checks: `node tools/security/check-passport-trust.js` (offline, no dependencies);
 optional browser check `tools/security/browser-check-passport-trust.js` (Playwright, every request intercepted).
@@ -42,7 +44,7 @@ Source of truth: tt-stack `api/src/cap/wineryVerificationLifecycle.ts` (identica
 
 | API value of winery `verification_status` | Shown |
 |---|---|
-| `verified` (exact) | "Verified" badge / label; sticker and onboarding preview show "CAP Verified" |
+| `verified` (exact) | "Verified" label, always named as the winery's (see 3a); the sticker shows nothing about it |
 | `under_review` | neutral "Under review" |
 | `documents_submitted` / `submitted` | neutral "Submitted" |
 | `claimed` | neutral "Claimed" / "Producer-asserted" |
@@ -57,18 +59,41 @@ Source of truth: tt-stack `api/src/cap/wineryVerificationLifecycle.ts` (identica
 Wine passport: the "Research Edition" tag appears when the winery has a non-empty status that is not
 `verified` (so `certified` now gets the tag; before it was treated as verified).
 
+### 3a. Owner decision D5 — whose status, and nothing verified on paper
+
+1. **Printed sticker** (`cap-qr-sticker.html`) and the **onboarding sticker preview** (`cap-onboarding.html`)
+   carry **no** "CAP Verified" / "verified" text at all, for any status, ever. They show the neutral
+   identification text exactly `Digital Wine Passport`. It is deliberately not translated: there is no
+   established translation key for it, so it is plain markup without `data-i18n` / `data-wz`
+   (`translate="no"`), and the old `cap_verified` keys were removed from `src/i18n/cap-i18n.js` and from
+   the onboarding dictionary so they cannot be re-attached. The shield-with-tick icon was removed with it.
+2. The **current** verification status is shown only on the digital page reached by the QR scan
+   (`/cap/b/:token` = `bottle-scan.html`), from the API at the moment of the scan.
+3. A verification status is the **winery's** status and every page that shows one names the winery
+   in the same label. It is never shown as, or next to, a claim that the wine, vintage, batch or bottle
+   is verified.
+
+| Page | What it shows | Labelled as |
+|---|---|---|
+| `bottle-scan.html` | winery status badge inside the "Winery" section | `Winery · Verification status: …` (existing keys `winery` + `vsPrefix` + `vs_*`) |
+| `winery-passport.html` | status chip in the winery hero | `Winery · Verified` etc. (existing keys `kick` + `b_*`); ownership fallback likewise |
+| `wine-passport.html` | no verified label; "Research Edition" tag for a non-verified winery | n/a — a verified winery adds nothing to the wine |
+| `vintage-passport.html` | no verification line at all | n/a |
+| ownership badge (all pages) | API text, which tt-stack sets to `Verified Winery` (`ownershipResolver.ts consumerOwnershipBadge`) | names the winery |
+| `producer.html` (static demo, fictional producer) | `CAP verified producer` | names the producer (= winery); unchanged |
+| `cap-demo.html` (static demo) | passport mock seal `WINERY VERIFIED` / `Winery status — not a verdict on this bottle`; passport footers `DIGITAL WINE PASSPORT · …` | names the winery; was `VERIFIED` / `Verified & traceable` / `VERIFIED BY …` on a bottle mock |
+
 ## 4. Other rules on the same pages
 
 - Every value from the API that becomes an `href` must pass `TT_TRUST.safeHttpUrl` (only `http:`/`https:`).
 - All API text goes through the page's HTML escaper before `innerHTML`.
-- `CAP Verified` markup in `cap-qr-sticker.html` and `cap-onboarding.html` is `hidden` by default and
-  is shown only by `TT_TRUST.isWineryVerified(...)`.
+- `cap-qr-sticker.html` and `cap-onboarding.html` contain no verification markup and no verification
+  logic (D5); the regression check fails if either page mentions "verified" or calls `isWineryVerified`.
 
 ## 5. Known limits
 
-- A printed sticker keeps whatever it printed. A winery verified at print time and later rejected still
-  has "CAP Verified" on its bottles. Whether printed stickers should carry a verification claim at all is
-  an owner decision.
+- A printed sticker keeps whatever it printed. Resolved by D5: no sticker printed from this version carries
+  a verification claim. Stickers printed earlier from a version that showed "CAP Verified" stay as printed.
 - The pages show what the T&T API says. There is no signature, hash or independent proof on any page;
   "Verified" means "the T&T API returned `verified` for this winery".
 - `script-src` keeps `'unsafe-inline'` because every page runs inline scripts; moving them to files would

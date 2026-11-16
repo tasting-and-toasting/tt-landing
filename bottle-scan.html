@@ -550,7 +550,9 @@ function renderPassport(d){
   const badges = [];
   // Ownership badge only for a confirmed owner; its text is never shown otherwise.
   if (ownershipConfirmed) badges.push('<span class="badge"><span aria-hidden="true">✓</span>'+esc(ownershipBadge || ui('ownFallback'))+'</span>');
-  if (vs.labelKey) badges.push('<span class="badge"><span class="dot" style="background:'+VS_DOT[vs.labelKey]+'"></span>'+esc(ui('vsPrefix'))+' '+esc(ui('vs_'+vs.labelKey))+'</span>');
+  // Owner decision D5: this is the WINERY's status, never the bottle's/wine's. The label
+  // names the winery explicitly ("Winery · Verification status: …"), built from existing keys.
+  if (vs.labelKey) badges.push('<span class="badge" data-status-subject="winery"><span class="dot" style="background:'+VS_DOT[vs.labelKey]+'"></span>'+esc(ui('winery'))+' · '+esc(ui('vsPrefix'))+' '+esc(ui('vs_'+vs.labelKey))+'</span>');
   let wineryHtml = '';
   if (wineryName || place || founded || tagline || wineryDesc || badges.length || website){
     wineryHtml = '<section class="band"><div class="eyebrow">'+esc(ui('winery'))+'</div>'

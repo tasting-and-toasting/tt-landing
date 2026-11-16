@@ -32,7 +32,7 @@
       verified_h:"Verified &amp; <em>Traceable</em>", bottle_of:"Bottle {n} of {t}", founder_words:"Founder's words", biography:"Bottle Biography",
       winery_section:"The winery", verified_facts:"Verified Facts", view_winery:"View winery", book_tasting:"Book a tasting", share:"Share this bottle", copied:"Link copied",
       ev_harvest:"Harvest", ev_fermentation:"Fermentation", ev_ageing:"Ageing", ev_bottling:"Bottling", ev_release:"Release",
-      cap_verified:"CAP Verified", scan_story:"Scan to discover the story", bottle_word:"Bottle",
+      scan_story:"Scan to discover the story", bottle_word:"Bottle",
       wp_ctx_loading:"Winery passport", wp_ctx_ready:"Passport · scanned from a bottle",
       wp_kick:"Winery", wp_verified_winery:"Verified Winery", wp_vs_prefix:"Verification status:",
       wp_dna_label:"Character · DNA", wp_services_label:"Services offered",
@@ -101,7 +101,7 @@
       verified_h:"Vérifié et <em>traçable</em>", bottle_of:"Bouteille {n} sur {t}", founder_words:"Les mots du fondateur", biography:"Biographie de la bouteille",
       winery_section:"Le domaine", verified_facts:"Faits vérifiés", view_winery:"Voir le domaine", book_tasting:"Réserver une dégustation", share:"Partager cette bouteille", copied:"Lien copié",
       ev_harvest:"Vendange", ev_fermentation:"Fermentation", ev_ageing:"Élevage", ev_bottling:"Mise en bouteille", ev_release:"Commercialisation",
-      cap_verified:"CAP vérifié", scan_story:"Scannez pour découvrir l'histoire", bottle_word:"Bouteille"
+      scan_story:"Scannez pour découvrir l'histoire", bottle_word:"Bouteille"
     },
     ru: {
       b_claimed:"Заявлено производителем", b_review:"На проверке", b_verified:"Подтверждено", b_unverified:"Не подтверждено",
@@ -119,7 +119,7 @@
       verified_h:"Подтверждено и <em>прослеживаемо</em>", bottle_of:"Бутылка {n} из {t}", founder_words:"Слова основателя", biography:"Биография бутылки",
       winery_section:"Винодельня", verified_facts:"Подтверждённые факты", view_winery:"Открыть винодельню", book_tasting:"Забронировать дегустацию", share:"Поделиться бутылкой", copied:"Ссылка скопирована",
       ev_harvest:"Сбор урожая", ev_fermentation:"Ферментация", ev_ageing:"Выдержка", ev_bottling:"Розлив", ev_release:"Выпуск",
-      cap_verified:"CAP подтверждён", scan_story:"Отсканируйте, чтобы узнать историю", bottle_word:"Бутылка"
+      scan_story:"Отсканируйте, чтобы узнать историю", bottle_word:"Бутылка"
     },
     es: {
       b_claimed:"Declarado por el productor", b_review:"En revisión", b_verified:"Verificado", b_unverified:"Sin verificar",
@@ -137,7 +137,7 @@
       verified_h:"Verificado y <em>trazable</em>", bottle_of:"Botella {n} de {t}", founder_words:"Palabras del fundador", biography:"Biografía de la botella",
       winery_section:"La bodega", verified_facts:"Datos verificados", view_winery:"Ver la bodega", book_tasting:"Reservar una cata", share:"Compartir esta botella", copied:"Enlace copiado",
       ev_harvest:"Vendimia", ev_fermentation:"Fermentación", ev_ageing:"Crianza", ev_bottling:"Embotellado", ev_release:"Salida al mercado",
-      cap_verified:"CAP verificado", scan_story:"Escanea para descubrir la historia", bottle_word:"Botella"
+      scan_story:"Escanea para descubrir la historia", bottle_word:"Botella"
     },
     uk: {
       b_claimed:"Заявлено виробником", b_review:"На перевірці", b_verified:"Підтверджено", b_unverified:"Не підтверджено",
@@ -155,7 +155,7 @@
       verified_h:"Підтверджено та <em>простежувано</em>", bottle_of:"Пляшка {n} з {t}", founder_words:"Слова засновника", biography:"Біографія пляшки",
       winery_section:"Виноробня", verified_facts:"Підтверджені факти", view_winery:"Відкрити виноробню", book_tasting:"Забронювати дегустацію", share:"Поділитися пляшкою", copied:"Посилання скопійовано",
       ev_harvest:"Збір врожаю", ev_fermentation:"Бродіння", ev_ageing:"Витримка", ev_bottling:"Розлив", ev_release:"Випуск",
-      cap_verified:"CAP підтверджено", scan_story:"Скануйте, щоб дізнатися історію", bottle_word:"Пляшка"
+      scan_story:"Скануйте, щоб дізнатися історію", bottle_word:"Пляшка"
     },
     it: {
       b_claimed:"Dichiarato dal produttore", b_review:"In verifica", b_verified:"Verificato", b_unverified:"Non verificato",
@@ -173,7 +173,7 @@
       verified_h:"Verificato e <em>tracciabile</em>", bottle_of:"Bottiglia {n} di {t}", founder_words:"Le parole del fondatore", biography:"Biografia della bottiglia",
       winery_section:"La cantina", verified_facts:"Fatti verificati", view_winery:"Vedi la cantina", book_tasting:"Prenota una degustazione", share:"Condividi questa bottiglia", copied:"Link copiato",
       ev_harvest:"Vendemmia", ev_fermentation:"Fermentazione", ev_ageing:"Affinamento", ev_bottling:"Imbottigliamento", ev_release:"Immissione sul mercato",
-      cap_verified:"CAP verificato", scan_story:"Scansiona per scoprire la storia", bottle_word:"Bottiglia"
+      scan_story:"Scansiona per scoprire la storia", bottle_word:"Bottiglia"
     },
     de: {
       b_claimed:"Vom Erzeuger angegeben", b_review:"In Prüfung", b_verified:"Verifiziert", b_unverified:"Nicht verifiziert",
@@ -191,7 +191,7 @@
       verified_h:"Verifiziert &amp; <em>rückverfolgbar</em>", bottle_of:"Flasche {n} von {t}", founder_words:"Worte des Gründers", biography:"Biografie der Flasche",
       winery_section:"Das Weingut", verified_facts:"Verifizierte Fakten", view_winery:"Weingut ansehen", book_tasting:"Verkostung buchen", share:"Diese Flasche teilen", copied:"Link kopiert",
       ev_harvest:"Lese", ev_fermentation:"Gärung", ev_ageing:"Reifung", ev_bottling:"Abfüllung", ev_release:"Markteinführung",
-      cap_verified:"CAP verifiziert", scan_story:"Scannen, um die Geschichte zu entdecken", bottle_word:"Flasche"
+      scan_story:"Scannen, um die Geschichte zu entdecken", bottle_word:"Flasche"
     },
     he: {
       b_claimed:"הוצהר על ידי היצרן", b_review:"בבדיקה", b_verified:"מאומת", b_unverified:"לא מאומת",
@@ -209,7 +209,7 @@
       verified_h:"מאומת <em>וניתן למעקב</em>", bottle_of:"בקבוק {n} מתוך {t}", founder_words:"דברי המייסד", biography:"הביוגרפיה של הבקבוק",
       winery_section:"היקב", verified_facts:"עובדות מאומתות", view_winery:"צפייה ביקב", book_tasting:"הזמנת טעימה", share:"שיתוף הבקבוק", copied:"הקישור הועתק",
       ev_harvest:"בציר", ev_fermentation:"תסיסה", ev_ageing:"התיישנות", ev_bottling:"מילוי בבקבוקים", ev_release:"שחרור לשוק",
-      cap_verified:"CAP מאומת", scan_story:"סרקו כדי לגלות את הסיפור", bottle_word:"בקבוק"
+      scan_story:"סרקו כדי לגלות את הסיפור", bottle_word:"בקבוק"
     },
     pt: {
       b_claimed:"Declarado pelo produtor", b_review:"Em verificação", b_verified:"Verificado", b_unverified:"Não verificado",
@@ -227,7 +227,7 @@
       verified_h:"Verificado e <em>rastreável</em>", bottle_of:"Garrafa {n} de {t}", founder_words:"As palavras do fundador", biography:"Biografia da garrafa",
       winery_section:"A quinta", verified_facts:"Factos verificados", view_winery:"Ver a quinta", book_tasting:"Reservar uma prova", share:"Partilhar esta garrafa", copied:"Ligação copiada",
       ev_harvest:"Vindima", ev_fermentation:"Fermentação", ev_ageing:"Estágio", ev_bottling:"Engarrafamento", ev_release:"Lançamento",
-      cap_verified:"CAP verificado", scan_story:"Digitalize para descobrir a história", bottle_word:"Garrafa"
+      scan_story:"Digitalize para descobrir a história", bottle_word:"Garrafa"
     },
     ka: {
       b_claimed:"მწარმოებლის მიერ მითითებული", b_review:"შემოწმების პროცესში", b_verified:"დადასტურებული", b_unverified:"დაუდასტურებელი",
@@ -245,7 +245,7 @@
       verified_h:"დადასტურებული და <em>თვალყურდევნებადი</em>", bottle_of:"ბოთლი {n} / {t}", founder_words:"დამფუძნებლის სიტყვები", biography:"ბოთლის ბიოგრაფია",
       winery_section:"მარანი", verified_facts:"დადასტურებული ფაქტები", view_winery:"მარნის ნახვა", book_tasting:"დააჯავშნე დეგუსტაცია", share:"ბოთლის გაზიარება", copied:"ბმული დაკოპირდა",
       ev_harvest:"რთველი", ev_fermentation:"დუღილი", ev_ageing:"დავარგება", ev_bottling:"ჩამოსხმა", ev_release:"გამოშვება",
-      cap_verified:"CAP დადასტურებული", scan_story:"დაასკანერე ისტორიის აღმოსაჩენად", bottle_word:"ბოთლი"
+      scan_story:"დაასკანერე ისტორიის აღმოსაჩენად", bottle_word:"ბოთლი"
     },
     ro: {
       b_claimed:"Declarat de producător", b_review:"În verificare", b_verified:"Verificat", b_unverified:"Neverificat",
@@ -263,7 +263,7 @@
       verified_h:"Verificat și <em>trasabil</em>", bottle_of:"Sticla {n} din {t}", founder_words:"Cuvintele fondatorului", biography:"Biografia sticlei",
       winery_section:"Crama", verified_facts:"Fapte verificate", view_winery:"Vezi crama", book_tasting:"Rezervă o degustare", share:"Distribuie această sticlă", copied:"Link copiat",
       ev_harvest:"Cules", ev_fermentation:"Fermentare", ev_ageing:"Învechire", ev_bottling:"Îmbuteliere", ev_release:"Lansare",
-      cap_verified:"CAP verificat", scan_story:"Scanează pentru a descoperi povestea", bottle_word:"Sticlă"
+      scan_story:"Scanează pentru a descoperi povestea", bottle_word:"Sticlă"
     },
     pl: {
       b_claimed:"Deklarowane przez producenta", b_review:"W weryfikacji", b_verified:"Zweryfikowane", b_unverified:"Niezweryfikowane",
@@ -281,7 +281,7 @@
       verified_h:"Zweryfikowane i <em>identyfikowalne</em>", bottle_of:"Butelka {n} z {t}", founder_words:"Słowa założyciela", biography:"Historia butelki",
       winery_section:"Winnica", verified_facts:"Zweryfikowane fakty", view_winery:"Zobacz winnicę", book_tasting:"Zarezerwuj degustację", share:"Udostępnij", copied:"Skopiowano link",
       ev_harvest:"Zbiory", ev_fermentation:"Fermentacja", ev_ageing:"Dojrzewanie", ev_bottling:"Butelkowanie", ev_release:"Wprowadzenie na rynek",
-      cap_verified:"CAP ZWERYFIKOWANO", scan_story:"Zeskanuj, aby poznać historię", bottle_word:"Butelka"
+      scan_story:"Zeskanuj, aby poznać historię", bottle_word:"Butelka"
     }
   };
 

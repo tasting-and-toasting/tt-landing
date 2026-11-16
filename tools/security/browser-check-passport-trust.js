@@ -110,6 +110,9 @@ const QR_STUB = 'window.QRCode=function(el,o){el.setAttribute("data-qr-text",o.t
     check('bottle: no javascript: link', jsLinks === 0, 'status ' + status + ': ' + jsLinks + ' javascript: links');
     check('bottle: no CSP violations on normal load', r.log.csp.length === 0, r.log.csp.join(' | '));
     if (status === 'verified') {
+      // D5: the status is the WINERY's, labelled so, inside the Winery section.
+      const lab = await r.page.evaluate(() => { const b = document.querySelector('[data-status-subject="winery"]'); const band = b && b.closest('section'); const eb = band && band.querySelector('.eyebrow'); return { text: b ? b.textContent : null, section: eb ? eb.textContent : null }; });
+      check('D5 bottle: verified label names the winery', lab.text === 'Winery · Verification status: Verified' && lab.section === 'Winery', 'badge ' + JSON.stringify(lab));
       const blocked = await r.page.evaluate(async () => { try { await fetch('https://attacker.example/probe'); return 'reached'; } catch (e) { return 'blocked'; } });
       check('bottle: CSP blocks foreign fetch', blocked === 'blocked' && r.log.evil.length === 0, 'fetch to attacker.example was ' + blocked + ', intercepted=' + r.log.evil.length);
     }
@@ -128,6 +131,10 @@ const QR_STUB = 'window.QRCode=function(el,o){el.setAttribute("data-qr-text",o.t
     check('winery: CSP sent', /connect-src/.test(r.csp), 'no CSP on /winery-passport');
     check('winery: ?api= ignored', r.log.evil.length === 0 && r.log.api.length > 0, 'evil=' + r.log.evil.length);
     check('winery: Verified only when verified', VERIFIED_RE.test(r.text) === wantVerified, 'status ' + status + ' Verified shown=' + VERIFIED_RE.test(r.text));
+    if (status === 'verified') {
+      const chips = await r.page.evaluate(() => [...document.querySelectorAll('.badge')].map(b => b.textContent));
+      check('D5 winery: verified chip names the winery', chips.includes('Winery · Verified') && !chips.includes('Verified'), 'chips ' + JSON.stringify(chips));
+    }
     check('winery: unknown status gets no "Under review"', status !== 'weird' || !/Under review/.test(r.text), 'unknown status shown as Under review');
     const links = await r.page.evaluate(() => [...document.querySelectorAll('a[href]')].map(a => a.getAttribute('href')).filter(h => /api=/.test(h)));
     check('winery: api not carried into links', links.length === 0, links.join(' '));
@@ -146,13 +153,15 @@ const QR_STUB = 'window.QRCode=function(el,o){el.setAttribute("data-qr-text",o.t
     await r.ctx.close();
   }
 
-  // 4. QR sticker: badge and QR target.
-  for (const [status, wantVisible] of [['claimed', false], ['certified', false], ['verified', true]]) {
-    const r = await open('/cap-qr-sticker?token=tok-synthetic&target=' + encodeURIComponent('https://attacker.example/phish') + Q, { winery: { verification_status: status } });
-    const st = await r.page.evaluate(() => ({ vis: getComputedStyle(document.querySelector('.cap-verified')).display !== 'none', qr: document.getElementById('qr').getAttribute('data-qr-text') }));
+  // 4. QR sticker: D5 neutral text for every status and language, and the QR target.
+  for (const [status, lang] of [['claimed', 'en'], ['certified', 'en'], ['verified', 'en'], ['verified', 'fr'], ['verified', 'ru'], ['verified', 'pl']]) {
+    const r = await open('/cap-qr-sticker?token=tok-synthetic&lang=' + lang + '&target=' + encodeURIComponent('https://attacker.example/phish') + Q, { winery: { verification_status: status } });
+    const st = await r.page.evaluate(() => { const s = document.querySelector('.sticker'); const id = document.getElementById('capIdentity'); return { text: s ? s.textContent : '', id: id ? id.textContent : null, idVisible: !!id && getComputedStyle(id).display !== 'none', wine: (document.getElementById('wine') || {}).textContent, qr: document.getElementById('qr').getAttribute('data-qr-text') }; });
+    check('D5 sticker: rendered', /Synthetic Wine/.test(st.wine || ''), 'status ' + status + '/' + lang + ': sticker did not render, wine=' + st.wine);
+    check('D5 sticker: no verified text', !/verif|vérifi|подтвержд|zweryfik/i.test(st.text), 'status ' + status + '/' + lang + ' sticker text: ' + st.text.replace(/\s+/g, ' ').trim().slice(0, 160));
+    check('D5 sticker: "Digital Wine Passport" shown untranslated', st.id === 'Digital Wine Passport' && st.idVisible, 'status ' + status + '/' + lang + ' identification ' + JSON.stringify(st.id) + ' visible=' + st.idVisible);
     check('sticker: CSP sent', /qrcodejs@1\.0\.0\/qrcode\.min\.js/.test(r.csp), 'sticker CSP: ' + r.csp);
     check('sticker: ?api= ignored', r.log.evil.length === 0 && r.log.api.length > 0, 'evil=' + r.log.evil.length);
-    check('sticker: badge only when verified', st.vis === wantVisible, 'status ' + status + ' badge visible=' + st.vis);
     check('sticker: QR is our short link', st.qr === 'https://tastingandtoasting.com/cap/b/tok-synthetic', 'QR text ' + st.qr);
     check('sticker: no CSP violations', r.log.csp.length === 0, r.log.csp.join(' | '));
     await r.ctx.close();
@@ -164,9 +173,28 @@ const QR_STUB = 'window.QRCode=function(el,o){el.setAttribute("data-qr-text",o.t
     const api = await r.page.evaluate(() => typeof API === 'string' ? API : (window.API || null)).catch(() => null);
     check('onboarding: CSP sent', /connect-src 'self' https:\/\/tt-stack-prod\.onrender\.com;/.test(r.csp), 'onboarding CSP: ' + r.csp);
     check('onboarding: API is production allowlist', api === 'https://tt-stack-prod.onrender.com/api/cap', 'API resolved to ' + api);
-    const hidden = await r.page.evaluate(() => getComputedStyle(document.querySelector('.sticker .cv')).display === 'none');
-    check('onboarding: sticker preview badge hidden', hidden, 'badge visible before any verified status');
+    const st = await r.page.evaluate(() => { const s = document.querySelector('.sticker'); const id = document.getElementById('stIdentity'); return { text: s ? s.textContent : '', id: id ? id.textContent : null }; });
+    check('D5 onboarding: sticker preview has no verified text', !/verif/i.test(st.text), 'preview text: ' + st.text.replace(/\s+/g, ' ').trim().slice(0, 160));
+    check('D5 onboarding: sticker preview shows "Digital Wine Passport"', st.id === 'Digital Wine Passport', 'identification ' + JSON.stringify(st.id));
     check('onboarding: no CSP violations', r.log.csp.length === 0, r.log.csp.join(' | '));
+    await r.ctx.close();
+  }
+
+  // 6. cap-demo (static demo): after the console flow is signed, the bottle passport shows the
+  //    WINERY's status, never a bare VERIFIED for the bottle (D5). Every demo language.
+  for (const lang of ['en', 'ru', 'es', 'de', 'it', 'pl']) {
+    const r = await open('/cap-demo.html?lang=' + lang, {});
+    const out = await r.page.evaluate(async () => {
+      const btn = document.getElementById('signAll'); if (btn) btn.click();
+      await new Promise(res => setTimeout(res, 2500));
+      const g = id => { const e = document.getElementById(id); return e ? e.textContent : null; };
+      return { status: g('ppStatus'), verdict: g('ppVerdict'), body: document.body.textContent };
+    });
+    const bare = (out.body.match(/(?:^|[^A-Za-z])(?:VERIFIED|Verified|ZWERYFIKOWANY)(?![a-z])/g) || []).length;
+    const named = (out.body.match(/WINERY VERIFIED|Winery verified|Verified Winery/g) || []).length;
+    check('D5 cap-demo ' + lang + ': no bottle-level verified claim', !/Verified & traceable|VERIFIED BY|Zweryfikowane i identyfikowalne/.test(out.body) && bare <= named,
+      'bare=' + bare + ' named=' + named + ' status=' + out.status);
+    check('D5 cap-demo ' + lang + ': signed passport status names the winery', out.status === 'WINERY VERIFIED', 'ppStatus=' + JSON.stringify(out.status) + ' verdict=' + JSON.stringify(out.verdict));
     await r.ctx.close();
   }
 

@@ -188,24 +188,64 @@ for (const page of PASSPORT_PAGES) {
   const m = html.match(/certified['"]?\s*[:=,)]|===?\s*['"]certified['"]/);
   check('no "certified" verified mapping', !m, page + ' still maps "certified": ' + (m ? m[0] : ''));
 }
+// Owner decision D5: the printed sticker and the onboarding sticker preview never carry a
+// verification claim; they show the neutral text exactly "Digital Wine Passport" (not translated).
+function stripComments(src) { return src.replace(/<!--[\s\S]*?-->/g, '').replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:'"`\\])\/\/[^\n]*/g, '$1'); }
+function verifWords(src) { return (src.match(/[^\s<>"'`]*verif[^\s<>"'`]*/gi) || []); }
 {
   const html = read('cap-qr-sticker.html');
-  const tag = html.match(/<div class="cap-verified"[^>]*>/);
-  check('sticker badge hidden by default', !!tag && /\shidden(\s|>)/.test(tag[0]), 'cap-qr-sticker.html badge tag is ' + (tag ? tag[0] : 'missing'));
-  check('sticker badge hidden CSS', /\.cap-verified\[hidden\]\s*\{\s*display:\s*none/.test(html), 'cap-qr-sticker.html has no .cap-verified[hidden]{display:none} (author display wins over hidden)');
-  check('sticker badge toggled by TT_TRUST', /getElementById\('capVerified'\)\.hidden\s*=\s*!TT_TRUST\.isWineryVerified\(/.test(html),
-    'cap-qr-sticker.html does not toggle the badge via TT_TRUST.isWineryVerified');
+  const code = stripComments(html);
+  const words = verifWords(code);
+  check('D5 sticker: no "verified" text or logic anywhere', words.length === 0, 'cap-qr-sticker.html still contains: ' + words.join(', '));
+  const id = code.match(/<div class="cap-id" id="capIdentity"([^>]*)>([^<]*)<\/div>/);
+  check('D5 sticker: neutral identification text', !!id && id[2] === 'Digital Wine Passport', 'cap-qr-sticker.html identification line is ' + (id ? JSON.stringify(id[2]) : 'missing'));
+  check('D5 sticker: identification not translated or hidden', !!id && !/data-i18n|data-wz|hidden/.test(id[1]), 'cap-qr-sticker.html identification attributes: ' + (id ? id[1] : 'missing'));
   const targetReads = html.split('\n').filter(l => /\.get\(\s*['"]target['"]\s*\)/.test(l));
   check('QR target not from URL on production', targetReads.length > 0 && targetReads.every(l => /isLocal\s*\?/.test(l)),
     'cap-qr-sticker.html reads ?target= outside a local-host guard: ' + targetReads.map(l => l.trim()).join(' | '));
 }
 {
   const html = read('cap-onboarding.html');
-  const tag = html.match(/<div class="cv"[^>]*>/);
-  check('onboarding badge hidden by default', !!tag && /\shidden(\s|>)/.test(tag[0]), 'cap-onboarding.html badge tag is ' + (tag ? tag[0] : 'missing'));
-  check('onboarding badge hidden CSS', /\.sticker \.cv\[hidden\]\s*\{\s*display:\s*none/.test(html), 'cap-onboarding.html has no .sticker .cv[hidden]{display:none}');
-  check('onboarding badge toggled by TT_TRUST', /getElementById\("stVerified"\)\.hidden\s*=\s*!TT_TRUST\.isWineryVerified\(/.test(html),
-    'cap-onboarding.html does not toggle the badge via TT_TRUST.isWineryVerified');
+  const code = stripComments(html);
+  const a = code.indexOf('<div class="sticker">');
+  const b = a < 0 ? -1 : code.indexOf('<div class="surl"', a);
+  const block = a < 0 || b < 0 ? '' : code.slice(a, b);
+  check('D5 onboarding: sticker preview found', block.length > 0, 'cap-onboarding.html sticker preview block not found');
+  const words = verifWords(block);
+  check('D5 onboarding: sticker preview has no "verified" text', words.length === 0, 'cap-onboarding.html sticker preview contains: ' + words.join(', '));
+  const id = block.match(/<div class="cid" id="stIdentity"([^>]*)>([^<]*)<\/div>/);
+  check('D5 onboarding: neutral identification text', !!id && id[2] === 'Digital Wine Passport', 'cap-onboarding.html sticker identification is ' + (id ? JSON.stringify(id[2]) : 'missing'));
+  check('D5 onboarding: identification not translated or hidden', !!id && !/data-i18n|data-wz|hidden/.test(id[1]), 'cap-onboarding.html identification attributes: ' + (id ? id[1] : 'missing'));
+  check('D5 onboarding: no verified toggle', !/isWineryVerified\(/.test(code) && !/stVerified/.test(code), 'cap-onboarding.html still toggles a verified line');
+  check('D5 onboarding: cap_verified key removed', !/cap_verified/.test(code), 'cap-onboarding.html still defines/uses cap_verified');
+}
+{
+  const i18n = read('src/i18n/cap-i18n.js');
+  check('D5 i18n: cap_verified key removed', !/cap_verified/.test(i18n), 'src/i18n/cap-i18n.js still defines cap_verified (' + (i18n.match(/cap_verified/g) || []).length + 'x)');
+}
+// Owner decision D5: a verification status is the WINERY's and the label says so.
+{
+  const bs = read('bottle-scan.html');
+  const line = bs.split('\n').find(l => /if \(vs\.labelKey\) badges\.push\(/.test(l)) || '';
+  check('D5 bottle: status badge names the winery', /data-status-subject="winery"/.test(line) && /esc\(ui\('winery'\)\)\+' · '\+esc\(ui\('vsPrefix'\)\)/.test(line),
+    'bottle-scan.html status badge is not labelled as the winery\'s: ' + line.trim().slice(0, 160));
+  const wy = read('winery-passport.html');
+  check('D5 winery: status chip names the winery', /var st = wineryStatusLabel\(statusLabel\(status\)\);/.test(wy), 'winery-passport.html status chip is not wrapped by wineryStatusLabel');
+  check('D5 winery: ownership fallback names the winery', /text\(ownershipBadge\) \|\| wineryStatusLabel\(CAP\.t\('b_verified'\)\)/.test(wy), 'winery-passport.html ownership fallback is a bare "Verified"');
+  check('D5 winery: label helper prefixes the winery word', /function wineryStatusLabel\(label\)\{ return label \? L\('kick'\) \+/.test(wy), 'winery-passport.html wineryStatusLabel does not prefix L(\'kick\')');
+  for (const page of ['wine-passport.html', 'vintage-passport.html']) {
+    const code = stripComments(read(page));
+    const uses = (code.match(/(?:\bt|\bL|\bui|CAP\.t)\(\s*['"](?:vs_verified|b_verified|vs)['"]|['"]vs_['"]\s*\+/g) || []);
+    check('D5 ' + page + ': renders no verification label', uses.length === 0, page + ' renders a verification label: ' + uses.join(', '));
+  }
+}
+{
+  const demo = read('cap-demo.html');
+  const bad = [];
+  for (const re of [/>\s*VERIFIED\s*</g, /Verified &(?:amp;)? traceable/g, /Zweryfikowane i identyfikowalne/g, /ZWERYFIKOWANY/g, /VERIFIED BY/g]) for (const m of demo.match(re) || []) bad.push(m);
+  for (const m of demo.matchAll(/pp_verified:`([^`]*)`/g)) if (!/^WINERY /.test(m[1])) bad.push('pp_verified:' + m[1]);
+  check('D5 cap-demo: no wine/bottle-level verified claim', bad.length === 0, 'cap-demo.html still shows: ' + bad.join(' | '));
+  check('D5 cap-demo: seal names the winery', /<div class="seal-status">WINERY VERIFIED<\/div>/.test(demo), 'cap-demo.html passport seal is not "WINERY VERIFIED"');
 }
 {
   const bs = read('bottle-scan.html');

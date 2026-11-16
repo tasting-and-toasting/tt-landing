@@ -32,9 +32,7 @@ html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
 .sticker{ width:340px; background:var(--card); color:var(--ink); border-radius:16px; padding:30px 28px 26px; text-align:center;
   box-shadow:0 18px 50px rgba(0,0,0,.5); position:relative; }
 .sticker::after{ content:""; position:absolute; inset:9px; border:1px solid var(--line); border-radius:10px; pointer-events:none; }
-.cap-verified{ font-family:var(--mono); font-weight:600; font-size:12px; letter-spacing:.34em; text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:9px; }
-.cap-verified svg{ width:15px; height:15px; }
-.cap-verified[hidden]{ display:none; }
+.cap-id{ font-family:var(--mono); font-weight:600; font-size:12px; letter-spacing:.34em; text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:9px; }
 .rule{ width:46px; height:1px; background:var(--line); margin:16px auto; }
 .wine{ font-family:var(--serif); font-weight:800; font-size:30px; line-height:1.05; color:var(--ink); }
 .winery{ font-family:var(--serif); font-size:16px; font-style:italic; color:#5a4d36; margin-top:4px; }
@@ -72,7 +70,10 @@ html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
 </div>
 
 <div class="sticker">
-  <div class="cap-verified" id="capVerified" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span id="t_verified" data-i18n="cap_verified">CAP Verified</span></div>
+  <!-- Owner decision D5 (2026-11-16): the printed sticker never carries a verification claim.
+       Neutral identification only, not translated (no established i18n key). The current
+       verification status is shown only on the digital page after the QR scan. -->
+  <div class="cap-id" id="capIdentity" translate="no">Digital Wine Passport</div>
   <div class="rule"></div>
   <div class="wine" id="wine">—</div>
   <div class="winery" id="winery">—</div>
@@ -114,9 +115,6 @@ async function load(){
   document.getElementById('winery').textContent=winery.name;
   const total=bottle.total_in_series||'—';
   document.getElementById('edition').textContent=(t('bottle_word')+' '+bottle.bottle_number+' / '+total).toUpperCase();
-  // "CAP Verified" is printed only for a winery whose API status is the reviewer
-  // decision "verified"; otherwise the line stays hidden (SECURITY B1).
-  document.getElementById('capVerified').hidden=!TT_TRUST.isWineryVerified(winery&&winery.verification_status);
   const prettyUrl=`tastingandtoasting.com/cap/b/${encodeURIComponent(token)}`;
   // The QR always encodes our own short link; ?target= is a local-dev aid only,
   // so a crafted link cannot print a sticker whose QR points elsewhere.

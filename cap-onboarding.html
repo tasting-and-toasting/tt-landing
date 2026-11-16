@@ -112,9 +112,7 @@ html[dir="rtl"] .fld select{ background-position:left 14px center; padding-right
 /* sticker preview (white card, mirrors cap-qr-sticker.html) */
 .sticker{ width:230px; background:#fff; color:#1a1206; border-radius:14px; padding:22px 20px 18px; text-align:center; position:relative; box-shadow:0 16px 44px rgba(0,0,0,.45); }
 .sticker::after{ content:""; position:absolute; inset:8px; border:1px solid #e4d9c4; border-radius:9px; pointer-events:none; }
-.sticker .cv{ font-family:var(--mono); font-weight:600; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:7px; }
-.sticker .cv svg{ width:13px; height:13px; }
-.sticker .cv[hidden]{ display:none; }
+.sticker .cid{ font-family:var(--mono); font-weight:600; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:7px; }
 .sticker .srule{ width:40px; height:1px; background:#e4d9c4; margin:13px auto; }
 .sticker .swine{ font-family:var(--serif); font-weight:800; font-size:22px; line-height:1.06; }
 .sticker .swinery{ font-family:var(--serif); font-style:italic; font-size:14px; color:#5a4d36; margin-top:3px; }
@@ -284,7 +282,8 @@ footer{ padding:30px 0; text-align:center; }
             <div class="cnt" id="genCount">—</div>
           </div>
           <div class="sticker">
-            <div class="cv" id="stVerified" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span data-wz="cap_verified">CAP Verified</span></div>
+            <!-- Owner decision D5: sticker preview = printed sticker, no verification claim; neutral text, not translated. -->
+            <div class="cid" id="stIdentity" translate="no">Digital Wine Passport</div>
             <div class="srule"></div>
             <div class="swine" id="stWine">—</div>
             <div class="swinery" id="stWinery">—</div>
@@ -376,7 +375,7 @@ const WZ = {
     wt_red:"Red",wt_white:"White",wt_rose:"Rosé",wt_sparkling:"Sparkling",wt_dessert:"Dessert",
     b_back:"Back",b_next:"Save & continue",b_generate:"Generate 10 demo bottle CAPs",b_submit:"Submit passport",b_finish:"Finish",
     optional:"optional",saving:"Saving…",generating:"Generating…",
-    g_first:"First bottle CAP",g_token:"QR token",cap_verified:"CAP Verified",g_count:"{n} bottle CAPs generated",
+    g_first:"First bottle CAP",g_token:"QR token",g_count:"{n} bottle CAPs generated",
     pv_w:"Winery Passport",pv_wd:"Your public estate page.",pv_b:"Bottle Scan",pv_bd:"What a guest sees when scanning.",pv_s:"QR Sticker",pv_sd:"Printable label for the bottle.",pv_open:"Open",
     done_h:"Submitted",done_d:"Your passport is submitted for T&T review.",
     ph_family:"Three generations on the same hillside…",ph_quote:"We don't make wine, we raise it.",ph_land:"South-facing slopes of glacial loam…",ph_philosophy:"Minimal intervention, maximal patience…",ph_wine_desc:"A supple red with notes of dark cherry…",ph_vintage:"A warm, dry summer made this an exceptional year.",
@@ -392,7 +391,7 @@ const WZ = {
     wt_red:"Rouge",wt_white:"Blanc",wt_rose:"Rosé",wt_sparkling:"Effervescent",wt_dessert:"Liquoreux",
     b_back:"Retour",b_next:"Enregistrer & continuer",b_generate:"Générer 10 CAP de démonstration",b_submit:"Soumettre le passeport",b_finish:"Terminer",
     optional:"optionnel",saving:"Enregistrement…",generating:"Génération…",
-    g_first:"Premier CAP de bouteille",g_token:"Jeton QR",cap_verified:"CAP vérifié",g_count:"{n} CAP générés",
+    g_first:"Premier CAP de bouteille",g_token:"Jeton QR",g_count:"{n} CAP générés",
     pv_w:"Passeport du domaine",pv_wd:"Votre page publique.",pv_b:"Scan de bouteille",pv_bd:"Ce que voit un visiteur en scannant.",pv_s:"Étiquette QR",pv_sd:"Étiquette imprimable pour la bouteille.",pv_open:"Ouvrir",
     done_h:"Soumis",done_d:"Votre passeport est soumis à la vérification de T&T.",
     ph_family:"Trois générations sur le même coteau…",ph_quote:"Nous ne faisons pas le vin, nous l'élevons.",ph_land:"Coteaux exposés au sud sur loam glaciaire…",ph_philosophy:"Intervention minimale, patience maximale…",ph_wine_desc:"Un rouge souple aux notes de cerise noire…",ph_vintage:"Un été chaud et sec en a fait une année exceptionnelle.",
@@ -408,7 +407,7 @@ const WZ = {
     wt_red:"Красное",wt_white:"Белое",wt_rose:"Розовое",wt_sparkling:"Игристое",wt_dessert:"Десертное",
     b_back:"Назад",b_next:"Сохранить и продолжить",b_generate:"Создать 10 демо-CAP",b_submit:"Отправить паспорт",b_finish:"Готово",
     optional:"необязательно",saving:"Сохранение…",generating:"Создание…",
-    g_first:"Первый CAP бутылки",g_token:"QR-токен",cap_verified:"CAP подтверждён",g_count:"Создано CAP: {n}",
+    g_first:"Первый CAP бутылки",g_token:"QR-токен",g_count:"Создано CAP: {n}",
     pv_w:"Паспорт винодельни",pv_wd:"Ваша публичная страница.",pv_b:"Скан бутылки",pv_bd:"Что видит гость при сканировании.",pv_s:"QR-наклейка",pv_sd:"Печатная этикетка для бутылки.",pv_open:"Открыть",
     done_h:"Отправлено",done_d:"Ваш паспорт отправлен на проверку T&T.",
     ph_family:"Три поколения на одном склоне…",ph_quote:"Мы не делаем вино, мы его растим.",ph_land:"Южные склоны из ледникового суглинка…",ph_philosophy:"Минимум вмешательства, максимум терпения…",ph_wine_desc:"Мягкое красное с нотами тёмной вишни…",ph_vintage:"Тёплое сухое лето сделало год исключительным.",
@@ -424,7 +423,7 @@ const WZ = {
     wt_red:"Tinto",wt_white:"Blanco",wt_rose:"Rosado",wt_sparkling:"Espumoso",wt_dessert:"Dulce",
     b_back:"Atrás",b_next:"Guardar y continuar",b_generate:"Generar 10 CAP de demostración",b_submit:"Enviar pasaporte",b_finish:"Finalizar",
     optional:"opcional",saving:"Guardando…",generating:"Generando…",
-    g_first:"Primer CAP de botella",g_token:"Token QR",cap_verified:"CAP verificado",g_count:"{n} CAP generados",
+    g_first:"Primer CAP de botella",g_token:"Token QR",g_count:"{n} CAP generados",
     pv_w:"Pasaporte de la bodega",pv_wd:"Tu página pública.",pv_b:"Escaneo de botella",pv_bd:"Lo que ve un visitante al escanear.",pv_s:"Etiqueta QR",pv_sd:"Etiqueta imprimible para la botella.",pv_open:"Abrir",
     done_h:"Enviado",done_d:"Tu pasaporte se ha enviado para revisión de T&T.",
     ph_family:"Tres generaciones en la misma ladera…",ph_quote:"No hacemos vino, lo criamos.",ph_land:"Laderas orientadas al sur sobre loam glaciar…",ph_philosophy:"Mínima intervención, máxima paciencia…",ph_wine_desc:"Un tinto suave con notas de cereza negra…",ph_vintage:"Un verano cálido y seco lo hizo un año excepcional.",
@@ -440,7 +439,7 @@ const WZ = {
     wt_red:"Червоне",wt_white:"Біле",wt_rose:"Рожеве",wt_sparkling:"Ігристе",wt_dessert:"Десертне",
     b_back:"Назад",b_next:"Зберегти й продовжити",b_generate:"Створити 10 демо-CAP",b_submit:"Надіслати паспорт",b_finish:"Готово",
     optional:"необов'язково",saving:"Збереження…",generating:"Створення…",
-    g_first:"Перший CAP пляшки",g_token:"QR-токен",cap_verified:"CAP підтверджено",g_count:"Створено CAP: {n}",
+    g_first:"Перший CAP пляшки",g_token:"QR-токен",g_count:"Створено CAP: {n}",
     pv_w:"Паспорт виноробні",pv_wd:"Ваша публічна сторінка.",pv_b:"Скан пляшки",pv_bd:"Що бачить гість під час сканування.",pv_s:"QR-наклейка",pv_sd:"Друкована етикетка для пляшки.",pv_open:"Відкрити",
     done_h:"Надіслано",done_d:"Ваш паспорт надіслано на перевірку T&T.",
     ph_family:"Три покоління на одному схилі…",ph_quote:"Ми не робимо вино, ми його вирощуємо.",ph_land:"Південні схили з льодовикового суглинку…",ph_philosophy:"Мінімум втручання, максимум терпіння…",ph_wine_desc:"М'яке червоне з нотами темної вишні…",ph_vintage:"Тепле сухе літо зробило рік винятковим.",
@@ -456,7 +455,7 @@ const WZ = {
     wt_red:"Rosso",wt_white:"Bianco",wt_rose:"Rosato",wt_sparkling:"Spumante",wt_dessert:"Dolce",
     b_back:"Indietro",b_next:"Salva e continua",b_generate:"Genera 10 CAP dimostrativi",b_submit:"Invia passaporto",b_finish:"Fine",
     optional:"facoltativo",saving:"Salvataggio…",generating:"Generazione…",
-    g_first:"Primo CAP della bottiglia",g_token:"Token QR",cap_verified:"CAP verificato",g_count:"{n} CAP generati",
+    g_first:"Primo CAP della bottiglia",g_token:"Token QR",g_count:"{n} CAP generati",
     pv_w:"Passaporto della cantina",pv_wd:"La tua pagina pubblica.",pv_b:"Scansione bottiglia",pv_bd:"Ciò che vede un ospite scansionando.",pv_s:"Etichetta QR",pv_sd:"Etichetta stampabile per la bottiglia.",pv_open:"Apri",
     done_h:"Inviato",done_d:"Il tuo passaporto è stato inviato per la verifica di T&T.",
     ph_family:"Tre generazioni sullo stesso versante…",ph_quote:"Non facciamo il vino, lo cresciamo.",ph_land:"Versanti esposti a sud su loam glaciale…",ph_philosophy:"Minimo intervento, massima pazienza…",ph_wine_desc:"Un rosso morbido con note di ciliegia nera…",ph_vintage:"Un'estate calda e secca ha reso l'annata eccezionale.",
@@ -472,7 +471,7 @@ const WZ = {
     wt_red:"Rot",wt_white:"Weiß",wt_rose:"Rosé",wt_sparkling:"Schaumwein",wt_dessert:"Süßwein",
     b_back:"Zurück",b_next:"Speichern & weiter",b_generate:"10 Demo-CAPs erzeugen",b_submit:"Pass einreichen",b_finish:"Fertig",
     optional:"optional",saving:"Speichern…",generating:"Wird erzeugt…",
-    g_first:"Erster Flaschen-CAP",g_token:"QR-Token",cap_verified:"CAP verifiziert",g_count:"{n} CAPs erzeugt",
+    g_first:"Erster Flaschen-CAP",g_token:"QR-Token",g_count:"{n} CAPs erzeugt",
     pv_w:"Weingut-Pass",pv_wd:"Ihre öffentliche Seite.",pv_b:"Flaschen-Scan",pv_bd:"Was ein Gast beim Scannen sieht.",pv_s:"QR-Etikett",pv_sd:"Druckbares Etikett für die Flasche.",pv_open:"Öffnen",
     done_h:"Eingereicht",done_d:"Ihr Pass wurde zur Prüfung an T&T eingereicht.",
     ph_family:"Drei Generationen am selben Hang…",ph_quote:"Wir machen keinen Wein, wir ziehen ihn auf.",ph_land:"Südhänge aus glazialem Lehm…",ph_philosophy:"Minimaler Eingriff, maximale Geduld…",ph_wine_desc:"Ein samtiger Rotwein mit Noten dunkler Kirsche…",ph_vintage:"Ein warmer, trockener Sommer machte das Jahr außergewöhnlich.",
@@ -488,7 +487,7 @@ const WZ = {
     wt_red:"אדום",wt_white:"לבן",wt_rose:"רוזה",wt_sparkling:"מבעבע",wt_dessert:"קינוח",
     b_back:"חזרה",b_next:"שמירה והמשך",b_generate:"צרו 10 CAP לדוגמה",b_submit:"שליחת דרכון",b_finish:"סיום",
     optional:"רשות",saving:"שומר…",generating:"יוצר…",
-    g_first:"ה-CAP הראשון של הבקבוק",g_token:"אסימון QR",cap_verified:"CAP מאומת",g_count:"נוצרו {n} CAP",
+    g_first:"ה-CAP הראשון של הבקבוק",g_token:"אסימון QR",g_count:"נוצרו {n} CAP",
     pv_w:"דרכון היקב",pv_wd:"העמוד הציבורי שלכם.",pv_b:"סריקת בקבוק",pv_bd:"מה שאורח רואה בעת סריקה.",pv_s:"מדבקת QR",pv_sd:"תווית להדפסה לבקבוק.",pv_open:"פתחו",
     done_h:"נשלח",done_d:"הדרכון שלכם נשלח לבדיקת T&T.",
     ph_family:"שלושה דורות על אותה גבעה…",ph_quote:"אנחנו לא מייצרים יין, אנחנו מגדלים אותו.",ph_land:"מדרונות פונים דרומה על קרקע קרחונית…",ph_philosophy:"מינימום התערבות, מקסימום סבלנות…",ph_wine_desc:"אדום רך עם רמזים של דובדבן כהה…",ph_vintage:"קיץ חם ויבש הפך את השנה לשנה יוצאת דופן.",
@@ -504,7 +503,7 @@ const WZ = {
     wt_red:"Tinto",wt_white:"Branco",wt_rose:"Rosé",wt_sparkling:"Espumante",wt_dessert:"Doce",
     b_back:"Voltar",b_next:"Guardar e continuar",b_generate:"Gerar 10 CAP de demonstração",b_submit:"Enviar passaporte",b_finish:"Concluir",
     optional:"opcional",saving:"A guardar…",generating:"A gerar…",
-    g_first:"Primeiro CAP da garrafa",g_token:"Token QR",cap_verified:"CAP verificado",g_count:"{n} CAP gerados",
+    g_first:"Primeiro CAP da garrafa",g_token:"Token QR",g_count:"{n} CAP gerados",
     pv_w:"Passaporte da quinta",pv_wd:"A sua página pública.",pv_b:"Leitura da garrafa",pv_bd:"O que um visitante vê ao digitalizar.",pv_s:"Etiqueta QR",pv_sd:"Etiqueta imprimível para a garrafa.",pv_open:"Abrir",
     done_h:"Enviado",done_d:"O seu passaporte foi enviado para verificação da T&T.",
     ph_family:"Três gerações na mesma encosta…",ph_quote:"Não fazemos vinho, criamo-lo.",ph_land:"Encostas viradas a sul sobre loam glaciar…",ph_philosophy:"Intervenção mínima, paciência máxima…",ph_wine_desc:"Um tinto suave com notas de cereja preta…",ph_vintage:"Um verão quente e seco tornou o ano excecional.",
@@ -520,7 +519,7 @@ const WZ = {
     wt_red:"წითელი",wt_white:"თეთრი",wt_rose:"ვარდისფერი",wt_sparkling:"ცქრიალა",wt_dessert:"სადესერტო",
     b_back:"უკან",b_next:"შენახვა და გაგრძელება",b_generate:"10 სადემონსტრაციო CAP-ის შექმნა",b_submit:"პასპორტის გაგზავნა",b_finish:"დასრულება",
     optional:"არასავალდებულო",saving:"ინახება…",generating:"იქმნება…",
-    g_first:"ბოთლის პირველი CAP",g_token:"QR ტოკენი",cap_verified:"CAP დადასტურებული",g_count:"შეიქმნა {n} CAP",
+    g_first:"ბოთლის პირველი CAP",g_token:"QR ტოკენი",g_count:"შეიქმნა {n} CAP",
     pv_w:"მარნის პასპორტი",pv_wd:"თქვენი საჯარო გვერდი.",pv_b:"ბოთლის სკანირება",pv_bd:"რას ხედავს სტუმარი სკანირებისას.",pv_s:"QR სტიკერი",pv_sd:"დასაბეჭდი ეტიკეტი ბოთლისთვის.",pv_open:"გახსნა",
     done_h:"გაგზავნილია",done_d:"თქვენი პასპორტი გაიგზავნა T&T-ის შესამოწმებლად.",
     ph_family:"სამი თაობა ერთსა და იმავე ფერდობზე…",ph_quote:"ჩვენ ღვინოს არ ვამზადებთ, ჩვენ მას ვზრდით.",ph_land:"სამხრეთისკენ მიმართული ფერდობები მყინვარული თიხნარით…",ph_philosophy:"მინიმალური ჩარევა, მაქსიმალური მოთმინება…",ph_wine_desc:"რბილი წითელი მუქი ალუბლის ნოტებით…",ph_vintage:"თბილმა და მშრალმა ზაფხულმა წელი განსაკუთრებული გახადა.",
@@ -536,7 +535,7 @@ const WZ = {
     wt_red:"Roșu",wt_white:"Alb",wt_rose:"Rosé",wt_sparkling:"Spumant",wt_dessert:"Desert",
     b_back:"Înapoi",b_next:"Salvează și continuă",b_generate:"Generează 10 CAP-uri demo",b_submit:"Trimite pașaportul",b_finish:"Finalizează",
     optional:"opțional",saving:"Se salvează…",generating:"Se generează…",
-    g_first:"Primul CAP al sticlei",g_token:"Token QR",cap_verified:"CAP verificat",g_count:"{n} CAP-uri generate",
+    g_first:"Primul CAP al sticlei",g_token:"Token QR",g_count:"{n} CAP-uri generate",
     pv_w:"Pașaportul cramei",pv_wd:"Pagina ta publică.",pv_b:"Scanare sticlă",pv_bd:"Ce vede un vizitator la scanare.",pv_s:"Etichetă QR",pv_sd:"Etichetă imprimabilă pentru sticlă.",pv_open:"Deschide",
     done_h:"Trimis",done_d:"Pașaportul tău a fost trimis spre verificare la T&T.",
     ph_family:"Trei generații pe același versant…",ph_quote:"Nu facem vin, îl creștem.",ph_land:"Versanți însoriți pe lut glaciar…",ph_philosophy:"Intervenție minimă, răbdare maximă…",ph_wine_desc:"Un roșu suplu cu note de cireșe negre…",ph_vintage:"O vară caldă și uscată a făcut anul excepțional.",
@@ -552,7 +551,7 @@ const WZ = {
     wt_red:"Czerwone",wt_white:"Białe",wt_rose:"Różowe",wt_sparkling:"Musujące",wt_dessert:"Deserowe",
     b_back:"Wstecz",b_next:"Zapisz i kontynuuj",b_generate:"Wygeneruj 10 demonstracyjnych CAP",b_submit:"Wyślij paszport",b_finish:"Zakończ",
     optional:"opcjonalne",saving:"Zapisywanie…",generating:"Generowanie…",
-    g_first:"Pierwszy CAP butelki",g_token:"Token QR",cap_verified:"CAP zweryfikowano",g_count:"Wygenerowano {n} CAP",
+    g_first:"Pierwszy CAP butelki",g_token:"Token QR",g_count:"Wygenerowano {n} CAP",
     pv_w:"Paszport winnicy",pv_wd:"Twoja strona publiczna.",pv_b:"Skan butelki",pv_bd:"Co widzi gość podczas skanowania.",pv_s:"Naklejka QR",pv_sd:"Etykieta do druku dla butelki.",pv_open:"Otwórz",
     done_h:"Wysłano",done_d:"Twój paszport został wysłany do weryfikacji T&T.",
     ph_family:"Trzy pokolenia na tym samym wzgórzu…",ph_quote:"Nie robimy wina, my je wychowujemy.",ph_land:"Południowe stoki na polodowcowej glinie…",ph_philosophy:"Minimum ingerencji, maksimum cierpliwości…",ph_wine_desc:"Aksamitne czerwone z nutami czarnej wiśni…",ph_vintage:"Ciepłe, suche lato uczyniło ten rok wyjątkowym.",
@@ -750,9 +749,6 @@ async function generateBottles(){
   document.getElementById("stWine").textContent = store.wineName || (store.wineName=val("f_wine_name")) || "—";
   document.getElementById("stWinery").textContent = store.wineryName || "—";
   document.getElementById("stEdition").textContent = (CAP.t("bottle_word")+" 1 / "+total).toUpperCase();
-  // A winery created in this wizard starts unverified; the "CAP Verified" line
-  // appears only for the reviewer decision "verified" (SECURITY B1).
-  document.getElementById("stVerified").hidden = !TT_TRUST.isWineryVerified(store.wineryVerification);
   const prettyUrl = `tastingandtoasting.com/cap/b/${token}`;
   document.getElementById("stUrl").textContent = prettyUrl;
   const qrBox = document.getElementById("stQr"); qrBox.innerHTML = "";

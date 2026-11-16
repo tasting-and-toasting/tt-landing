@@ -497,16 +497,19 @@ function servicesBlock(services){
     labels.map(function(label){ return '<span class="svc">' + esc(label) + '</span>'; }).join('') +
     '</div></section>';
 }
+// Owner decision D5: a verification label is the WINERY's status and says so
+// ("Winery · Verified"), so it can never be read as a wine/vintage/bottle verdict.
+function wineryStatusLabel(label){ return label ? L('kick') + ' \u00b7 ' + label : ''; }
 function chipsFor(w, ownershipConfirmed, ownershipBadge){
   var chips = [];
   var status = TT_TRUST.wineryVerification(w.verification_status).status;
   if (status === 'claimed') chips.push(assertedLabel());
   else {
-    var st = statusLabel(status);
+    var st = wineryStatusLabel(statusLabel(status));
     if (st) chips.push(st);
   }
   if (ownershipConfirmed){
-    var extra = text(ownershipBadge) || CAP.t('b_verified');
+    var extra = text(ownershipBadge) || wineryStatusLabel(CAP.t('b_verified'));
     if (extra && chips.indexOf(extra) === -1) chips.push(extra);
   }
   return chips;
