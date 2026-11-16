@@ -230,7 +230,8 @@ const I18N = {
     "photo_alt": "Producer's photograph",
     "close": "Close",
     "credit": "© {name}, producer's website",
-    "source": "Source: {domain}"
+    "source": "Source: {domain}",
+    "photo_by": "Photo: {name}"
   },
   "fr": {
     "wine": "Vin",
@@ -275,7 +276,8 @@ const I18N = {
     "photo_alt": "Photographie du producteur",
     "close": "Fermer",
     "credit": "© {name}, site du producteur",
-    "source": "Source : {domain}"
+    "source": "Source : {domain}",
+    "photo_by": "Photo : {name}"
   },
   "ru": {
     "wine": "Вино",
@@ -320,7 +322,8 @@ const I18N = {
     "photo_alt": "Фотография производителя",
     "close": "Закрыть",
     "credit": "© {name}, сайт производителя",
-    "source": "Источник: {domain}"
+    "source": "Источник: {domain}",
+    "photo_by": "Фото: {name}"
   },
   "es": {
     "wine": "Vino",
@@ -365,7 +368,8 @@ const I18N = {
     "photo_alt": "Fotografía del productor",
     "close": "Cerrar",
     "credit": "© {name}, sitio del productor",
-    "source": "Fuente: {domain}"
+    "source": "Fuente: {domain}",
+    "photo_by": "Foto: {name}"
   },
   "uk": {
     "wine": "Вино",
@@ -410,7 +414,8 @@ const I18N = {
     "photo_alt": "Фотографія виробника",
     "close": "Закрити",
     "credit": "© {name}, сайт виробника",
-    "source": "Джерело: {domain}"
+    "source": "Джерело: {domain}",
+    "photo_by": "Фото: {name}"
   },
   "it": {
     "wine": "Vino",
@@ -455,7 +460,8 @@ const I18N = {
     "photo_alt": "Fotografia del produttore",
     "close": "Chiudi",
     "credit": "© {name}, sito del produttore",
-    "source": "Fonte: {domain}"
+    "source": "Fonte: {domain}",
+    "photo_by": "Foto: {name}"
   },
   "de": {
     "wine": "Wein",
@@ -500,7 +506,8 @@ const I18N = {
     "photo_alt": "Foto des Erzeugers",
     "close": "Schließen",
     "credit": "© {name}, Website des Erzeugers",
-    "source": "Quelle: {domain}"
+    "source": "Quelle: {domain}",
+    "photo_by": "Foto: {name}"
   },
   "he": {
     "wine": "יין",
@@ -545,7 +552,8 @@ const I18N = {
     "photo_alt": "צילום של היצרן",
     "close": "סגירה",
     "credit": "© {name}, אתר היצרן",
-    "source": "מקור: {domain}"
+    "source": "מקור: {domain}",
+    "photo_by": "צילום: {name}"
   },
   "pt": {
     "wine": "Vinho",
@@ -590,7 +598,8 @@ const I18N = {
     "photo_alt": "Fotografia do produtor",
     "close": "Fechar",
     "credit": "© {name}, sítio do produtor",
-    "source": "Fonte: {domain}"
+    "source": "Fonte: {domain}",
+    "photo_by": "Foto: {name}"
   },
   "ka": {
     "wine": "ღვინო",
@@ -635,7 +644,8 @@ const I18N = {
     "photo_alt": "მწარმოებლის ფოტო",
     "close": "დახურვა",
     "credit": "© {name}, მწარმოებლის საიტი",
-    "source": "წყარო: {domain}"
+    "source": "წყარო: {domain}",
+    "photo_by": "ფოტო: {name}"
   },
   "ro": {
     "wine": "Vin",
@@ -680,7 +690,8 @@ const I18N = {
     "photo_alt": "Fotografia producătorului",
     "close": "Închide",
     "credit": "© {name}, site-ul producătorului",
-    "source": "Sursă: {domain}"
+    "source": "Sursă: {domain}",
+    "photo_by": "Foto: {name}"
   },
   "pl": {
     "wine": "Wino",
@@ -725,7 +736,8 @@ const I18N = {
     "photo_alt": "Zdjęcie producenta",
     "close": "Zamknij",
     "credit": "© {name}, strona producenta",
-    "source": "Źródło: {domain}"
+    "source": "Źródło: {domain}",
+    "photo_by": "Zdjęcie: {name}"
   }
 };
 // Golden Master blocks (tt-passport-factory/templates/golden-master.html), 12 languages.
@@ -1032,7 +1044,8 @@ function href(page, params) {
 const PHOTO_HOSTS = [
   { host: 'bdxfamilies.fr', name: 'BDX Families' },
   { host: 'bordeauxfamilies.fr', name: 'BDX Families' },
-  { host: 'pfaffenheim.com', name: 'Cave de Pfaffenheim' }
+  { host: 'pfaffenheim.com', name: 'Cave de Pfaffenheim' },
+  { host: 'events.tastingandtoasting.com', name: 'Tasting & Toasting', own: true }
 ];
 function photoHost(url) {
   const m = /^https?:\/\/([^/?#]+)/i.exec(String(url || '').trim());
@@ -1044,10 +1057,12 @@ function photoCredit(url) {
   const host = photoHost(url);
   if (!host) return null;
   const named = PHOTO_HOSTS.find(c => host === c.host || host.endsWith('.' + c.host));
-  return named ? { kind: 'producer', name: named.name } : { kind: 'domain', domain: host };
+  if (!named) return { kind: 'domain', domain: host };
+  return { kind: named.own ? 'own' : 'producer', name: named.name };
 }
 function creditText(c) {
   if (!c) return '';
+  if (c.kind === 'own') return fill(L('photo_by'), { name: c.name });
   if (c.kind === 'producer') return fill(L('credit'), { name: c.name });
   return fill(L('source'), { domain: c.domain });
 }
