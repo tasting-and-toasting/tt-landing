@@ -83,6 +83,41 @@ Wine passport: the "Research Edition" tag appears when the winery has a non-empt
 | `producer.html` (static demo, fictional producer) | `CAP verified producer` | names the producer (= winery); unchanged |
 | `cap-demo.html` (static demo) | passport mock seal `WINERY VERIFIED` / `Winery status — not a verdict on this bottle`; passport footers `DIGITAL WINE PASSPORT · …` | names the winery; was `VERIFIED` / `Verified & traceable` / `VERIFIED BY …` on a bottle mock |
 
+
+### 3b. Owner decision OD-17 D2 — wizard headline and the wording sweep (SECURITY B3)
+
+1. **Winery wizard headline** (`cap-onboarding.html`, `<h1 data-wz-html="title">` and the `title` key in all
+   12 wizard dictionaries) says what the wizard makes, not a verification result:
+
+| Lang | Headline (emphasis on the "digital" word) | Note |
+|---|---|---|
+| en | Create your winery's digital passport | owner wording |
+| ru | Создайте цифровой паспорт вашей винодельни | owner wording |
+| fr | Créez le passeport numérique de votre domaine | |
+| es | Crea el pasaporte digital de tu bodega | |
+| uk | Створіть цифровий паспорт вашої виноробні | |
+| it | Crea il passaporto digitale della tua cantina | |
+| de | Erstellen Sie den digitalen Pass Ihres Weinguts | |
+| he | צרו את הדרכון הדיגיטלי של היקב שלכם | needs native review |
+| pt | Crie o passaporte digital da sua quinta | |
+| ka | შექმენით თქვენი მარნის ციფრული პასპორტი | needs native review |
+| ro | Creează pașaportul digital al cramei tale | needs native review |
+| pl | Stwórz cyfrowy paszport swojej winnicy | |
+
+2. **Rule.** On the passport, onboarding, sticker and demo pages, "verified" / «подтверждён» / "confirmed"
+   and their equivalents in the 12 languages are never a general status of a wine, vintage, bottle or
+   winery. The only permitted uses are: the winery's own status, labelled as the winery's, rendered from
+   the API (`TT_TRUST`), or demo text that names the winery/producer; negative or failure text ("Not
+   verified", "This bottle could not be verified"); the verb "to check".
+3. **Sweep changes (B3):** `cap-demo.html` bottle chain banner `Chain confirmed` → `Chain recorded` (6 demo
+   languages); `producer.html` footer `Verified by Tasting & Toasting CAP` → `Digital Wine Passport ·
+   Tasting & Toasting CAP` (9 languages); unused bottle-level keys `verified_h` ("Verified & Traceable")
+   and `verified_facts` ("Verified Facts") removed from `src/i18n/cap-i18n.js` (12 languages each).
+4. **Enforcement.** `tools/security/check-passport-trust.js` section 6 extracts every user-visible text
+   (dictionary values, string literals, HTML text) on these pages that carries a status word and fails
+   unless its key is on the reviewed list (`ALLOWED_KEYS`: W winery-scoped, N negative, X defined but not
+   rendered, V verb). Adding a key to that list is a product decision, not a test fix.
+
 ## 4. Other rules on the same pages
 
 - Every value from the API that becomes an `href` must pass `TT_TRUST.safeHttpUrl` (only `http:`/`https:`).

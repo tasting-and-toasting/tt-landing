@@ -15,6 +15,10 @@
 //   5. Pages: no "certified" → verified mapping; sticker/onboarding badge hidden by
 //      default and toggled only through TT_TRUST; QR target not taken from the URL
 //      on production hosts; website links go through an http(s) filter.
+//   6. Owner decision OD-17 D2 (SECURITY B3): winery wizard headline is "Create your winery's
+//      digital passport" in all 12 languages, the old "verified passport" headline is gone, and every
+//      verification/confirmation status word on the passport, onboarding, sticker and demo pages is a
+//      reviewed winery-scoped, negative or verb use (anything new fails with file:line and text).
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -266,6 +270,104 @@ function verifWords(src) { return (src.match(/[^\s<>"'`]*verif[^\s<>"'`]*/gi) ||
   const i18n = read(path.join('src', 'i18n', 'cap-i18n.js'));
   check('language switcher drops ?api= off local hosts', /if \(!keepApi\) params\.delete\("api"\);/.test(i18n) && /keepApi = !!\(window\.TT_TRUST && window\.TT_TRUST\.devApiOverride\(window\.location\)\)/.test(i18n),
     'src/i18n/cap-i18n.js wireSwitcher copies ?api= into language links without the TT_TRUST local-host guard');
+}
+
+// ---- SECURITY B3 / owner decision OD-17 D2 (insert before the summary) ----
+// D2 headline: the winery wizard headline is "Create your winery's digital passport" in every
+// language; the old "verified passport" headline must not exist anywhere in the served pages.
+{
+  const html = read('cap-onboarding.html');
+  const plain = s => s.replace(/<[^>]+>/g, '');
+  const EXPECTED = {
+    en: "Create your winery's digital passport",
+    fr: 'Créez le passeport numérique de votre domaine',
+    ru: 'Создайте цифровой паспорт вашей винодельни',
+    es: 'Crea el pasaporte digital de tu bodega',
+    uk: 'Створіть цифровий паспорт вашої виноробні',
+    it: 'Crea il passaporto digitale della tua cantina',
+    de: 'Erstellen Sie den digitalen Pass Ihres Weinguts',
+    he: 'צרו את הדרכון הדיגיטלי של היקב שלכם',
+    pt: 'Crie o passaporte digital da sua quinta',
+    ka: 'შექმენით თქვენი მარნის ციფრული პასპორტი',
+    ro: 'Creează pașaportul digital al cramei tale',
+    pl: 'Stwórz cyfrowy paszport swojej winnicy'
+  };
+  for (const [lang, want] of Object.entries(EXPECTED)) {
+    const m = html.match(new RegExp('\\n\\s*' + lang + ':\\{nav:"[^"]*", title:"([^"]*)"'));
+    check('D2 onboarding headline ' + lang, !!m && plain(m[1]) === want,
+      'cap-onboarding.html ' + lang + ' title is ' + (m ? JSON.stringify(plain(m[1])) : 'missing') + ', expected ' + JSON.stringify(want));
+  }
+  const h1 = html.match(/<h1 data-wz-html="title">([\s\S]*?)<\/h1>/);
+  check('D2 onboarding headline static fallback', !!h1 && plain(h1[1]) === EXPECTED.en,
+    'cap-onboarding.html <h1> fallback is ' + (h1 ? JSON.stringify(plain(h1[1])) : 'missing'));
+  const OLD = [/Create your (?:<em>)?verified/i, /passeport (?:<em>)?vérifié/i, /(?:<em>)?подтверждённый(?:<\/em>)? паспорт/i,
+    /pasaporte (?:<em>)?verificado/i, /(?:<em>)?підтверджений(?:<\/em>)? паспорт/i, /passaporto (?:<em>)?verificato/i,
+    /(?:<em>)?verifizierten(?:<\/em>)? Pass/i, /הדרכון (?:<em>)?המאומת/, /passaporte (?:<em>)?verificado/i,
+    /(?:<em>)?დადასტურებული(?:<\/em>)? პასპორტი/, /pașaportul (?:<em>)?verificat/i, /(?:<em>)?zweryfikowany(?:<\/em>)? paszport/i];
+  const served = allHtml(ROOT, []).filter(rel => !rel.startsWith(path.join('tools', '')));
+  for (const re of OLD) {
+    const hits = [];
+    for (const rel of served) { const m = read(rel).match(re); if (m) hits.push(rel + ': ' + m[0]); }
+    check('D2 old headline gone', hits.length === 0, 'old headline still present: ' + hits.join(' | '));
+  }
+}
+// D2 sweep: on passport / onboarding / sticker / demo pages, every user-visible text that carries a
+// "verified/confirmed" status word (12 languages) must be a reviewed, winery-scoped or negative use.
+// A new or unreviewed occurrence fails and names file:line, the key and the text.
+{
+  const STATUS = /verified|vérifié|подтвержд[её]н|подтверждено|проверен|verificad[oa]|verificat[oa]?\b|verificată|verifiziert|geprüft|מאומת|დადასტურებ|підтвердж[её]н|підтверджено|перевірен|zweryfikowan|weryfikowan|верифицирован|верифікован|confirmed|confirmé|confirmad[oa]|confermat[oa]|bestätigt|potwierdzon|confirmat[aă]?\b/i;
+  // Reviewed keys. W = winery's own status (rendered only via TT_TRUST / labelled as the winery's),
+  // N = negative or failure text, X = defined but never rendered (enforced by the D5 render checks).
+  // Every key listed here was reviewed in SECURITY B3 (docs/security/VERIFICATION-STATUS-DISPLAY.md, section 3b).
+  const ALLOWED_KEYS = {
+    b_verified: 'W', wp_verified_winery: 'W', ownFallback: 'W', vs_verified: 'X', vs: 'X',
+    b_unverified: 'N', vs_rejected: 'N', nf_bottle: 'N', bp_nf_title: 'N',
+    p_verified: 'W', pp_verified: 'W', foot_fine: 'W', d2p: 'W',
+    // V = the verb "to check", not a status ("should be checked", "first they check not the wine").
+    al1: 'V', s1_h2: 'V'
+  };
+  // Reviewed unkeyed literal texts (exact, trimmed).
+  const ALLOWED_TEXT = new Set(['WINERY VERIFIED']);
+  const FILES = ['cap-onboarding.html', 'cap-qr-sticker.html', 'bottle-scan.html', 'wine-passport.html', 'vintage-passport.html',
+    'winery-passport.html', 'producer.html', 'cap-demo.html', path.join('src', 'i18n', 'cap-i18n.js'), path.join('src', 'passport', 'tt-trust.js')];
+  const STR = /(["'`])((?:\\.|(?!\1)[^\\\n])*)\1/g;
+  for (const rel of FILES) {
+    const lines = read(rel).replace(/<!--[\s\S]*?-->/g, m => m.replace(/[^\n]/g, ' '))
+      .replace(/<style[\s\S]*?<\/style>/g, m => m.replace(/[^\n]/g, ' '))
+      .replace(/\/\*[\s\S]*?\*\//g, m => m.replace(/[^\n]/g, ' ')).split('\n');
+    lines.forEach((raw, i) => {
+      const line = raw.replace(/(^|[^:'"`\\])\/\/[^\n]*/, '$1');
+      const texts = [];
+      for (const m of line.matchAll(STR)) {
+        const before = line.slice(0, m.index);
+        if (/[\w-]=\s*$/.test(before)) continue;                         // HTML attribute value (class, id, data-*, href)
+        if (/^[a-z_][a-z0-9_]*$/.test(m[2])) continue;                    // identifier / status code, not prose
+        const k = before.match(/["']?([A-Za-z_]\w*)["']?\s*:\s*$/);
+        texts.push({ key: k ? k[1] : null, text: m[2] });
+      }
+      const attrs = [...line.matchAll(/data-(?:i18n|i18n-html|wz|wz-html)="([^"]+)"/g)];
+      for (const m of line.matchAll(/>([^<>]+)</g)) {
+        const own = attrs.filter(a => a.index < m.index).pop();       // nearest i18n attribute before this text
+        texts.push({ key: own ? own[1] : null, text: m[1] });
+      }
+      for (const t of texts) {
+        const hit = t.text.match(STATUS);
+        if (!hit) continue;
+        const plain = t.text.replace(/<[^>]+>/g, '').trim();
+        const ok = (t.key && ALLOWED_KEYS[t.key]) || ALLOWED_TEXT.has(plain);
+        check('D2 no general "verified" wording', !!ok, rel + ':' + (i + 1) + ' key=' + (t.key || '-') + ' word="' + hit[0] + '" text=' + JSON.stringify(plain.slice(0, 100)));
+      }
+    });
+  }
+  // Winery-scoped keys must stay winery-scoped where they are literal demo text.
+  const demo = read('cap-demo.html');
+  for (const m of demo.matchAll(/foot_fine:`([^`]*)`/g)) check('D2 cap-demo foot_fine: only "Winery verified"', /Winery verified/.test(m[1]) && !STATUS.test(m[1].replace(/Winery verified/g, '')), 'cap-demo.html foot_fine: ' + m[1].slice(0, 100));
+  for (const m of demo.matchAll(/d2p:`([^`]*)`/g)) {
+    const at = m[1].search(/(?:Status|Статус|Estado|Stato):\s*«?(?:producer|производитель|productor|Produzent|produttore|producent)(?=[\s»])/i);
+    check('D2 cap-demo d2p: status is the producer\'s', at > 0 && !STATUS.test(m[1].slice(0, at)), 'cap-demo.html d2p: ' + m[1].slice(0, 100));
+  }
+  const prod = read('producer.html');
+  for (const m of prod.matchAll(/foot:`([^`]*)`/g)) check('D2 producer footer has no "verified by"', !STATUS.test(m[1]), 'producer.html foot: ' + m[1].slice(0, 100));
 }
 
 console.log('passport trust checks: ' + pass + ' passed, ' + failures.length + ' failed');

@@ -19,6 +19,17 @@ const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
 const SITE = 'https://tastingandtoasting.com';
 const API_HOST = 'tt-stack-prod.onrender.com';
 const EVIL = 'https://attacker.example/api/cap';
+// OD-17 D2 (SECURITY B3): expected winery wizard headline per language, and the status-word family
+// (verified / confirmed and their equivalents in the 12 site languages).
+const HEADLINE = {
+  en: "Create your winery's digital passport", fr: 'Créez le passeport numérique de votre domaine',
+  ru: 'Создайте цифровой паспорт вашей винодельни', es: 'Crea el pasaporte digital de tu bodega',
+  uk: 'Створіть цифровий паспорт вашої виноробні', it: 'Crea il passaporto digitale della tua cantina',
+  de: 'Erstellen Sie den digitalen Pass Ihres Weinguts', he: 'צרו את הדרכון הדיגיטלי של היקב שלכם',
+  pt: 'Crie o passaporte digital da sua quinta', ka: 'შექმენით თქვენი მარნის ციფრული პასპორტი',
+  ro: 'Creează pașaportul digital al cramei tale', pl: 'Stwórz cyfrowy paszport swojej winnicy'
+};
+const STATUS_WORD = /verified|vérifié|подтвержд[её]н|подтверждено|проверен|verificad[oa]|verificat[oa]?(?![a-zăîâșț])|verificată|verifiziert|geprüft|מאומת|დადასტურებ|підтвердж[её]н|підтверджено|перевірен|zweryfikowan|верифицирован|верифікован|confirmed|confirmé|confirmad[oa]|confermat[oa]|bestätigt|potwierdzon/i;
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.json': 'application/json' };
 
 function match(source, pathname) {
@@ -195,6 +206,24 @@ const QR_STUB = 'window.QRCode=function(el,o){el.setAttribute("data-qr-text",o.t
     check('D5 cap-demo ' + lang + ': no bottle-level verified claim', !/Verified & traceable|VERIFIED BY|Zweryfikowane i identyfikowalne/.test(out.body) && bare <= named,
       'bare=' + bare + ' named=' + named + ' status=' + out.status);
     check('D5 cap-demo ' + lang + ': signed passport status names the winery', out.status === 'WINERY VERIFIED', 'ppStatus=' + JSON.stringify(out.status) + ' verdict=' + JSON.stringify(out.verdict));
+    const chain = await r.page.evaluate(() => { const e = document.querySelector('[data-i18n="chain"]'); return e ? e.textContent : null; });
+    check('D2 cap-demo ' + lang + ': bottle chain not called confirmed', chain !== null && !STATUS_WORD.test(chain), 'chain banner: ' + JSON.stringify(chain));
+    await r.ctx.close();
+  }
+
+  // 7. Owner decision OD-17 D2: the winery wizard headline in every language, and no status word in the header.
+  for (const [lang, want] of Object.entries(HEADLINE)) {
+    const r = await open('/cap-onboarding?demo=1&lang=' + lang, {});
+    const h = await r.page.evaluate(() => { const h1 = document.querySelector('header.head h1'); const hd = document.querySelector('header.head'); return { h1: h1 ? h1.textContent : null, head: hd ? hd.textContent : '' }; });
+    check('D2 onboarding headline ' + lang, h.h1 === want, 'h1=' + JSON.stringify(h.h1) + ' expected ' + JSON.stringify(want));
+    check('D2 onboarding header ' + lang + ': no status word', !STATUS_WORD.test(h.head), 'header text: ' + h.head.replace(/\s+/g, ' ').trim().slice(0, 160));
+    await r.ctx.close();
+  }
+  // 8. producer demo footer in every producer language: neutral label, no "verified by".
+  for (const lang of ['en', 'fr', 'ru', 'es', 'uk', 'it', 'de', 'he', 'pt']) {
+    const r = await open('/producer.html?lang=' + lang, {});
+    const foot = await r.page.evaluate(() => { const e = document.querySelector('[data-i18n="foot"]'); return e ? e.textContent : null; });
+    check('D2 producer ' + lang + ': footer neutral', !!foot && /^Digital Wine Passport · Tasting & Toasting CAP/.test(foot) && !STATUS_WORD.test(foot), 'footer: ' + JSON.stringify(foot));
     await r.ctx.close();
   }
 
