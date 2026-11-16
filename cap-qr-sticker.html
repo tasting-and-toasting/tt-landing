@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="src/i18n/cap-i18n.js"></script>
+<script src="src/passport/tt-trust.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <style>
 :root{
@@ -33,6 +34,7 @@ html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
 .sticker::after{ content:""; position:absolute; inset:9px; border:1px solid var(--line); border-radius:10px; pointer-events:none; }
 .cap-verified{ font-family:var(--mono); font-weight:600; font-size:12px; letter-spacing:.34em; text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:9px; }
 .cap-verified svg{ width:15px; height:15px; }
+.cap-verified[hidden]{ display:none; }
 .rule{ width:46px; height:1px; background:var(--line); margin:16px auto; }
 .wine{ font-family:var(--serif); font-weight:800; font-size:30px; line-height:1.05; color:var(--ink); }
 .winery{ font-family:var(--serif); font-size:16px; font-style:italic; color:#5a4d36; margin-top:4px; }
@@ -70,7 +72,7 @@ html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
 </div>
 
 <div class="sticker">
-  <div class="cap-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span id="t_verified" data-i18n="cap_verified">CAP Verified</span></div>
+  <div class="cap-verified" id="capVerified" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span id="t_verified" data-i18n="cap_verified">CAP Verified</span></div>
   <div class="rule"></div>
   <div class="wine" id="wine">—</div>
   <div class="winery" id="winery">—</div>
@@ -85,11 +87,12 @@ html[dir="rtl"] .lang-switcher-flags{ flex-direction:row-reverse; }
 <script>
 const qs=new URLSearchParams(location.search);
 const t=CAP.t;
-const isDemo=qs.get('demo')==='1'||/^(localhost|127\.|0\.0)/.test(location.hostname);
+const isLocal=TT_TRUST.isLocalHost(location.hostname);
+const isDemo=qs.get('demo')==='1'||isLocal;
 const DEMO_TOKEN='faf6bd0a-cb26-450e-82ff-2d7161495428';
 const rawToken=(qs.get('token')||'').trim();
 const token=rawToken||(isDemo?DEMO_TOKEN:null);
-const API=qs.get('api')||(/^(localhost|127\.|0\.0)/.test(location.hostname)?'http://localhost:8088/api/cap':'https://tt-stack-prod.onrender.com/api/cap');
+const API=TT_TRUST.resolveApiBase(location); // ?api= honoured on a local dev host only (SECURITY B1)
 
 function fail(msg){
   document.getElementById('root').innerHTML=`<div class="state">${msg}</div>`;
@@ -111,8 +114,14 @@ async function load(){
   document.getElementById('winery').textContent=winery.name;
   const total=bottle.total_in_series||'—';
   document.getElementById('edition').textContent=(t('bottle_word')+' '+bottle.bottle_number+' / '+total).toUpperCase();
-  const prettyUrl=`tastingandtoasting.com/cap/b/${token}`;
-  const qrTarget=qs.get('target')||`https://${prettyUrl}`;
+  // "CAP Verified" is printed only for a winery whose API status is the reviewer
+  // decision "verified"; otherwise the line stays hidden (SECURITY B1).
+  document.getElementById('capVerified').hidden=!TT_TRUST.isWineryVerified(winery&&winery.verification_status);
+  const prettyUrl=`tastingandtoasting.com/cap/b/${encodeURIComponent(token)}`;
+  // The QR always encodes our own short link; ?target= is a local-dev aid only,
+  // so a crafted link cannot print a sticker whose QR points elsewhere.
+  const devTarget=isLocal?TT_TRUST.safeHttpUrl(qs.get('target')):'';
+  const qrTarget=devTarget||`https://${prettyUrl}`;
   document.getElementById('url').textContent=prettyUrl;
   document.title=`CAP QR Sticker · ${wine.name} ${vintage.vintage_year}`;
   CAP.wireSwitcher();

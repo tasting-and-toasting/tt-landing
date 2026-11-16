@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="src/i18n/cap-i18n.js"></script>
+<script src="src/passport/tt-trust.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <style>
 :root{
@@ -113,6 +114,7 @@ html[dir="rtl"] .fld select{ background-position:left 14px center; padding-right
 .sticker::after{ content:""; position:absolute; inset:8px; border:1px solid #e4d9c4; border-radius:9px; pointer-events:none; }
 .sticker .cv{ font-family:var(--mono); font-weight:600; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:7px; }
 .sticker .cv svg{ width:13px; height:13px; }
+.sticker .cv[hidden]{ display:none; }
 .sticker .srule{ width:40px; height:1px; background:#e4d9c4; margin:13px auto; }
 .sticker .swine{ font-family:var(--serif); font-weight:800; font-size:22px; line-height:1.06; }
 .sticker .swinery{ font-family:var(--serif); font-style:italic; font-size:14px; color:#5a4d36; margin-top:3px; }
@@ -282,7 +284,7 @@ footer{ padding:30px 0; text-align:center; }
             <div class="cnt" id="genCount">—</div>
           </div>
           <div class="sticker">
-            <div class="cv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span data-wz="cap_verified">CAP Verified</span></div>
+            <div class="cv" id="stVerified" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span data-wz="cap_verified">CAP Verified</span></div>
             <div class="srule"></div>
             <div class="swine" id="stWine">—</div>
             <div class="swinery" id="stWinery">—</div>
@@ -565,14 +567,13 @@ const esc = s => String(s==null?"":s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&
 
 /* Demo-only wizard: require ?demo=1 on production hosts (localhost always allowed). */
 const pageQs = new URLSearchParams(location.search);
-const isCapDemoOnboarding = pageQs.get("demo") === "1" || /^(localhost|127\.|0\.0)/.test(location.hostname);
+const isCapDemoOnboarding = pageQs.get("demo") === "1" || TT_TRUST.isLocalHost(location.hostname);
 if (!isCapDemoOnboarding) {
   document.body.innerHTML = '<main style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 24px;font-family:monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8a807a;text-align:center">CAP demo onboarding only. Open with ?demo=1 on production.</main>';
   throw new Error("cap-onboarding: demo gate");
 }
 
-const API = pageQs.get("api")
-  || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? "http://localhost:8088/api/cap" : "https://tt-stack-prod.onrender.com/api/cap");
+const API = TT_TRUST.resolveApiBase(location); // ?api= honoured on a local dev host only (SECURITY B1)
 
 /* ---- static i18n apply ---- */
 function applyI18n(){
@@ -670,6 +671,7 @@ async function saveStep(n){
       const d = await post("/wineries", body);
       store.wineryId = pick(d.winery||d, "id") || uuid();
       store.winerySlug = pick(d.winery||d, "slug") || slug;
+      store.wineryVerification = pick(d.winery||d, "verification_status");
     }catch(e){
       store.wineryId = store.wineryId || uuid(); store.winerySlug = slug;
       showNotice("warn", tw("warn_offline"));
@@ -748,6 +750,9 @@ async function generateBottles(){
   document.getElementById("stWine").textContent = store.wineName || (store.wineName=val("f_wine_name")) || "—";
   document.getElementById("stWinery").textContent = store.wineryName || "—";
   document.getElementById("stEdition").textContent = (CAP.t("bottle_word")+" 1 / "+total).toUpperCase();
+  // A winery created in this wizard starts unverified; the "CAP Verified" line
+  // appears only for the reviewer decision "verified" (SECURITY B1).
+  document.getElementById("stVerified").hidden = !TT_TRUST.isWineryVerified(store.wineryVerification);
   const prettyUrl = `tastingandtoasting.com/cap/b/${token}`;
   document.getElementById("stUrl").textContent = prettyUrl;
   const qrBox = document.getElementById("stQr"); qrBox.innerHTML = "";

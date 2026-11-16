@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="/src/i18n/cap-i18n.js"></script>
+<script src="/src/passport/tt-trust.js"></script>
 <link rel="stylesheet" href="/src/passport/tt-head.css">
 <style>
   *{box-sizing:border-box;}
@@ -128,7 +129,7 @@
 const qs = new URLSearchParams(location.search);
 const slug = (qs.get('slug') || '').trim();
 const lang = CAP.lang;
-const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
+const API = TT_TRUST.resolveApiBase(location); // ?api= honoured on a local dev host only (SECURITY B1)
 
 const UI = {
   en:{kick:"Winery",dna:"DNA",services:"Services",ph_credit:"\u00a9 {name}, producer's website",ph_source:"Source: {domain}",nf_kick:"Not found",nf_title:"We couldn't confirm this \u2014 this code isn't in our records.",nf_body:"Check the link and try again. If you believe this is an error, contact the producer directly.",explore:"Explore Tasting & Toasting",err_kick:"Something went wrong",err_title:"We couldn't load this passport.",err_body:"A problem on our end, not with the winery. Your place is safe. Please try again.",retry:"Try again",draft_kick:"Not yet published",draft_title:"This winery profile hasn't been published yet.",draft_body:"Nothing is missing by mistake \u2014 the producer is still preparing it. This is different from an invalid or counterfeit code.",wines_empty:"No wines listed yet",wines_empty_sub:"This winery hasn't added wines to its passport.",wines_one:"1 wine",wines_many:"{n} wines",submitted:"Submitted",zoom:"Enlarge",close:"Close"},
@@ -164,7 +165,7 @@ function pageHref(file, params){
     if (params[k] != null && String(params[k]) !== '') u.set(k, String(params[k]));
   });
   if (lang !== 'en') u.set('lang', lang);
-  var api = qs.get('api');
+  var api = TT_TRUST.devApiOverride(location);
   if (api) u.set('api', api);
   return path + '?' + u.toString();
 }
@@ -396,12 +397,13 @@ function assertedLabel(){
   if (lang === 'en') return 'Producer-asserted';
   return CAP.t('b_claimed');
 }
+// Label for a NORMALISED winery status (TT_TRUST.wineryVerification). Unknown or
+// missing status gets no label at all (SECURITY B1).
 function statusLabel(status){
-  if (status === 'verified' || status === 'certified') return CAP.t('b_verified');
+  if (status === TT_TRUST.CONFIRMED_STATUS) return CAP.t('b_verified');
   if (status === 'under_review') return CAP.t('b_review');
   if (status === 'documents_submitted') return L('submitted');
   if (status === 'rejected') return CAP.t('b_unverified');
-  if (status) return CAP.t('b_review');
   return '';
 }
 function serviceLabels(services){
@@ -429,10 +431,6 @@ function placeLine(w){
   var parts = [left, country].filter(Boolean);
   if (!parts.length) return '';
   return '<div class="place">' + flagSvg(country) + '<span>' + esc(parts.join(' \u00b7 ')) + '</span></div>';
-}
-function safeHttp(url){
-  var u = text(url);
-  return /^https?:\/\//i.test(u) ? u : '';
 }
 function dnaBlock(dna){
   dna = dna || {};
@@ -498,7 +496,7 @@ function servicesBlock(services){
 }
 function chipsFor(w, ownershipConfirmed, ownershipBadge){
   var chips = [];
-  var status = text(w.verification_status).toLowerCase();
+  var status = TT_TRUST.wineryVerification(w.verification_status).status;
   if (status === 'claimed') chips.push(assertedLabel());
   else {
     var st = statusLabel(status);
@@ -586,7 +584,7 @@ function renderPassport(w, dna, services, wines, winesOk, ownershipConfirmed, ow
   setCrumb(name, pageHref('winery-passport.html', {slug: winerySlug}));
   var tagline = text(w.tagline);
   var description = text(w.description);
-  var website = safeHttp(w.website_url);
+  var website = TT_TRUST.safeHttpUrl(w.website_url);
   var chips = chipsFor(w, ownershipConfirmed, ownershipBadge);
   var meta = '';
   if (chips.length || website){
@@ -625,7 +623,7 @@ async function load(){
   if (text(w.status).toLowerCase() === 'draft'){ renderDraft(); return; }
   var dna = data.dna || {};
   var services = data.services || [];
-  var ownershipConfirmed = !!(data.ownership_confirmed ?? w.ownership_confirmed);
+  var ownershipConfirmed = TT_TRUST.ownershipConfirmed(data, w);
   var ownershipBadge = data.ownership_badge != null ? data.ownership_badge : (w.ownership_badge != null ? w.ownership_badge : null);
   var wines = [];
   var winesOk = false;

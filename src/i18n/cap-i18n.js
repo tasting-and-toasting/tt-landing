@@ -322,11 +322,14 @@
   }
 
   // Point each flag link at the current page+params with lang swapped in,
-  // and mark the active one. Preserves ?slug / ?token / ?api / #hash.
+  // and mark the active one. Preserves ?slug / ?token / #hash; ?api only on a
+  // local dev host (TT_TRUST, SECURITY B1), so a crafted link does not spread.
   function wireSwitcher() {
+    var keepApi = !!(window.TT_TRUST && window.TT_TRUST.devApiOverride(window.location));
     document.querySelectorAll("[data-lang-link]").forEach(function (el) {
       var code = el.getAttribute("data-lang-link");
       var params = new URLSearchParams(window.location.search);
+      if (!keepApi) params.delete("api");
       params.set("lang", code);
       el.setAttribute("href", window.location.pathname + "?" + params.toString() + window.location.hash);
       var on = code === lang;

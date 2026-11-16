@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="/src/i18n/cap-i18n.js"></script>
+<script src="/src/passport/tt-trust.js"></script>
 <link rel="stylesheet" href="/src/passport/tt-head.css">
 <style>
 
@@ -999,7 +1000,7 @@ const MONTHS = {"en": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "
 const qs = new URLSearchParams(location.search);
 const lang = CAP.lang;
 const t = CAP.t;
-const API = qs.get('api') || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? 'http://localhost:8088/api/cap' : 'https://tt-stack-prod.onrender.com/api/cap');
+const API = TT_TRUST.resolveApiBase(location); // ?api= honoured on a local dev host only (SECURITY B1)
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function L(key) {
   if (/^gm_/.test(key)) return (GM_I18N[lang] || GM_I18N.en)[key] || GM_I18N.en[key] || key;
@@ -1024,7 +1025,7 @@ function href(page, params) {
     if (v != null && String(v).trim() !== '') q.set(k, String(v));
   });
   if (lang && lang !== 'en') q.set('lang', lang);
-  const apiQs = qs.get('api');
+  const apiQs = TT_TRUST.devApiOverride(location);
   if (apiQs) q.set('api', apiQs);
   const s = q.toString();
   return path + (s ? '?' + s : '');
@@ -1199,15 +1200,6 @@ function enumLabel(prefix, raw) {
   const label = t(key);
   return label === key ? s : label;
 }
-function statusView(code) {
-  const map = {
-    verified: 'vs_verified', certified: 'vs_verified', under_review: 'vs_review',
-    documents_submitted: 'vs_submitted', claimed: 'vs_claimed', rejected: 'vs_rejected'
-  };
-  const key = map[code];
-  if (!key) return '';
-  return L(key);
-}
 function formatDate(raw) {
   const s = nonEmpty(raw);
   if (!s) return '';
@@ -1336,8 +1328,10 @@ function siteHost(url) {
 }
 function isResearchEdition(winery) {
   if (!winery) return false;
-  const st = nonEmpty(winery.verification_status).toLowerCase();
-  return !!st && st !== 'verified' && st !== 'certified';
+  // A known, not-yet-verified winery gets the Research Edition tag; only the
+  // reviewer decision "verified" removes it (TT_TRUST, SECURITY B1).
+  const raw = nonEmpty(winery.verification_status);
+  return !!raw && !TT_TRUST.isWineryVerified(raw);
 }
 function vintageSection(v) {
   const year = vintageYear(v);
