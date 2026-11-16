@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="src/i18n/cap-i18n.js"></script>
+<script src="src/passport/tt-trust.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <style>
 :root{
@@ -111,8 +112,7 @@ html[dir="rtl"] .fld select{ background-position:left 14px center; padding-right
 /* sticker preview (white card, mirrors cap-qr-sticker.html) */
 .sticker{ width:230px; background:#fff; color:#1a1206; border-radius:14px; padding:22px 20px 18px; text-align:center; position:relative; box-shadow:0 16px 44px rgba(0,0,0,.45); }
 .sticker::after{ content:""; position:absolute; inset:8px; border:1px solid #e4d9c4; border-radius:9px; pointer-events:none; }
-.sticker .cv{ font-family:var(--mono); font-weight:600; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:7px; }
-.sticker .cv svg{ width:13px; height:13px; }
+.sticker .cid{ font-family:var(--mono); font-weight:600; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:7px; }
 .sticker .srule{ width:40px; height:1px; background:#e4d9c4; margin:13px auto; }
 .sticker .swine{ font-family:var(--serif); font-weight:800; font-size:22px; line-height:1.06; }
 .sticker .swinery{ font-family:var(--serif); font-style:italic; font-size:14px; color:#5a4d36; margin-top:3px; }
@@ -188,7 +188,7 @@ footer{ padding:30px 0; text-align:center; }
 
 <header class="head"><div class="wrap">
   <div class="kick mono" data-wz="nav">WINERY ONBOARDING</div>
-  <h1 data-wz-html="title">Create your <em>verified</em> passport</h1>
+  <h1 data-wz-html="title">Create your winery's <em>digital</em> passport</h1>
   <p data-wz="tagline">From estate to bottle — build your CAP passport in eight steps.</p>
   <div class="progress" id="progress"></div>
 </div></header>
@@ -282,7 +282,8 @@ footer{ padding:30px 0; text-align:center; }
             <div class="cnt" id="genCount">—</div>
           </div>
           <div class="sticker">
-            <div class="cv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M8.5 12l2.5 2.5L16 9"/></svg><span data-wz="cap_verified">CAP Verified</span></div>
+            <!-- Owner decision D5: sticker preview = printed sticker, no verification claim; neutral text, not translated. -->
+            <div class="cid" id="stIdentity" translate="no">Digital Wine Passport</div>
             <div class="srule"></div>
             <div class="swine" id="stWine">—</div>
             <div class="swinery" id="stWinery">—</div>
@@ -363,7 +364,7 @@ const ICO_ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 
 /* ---- wizard i18n (12 languages) ---- */
 const WZ = {
-  en:{nav:"WINERY ONBOARDING", title:"Create your <em>verified</em> passport", tagline:"From estate to bottle — build your CAP passport in eight steps.",
+  en:{nav:"WINERY ONBOARDING", title:"Create your winery's <em>digital</em> passport", tagline:"From estate to bottle — build your CAP passport in eight steps.",
     s1:"Profile",s2:"DNA",s3:"Services",s4:"Wine",s5:"Vintage",s6:"Bottles",s7:"Preview",s8:"Submit",
     h1:"Basic profile",h2:"Winery DNA",h3:"Services & experiences",h4:"First wine",h5:"First vintage",h6:"Generate bottle CAPs",h7:"Preview your passport",h8:"Submit for review",
     sh1:"Tell us who you are.",sh2:"The story behind the estate.",sh3:"What can guests experience on-site?",sh4:"Add your first wine.",sh5:"Add the first vintage of this wine.",sh6:"Mint demo bottle CAPs with QR codes.",sh7:"See the live consumer-facing pages.",sh8:"Send your passport to Tasting & Toasting.",
@@ -374,12 +375,12 @@ const WZ = {
     wt_red:"Red",wt_white:"White",wt_rose:"Rosé",wt_sparkling:"Sparkling",wt_dessert:"Dessert",
     b_back:"Back",b_next:"Save & continue",b_generate:"Generate 10 demo bottle CAPs",b_submit:"Submit passport",b_finish:"Finish",
     optional:"optional",saving:"Saving…",generating:"Generating…",
-    g_first:"First bottle CAP",g_token:"QR token",cap_verified:"CAP Verified",g_count:"{n} bottle CAPs generated",
+    g_first:"First bottle CAP",g_token:"QR token",g_count:"{n} bottle CAPs generated",
     pv_w:"Winery Passport",pv_wd:"Your public estate page.",pv_b:"Bottle Scan",pv_bd:"What a guest sees when scanning.",pv_s:"QR Sticker",pv_sd:"Printable label for the bottle.",pv_open:"Open",
     done_h:"Submitted",done_d:"Your passport is submitted for T&T review.",
     ph_family:"Three generations on the same hillside…",ph_quote:"We don't make wine, we raise it.",ph_land:"South-facing slopes of glacial loam…",ph_philosophy:"Minimal intervention, maximal patience…",ph_wine_desc:"A supple red with notes of dark cherry…",ph_vintage:"A warm, dry summer made this an exceptional year.",
     err_required:"Please fill in the required fields.",err_save:"Could not save — check the connection and try again.",err_services:"Select at least one service.",warn_offline:"Saved locally — the server could not be reached. Continuing in demo mode."},
-  fr:{nav:"INTÉGRATION DU DOMAINE", title:"Créez votre passeport <em>vérifié</em>", tagline:"Du domaine à la bouteille — créez votre passeport CAP en huit étapes.",
+  fr:{nav:"INTÉGRATION DU DOMAINE", title:"Créez le passeport <em>numérique</em> de votre domaine", tagline:"Du domaine à la bouteille — créez votre passeport CAP en huit étapes.",
     s1:"Profil",s2:"ADN",s3:"Services",s4:"Vin",s5:"Millésime",s6:"Bouteilles",s7:"Aperçu",s8:"Envoyer",
     h1:"Profil de base",h2:"ADN du domaine",h3:"Services & expériences",h4:"Premier vin",h5:"Premier millésime",h6:"Générer les CAP des bouteilles",h7:"Aperçu de votre passeport",h8:"Soumettre pour vérification",
     sh1:"Présentez-vous.",sh2:"L'histoire derrière le domaine.",sh3:"Que peuvent vivre les visiteurs sur place ?",sh4:"Ajoutez votre premier vin.",sh5:"Ajoutez le premier millésime de ce vin.",sh6:"Créez des CAP de démonstration avec QR codes.",sh7:"Voyez les pages destinées au public.",sh8:"Envoyez votre passeport à Tasting & Toasting.",
@@ -390,12 +391,12 @@ const WZ = {
     wt_red:"Rouge",wt_white:"Blanc",wt_rose:"Rosé",wt_sparkling:"Effervescent",wt_dessert:"Liquoreux",
     b_back:"Retour",b_next:"Enregistrer & continuer",b_generate:"Générer 10 CAP de démonstration",b_submit:"Soumettre le passeport",b_finish:"Terminer",
     optional:"optionnel",saving:"Enregistrement…",generating:"Génération…",
-    g_first:"Premier CAP de bouteille",g_token:"Jeton QR",cap_verified:"CAP vérifié",g_count:"{n} CAP générés",
+    g_first:"Premier CAP de bouteille",g_token:"Jeton QR",g_count:"{n} CAP générés",
     pv_w:"Passeport du domaine",pv_wd:"Votre page publique.",pv_b:"Scan de bouteille",pv_bd:"Ce que voit un visiteur en scannant.",pv_s:"Étiquette QR",pv_sd:"Étiquette imprimable pour la bouteille.",pv_open:"Ouvrir",
     done_h:"Soumis",done_d:"Votre passeport est soumis à la vérification de T&T.",
     ph_family:"Trois générations sur le même coteau…",ph_quote:"Nous ne faisons pas le vin, nous l'élevons.",ph_land:"Coteaux exposés au sud sur loam glaciaire…",ph_philosophy:"Intervention minimale, patience maximale…",ph_wine_desc:"Un rouge souple aux notes de cerise noire…",ph_vintage:"Un été chaud et sec en a fait une année exceptionnelle.",
     err_required:"Veuillez remplir les champs obligatoires.",err_save:"Échec de l'enregistrement — vérifiez la connexion et réessayez.",err_services:"Sélectionnez au moins un service.",warn_offline:"Enregistré localement — serveur injoignable. Mode démonstration."},
-  ru:{nav:"РЕГИСТРАЦИЯ ВИНОДЕЛЬНИ", title:"Создайте <em>подтверждённый</em> паспорт", tagline:"От винодельни до бутылки — создайте CAP-паспорт за восемь шагов.",
+  ru:{nav:"РЕГИСТРАЦИЯ ВИНОДЕЛЬНИ", title:"Создайте <em>цифровой</em> паспорт вашей винодельни", tagline:"От винодельни до бутылки — создайте CAP-паспорт за восемь шагов.",
     s1:"Профиль",s2:"ДНК",s3:"Услуги",s4:"Вино",s5:"Урожай",s6:"Бутылки",s7:"Превью",s8:"Отправка",
     h1:"Основной профиль",h2:"ДНК винодельни",h3:"Услуги и впечатления",h4:"Первое вино",h5:"Первый урожай",h6:"Создать CAP бутылок",h7:"Предпросмотр паспорта",h8:"Отправить на проверку",
     sh1:"Расскажите о себе.",sh2:"История за винодельней.",sh3:"Что гости могут испытать на месте?",sh4:"Добавьте первое вино.",sh5:"Добавьте первый урожай этого вина.",sh6:"Создайте демо-CAP с QR-кодами.",sh7:"Посмотрите страницы для потребителей.",sh8:"Отправьте паспорт в Tasting & Toasting.",
@@ -406,12 +407,12 @@ const WZ = {
     wt_red:"Красное",wt_white:"Белое",wt_rose:"Розовое",wt_sparkling:"Игристое",wt_dessert:"Десертное",
     b_back:"Назад",b_next:"Сохранить и продолжить",b_generate:"Создать 10 демо-CAP",b_submit:"Отправить паспорт",b_finish:"Готово",
     optional:"необязательно",saving:"Сохранение…",generating:"Создание…",
-    g_first:"Первый CAP бутылки",g_token:"QR-токен",cap_verified:"CAP подтверждён",g_count:"Создано CAP: {n}",
+    g_first:"Первый CAP бутылки",g_token:"QR-токен",g_count:"Создано CAP: {n}",
     pv_w:"Паспорт винодельни",pv_wd:"Ваша публичная страница.",pv_b:"Скан бутылки",pv_bd:"Что видит гость при сканировании.",pv_s:"QR-наклейка",pv_sd:"Печатная этикетка для бутылки.",pv_open:"Открыть",
     done_h:"Отправлено",done_d:"Ваш паспорт отправлен на проверку T&T.",
     ph_family:"Три поколения на одном склоне…",ph_quote:"Мы не делаем вино, мы его растим.",ph_land:"Южные склоны из ледникового суглинка…",ph_philosophy:"Минимум вмешательства, максимум терпения…",ph_wine_desc:"Мягкое красное с нотами тёмной вишни…",ph_vintage:"Тёплое сухое лето сделало год исключительным.",
     err_required:"Пожалуйста, заполните обязательные поля.",err_save:"Не удалось сохранить — проверьте соединение и повторите.",err_services:"Выберите хотя бы одну услугу.",warn_offline:"Сохранено локально — сервер недоступен. Демо-режим."},
-  es:{nav:"ALTA DE BODEGA", title:"Crea tu pasaporte <em>verificado</em>", tagline:"De la bodega a la botella — crea tu pasaporte CAP en ocho pasos.",
+  es:{nav:"ALTA DE BODEGA", title:"Crea el pasaporte <em>digital</em> de tu bodega", tagline:"De la bodega a la botella — crea tu pasaporte CAP en ocho pasos.",
     s1:"Perfil",s2:"ADN",s3:"Servicios",s4:"Vino",s5:"Añada",s6:"Botellas",s7:"Vista previa",s8:"Enviar",
     h1:"Perfil básico",h2:"ADN de la bodega",h3:"Servicios y experiencias",h4:"Primer vino",h5:"Primera añada",h6:"Generar CAP de botellas",h7:"Vista previa del pasaporte",h8:"Enviar a revisión",
     sh1:"Cuéntanos quién eres.",sh2:"La historia detrás de la bodega.",sh3:"¿Qué pueden vivir los visitantes en la bodega?",sh4:"Añade tu primer vino.",sh5:"Añade la primera añada de este vino.",sh6:"Genera CAP de demostración con códigos QR.",sh7:"Mira las páginas para el consumidor.",sh8:"Envía tu pasaporte a Tasting & Toasting.",
@@ -422,12 +423,12 @@ const WZ = {
     wt_red:"Tinto",wt_white:"Blanco",wt_rose:"Rosado",wt_sparkling:"Espumoso",wt_dessert:"Dulce",
     b_back:"Atrás",b_next:"Guardar y continuar",b_generate:"Generar 10 CAP de demostración",b_submit:"Enviar pasaporte",b_finish:"Finalizar",
     optional:"opcional",saving:"Guardando…",generating:"Generando…",
-    g_first:"Primer CAP de botella",g_token:"Token QR",cap_verified:"CAP verificado",g_count:"{n} CAP generados",
+    g_first:"Primer CAP de botella",g_token:"Token QR",g_count:"{n} CAP generados",
     pv_w:"Pasaporte de la bodega",pv_wd:"Tu página pública.",pv_b:"Escaneo de botella",pv_bd:"Lo que ve un visitante al escanear.",pv_s:"Etiqueta QR",pv_sd:"Etiqueta imprimible para la botella.",pv_open:"Abrir",
     done_h:"Enviado",done_d:"Tu pasaporte se ha enviado para revisión de T&T.",
     ph_family:"Tres generaciones en la misma ladera…",ph_quote:"No hacemos vino, lo criamos.",ph_land:"Laderas orientadas al sur sobre loam glaciar…",ph_philosophy:"Mínima intervención, máxima paciencia…",ph_wine_desc:"Un tinto suave con notas de cereza negra…",ph_vintage:"Un verano cálido y seco lo hizo un año excepcional.",
     err_required:"Por favor, completa los campos obligatorios.",err_save:"No se pudo guardar — comprueba la conexión e inténtalo de nuevo.",err_services:"Selecciona al menos un servicio.",warn_offline:"Guardado localmente — no se pudo contactar al servidor. Modo demo."},
-  uk:{nav:"РЕЄСТРАЦІЯ ВИНОРОБНІ", title:"Створіть <em>підтверджений</em> паспорт", tagline:"Від виноробні до пляшки — створіть CAP-паспорт за вісім кроків.",
+  uk:{nav:"РЕЄСТРАЦІЯ ВИНОРОБНІ", title:"Створіть <em>цифровий</em> паспорт вашої виноробні", tagline:"Від виноробні до пляшки — створіть CAP-паспорт за вісім кроків.",
     s1:"Профіль",s2:"ДНК",s3:"Послуги",s4:"Вино",s5:"Врожай",s6:"Пляшки",s7:"Перегляд",s8:"Надіслати",
     h1:"Основний профіль",h2:"ДНК виноробні",h3:"Послуги та враження",h4:"Перше вино",h5:"Перший врожай",h6:"Створити CAP пляшок",h7:"Перегляд паспорта",h8:"Надіслати на перевірку",
     sh1:"Розкажіть про себе.",sh2:"Історія виноробні.",sh3:"Що гості можуть відчути на місці?",sh4:"Додайте перше вино.",sh5:"Додайте перший врожай цього вина.",sh6:"Створіть демо-CAP з QR-кодами.",sh7:"Перегляньте сторінки для споживачів.",sh8:"Надішліть паспорт до Tasting & Toasting.",
@@ -438,12 +439,12 @@ const WZ = {
     wt_red:"Червоне",wt_white:"Біле",wt_rose:"Рожеве",wt_sparkling:"Ігристе",wt_dessert:"Десертне",
     b_back:"Назад",b_next:"Зберегти й продовжити",b_generate:"Створити 10 демо-CAP",b_submit:"Надіслати паспорт",b_finish:"Готово",
     optional:"необов'язково",saving:"Збереження…",generating:"Створення…",
-    g_first:"Перший CAP пляшки",g_token:"QR-токен",cap_verified:"CAP підтверджено",g_count:"Створено CAP: {n}",
+    g_first:"Перший CAP пляшки",g_token:"QR-токен",g_count:"Створено CAP: {n}",
     pv_w:"Паспорт виноробні",pv_wd:"Ваша публічна сторінка.",pv_b:"Скан пляшки",pv_bd:"Що бачить гість під час сканування.",pv_s:"QR-наклейка",pv_sd:"Друкована етикетка для пляшки.",pv_open:"Відкрити",
     done_h:"Надіслано",done_d:"Ваш паспорт надіслано на перевірку T&T.",
     ph_family:"Три покоління на одному схилі…",ph_quote:"Ми не робимо вино, ми його вирощуємо.",ph_land:"Південні схили з льодовикового суглинку…",ph_philosophy:"Мінімум втручання, максимум терпіння…",ph_wine_desc:"М'яке червоне з нотами темної вишні…",ph_vintage:"Тепле сухе літо зробило рік винятковим.",
     err_required:"Будь ласка, заповніть обов'язкові поля.",err_save:"Не вдалося зберегти — перевірте з'єднання та повторіть.",err_services:"Виберіть принаймні одну послугу.",warn_offline:"Збережено локально — сервер недоступний. Демо-режим."},
-  it:{nav:"REGISTRAZIONE CANTINA", title:"Crea il tuo passaporto <em>verificato</em>", tagline:"Dalla cantina alla bottiglia — crea il tuo passaporto CAP in otto passi.",
+  it:{nav:"REGISTRAZIONE CANTINA", title:"Crea il passaporto <em>digitale</em> della tua cantina", tagline:"Dalla cantina alla bottiglia — crea il tuo passaporto CAP in otto passi.",
     s1:"Profilo",s2:"DNA",s3:"Servizi",s4:"Vino",s5:"Annata",s6:"Bottiglie",s7:"Anteprima",s8:"Invia",
     h1:"Profilo base",h2:"DNA della cantina",h3:"Servizi ed esperienze",h4:"Primo vino",h5:"Prima annata",h6:"Genera i CAP delle bottiglie",h7:"Anteprima del passaporto",h8:"Invia per la verifica",
     sh1:"Raccontaci chi sei.",sh2:"La storia dietro la cantina.",sh3:"Cosa possono vivere gli ospiti in cantina?",sh4:"Aggiungi il tuo primo vino.",sh5:"Aggiungi la prima annata di questo vino.",sh6:"Genera CAP dimostrativi con codici QR.",sh7:"Guarda le pagine per il consumatore.",sh8:"Invia il tuo passaporto a Tasting & Toasting.",
@@ -454,12 +455,12 @@ const WZ = {
     wt_red:"Rosso",wt_white:"Bianco",wt_rose:"Rosato",wt_sparkling:"Spumante",wt_dessert:"Dolce",
     b_back:"Indietro",b_next:"Salva e continua",b_generate:"Genera 10 CAP dimostrativi",b_submit:"Invia passaporto",b_finish:"Fine",
     optional:"facoltativo",saving:"Salvataggio…",generating:"Generazione…",
-    g_first:"Primo CAP della bottiglia",g_token:"Token QR",cap_verified:"CAP verificato",g_count:"{n} CAP generati",
+    g_first:"Primo CAP della bottiglia",g_token:"Token QR",g_count:"{n} CAP generati",
     pv_w:"Passaporto della cantina",pv_wd:"La tua pagina pubblica.",pv_b:"Scansione bottiglia",pv_bd:"Ciò che vede un ospite scansionando.",pv_s:"Etichetta QR",pv_sd:"Etichetta stampabile per la bottiglia.",pv_open:"Apri",
     done_h:"Inviato",done_d:"Il tuo passaporto è stato inviato per la verifica di T&T.",
     ph_family:"Tre generazioni sullo stesso versante…",ph_quote:"Non facciamo il vino, lo cresciamo.",ph_land:"Versanti esposti a sud su loam glaciale…",ph_philosophy:"Minimo intervento, massima pazienza…",ph_wine_desc:"Un rosso morbido con note di ciliegia nera…",ph_vintage:"Un'estate calda e secca ha reso l'annata eccezionale.",
     err_required:"Compila i campi obbligatori.",err_save:"Impossibile salvare — controlla la connessione e riprova.",err_services:"Seleziona almeno un servizio.",warn_offline:"Salvato localmente — server non raggiungibile. Modalità demo."},
-  de:{nav:"WEINGUT-ANMELDUNG", title:"Erstellen Sie Ihren <em>verifizierten</em> Pass", tagline:"Vom Weingut zur Flasche — erstellen Sie Ihren CAP-Pass in acht Schritten.",
+  de:{nav:"WEINGUT-ANMELDUNG", title:"Erstellen Sie den <em>digitalen</em> Pass Ihres Weinguts", tagline:"Vom Weingut zur Flasche — erstellen Sie Ihren CAP-Pass in acht Schritten.",
     s1:"Profil",s2:"DNA",s3:"Angebote",s4:"Wein",s5:"Jahrgang",s6:"Flaschen",s7:"Vorschau",s8:"Senden",
     h1:"Basisprofil",h2:"DNA des Weinguts",h3:"Angebote & Erlebnisse",h4:"Erster Wein",h5:"Erster Jahrgang",h6:"Flaschen-CAPs erzeugen",h7:"Pass-Vorschau",h8:"Zur Prüfung einreichen",
     sh1:"Erzählen Sie uns, wer Sie sind.",sh2:"Die Geschichte hinter dem Weingut.",sh3:"Was können Gäste vor Ort erleben?",sh4:"Fügen Sie Ihren ersten Wein hinzu.",sh5:"Fügen Sie den ersten Jahrgang dieses Weins hinzu.",sh6:"Erzeugen Sie Demo-CAPs mit QR-Codes.",sh7:"Sehen Sie die Verbraucherseiten.",sh8:"Senden Sie Ihren Pass an Tasting & Toasting.",
@@ -470,12 +471,12 @@ const WZ = {
     wt_red:"Rot",wt_white:"Weiß",wt_rose:"Rosé",wt_sparkling:"Schaumwein",wt_dessert:"Süßwein",
     b_back:"Zurück",b_next:"Speichern & weiter",b_generate:"10 Demo-CAPs erzeugen",b_submit:"Pass einreichen",b_finish:"Fertig",
     optional:"optional",saving:"Speichern…",generating:"Wird erzeugt…",
-    g_first:"Erster Flaschen-CAP",g_token:"QR-Token",cap_verified:"CAP verifiziert",g_count:"{n} CAPs erzeugt",
+    g_first:"Erster Flaschen-CAP",g_token:"QR-Token",g_count:"{n} CAPs erzeugt",
     pv_w:"Weingut-Pass",pv_wd:"Ihre öffentliche Seite.",pv_b:"Flaschen-Scan",pv_bd:"Was ein Gast beim Scannen sieht.",pv_s:"QR-Etikett",pv_sd:"Druckbares Etikett für die Flasche.",pv_open:"Öffnen",
     done_h:"Eingereicht",done_d:"Ihr Pass wurde zur Prüfung an T&T eingereicht.",
     ph_family:"Drei Generationen am selben Hang…",ph_quote:"Wir machen keinen Wein, wir ziehen ihn auf.",ph_land:"Südhänge aus glazialem Lehm…",ph_philosophy:"Minimaler Eingriff, maximale Geduld…",ph_wine_desc:"Ein samtiger Rotwein mit Noten dunkler Kirsche…",ph_vintage:"Ein warmer, trockener Sommer machte das Jahr außergewöhnlich.",
     err_required:"Bitte füllen Sie die Pflichtfelder aus.",err_save:"Speichern fehlgeschlagen — Verbindung prüfen und erneut versuchen.",err_services:"Wählen Sie mindestens ein Angebot.",warn_offline:"Lokal gespeichert — Server nicht erreichbar. Demo-Modus."},
-  he:{nav:"רישום יקב", title:"צרו את הדרכון <em>המאומת</em> שלכם", tagline:"מהיקב ועד הבקבוק — בנו את דרכון ה-CAP בשמונה שלבים.",
+  he:{nav:"רישום יקב", title:"צרו את הדרכון <em>הדיגיטלי</em> של היקב שלכם", tagline:"מהיקב ועד הבקבוק — בנו את דרכון ה-CAP בשמונה שלבים.",
     s1:"פרופיל",s2:"דנ\"א",s3:"שירותים",s4:"יין",s5:"בציר",s6:"בקבוקים",s7:"תצוגה",s8:"שליחה",
     h1:"פרופיל בסיסי",h2:"הדנ\"א של היקב",h3:"שירותים וחוויות",h4:"היין הראשון",h5:"הבציר הראשון",h6:"יצירת CAP לבקבוקים",h7:"תצוגה מקדימה של הדרכון",h8:"שליחה לבדיקה",
     sh1:"ספרו לנו מי אתם.",sh2:"הסיפור שמאחורי היקב.",sh3:"מה האורחים יכולים לחוות במקום?",sh4:"הוסיפו את היין הראשון שלכם.",sh5:"הוסיפו את הבציר הראשון של היין הזה.",sh6:"צרו CAP לדוגמה עם קודי QR.",sh7:"צפו בעמודים לצרכן.",sh8:"שלחו את הדרכון ל-Tasting & Toasting.",
@@ -486,12 +487,12 @@ const WZ = {
     wt_red:"אדום",wt_white:"לבן",wt_rose:"רוזה",wt_sparkling:"מבעבע",wt_dessert:"קינוח",
     b_back:"חזרה",b_next:"שמירה והמשך",b_generate:"צרו 10 CAP לדוגמה",b_submit:"שליחת דרכון",b_finish:"סיום",
     optional:"רשות",saving:"שומר…",generating:"יוצר…",
-    g_first:"ה-CAP הראשון של הבקבוק",g_token:"אסימון QR",cap_verified:"CAP מאומת",g_count:"נוצרו {n} CAP",
+    g_first:"ה-CAP הראשון של הבקבוק",g_token:"אסימון QR",g_count:"נוצרו {n} CAP",
     pv_w:"דרכון היקב",pv_wd:"העמוד הציבורי שלכם.",pv_b:"סריקת בקבוק",pv_bd:"מה שאורח רואה בעת סריקה.",pv_s:"מדבקת QR",pv_sd:"תווית להדפסה לבקבוק.",pv_open:"פתחו",
     done_h:"נשלח",done_d:"הדרכון שלכם נשלח לבדיקת T&T.",
     ph_family:"שלושה דורות על אותה גבעה…",ph_quote:"אנחנו לא מייצרים יין, אנחנו מגדלים אותו.",ph_land:"מדרונות פונים דרומה על קרקע קרחונית…",ph_philosophy:"מינימום התערבות, מקסימום סבלנות…",ph_wine_desc:"אדום רך עם רמזים של דובדבן כהה…",ph_vintage:"קיץ חם ויבש הפך את השנה לשנה יוצאת דופן.",
     err_required:"נא למלא את שדות החובה.",err_save:"השמירה נכשלה — בדקו את החיבור ונסו שוב.",err_services:"בחרו שירות אחד לפחות.",warn_offline:"נשמר מקומית — לא ניתן היה להגיע לשרת. מצב הדגמה."},
-  pt:{nav:"REGISTO DA QUINTA", title:"Crie o seu passaporte <em>verificado</em>", tagline:"Da quinta à garrafa — crie o seu passaporte CAP em oito passos.",
+  pt:{nav:"REGISTO DA QUINTA", title:"Crie o passaporte <em>digital</em> da sua quinta", tagline:"Da quinta à garrafa — crie o seu passaporte CAP em oito passos.",
     s1:"Perfil",s2:"ADN",s3:"Serviços",s4:"Vinho",s5:"Colheita",s6:"Garrafas",s7:"Pré-visualização",s8:"Enviar",
     h1:"Perfil básico",h2:"ADN da quinta",h3:"Serviços e experiências",h4:"Primeiro vinho",h5:"Primeira colheita",h6:"Gerar CAP das garrafas",h7:"Pré-visualizar o passaporte",h8:"Enviar para verificação",
     sh1:"Diga-nos quem é.",sh2:"A história por trás da quinta.",sh3:"O que podem os visitantes experienciar no local?",sh4:"Adicione o seu primeiro vinho.",sh5:"Adicione a primeira colheita deste vinho.",sh6:"Gere CAP de demonstração com códigos QR.",sh7:"Veja as páginas para o consumidor.",sh8:"Envie o seu passaporte para a Tasting & Toasting.",
@@ -502,12 +503,12 @@ const WZ = {
     wt_red:"Tinto",wt_white:"Branco",wt_rose:"Rosé",wt_sparkling:"Espumante",wt_dessert:"Doce",
     b_back:"Voltar",b_next:"Guardar e continuar",b_generate:"Gerar 10 CAP de demonstração",b_submit:"Enviar passaporte",b_finish:"Concluir",
     optional:"opcional",saving:"A guardar…",generating:"A gerar…",
-    g_first:"Primeiro CAP da garrafa",g_token:"Token QR",cap_verified:"CAP verificado",g_count:"{n} CAP gerados",
+    g_first:"Primeiro CAP da garrafa",g_token:"Token QR",g_count:"{n} CAP gerados",
     pv_w:"Passaporte da quinta",pv_wd:"A sua página pública.",pv_b:"Leitura da garrafa",pv_bd:"O que um visitante vê ao digitalizar.",pv_s:"Etiqueta QR",pv_sd:"Etiqueta imprimível para a garrafa.",pv_open:"Abrir",
     done_h:"Enviado",done_d:"O seu passaporte foi enviado para verificação da T&T.",
     ph_family:"Três gerações na mesma encosta…",ph_quote:"Não fazemos vinho, criamo-lo.",ph_land:"Encostas viradas a sul sobre loam glaciar…",ph_philosophy:"Intervenção mínima, paciência máxima…",ph_wine_desc:"Um tinto suave com notas de cereja preta…",ph_vintage:"Um verão quente e seco tornou o ano excecional.",
     err_required:"Preencha os campos obrigatórios.",err_save:"Não foi possível guardar — verifique a ligação e tente novamente.",err_services:"Selecione pelo menos um serviço.",warn_offline:"Guardado localmente — servidor inacessível. Modo demonstração."},
-  ka:{nav:"მარნის რეგისტრაცია", title:"შექმენით თქვენი <em>დადასტურებული</em> პასპორტი", tagline:"მარნიდან ბოთლამდე — შექმენით CAP პასპორტი რვა ნაბიჯში.",
+  ka:{nav:"მარნის რეგისტრაცია", title:"შექმენით თქვენი მარნის <em>ციფრული</em> პასპორტი", tagline:"მარნიდან ბოთლამდე — შექმენით CAP პასპორტი რვა ნაბიჯში.",
     s1:"პროფილი",s2:"დნმ",s3:"სერვისები",s4:"ღვინო",s5:"მოსავალი",s6:"ბოთლები",s7:"ხედი",s8:"გაგზავნა",
     h1:"ძირითადი პროფილი",h2:"მარნის დნმ",h3:"სერვისები და გამოცდილებები",h4:"პირველი ღვინო",h5:"პირველი მოსავალი",h6:"ბოთლების CAP-ის გენერაცია",h7:"პასპორტის გადახედვა",h8:"გაგზავნა შესამოწმებლად",
     sh1:"მოგვიყევით თქვენ შესახებ.",sh2:"მარნის ისტორია.",sh3:"რას განიცდიან სტუმრები ადგილზე?",sh4:"დაამატეთ პირველი ღვინო.",sh5:"დაამატეთ ამ ღვინის პირველი მოსავალი.",sh6:"შექმენით სადემონსტრაციო CAP QR კოდებით.",sh7:"იხილეთ მომხმარებლის გვერდები.",sh8:"გაუგზავნეთ პასპორტი Tasting & Toasting-ს.",
@@ -518,12 +519,12 @@ const WZ = {
     wt_red:"წითელი",wt_white:"თეთრი",wt_rose:"ვარდისფერი",wt_sparkling:"ცქრიალა",wt_dessert:"სადესერტო",
     b_back:"უკან",b_next:"შენახვა და გაგრძელება",b_generate:"10 სადემონსტრაციო CAP-ის შექმნა",b_submit:"პასპორტის გაგზავნა",b_finish:"დასრულება",
     optional:"არასავალდებულო",saving:"ინახება…",generating:"იქმნება…",
-    g_first:"ბოთლის პირველი CAP",g_token:"QR ტოკენი",cap_verified:"CAP დადასტურებული",g_count:"შეიქმნა {n} CAP",
+    g_first:"ბოთლის პირველი CAP",g_token:"QR ტოკენი",g_count:"შეიქმნა {n} CAP",
     pv_w:"მარნის პასპორტი",pv_wd:"თქვენი საჯარო გვერდი.",pv_b:"ბოთლის სკანირება",pv_bd:"რას ხედავს სტუმარი სკანირებისას.",pv_s:"QR სტიკერი",pv_sd:"დასაბეჭდი ეტიკეტი ბოთლისთვის.",pv_open:"გახსნა",
     done_h:"გაგზავნილია",done_d:"თქვენი პასპორტი გაიგზავნა T&T-ის შესამოწმებლად.",
     ph_family:"სამი თაობა ერთსა და იმავე ფერდობზე…",ph_quote:"ჩვენ ღვინოს არ ვამზადებთ, ჩვენ მას ვზრდით.",ph_land:"სამხრეთისკენ მიმართული ფერდობები მყინვარული თიხნარით…",ph_philosophy:"მინიმალური ჩარევა, მაქსიმალური მოთმინება…",ph_wine_desc:"რბილი წითელი მუქი ალუბლის ნოტებით…",ph_vintage:"თბილმა და მშრალმა ზაფხულმა წელი განსაკუთრებული გახადა.",
     err_required:"გთხოვთ, შეავსოთ სავალდებულო ველები.",err_save:"შენახვა ვერ მოხერხდა — შეამოწმეთ კავშირი და სცადეთ ხელახლა.",err_services:"აირჩიეთ მინიმუმ ერთი სერვისი.",warn_offline:"შენახულია ლოკალურად — სერვერი მიუწვდომელია. სადემონსტრაციო რეჟიმი."},
-  ro:{nav:"ÎNREGISTRARE CRAMĂ", title:"Creează-ți pașaportul <em>verificat</em>", tagline:"De la cramă la sticlă — creează-ți pașaportul CAP în opt pași.",
+  ro:{nav:"ÎNREGISTRARE CRAMĂ", title:"Creează pașaportul <em>digital</em> al cramei tale", tagline:"De la cramă la sticlă — creează-ți pașaportul CAP în opt pași.",
     s1:"Profil",s2:"ADN",s3:"Servicii",s4:"Vin",s5:"Recoltă",s6:"Sticle",s7:"Previzualizare",s8:"Trimite",
     h1:"Profil de bază",h2:"ADN-ul cramei",h3:"Servicii și experiențe",h4:"Primul vin",h5:"Prima recoltă",h6:"Generează CAP-urile sticlelor",h7:"Previzualizează pașaportul",h8:"Trimite spre verificare",
     sh1:"Spune-ne cine ești.",sh2:"Povestea din spatele cramei.",sh3:"Ce pot experimenta vizitatorii la fața locului?",sh4:"Adaugă primul tău vin.",sh5:"Adaugă prima recoltă a acestui vin.",sh6:"Generează CAP-uri demo cu coduri QR.",sh7:"Vezi paginile pentru consumator.",sh8:"Trimite-ți pașaportul către Tasting & Toasting.",
@@ -534,12 +535,12 @@ const WZ = {
     wt_red:"Roșu",wt_white:"Alb",wt_rose:"Rosé",wt_sparkling:"Spumant",wt_dessert:"Desert",
     b_back:"Înapoi",b_next:"Salvează și continuă",b_generate:"Generează 10 CAP-uri demo",b_submit:"Trimite pașaportul",b_finish:"Finalizează",
     optional:"opțional",saving:"Se salvează…",generating:"Se generează…",
-    g_first:"Primul CAP al sticlei",g_token:"Token QR",cap_verified:"CAP verificat",g_count:"{n} CAP-uri generate",
+    g_first:"Primul CAP al sticlei",g_token:"Token QR",g_count:"{n} CAP-uri generate",
     pv_w:"Pașaportul cramei",pv_wd:"Pagina ta publică.",pv_b:"Scanare sticlă",pv_bd:"Ce vede un vizitator la scanare.",pv_s:"Etichetă QR",pv_sd:"Etichetă imprimabilă pentru sticlă.",pv_open:"Deschide",
     done_h:"Trimis",done_d:"Pașaportul tău a fost trimis spre verificare la T&T.",
     ph_family:"Trei generații pe același versant…",ph_quote:"Nu facem vin, îl creștem.",ph_land:"Versanți însoriți pe lut glaciar…",ph_philosophy:"Intervenție minimă, răbdare maximă…",ph_wine_desc:"Un roșu suplu cu note de cireșe negre…",ph_vintage:"O vară caldă și uscată a făcut anul excepțional.",
     err_required:"Te rugăm să completezi câmpurile obligatorii.",err_save:"Nu s-a putut salva — verifică conexiunea și încearcă din nou.",err_services:"Selectează cel puțin un serviciu.",warn_offline:"Salvat local — serverul nu a putut fi contactat. Mod demo."},
-  pl:{nav:"REJESTRACJA WINNICY", title:"Stwórz swój <em>zweryfikowany</em> paszport", tagline:"Od winnicy po butelkę — zbuduj paszport CAP w ośmiu krokach.",
+  pl:{nav:"REJESTRACJA WINNICY", title:"Stwórz <em>cyfrowy</em> paszport swojej winnicy", tagline:"Od winnicy po butelkę — zbuduj paszport CAP w ośmiu krokach.",
     s1:"Profil",s2:"DNA",s3:"Usługi",s4:"Wino",s5:"Rocznik",s6:"Butelki",s7:"Podgląd",s8:"Wyślij",
     h1:"Profil podstawowy",h2:"DNA winnicy",h3:"Usługi i doświadczenia",h4:"Pierwsze wino",h5:"Pierwszy rocznik",h6:"Wygeneruj CAP butelek",h7:"Podgląd paszportu",h8:"Wyślij do weryfikacji",
     sh1:"Powiedz nam, kim jesteś.",sh2:"Historia stojąca za winnicą.",sh3:"Czego goście mogą doświadczyć na miejscu?",sh4:"Dodaj swoje pierwsze wino.",sh5:"Dodaj pierwszy rocznik tego wina.",sh6:"Wygeneruj demonstracyjne CAP z kodami QR.",sh7:"Zobacz strony dla konsumenta.",sh8:"Wyślij paszport do Tasting & Toasting.",
@@ -550,7 +551,7 @@ const WZ = {
     wt_red:"Czerwone",wt_white:"Białe",wt_rose:"Różowe",wt_sparkling:"Musujące",wt_dessert:"Deserowe",
     b_back:"Wstecz",b_next:"Zapisz i kontynuuj",b_generate:"Wygeneruj 10 demonstracyjnych CAP",b_submit:"Wyślij paszport",b_finish:"Zakończ",
     optional:"opcjonalne",saving:"Zapisywanie…",generating:"Generowanie…",
-    g_first:"Pierwszy CAP butelki",g_token:"Token QR",cap_verified:"CAP zweryfikowano",g_count:"Wygenerowano {n} CAP",
+    g_first:"Pierwszy CAP butelki",g_token:"Token QR",g_count:"Wygenerowano {n} CAP",
     pv_w:"Paszport winnicy",pv_wd:"Twoja strona publiczna.",pv_b:"Skan butelki",pv_bd:"Co widzi gość podczas skanowania.",pv_s:"Naklejka QR",pv_sd:"Etykieta do druku dla butelki.",pv_open:"Otwórz",
     done_h:"Wysłano",done_d:"Twój paszport został wysłany do weryfikacji T&T.",
     ph_family:"Trzy pokolenia na tym samym wzgórzu…",ph_quote:"Nie robimy wina, my je wychowujemy.",ph_land:"Południowe stoki na polodowcowej glinie…",ph_philosophy:"Minimum ingerencji, maksimum cierpliwości…",ph_wine_desc:"Aksamitne czerwone z nutami czarnej wiśni…",ph_vintage:"Ciepłe, suche lato uczyniło ten rok wyjątkowym.",
@@ -565,14 +566,13 @@ const esc = s => String(s==null?"":s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&
 
 /* Demo-only wizard: require ?demo=1 on production hosts (localhost always allowed). */
 const pageQs = new URLSearchParams(location.search);
-const isCapDemoOnboarding = pageQs.get("demo") === "1" || /^(localhost|127\.|0\.0)/.test(location.hostname);
+const isCapDemoOnboarding = pageQs.get("demo") === "1" || TT_TRUST.isLocalHost(location.hostname);
 if (!isCapDemoOnboarding) {
   document.body.innerHTML = '<main style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 24px;font-family:monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8a807a;text-align:center">CAP demo onboarding only. Open with ?demo=1 on production.</main>';
   throw new Error("cap-onboarding: demo gate");
 }
 
-const API = pageQs.get("api")
-  || (/^(localhost|127\.|0\.0)/.test(location.hostname) ? "http://localhost:8088/api/cap" : "https://tt-stack-prod.onrender.com/api/cap");
+const API = TT_TRUST.resolveApiBase(location); // ?api= honoured on a local dev host only (SECURITY B1)
 
 /* ---- static i18n apply ---- */
 function applyI18n(){
@@ -670,6 +670,7 @@ async function saveStep(n){
       const d = await post("/wineries", body);
       store.wineryId = pick(d.winery||d, "id") || uuid();
       store.winerySlug = pick(d.winery||d, "slug") || slug;
+      store.wineryVerification = pick(d.winery||d, "verification_status");
     }catch(e){
       store.wineryId = store.wineryId || uuid(); store.winerySlug = slug;
       showNotice("warn", tw("warn_offline"));

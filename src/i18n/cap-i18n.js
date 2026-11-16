@@ -29,10 +29,10 @@
       svc_enotourism:"Enotourism", svc_weddings_events:"Weddings & Events", svc_gift_sets_shop:"Gift sets & Shop", svc_business_programs:"Business programs",
       overview:"About this wine", vintages_title:"Vintages", bottles:"bottles", back_wines:"All wines", back_wine:"Wine passport", back_winery:"Winery passport",
       total_bottles:"Bottles produced", abv:"Alcohol", year:"Vintage year", production:"The vintage", ageing:"Ageing potential", ageing_val:"Cellar-worthy", overview_vintage:"This vintage",
-      verified_h:"Verified &amp; <em>Traceable</em>", bottle_of:"Bottle {n} of {t}", founder_words:"Founder's words", biography:"Bottle Biography",
-      winery_section:"The winery", verified_facts:"Verified Facts", view_winery:"View winery", book_tasting:"Book a tasting", share:"Share this bottle", copied:"Link copied",
+      bottle_of:"Bottle {n} of {t}", founder_words:"Founder's words", biography:"Bottle Biography",
+      winery_section:"The winery", view_winery:"View winery", book_tasting:"Book a tasting", share:"Share this bottle", copied:"Link copied",
       ev_harvest:"Harvest", ev_fermentation:"Fermentation", ev_ageing:"Ageing", ev_bottling:"Bottling", ev_release:"Release",
-      cap_verified:"CAP Verified", scan_story:"Scan to discover the story", bottle_word:"Bottle",
+      scan_story:"Scan to discover the story", bottle_word:"Bottle",
       wp_ctx_loading:"Winery passport", wp_ctx_ready:"Passport · scanned from a bottle",
       wp_kick:"Winery", wp_verified_winery:"Verified Winery", wp_vs_prefix:"Verification status:",
       wp_dna_label:"Character · DNA", wp_services_label:"Services offered",
@@ -98,10 +98,10 @@
       svc_enotourism:"Œnotourisme", svc_weddings_events:"Mariages & événements", svc_gift_sets_shop:"Coffrets & boutique", svc_business_programs:"Programmes pro",
       overview:"À propos de ce vin", vintages_title:"Millésimes", bottles:"bouteilles", back_wines:"Tous les vins", back_wine:"Passeport du vin", back_winery:"Passeport du domaine",
       total_bottles:"Bouteilles produites", abv:"Alcool", year:"Millésime", production:"Le millésime", ageing:"Potentiel de garde", ageing_val:"Apte au vieillissement", overview_vintage:"Ce millésime",
-      verified_h:"Vérifié et <em>traçable</em>", bottle_of:"Bouteille {n} sur {t}", founder_words:"Les mots du fondateur", biography:"Biographie de la bouteille",
-      winery_section:"Le domaine", verified_facts:"Faits vérifiés", view_winery:"Voir le domaine", book_tasting:"Réserver une dégustation", share:"Partager cette bouteille", copied:"Lien copié",
+      bottle_of:"Bouteille {n} sur {t}", founder_words:"Les mots du fondateur", biography:"Biographie de la bouteille",
+      winery_section:"Le domaine", view_winery:"Voir le domaine", book_tasting:"Réserver une dégustation", share:"Partager cette bouteille", copied:"Lien copié",
       ev_harvest:"Vendange", ev_fermentation:"Fermentation", ev_ageing:"Élevage", ev_bottling:"Mise en bouteille", ev_release:"Commercialisation",
-      cap_verified:"CAP vérifié", scan_story:"Scannez pour découvrir l'histoire", bottle_word:"Bouteille"
+      scan_story:"Scannez pour découvrir l'histoire", bottle_word:"Bouteille"
     },
     ru: {
       b_claimed:"Заявлено производителем", b_review:"На проверке", b_verified:"Подтверждено", b_unverified:"Не подтверждено",
@@ -116,10 +116,10 @@
       svc_enotourism:"Энотуризм", svc_weddings_events:"Свадьбы и мероприятия", svc_gift_sets_shop:"Подарочные наборы и магазин", svc_business_programs:"Бизнес-программы",
       overview:"Об этом вине", vintages_title:"Урожаи", bottles:"бутылок", back_wines:"Все вина", back_wine:"Паспорт вина", back_winery:"Паспорт винодельни",
       total_bottles:"Произведено бутылок", abv:"Крепость", year:"Год урожая", production:"Урожай", ageing:"Потенциал выдержки", ageing_val:"Подходит для погреба", overview_vintage:"Этот урожай",
-      verified_h:"Подтверждено и <em>прослеживаемо</em>", bottle_of:"Бутылка {n} из {t}", founder_words:"Слова основателя", biography:"Биография бутылки",
-      winery_section:"Винодельня", verified_facts:"Подтверждённые факты", view_winery:"Открыть винодельню", book_tasting:"Забронировать дегустацию", share:"Поделиться бутылкой", copied:"Ссылка скопирована",
+      bottle_of:"Бутылка {n} из {t}", founder_words:"Слова основателя", biography:"Биография бутылки",
+      winery_section:"Винодельня", view_winery:"Открыть винодельню", book_tasting:"Забронировать дегустацию", share:"Поделиться бутылкой", copied:"Ссылка скопирована",
       ev_harvest:"Сбор урожая", ev_fermentation:"Ферментация", ev_ageing:"Выдержка", ev_bottling:"Розлив", ev_release:"Выпуск",
-      cap_verified:"CAP подтверждён", scan_story:"Отсканируйте, чтобы узнать историю", bottle_word:"Бутылка"
+      scan_story:"Отсканируйте, чтобы узнать историю", bottle_word:"Бутылка"
     },
     es: {
       b_claimed:"Declarado por el productor", b_review:"En revisión", b_verified:"Verificado", b_unverified:"Sin verificar",
@@ -134,10 +134,10 @@
       svc_enotourism:"Enoturismo", svc_weddings_events:"Bodas y eventos", svc_gift_sets_shop:"Estuches y tienda", svc_business_programs:"Programas de empresa",
       overview:"Sobre este vino", vintages_title:"Añadas", bottles:"botellas", back_wines:"Todos los vinos", back_wine:"Pasaporte del vino", back_winery:"Pasaporte de la bodega",
       total_bottles:"Botellas producidas", abv:"Alcohol", year:"Añada", production:"La añada", ageing:"Potencial de guarda", ageing_val:"Apto para guarda", overview_vintage:"Esta añada",
-      verified_h:"Verificado y <em>trazable</em>", bottle_of:"Botella {n} de {t}", founder_words:"Palabras del fundador", biography:"Biografía de la botella",
-      winery_section:"La bodega", verified_facts:"Datos verificados", view_winery:"Ver la bodega", book_tasting:"Reservar una cata", share:"Compartir esta botella", copied:"Enlace copiado",
+      bottle_of:"Botella {n} de {t}", founder_words:"Palabras del fundador", biography:"Biografía de la botella",
+      winery_section:"La bodega", view_winery:"Ver la bodega", book_tasting:"Reservar una cata", share:"Compartir esta botella", copied:"Enlace copiado",
       ev_harvest:"Vendimia", ev_fermentation:"Fermentación", ev_ageing:"Crianza", ev_bottling:"Embotellado", ev_release:"Salida al mercado",
-      cap_verified:"CAP verificado", scan_story:"Escanea para descubrir la historia", bottle_word:"Botella"
+      scan_story:"Escanea para descubrir la historia", bottle_word:"Botella"
     },
     uk: {
       b_claimed:"Заявлено виробником", b_review:"На перевірці", b_verified:"Підтверджено", b_unverified:"Не підтверджено",
@@ -152,10 +152,10 @@
       svc_enotourism:"Енотуризм", svc_weddings_events:"Весілля та події", svc_gift_sets_shop:"Подарункові набори та магазин", svc_business_programs:"Бізнес-програми",
       overview:"Про це вино", vintages_title:"Врожаї", bottles:"пляшок", back_wines:"Усі вина", back_wine:"Паспорт вина", back_winery:"Паспорт виноробні",
       total_bottles:"Вироблено пляшок", abv:"Міцність", year:"Рік врожаю", production:"Врожай", ageing:"Потенціал витримки", ageing_val:"Для витримки", overview_vintage:"Цей врожай",
-      verified_h:"Підтверджено та <em>простежувано</em>", bottle_of:"Пляшка {n} з {t}", founder_words:"Слова засновника", biography:"Біографія пляшки",
-      winery_section:"Виноробня", verified_facts:"Підтверджені факти", view_winery:"Відкрити виноробню", book_tasting:"Забронювати дегустацію", share:"Поділитися пляшкою", copied:"Посилання скопійовано",
+      bottle_of:"Пляшка {n} з {t}", founder_words:"Слова засновника", biography:"Біографія пляшки",
+      winery_section:"Виноробня", view_winery:"Відкрити виноробню", book_tasting:"Забронювати дегустацію", share:"Поділитися пляшкою", copied:"Посилання скопійовано",
       ev_harvest:"Збір врожаю", ev_fermentation:"Бродіння", ev_ageing:"Витримка", ev_bottling:"Розлив", ev_release:"Випуск",
-      cap_verified:"CAP підтверджено", scan_story:"Скануйте, щоб дізнатися історію", bottle_word:"Пляшка"
+      scan_story:"Скануйте, щоб дізнатися історію", bottle_word:"Пляшка"
     },
     it: {
       b_claimed:"Dichiarato dal produttore", b_review:"In verifica", b_verified:"Verificato", b_unverified:"Non verificato",
@@ -170,10 +170,10 @@
       svc_enotourism:"Enoturismo", svc_weddings_events:"Matrimoni ed eventi", svc_gift_sets_shop:"Confezioni regalo e shop", svc_business_programs:"Programmi business",
       overview:"Su questo vino", vintages_title:"Annate", bottles:"bottiglie", back_wines:"Tutti i vini", back_wine:"Passaporto del vino", back_winery:"Passaporto della cantina",
       total_bottles:"Bottiglie prodotte", abv:"Alcol", year:"Annata", production:"L'annata", ageing:"Potenziale di invecchiamento", ageing_val:"Da invecchiamento", overview_vintage:"Questa annata",
-      verified_h:"Verificato e <em>tracciabile</em>", bottle_of:"Bottiglia {n} di {t}", founder_words:"Le parole del fondatore", biography:"Biografia della bottiglia",
-      winery_section:"La cantina", verified_facts:"Fatti verificati", view_winery:"Vedi la cantina", book_tasting:"Prenota una degustazione", share:"Condividi questa bottiglia", copied:"Link copiato",
+      bottle_of:"Bottiglia {n} di {t}", founder_words:"Le parole del fondatore", biography:"Biografia della bottiglia",
+      winery_section:"La cantina", view_winery:"Vedi la cantina", book_tasting:"Prenota una degustazione", share:"Condividi questa bottiglia", copied:"Link copiato",
       ev_harvest:"Vendemmia", ev_fermentation:"Fermentazione", ev_ageing:"Affinamento", ev_bottling:"Imbottigliamento", ev_release:"Immissione sul mercato",
-      cap_verified:"CAP verificato", scan_story:"Scansiona per scoprire la storia", bottle_word:"Bottiglia"
+      scan_story:"Scansiona per scoprire la storia", bottle_word:"Bottiglia"
     },
     de: {
       b_claimed:"Vom Erzeuger angegeben", b_review:"In Prüfung", b_verified:"Verifiziert", b_unverified:"Nicht verifiziert",
@@ -188,10 +188,10 @@
       svc_enotourism:"Önotourismus", svc_weddings_events:"Hochzeiten & Events", svc_gift_sets_shop:"Geschenksets & Shop", svc_business_programs:"Business-Programme",
       overview:"Über diesen Wein", vintages_title:"Jahrgänge", bottles:"Flaschen", back_wines:"Alle Weine", back_wine:"Wein-Pass", back_winery:"Weingut-Pass",
       total_bottles:"Produzierte Flaschen", abv:"Alkohol", year:"Jahrgang", production:"Der Jahrgang", ageing:"Reifepotenzial", ageing_val:"Lagerfähig", overview_vintage:"Dieser Jahrgang",
-      verified_h:"Verifiziert &amp; <em>rückverfolgbar</em>", bottle_of:"Flasche {n} von {t}", founder_words:"Worte des Gründers", biography:"Biografie der Flasche",
-      winery_section:"Das Weingut", verified_facts:"Verifizierte Fakten", view_winery:"Weingut ansehen", book_tasting:"Verkostung buchen", share:"Diese Flasche teilen", copied:"Link kopiert",
+      bottle_of:"Flasche {n} von {t}", founder_words:"Worte des Gründers", biography:"Biografie der Flasche",
+      winery_section:"Das Weingut", view_winery:"Weingut ansehen", book_tasting:"Verkostung buchen", share:"Diese Flasche teilen", copied:"Link kopiert",
       ev_harvest:"Lese", ev_fermentation:"Gärung", ev_ageing:"Reifung", ev_bottling:"Abfüllung", ev_release:"Markteinführung",
-      cap_verified:"CAP verifiziert", scan_story:"Scannen, um die Geschichte zu entdecken", bottle_word:"Flasche"
+      scan_story:"Scannen, um die Geschichte zu entdecken", bottle_word:"Flasche"
     },
     he: {
       b_claimed:"הוצהר על ידי היצרן", b_review:"בבדיקה", b_verified:"מאומת", b_unverified:"לא מאומת",
@@ -206,10 +206,10 @@
       svc_enotourism:"תיירות יין", svc_weddings_events:"חתונות ואירועים", svc_gift_sets_shop:"מארזי מתנה וחנות", svc_business_programs:"תוכניות עסקיות",
       overview:"על היין הזה", vintages_title:"בצירים", bottles:"בקבוקים", back_wines:"כל היינות", back_wine:"דרכון היין", back_winery:"דרכון היקב",
       total_bottles:"בקבוקים שיוצרו", abv:"אלכוהול", year:"שנת בציר", production:"הבציר", ageing:"פוטנציאל התיישנות", ageing_val:"מתאים להתיישנות", overview_vintage:"הבציר הזה",
-      verified_h:"מאומת <em>וניתן למעקב</em>", bottle_of:"בקבוק {n} מתוך {t}", founder_words:"דברי המייסד", biography:"הביוגרפיה של הבקבוק",
-      winery_section:"היקב", verified_facts:"עובדות מאומתות", view_winery:"צפייה ביקב", book_tasting:"הזמנת טעימה", share:"שיתוף הבקבוק", copied:"הקישור הועתק",
+      bottle_of:"בקבוק {n} מתוך {t}", founder_words:"דברי המייסד", biography:"הביוגרפיה של הבקבוק",
+      winery_section:"היקב", view_winery:"צפייה ביקב", book_tasting:"הזמנת טעימה", share:"שיתוף הבקבוק", copied:"הקישור הועתק",
       ev_harvest:"בציר", ev_fermentation:"תסיסה", ev_ageing:"התיישנות", ev_bottling:"מילוי בבקבוקים", ev_release:"שחרור לשוק",
-      cap_verified:"CAP מאומת", scan_story:"סרקו כדי לגלות את הסיפור", bottle_word:"בקבוק"
+      scan_story:"סרקו כדי לגלות את הסיפור", bottle_word:"בקבוק"
     },
     pt: {
       b_claimed:"Declarado pelo produtor", b_review:"Em verificação", b_verified:"Verificado", b_unverified:"Não verificado",
@@ -224,10 +224,10 @@
       svc_enotourism:"Enoturismo", svc_weddings_events:"Casamentos e eventos", svc_gift_sets_shop:"Conjuntos de oferta e loja", svc_business_programs:"Programas empresariais",
       overview:"Sobre este vinho", vintages_title:"Colheitas", bottles:"garrafas", back_wines:"Todos os vinhos", back_wine:"Passaporte do vinho", back_winery:"Passaporte da quinta",
       total_bottles:"Garrafas produzidas", abv:"Álcool", year:"Colheita", production:"A colheita", ageing:"Potencial de guarda", ageing_val:"Próprio para guarda", overview_vintage:"Esta colheita",
-      verified_h:"Verificado e <em>rastreável</em>", bottle_of:"Garrafa {n} de {t}", founder_words:"As palavras do fundador", biography:"Biografia da garrafa",
-      winery_section:"A quinta", verified_facts:"Factos verificados", view_winery:"Ver a quinta", book_tasting:"Reservar uma prova", share:"Partilhar esta garrafa", copied:"Ligação copiada",
+      bottle_of:"Garrafa {n} de {t}", founder_words:"As palavras do fundador", biography:"Biografia da garrafa",
+      winery_section:"A quinta", view_winery:"Ver a quinta", book_tasting:"Reservar uma prova", share:"Partilhar esta garrafa", copied:"Ligação copiada",
       ev_harvest:"Vindima", ev_fermentation:"Fermentação", ev_ageing:"Estágio", ev_bottling:"Engarrafamento", ev_release:"Lançamento",
-      cap_verified:"CAP verificado", scan_story:"Digitalize para descobrir a história", bottle_word:"Garrafa"
+      scan_story:"Digitalize para descobrir a história", bottle_word:"Garrafa"
     },
     ka: {
       b_claimed:"მწარმოებლის მიერ მითითებული", b_review:"შემოწმების პროცესში", b_verified:"დადასტურებული", b_unverified:"დაუდასტურებელი",
@@ -242,10 +242,10 @@
       svc_enotourism:"ენოტურიზმი", svc_weddings_events:"ქორწილები და ღონისძიებები", svc_gift_sets_shop:"სასაჩუქრე ნაკრები და მაღაზია", svc_business_programs:"ბიზნესპროგრამები",
       overview:"ამ ღვინის შესახებ", vintages_title:"მოსავლები", bottles:"ბოთლი", back_wines:"ყველა ღვინო", back_wine:"ღვინის პასპორტი", back_winery:"მარნის პასპორტი",
       total_bottles:"წარმოებული ბოთლები", abv:"ალკოჰოლი", year:"მოსავლის წელი", production:"მოსავალი", ageing:"დავარგების პოტენციალი", ageing_val:"დასავარგებლად ვარგისი", overview_vintage:"ეს მოსავალი",
-      verified_h:"დადასტურებული და <em>თვალყურდევნებადი</em>", bottle_of:"ბოთლი {n} / {t}", founder_words:"დამფუძნებლის სიტყვები", biography:"ბოთლის ბიოგრაფია",
-      winery_section:"მარანი", verified_facts:"დადასტურებული ფაქტები", view_winery:"მარნის ნახვა", book_tasting:"დააჯავშნე დეგუსტაცია", share:"ბოთლის გაზიარება", copied:"ბმული დაკოპირდა",
+      bottle_of:"ბოთლი {n} / {t}", founder_words:"დამფუძნებლის სიტყვები", biography:"ბოთლის ბიოგრაფია",
+      winery_section:"მარანი", view_winery:"მარნის ნახვა", book_tasting:"დააჯავშნე დეგუსტაცია", share:"ბოთლის გაზიარება", copied:"ბმული დაკოპირდა",
       ev_harvest:"რთველი", ev_fermentation:"დუღილი", ev_ageing:"დავარგება", ev_bottling:"ჩამოსხმა", ev_release:"გამოშვება",
-      cap_verified:"CAP დადასტურებული", scan_story:"დაასკანერე ისტორიის აღმოსაჩენად", bottle_word:"ბოთლი"
+      scan_story:"დაასკანერე ისტორიის აღმოსაჩენად", bottle_word:"ბოთლი"
     },
     ro: {
       b_claimed:"Declarat de producător", b_review:"În verificare", b_verified:"Verificat", b_unverified:"Neverificat",
@@ -260,10 +260,10 @@
       svc_enotourism:"Enoturism", svc_weddings_events:"Nunți și evenimente", svc_gift_sets_shop:"Seturi cadou și magazin", svc_business_programs:"Programe pentru companii",
       overview:"Despre acest vin", vintages_title:"Recolte", bottles:"sticle", back_wines:"Toate vinurile", back_wine:"Pașaportul vinului", back_winery:"Pașaportul cramei",
       total_bottles:"Sticle produse", abv:"Alcool", year:"Recolta", production:"Recolta", ageing:"Potențial de învechire", ageing_val:"Potrivit pentru învechire", overview_vintage:"Această recoltă",
-      verified_h:"Verificat și <em>trasabil</em>", bottle_of:"Sticla {n} din {t}", founder_words:"Cuvintele fondatorului", biography:"Biografia sticlei",
-      winery_section:"Crama", verified_facts:"Fapte verificate", view_winery:"Vezi crama", book_tasting:"Rezervă o degustare", share:"Distribuie această sticlă", copied:"Link copiat",
+      bottle_of:"Sticla {n} din {t}", founder_words:"Cuvintele fondatorului", biography:"Biografia sticlei",
+      winery_section:"Crama", view_winery:"Vezi crama", book_tasting:"Rezervă o degustare", share:"Distribuie această sticlă", copied:"Link copiat",
       ev_harvest:"Cules", ev_fermentation:"Fermentare", ev_ageing:"Învechire", ev_bottling:"Îmbuteliere", ev_release:"Lansare",
-      cap_verified:"CAP verificat", scan_story:"Scanează pentru a descoperi povestea", bottle_word:"Sticlă"
+      scan_story:"Scanează pentru a descoperi povestea", bottle_word:"Sticlă"
     },
     pl: {
       b_claimed:"Deklarowane przez producenta", b_review:"W weryfikacji", b_verified:"Zweryfikowane", b_unverified:"Niezweryfikowane",
@@ -278,10 +278,10 @@
       svc_enotourism:"Enoturystyka", svc_weddings_events:"Wesela i wydarzenia", svc_gift_sets_shop:"Zestawy prezentowe i sklep", svc_business_programs:"Programy biznesowe",
       overview:"O tym winie", vintages_title:"Roczniki", bottles:"butelek", back_wines:"Wszystkie wina", back_wine:"Paszport wina", back_winery:"Paszport winnicy",
       total_bottles:"Wyprodukowane butelki", abv:"Zawartość alkoholu", year:"Rocznik", production:"Rocznik", ageing:"Potencjał dojrzewania", ageing_val:"Do leżakowania", overview_vintage:"Ten rocznik",
-      verified_h:"Zweryfikowane i <em>identyfikowalne</em>", bottle_of:"Butelka {n} z {t}", founder_words:"Słowa założyciela", biography:"Historia butelki",
-      winery_section:"Winnica", verified_facts:"Zweryfikowane fakty", view_winery:"Zobacz winnicę", book_tasting:"Zarezerwuj degustację", share:"Udostępnij", copied:"Skopiowano link",
+      bottle_of:"Butelka {n} z {t}", founder_words:"Słowa założyciela", biography:"Historia butelki",
+      winery_section:"Winnica", view_winery:"Zobacz winnicę", book_tasting:"Zarezerwuj degustację", share:"Udostępnij", copied:"Skopiowano link",
       ev_harvest:"Zbiory", ev_fermentation:"Fermentacja", ev_ageing:"Dojrzewanie", ev_bottling:"Butelkowanie", ev_release:"Wprowadzenie na rynek",
-      cap_verified:"CAP ZWERYFIKOWANO", scan_story:"Zeskanuj, aby poznać historię", bottle_word:"Butelka"
+      scan_story:"Zeskanuj, aby poznać historię", bottle_word:"Butelka"
     }
   };
 
@@ -322,11 +322,14 @@
   }
 
   // Point each flag link at the current page+params with lang swapped in,
-  // and mark the active one. Preserves ?slug / ?token / ?api / #hash.
+  // and mark the active one. Preserves ?slug / ?token / #hash; ?api only on a
+  // local dev host (TT_TRUST, SECURITY B1), so a crafted link does not spread.
   function wireSwitcher() {
+    var keepApi = !!(window.TT_TRUST && window.TT_TRUST.devApiOverride(window.location));
     document.querySelectorAll("[data-lang-link]").forEach(function (el) {
       var code = el.getAttribute("data-lang-link");
       var params = new URLSearchParams(window.location.search);
+      if (!keepApi) params.delete("api");
       params.set("lang", code);
       el.setAttribute("href", window.location.pathname + "?" + params.toString() + window.location.hash);
       var on = code === lang;
